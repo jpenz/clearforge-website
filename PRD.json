@@ -108,7 +108,7 @@
           "d": "Build /case-studies page with 3-5 anonymized case studies using C-S-O-S framework (Challenge, Solution, Outcome, Scale). Create case study card components and detail pages. Cases: (1) $50M Manufacturer — sales pipeline automation, 30% pipeline increase. (2) PE Portfolio — AI value creation across 3 companies, 10% EBITDA improvement. (3) $25M Services Company — process automation, $240K annual savings. (4) B2B Software — AI SDR agents, 3.5x conversion improvement. Each detail page has: hero with key metric, challenge narrative, solution description, outcomes with large numbers, scale/expansion section, CTA.",
           "f": "src/app/case-studies/page.tsx, src/app/case-studies/[slug]/page.tsx, src/data/case-studies.ts",
           "pr": "medium",
-          "st": "pending",
+          "st": "complete",
           "ac": "[x] Case study hub with cards [x] 4 detail pages [x] C-S-O-S framework on each [x] Large metric displays [x] Dynamic routing [x] Filterable by service/industry [x] CTA on each page"
         },
         {
