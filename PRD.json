@@ -117,7 +117,7 @@
           "d": "Build /insights blog with MDX support. Create 5 launch posts: (1) AI Readiness CEO Guide, (2) Why 95% of AI Pilots Fail, (3) PE Value Creation with AI, (4) Hidden Cost of Manual Processes, (5) AI Agents Explained. Blog hub with cards showing title, excerpt, date, reading time, category. Individual post pages with MDX rendering, author info, share buttons, related posts, CTA. Categories: AI Strategy, Performance Improvement, PE Value Creation, AI Agents.",
           "f": "src/app/insights/page.tsx, src/app/insights/[slug]/page.tsx, src/content/*.mdx, src/lib/mdx.ts",
           "pr": "medium",
-          "st": "pending",
+          "st": "complete",
           "ac": "[x] Blog hub with post cards [x] MDX rendering working [x] 5 launch posts written [x] Category filtering [x] Reading time calculated [x] Share buttons [x] Related posts [x] Author section [x] CTA in each post"
         }
       ]
