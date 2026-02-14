@@ -43,6 +43,51 @@
   color-scheme: light;
 }
 
+[data-theme="light"] body {
+  background: #FAFAFA;
+  color: #0F172A;
+}
+
+[data-theme="light"] .text-text-primary {
+  color: #0F172A;
+}
+
+[data-theme="light"] .text-text-secondary {
+  color: #475569;
+}
+
+[data-theme="light"] .text-text-muted {
+  color: #64748B;
+}
+
+[data-theme="light"] .bg-bg-dark {
+  background-color: #FAFAFA;
+}
+
+[data-theme="light"] .bg-bg-card {
+  background-color: #FFFFFF;
+}
+
+[data-theme="light"] .bg-bg-elevated {
+  background-color: #F1F5F9;
+}
+
+[data-theme="light"] .border-border-subtle {
+  border-color: #E2E8F0;
+}
+
+[data-theme="light"] .border-border-medium {
+  border-color: #CBD5E1;
+}
+
+[data-theme="light"] .bg-bg-dark\/80 {
+  background-color: rgba(250, 250, 250, 0.8);
+}
+
+[data-theme="light"] .bg-bg-dark\/95 {
+  background-color: rgba(250, 250, 250, 0.95);
+}
+
 body {
   background: var(--bg-dark);
   color: var(--text-primary);

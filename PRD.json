@@ -40,7 +40,7 @@
           "d": "Create the design system: global CSS with dark/light mode CSS variables, color palette (Navy #0F172A, Blue #3B82F6, Emerald #10B981, backgrounds #0A0A0A/#111111/#1A1A1A), Geist font setup, and base UI components (Button, Card, Badge, Input, Textarea, Label, Separator, Dialog, Sheet, Tabs, Tooltip) using Radix UI primitives with Tailwind styling. Include cn() utility.",
           "f": "src/app/globals.css, src/lib/utils.ts, src/components/ui/*",
           "pr": "high",
-          "st": "pending",
+          "st": "complete",
           "ac": "[x] CSS variables for dark/light mode [x] Color palette matches spec [x] Geist Sans + Mono fonts [x] All base components created with variants [x] cn() utility working [x] Dark mode default with toggle support"
         },
         {
@@ -49,7 +49,7 @@
           "d": "Create root layout with responsive header (logo, nav links: Services, Case Studies, Pricing, Insights, About | CTAs: Take AI Scorecard, Book Call), footer (sitemap, social links, newsletter signup), and dark/light theme toggle. Mobile hamburger menu. Sticky header on scroll with blur backdrop.",
           "f": "src/app/layout.tsx, src/components/layout/header.tsx, src/components/layout/footer.tsx, src/components/theme-toggle.tsx, src/components/layout/mobile-nav.tsx",
           "pr": "high",
-          "st": "pending",
+          "st": "complete",
           "ac": "[x] Responsive header with all nav items [x] Mobile hamburger menu [x] Sticky header with backdrop blur [x] Footer with sitemap and social links [x] Theme toggle (dark default) [x] Smooth transitions"
         }
       ]
