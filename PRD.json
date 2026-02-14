@@ -140,7 +140,7 @@
           "d": "Build interactive ROI calculator at /roi-calculator. Inputs: annual revenue (slider or input), number of employees (slider), manual process hours/week (slider), industry dropdown. Output: estimated annual value from AI implementation with breakdown. Uses industry-specific multipliers. Soft-gated: show estimate free, email for detailed breakdown. Clean, interactive design with real-time calculation updates.",
           "f": "src/app/roi-calculator/page.tsx, src/components/roi-calculator/*, src/lib/roi-calculator.ts",
           "pr": "medium",
-          "st": "pending",
+          "st": "complete",
           "ac": "[x] 4 input fields with sliders [x] Real-time calculation [x] Industry multipliers [x] Animated result display [x] Soft-gated detailed breakdown [x] API route for lead capture [x] Mobile responsive"
         },
         {
@@ -149,7 +149,7 @@
           "d": "Add comprehensive SEO: metadata for all pages (title, description, og:image, twitter cards), JSON-LD structured data (Organization, Service, FAQ), sitemap.xml, robots.txt. Optimize for performance: dynamic imports for heavy components, image optimization, font subsetting, preload critical resources. Target Lighthouse 95+ on all metrics.",
           "f": "src/app/layout.tsx (metadata), src/app/sitemap.ts, src/app/robots.ts, src/lib/metadata.ts",
           "pr": "medium",
-          "st": "pending",
+          "st": "complete",
           "ac": "[x] All pages have unique title + description [x] OG images configured [x] JSON-LD on key pages [x] sitemap.xml generated [x] robots.txt configured [x] Dynamic imports for Recharts etc [x] Font optimization [x] Lighthouse 90+ on mobile"
         }
       ]
