@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, Sparkles, MessageSquare } from "lucide-react";
+import { ArrowRight, CheckCircle2, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -15,18 +15,18 @@ import { pricingTiers, faqs } from "@/data/pricing";
 export function PricingPageClient() {
   return (
     <div className="py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Hero */}
         <motion.div
           className="mx-auto max-w-3xl text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
-          <p className="text-sm font-medium uppercase tracking-wider text-blue">
+          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
             Pricing
           </p>
-          <h1 className="mt-4 text-4xl font-bold text-text-primary sm:text-5xl">
+          <h1 className="mt-4 font-serif text-4xl text-forge-navy sm:text-5xl">
             Transparent Pricing, Measurable Results
           </h1>
           <p className="mt-6 text-lg text-text-secondary">
@@ -35,51 +35,40 @@ export function PricingPageClient() {
           </p>
         </motion.div>
 
-        {/* Pricing Cards */}
-        <div className="mt-16 grid gap-8 lg:grid-cols-3">
+        {/* Pricing — editorial layout with ruled separators */}
+        <div className="mt-16 divide-y divide-border-subtle">
           {pricingTiers.map((tier, i) => (
             <motion.div
               key={tier.name}
-              className={`relative flex flex-col rounded-xl border p-8 ${
-                tier.popular
-                  ? "border-blue bg-bg-card shadow-lg shadow-blue/5"
-                  : "border-border-subtle bg-bg-card"
-              }`}
-              initial={{ opacity: 0, y: 30 }}
+              className="grid gap-8 py-12 lg:grid-cols-[2fr_3fr_auto]"
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
             >
-              {tier.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-blue px-3 py-1 text-xs font-medium text-white">
-                    <Sparkles className="h-3 w-3" />
-                    Most Popular
-                  </span>
-                </div>
-              )}
-
               <div>
-                <h3 className="text-lg font-semibold text-text-primary">
+                <h3 className="font-serif text-2xl text-forge-navy">
                   {tier.name}
                 </h3>
-                <div className="mt-4 flex items-baseline gap-1">
-                  <span className="text-4xl font-bold text-text-primary">
+                <div className="mt-3 flex items-baseline gap-1">
+                  <span className="metric-display text-3xl text-molten-amber">
                     {tier.price}
                   </span>
-                  <span className="text-text-muted">{tier.period}</span>
+                  <span className="text-sm text-text-muted">{tier.period}</span>
                 </div>
-                <p className="mt-1 text-sm text-text-muted">{tier.timeline}</p>
-                <p className="mt-4 text-sm text-text-secondary leading-relaxed">
-                  {tier.description}
+                <p className="mt-1 text-xs uppercase tracking-[1.5px] text-text-muted">
+                  {tier.timeline}
                 </p>
               </div>
 
-              <div className="mt-8 flex-1">
-                <ul className="space-y-3">
+              <div>
+                <p className="text-text-secondary leading-relaxed">
+                  {tier.description}
+                </p>
+                <ul className="mt-6 space-y-2">
                   {tier.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-3">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald" />
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-molten-amber" />
                       <span className="text-sm text-text-secondary">
                         {feature}
                       </span>
@@ -88,11 +77,10 @@ export function PricingPageClient() {
                 </ul>
               </div>
 
-              <div className="mt-8">
+              <div className="flex items-start">
                 <Button
                   size="lg"
                   variant={tier.popular ? "default" : "outline"}
-                  className="w-full"
                   asChild
                 >
                   <Link href="/contact">
@@ -107,14 +95,14 @@ export function PricingPageClient() {
 
         {/* Custom Engagement CTA */}
         <motion.div
-          className="mt-16 rounded-xl border border-border-subtle bg-bg-card p-8 text-center sm:p-12"
-          initial={{ opacity: 0, y: 30 }}
+          className="mt-16 border border-border-subtle bg-canvas p-8 text-center sm:p-12"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
-          <MessageSquare className="mx-auto h-8 w-8 text-blue" />
-          <h2 className="mt-4 text-2xl font-bold text-text-primary">
+          <MessageSquare className="mx-auto h-8 w-8 text-molten-amber" />
+          <h2 className="mt-4 font-serif text-2xl text-forge-navy">
             Need Something Custom?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-text-secondary">
@@ -133,11 +121,11 @@ export function PricingPageClient() {
 
         {/* Trust Signals */}
         <motion.div
-          className="mt-16 grid gap-6 sm:grid-cols-3"
-          initial={{ opacity: 0, y: 30 }}
+          className="mt-16 grid gap-0 divide-x divide-border-subtle border border-border-subtle sm:grid-cols-3"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
           {[
             {
@@ -155,12 +143,14 @@ export function PricingPageClient() {
           ].map((signal) => (
             <div
               key={signal.label}
-              className="rounded-xl border border-border-subtle bg-bg-card p-6 text-center"
+              className="p-6 text-center"
             >
-              <p className="text-2xl font-bold text-text-primary">
+              <p className="metric-display text-2xl text-molten-amber">
                 {signal.metric}
               </p>
-              <p className="mt-1 text-sm text-text-muted">{signal.label}</p>
+              <p className="mt-1 text-xs uppercase tracking-[1.5px] text-text-muted">
+                {signal.label}
+              </p>
             </div>
           ))}
         </motion.div>
@@ -169,12 +159,12 @@ export function PricingPageClient() {
         <div className="mt-24 border-t border-border-subtle pt-20">
           <motion.div
             className="mx-auto max-w-2xl text-center"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
           >
-            <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+            <h2 className="font-serif text-3xl text-forge-navy sm:text-4xl">
               Frequently Asked Questions
             </h2>
             <p className="mt-4 text-text-secondary">
@@ -184,10 +174,10 @@ export function PricingPageClient() {
 
           <motion.div
             className="mx-auto mt-12 max-w-3xl"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
           >
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, i) => (

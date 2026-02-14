@@ -109,10 +109,10 @@ export function AboutPageClient() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-sm font-medium uppercase tracking-wider text-blue">
+          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
             About ClearForge
           </p>
-          <h1 className="mt-4 text-4xl font-bold text-text-primary sm:text-5xl">
+          <h1 className="mt-4 text-4xl font-serif text-forge-navy sm:text-5xl">
             Why ClearForge
           </h1>
           <p className="mt-6 text-lg text-text-secondary leading-relaxed">
@@ -131,15 +131,15 @@ export function AboutPageClient() {
           transition={{ duration: 0.5 }}
         >
           <div className="flex flex-col items-center gap-8 md:flex-row md:items-start md:gap-12">
-            <div className="flex h-40 w-40 shrink-0 items-center justify-center rounded-2xl border border-border-subtle bg-bg-card md:h-56 md:w-56">
+            <div className="flex h-40 w-40 shrink-0 items-center justify-center border border-border-subtle bg-canvas md:h-56 md:w-56">
               <User className="h-14 w-14 text-text-muted md:h-20 md:w-20" />
             </div>
 
             <div>
-              <p className="text-sm font-medium uppercase tracking-wider text-blue">
+              <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
                 From the Founder
               </p>
-              <h2 className="mt-2 text-2xl font-bold text-text-primary sm:text-3xl">
+              <h2 className="mt-2 text-2xl font-serif text-forge-navy sm:text-3xl">
                 Built by an Operator, for Operators
               </h2>
               <p className="mt-4 text-text-secondary leading-relaxed">
@@ -174,10 +174,10 @@ export function AboutPageClient() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5 }}
           >
-            <p className="text-sm font-medium uppercase tracking-wider text-blue">
+            <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
               Our Approach
             </p>
-            <h2 className="mt-4 text-3xl font-bold text-text-primary sm:text-4xl">
+            <h2 className="mt-4 text-3xl font-serif text-forge-navy sm:text-4xl">
               The ClearForge Method
             </h2>
             <p className="mt-4 text-text-secondary">
@@ -192,19 +192,19 @@ export function AboutPageClient() {
               return (
                 <motion.div
                   key={step.title}
-                  className="relative rounded-xl border border-border-subtle bg-bg-card p-6"
+                  className="relative border border-border-subtle bg-canvas p-6"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                 >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue/10">
-                    <Icon className="h-5 w-5 text-blue" />
+                  <div className="flex h-10 w-10 items-center justify-center bg-molten-amber/10">
+                    <Icon className="h-5 w-5 text-molten-amber" />
                   </div>
                   <span className="mt-4 block text-xs font-medium text-text-muted">
                     {step.phase}
                   </span>
-                  <h3 className="mt-1 text-lg font-semibold text-text-primary">
+                  <h3 className="mt-1 text-lg font-serif text-forge-navy">
                     {step.title}
                   </h3>
                   <p className="mt-2 text-sm text-text-secondary leading-relaxed">
@@ -228,7 +228,7 @@ export function AboutPageClient() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+            <h2 className="text-3xl font-serif text-forge-navy sm:text-4xl">
               What Makes Us Different
             </h2>
           </motion.div>
@@ -239,14 +239,14 @@ export function AboutPageClient() {
               return (
                 <motion.div
                   key={item.title}
-                  className="rounded-xl border border-border-subtle bg-bg-card p-8 transition-all hover:border-blue/30 hover:bg-bg-elevated"
+                  className="border border-border-subtle bg-canvas p-8 transition-all hover:border-molten-amber/30 hover:bg-bg-elevated"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                 >
-                  <Icon className="h-6 w-6 text-blue" />
-                  <h3 className="mt-4 text-xl font-semibold text-text-primary">
+                  <Icon className="h-6 w-6 text-molten-amber" />
+                  <h3 className="mt-4 text-xl font-serif text-forge-navy">
                     {item.title}
                   </h3>
                   <p className="mt-3 text-text-secondary leading-relaxed">
@@ -267,10 +267,10 @@ export function AboutPageClient() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5 }}
           >
-            <p className="text-sm font-medium uppercase tracking-wider text-blue">
+            <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
               Our Principles
             </p>
-            <h2 className="mt-4 text-3xl font-bold text-text-primary sm:text-4xl">
+            <h2 className="mt-4 text-3xl font-serif text-forge-navy sm:text-4xl">
               What We Believe
             </h2>
           </motion.div>
@@ -281,17 +281,17 @@ export function AboutPageClient() {
               return (
                 <motion.div
                   key={value.title}
-                  className="flex gap-4 rounded-xl border border-border-subtle bg-bg-card p-6"
+                  className="flex gap-4 border border-border-subtle bg-canvas p-6"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald/10">
-                    <Icon className="h-5 w-5 text-emerald" />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-molten-amber/10">
+                    <Icon className="h-5 w-5 text-molten-amber" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-text-primary">
+                    <h3 className="text-lg font-serif text-forge-navy">
                       {value.title}
                     </h3>
                     <p className="mt-2 text-sm text-text-secondary leading-relaxed">
@@ -313,7 +313,7 @@ export function AboutPageClient() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+            <h2 className="text-3xl font-serif text-forge-navy sm:text-4xl">
               Growing the Team
             </h2>
             <p className="mt-4 text-text-secondary leading-relaxed">
@@ -341,7 +341,7 @@ export function AboutPageClient() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+          <h2 className="text-3xl font-serif text-forge-navy sm:text-4xl">
             Ready to Work Together?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-text-secondary">

@@ -1,62 +1,59 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, BarChart3 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
+const metrics = [
+  { value: "23%", label: "Avg. Cost Reduction" },
+  { value: "90d", label: "Time to Impact" },
+  { value: "$4.2M", label: "Avg. Value Created" },
+];
+
 export function Hero() {
   return (
-    <section className="relative flex min-h-[90vh] items-center overflow-hidden">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-bg-dark" />
-        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-blue/10 blur-[128px]" />
-        <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-emerald/10 blur-[128px]" />
-        <div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue/5 blur-[96px]" />
-      </div>
+    <section className="relative overflow-hidden bg-warm-white">
+      {/* Crosshatch pattern background */}
+      <div className="absolute inset-0 crosshatch" />
 
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-4xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
+      <div className="relative mx-auto max-w-7xl px-6 pb-0 pt-24 lg:px-8 lg:pt-32">
+        <div className="max-w-4xl">
+          <motion.p
+            className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber"
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
           >
-            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border-subtle bg-bg-card px-4 py-1.5 text-sm text-text-secondary">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald" />
-              AI Performance Consulting
-            </span>
-          </motion.div>
+            AI Performance Consulting
+          </motion.p>
 
           <motion.h1
-            className="mt-6 text-4xl font-bold leading-tight tracking-tight text-text-primary sm:text-5xl md:text-6xl lg:text-7xl"
-            initial={{ opacity: 0, y: 20 }}
+            className="mt-6 font-serif text-5xl text-forge-navy sm:text-6xl md:text-7xl lg:text-[72px]"
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.4, delay: 0.05 }}
           >
             Strategy that ships.
             <br />
-            <span className="bg-gradient-to-r from-blue to-emerald bg-clip-text text-transparent">
-              AI that performs.
-            </span>
+            <span className="text-molten-amber">AI that performs.</span>
           </motion.h1>
 
           <motion.p
-            className="mx-auto mt-6 max-w-2xl text-lg text-text-secondary sm:text-xl"
-            initial={{ opacity: 0, y: 20 }}
+            className="mt-8 max-w-xl text-lg leading-relaxed text-text-secondary"
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
           >
             We combine management consulting rigor with hands-on AI engineering
             to deliver measurable results&nbsp;&mdash; not just roadmaps.
           </motion.p>
 
           <motion.div
-            className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
-            initial={{ opacity: 0, y: 20 }}
+            className="mt-10 flex flex-col gap-4 sm:flex-row"
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.4, delay: 0.15 }}
           >
             <Button size="xl" asChild>
               <Link href="/contact">
@@ -64,15 +61,35 @@ export function Hero() {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button size="xl" variant="secondary" asChild>
+            <Button size="xl" variant="outline" asChild>
               <Link href="/scorecard">
-                <BarChart3 className="mr-2 h-5 w-5" />
                 Take AI Scorecard
               </Link>
             </Button>
           </motion.div>
         </div>
       </div>
+
+      {/* Metrics bar */}
+      <motion.div
+        className="relative mt-20 border-t border-border-subtle"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4, delay: 0.2 }}
+      >
+        <div className="mx-auto flex max-w-7xl flex-col divide-y divide-border-subtle px-6 sm:flex-row sm:divide-x sm:divide-y-0 lg:px-8">
+          {metrics.map((metric) => (
+            <div key={metric.label} className="flex-1 py-6 sm:px-8 first:sm:pl-0 last:sm:pr-0">
+              <span className="metric-display text-3xl text-molten-amber lg:text-4xl">
+                {metric.value}
+              </span>
+              <p className="mt-1 text-xs uppercase tracking-[1.5px] text-text-muted">
+                {metric.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 }

@@ -1,19 +1,25 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
+import { DM_Serif_Display, Inter, JetBrains_Mono } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { organizationJsonLd } from "@/lib/metadata";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const dmSerif = DM_Serif_Display({
+  variable: "--font-dm-serif",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
   display: "swap",
 });
@@ -46,9 +52,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${dmSerif.variable} ${inter.variable} ${jetbrains.variable} antialiased`}
       >
         <script
           type="application/ld+json"
@@ -56,17 +62,15 @@ export default function RootLayout({
             __html: JSON.stringify(organizationJsonLd),
           }}
         />
-        <ThemeProvider>
-          <a
-            href="#main-content"
-            className="fixed left-4 top-4 z-[100] -translate-y-full rounded-lg bg-blue px-4 py-2 text-sm font-medium text-white transition-transform focus:translate-y-0"
-          >
-            Skip to content
-          </a>
-          <Header />
-          <main id="main-content" className="min-h-screen pt-16">{children}</main>
-          <Footer />
-        </ThemeProvider>
+        <a
+          href="#main-content"
+          className="fixed left-4 top-4 z-[100] -translate-y-full bg-molten-amber px-4 py-2 text-sm font-medium text-forge-navy transition-transform focus:translate-y-0"
+        >
+          Skip to content
+        </a>
+        <Header />
+        <main id="main-content" className="min-h-screen pt-16">{children}</main>
+        <Footer />
       </body>
     </html>
   );

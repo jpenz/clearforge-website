@@ -86,10 +86,10 @@ export function ContactPageClient() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-sm font-medium uppercase tracking-wider text-blue">
+          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
             Contact
           </p>
-          <h1 className="mt-4 text-4xl font-bold text-text-primary sm:text-5xl">
+          <h1 className="mt-4 text-4xl font-serif text-forge-navy sm:text-5xl">
             Let&apos;s Talk Results
           </h1>
           <p className="mt-6 text-lg text-text-secondary">
@@ -107,8 +107,8 @@ export function ContactPageClient() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="rounded-xl border border-border-subtle bg-bg-card p-6 sm:p-8">
-              <h2 className="text-xl font-semibold text-text-primary">
+            <div className="border border-border-subtle bg-canvas p-6 sm:p-8">
+              <h2 className="text-xl font-serif text-forge-navy">
                 Send Us a Message
               </h2>
               <p className="mt-2 text-sm text-text-secondary">
@@ -117,9 +117,9 @@ export function ContactPageClient() {
               </p>
 
               {submitState === "success" ? (
-                <div className="mt-8 flex flex-col items-center rounded-xl border border-emerald/30 bg-emerald/5 p-8 text-center">
-                  <CheckCircle2 className="h-12 w-12 text-emerald" />
-                  <h3 className="mt-4 text-lg font-semibold text-text-primary">
+                <div className="mt-8 flex flex-col items-center border border-molten-amber/30 bg-molten-amber/5 p-8 text-center">
+                  <CheckCircle2 className="h-12 w-12 text-molten-amber" />
+                  <h3 className="mt-4 text-lg font-serif text-forge-navy">
                     Message Sent
                   </h3>
                   <p className="mt-2 text-text-secondary">
@@ -232,7 +232,7 @@ export function ContactPageClient() {
                   </div>
 
                   {submitState === "error" && (
-                    <div className="flex items-center gap-2 rounded-lg border border-red-400/30 bg-red-400/5 p-3">
+                    <div className="flex items-center gap-2 border border-red-400/30 bg-red-400/5 p-3">
                       <AlertCircle className="h-4 w-4 shrink-0 text-red-400" />
                       <p className="text-sm text-red-400">
                         Something went wrong. Please try again or email us
@@ -270,16 +270,16 @@ export function ContactPageClient() {
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             {/* Calendly Placeholder */}
-            <div className="rounded-xl border border-border-subtle bg-bg-card p-6">
-              <Calendar className="h-6 w-6 text-blue" />
-              <h3 className="mt-4 text-lg font-semibold text-text-primary">
+            <div className="border border-border-subtle bg-canvas p-6">
+              <Calendar className="h-6 w-6 text-molten-amber" />
+              <h3 className="mt-4 text-lg font-serif text-forge-navy">
                 Book a Discovery Call
               </h3>
               <p className="mt-2 text-sm text-text-secondary">
                 30 minutes to discuss your business, challenges, and whether
                 ClearForge is the right fit.
               </p>
-              <div className="mt-6 flex h-48 items-center justify-center rounded-lg border border-dashed border-border-medium bg-bg-elevated">
+              <div className="mt-6 flex h-48 items-center justify-center border border-dashed border-border-medium bg-bg-elevated">
                 <p className="text-sm text-text-muted">
                   Calendly embed coming soon
                 </p>
@@ -287,9 +287,9 @@ export function ContactPageClient() {
             </div>
 
             {/* Response Time */}
-            <div className="rounded-xl border border-border-subtle bg-bg-card p-6">
-              <Clock className="h-6 w-6 text-emerald" />
-              <h3 className="mt-4 text-lg font-semibold text-text-primary">
+            <div className="border border-border-subtle bg-canvas p-6">
+              <Clock className="h-6 w-6 text-molten-amber" />
+              <h3 className="mt-4 text-lg font-serif text-forge-navy">
                 We Respond Within 24 Hours
               </h3>
               <p className="mt-2 text-sm text-text-secondary">
@@ -299,16 +299,16 @@ export function ContactPageClient() {
             </div>
 
             {/* Email */}
-            <div className="rounded-xl border border-border-subtle bg-bg-card p-6">
-              <Mail className="h-6 w-6 text-blue" />
-              <h3 className="mt-4 text-lg font-semibold text-text-primary">
+            <div className="border border-border-subtle bg-canvas p-6">
+              <Mail className="h-6 w-6 text-molten-amber" />
+              <h3 className="mt-4 text-lg font-serif text-forge-navy">
                 Email Us Directly
               </h3>
               <p className="mt-2 text-sm text-text-secondary">
                 Prefer email? Reach us at{" "}
                 <a
                   href="mailto:hello@clearforge.ai"
-                  className="text-blue hover:underline"
+                  className="text-molten-amber hover:underline"
                 >
                   hello@clearforge.ai
                 </a>

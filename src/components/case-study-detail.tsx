@@ -33,19 +33,19 @@ export function CaseStudyDetail({ caseStudy }: { caseStudy: CaseStudy }) {
           transition={{ duration: 0.5 }}
         >
           <div className="flex items-center justify-center gap-3">
-            <span className="rounded-full bg-blue/10 px-3 py-1 text-xs font-medium text-blue">
+            <span className="bg-molten-amber/10 px-3 py-1 text-xs font-medium text-molten-amber">
               {caseStudy.service}
             </span>
-            <span className="rounded-full bg-bg-elevated px-3 py-1 text-xs text-text-muted">
+            <span className="bg-bg-elevated px-3 py-1 text-xs text-text-muted">
               {caseStudy.industry}
             </span>
           </div>
-          <h1 className="mt-6 text-3xl font-bold text-text-primary sm:text-4xl lg:text-5xl">
+          <h1 className="mt-6 text-3xl font-serif text-forge-navy sm:text-4xl lg:text-5xl">
             {caseStudy.title}
           </h1>
 
-          <div className="mt-8 inline-flex flex-col items-center rounded-xl border border-border-subtle bg-bg-card px-8 py-6">
-            <p className="text-5xl font-bold text-text-primary sm:text-6xl">
+          <div className="mt-8 inline-flex flex-col items-center border border-border-subtle bg-canvas px-8 py-6">
+            <p className="text-5xl font-serif text-forge-navy sm:text-6xl">
               {caseStudy.heroMetric}
             </p>
             <p className="mt-2 text-text-muted">{caseStudy.heroMetricLabel}</p>
@@ -60,10 +60,10 @@ export function CaseStudyDetail({ caseStudy }: { caseStudy: CaseStudy }) {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-sm font-medium uppercase tracking-wider text-blue">
+          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
             The Challenge
           </p>
-          <h2 className="mt-2 text-2xl font-bold text-text-primary">
+          <h2 className="mt-2 text-2xl font-serif text-forge-navy">
             What They Were Facing
           </h2>
           <p className="mt-4 text-text-secondary leading-relaxed">
@@ -79,10 +79,10 @@ export function CaseStudyDetail({ caseStudy }: { caseStudy: CaseStudy }) {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-sm font-medium uppercase tracking-wider text-emerald">
+          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
             The Solution
           </p>
-          <h2 className="mt-2 text-2xl font-bold text-text-primary">
+          <h2 className="mt-2 text-2xl font-serif text-forge-navy">
             What We Built
           </h2>
           <p className="mt-4 text-text-secondary leading-relaxed">
@@ -99,10 +99,10 @@ export function CaseStudyDetail({ caseStudy }: { caseStudy: CaseStudy }) {
           transition={{ duration: 0.5 }}
         >
           <div className="mx-auto max-w-3xl">
-            <p className="text-sm font-medium uppercase tracking-wider text-blue">
+            <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
               The Outcomes
             </p>
-            <h2 className="mt-2 text-2xl font-bold text-text-primary">
+            <h2 className="mt-2 text-2xl font-serif text-forge-navy">
               Measurable Results
             </h2>
           </div>
@@ -110,13 +110,13 @@ export function CaseStudyDetail({ caseStudy }: { caseStudy: CaseStudy }) {
             {caseStudy.outcomes.map((outcome, i) => (
               <motion.div
                 key={outcome.metric}
-                className="rounded-xl border border-border-subtle bg-bg-card p-6 text-center"
+                className="border border-border-subtle bg-canvas p-6 text-center"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
-                <p className="text-3xl font-bold text-text-primary">
+                <p className="text-3xl font-serif text-forge-navy">
                   {outcome.metric}
                 </p>
                 <p className="mt-2 text-sm text-text-muted">
@@ -135,10 +135,10 @@ export function CaseStudyDetail({ caseStudy }: { caseStudy: CaseStudy }) {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-sm font-medium uppercase tracking-wider text-emerald">
+          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
             The Scale
           </p>
-          <h2 className="mt-2 text-2xl font-bold text-text-primary">
+          <h2 className="mt-2 text-2xl font-serif text-forge-navy">
             What Happened Next
           </h2>
           <p className="mt-4 text-text-secondary leading-relaxed">
@@ -154,7 +154,7 @@ export function CaseStudyDetail({ caseStudy }: { caseStudy: CaseStudy }) {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold text-text-primary">
+          <h2 className="text-3xl font-serif text-forge-navy">
             Ready for Similar Results?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-text-secondary">

@@ -16,12 +16,10 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 py-20 text-center">
+    <div className="flex min-h-[60vh] flex-col items-center justify-center px-6 py-20 text-center">
       <div className="mx-auto max-w-md">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-red-400/10">
-          <AlertTriangle className="h-8 w-8 text-red-400" />
-        </div>
-        <h1 className="mt-6 text-2xl font-bold text-text-primary sm:text-3xl">
+        <AlertTriangle className="mx-auto h-10 w-10 text-molten-amber" />
+        <h1 className="mt-6 font-serif text-2xl text-forge-navy sm:text-3xl">
           Something Went Wrong
         </h1>
         <p className="mt-4 text-text-secondary">

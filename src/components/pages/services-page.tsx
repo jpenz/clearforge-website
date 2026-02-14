@@ -16,7 +16,7 @@ export function ServicesPageClient() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl font-bold text-text-primary sm:text-5xl">
+          <h1 className="text-4xl font-serif text-forge-navy sm:text-5xl">
             Our Services
           </h1>
           <p className="mt-4 text-lg text-text-secondary">
@@ -37,19 +37,19 @@ export function ServicesPageClient() {
             >
               <Link
                 href={`/services/${service.slug}`}
-                className="group flex h-full flex-col rounded-xl border border-border-subtle bg-bg-card p-8 transition-all hover:border-blue/30 hover:bg-bg-elevated"
+                className="group flex h-full flex-col border border-border-subtle bg-canvas p-8 transition-all hover:border-molten-amber/30 hover:bg-bg-elevated"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue/10">
-                  <Icon className="h-6 w-6 text-blue" />
+                <div className="flex h-12 w-12 items-center justify-center bg-molten-amber/10">
+                  <Icon className="h-6 w-6 text-molten-amber" />
                 </div>
-                <h2 className="mt-6 text-2xl font-semibold text-text-primary">
+                <h2 className="mt-6 text-2xl font-serif text-forge-navy">
                   {service.title}
                 </h2>
                 <p className="mt-2 text-text-muted">{service.tagline}</p>
                 <p className="mt-4 flex-1 text-text-secondary leading-relaxed">
                   {service.description}
                 </p>
-                <div className="mt-6 flex items-center text-sm font-medium text-blue">
+                <div className="mt-6 flex items-center text-sm font-medium text-molten-amber">
                   Learn more
                   <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </div>

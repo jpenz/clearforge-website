@@ -14,7 +14,7 @@ const RadarChartComponent = dynamic(() => import("./radar-chart"), {
   ssr: false,
   loading: () => (
     <div className="flex h-[300px] items-center justify-center">
-      <div className="h-8 w-8 animate-spin rounded-full border-2 border-blue border-t-transparent" />
+      <div className="h-8 w-8 animate-spin border-2 border-molten-amber border-t-transparent" />
     </div>
   ),
 });
@@ -27,12 +27,13 @@ function ScoreGauge({ score }: { score: number }) {
     return () => clearTimeout(timer);
   }, [score]);
 
+  // Heat gradient color based on score
   const getColor = (s: number) => {
-    if (s <= 40) return "text-red-400";
-    if (s <= 55) return "text-orange-400";
-    if (s <= 70) return "text-yellow-400";
-    if (s <= 85) return "text-emerald";
-    return "text-blue";
+    if (s <= 40) return "text-signal-blue";
+    if (s <= 55) return "text-deep-steel";
+    if (s <= 70) return "text-molten-amber";
+    if (s <= 85) return "text-molten-amber";
+    return "text-forge-navy";
   };
 
   return (
@@ -61,15 +62,15 @@ function ScoreGauge({ score }: { score: number }) {
             stroke="currentColor"
             strokeWidth="8"
             strokeDasharray={`${(animatedScore / 100) * 440} 440`}
-            strokeLinecap="round"
+            strokeLinecap="butt"
             className={`${getColor(score)} transition-all duration-1000`}
           />
         </svg>
-        <span className={`text-5xl font-bold ${getColor(score)}`}>
+        <span className={`metric-display text-5xl ${getColor(score)}`}>
           {animatedScore}
         </span>
       </div>
-      <p className="mt-2 text-sm text-text-muted">out of 100</p>
+      <p className="mt-2 text-xs uppercase tracking-[1.5px] text-text-muted">out of 100</p>
     </motion.div>
   );
 }
@@ -83,21 +84,28 @@ function PillarBar({
   percentage: number;
   delay: number;
 }) {
+  // Heat color for individual bars
+  const getBarColor = (pct: number) => {
+    if (pct <= 40) return "bg-signal-blue";
+    if (pct <= 70) return "bg-molten-amber";
+    return "bg-forge-navy";
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
+      initial={{ opacity: 0, x: -16 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.4, delay }}
+      transition={{ duration: 0.3, delay }}
     >
       <div className="mb-1 flex items-center justify-between text-sm">
         <span className="text-text-secondary">{name}</span>
-        <span className="font-medium text-text-primary">
+        <span className="metric-display font-medium text-forge-navy">
           {Math.round(percentage)}%
         </span>
       </div>
-      <div className="h-2.5 w-full overflow-hidden rounded-full bg-bg-elevated">
+      <div className="h-2 w-full overflow-hidden bg-bg-elevated">
         <motion.div
-          className="h-full rounded-full bg-blue"
+          className={`h-full ${getBarColor(percentage)}`}
           initial={{ width: 0 }}
           animate={{ width: `${percentage}%` }}
           transition={{ duration: 0.8, delay: delay + 0.2 }}
@@ -150,61 +158,61 @@ export function ResultsDisplay() {
   if (!results) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-blue border-t-transparent" />
+        <div className="h-8 w-8 animate-spin border-2 border-molten-amber border-t-transparent" />
       </div>
     );
   }
 
   return (
-    <div className="py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="py-24">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <motion.div
           className="mx-auto max-w-3xl text-center"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
-          <p className="text-sm font-medium uppercase tracking-wider text-blue">
+          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
             Your Results
           </p>
-          <h1 className="mt-4 text-3xl font-bold text-text-primary sm:text-4xl">
-            AI Readiness Score
+          <h1 className="mt-4 font-serif text-3xl text-forge-navy sm:text-4xl">
+            Forge Report Card
           </h1>
         </motion.div>
 
         {/* Score + Maturity Level */}
         <div className="mx-auto mt-12 max-w-4xl">
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-0 border border-border-subtle md:grid-cols-2">
             <motion.div
-              className="flex flex-col items-center rounded-xl border border-border-subtle bg-bg-card p-8"
-              initial={{ opacity: 0, y: 20 }}
+              className="flex flex-col items-center border-b border-border-subtle p-8 md:border-b-0 md:border-r"
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
             >
               <ScoreGauge score={results.compositeScore} />
               <div className="mt-6 text-center">
-                <p className="text-sm text-text-muted">Maturity Level</p>
-                <p className="mt-1 text-2xl font-bold text-text-primary">
+                <p className="text-xs uppercase tracking-[1.5px] text-text-muted">Maturity Level</p>
+                <p className="mt-1 font-serif text-2xl text-forge-navy">
                   {results.maturityLevel}
                 </p>
               </div>
             </motion.div>
 
             <motion.div
-              className="flex flex-col rounded-xl border border-border-subtle bg-bg-card p-8"
-              initial={{ opacity: 0, y: 20 }}
+              className="flex flex-col p-8"
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
             >
-              <h3 className="text-lg font-semibold text-text-primary">
+              <h3 className="font-serif text-lg text-forge-navy">
                 What This Means
               </h3>
               <p className="mt-3 flex-1 text-sm text-text-secondary leading-relaxed">
                 {results.maturityDescription}
               </p>
-              <div className="mt-4 rounded-lg bg-blue/10 p-4">
-                <p className="text-sm font-medium text-blue">
+              <div className="mt-4 border-l-2 border-molten-amber bg-molten-amber/5 p-4 pl-5">
+                <p className="text-xs font-semibold uppercase tracking-[1.5px] text-molten-amber">
                   Our Recommendation
                 </p>
                 <p className="mt-1 text-sm text-text-secondary">
@@ -217,12 +225,12 @@ export function ResultsDisplay() {
 
         {/* Radar Chart */}
         <motion.div
-          className="mx-auto mt-12 max-w-4xl rounded-xl border border-border-subtle bg-bg-card p-6 sm:p-8"
-          initial={{ opacity: 0, y: 30 }}
+          className="mx-auto mt-12 max-w-4xl border border-border-subtle p-6 sm:p-8"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
         >
-          <h3 className="text-lg font-semibold text-text-primary">
+          <h3 className="font-serif text-lg text-forge-navy">
             Pillar Breakdown
           </h3>
           <div className="grid gap-8 md:grid-cols-2">
@@ -235,7 +243,7 @@ export function ResultsDisplay() {
                   key={pillar.key}
                   name={pillar.name}
                   percentage={pillar.percentage}
-                  delay={0.4 + i * 0.1}
+                  delay={0.4 + i * 0.08}
                 />
               ))}
             </div>
@@ -246,13 +254,13 @@ export function ResultsDisplay() {
         {isGated && (
           <motion.div
             className="mx-auto mt-12 max-w-4xl"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{ duration: 0.4, delay: 0.5 }}
           >
-            <div className="rounded-xl border border-blue/30 bg-gradient-to-br from-blue/5 to-emerald/5 p-8 text-center">
-              <Lock className="mx-auto h-8 w-8 text-blue" />
-              <h3 className="mt-4 text-xl font-bold text-text-primary">
+            <div className="border border-border-accent bg-molten-amber/5 p-8 text-center">
+              <Lock className="mx-auto h-8 w-8 text-molten-amber" />
+              <h3 className="mt-4 font-serif text-xl text-forge-navy">
                 Get Your Full Report
               </h3>
               <p className="mx-auto mt-2 max-w-md text-sm text-text-secondary">
@@ -284,12 +292,12 @@ export function ResultsDisplay() {
         {submitted && !isGated && (
           <motion.div
             className="mx-auto mt-12 max-w-4xl"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
           >
-            <div className="rounded-xl border border-emerald/30 bg-emerald/5 p-6">
-              <p className="text-sm font-medium text-emerald">
+            <div className="border border-forge-navy/20 bg-forge-navy/5 p-6">
+              <p className="text-sm font-medium text-forge-navy">
                 Report sent to {email}
               </p>
               <p className="mt-1 text-sm text-text-secondary">
@@ -302,18 +310,18 @@ export function ResultsDisplay() {
 
         {/* CTA */}
         <motion.div
-          className="mt-20 text-center"
-          initial={{ opacity: 0, y: 30 }}
+          className="mt-24 text-center"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
-          <h2 className="text-3xl font-bold text-text-primary">
+          <h2 className="font-serif text-3xl text-forge-navy">
             Ready to Improve Your Score?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-text-secondary">
             Our recommended next step:{" "}
-            <span className="font-medium text-text-primary">
+            <span className="font-medium text-forge-navy">
               {results.recommendedService}
             </span>
           </p>

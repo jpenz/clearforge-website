@@ -11,6 +11,13 @@ interface ProgressBarProps {
 export function ProgressBar({ currentStep, completedSteps }: ProgressBarProps) {
   const progress = ((currentStep + 1) / pillars.length) * 100;
 
+  // Heat gradient: cool blue → warm amber → hot
+  const getHeatColor = (pct: number) => {
+    if (pct <= 33) return "from-signal-blue to-signal-blue";
+    if (pct <= 66) return "from-signal-blue via-molten-amber to-molten-amber";
+    return "from-signal-blue via-molten-amber to-red-500";
+  };
+
   return (
     <div className="mb-10">
       {/* Step indicators */}
@@ -21,40 +28,40 @@ export function ProgressBar({ currentStep, completedSteps }: ProgressBarProps) {
             className={cn(
               "flex items-center gap-1.5 text-xs font-medium transition-colors",
               i === currentStep
-                ? "text-blue"
+                ? "text-molten-amber"
                 : completedSteps.has(pillar.key)
-                  ? "text-emerald"
+                  ? "text-forge-navy"
                   : "text-text-muted"
             )}
           >
             <div
               className={cn(
-                "flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold transition-all",
+                "metric-display flex h-6 w-6 items-center justify-center text-xs font-bold transition-all",
                 i === currentStep
-                  ? "bg-blue text-white"
+                  ? "bg-molten-amber text-forge-navy"
                   : completedSteps.has(pillar.key)
-                    ? "bg-emerald text-white"
+                    ? "bg-forge-navy text-warm-white"
                     : "bg-bg-elevated text-text-muted"
               )}
             >
-              {completedSteps.has(pillar.key) ? "✓" : i + 1}
+              {completedSteps.has(pillar.key) ? "\u2713" : i + 1}
             </div>
             <span className="hidden lg:inline">{pillar.name}</span>
           </div>
         ))}
       </div>
 
-      {/* Progress bar */}
+      {/* Heat-gradient progress bar */}
       <div
         role="progressbar"
         aria-valuenow={Math.round(progress)}
         aria-valuemin={0}
         aria-valuemax={100}
         aria-label={`Assessment progress: ${currentStep + 1} of ${pillars.length} pillars`}
-        className="h-1.5 w-full overflow-hidden rounded-full bg-bg-elevated"
+        className="h-1.5 w-full overflow-hidden bg-bg-elevated"
       >
         <div
-          className="h-full rounded-full bg-blue transition-all duration-500"
+          className={cn("h-full bg-gradient-to-r transition-all duration-500", getHeatColor(progress))}
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -62,13 +69,13 @@ export function ProgressBar({ currentStep, completedSteps }: ProgressBarProps) {
       {/* Current pillar info */}
       <div className="mt-3 flex items-center justify-between gap-4">
         <p className="text-sm text-text-secondary">
-          <span className="font-medium text-text-primary">
+          <span className="font-medium text-forge-navy">
             {pillars[currentStep].name}
           </span>{" "}
-          <span className="hidden sm:inline">— {pillars[currentStep].description}</span>
+          <span className="hidden sm:inline">&mdash; {pillars[currentStep].description}</span>
         </p>
-        <p className="shrink-0 text-xs text-text-muted">
-          Step {currentStep + 1} of {pillars.length}
+        <p className="metric-display shrink-0 text-xs text-text-muted">
+          {currentStep + 1} / {pillars.length}
         </p>
       </div>
     </div>

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Zap } from "lucide-react";
 
 const footerLinks = {
   Services: [
@@ -23,17 +22,14 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer role="contentinfo" className="border-t border-border-subtle bg-bg-dark">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <footer role="contentinfo" className="border-t border-border-subtle bg-warm-white">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue">
-                <Zap className="h-4 w-4 text-white" />
-              </div>
-              <span className="text-lg font-bold text-text-primary">
-                ClearForge<span className="text-blue">.ai</span>
+            <Link href="/" className="inline-block">
+              <span className="font-serif text-xl text-forge-navy">
+                ClearForge<span className="text-molten-amber">.ai</span>
               </span>
             </Link>
             <p className="text-sm leading-relaxed text-text-muted">
@@ -45,15 +41,15 @@ export function Footer() {
           {/* Link columns */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
-              <h3 className="mb-3 text-sm font-semibold text-text-primary">
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-[1.5px] text-text-muted">
                 {title}
               </h3>
-              <ul className="space-y-2">
+              <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-text-muted transition-colors hover:text-text-primary"
+                      className="amber-underline text-sm text-text-secondary transition-colors hover:text-forge-navy"
                     >
                       {link.label}
                     </Link>
@@ -65,7 +61,7 @@ export function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border-subtle pt-8 sm:flex-row">
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border-subtle pt-8 sm:flex-row">
           <p className="text-sm text-text-muted">
             &copy; {new Date().getFullYear()} ClearForge.ai. All rights
             reserved.
@@ -73,13 +69,13 @@ export function Footer() {
           <div className="flex gap-6">
             <Link
               href="/privacy"
-              className="text-sm text-text-muted transition-colors hover:text-text-primary"
+              className="text-sm text-text-muted transition-colors hover:text-forge-navy"
             >
               Privacy
             </Link>
             <Link
               href="/terms"
-              className="text-sm text-text-muted transition-colors hover:text-text-primary"
+              className="text-sm text-text-muted transition-colors hover:text-forge-navy"
             >
               Terms
             </Link>

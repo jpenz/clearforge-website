@@ -44,7 +44,7 @@ function Slider({
     <div>
       <div className="mb-2 flex items-center justify-between">
         <label className="text-sm font-medium text-text-primary">{label}</label>
-        <span className="text-sm font-semibold text-blue">{format(value)}</span>
+        <span className="text-sm font-semibold text-molten-amber">{format(value)}</span>
       </div>
       <input
         type="range"
@@ -54,9 +54,9 @@ function Slider({
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
         aria-label={`${label}: ${format(value)}`}
-        className="w-full accent-blue"
+        className="w-full accent-molten-amber"
         style={{
-          background: `linear-gradient(to right, var(--color-blue) 0%, var(--color-blue) ${percentage}%, var(--color-bg-elevated) ${percentage}%, var(--color-bg-elevated) 100%)`,
+          background: `linear-gradient(to right, var(--color-molten-amber) 0%, var(--color-molten-amber) ${percentage}%, var(--color-bg-elevated) ${percentage}%, var(--color-bg-elevated) 100%)`,
         }}
       />
       <div className="mt-1 flex justify-between text-xs text-text-muted">
@@ -115,10 +115,10 @@ export function ROICalculatorPageClient() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-sm font-medium uppercase tracking-wider text-blue">
+          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
             ROI Calculator
           </p>
-          <h1 className="mt-4 text-3xl font-bold text-text-primary sm:text-4xl">
+          <h1 className="mt-4 text-3xl font-serif text-forge-navy sm:text-4xl">
             Estimate Your AI Implementation Value
           </h1>
           <p className="mt-4 text-text-secondary">
@@ -131,12 +131,12 @@ export function ROICalculatorPageClient() {
           <div className="grid gap-8 lg:grid-cols-2">
             {/* Inputs */}
             <motion.div
-              className="rounded-xl border border-border-subtle bg-bg-card p-6 sm:p-8"
+              className="border border-border-subtle bg-canvas p-6 sm:p-8"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <h2 className="text-lg font-semibold text-text-primary">
+              <h2 className="text-lg font-serif text-forge-navy">
                 Your Business
               </h2>
               <p className="mt-1 text-sm text-text-muted">
@@ -192,7 +192,7 @@ export function ROICalculatorPageClient() {
                         industry: e.target.value,
                       }))
                     }
-                    className="w-full rounded-lg border border-border-subtle bg-bg-card px-3 py-2.5 text-sm text-text-primary focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue"
+                    className="w-full border border-border-subtle bg-canvas px-3 py-2.5 text-sm text-text-primary focus:border-molten-amber focus:outline-none focus:ring-1 focus:ring-molten-amber"
                   >
                     {industries.map((ind) => (
                       <option key={ind.value} value={ind.value}>
@@ -206,12 +206,12 @@ export function ROICalculatorPageClient() {
 
             {/* Results */}
             <motion.div
-              className="rounded-xl border border-border-subtle bg-bg-card p-6 sm:p-8"
+              className="border border-border-subtle bg-canvas p-6 sm:p-8"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <h2 className="text-lg font-semibold text-text-primary">
+              <h2 className="text-lg font-serif text-forge-navy">
                 Estimated Annual Value
               </h2>
               <p className="mt-1 text-sm text-text-muted">
@@ -225,7 +225,7 @@ export function ROICalculatorPageClient() {
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.3 }}
               >
-                <p className="text-5xl font-bold text-text-primary sm:text-6xl">
+                <p className="text-5xl font-serif text-forge-navy sm:text-6xl">
                   {formatCurrency(results.estimatedAnnualValue)}
                 </p>
                 <p className="mt-2 text-sm text-text-muted">
@@ -235,23 +235,23 @@ export function ROICalculatorPageClient() {
 
               {/* Metrics */}
               <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-                <div className="rounded-lg bg-bg-elevated p-4 text-center">
-                  <Clock className="mx-auto h-5 w-5 text-blue" />
-                  <p className="mt-2 text-xl font-bold text-text-primary">
+                <div className="bg-bg-elevated p-4 text-center">
+                  <Clock className="mx-auto h-5 w-5 text-molten-amber" />
+                  <p className="mt-2 text-xl font-serif text-forge-navy">
                     {results.timeReclaimed.toLocaleString()}
                   </p>
                   <p className="text-xs text-text-muted">Hours Reclaimed/yr</p>
                 </div>
-                <div className="rounded-lg bg-bg-elevated p-4 text-center">
-                  <ShieldCheck className="mx-auto h-5 w-5 text-emerald" />
-                  <p className="mt-2 text-xl font-bold text-text-primary">
+                <div className="bg-bg-elevated p-4 text-center">
+                  <ShieldCheck className="mx-auto h-5 w-5 text-molten-amber" />
+                  <p className="mt-2 text-xl font-serif text-forge-navy">
                     {results.errorReduction}%
                   </p>
                   <p className="text-xs text-text-muted">Error Reduction</p>
                 </div>
-                <div className="rounded-lg bg-bg-elevated p-4 text-center">
-                  <TrendingUp className="mx-auto h-5 w-5 text-blue" />
-                  <p className="mt-2 text-xl font-bold text-text-primary">
+                <div className="bg-bg-elevated p-4 text-center">
+                  <TrendingUp className="mx-auto h-5 w-5 text-molten-amber" />
+                  <p className="mt-2 text-xl font-serif text-forge-navy">
                     {results.productivityGain}%
                   </p>
                   <p className="text-xs text-text-muted">
@@ -264,7 +264,7 @@ export function ROICalculatorPageClient() {
               <div className="mt-6 space-y-3">
                 <div className="flex items-center justify-between text-sm">
                   <span className="flex items-center gap-2 text-text-secondary">
-                    <DollarSign className="h-4 w-4 text-blue" />
+                    <DollarSign className="h-4 w-4 text-molten-amber" />
                     Labor Cost Savings
                   </span>
                   <span className="font-medium text-text-primary">
@@ -273,7 +273,7 @@ export function ROICalculatorPageClient() {
                 </div>
                 <div className="flex items-center justify-between text-sm">
                   <span className="flex items-center gap-2 text-text-secondary">
-                    <DollarSign className="h-4 w-4 text-emerald" />
+                    <DollarSign className="h-4 w-4 text-molten-amber" />
                     Error Reduction Savings
                   </span>
                   <span className="font-medium text-text-primary">
@@ -291,7 +291,7 @@ export function ROICalculatorPageClient() {
                 ) : (
                   <div className="flex items-center justify-between text-sm">
                     <span className="flex items-center gap-2 text-text-secondary">
-                      <DollarSign className="h-4 w-4 text-blue" />
+                      <DollarSign className="h-4 w-4 text-molten-amber" />
                       Productivity Value
                     </span>
                     <span className="font-medium text-text-primary">
@@ -306,13 +306,13 @@ export function ROICalculatorPageClient() {
           {/* Email Gate */}
           {isGated && (
             <motion.div
-              className="mt-8 rounded-xl border border-blue/30 bg-gradient-to-br from-blue/5 to-emerald/5 p-8 text-center"
+              className="mt-8 border border-molten-amber/30 bg-molten-amber/5 p-8 text-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <Lock className="mx-auto h-8 w-8 text-blue" />
-              <h3 className="mt-4 text-xl font-bold text-text-primary">
+              <Lock className="mx-auto h-8 w-8 text-molten-amber" />
+              <h3 className="mt-4 text-xl font-serif text-forge-navy">
                 Get Your Detailed Breakdown
               </h3>
               <p className="mx-auto mt-2 max-w-md text-sm text-text-secondary">
@@ -341,12 +341,12 @@ export function ROICalculatorPageClient() {
 
           {submitted && !isGated && (
             <motion.div
-              className="mt-8 rounded-xl border border-emerald/30 bg-emerald/5 p-6"
+              className="mt-8 border border-molten-amber/30 bg-molten-amber/5 p-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <p className="text-sm font-medium text-emerald">
+              <p className="text-sm font-medium text-molten-amber">
                 Full breakdown unlocked! Report sent to {email}.
               </p>
             </motion.div>
@@ -361,7 +361,7 @@ export function ROICalculatorPageClient() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold text-text-primary">
+          <h2 className="text-3xl font-serif text-forge-navy">
             Ready to Capture This Value?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-text-secondary">

@@ -2,35 +2,32 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { BarChart3, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function ScorecardCTA() {
   return (
-    <section className="py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="border-t border-border-subtle bg-forge-navy py-24">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
-          className="relative overflow-hidden rounded-2xl border border-blue/20 bg-gradient-to-br from-blue/10 via-bg-card to-emerald/10 p-8 sm:p-12 lg:p-16"
-          initial={{ opacity: 0, y: 30 }}
+          className="grid gap-12 lg:grid-cols-[3fr_2fr] lg:items-center"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
-          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-blue/10 blur-[80px]" />
-          <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-emerald/10 blur-[80px]" />
-
-          <div className="relative mx-auto max-w-2xl text-center">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-blue/10">
-              <BarChart3 className="h-8 w-8 text-blue" />
-            </div>
-            <h2 className="mt-6 text-3xl font-bold text-text-primary sm:text-4xl">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
+              Free Assessment
+            </p>
+            <h2 className="mt-4 font-serif text-3xl text-warm-white sm:text-4xl lg:text-5xl">
               How AI-Ready Is Your Business?
             </h2>
-            <p className="mt-4 text-lg text-text-secondary">
+            <p className="mt-6 max-w-lg text-lg leading-relaxed text-warm-white/70">
               Take our free 5-minute assessment and get a personalized AI
               readiness score with actionable recommendations.
             </p>
-            <div className="mt-8">
+            <div className="mt-10">
               <Button size="xl" asChild>
                 <Link href="/scorecard">
                   Take the Assessment
@@ -38,9 +35,23 @@ export function ScorecardCTA() {
                 </Link>
               </Button>
             </div>
-            <p className="mt-4 text-sm text-text-muted">
-              18 questions &middot; 5 minutes &middot; Instant results
-            </p>
+          </div>
+
+          <div className="flex flex-col divide-y divide-warm-white/10">
+            {[
+              { value: "18", label: "Questions" },
+              { value: "5 min", label: "Duration" },
+              { value: "Instant", label: "Results" },
+            ].map((item) => (
+              <div key={item.label} className="py-6">
+                <span className="metric-display text-3xl text-molten-amber">
+                  {item.value}
+                </span>
+                <p className="mt-1 text-xs uppercase tracking-[1.5px] text-warm-white/50">
+                  {item.label}
+                </p>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>

@@ -2,30 +2,33 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function FinalCTA() {
   return (
-    <section className="py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="relative border-t border-border-subtle py-24">
+      <div className="absolute inset-0 crosshatch" />
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           className="mx-auto max-w-2xl text-center"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
-          <Calendar className="mx-auto h-10 w-10 text-blue" />
-          <h2 className="mt-6 text-3xl font-bold text-text-primary sm:text-4xl">
+          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
+            Get Started
+          </p>
+          <h2 className="mt-4 font-serif text-3xl text-forge-navy sm:text-4xl lg:text-5xl">
             Ready to See What AI Can Do for You?
           </h2>
-          <p className="mt-4 text-lg text-text-secondary">
+          <p className="mt-6 text-lg text-text-secondary">
             Book a free 30-minute discovery call. We&apos;ll discuss your
             challenges, identify quick wins, and outline a path to measurable
             ROI.
           </p>
-          <div className="mt-8">
+          <div className="mt-10">
             <Button size="xl" asChild>
               <Link href="/contact">
                 Book Discovery Call
@@ -33,7 +36,7 @@ export function FinalCTA() {
               </Link>
             </Button>
           </div>
-          <p className="mt-4 text-sm text-text-muted">
+          <p className="metric-display mt-6 text-xs text-text-muted">
             No commitment &middot; 30 minutes &middot; Actionable insights
           </p>
         </motion.div>

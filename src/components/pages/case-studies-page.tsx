@@ -30,10 +30,10 @@ export function CaseStudiesPageClient() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-sm font-medium uppercase tracking-wider text-blue">
+          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
             Case Studies
           </p>
-          <h1 className="mt-4 text-4xl font-bold text-text-primary sm:text-5xl">
+          <h1 className="mt-4 text-4xl font-serif text-forge-navy sm:text-5xl">
             Results That Speak for Themselves
           </h1>
           <p className="mt-6 text-lg text-text-secondary">
@@ -56,9 +56,9 @@ export function CaseStudiesPageClient() {
                 key={s}
                 onClick={() => setServiceFilter(s)}
                 aria-pressed={serviceFilter === s}
-                className={`rounded-full px-3 py-1 text-sm transition-colors ${
+                className={`px-3 py-1 text-sm transition-colors ${
                   serviceFilter === s
-                    ? "bg-blue text-white"
+                    ? "bg-molten-amber text-forge-navy"
                     : "bg-bg-elevated text-text-secondary hover:text-text-primary"
                 }`}
               >
@@ -73,9 +73,9 @@ export function CaseStudiesPageClient() {
                 key={ind}
                 onClick={() => setIndustryFilter(ind)}
                 aria-pressed={industryFilter === ind}
-                className={`rounded-full px-3 py-1 text-sm transition-colors ${
+                className={`px-3 py-1 text-sm transition-colors ${
                   industryFilter === ind
-                    ? "bg-blue text-white"
+                    ? "bg-molten-amber text-forge-navy"
                     : "bg-bg-elevated text-text-secondary hover:text-text-primary"
                 }`}
               >
@@ -97,18 +97,18 @@ export function CaseStudiesPageClient() {
             >
               <Link
                 href={`/case-studies/${cs.slug}`}
-                className="group flex h-full flex-col rounded-xl border border-border-subtle bg-bg-card p-8 transition-all hover:border-blue/30 hover:bg-bg-elevated"
+                className="group flex h-full flex-col border border-border-subtle bg-canvas p-8 transition-all hover:border-molten-amber/30 hover:bg-bg-elevated"
               >
                 <div className="flex items-center gap-3">
-                  <span className="rounded-full bg-blue/10 px-3 py-1 text-xs font-medium text-blue">
+                  <span className="bg-molten-amber/10 px-3 py-1 text-xs font-medium text-molten-amber">
                     {cs.service}
                   </span>
-                  <span className="rounded-full bg-bg-elevated px-3 py-1 text-xs text-text-muted">
+                  <span className="bg-bg-elevated px-3 py-1 text-xs text-text-muted">
                     {cs.industry}
                   </span>
                 </div>
 
-                <h2 className="mt-4 text-xl font-semibold text-text-primary">
+                <h2 className="mt-4 text-xl font-serif text-forge-navy">
                   {cs.title}
                 </h2>
                 <p className="mt-3 flex-1 text-sm text-text-secondary leading-relaxed">
@@ -117,14 +117,14 @@ export function CaseStudiesPageClient() {
 
                 <div className="mt-6 flex items-end justify-between">
                   <div>
-                    <p className="text-3xl font-bold text-text-primary">
+                    <p className="text-3xl font-serif text-forge-navy">
                       {cs.heroMetric}
                     </p>
                     <p className="text-sm text-text-muted">
                       {cs.heroMetricLabel}
                     </p>
                   </div>
-                  <span className="flex items-center text-sm font-medium text-blue">
+                  <span className="flex items-center text-sm font-medium text-molten-amber">
                     Read Case Study
                     <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
@@ -160,7 +160,7 @@ export function CaseStudiesPageClient() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold text-text-primary">
+          <h2 className="text-3xl font-serif text-forge-navy">
             Ready for Results Like These?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-text-secondary">

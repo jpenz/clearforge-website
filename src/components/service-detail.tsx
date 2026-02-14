@@ -19,10 +19,10 @@ export function ServiceDetail({ service }: { service: Service }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-blue/10">
-            <Icon className="h-7 w-7 text-blue" />
+          <div className="mx-auto flex h-14 w-14 items-center justify-center bg-molten-amber/10">
+            <Icon className="h-7 w-7 text-molten-amber" />
           </div>
-          <h1 className="mt-6 text-4xl font-bold text-text-primary sm:text-5xl">
+          <h1 className="mt-6 text-4xl font-serif text-forge-navy sm:text-5xl">
             {service.title}
           </h1>
           <p className="mt-4 text-lg text-text-secondary">{service.tagline}</p>
@@ -33,13 +33,13 @@ export function ServiceDetail({ service }: { service: Service }) {
 
         {/* Ideal Client */}
         <motion.div
-          className="mx-auto mt-12 max-w-2xl rounded-xl border border-border-subtle bg-bg-card p-6"
+          className="mx-auto mt-12 max-w-2xl border border-border-subtle bg-canvas p-6"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-sm font-medium uppercase tracking-wider text-blue">
+          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
             Ideal Client
           </p>
           <p className="mt-2 text-text-secondary">{service.idealClient}</p>
@@ -53,13 +53,13 @@ export function ServiceDetail({ service }: { service: Service }) {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-center text-3xl font-bold text-text-primary">
+          <h2 className="text-center text-3xl font-serif text-forge-navy">
             What We Deliver
           </h2>
           <div className="mx-auto mt-8 max-w-2xl space-y-4">
             {service.deliverables.map((item) => (
               <div key={item} className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald" />
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-molten-amber" />
                 <span className="text-text-secondary">{item}</span>
               </div>
             ))}
@@ -74,20 +74,20 @@ export function ServiceDetail({ service }: { service: Service }) {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-center text-3xl font-bold text-text-primary">
+          <h2 className="text-center text-3xl font-serif text-forge-navy">
             Typical Outcomes
           </h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {service.outcomes.map((outcome, i) => (
               <motion.div
                 key={outcome.metric}
-                className="rounded-xl border border-border-subtle bg-bg-card p-6 text-center"
+                className="border border-border-subtle bg-canvas p-6 text-center"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
-                <p className="text-2xl font-bold text-text-primary">
+                <p className="text-2xl font-serif text-forge-navy">
                   {outcome.metric}
                 </p>
                 <p className="mt-2 text-sm text-text-muted">
@@ -106,19 +106,19 @@ export function ServiceDetail({ service }: { service: Service }) {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-center text-3xl font-bold text-text-primary">
+          <h2 className="text-center text-3xl font-serif text-forge-navy">
             How We Work
           </h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {service.workflow.map((step, i) => (
               <div
                 key={step.title}
-                className="relative rounded-xl border border-border-subtle bg-bg-card p-6"
+                className="relative border border-border-subtle bg-canvas p-6"
               >
-                <span className="text-xs font-medium text-blue">
+                <span className="text-xs font-medium text-molten-amber">
                   {step.phase}
                 </span>
-                <h3 className="mt-2 text-lg font-semibold text-text-primary">
+                <h3 className="mt-2 text-lg font-serif text-forge-navy">
                   {step.title}
                 </h3>
                 <p className="mt-2 text-sm text-text-secondary">
@@ -140,7 +140,7 @@ export function ServiceDetail({ service }: { service: Service }) {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold text-text-primary">
+          <h2 className="text-3xl font-serif text-forge-navy">
             Ready to Get Started?
           </h2>
           <p className="mt-4 text-text-secondary">

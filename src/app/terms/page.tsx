@@ -10,7 +10,7 @@ export default function TermsPage() {
   return (
     <div className="py-20">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-text-primary sm:text-4xl">
+        <h1 className="font-serif text-3xl text-forge-navy sm:text-4xl">
           Terms of Service
         </h1>
         <p className="mt-4 text-sm text-text-muted">
@@ -19,7 +19,7 @@ export default function TermsPage() {
 
         <div className="mt-12 space-y-8 text-text-secondary leading-relaxed">
           <section>
-            <h2 className="text-xl font-semibold text-text-primary">
+            <h2 className="font-serif text-xl text-forge-navy">
               Agreement to Terms
             </h2>
             <p className="mt-3">
@@ -30,7 +30,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-text-primary">
+            <h2 className="font-serif text-xl text-forge-navy">
               Services
             </h2>
             <p className="mt-3">
@@ -42,7 +42,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-text-primary">
+            <h2 className="font-serif text-xl text-forge-navy">
               Intellectual Property
             </h2>
             <p className="mt-3">
@@ -55,7 +55,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-text-primary">
+            <h2 className="font-serif text-xl text-forge-navy">
               Use of Tools
             </h2>
             <p className="mt-3">
@@ -67,7 +67,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-text-primary">
+            <h2 className="font-serif text-xl text-forge-navy">
               Limitation of Liability
             </h2>
             <p className="mt-3">
@@ -79,7 +79,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-text-primary">
+            <h2 className="font-serif text-xl text-forge-navy">
               Governing Law
             </h2>
             <p className="mt-3">
@@ -90,14 +90,14 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-text-primary">
+            <h2 className="font-serif text-xl text-forge-navy">
               Contact Us
             </h2>
             <p className="mt-3">
               If you have questions about these terms, please contact us at{" "}
               <a
                 href="mailto:legal@clearforge.ai"
-                className="text-blue hover:underline"
+                className="text-molten-amber hover:underline"
               >
                 legal@clearforge.ai
               </a>

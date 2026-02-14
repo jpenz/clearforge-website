@@ -10,7 +10,7 @@ export default function PrivacyPage() {
   return (
     <div className="py-20">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-text-primary sm:text-4xl">
+        <h1 className="font-serif text-3xl text-forge-navy sm:text-4xl">
           Privacy Policy
         </h1>
         <p className="mt-4 text-sm text-text-muted">
@@ -19,7 +19,7 @@ export default function PrivacyPage() {
 
         <div className="mt-12 space-y-8 text-text-secondary leading-relaxed">
           <section>
-            <h2 className="text-xl font-semibold text-text-primary">
+            <h2 className="font-serif text-xl text-forge-navy">
               Information We Collect
             </h2>
             <p className="mt-3">
@@ -32,7 +32,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-text-primary">
+            <h2 className="font-serif text-xl text-forge-navy">
               How We Use Your Information
             </h2>
             <p className="mt-3">
@@ -44,7 +44,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-text-primary">
+            <h2 className="font-serif text-xl text-forge-navy">
               Data Security
             </h2>
             <p className="mt-3">
@@ -56,7 +56,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-text-primary">
+            <h2 className="font-serif text-xl text-forge-navy">
               Cookies and Analytics
             </h2>
             <p className="mt-3">
@@ -67,7 +67,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-text-primary">
+            <h2 className="font-serif text-xl text-forge-navy">
               Your Rights
             </h2>
             <p className="mt-3">
@@ -76,7 +76,7 @@ export default function PrivacyPage() {
               any time. To exercise these rights, please contact us at{" "}
               <a
                 href="mailto:privacy@clearforge.ai"
-                className="text-blue hover:underline"
+                className="text-molten-amber hover:underline"
               >
                 privacy@clearforge.ai
               </a>
@@ -85,7 +85,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-text-primary">
+            <h2 className="font-serif text-xl text-forge-navy">
               Changes to This Policy
             </h2>
             <p className="mt-3">
@@ -96,7 +96,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-text-primary">
+            <h2 className="font-serif text-xl text-forge-navy">
               Contact Us
             </h2>
             <p className="mt-3">
@@ -104,7 +104,7 @@ export default function PrivacyPage() {
               at{" "}
               <a
                 href="mailto:privacy@clearforge.ai"
-                className="text-blue hover:underline"
+                className="text-molten-amber hover:underline"
               >
                 privacy@clearforge.ai
               </a>

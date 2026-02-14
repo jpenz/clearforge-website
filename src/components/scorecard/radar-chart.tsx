@@ -25,16 +25,16 @@ export default function ScorecardRadarChart({
   return (
     <ResponsiveContainer width="100%" height={300}>
       <RadarChart data={data} cx="50%" cy="50%" outerRadius="75%">
-        <PolarGrid stroke="var(--color-border-medium)" />
+        <PolarGrid stroke="#E5E1DA" />
         <PolarAngleAxis
           dataKey="name"
-          tick={{ fill: "var(--color-text-secondary)", fontSize: 12 }}
+          tick={{ fill: "#3D4F5F", fontSize: 12 }}
         />
         <Radar
           name="Score"
           dataKey="score"
-          stroke="var(--color-blue)"
-          fill="var(--color-blue)"
+          stroke="#0B1D33"
+          fill="#C8963E"
           fillOpacity={0.2}
           strokeWidth={2}
         />

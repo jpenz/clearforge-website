@@ -17,7 +17,7 @@ export function MobileNav({ links }: MobileNavProps) {
     <>
       <button
         onClick={() => setOpen(!open)}
-        className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-bg-elevated hover:text-text-primary"
+        className="inline-flex h-9 w-9 items-center justify-center text-text-secondary transition-colors hover:text-forge-navy"
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
       >
@@ -27,25 +27,24 @@ export function MobileNav({ links }: MobileNavProps) {
       {/* Mobile menu overlay */}
       <div
         className={cn(
-          "fixed inset-0 top-16 z-40 bg-bg-dark/95 backdrop-blur-xl transition-all duration-300 lg:hidden",
+          "fixed inset-0 top-16 z-40 bg-warm-white/98 transition-all duration-300 lg:hidden",
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
         )}
       >
-        <nav aria-label="Mobile navigation" className="flex flex-col gap-1 p-4">
+        <nav aria-label="Mobile navigation" className="flex flex-col gap-1 p-6">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="rounded-lg px-4 py-3 text-lg text-text-secondary transition-colors hover:bg-bg-elevated hover:text-text-primary"
+              className="border-b border-border-subtle px-2 py-4 text-lg text-text-secondary transition-colors hover:text-forge-navy"
             >
               {link.label}
             </Link>
           ))}
-          <div className="my-4 h-px bg-border-subtle" />
-          <div className="flex flex-col gap-3 px-4">
+          <div className="mt-6 flex flex-col gap-3">
             <Button variant="outline" asChild>
               <Link href="/scorecard" onClick={() => setOpen(false)}>
                 Take AI Scorecard

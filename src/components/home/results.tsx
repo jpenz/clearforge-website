@@ -6,7 +6,7 @@ import { motion, useInView } from "framer-motion";
 const metrics = [
   { value: 30, suffix: "%", label: "Pipeline Increase" },
   { value: 10, suffix: "%", label: "EBITDA Improvement" },
-  { value: 90, suffix: "-Day", label: "Time to ROI" },
+  { value: 90, suffix: "d", label: "Time to ROI" },
   { value: 240, prefix: "$", suffix: "K", label: "Average Savings" },
 ];
 
@@ -41,10 +41,10 @@ function AnimatedCounter({
   }, [inView, value]);
 
   return (
-    <span className="text-5xl font-bold text-text-primary sm:text-6xl">
+    <span className="metric-display text-6xl text-molten-amber sm:text-7xl lg:text-[120px]">
       {prefix}
       {count}
-      {suffix}
+      <span className="text-4xl sm:text-5xl lg:text-6xl">{suffix}</span>
     </span>
   );
 }
@@ -54,32 +54,30 @@ export function Results() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-20" ref={ref}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="border-t border-border-subtle py-24" ref={ref}>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
-          className="mx-auto max-w-2xl text-center"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
-          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
-            Results That Speak
-          </h2>
-          <p className="mt-4 text-text-secondary">
-            Across engagements, our clients see measurable impact.
+          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
+            Impact
           </p>
+          <h2 className="mt-4 max-w-md font-serif text-3xl text-forge-navy sm:text-4xl">
+            Results that speak.
+          </h2>
         </motion.div>
 
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-20 grid gap-16 sm:grid-cols-2 lg:grid-cols-4">
           {metrics.map((metric, i) => (
             <motion.div
               key={metric.label}
-              className="text-center"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
             >
               <AnimatedCounter
                 value={metric.value}
@@ -87,7 +85,9 @@ export function Results() {
                 suffix={metric.suffix}
                 inView={inView}
               />
-              <p className="mt-2 text-text-secondary">{metric.label}</p>
+              <p className="mt-3 text-xs uppercase tracking-[1.5px] text-text-muted">
+                {metric.label}
+              </p>
             </motion.div>
           ))}
         </div>

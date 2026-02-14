@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 py-20 text-center">
+    <div className="flex min-h-[60vh] flex-col items-center justify-center px-6 py-20 text-center">
       <div className="mx-auto max-w-md">
-        <p className="font-mono text-7xl font-bold text-blue">404</p>
-        <h1 className="mt-4 text-2xl font-bold text-text-primary sm:text-3xl">
+        <p className="metric-display text-7xl text-molten-amber">404</p>
+        <h1 className="mt-4 font-serif text-2xl text-forge-navy sm:text-3xl">
           Page Not Found
         </h1>
         <p className="mt-4 text-text-secondary">

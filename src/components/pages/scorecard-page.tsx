@@ -15,10 +15,10 @@ export function ScorecardPageClient() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-sm font-medium uppercase tracking-wider text-blue">
+          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
             AI Readiness Scorecard
           </p>
-          <h1 className="mt-4 text-3xl font-bold text-text-primary sm:text-4xl">
+          <h1 className="mt-4 text-3xl font-serif text-forge-navy sm:text-4xl">
             How AI-Ready Is Your Business?
           </h1>
           <p className="mt-4 text-text-secondary">

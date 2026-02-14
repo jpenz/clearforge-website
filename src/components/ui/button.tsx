@@ -4,22 +4,22 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-bg-dark disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-molten-amber focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "bg-blue text-white hover:bg-blue-dark",
-        secondary: "bg-bg-elevated text-text-primary border border-border-subtle hover:bg-bg-card hover:border-border-medium",
-        outline: "border border-border-medium text-text-primary hover:bg-bg-elevated",
+        default: "bg-molten-amber text-forge-navy hover:bg-molten-amber/90",
+        secondary: "border border-border-subtle bg-canvas text-text-primary hover:bg-bg-elevated",
+        outline: "border border-molten-amber text-molten-amber hover:bg-molten-amber hover:text-forge-navy",
         ghost: "text-text-secondary hover:text-text-primary hover:bg-bg-elevated",
-        emerald: "bg-emerald text-white hover:bg-emerald-dark",
-        link: "text-blue underline-offset-4 hover:underline",
+        navy: "bg-forge-navy text-warm-white hover:bg-deep-steel",
+        link: "text-molten-amber underline-offset-4 hover:underline",
       },
       size: {
         default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3 text-xs",
-        lg: "h-12 rounded-lg px-8 text-base",
-        xl: "h-14 rounded-lg px-10 text-lg",
+        sm: "h-9 px-3 text-xs",
+        lg: "h-12 px-8 text-base",
+        xl: "h-14 px-10 text-lg",
         icon: "h-10 w-10",
       },
     },

@@ -2,84 +2,98 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Bot, LineChart, Rocket, Cog } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const services = [
   {
-    icon: LineChart,
+    number: "01",
     title: "AI Revenue Operations",
     description:
       "Sales automation, intent signals, and pipeline analytics that turn data into deals.",
+    metric: "30%",
+    metricLabel: "pipeline increase",
     href: "/services/ai-revenue-operations",
   },
   {
-    icon: Cog,
+    number: "02",
     title: "Performance Improvement",
     description:
       "Process mining, operational diagnostics, and custom automation to cut waste.",
+    metric: "23%",
+    metricLabel: "cost reduction",
     href: "/services/performance-improvement",
   },
   {
-    icon: Rocket,
+    number: "03",
     title: "PE Value Creation",
     description:
       "90-day sprints and portfolio-wide AI playbooks that drive EBITDA improvement.",
+    metric: "10%",
+    metricLabel: "EBITDA lift",
     href: "/services/pe-value-creation",
   },
   {
-    icon: Bot,
+    number: "04",
     title: "Custom AI Agents",
     description:
       "Bespoke agents for sales, ops, and finance — built for your workflows.",
+    metric: "90d",
+    metricLabel: "to production",
     href: "/services/custom-ai-agents",
   },
 ];
 
 export function ServicesPreview() {
   return (
-    <section className="border-t border-border-subtle py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="border-t border-border-subtle bg-canvas py-24">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
-          className="mx-auto max-w-2xl text-center"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
-          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
             What We Build
-          </h2>
-          <p className="mt-4 text-text-secondary">
-            Four practice areas, one goal: measurable business impact.
           </p>
+          <h2 className="mt-4 max-w-md font-serif text-3xl text-forge-navy sm:text-4xl">
+            Four practice areas, one goal.
+          </h2>
         </motion.div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+        <div className="mt-16 divide-y divide-border-subtle">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.4, delay: i * 0.06 }}
             >
               <Link
                 href={service.href}
-                className="group flex h-full flex-col rounded-xl border border-border-subtle bg-bg-card p-8 transition-all hover:border-blue/30 hover:bg-bg-elevated"
+                className="group grid items-center gap-6 py-8 lg:grid-cols-[auto_1fr_auto_auto]"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue/10">
-                  <service.icon className="h-6 w-6 text-blue" />
+                <span className="metric-display text-sm text-text-muted">
+                  {service.number}
+                </span>
+                <div className="lg:grid lg:grid-cols-[2fr_3fr] lg:gap-8">
+                  <h3 className="font-serif text-xl text-forge-navy group-hover:text-molten-amber transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="mt-2 text-text-secondary lg:mt-0">
+                    {service.description}
+                  </p>
                 </div>
-                <h3 className="mt-6 text-xl font-semibold text-text-primary">
-                  {service.title}
-                </h3>
-                <p className="mt-3 flex-1 text-text-secondary leading-relaxed">
-                  {service.description}
-                </p>
-                <div className="mt-6 flex items-center text-sm font-medium text-blue">
-                  Learn more
-                  <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <div className="hidden lg:block">
+                  <span className="metric-display text-2xl text-molten-amber">
+                    {service.metric}
+                  </span>
+                  <p className="text-xs uppercase tracking-[1px] text-text-muted">
+                    {service.metricLabel}
+                  </p>
                 </div>
+                <ArrowRight className="hidden h-5 w-5 text-text-muted transition-all group-hover:translate-x-1 group-hover:text-molten-amber lg:block" />
               </Link>
             </motion.div>
           ))}
