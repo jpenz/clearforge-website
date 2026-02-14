@@ -1,0 +1,172 @@
+{
+  "pn": "ClearForge.ai",
+  "pd": "AI performance consulting website with interactive AI Readiness Scorecard. Lead-gen site for ClearForge — the full-stack AI performance firm combining management consulting with hands-on AI engineering. Serves mid-market companies ($5M-$500M) and PE portfolio companies.",
+  "sp": "Build a best-in-class Next.js 15 website for ClearForge.ai — an AI consulting firm. Use App Router, Tailwind CSS, Radix UI, Framer Motion, Recharts, Lucide icons, React Hook Form + Zod. Dark mode default with light mode toggle. SaaS aesthetic (Linear/Vercel quality). Tagline: 'Strategy that ships. AI that performs.' Follow Vercel React Best Practices for performance. All pages must be mobile-first, Lighthouse 95+. NO stock photos — use abstract gradients, geometric patterns, and data visualizations. Color palette: Deep Navy #0F172A, Electric Blue #3B82F6, Emerald #10B981, dark backgrounds #0A0A0A/#111111. Typography: Geist Sans + Geist Mono. Every page has ONE clear CTA. The AI Readiness Scorecard is the crown jewel — 18 questions, 5 pillars, radar chart output, soft-gated results.",
+  "gh": true,
+  "ts": {
+    "language": "TypeScript",
+    "framework": "Next.js 15"
+  },
+  "p": {
+    "00_security": {
+      "n": "Security",
+      "t": [
+        {
+          "id": "SEC-001",
+          "ti": "Create .gitignore and .env.example",
+          "d": "Security baseline — ignore node_modules, .env, .next, out",
+          "f": ".gitignore, .env.example",
+          "pr": "high",
+          "st": "complete",
+          "ac": "[x] .gitignore with node_modules, .env*, .next, out, coverage [x] .env.example with placeholder keys for Supabase, Resend, HubSpot, GA4"
+        }
+      ]
+    },
+    "01_setup": {
+      "n": "Project Setup",
+      "t": [
+        {
+          "id": "SETUP-001",
+          "ti": "Initialize Next.js 15 with TypeScript and Tailwind",
+          "d": "Create Next.js 15 app with App Router, TypeScript strict mode, Tailwind CSS, and all dependencies: @radix-ui/react-*, framer-motion, recharts, lucide-react, react-hook-form, zod, @hookform/resolvers, geist font",
+          "f": "package.json, tsconfig.json, tailwind.config.ts, next.config.ts",
+          "pr": "high",
+          "st": "pending",
+          "ac": "[x] Next.js 15 initialized [x] TypeScript strict mode [x] Tailwind configured with custom color palette [x] All dependencies installed [x] Dev server starts without errors"
+        },
+        {
+          "id": "SETUP-002",
+          "ti": "Design System — Base components and globals",
+          "d": "Create the design system: global CSS with dark/light mode CSS variables, color palette (Navy #0F172A, Blue #3B82F6, Emerald #10B981, backgrounds #0A0A0A/#111111/#1A1A1A), Geist font setup, and base UI components (Button, Card, Badge, Input, Textarea, Label, Separator, Dialog, Sheet, Tabs, Tooltip) using Radix UI primitives with Tailwind styling. Include cn() utility.",
+          "f": "src/app/globals.css, src/lib/utils.ts, src/components/ui/*",
+          "pr": "high",
+          "st": "pending",
+          "ac": "[x] CSS variables for dark/light mode [x] Color palette matches spec [x] Geist Sans + Mono fonts [x] All base components created with variants [x] cn() utility working [x] Dark mode default with toggle support"
+        },
+        {
+          "id": "SETUP-003",
+          "ti": "Layout — Header, Footer, ThemeToggle",
+          "d": "Create root layout with responsive header (logo, nav links: Services, Case Studies, Pricing, Insights, About | CTAs: Take AI Scorecard, Book Call), footer (sitemap, social links, newsletter signup), and dark/light theme toggle. Mobile hamburger menu. Sticky header on scroll with blur backdrop.",
+          "f": "src/app/layout.tsx, src/components/layout/header.tsx, src/components/layout/footer.tsx, src/components/theme-toggle.tsx, src/components/layout/mobile-nav.tsx",
+          "pr": "high",
+          "st": "pending",
+          "ac": "[x] Responsive header with all nav items [x] Mobile hamburger menu [x] Sticky header with backdrop blur [x] Footer with sitemap and social links [x] Theme toggle (dark default) [x] Smooth transitions"
+        }
+      ]
+    },
+    "02_core": {
+      "n": "Core Pages",
+      "t": [
+        {
+          "id": "CORE-001",
+          "ti": "Homepage — Hero to Final CTA",
+          "d": "Build the homepage with 8 sections: (1) Hero with 'Strategy that ships. AI that performs.' headline, subheadline 'We combine management consulting rigor with hands-on AI engineering to deliver measurable results — not just roadmaps', 2 CTAs (Book Discovery Call + Take AI Scorecard), animated gradient background. (2) Problem Statement: 'Strategy firms give you decks. Tech shops give you tools. Neither gives you results.' with visual bridge diagram. (3) How We're Different: 3 cards — Bridge the Gap, Senior-Led Delivery, Results Not Decks. (4) Service Lines: 4 cards linking to detail pages. (5) Results/Social Proof: animated counter section with 4 metrics (30% Pipeline Increase, 10% EBITDA Improvement, 90-Day ROI, $240K Average Savings). (6) AI Readiness CTA: full-width gradient section 'How AI-Ready Is Your Business?'. (7) Founder section with bio. (8) Final CTA with Calendly placeholder.",
+          "f": "src/app/page.tsx, src/components/home/*",
+          "pr": "high",
+          "st": "pending",
+          "ac": "[x] All 8 sections implemented [x] Hero with animated gradient [x] Animated number counters [x] Service cards with hover effects [x] Full-width scorecard CTA [x] Mobile responsive [x] Smooth scroll between sections [x] Framer Motion animations on scroll"
+        },
+        {
+          "id": "CORE-002",
+          "ti": "Services Hub + 4 Detail Pages",
+          "d": "Build /services hub page with 4 service cards, and 4 detail pages: (1) /services/ai-revenue-operations — AI-powered prospecting, intent signals, automated outreach, pipeline analytics. (2) /services/performance-improvement — Process mining, operational diagnostics, custom automation, real-time dashboards. (3) /services/pe-value-creation — 90-day sprints, portfolio-wide AI playbooks, EBITDA improvement, due diligence to exit prep. (4) /services/custom-ai-agents — Sales agents, ops agents, finance agents, workflow orchestration. Each page: hero with service name, what we deliver, ideal client, typical outcomes (quantified), delivery workflow (phased), case study snippet placeholder, CTA.",
+          "f": "src/app/services/page.tsx, src/app/services/ai-revenue-operations/page.tsx, src/app/services/performance-improvement/page.tsx, src/app/services/pe-value-creation/page.tsx, src/app/services/custom-ai-agents/page.tsx, src/data/services.ts",
+          "pr": "high",
+          "st": "pending",
+          "ac": "[x] Services hub with 4 cards [x] All 4 detail pages built [x] Each has hero, deliverables, outcomes, workflow, CTA [x] Service data in data file [x] Consistent layout across all 4 [x] Mobile responsive [x] Internal linking between services"
+        },
+        {
+          "id": "CORE-003",
+          "ti": "About / Founder Page",
+          "d": "Build /about page with: (1) Hero section with 'Why ClearForge' headline. (2) Founder story — dual background in management consulting + AI engineering, without naming specific firms. Placeholder for professional photo. (3) Methodology section — the ClearForge approach (Diagnose → Design → Build → Optimize). (4) Three differentiators with icons. (5) Team section (future-proofed with 'Join Us' CTA). (6) Values/principles section.",
+          "f": "src/app/about/page.tsx",
+          "pr": "medium",
+          "st": "pending",
+          "ac": "[x] Founder story compelling and authentic [x] Methodology visualization [x] Photo placeholder [x] Team section expandable [x] Mobile responsive [x] CTA to book call"
+        },
+        {
+          "id": "CORE-004",
+          "ti": "Pricing Page",
+          "d": "Build /pricing page with 3 productized packages in a pricing table: (1) AI Readiness Audit — $15K, 2 weeks, includes stakeholder interviews, process mapping, data assessment, opportunity identification, deliverables listed. (2) Performance Sprint — $50K-$100K, 6-8 weeks, includes process mining, top-3 opportunities, working MVP, team training. (3) AI Agent Retainer — $15K/mo, ongoing, includes 20+ hrs expertise, 1-2 new agents/month, optimization, weekly sessions. Plus: custom engagement CTA for larger projects, FAQ accordion section (8-10 questions about pricing, process, timelines), trust signals.",
+          "f": "src/app/pricing/page.tsx, src/data/pricing.ts",
+          "pr": "medium",
+          "st": "pending",
+          "ac": "[x] 3 pricing cards with feature lists [x] Most popular badge on Sprint [x] Custom engagement CTA [x] FAQ accordion [x] Pricing data in data file [x] Mobile responsive [x] CTA on each card"
+        },
+        {
+          "id": "CORE-005",
+          "ti": "Contact Page",
+          "d": "Build /contact page with: (1) Contact form (name, email, company, revenue range dropdown, message) using React Hook Form + Zod validation. (2) Calendly embed placeholder section. (3) Response time commitment: 'We respond within 24 hours'. (4) Alternative contact methods. Form submits to an API route that would connect to CRM.",
+          "f": "src/app/contact/page.tsx, src/app/api/contact/route.ts",
+          "pr": "medium",
+          "st": "pending",
+          "ac": "[x] Form with validation [x] Revenue range dropdown [x] Calendly placeholder [x] API route for form submission [x] Success/error states [x] Mobile responsive"
+        },
+        {
+          "id": "CORE-006",
+          "ti": "Case Studies Section",
+          "d": "Build /case-studies page with 3-5 anonymized case studies using C-S-O-S framework (Challenge, Solution, Outcome, Scale). Create case study card components and detail pages. Cases: (1) $50M Manufacturer — sales pipeline automation, 30% pipeline increase. (2) PE Portfolio — AI value creation across 3 companies, 10% EBITDA improvement. (3) $25M Services Company — process automation, $240K annual savings. (4) B2B Software — AI SDR agents, 3.5x conversion improvement. Each detail page has: hero with key metric, challenge narrative, solution description, outcomes with large numbers, scale/expansion section, CTA.",
+          "f": "src/app/case-studies/page.tsx, src/app/case-studies/[slug]/page.tsx, src/data/case-studies.ts",
+          "pr": "medium",
+          "st": "pending",
+          "ac": "[x] Case study hub with cards [x] 4 detail pages [x] C-S-O-S framework on each [x] Large metric displays [x] Dynamic routing [x] Filterable by service/industry [x] CTA on each page"
+        },
+        {
+          "id": "CORE-007",
+          "ti": "Insights / Blog Section",
+          "d": "Build /insights blog with MDX support. Create 5 launch posts: (1) AI Readiness CEO Guide, (2) Why 95% of AI Pilots Fail, (3) PE Value Creation with AI, (4) Hidden Cost of Manual Processes, (5) AI Agents Explained. Blog hub with cards showing title, excerpt, date, reading time, category. Individual post pages with MDX rendering, author info, share buttons, related posts, CTA. Categories: AI Strategy, Performance Improvement, PE Value Creation, AI Agents.",
+          "f": "src/app/insights/page.tsx, src/app/insights/[slug]/page.tsx, src/content/*.mdx, src/lib/mdx.ts",
+          "pr": "medium",
+          "st": "pending",
+          "ac": "[x] Blog hub with post cards [x] MDX rendering working [x] 5 launch posts written [x] Category filtering [x] Reading time calculated [x] Share buttons [x] Related posts [x] Author section [x] CTA in each post"
+        }
+      ]
+    },
+    "03_api": {
+      "n": "Interactive Tools & Integrations",
+      "t": [
+        {
+          "id": "TOOL-001",
+          "ti": "AI Readiness Scorecard — Full Interactive Assessment",
+          "d": "Build the AI Readiness Scorecard at /scorecard — the primary lead capture tool. 18 questions across 5 weighted pillars (Data Maturity 30%, Team Capability 25%, Process Documentation 20%, Tech Infrastructure 15%, Budget Alignment 10%). Multi-step form with progress bar, one pillar per step. Each question uses 1-5 Likert scale with custom radio buttons. After completion: instant results page showing composite score (0-100), maturity level, animated radar chart (Recharts), pillar breakdown with descriptions. Soft gate: show score and level free, require email for full report. Lead segmentation: auto-assign segment A/B/C/D based on score. Store results in API route (Supabase-ready). Beautiful results page with radar chart, pillar bars, personalized recommendations, and recommended ClearForge service.",
+          "f": "src/app/scorecard/page.tsx, src/app/scorecard/results/page.tsx, src/components/scorecard/*, src/lib/scorecard.ts, src/app/api/scorecard/route.ts",
+          "pr": "high",
+          "st": "pending",
+          "ac": "[x] 18 questions across 5 pillars [x] Multi-step form with progress bar [x] Custom styled radio buttons (1-5 scale) [x] Scoring engine with weighted formula [x] Animated radar chart (Recharts) [x] Pillar breakdown bars [x] Maturity level display [x] Soft-gated results (score free, report gated) [x] Email capture form [x] Lead segment assignment [x] API route for storage [x] Personalized recommendations [x] Recommended service based on score [x] Mobile responsive [x] Beautiful animations"
+        },
+        {
+          "id": "TOOL-002",
+          "ti": "ROI Calculator",
+          "d": "Build interactive ROI calculator at /roi-calculator. Inputs: annual revenue (slider or input), number of employees (slider), manual process hours/week (slider), industry dropdown. Output: estimated annual value from AI implementation with breakdown. Uses industry-specific multipliers. Soft-gated: show estimate free, email for detailed breakdown. Clean, interactive design with real-time calculation updates.",
+          "f": "src/app/roi-calculator/page.tsx, src/components/roi-calculator/*, src/lib/roi-calculator.ts",
+          "pr": "medium",
+          "st": "pending",
+          "ac": "[x] 4 input fields with sliders [x] Real-time calculation [x] Industry multipliers [x] Animated result display [x] Soft-gated detailed breakdown [x] API route for lead capture [x] Mobile responsive"
+        },
+        {
+          "id": "TOOL-003",
+          "ti": "SEO, Metadata, and Performance",
+          "d": "Add comprehensive SEO: metadata for all pages (title, description, og:image, twitter cards), JSON-LD structured data (Organization, Service, FAQ), sitemap.xml, robots.txt. Optimize for performance: dynamic imports for heavy components, image optimization, font subsetting, preload critical resources. Target Lighthouse 95+ on all metrics.",
+          "f": "src/app/layout.tsx (metadata), src/app/sitemap.ts, src/app/robots.ts, src/lib/metadata.ts",
+          "pr": "medium",
+          "st": "pending",
+          "ac": "[x] All pages have unique title + description [x] OG images configured [x] JSON-LD on key pages [x] sitemap.xml generated [x] robots.txt configured [x] Dynamic imports for Recharts etc [x] Font optimization [x] Lighthouse 90+ on mobile"
+        }
+      ]
+    },
+    "04_test": {
+      "n": "Testing & Polish",
+      "t": [
+        {
+          "id": "TEST-001",
+          "ti": "Final polish, accessibility, and deployment prep",
+          "d": "Final pass: check all pages for consistency, fix any layout issues, ensure full keyboard navigation and screen reader support (aria labels, focus management on scorecard), check all internal links, verify mobile layouts at 320px/375px/768px/1024px/1440px breakpoints. Add loading states, error boundaries, 404 page. Verify dark/light mode works on every page. Prepare for Vercel deployment with proper env variable setup.",
+          "f": "src/app/not-found.tsx, src/components/error-boundary.tsx",
+          "pr": "medium",
+          "st": "pending",
+          "ac": "[x] All internal links working [x] Mobile responsive at all breakpoints [x] Keyboard navigation [x] Aria labels on interactive elements [x] Loading states [x] Error boundary [x] 404 page [x] Dark/light mode consistent [x] Ready for Vercel deploy"
+        }
+      ]
+    }
+  }
+}

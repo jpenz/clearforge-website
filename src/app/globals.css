@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-navy: #0F172A;
+  --color-blue: #3B82F6;
+  --color-blue-dark: #2563EB;
+  --color-blue-light: #60A5FA;
+  --color-emerald: #10B981;
+  --color-emerald-dark: #059669;
+  --color-emerald-light: #34D399;
+
+  --color-bg-dark: #0A0A0A;
+  --color-bg-card: #111111;
+  --color-bg-elevated: #1A1A1A;
+  --color-bg-light: #FAFAFA;
+
+  --color-border-subtle: #1E293B;
+  --color-border-medium: #334155;
+
+  --color-text-primary: #F8FAFC;
+  --color-text-secondary: #94A3B8;
+  --color-text-muted: #64748B;
+  --color-text-light-primary: #0F172A;
+
+  --color-background: var(--bg-dark);
+  --color-foreground: var(--text-primary);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Dark mode (default) */
+:root {
+  --bg-dark: #0A0A0A;
+  --text-primary: #F8FAFC;
+  color-scheme: dark;
+}
+
+/* Light mode */
+[data-theme="light"] {
+  --bg-dark: #FAFAFA;
+  --text-primary: #0F172A;
+  color-scheme: light;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for dark mode */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #FAFAFA;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+}
