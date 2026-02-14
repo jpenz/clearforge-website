@@ -53,9 +53,10 @@ function Slider({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
+        aria-label={`${label}: ${format(value)}`}
         className="w-full accent-blue"
         style={{
-          background: `linear-gradient(to right, #3B82F6 0%, #3B82F6 ${percentage}%, #1A1A1A ${percentage}%, #1A1A1A 100%)`,
+          background: `linear-gradient(to right, var(--color-blue) 0%, var(--color-blue) ${percentage}%, var(--color-bg-elevated) ${percentage}%, var(--color-bg-elevated) 100%)`,
         }}
       />
       <div className="mt-1 flex justify-between text-xs text-text-muted">
@@ -233,7 +234,7 @@ export function ROICalculatorPageClient() {
               </motion.div>
 
               {/* Metrics */}
-              <div className="mt-8 grid grid-cols-3 gap-4">
+              <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <div className="rounded-lg bg-bg-elevated p-4 text-center">
                   <Clock className="mx-auto h-5 w-5 text-blue" />
                   <p className="mt-2 text-xl font-bold text-text-primary">

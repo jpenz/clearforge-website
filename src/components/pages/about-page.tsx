@@ -131,8 +131,8 @@ export function AboutPageClient() {
           transition={{ duration: 0.5 }}
         >
           <div className="flex flex-col items-center gap-8 md:flex-row md:items-start md:gap-12">
-            <div className="flex h-56 w-56 shrink-0 items-center justify-center rounded-2xl border border-border-subtle bg-bg-card">
-              <User className="h-20 w-20 text-text-muted" />
+            <div className="flex h-40 w-40 shrink-0 items-center justify-center rounded-2xl border border-border-subtle bg-bg-card md:h-56 md:w-56">
+              <User className="h-14 w-14 text-text-muted md:h-20 md:w-20" />
             </div>
 
             <div>

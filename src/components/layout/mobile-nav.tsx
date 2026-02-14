@@ -19,6 +19,7 @@ export function MobileNav({ links }: MobileNavProps) {
         onClick={() => setOpen(!open)}
         className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-bg-elevated hover:text-text-primary"
         aria-label={open ? "Close menu" : "Open menu"}
+        aria-expanded={open}
       >
         {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </button>
@@ -32,7 +33,7 @@ export function MobileNav({ links }: MobileNavProps) {
             : "pointer-events-none opacity-0"
         )}
       >
-        <nav className="flex flex-col gap-1 p-4">
+        <nav aria-label="Mobile navigation" className="flex flex-col gap-1 p-4">
           {links.map((link) => (
             <Link
               key={link.href}

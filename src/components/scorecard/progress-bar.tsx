@@ -45,7 +45,14 @@ export function ProgressBar({ currentStep, completedSteps }: ProgressBarProps) {
       </div>
 
       {/* Progress bar */}
-      <div className="h-1.5 w-full overflow-hidden rounded-full bg-bg-elevated">
+      <div
+        role="progressbar"
+        aria-valuenow={Math.round(progress)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label={`Assessment progress: ${currentStep + 1} of ${pillars.length} pillars`}
+        className="h-1.5 w-full overflow-hidden rounded-full bg-bg-elevated"
+      >
         <div
           className="h-full rounded-full bg-blue transition-all duration-500"
           style={{ width: `${progress}%` }}
@@ -53,14 +60,14 @@ export function ProgressBar({ currentStep, completedSteps }: ProgressBarProps) {
       </div>
 
       {/* Current pillar info */}
-      <div className="mt-3 flex items-center justify-between">
+      <div className="mt-3 flex items-center justify-between gap-4">
         <p className="text-sm text-text-secondary">
           <span className="font-medium text-text-primary">
             {pillars[currentStep].name}
           </span>{" "}
-          — {pillars[currentStep].description}
+          <span className="hidden sm:inline">— {pillars[currentStep].description}</span>
         </p>
-        <p className="text-xs text-text-muted">
+        <p className="shrink-0 text-xs text-text-muted">
           Step {currentStep + 1} of {pillars.length}
         </p>
       </div>

@@ -55,6 +55,7 @@ export function CaseStudiesPageClient() {
               <button
                 key={s}
                 onClick={() => setServiceFilter(s)}
+                aria-pressed={serviceFilter === s}
                 className={`rounded-full px-3 py-1 text-sm transition-colors ${
                   serviceFilter === s
                     ? "bg-blue text-white"
@@ -71,6 +72,7 @@ export function CaseStudiesPageClient() {
               <button
                 key={ind}
                 onClick={() => setIndustryFilter(ind)}
+                aria-pressed={industryFilter === ind}
                 className={`rounded-full px-3 py-1 text-sm transition-colors ${
                   industryFilter === ind
                     ? "bg-blue text-white"

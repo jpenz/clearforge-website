@@ -42,7 +42,7 @@ function ScoreGauge({ score }: { score: number }) {
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
     >
-      <div className="relative flex h-40 w-40 items-center justify-center">
+      <div className="relative flex h-32 w-32 items-center justify-center sm:h-40 sm:w-40">
         <svg className="absolute inset-0 -rotate-90" viewBox="0 0 160 160">
           <circle
             cx="80"

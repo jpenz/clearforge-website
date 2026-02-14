@@ -16,8 +16,8 @@ export function Founder() {
             transition={{ duration: 0.5 }}
           >
             {/* Photo placeholder */}
-            <div className="flex h-48 w-48 shrink-0 items-center justify-center rounded-2xl border border-border-subtle bg-bg-card">
-              <User className="h-16 w-16 text-text-muted" />
+            <div className="flex h-32 w-32 shrink-0 items-center justify-center rounded-2xl border border-border-subtle bg-bg-card md:h-48 md:w-48">
+              <User className="h-12 w-12 text-text-muted md:h-16 md:w-16" />
             </div>
 
             <div>

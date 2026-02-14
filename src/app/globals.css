@@ -88,6 +88,13 @@
   background-color: rgba(250, 250, 250, 0.95);
 }
 
+/* CSS variable overrides for components using var() directly (e.g. Recharts) */
+[data-theme="light"] {
+  --color-bg-elevated: #F1F5F9;
+  --color-border-medium: #CBD5E1;
+  --color-text-secondary: #475569;
+}
+
 body {
   background: var(--bg-dark);
   color: var(--text-primary);
