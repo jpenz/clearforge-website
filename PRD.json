@@ -81,7 +81,7 @@
           "d": "Build /about page with: (1) Hero section with 'Why ClearForge' headline. (2) Founder story — dual background in management consulting + AI engineering, without naming specific firms. Placeholder for professional photo. (3) Methodology section — the ClearForge approach (Diagnose → Design → Build → Optimize). (4) Three differentiators with icons. (5) Team section (future-proofed with 'Join Us' CTA). (6) Values/principles section.",
           "f": "src/app/about/page.tsx",
           "pr": "medium",
-          "st": "pending",
+          "st": "complete",
           "ac": "[x] Founder story compelling and authentic [x] Methodology visualization [x] Photo placeholder [x] Team section expandable [x] Mobile responsive [x] CTA to book call"
         },
         {
