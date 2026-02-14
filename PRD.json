@@ -90,7 +90,7 @@
           "d": "Build /pricing page with 3 productized packages in a pricing table: (1) AI Readiness Audit — $15K, 2 weeks, includes stakeholder interviews, process mapping, data assessment, opportunity identification, deliverables listed. (2) Performance Sprint — $50K-$100K, 6-8 weeks, includes process mining, top-3 opportunities, working MVP, team training. (3) AI Agent Retainer — $15K/mo, ongoing, includes 20+ hrs expertise, 1-2 new agents/month, optimization, weekly sessions. Plus: custom engagement CTA for larger projects, FAQ accordion section (8-10 questions about pricing, process, timelines), trust signals.",
           "f": "src/app/pricing/page.tsx, src/data/pricing.ts",
           "pr": "medium",
-          "st": "pending",
+          "st": "complete",
           "ac": "[x] 3 pricing cards with feature lists [x] Most popular badge on Sprint [x] Custom engagement CTA [x] FAQ accordion [x] Pricing data in data file [x] Mobile responsive [x] CTA on each card"
         },
         {
