@@ -72,7 +72,7 @@
           "d": "Build /services hub page with 4 service cards, and 4 detail pages: (1) /services/ai-revenue-operations — AI-powered prospecting, intent signals, automated outreach, pipeline analytics. (2) /services/performance-improvement — Process mining, operational diagnostics, custom automation, real-time dashboards. (3) /services/pe-value-creation — 90-day sprints, portfolio-wide AI playbooks, EBITDA improvement, due diligence to exit prep. (4) /services/custom-ai-agents — Sales agents, ops agents, finance agents, workflow orchestration. Each page: hero with service name, what we deliver, ideal client, typical outcomes (quantified), delivery workflow (phased), case study snippet placeholder, CTA.",
           "f": "src/app/services/page.tsx, src/app/services/ai-revenue-operations/page.tsx, src/app/services/performance-improvement/page.tsx, src/app/services/pe-value-creation/page.tsx, src/app/services/custom-ai-agents/page.tsx, src/data/services.ts",
           "pr": "high",
-          "st": "pending",
+          "st": "complete",
           "ac": "[x] Services hub with 4 cards [x] All 4 detail pages built [x] Each has hero, deliverables, outcomes, workflow, CTA [x] Service data in data file [x] Consistent layout across all 4 [x] Mobile responsive [x] Internal linking between services"
         },
         {
