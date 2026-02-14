@@ -131,7 +131,7 @@
           "d": "Build the AI Readiness Scorecard at /scorecard — the primary lead capture tool. 18 questions across 5 weighted pillars (Data Maturity 30%, Team Capability 25%, Process Documentation 20%, Tech Infrastructure 15%, Budget Alignment 10%). Multi-step form with progress bar, one pillar per step. Each question uses 1-5 Likert scale with custom radio buttons. After completion: instant results page showing composite score (0-100), maturity level, animated radar chart (Recharts), pillar breakdown with descriptions. Soft gate: show score and level free, require email for full report. Lead segmentation: auto-assign segment A/B/C/D based on score. Store results in API route (Supabase-ready). Beautiful results page with radar chart, pillar bars, personalized recommendations, and recommended ClearForge service.",
           "f": "src/app/scorecard/page.tsx, src/app/scorecard/results/page.tsx, src/components/scorecard/*, src/lib/scorecard.ts, src/app/api/scorecard/route.ts",
           "pr": "high",
-          "st": "pending",
+          "st": "complete",
           "ac": "[x] 18 questions across 5 pillars [x] Multi-step form with progress bar [x] Custom styled radio buttons (1-5 scale) [x] Scoring engine with weighted formula [x] Animated radar chart (Recharts) [x] Pillar breakdown bars [x] Maturity level display [x] Soft-gated results (score free, report gated) [x] Email capture form [x] Lead segment assignment [x] API route for storage [x] Personalized recommendations [x] Recommended service based on score [x] Mobile responsive [x] Beautiful animations"
         },
         {
