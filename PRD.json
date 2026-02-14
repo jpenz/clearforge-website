@@ -31,7 +31,7 @@
           "d": "Create Next.js 15 app with App Router, TypeScript strict mode, Tailwind CSS, and all dependencies: @radix-ui/react-*, framer-motion, recharts, lucide-react, react-hook-form, zod, @hookform/resolvers, geist font",
           "f": "package.json, tsconfig.json, tailwind.config.ts, next.config.ts",
           "pr": "high",
-          "st": "pending",
+          "st": "complete",
           "ac": "[x] Next.js 15 initialized [x] TypeScript strict mode [x] Tailwind configured with custom color palette [x] All dependencies installed [x] Dev server starts without errors"
         },
         {
