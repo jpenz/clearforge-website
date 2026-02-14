@@ -63,7 +63,7 @@
           "d": "Build the homepage with 8 sections: (1) Hero with 'Strategy that ships. AI that performs.' headline, subheadline 'We combine management consulting rigor with hands-on AI engineering to deliver measurable results — not just roadmaps', 2 CTAs (Book Discovery Call + Take AI Scorecard), animated gradient background. (2) Problem Statement: 'Strategy firms give you decks. Tech shops give you tools. Neither gives you results.' with visual bridge diagram. (3) How We're Different: 3 cards — Bridge the Gap, Senior-Led Delivery, Results Not Decks. (4) Service Lines: 4 cards linking to detail pages. (5) Results/Social Proof: animated counter section with 4 metrics (30% Pipeline Increase, 10% EBITDA Improvement, 90-Day ROI, $240K Average Savings). (6) AI Readiness CTA: full-width gradient section 'How AI-Ready Is Your Business?'. (7) Founder section with bio. (8) Final CTA with Calendly placeholder.",
           "f": "src/app/page.tsx, src/components/home/*",
           "pr": "high",
-          "st": "pending",
+          "st": "complete",
           "ac": "[x] All 8 sections implemented [x] Hero with animated gradient [x] Animated number counters [x] Service cards with hover effects [x] Full-width scorecard CTA [x] Mobile responsive [x] Smooth scroll between sections [x] Framer Motion animations on scroll"
         },
         {
