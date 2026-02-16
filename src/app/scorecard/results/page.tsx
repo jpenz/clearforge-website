@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
+import { createMetadata } from "@/lib/metadata";
 import { ResultsDisplay } from "@/components/scorecard/results-display";
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "Your AI Readiness Results",
-  description:
-    "View your personalized AI Readiness Scorecard results with pillar breakdown, radar chart, and recommendations.",
-  robots: { index: false, follow: false },
-};
+  description: "Your personalized AI readiness score and recommendations.",
+  path: "/scorecard/results",
+  noIndex: true,
+});
 
 export default function ScorecardResultsPage() {
   return <ResultsDisplay />;

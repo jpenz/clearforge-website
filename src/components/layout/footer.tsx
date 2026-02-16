@@ -2,21 +2,18 @@ import Link from "next/link";
 
 const footerLinks = {
   Services: [
-    { href: "/services/ai-revenue-operations", label: "AI Revenue Operations" },
-    { href: "/services/performance-improvement", label: "Performance Improvement" },
-    { href: "/services/pe-value-creation", label: "PE Value Creation" },
-    { href: "/services/custom-ai-agents", label: "Custom AI Agents" },
+    { href: "/services", label: "All Services" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/case-studies", label: "Case Studies" },
   ],
   Company: [
     { href: "/about", label: "About" },
-    { href: "/case-studies", label: "Case Studies" },
-    { href: "/pricing", label: "Pricing" },
     { href: "/insights", label: "Insights" },
+    { href: "/contact", label: "Contact" },
   ],
   Tools: [
     { href: "/scorecard", label: "AI Readiness Scorecard" },
-    { href: "/roi-calculator", label: "ROI Calculator" },
-    { href: "/contact", label: "Contact" },
+    { href: "/insights/continuous-ai-agents", label: "The Continuous AI Agent" },
   ],
 };
 

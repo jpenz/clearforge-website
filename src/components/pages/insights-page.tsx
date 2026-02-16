@@ -1,212 +1,109 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Clock, Calendar } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  insights,
-  insightCategories,
-  formatDate,
-} from "@/data/insights";
-
-const allCategories = ["All", ...insightCategories];
+import { ArrowRight } from "lucide-react";
+import { insights, formatDate } from "@/data/insights";
 
 export function InsightsPageClient() {
-  const [categoryFilter, setCategoryFilter] = useState("All");
-
-  const filtered =
-    categoryFilter === "All"
-      ? insights
-      : insights.filter((i) => i.category === categoryFilter);
-
   return (
     <div className="py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Hero */}
         <motion.div
-          className="mx-auto max-w-3xl text-center"
+          className="max-w-3xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
-          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
+          <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
             Insights
           </p>
-          <h1 className="mt-4 text-4xl font-serif text-forge-navy sm:text-5xl">
-            Practical AI Strategy for Business Leaders
+          <h1 className="mt-6 font-serif text-4xl text-forge-navy sm:text-5xl lg:text-6xl">
+            Practical intelligence,
+            <br />
+            not vendor hype
           </h1>
           <p className="mt-6 text-lg text-text-secondary">
-            No hype, no jargon. Actionable frameworks and lessons from real AI
-            implementations.
+            Frameworks, case studies, and guides for business leaders
+            navigating AI strategy and implementation.
           </p>
         </motion.div>
 
-        {/* Category Filters */}
-        <motion.div
-          className="mt-12 flex flex-wrap items-center justify-center gap-2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          {allCategories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setCategoryFilter(cat)}
-              className={`px-4 py-1.5 text-sm transition-colors ${
-                categoryFilter === cat
-                  ? "bg-molten-amber text-forge-navy"
-                  : "bg-bg-elevated text-text-secondary hover:text-text-primary"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Featured Post */}
-        {categoryFilter === "All" && (
+        {/* Featured (first article) */}
+        {insights.slice(0, 1).map((insight) => (
           <motion.div
-            className="mt-12"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
+            key={insight.slug}
+            className="mt-16 border border-border-accent bg-canvas"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
           >
-            <Link
-              href={`/insights/${filtered[0].slug}`}
-              className="group flex flex-col overflow-hidden border border-border-subtle bg-canvas transition-all hover:border-molten-amber/30 hover:bg-bg-elevated md:flex-row"
-            >
-              <div className="flex aspect-video items-center justify-center crosshatch md:aspect-auto md:w-2/5">
-                <div className="p-12 text-center">
-                  <div className="inline-flex bg-molten-amber/10 px-3 py-1 text-xs font-medium text-molten-amber">
-                    Featured
-                  </div>
-                  <p className="mt-4 metric-display text-sm text-text-muted">
-                    {filtered[0].category}
-                  </p>
-                </div>
+            <div className="p-10 sm:p-14">
+              <div className="flex items-center gap-4">
+                <span className="bg-molten-amber/10 px-3 py-1 text-xs font-semibold uppercase tracking-[1.5px] text-molten-amber">
+                  {insight.category}
+                </span>
+                <span className="text-xs text-text-muted">
+                  {formatDate(insight.date)} &middot; {insight.readingTime} min
+                  read
+                </span>
               </div>
-              <div className="flex flex-1 flex-col justify-center p-6 sm:p-8 md:p-10">
-                <div className="flex items-center gap-4 text-sm text-text-muted">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="h-3.5 w-3.5" />
-                    {formatDate(filtered[0].date)}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="h-3.5 w-3.5" />
-                    {filtered[0].readingTime} min read
-                  </span>
-                </div>
-                <h2 className="mt-3 text-2xl font-serif text-forge-navy sm:text-3xl">
-                  {filtered[0].title}
-                </h2>
-                <p className="mt-3 text-text-secondary leading-relaxed">
-                  {filtered[0].excerpt}
-                </p>
-                <div className="mt-4">
-                  <span className="flex items-center text-sm font-medium text-molten-amber">
-                    Read Article
-                    <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </div>
-              </div>
-            </Link>
-          </motion.div>
-        )}
-
-        {/* Post Grid */}
-        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {(categoryFilter === "All" ? filtered.slice(1) : filtered).map(
-            (post, i) => (
-              <motion.div
-                key={post.slug}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+              <h2 className="mt-6 font-serif text-3xl text-forge-navy">
+                {insight.title}
+              </h2>
+              <p className="mt-4 max-w-2xl text-text-secondary leading-relaxed">
+                {insight.excerpt}
+              </p>
+              <Link
+                href={`/insights/${insight.slug}`}
+                className="amber-underline mt-6 inline-flex items-center gap-2 text-sm font-medium text-molten-amber"
               >
-                <Link
-                  href={`/insights/${post.slug}`}
-                  className="group flex h-full flex-col border border-border-subtle bg-canvas transition-all hover:border-molten-amber/30 hover:bg-bg-elevated"
-                >
-                  <div className="flex aspect-[2/1] items-center justify-center crosshatch">
-                    <p className="metric-display text-sm text-text-muted">
-                      {post.category}
-                    </p>
-                  </div>
-                  <div className="flex flex-1 flex-col p-6">
-                    <div className="flex items-center gap-3 text-xs text-text-muted">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
-                        {formatDate(post.date)}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="h-3 w-3" />
-                        {post.readingTime} min
-                      </span>
-                    </div>
-                    <h3 className="mt-3 text-lg font-serif text-forge-navy leading-snug">
-                      {post.title}
-                    </h3>
-                    <p className="mt-2 flex-1 text-sm text-text-secondary leading-relaxed">
-                      {post.excerpt}
-                    </p>
-                    <div className="mt-4">
-                      <span className="flex items-center text-sm font-medium text-molten-amber">
-                        Read Article
-                        <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            )
-          )}
-        </div>
-
-        {filtered.length === 0 && (
-          <div className="mt-12 text-center">
-            <p className="text-text-muted">
-              No articles in this category yet.
-            </p>
-            <Button
-              variant="ghost"
-              className="mt-4"
-              onClick={() => setCategoryFilter("All")}
-            >
-              View All Articles
-            </Button>
-          </div>
-        )}
-
-        {/* CTA */}
-        <motion.div
-          className="mt-24 text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="text-3xl font-serif text-forge-navy">
-            Ready to Put These Insights Into Action?
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-text-secondary">
-            Take our free AI Readiness Scorecard to see where your business
-            stands — and where to start.
-          </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button size="xl" asChild>
-              <Link href="/scorecard">
-                Take AI Scorecard
-                <ArrowRight className="ml-2 h-5 w-5" />
+                Read article
+                <ArrowRight className="h-4 w-4" />
               </Link>
-            </Button>
-            <Button size="xl" variant="secondary" asChild>
-              <Link href="/contact">Book Discovery Call</Link>
-            </Button>
-          </div>
-        </motion.div>
+            </div>
+          </motion.div>
+        ))}
+
+        {/* All articles */}
+        <div className="mt-16 divide-y divide-border-subtle border-y border-border-subtle">
+          {insights.slice(1).map((insight, i) => (
+            <motion.div
+              key={insight.slug}
+              className="grid gap-4 py-8 sm:grid-cols-[auto_1fr_auto] sm:items-center"
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.3, delay: i * 0.04 }}
+            >
+              <div className="min-w-[140px]">
+                <span className="text-xs text-text-muted">
+                  {formatDate(insight.date)}
+                </span>
+                <p className="mt-1 text-xs uppercase tracking-[1.5px] text-molten-amber">
+                  {insight.category}
+                </p>
+              </div>
+              <div>
+                <h3 className="font-serif text-lg text-forge-navy">
+                  {insight.title}
+                </h3>
+                <p className="mt-1 text-sm text-text-secondary line-clamp-2">
+                  {insight.excerpt}
+                </p>
+              </div>
+              <Link
+                href={`/insights/${insight.slug}`}
+                className="amber-underline inline-flex items-center gap-1 text-sm text-molten-amber"
+              >
+                Read
+                <ArrowRight className="h-3 w-3" />
+              </Link>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );

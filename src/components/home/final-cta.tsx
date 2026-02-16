@@ -7,38 +7,40 @@ import { Button } from "@/components/ui/button";
 
 export function FinalCTA() {
   return (
-    <section className="relative border-t border-border-subtle py-24">
-      <div className="absolute inset-0 crosshatch" />
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="bg-forge-navy py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
-          className="mx-auto max-w-2xl text-center"
-          initial={{ opacity: 0, y: 20 }}
+          className="mx-auto max-w-3xl text-center"
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.4 }}
         >
-          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
-            Get Started
-          </p>
-          <h2 className="mt-4 font-serif text-3xl text-forge-navy sm:text-4xl lg:text-5xl">
-            Ready to See What AI Can Do for You?
+          <h2 className="font-serif text-4xl text-warm-white sm:text-5xl lg:text-6xl">
+            Ready to stop planning
+            <br />
+            and start performing?
           </h2>
-          <p className="mt-6 text-lg text-text-secondary">
-            Book a free 30-minute discovery call. We&apos;ll discuss your
-            challenges, identify quick wins, and outline a path to measurable
-            ROI.
+          <p className="mx-auto mt-6 max-w-xl text-warm-white/60">
+            30 minutes. No pitch decks. Just a straightforward conversation
+            about your business and whether AI can help.
           </p>
-          <div className="mt-10">
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button size="xl" asChild>
               <Link href="/contact">
                 Book Discovery Call
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
+            <Button
+              size="xl"
+              variant="outline"
+              className="border-warm-white/20 text-warm-white hover:bg-warm-white hover:text-forge-navy"
+              asChild
+            >
+              <Link href="/scorecard">Take AI Scorecard</Link>
+            </Button>
           </div>
-          <p className="metric-display mt-6 text-xs text-text-muted">
-            No commitment &middot; 30 minutes &middot; Actionable insights
-          </p>
         </motion.div>
       </div>
     </section>

@@ -2,56 +2,68 @@
 
 import { motion } from "framer-motion";
 
+const problems = [
+  {
+    number: "01",
+    title: "Strategy without execution",
+    description:
+      "Traditional consultants hand you a roadmap and walk away. You're left with a beautiful deck and no one to build it.",
+  },
+  {
+    number: "02",
+    title: "AI that stops learning",
+    description:
+      "Most AI implementations are one-time projects. The model goes stale in months, and the value evaporates.",
+  },
+  {
+    number: "03",
+    title: "Hidden pricing, scope creep",
+    description:
+      "Vague SOWs, hourly billing, and change orders turn a $50K project into a $200K disappointment.",
+  },
+];
+
 export function Problem() {
   return (
-    <section className="border-t border-border-subtle bg-canvas py-24">
+    <section className="bg-forge-navy py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
-          className="grid gap-16 lg:grid-cols-[3fr_2fr]"
-          initial={{ opacity: 0, y: 20 }}
+          className="max-w-2xl"
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.4 }}
         >
-          {/* Left: The problem */}
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
-              The Problem
-            </p>
-            <h2 className="mt-4 font-serif text-3xl text-forge-navy sm:text-4xl lg:text-5xl">
-              Strategy firms give you decks.
-              <br />
-              Tech shops give you tools.
-            </h2>
-            <p className="mt-2 font-serif text-3xl text-text-muted sm:text-4xl lg:text-5xl">
-              Neither gives you results.
-            </p>
-          </div>
-
-          {/* Right: ClearForge difference */}
-          <div className="flex flex-col justify-center border-l border-border-subtle pl-8 lg:pl-12">
-            <div className="space-y-8">
-              <div className="border-b border-border-subtle pb-8">
-                <p className="text-xs font-semibold uppercase tracking-[1.5px] text-text-muted">Strategy Firms</p>
-                <p className="mt-2 text-text-secondary">
-                  Beautiful roadmaps that collect dust. No implementation, no accountability.
-                </p>
-              </div>
-              <div className="border-b border-border-subtle pb-8">
-                <p className="text-xs font-semibold uppercase tracking-[1.5px] text-text-muted">Tech Shops</p>
-                <p className="mt-2 text-text-secondary">
-                  Tools without strategy. Custom builds that don&apos;t align with business goals.
-                </p>
-              </div>
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[1.5px] text-molten-amber">ClearForge</p>
-                <p className="mt-2 text-text-primary font-medium">
-                  Strategy + Engineering in one team. We build what we recommend and measure the results.
-                </p>
-              </div>
-            </div>
-          </div>
+          <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
+            The Problem
+          </p>
+          <h2 className="mt-6 font-serif text-3xl text-warm-white sm:text-4xl lg:text-5xl">
+            Most AI consulting is broken
+          </h2>
         </motion.div>
+
+        <div className="mt-16 grid gap-0 divide-y divide-deep-steel border-t border-deep-steel lg:grid-cols-3 lg:divide-x lg:divide-y-0">
+          {problems.map((p, i) => (
+            <motion.div
+              key={p.number}
+              className="py-10 lg:px-10 first:lg:pl-0 last:lg:pr-0"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+            >
+              <span className="metric-display text-sm text-molten-amber">
+                {p.number}
+              </span>
+              <h3 className="mt-4 font-serif text-xl text-warm-white">
+                {p.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-warm-white/60">
+                {p.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

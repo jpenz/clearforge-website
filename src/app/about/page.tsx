@@ -1,16 +1,12 @@
-import type { Metadata } from "next";
+import { createMetadata } from "@/lib/metadata";
 import { AboutPageClient } from "@/components/pages/about-page";
 
-export const metadata: Metadata = {
-  title: "About ClearForge — Our Story, Method & Values",
+export const metadata = createMetadata({
+  title: "About",
   description:
-    "ClearForge bridges the gap between strategy and engineering. Learn about our founder, our four-phase methodology, and why we deliver results — not reports.",
-  openGraph: {
-    title: "About ClearForge — Our Story, Method & Values",
-    description:
-      "ClearForge bridges the gap between strategy and engineering. Learn about our founder, our four-phase methodology, and why we deliver results — not reports.",
-  },
-};
+    "ClearForge combines management consulting rigor with hands-on AI engineering. We build what we recommend.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return <AboutPageClient />;

@@ -2,363 +2,215 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  User,
-  Search,
-  Pencil,
-  Wrench,
-  BarChart3,
-  GitMerge,
-  Users,
-  Target,
-  Lightbulb,
-  Shield,
-  Zap,
-  Heart,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const methodology = [
-  {
-    phase: "Phase 1",
-    title: "Diagnose",
-    description:
-      "Deep-dive into your operations, data, and workflows to identify the highest-impact AI opportunities.",
-    icon: Search,
-  },
-  {
-    phase: "Phase 2",
-    title: "Design",
-    description:
-      "Architect solutions that align with your business goals, technical constraints, and team capabilities.",
-    icon: Pencil,
-  },
-  {
-    phase: "Phase 3",
-    title: "Build",
-    description:
-      "Hands-on engineering — we build working solutions, not slide decks. Rapid iteration with your team.",
-    icon: Wrench,
-  },
-  {
-    phase: "Phase 4",
-    title: "Optimize",
-    description:
-      "Measure results, fine-tune performance, and scale what works across your organization.",
-    icon: BarChart3,
-  },
-];
-
-const differentiators = [
-  {
-    icon: GitMerge,
-    title: "We Bridge the Gap",
-    description:
-      "Most firms are either strategy consultants who can't build, or engineers who can't think strategically. We do both — fluently.",
-  },
-  {
-    icon: Users,
-    title: "Senior-Led Delivery",
-    description:
-      "No bait-and-switch. The experienced operators who scope your project are the same ones who deliver it.",
-  },
-  {
-    icon: Target,
-    title: "Results, Not Reports",
-    description:
-      "We measure success by business impact — revenue gained, costs saved, processes automated — not pages delivered.",
-  },
-];
 
 const values = [
   {
-    icon: Lightbulb,
-    title: "Clarity Over Complexity",
+    title: "Results over activity",
     description:
-      "We cut through AI hype to focus on what actually works for your business right now.",
+      "We measure success by business outcomes, not hours billed or slides delivered. Every engagement has measurable KPIs from day one.",
   },
   {
-    icon: Shield,
-    title: "Radical Transparency",
+    title: "Build, don't just advise",
     description:
-      "No black boxes. We explain every recommendation, share every trade-off, and own every outcome.",
+      "We don't hand you a roadmap and walk away. The same team that designs your strategy builds and deploys the solution.",
   },
   {
-    icon: Zap,
-    title: "Speed to Value",
+    title: "Continuous > one-time",
     description:
-      "We optimize for time-to-impact. Quick wins build momentum; momentum drives transformation.",
+      "AI systems that stop learning start dying. We build for continuous optimization because that's where the real value compounds.",
   },
   {
-    icon: Heart,
-    title: "Partnership, Not Projects",
+    title: "Radical transparency",
     description:
-      "We succeed when you succeed. Our best client relationships are measured in years, not invoices.",
+      "Transparent pricing, clear deliverables, honest assessments. If AI isn't the right answer for you, we'll tell you.",
+  },
+  {
+    title: "Senior operators only",
+    description:
+      "No bait-and-switch. The people you meet in the discovery call are the people who do the work. Period.",
+  },
+  {
+    title: "Your IP, your systems",
+    description:
+      "Everything we build is yours to keep. Full documentation, knowledge transfer, and no vendor lock-in.",
+  },
+];
+
+const approach = [
+  {
+    number: "01",
+    title: "Management consulting rigor",
+    description:
+      "We start with the business problem, not the technology. Stakeholder interviews, process mapping, data audits, and opportunity sizing — the same methodology used by top-tier firms.",
+  },
+  {
+    number: "02",
+    title: "AI engineering execution",
+    description:
+      "Then we build. Custom AI agents, workflow automation, data pipelines, and analytics dashboards — deployed into your production environment in weeks, not quarters.",
+  },
+  {
+    number: "03",
+    title: "Continuous optimization",
+    description:
+      "Our AI systems get smarter every month. Monthly retraining on conversion data, new market signals, and performance metrics. The gap between month one and month six is exponential.",
   },
 ];
 
 export function AboutPageClient() {
   return (
     <div className="py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Hero */}
         <motion.div
-          className="mx-auto max-w-3xl text-center"
+          className="max-w-3xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
-          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
+          <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
             About ClearForge
           </p>
-          <h1 className="mt-4 text-4xl font-serif text-forge-navy sm:text-5xl">
-            Why ClearForge
+          <h1 className="mt-6 font-serif text-4xl text-forge-navy sm:text-5xl lg:text-6xl">
+            The firm that builds
+            <br />
+            what it recommends
           </h1>
-          <p className="mt-6 text-lg text-text-secondary leading-relaxed">
-            We exist because the AI industry has a delivery problem. Strategy
-            firms hand you roadmaps. Tech shops hand you tools. Neither hands
-            you results. ClearForge was built to change that.
+          <p className="mt-6 max-w-xl text-lg text-text-secondary leading-relaxed">
+            ClearForge combines management consulting rigor with hands-on AI
+            engineering. We exist because too many companies have shelves full of
+            strategy decks and nothing in production.
           </p>
         </motion.div>
 
-        {/* Founder Story */}
-        <motion.div
-          className="mx-auto mt-20 max-w-4xl"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="flex flex-col items-center gap-8 md:flex-row md:items-start md:gap-12">
-            <div className="flex h-40 w-40 shrink-0 items-center justify-center border border-border-subtle bg-canvas md:h-56 md:w-56">
-              <User className="h-14 w-14 text-text-muted md:h-20 md:w-20" />
-            </div>
-
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
-                From the Founder
-              </p>
-              <h2 className="mt-2 text-2xl font-serif text-forge-navy sm:text-3xl">
-                Built by an Operator, for Operators
-              </h2>
-              <p className="mt-4 text-text-secondary leading-relaxed">
-                My career has lived at the intersection of management consulting
-                and AI engineering. I&apos;ve led transformation programs at
-                top-tier consulting firms and built production AI systems from
-                the ground up. That dual perspective revealed a frustrating
-                pattern: brilliant strategies that never shipped, and powerful
-                technology that never connected to business outcomes.
-              </p>
-              <p className="mt-4 text-text-secondary leading-relaxed">
-                ClearForge was founded to solve that disconnect. We bring both
-                the business acumen to identify high-impact opportunities and
-                the technical depth to deliver working solutions — in weeks, not
-                quarters.
-              </p>
-              <p className="mt-4 text-text-secondary leading-relaxed">
-                Our clients are mid-market leaders and PE-backed companies who
-                are done with AI experimentation and ready for AI execution. If
-                that sounds like you, I&apos;d love to talk.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Methodology */}
-        <div className="mt-24 border-t border-border-subtle pt-20">
-          <motion.div
-            className="mx-auto max-w-2xl text-center"
-            initial={{ opacity: 0, y: 30 }}
+        {/* Our Approach */}
+        <div className="mt-24">
+          <motion.h2
+            className="font-serif text-3xl text-forge-navy"
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
           >
-            <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
-              Our Approach
-            </p>
-            <h2 className="mt-4 text-3xl font-serif text-forge-navy sm:text-4xl">
-              The ClearForge Method
-            </h2>
-            <p className="mt-4 text-text-secondary">
-              A proven four-phase approach that moves from insight to impact
-              — fast.
-            </p>
-          </motion.div>
-
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {methodology.map((step, i) => {
-              const Icon = step.icon;
-              return (
-                <motion.div
-                  key={step.title}
-                  className="relative border border-border-subtle bg-canvas p-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                >
-                  <div className="flex h-10 w-10 items-center justify-center bg-molten-amber/10">
-                    <Icon className="h-5 w-5 text-molten-amber" />
-                  </div>
-                  <span className="mt-4 block text-xs font-medium text-text-muted">
-                    {step.phase}
-                  </span>
-                  <h3 className="mt-1 text-lg font-serif text-forge-navy">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-text-secondary leading-relaxed">
-                    {step.description}
-                  </p>
-                  {i < methodology.length - 1 && (
-                    <ArrowRight className="absolute -right-3 top-1/2 hidden h-5 w-5 -translate-y-1/2 text-text-muted lg:block" />
-                  )}
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Differentiators */}
-        <div className="mt-24 border-t border-border-subtle pt-20">
-          <motion.div
-            className="mx-auto max-w-2xl text-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="text-3xl font-serif text-forge-navy sm:text-4xl">
-              What Makes Us Different
-            </h2>
-          </motion.div>
-
-          <div className="mt-12 grid gap-8 sm:grid-cols-3">
-            {differentiators.map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
-                  key={item.title}
-                  className="border border-border-subtle bg-canvas p-8 transition-all hover:border-molten-amber/30 hover:bg-bg-elevated"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                >
-                  <Icon className="h-6 w-6 text-molten-amber" />
-                  <h3 className="mt-4 text-xl font-serif text-forge-navy">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-text-secondary leading-relaxed">
-                    {item.description}
-                  </p>
-                </motion.div>
-              );
-            })}
+            Our approach
+          </motion.h2>
+          <div className="mt-12 divide-y divide-border-subtle border-y border-border-subtle">
+            {approach.map((a, i) => (
+              <motion.div
+                key={a.number}
+                className="grid gap-6 py-10 lg:grid-cols-[auto_1fr_2fr] lg:items-start"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+              >
+                <span className="metric-display text-sm text-molten-amber">
+                  {a.number}
+                </span>
+                <h3 className="font-serif text-xl text-forge-navy">
+                  {a.title}
+                </h3>
+                <p className="text-text-secondary leading-relaxed">
+                  {a.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
 
         {/* Values */}
-        <div className="mt-24 border-t border-border-subtle pt-20">
-          <motion.div
-            className="mx-auto max-w-2xl text-center"
-            initial={{ opacity: 0, y: 30 }}
+        <div className="mt-24">
+          <motion.h2
+            className="font-serif text-3xl text-forge-navy"
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
           >
-            <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
-              Our Principles
-            </p>
-            <h2 className="mt-4 text-3xl font-serif text-forge-navy sm:text-4xl">
-              What We Believe
-            </h2>
-          </motion.div>
-
-          <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            {values.map((value, i) => {
-              const Icon = value.icon;
-              return (
-                <motion.div
-                  key={value.title}
-                  className="flex gap-4 border border-border-subtle bg-canvas p-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-molten-amber/10">
-                    <Icon className="h-5 w-5 text-molten-amber" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-serif text-forge-navy">
-                      {value.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-text-secondary leading-relaxed">
-                      {value.description}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
+            What we believe
+          </motion.h2>
+          <div className="mt-12 grid gap-px bg-border-subtle sm:grid-cols-2 lg:grid-cols-3">
+            {values.map((v, i) => (
+              <motion.div
+                key={v.title}
+                className="bg-warm-white p-8 lg:p-10"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+              >
+                <h3 className="font-serif text-lg text-forge-navy">
+                  {v.title}
+                </h3>
+                <p className="mt-3 text-sm text-text-secondary leading-relaxed">
+                  {v.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
 
-        {/* Team Section */}
-        <div className="mt-24 border-t border-border-subtle pt-20">
-          <motion.div
-            className="mx-auto max-w-2xl text-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="text-3xl font-serif text-forge-navy sm:text-4xl">
-              Growing the Team
-            </h2>
-            <p className="mt-4 text-text-secondary leading-relaxed">
-              ClearForge is selectively growing. We&apos;re looking for
-              operators who combine strategic thinking with hands-on technical
-              skills — people who can diagnose a business problem in the morning
-              and ship a working solution by afternoon.
-            </p>
-            <div className="mt-8">
-              <Button size="lg" variant="outline" asChild>
-                <Link href="/contact">
-                  Join Us
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </motion.div>
-        </div>
+        {/* Team */}
+        <motion.div
+          className="mt-24 bg-forge-navy p-10 sm:p-16"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.4 }}
+        >
+          <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
+            The Team
+          </p>
+          <h2 className="mt-6 font-serif text-3xl text-warm-white">
+            Operators, not advisors
+          </h2>
+          <p className="mt-4 max-w-2xl text-warm-white/60 leading-relaxed">
+            Our team combines backgrounds in top-tier management consulting with
+            deep AI engineering expertise. We&apos;ve built and deployed AI
+            solutions for Fortune 1000 companies, PE portfolio companies, and
+            high-growth firms. We don&apos;t just know what to do — we know how
+            to build it.
+          </p>
+          <div className="mt-10 grid gap-px bg-deep-steel sm:grid-cols-3">
+            {[
+              { metric: "50+", label: "AI Solutions Deployed" },
+              { metric: "10+", label: "Years Combined Experience" },
+              { metric: "100%", label: "Senior Delivery Team" },
+            ].map((m) => (
+              <div key={m.label} className="bg-forge-navy p-6 text-center">
+                <span className="metric-display text-2xl text-molten-amber">
+                  {m.metric}
+                </span>
+                <p className="mt-1 text-xs uppercase tracking-[1.5px] text-warm-white/50">
+                  {m.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* CTA */}
         <motion.div
-          className="mt-24 border-t border-border-subtle pt-20 text-center"
-          initial={{ opacity: 0, y: 30 }}
+          className="mt-24 text-center"
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
-          <h2 className="text-3xl font-serif text-forge-navy sm:text-4xl">
-            Ready to Work Together?
+          <h2 className="font-serif text-3xl text-forge-navy sm:text-4xl">
+            Let&apos;s build something that works
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-text-secondary">
-            Book a free discovery call to discuss how ClearForge can drive
-            measurable AI results for your business.
+            30 minutes. No pitch decks. Just a straightforward conversation.
           </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button size="xl" asChild>
-              <Link href="/contact">
-                Book Discovery Call
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-            <Button size="xl" variant="secondary" asChild>
-              <Link href="/services">Explore Services</Link>
-            </Button>
-          </div>
+          <Button size="xl" className="mt-8" asChild>
+            <Link href="/contact">
+              Book Discovery Call
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
         </motion.div>
       </div>
     </div>

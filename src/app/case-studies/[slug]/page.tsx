@@ -1,29 +1,27 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { caseStudies, getCaseStudy } from "@/data/case-studies";
+import { notFound, redirect } from "next/navigation";
+import { createMetadata } from "@/lib/metadata";
+import { getCaseStudy, caseStudies } from "@/data/case-studies";
 import { CaseStudyDetail } from "@/components/case-study-detail";
 
 export function generateStaticParams() {
-  return caseStudies.map((cs) => ({ slug: cs.slug }));
+  return caseStudies
+    .filter((cs) => cs.slug !== "industrial-manufacturer")
+    .map((cs) => ({ slug: cs.slug }));
 }
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+}) {
   const { slug } = await params;
   const cs = getCaseStudy(slug);
   if (!cs) return {};
-
-  return {
-    title: `${cs.title} — Case Study`,
+  return createMetadata({
+    title: cs.title,
     description: cs.excerpt,
-    openGraph: {
-      title: `${cs.title} — Case Study`,
-      description: cs.excerpt,
-    },
-  };
+    path: `/case-studies/${slug}`,
+  });
 }
 
 export default async function CaseStudyPage({
@@ -32,11 +30,13 @@ export default async function CaseStudyPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const caseStudy = getCaseStudy(slug);
 
-  if (!caseStudy) {
-    notFound();
+  if (slug === "industrial-manufacturer") {
+    redirect("/case-studies/industrial-manufacturer");
   }
 
-  return <CaseStudyDetail caseStudy={caseStudy} />;
+  const cs = getCaseStudy(slug);
+  if (!cs) notFound();
+
+  return <CaseStudyDetail cs={cs} />;
 }

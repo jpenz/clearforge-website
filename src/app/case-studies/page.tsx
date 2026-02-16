@@ -1,16 +1,12 @@
-import type { Metadata } from "next";
+import { createMetadata } from "@/lib/metadata";
 import { CaseStudiesPageClient } from "@/components/pages/case-studies-page";
 
-export const metadata: Metadata = {
-  title: "Case Studies — Real AI Results, Verified Outcomes",
+export const metadata = createMetadata({
+  title: "Case Studies",
   description:
-    "See how ClearForge delivers measurable results: 30% pipeline increases, 10% EBITDA improvement, $240K annual savings, and 3.5x conversion lifts.",
-  openGraph: {
-    title: "Case Studies — Real AI Results, Verified Outcomes",
-    description:
-      "See how ClearForge delivers measurable results: 30% pipeline increases, 10% EBITDA improvement, $240K annual savings, and 3.5x conversion lifts.",
-  },
-};
+    "Real results from real businesses. See how ClearForge delivers measurable AI-driven outcomes for mid-market companies and PE portfolios.",
+  path: "/case-studies",
+});
 
 export default function CaseStudiesPage() {
   return <CaseStudiesPageClient />;

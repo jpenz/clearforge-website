@@ -1,16 +1,12 @@
-import type { Metadata } from "next";
+import { createMetadata } from "@/lib/metadata";
 import { ScorecardPageClient } from "@/components/pages/scorecard-page";
 
-export const metadata: Metadata = {
-  title: "AI Readiness Scorecard — Free Assessment",
+export const metadata = createMetadata({
+  title: "AI Readiness Scorecard",
   description:
-    "Take the free 5-minute AI Readiness Scorecard. 18 questions across 5 pillars give you a personalized score with actionable recommendations.",
-  openGraph: {
-    title: "AI Readiness Scorecard — Free Assessment",
-    description:
-      "Take the free 5-minute AI Readiness Scorecard. 18 questions across 5 pillars give you a personalized score with actionable recommendations.",
-  },
-};
+    "How AI-ready is your business? Take our 5-minute assessment across 5 key pillars to get your personalized AI readiness score.",
+  path: "/scorecard",
+});
 
 export default function ScorecardPage() {
   return <ScorecardPageClient />;

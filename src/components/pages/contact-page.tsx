@@ -2,318 +2,230 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import {
-  ArrowRight,
-  Calendar,
-  Clock,
-  Mail,
-  CheckCircle2,
-  AlertCircle,
-} from "lucide-react";
+import { ArrowRight, Mail, Clock, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
-const revenueRanges = [
-  "Under $5M",
-  "$5M – $25M",
-  "$25M – $50M",
-  "$50M – $100M",
-  "$100M – $250M",
-  "$250M – $500M",
-  "$500M+",
-];
-
-const contactSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  company: z.string().min(2, "Company name must be at least 2 characters"),
-  revenue: z.string().min(1, "Please select a revenue range"),
-  message: z.string().min(10, "Please provide a bit more detail"),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
 
 export function ContactPageClient() {
-  const [submitState, setSubmitState] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-    reset,
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
-  });
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    const form = e.currentTarget;
+    const data = new FormData(form);
 
-  const onSubmit = async (data: ContactFormData) => {
-    setSubmitState("loading");
     try {
-      const response = await fetch("/api/contact", {
+      await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          company: data.get("company"),
+          revenue: data.get("revenue"),
+          message: data.get("message"),
+        }),
       });
-      if (!response.ok) throw new Error("Failed to submit");
-      setSubmitState("success");
-      reset();
     } catch {
-      setSubmitState("error");
+      // Non-blocking
     }
+
+    setSubmitted(true);
+    setLoading(false);
   };
 
   return (
     <div className="py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Hero */}
-        <motion.div
-          className="mx-auto max-w-3xl text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="text-xs font-semibold uppercase tracking-[2px] text-molten-amber">
-            Contact
-          </p>
-          <h1 className="mt-4 text-4xl font-serif text-forge-navy sm:text-5xl">
-            Let&apos;s Talk Results
-          </h1>
-          <p className="mt-6 text-lg text-text-secondary">
-            Book a free discovery call or send us a message. We respond within
-            24 hours.
-          </p>
-        </motion.div>
-
-        <div className="mt-16 grid gap-12 lg:grid-cols-5">
-          {/* Form */}
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="grid gap-16 lg:grid-cols-2">
+          {/* Left: info */}
           <motion.div
-            className="lg:col-span-3"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
           >
-            <div className="border border-border-subtle bg-canvas p-6 sm:p-8">
-              <h2 className="text-xl font-serif text-forge-navy">
-                Send Us a Message
-              </h2>
-              <p className="mt-2 text-sm text-text-secondary">
-                Tell us about your business and what you&apos;re looking to
-                achieve.
-              </p>
+            <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
+              Contact
+            </p>
+            <h1 className="mt-6 font-serif text-4xl text-forge-navy sm:text-5xl">
+              Let&apos;s talk about
+              <br />
+              what&apos;s possible
+            </h1>
+            <p className="mt-6 text-text-secondary leading-relaxed">
+              Book a 30-minute discovery call. We&apos;ll learn about your
+              business, discuss your challenges, and give you an honest
+              assessment of whether AI can help.
+            </p>
 
-              {submitState === "success" ? (
-                <div className="mt-8 flex flex-col items-center border border-molten-amber/30 bg-molten-amber/5 p-8 text-center">
-                  <CheckCircle2 className="h-12 w-12 text-molten-amber" />
-                  <h3 className="mt-4 text-lg font-serif text-forge-navy">
-                    Message Sent
-                  </h3>
-                  <p className="mt-2 text-text-secondary">
-                    We&apos;ll get back to you within 24 hours. Looking forward
-                    to the conversation.
-                  </p>
-                  <Button
-                    className="mt-6"
-                    variant="outline"
-                    onClick={() => setSubmitState("idle")}
-                  >
-                    Send Another Message
-                  </Button>
+            <div className="mt-10 space-y-6 border-t border-border-subtle pt-8">
+              {[
+                {
+                  icon: Clock,
+                  title: "30-minute call",
+                  text: "No pitch decks. Just a conversation.",
+                },
+                {
+                  icon: Shield,
+                  title: "No pressure",
+                  text: "Honest assessment. If AI isn't right for you, we'll say so.",
+                },
+                {
+                  icon: Mail,
+                  title: "24-hour response",
+                  text: "We respond to every inquiry within one business day.",
+                },
+              ].map(({ icon: Icon, title, text }) => (
+                <div key={title} className="flex items-start gap-4">
+                  <Icon
+                    className="mt-0.5 h-5 w-5 shrink-0 text-molten-amber"
+                    strokeWidth={1.5}
+                  />
+                  <div>
+                    <p className="text-sm font-medium text-forge-navy">
+                      {title}
+                    </p>
+                    <p className="text-sm text-text-muted">{text}</p>
+                  </div>
                 </div>
-              ) : (
-                <form
-                  onSubmit={handleSubmit(onSubmit)}
-                  className="mt-6 space-y-6"
-                >
-                  <div className="grid gap-6 sm:grid-cols-2">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Full Name</Label>
-                      <Input
-                        id="name"
-                        placeholder="Jane Smith"
-                        {...register("name")}
-                      />
-                      {errors.name && (
-                        <p className="text-xs text-red-400">
-                          {errors.name.message}
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Work Email</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="jane@company.com"
-                        {...register("email")}
-                      />
-                      {errors.email && (
-                        <p className="text-xs text-red-400">
-                          {errors.email.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="grid gap-6 sm:grid-cols-2">
-                    <div className="space-y-2">
-                      <Label htmlFor="company">Company</Label>
-                      <Input
-                        id="company"
-                        placeholder="Acme Corp"
-                        {...register("company")}
-                      />
-                      {errors.company && (
-                        <p className="text-xs text-red-400">
-                          {errors.company.message}
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="revenue">Annual Revenue</Label>
-                      <Controller
-                        name="revenue"
-                        control={control}
-                        render={({ field }) => (
-                          <Select
-                            onValueChange={field.onChange}
-                            value={field.value}
-                          >
-                            <SelectTrigger id="revenue">
-                              <SelectValue placeholder="Select range" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {revenueRanges.map((range) => (
-                                <SelectItem key={range} value={range}>
-                                  {range}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        )}
-                      />
-                      {errors.revenue && (
-                        <p className="text-xs text-red-400">
-                          {errors.revenue.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message">
-                      How Can We Help?
-                    </Label>
-                    <Textarea
-                      id="message"
-                      placeholder="Tell us about your business challenges and what you're hoping to achieve with AI..."
-                      rows={5}
-                      {...register("message")}
-                    />
-                    {errors.message && (
-                      <p className="text-xs text-red-400">
-                        {errors.message.message}
-                      </p>
-                    )}
-                  </div>
-
-                  {submitState === "error" && (
-                    <div className="flex items-center gap-2 border border-red-400/30 bg-red-400/5 p-3">
-                      <AlertCircle className="h-4 w-4 shrink-0 text-red-400" />
-                      <p className="text-sm text-red-400">
-                        Something went wrong. Please try again or email us
-                        directly.
-                      </p>
-                    </div>
-                  )}
-
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full sm:w-auto"
-                    disabled={submitState === "loading"}
-                  >
-                    {submitState === "loading" ? (
-                      "Sending..."
-                    ) : (
-                      <>
-                        Send Message
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </>
-                    )}
-                  </Button>
-                </form>
-              )}
-            </div>
-          </motion.div>
-
-          {/* Sidebar */}
-          <motion.div
-            className="space-y-6 lg:col-span-2"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            {/* Calendly Placeholder */}
-            <div className="border border-border-subtle bg-canvas p-6">
-              <Calendar className="h-6 w-6 text-molten-amber" />
-              <h3 className="mt-4 text-lg font-serif text-forge-navy">
-                Book a Discovery Call
-              </h3>
-              <p className="mt-2 text-sm text-text-secondary">
-                30 minutes to discuss your business, challenges, and whether
-                ClearForge is the right fit.
-              </p>
-              <div className="mt-6 flex h-48 items-center justify-center border border-dashed border-border-medium bg-bg-elevated">
-                <p className="text-sm text-text-muted">
-                  Calendly embed coming soon
-                </p>
-              </div>
+              ))}
             </div>
 
-            {/* Response Time */}
-            <div className="border border-border-subtle bg-canvas p-6">
-              <Clock className="h-6 w-6 text-molten-amber" />
-              <h3 className="mt-4 text-lg font-serif text-forge-navy">
-                We Respond Within 24 Hours
-              </h3>
-              <p className="mt-2 text-sm text-text-secondary">
-                No automated replies. You&apos;ll hear directly from a senior
-                operator who can speak to your specific situation.
-              </p>
-            </div>
-
-            {/* Email */}
-            <div className="border border-border-subtle bg-canvas p-6">
-              <Mail className="h-6 w-6 text-molten-amber" />
-              <h3 className="mt-4 text-lg font-serif text-forge-navy">
-                Email Us Directly
-              </h3>
-              <p className="mt-2 text-sm text-text-secondary">
-                Prefer email? Reach us at{" "}
+            <div className="mt-10 border-t border-border-subtle pt-8">
+              <p className="text-sm text-text-muted">
+                Or email us directly at{" "}
                 <a
                   href="mailto:hello@clearforge.ai"
-                  className="text-molten-amber hover:underline"
+                  className="amber-underline text-molten-amber"
                 >
                   hello@clearforge.ai
                 </a>
               </p>
             </div>
+          </motion.div>
+
+          {/* Right: form */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+          >
+            {submitted ? (
+              <div className="flex min-h-[400px] items-center justify-center border border-border-subtle bg-canvas p-12 text-center">
+                <div>
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center bg-molten-amber/10">
+                    <Mail className="h-6 w-6 text-molten-amber" />
+                  </div>
+                  <h3 className="mt-6 font-serif text-2xl text-forge-navy">
+                    Message received
+                  </h3>
+                  <p className="mt-3 text-text-secondary">
+                    We&apos;ll get back to you within 24 hours. Looking forward
+                    to the conversation.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-6 border border-border-subtle bg-canvas p-8 sm:p-10"
+              >
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="mb-2 block text-xs font-semibold uppercase tracking-[1.5px] text-text-muted"
+                    >
+                      Name
+                    </label>
+                    <Input
+                      id="name"
+                      name="name"
+                      required
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="mb-2 block text-xs font-semibold uppercase tracking-[1.5px] text-text-muted"
+                    >
+                      Email
+                    </label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="you@company.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <div>
+                    <label
+                      htmlFor="company"
+                      className="mb-2 block text-xs font-semibold uppercase tracking-[1.5px] text-text-muted"
+                    >
+                      Company
+                    </label>
+                    <Input
+                      id="company"
+                      name="company"
+                      placeholder="Company name"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="revenue"
+                      className="mb-2 block text-xs font-semibold uppercase tracking-[1.5px] text-text-muted"
+                    >
+                      Annual Revenue
+                    </label>
+                    <Input
+                      id="revenue"
+                      name="revenue"
+                      placeholder="e.g. $10M-$50M"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="mb-2 block text-xs font-semibold uppercase tracking-[1.5px] text-text-muted"
+                  >
+                    What are you looking to solve?
+                  </label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    required
+                    placeholder="Tell us about your business challenge..."
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full"
+                  disabled={loading}
+                >
+                  {loading ? "Sending..." : "Send Message"}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+
+                <p className="text-center text-xs text-text-muted">
+                  No spam. No newsletters. We&apos;ll only use your information
+                  to respond to your inquiry.
+                </p>
+              </form>
+            )}
           </motion.div>
         </div>
       </div>
