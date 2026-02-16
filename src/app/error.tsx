@@ -1,36 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
-import { AlertTriangle, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
-  useEffect(() => {
-    console.error(error);
-  }, [error]);
-
+export default function Error({ error, reset }: { error: Error; reset: () => void }) {
   return (
-    <div className="flex min-h-[60vh] flex-col items-center justify-center px-6 py-20 text-center">
-      <div className="mx-auto max-w-md">
-        <AlertTriangle className="mx-auto h-10 w-10 text-molten-amber" />
-        <h1 className="mt-6 font-serif text-2xl text-forge-navy sm:text-3xl">
-          Something Went Wrong
-        </h1>
-        <p className="mt-4 text-text-secondary">
-          An unexpected error occurred. Please try again or contact us if the
-          problem persists.
-        </p>
-        <Button onClick={reset} className="mt-8 gap-2">
-          <RotateCcw className="h-4 w-4" />
-          Try Again
-        </Button>
+    <section className="bg-white py-32 lg:py-48">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+        <span className="metric-display text-4xl">Error</span>
+        <h1 className="mt-4 text-2xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>Something went wrong</h1>
+        <p className="mt-2 text-base text-slate-500">Please try again.</p>
+        <Button className="mt-8" onClick={reset}>Try Again</Button>
       </div>
-    </div>
+    </section>
   );
 }

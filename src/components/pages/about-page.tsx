@@ -2,217 +2,134 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const values = [
-  {
-    title: "Results over activity",
-    description:
-      "We measure success by business outcomes, not hours billed or slides delivered. Every engagement has measurable KPIs from day one.",
-  },
-  {
-    title: "Build, don't just advise",
-    description:
-      "We don't hand you a roadmap and walk away. The same team that designs your strategy builds and deploys the solution.",
-  },
-  {
-    title: "Continuous > one-time",
-    description:
-      "AI systems that stop learning start dying. We build for continuous optimization because that's where the real value compounds.",
-  },
-  {
-    title: "Radical transparency",
-    description:
-      "Transparent pricing, clear deliverables, honest assessments. If AI isn't the right answer for you, we'll tell you.",
-  },
-  {
-    title: "Senior operators only",
-    description:
-      "No bait-and-switch. The people you meet in the discovery call are the people who do the work. Period.",
-  },
-  {
-    title: "Your IP, your systems",
-    description:
-      "Everything we build is yours to keep. Full documentation, knowledge transfer, and no vendor lock-in.",
-  },
+  { title: "Outcomes Over Outputs", description: "We measure success by business impact, not deliverables. Every engagement ties to a KPI you care about." },
+  { title: "Build, Don't Just Advise", description: "The people who scope your engagement are the ones who deliver it. No bait-and-switch with junior teams." },
+  { title: "Compound Intelligence", description: "Our AI systems get smarter every month. Models retrain on real data. Intelligence compounds. The gap widens." },
+  { title: "Radical Transparency", description: "Transparent pricing, honest assessments, and clear communication. If AI isn't the right answer, we'll tell you." },
 ];
 
 const approach = [
-  {
-    number: "01",
-    title: "Management consulting rigor",
-    description:
-      "We start with the business problem, not the technology. Stakeholder interviews, process mapping, data audits, and opportunity sizing — the same methodology used by top-tier firms.",
-  },
-  {
-    number: "02",
-    title: "AI engineering execution",
-    description:
-      "Then we build. Custom AI agents, workflow automation, data pipelines, and analytics dashboards — deployed into your production environment in weeks, not quarters.",
-  },
-  {
-    number: "03",
-    title: "Continuous optimization",
-    description:
-      "Our AI systems get smarter every month. Monthly retraining on conversion data, new market signals, and performance metrics. The gap between month one and month six is exponential.",
-  },
+  { number: "01", title: "Strategy Consulting Rigor", description: "We start with the business problem, not the technology. Deep diagnostics, stakeholder interviews, process mapping — the foundational work that separates successful AI from expensive experiments." },
+  { number: "02", title: "Hands-On Engineering", description: "Same team, same engagement. The strategists who diagnose the problems are the engineers who build the solutions. No handoff, no gap, no loss of context." },
+  { number: "03", title: "Continuous Optimization", description: "We don't build and leave. Our AI systems learn and improve monthly. Models retrained on real data. Performance improves every cycle. The system compounds in value." },
 ];
 
-export function AboutPageClient() {
+export function AboutPage() {
   return (
-    <div className="py-20">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Hero */}
-        <motion.div
-          className="max-w-3xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
-            About ClearForge
-          </p>
-          <h1 className="mt-6 font-serif text-4xl text-forge-navy sm:text-5xl lg:text-6xl">
-            The firm that builds
-            <br />
-            what it recommends
-          </h1>
-          <p className="mt-6 max-w-xl text-lg text-text-secondary leading-relaxed">
-            ClearForge combines management consulting rigor with hands-on AI
-            engineering. We exist because too many companies have shelves full of
-            strategy decks and nothing in production.
-          </p>
-        </motion.div>
+    <>
+      {/* Hero */}
+      <section className="bg-white py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-3xl">
+            <span className="section-label">About ClearForge</span>
+            <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              We close the gap between <span className="gradient-text">AI strategy and AI execution.</span>
+            </h1>
+            <p className="mt-6 text-lg text-slate-500">
+              ClearForge was founded on a simple observation: most AI initiatives fail not because the
+              technology doesn&apos;t work, but because strategy and execution live in separate silos.
+              We put them in the same team.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
-        {/* Our Approach */}
-        <div className="mt-24">
-          <motion.h2
-            className="font-serif text-3xl text-forge-navy"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.4 }}
-          >
-            Our approach
-          </motion.h2>
-          <div className="mt-12 divide-y divide-border-subtle border-y border-border-subtle">
-            {approach.map((a, i) => (
+      {/* Approach */}
+      <section className="bg-gray-100 py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mb-16">
+            <span className="section-label">Our Approach</span>
+            <h2 className="mt-4 text-3xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              Strategy meets engineering.
+            </h2>
+          </motion.div>
+          <div className="grid gap-8 md:grid-cols-3">
+            {approach.map((item, i) => (
               <motion.div
-                key={a.number}
-                className="grid gap-6 py-10 lg:grid-cols-[auto_1fr_2fr] lg:items-start"
-                initial={{ opacity: 0, y: 16 }}
+                key={item.number}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.1 * i }}
+                className="rounded-lg border border-gray-200 bg-white p-8"
               >
-                <span className="metric-display text-sm text-molten-amber">
-                  {a.number}
-                </span>
-                <h3 className="font-serif text-xl text-forge-navy">
-                  {a.title}
-                </h3>
-                <p className="text-text-secondary leading-relaxed">
-                  {a.description}
-                </p>
+                <span className="metric-display text-2xl">{item.number}</span>
+                <h3 className="mt-4 text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>{item.title}</h3>
+                <p className="mt-3 text-sm text-slate-500 leading-relaxed">{item.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Values */}
-        <div className="mt-24">
-          <motion.h2
-            className="font-serif text-3xl text-forge-navy"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.4 }}
-          >
-            What we believe
-          </motion.h2>
-          <div className="mt-12 grid gap-px bg-border-subtle sm:grid-cols-2 lg:grid-cols-3">
-            {values.map((v, i) => (
+      {/* Values */}
+      <section className="bg-white py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mb-16">
+            <span className="section-label">What We Believe</span>
+            <h2 className="mt-4 text-3xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              Principles, not platitudes.
+            </h2>
+          </motion.div>
+          <div className="grid gap-6 sm:grid-cols-2">
+            {values.map((value, i) => (
               <motion.div
-                key={v.title}
-                className="bg-warm-white p-8 lg:p-10"
-                initial={{ opacity: 0, y: 16 }}
+                key={value.title}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.4, delay: i * 0.05 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.08 * i }}
+                className="rounded-lg border border-gray-200 p-8"
               >
-                <h3 className="font-serif text-lg text-forge-navy">
-                  {v.title}
-                </h3>
-                <p className="mt-3 text-sm text-text-secondary leading-relaxed">
-                  {v.description}
-                </p>
+                <h3 className="text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>{value.title}</h3>
+                <p className="mt-3 text-sm text-slate-500 leading-relaxed">{value.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Team */}
-        <motion.div
-          className="mt-24 bg-forge-navy p-10 sm:p-16"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.4 }}
-        >
-          <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
-            The Team
-          </p>
-          <h2 className="mt-6 font-serif text-3xl text-warm-white">
-            Operators, not advisors
-          </h2>
-          <p className="mt-4 max-w-2xl text-warm-white/60 leading-relaxed">
-            Our team combines backgrounds in top-tier management consulting with
-            deep AI engineering expertise. We&apos;ve built and deployed AI
-            solutions for Fortune 1000 companies, PE portfolio companies, and
-            high-growth firms. We don&apos;t just know what to do — we know how
-            to build it.
-          </p>
-          <div className="mt-10 grid gap-px bg-deep-steel sm:grid-cols-3">
-            {[
-              { metric: "50+", label: "AI Solutions Deployed" },
-              { metric: "10+", label: "Years Combined Experience" },
-              { metric: "100%", label: "Senior Delivery Team" },
-            ].map((m) => (
-              <div key={m.label} className="bg-forge-navy p-6 text-center">
-                <span className="metric-display text-2xl text-molten-amber">
-                  {m.metric}
-                </span>
-                <p className="mt-1 text-xs uppercase tracking-[1.5px] text-warm-white/50">
-                  {m.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+      {/* Who We Work With */}
+      <section className="bg-slate-navy py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+            <span className="section-label text-teal">Who We Work With</span>
+            <h2 className="mt-4 text-3xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              Mid-market operators who want measurable results.
+            </h2>
+            <div className="mt-12 grid gap-6 md:grid-cols-3">
+              {[
+                { title: "Mid-Market Companies", description: "$5M-$500M revenue companies looking to build competitive advantage through AI-driven operations." },
+                { title: "PE Portfolio Companies", description: "Portfolio companies seeking AI-driven value creation — from 90-day sprints to portfolio-wide transformation." },
+                { title: "Growth-Stage Firms", description: "Companies scaling fast that need systems built for performance, not just for show." },
+              ].map((item, i) => (
+                <div key={item.title} className="rounded-lg border border-charcoal bg-charcoal p-6">
+                  <h3 className="text-base font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>{item.title}</h3>
+                  <p className="mt-2 text-sm text-slate-400">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
-        {/* CTA */}
-        <motion.div
-          className="mt-24 text-center"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.4 }}
-        >
-          <h2 className="font-serif text-3xl text-forge-navy sm:text-4xl">
-            Let&apos;s build something that works
+      {/* CTA */}
+      <section className="bg-white py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            Let&apos;s talk about your business.
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-text-secondary">
-            30 minutes. No pitch decks. Just a straightforward conversation.
+          <p className="mt-4 text-base text-slate-500 max-w-xl mx-auto">
+            30-minute discovery call. Honest assessment. No pressure.
           </p>
-          <Button size="xl" className="mt-8" asChild>
-            <Link href="/contact">
-              Book Discovery Call
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
+          <Button size="lg" className="mt-8" asChild>
+            <Link href="/contact">Book a Discovery Call</Link>
           </Button>
-        </motion.div>
-      </div>
-    </div>
+        </div>
+      </section>
+    </>
   );
 }

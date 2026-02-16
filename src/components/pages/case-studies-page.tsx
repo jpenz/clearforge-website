@@ -2,120 +2,84 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { caseStudies } from "@/data/case-studies";
+import { ArrowRight } from "lucide-react";
 
-export function CaseStudiesPageClient() {
+export function CaseStudiesPage() {
   return (
-    <div className="py-20">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Hero */}
-        <motion.div
-          className="max-w-3xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
-            Case Studies
-          </p>
-          <h1 className="mt-6 font-serif text-4xl text-forge-navy sm:text-5xl lg:text-6xl">
-            Real results. Real businesses.
-          </h1>
-          <p className="mt-6 text-lg text-text-secondary">
-            See how we&apos;ve helped companies transform operations, accelerate
-            growth, and build AI systems that compound in value.
-          </p>
-        </motion.div>
+    <>
+      <section className="bg-white py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="max-w-3xl"
+          >
+            <span className="section-label">Case Studies</span>
+            <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              Results that <span className="gradient-text">speak for themselves.</span>
+            </h1>
+            <p className="mt-6 text-lg text-slate-500">
+              Real engagements, real outcomes. Every metric verified, every case anonymized.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
-        {/* Featured */}
-        {caseStudies
-          .filter((cs) => cs.featured)
-          .map((cs) => (
-            <motion.div
-              key={cs.slug}
-              className="mt-16 border border-border-accent bg-canvas"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
-            >
-              <div className="grid lg:grid-cols-[2fr_1fr]">
-                <div className="p-10 sm:p-14">
-                  <span className="inline-block bg-molten-amber/10 px-3 py-1 text-xs font-semibold uppercase tracking-[1.5px] text-molten-amber">
-                    Featured
-                  </span>
-                  <h2 className="mt-6 font-serif text-3xl text-forge-navy">
-                    {cs.title}
-                  </h2>
-                  <p className="mt-4 text-text-secondary leading-relaxed">
-                    {cs.excerpt}
-                  </p>
-                  <Link
-                    href={`/case-studies/${cs.slug}`}
-                    className="amber-underline mt-6 inline-flex items-center gap-2 text-sm font-medium text-molten-amber"
-                  >
-                    Read full case study
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-                <div className="grid grid-cols-2 gap-px bg-border-subtle">
-                  {cs.outcomes.slice(0, 4).map((o) => (
-                    <div key={o.metric} className="bg-canvas p-6">
-                      <span className="metric-display text-2xl text-molten-amber">
-                        {o.metric}
-                      </span>
-                      <p className="mt-1 text-xs text-text-muted">
-                        {o.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-
-        {/* Other case studies */}
-        <div className="mt-16 divide-y divide-border-subtle border-y border-border-subtle">
-          {caseStudies
-            .filter((cs) => !cs.featured)
-            .map((cs, i) => (
+      <section className="bg-gray-100 py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="space-y-8">
+            {caseStudies.map((cs, i) => (
               <motion.div
                 key={cs.slug}
-                className="grid gap-6 py-10 sm:grid-cols-[2fr_1fr_auto] sm:items-center"
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.08 * i }}
+                className="rounded-lg border border-gray-200 bg-white overflow-hidden"
               >
-                <div>
-                  <p className="text-xs uppercase tracking-[1.5px] text-text-muted">
-                    {cs.industry} &middot; {cs.service}
-                  </p>
-                  <h3 className="mt-2 font-serif text-xl text-forge-navy">
-                    {cs.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-text-secondary">
-                    {cs.excerpt}
-                  </p>
+                <div className="grid md:grid-cols-3">
+                  <div className="p-8 md:col-span-2">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-xs font-medium text-teal border border-teal/20 bg-teal/5 rounded-md px-2 py-1">{cs.industry}</span>
+                      <span className="text-xs text-slate-500">{cs.service}</span>
+                    </div>
+                    <h2 className="text-xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                      {cs.title}
+                    </h2>
+                    <p className="mt-3 text-sm text-slate-500 leading-relaxed">{cs.excerpt}</p>
+                    <Button variant="link" className="mt-4 px-0" asChild>
+                      <Link href={`/case-studies/${cs.slug}`}>
+                        Read Full Case Study <ArrowRight className="ml-1 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </div>
+                  <div className="bg-slate-navy p-8 flex flex-col justify-center items-center text-center">
+                    <div className="metric-display text-4xl">{cs.heroMetric}</div>
+                    <p className="mt-2 text-sm text-slate-400">{cs.heroMetricLabel}</p>
+                  </div>
                 </div>
-                <div className="text-center">
-                  <span className="metric-display text-3xl text-molten-amber">
-                    {cs.heroMetric}
-                  </span>
-                  <p className="text-xs text-text-muted">{cs.heroMetricLabel}</p>
-                </div>
-                <Link
-                  href={`/case-studies/${cs.slug}`}
-                  className="amber-underline inline-flex items-center gap-1 text-sm text-molten-amber"
-                >
-                  Read more
-                  <ArrowRight className="h-3 w-3" />
-                </Link>
               </motion.div>
             ))}
+          </div>
         </div>
-      </div>
-    </div>
+      </section>
+
+      <section className="bg-slate-navy py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            Want results like these?
+          </h2>
+          <p className="mt-4 text-base text-slate-400 max-w-xl mx-auto">
+            Every engagement starts with a conversation about your specific challenges and goals.
+          </p>
+          <Button size="lg" className="mt-8" asChild>
+            <Link href="/contact">Book a Discovery Call</Link>
+          </Button>
+        </div>
+      </section>
+    </>
   );
 }

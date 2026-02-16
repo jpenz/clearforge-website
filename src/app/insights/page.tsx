@@ -1,13 +1,12 @@
 import { createMetadata } from "@/lib/metadata";
-import { InsightsPageClient } from "@/components/pages/insights-page";
+import { InsightsPage } from "@/components/pages/insights-page";
 
 export const metadata = createMetadata({
-  title: "Insights",
-  description:
-    "AI strategy, performance improvement, and value creation insights for business leaders. Practical guides, not vendor hype.",
+  title: "Insights — AI Strategy, Performance Improvement, and Value Creation",
+  description: "Practical perspectives on AI implementation, performance improvement, and value creation for mid-market companies.",
   path: "/insights",
 });
 
-export default function InsightsPage() {
-  return <InsightsPageClient />;
+export default function Page() {
+  return <InsightsPage />;
 }

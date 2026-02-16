@@ -25,18 +25,18 @@ export const caseStudies: CaseStudy[] = [
     title: "Fortune 1000 Industrial Manufacturer Transforms Sales Intelligence",
     industry: "Industrial Manufacturing",
     service: "AI Revenue Operations",
-    heroMetric: "358",
-    heroMetricLabel: "Qualified Targets Identified",
+    heroMetric: "1,060",
+    heroMetricLabel: "Qualified Opportunities Identified",
     featured: true,
     excerpt:
       "A $2B+ industrial manufacturer with 70+ facilities deployed AI-powered sales intelligence across 16 divisions — discovering 5 new high-growth market segments and reducing manual prospecting time by 60%.",
     challenge:
       "A Fortune 1000 industrial manufacturer with $2B+ in revenue, 70+ facilities across North America, and 16 distinct business divisions faced a critical growth challenge. Sales teams across divisions operated in silos with no shared market intelligence, targeting prospects based on gut feel rather than data. Each division ran its own prospecting process — duplicating effort, missing cross-sell opportunities, and wasting senior sales talent on manual research. Leadership had no unified view of which markets, geographies, or verticals offered the highest growth potential across their portfolio of businesses.",
     solution: [
-      "AI-powered sales intelligence platform built on n8n workflow automation, orchestrating data collection and analysis across all 16 divisions simultaneously",
+      "AI-powered sales intelligence platform proprietary platform orchestrating data collection and analysis across all 16 divisions simultaneously",
       "State-by-state automated prospect research pipelines that identified and qualified targets across every division's addressable market",
       "Contact enrichment pipeline using a waterfall approach across multiple data sources — ensuring high match rates and accurate decision-maker contacts",
-      "Monthly Bain/McKinsey-caliber market intelligence reports generated in under 45 minutes, covering competitive landscapes, market sizing, and growth trends",
+      "Strategic market intelligence reports generated in under 45 minutes, covering competitive landscapes, market sizing, and growth trends",
       "Portfolio strategy analysis that ranked all 16 business divisions by CAGR, total addressable market, and margin potential — giving leadership a data-driven capital allocation framework",
       "Geographic expansion modeling that identified optimal new territories for each division based on infrastructure spending, regulatory tailwinds, and competitive density",
     ],
@@ -47,7 +47,7 @@ export const caseStudies: CaseStudy[] = [
       "Sales teams receive pre-qualified, enriched leads directly in their workflow — eliminating the gap between intelligence and action",
     ],
     outcomes: [
-      { metric: "358", description: "Qualified acquisition and prospect targets identified in the first market sweep" },
+      { metric: "1,060", description: "Qualified opportunities identified across all divisions" },
       { metric: "10", description: "Industry verticals analyzed with full competitive landscapes" },
       { metric: "45 min", description: "Time to generate an 82-page strategic market study (previously weeks)" },
       { metric: "5", description: "New high-growth market segments discovered (data center cooling at 21.9% CAGR, additive manufacturing at 18.6% CAGR)" },

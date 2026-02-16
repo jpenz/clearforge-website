@@ -11,7 +11,7 @@ const footerLinks = {
     { href: "/insights", label: "Insights" },
     { href: "/contact", label: "Contact" },
   ],
-  Tools: [
+  Resources: [
     { href: "/scorecard", label: "AI Readiness Scorecard" },
     { href: "/insights/continuous-ai-agents", label: "The Continuous AI Agent" },
   ],
@@ -19,63 +19,33 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer role="contentinfo" className="border-t border-border-subtle bg-warm-white">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+    <footer role="contentinfo" className="border-t border-gray-200 bg-gray-100">
+      <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Brand */}
           <div className="space-y-4">
             <Link href="/" className="inline-block">
-              <span className="font-serif text-xl text-forge-navy">
-                ClearForge<span className="text-molten-amber">.ai</span>
+              <span className="text-xl font-bold tracking-tight text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                ClearForge<span className="text-teal">.ai</span>
               </span>
             </Link>
-            <p className="text-sm leading-relaxed text-text-muted">
-              Strategy that ships. AI that performs. Combining management
-              consulting rigor with hands-on AI engineering.
-            </p>
+            <p className="text-sm leading-relaxed text-slate-500">Strategy that ships. AI that performs.</p>
           </div>
-
-          {/* Link columns */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
-              <h3 className="mb-4 text-xs font-semibold uppercase tracking-[1.5px] text-text-muted">
-                {title}
-              </h3>
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-500" style={{ fontFamily: "var(--font-inter)" }}>{title}</h3>
               <ul className="space-y-3">
                 {links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="amber-underline text-sm text-text-secondary transition-colors hover:text-forge-navy"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
+                  <li key={link.href}><Link href={link.href} className="text-sm text-slate-500 transition-colors hover:text-teal">{link.label}</Link></li>
                 ))}
               </ul>
             </div>
           ))}
         </div>
-
-        {/* Bottom */}
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border-subtle pt-8 sm:flex-row">
-          <p className="text-sm text-text-muted">
-            &copy; {new Date().getFullYear()} ClearForge.ai. All rights
-            reserved.
-          </p>
+        <div className="mt-20 flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-8 sm:flex-row">
+          <p className="text-sm text-slate-500">&copy; {new Date().getFullYear()} ClearForge.ai. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link
-              href="/privacy"
-              className="text-sm text-text-muted transition-colors hover:text-forge-navy"
-            >
-              Privacy
-            </Link>
-            <Link
-              href="/terms"
-              className="text-sm text-text-muted transition-colors hover:text-forge-navy"
-            >
-              Terms
-            </Link>
+            <Link href="/privacy" className="text-sm text-slate-500 hover:text-teal">Privacy</Link>
+            <Link href="/terms" className="text-sm text-slate-500 hover:text-teal">Terms</Link>
           </div>
         </div>
       </div>

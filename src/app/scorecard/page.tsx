@@ -1,13 +1,12 @@
 import { createMetadata } from "@/lib/metadata";
-import { ScorecardPageClient } from "@/components/pages/scorecard-page";
+import { ScorecardPage } from "@/components/pages/scorecard-page";
 
 export const metadata = createMetadata({
-  title: "AI Readiness Scorecard",
-  description:
-    "How AI-ready is your business? Take our 5-minute assessment across 5 key pillars to get your personalized AI readiness score.",
+  title: "AI Readiness Scorecard — Assess Your Business in 5 Minutes",
+  description: "18 questions across 5 pillars. Get a personalized AI readiness score with specific recommendations for your business.",
   path: "/scorecard",
 });
 
-export default function ScorecardPage() {
-  return <ScorecardPageClient />;
+export default function Page() {
+  return <ScorecardPage />;
 }

@@ -1,34 +1,17 @@
 import Link from "next/link";
-import { ArrowRight, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-[60vh] flex-col items-center justify-center px-6 py-20 text-center">
-      <div className="mx-auto max-w-md">
-        <p className="metric-display text-7xl text-molten-amber">404</p>
-        <h1 className="mt-4 font-serif text-2xl text-forge-navy sm:text-3xl">
-          Page Not Found
-        </h1>
-        <p className="mt-4 text-text-secondary">
-          The page you&apos;re looking for doesn&apos;t exist or has been moved.
-          Let&apos;s get you back on track.
-        </p>
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button asChild>
-            <Link href="/">
-              <Home className="mr-2 h-4 w-4" />
-              Go Home
-            </Link>
-          </Button>
-          <Button variant="outline" asChild>
-            <Link href="/contact">
-              Contact Us
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
+    <section className="bg-white py-32 lg:py-48">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+        <span className="metric-display text-6xl">404</span>
+        <h1 className="mt-4 text-2xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>Page not found</h1>
+        <p className="mt-2 text-base text-slate-500">The page you&apos;re looking for doesn&apos;t exist or has been moved.</p>
+        <Button className="mt-8" asChild>
+          <Link href="/">Back to Home</Link>
+        </Button>
       </div>
-    </div>
+    </section>
   );
 }

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClearForge — Option B: Stripe Warmth</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #FFFFFF; color: #1A1A2E; -webkit-font-smoothing: antialiased; }
+
+nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; border-bottom: 1px solid #EAEAEA; }
+nav .logo { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.5px; }
+nav .logo span { color: #0D9488; }
+nav .links { display: flex; gap: 32px; font-size: 14px; color: #6B7280; }
+nav .cta-btn { background: #0D9488; color: white; padding: 8px 20px; border-radius: 6px; font-size: 13px; font-weight: 500; border: none; }
+
+/* HERO */
+.hero { padding: 120px 48px 100px; max-width: 1200px; margin: 0 auto; }
+.hero .tag { font-size: 13px; font-weight: 600; color: #0D9488; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 24px; }
+.hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: 64px; font-weight: 700; line-height: 1.05; letter-spacing: -2px; max-width: 700px; color: #0F172A; }
+.hero h1 span { background: linear-gradient(135deg, #0D9488, #06B6D4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { font-size: 18px; line-height: 1.7; color: #475569; max-width: 520px; margin-top: 24px; }
+.hero .btns { display: flex; gap: 12px; margin-top: 40px; }
+.hero .btn-primary { background: #0D9488; color: white; padding: 14px 32px; border-radius: 8px; font-size: 15px; font-weight: 500; border: none; cursor: pointer; }
+.hero .btn-secondary { background: transparent; color: #0F172A; padding: 14px 32px; border-radius: 8px; font-size: 15px; font-weight: 500; border: 1px solid #D1D5DB; cursor: pointer; }
+
+/* METRICS */
+.metrics { display: flex; gap: 0; border-top: 1px solid #E5E7EB; border-bottom: 1px solid #E5E7EB; max-width: 1200px; margin: 0 auto; }
+.metric { flex: 1; padding: 40px 48px; border-right: 1px solid #E5E7EB; }
+.metric:last-child { border-right: none; }
+.metric .num { font-family: 'JetBrains Mono', monospace; font-size: 36px; font-weight: 500; color: #0D9488; }
+.metric .label { font-size: 13px; color: #6B7280; margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+
+/* PROBLEM */
+.problem { background: #0F172A; color: white; padding: 100px 48px; }
+.problem .inner { max-width: 1200px; margin: 0 auto; }
+.problem .tag { font-size: 13px; color: #0D9488; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+.problem h2 { font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700; letter-spacing: -1.5px; max-width: 600px; }
+.problem .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 48px; border-top: 1px solid #1E293B; }
+.problem .card { padding: 40px 32px 40px 0; border-right: 1px solid #1E293B; }
+.problem .card:last-child { border-right: none; }
+.problem .card .num { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #0D9488; margin-bottom: 16px; }
+.problem .card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+.problem .card p { font-size: 14px; line-height: 1.7; color: #94A3B8; }
+
+/* SERVICES */
+.services { padding: 100px 48px; max-width: 1200px; margin: 0 auto; }
+.services .tag { font-size: 13px; color: #0D9488; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+.services h2 { font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700; letter-spacing: -1.5px; max-width: 500px; margin-bottom: 48px; color: #0F172A; }
+.services .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #E5E7EB; border: 1px solid #E5E7EB; border-radius: 12px; overflow: hidden; }
+.services .item { background: white; padding: 40px; }
+.services .item .price { font-family: 'JetBrains Mono', monospace; font-size: 28px; color: #0D9488; margin-bottom: 4px; }
+.services .item .duration { font-size: 12px; color: #6B7280; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+.services .item h3 { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #0F172A; }
+.services .item p { font-size: 14px; line-height: 1.7; color: #475569; }
+
+.footer-label { text-align: center; padding: 40px; font-size: 12px; color: #9CA3AF; text-transform: uppercase; letter-spacing: 2px; border-top: 1px solid #E5E7EB; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">ClearForge<span>.ai</span></div>
+  <div class="links">
+    <span>Services</span>
+    <span>Case Studies</span>
+    <span>Pricing</span>
+    <span>Insights</span>
+    <span>About</span>
+  </div>
+  <button class="cta-btn">Book a Call</button>
+</nav>
+
+<div class="hero">
+  <div class="tag">AI Performance Consulting</div>
+  <h1>Strategy that ships.<br><span>AI that performs.</span></h1>
+  <p>We combine management consulting rigor with hands-on AI engineering to deliver measurable results — not decks that collect dust.</p>
+  <div class="btns">
+    <button class="btn-primary">Book Discovery Call →</button>
+    <button class="btn-secondary">Take AI Scorecard</button>
+  </div>
+</div>
+
+<div class="metrics">
+  <div class="metric"><div class="num">1,060</div><div class="label">Opportunities Identified</div></div>
+  <div class="metric"><div class="num">97.5%</div><div class="label">Accuracy Rate</div></div>
+  <div class="metric"><div class="num">45 min</div><div class="label">82-Page Study Delivered</div></div>
+  <div class="metric"><div class="num">60%+</div><div class="label">Prospecting Time Saved</div></div>
+</div>
+
+<div class="problem">
+  <div class="inner">
+    <div class="tag">The Problem</div>
+    <h2>Most AI consulting is fundamentally broken</h2>
+    <div class="cards">
+      <div class="card"><div class="num">01</div><h3>Strategy without execution</h3><p>Traditional consultants hand you a roadmap and walk away. Beautiful deck, no one to build it.</p></div>
+      <div class="card"><div class="num">02</div><h3>AI that stops learning</h3><p>Most implementations are one-time projects. The model goes stale in months, value evaporates.</p></div>
+      <div class="card"><div class="num">03</div><h3>Hidden pricing, scope creep</h3><p>Vague SOWs and hourly billing turn a $50K project into a $200K disappointment.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="services">
+  <div class="tag">How We Engage</div>
+  <h2>Transparent pricing. Clear deliverables.</h2>
+  <div class="grid">
+    <div class="item">
+      <div class="price">$15K</div>
+      <div class="duration">4 Weeks</div>
+      <h3>AI Readiness Audit</h3>
+      <p>Stakeholder interviews, process mapping, data assessment, and an executive-ready roadmap with ROI projections.</p>
+    </div>
+    <div class="item">
+      <div class="price">$50–100K</div>
+      <div class="duration">6–8 Weeks</div>
+      <h3>Performance Sprint</h3>
+      <p>Diagnose top opportunities, build working solutions, deploy to production with measurable KPIs from day one.</p>
+    </div>
+    <div class="item">
+      <div class="price">$15K/mo</div>
+      <div class="duration">Ongoing</div>
+      <h3>Managed AI Services</h3>
+      <p>We build, own, and maintain your AI agents. You get best-in-class tools on a subscription — no engineering team required.</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer-label">Option B — "Stripe Warmth" • Slate Navy + Teal (#0D9488) • Space Grotesk + Inter • Light mode with gradient accent</div>
+
+</body>
+</html>

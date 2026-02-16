@@ -4,70 +4,63 @@ import { motion } from "framer-motion";
 
 const steps = [
   {
-    phase: "01",
-    title: "Discover",
-    description:
-      "Stakeholder interviews, process mapping, data audit. We understand your business before we touch any technology.",
+    number: "01",
+    title: "Diagnose",
+    description: "We audit your data, processes, and tech stack to identify the highest-impact opportunities. No guesswork — just evidence.",
+    duration: "2 weeks",
   },
   {
-    phase: "02",
-    title: "Design",
-    description:
-      "Prioritize opportunities by ROI, architect solutions, define success metrics. You approve the plan before we build.",
+    number: "02",
+    title: "Build",
+    description: "We design and deploy working AI solutions — not prototypes. Real systems integrated with your existing tools and workflows.",
+    duration: "4–6 weeks",
   },
   {
-    phase: "03",
-    title: "Deploy",
-    description:
-      "Build working solutions, integrate with your stack, train your team. In production within 6–8 weeks.",
-  },
-  {
-    phase: "04",
+    number: "03",
     title: "Optimize",
-    description:
-      "Monthly retraining, performance monitoring, new capabilities. Your AI gets smarter every cycle.",
+    description: "Our systems learn monthly. Models retrain on real data, intelligence compounds, and performance improves every cycle.",
+    duration: "Ongoing",
   },
 ];
 
 export function HowWeWork() {
   return (
-    <section className="border-y border-border-subtle bg-canvas py-24 lg:py-32">
+    <section className="bg-white py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
-          className="mx-auto max-w-2xl text-center"
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.4 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-16 max-w-2xl"
         >
-          <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
-            Our Process
-          </p>
-          <h2 className="mt-6 font-serif text-3xl text-forge-navy sm:text-4xl lg:text-5xl">
-            Discover. Design. Deploy. Optimize.
+          <span className="section-label">How We Work</span>
+          <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            Diagnose. Build. Optimize.
           </h2>
-          <p className="mt-4 text-text-secondary">
-            A proven methodology refined across dozens of engagements.
+          <p className="mt-4 text-base text-slate-500">
+            Every engagement follows a disciplined structure designed to deliver results fast and compound value over time.
           </p>
         </motion.div>
 
-        <div className="mt-16 grid gap-0 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 md:grid-cols-3">
           {steps.map((step, i) => (
             <motion.div
-              key={step.phase}
-              className="relative border-t border-border-subtle p-8 lg:border-l lg:border-t-0 first:lg:border-l-0"
-              initial={{ opacity: 0, y: 16 }}
+              key={step.number}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.1 * i }}
+              className="relative rounded-lg border border-gray-200 p-8"
             >
-              <span className="metric-display text-4xl text-bg-elevated lg:text-5xl">
-                {step.phase}
-              </span>
-              <h3 className="mt-4 font-serif text-xl text-forge-navy">
+              <div className="flex items-center justify-between mb-4">
+                <span className="metric-display text-3xl">{step.number}</span>
+                <span className="text-xs font-medium text-slate-400 border border-gray-200 rounded-md px-2 py-1">{step.duration}</span>
+              </div>
+              <h3 className="text-xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
                 {step.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-text-secondary">
+              <p className="mt-3 text-sm leading-relaxed text-slate-500">
                 {step.description}
               </p>
             </motion.div>

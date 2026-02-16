@@ -1,13 +1,13 @@
 import { createMetadata } from "@/lib/metadata";
-import { ResultsDisplay } from "@/components/scorecard/results-display";
+import { ScorecardResultsPage } from "@/components/pages/scorecard-results-page";
 
 export const metadata = createMetadata({
   title: "Your AI Readiness Results",
-  description: "Your personalized AI readiness score and recommendations.",
+  description: "Your personalized AI readiness assessment results with specific recommendations.",
   path: "/scorecard/results",
   noIndex: true,
 });
 
-export default function ScorecardResultsPage() {
-  return <ResultsDisplay />;
+export default function Page() {
+  return <ScorecardResultsPage />;
 }

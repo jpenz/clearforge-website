@@ -5,61 +5,54 @@ import { motion } from "framer-motion";
 const problems = [
   {
     number: "01",
-    title: "Strategy without execution",
-    description:
-      "Traditional consultants hand you a roadmap and walk away. You're left with a beautiful deck and no one to build it.",
+    title: "Strategy Without Execution",
+    description: "Traditional consultants deliver decks and disappear. You're left with recommendations nobody implements and a bill that doesn't tie to outcomes.",
   },
   {
     number: "02",
-    title: "AI that stops learning",
-    description:
-      "Most AI implementations are one-time projects. The model goes stale in months, and the value evaporates.",
+    title: "AI Without Strategy",
+    description: "Tech vendors push tools without understanding your business. You end up with shiny demos that never make it to production — and pilots that die after 90 days.",
   },
   {
     number: "03",
-    title: "Hidden pricing, scope creep",
-    description:
-      "Vague SOWs, hourly billing, and change orders turn a $50K project into a $200K disappointment.",
+    title: "Static Systems That Decay",
+    description: "One-time AI implementations start depreciating on day one. Models trained on stale data make increasingly wrong decisions while the team that built them has moved on.",
   },
 ];
 
 export function Problem() {
   return (
-    <section className="bg-forge-navy py-24 lg:py-32">
+    <section className="bg-slate-navy py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
-          className="max-w-2xl"
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.4 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-16"
         >
-          <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
-            The Problem
-          </p>
-          <h2 className="mt-6 font-serif text-3xl text-warm-white sm:text-4xl lg:text-5xl">
-            Most AI consulting is broken
+          <span className="section-label text-teal">The Problem</span>
+          <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            Most AI initiatives fail.<br />Not because the tech doesn't work.
           </h2>
         </motion.div>
 
-        <div className="mt-16 grid gap-0 divide-y divide-deep-steel border-t border-deep-steel lg:grid-cols-3 lg:divide-x lg:divide-y-0">
-          {problems.map((p, i) => (
+        <div className="grid gap-6 md:grid-cols-3">
+          {problems.map((problem, i) => (
             <motion.div
-              key={p.number}
-              className="py-10 lg:px-10 first:lg:pl-0 last:lg:pr-0"
-              initial={{ opacity: 0, y: 16 }}
+              key={problem.number}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.1 * i }}
+              className="rounded-lg border border-charcoal bg-charcoal p-8"
             >
-              <span className="metric-display text-sm text-molten-amber">
-                {p.number}
-              </span>
-              <h3 className="mt-4 font-serif text-xl text-warm-white">
-                {p.title}
+              <span className="metric-display text-2xl">{problem.number}</span>
+              <h3 className="mt-4 text-xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                {problem.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-warm-white/60">
-                {p.description}
+              <p className="mt-3 text-sm leading-relaxed text-slate-400">
+                {problem.description}
               </p>
             </motion.div>
           ))}

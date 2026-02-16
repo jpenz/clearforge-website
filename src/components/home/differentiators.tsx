@@ -1,76 +1,66 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Zap, RefreshCw, DollarSign, Code2, Users } from "lucide-react";
+import { Code, TrendingUp, RefreshCw, Shield } from "lucide-react";
 
-const diffs = [
+const items = [
   {
-    icon: Code2,
-    title: "Strategy + Engineering",
-    description:
-      "One team that does both. No handoff to another firm. The people who design your AI strategy are the same ones who build and deploy it.",
+    icon: Code,
+    title: "We Build, Not Just Advise",
+    description: "Senior operators who scope your engagement are the same people who deliver it. Strategy and engineering in the same team.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Tied to Outcomes",
+    description: "Every engagement maps to a KPI you care about. If we can't draw a line from the solution to a financial metric, we don't build it.",
   },
   {
     icon: RefreshCw,
-    title: "AI That Keeps Learning",
-    description:
-      "Our agents are retrained monthly on your data. They get sharper, not stale. Month six is exponentially better than month one.",
+    title: "Continuous, Not Static",
+    description: "Our AI systems learn and improve monthly. Models retrained on real data compound in value — the gap widens every cycle.",
   },
   {
-    icon: DollarSign,
-    title: "Transparent Pricing",
-    description:
-      "Three productized packages with clear deliverables. No hourly billing, no scope creep, no surprises.",
-  },
-  {
-    icon: Zap,
-    title: "Results, Not Roadmaps",
-    description:
-      "Working solutions in 6–8 weeks. Measurable KPIs from day one. You see ROI before the first invoice.",
-  },
-  {
-    icon: Users,
-    title: "Senior Operators Only",
-    description:
-      "No bait-and-switch with junior analysts. Every engagement is led by experienced professionals who've done this before.",
+    icon: Shield,
+    title: "You Own Everything",
+    description: "Full code ownership, documentation, and knowledge transfer. No vendor lock-in. Your AI assets are your competitive advantage.",
   },
 ];
 
 export function Differentiators() {
   return (
-    <section className="bg-warm-white py-24 lg:py-32">
+    <section className="bg-white py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
-          className="max-w-2xl"
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.4 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-16 max-w-2xl"
         >
-          <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
-            Why ClearForge
-          </p>
-          <h2 className="mt-6 font-serif text-3xl text-forge-navy sm:text-4xl lg:text-5xl">
-            Built different, on purpose
+          <span className="section-label">Why ClearForge</span>
+          <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            Strategy consulting meets AI engineering.
           </h2>
         </motion.div>
 
-        <div className="mt-16 grid gap-px bg-border-subtle sm:grid-cols-2 lg:grid-cols-3">
-          {diffs.map((d, i) => (
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((item, i) => (
             <motion.div
-              key={d.title}
-              className="bg-warm-white p-8 lg:p-10"
-              initial={{ opacity: 0, y: 16 }}
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.08 * i }}
+              className="group"
             >
-              <d.icon className="h-5 w-5 text-molten-amber" strokeWidth={1.5} />
-              <h3 className="mt-4 font-serif text-lg text-forge-navy">
-                {d.title}
+              <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-md border border-gray-200 text-teal transition-colors group-hover:bg-teal group-hover:text-white group-hover:border-teal">
+                <item.icon className="h-5 w-5" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                {item.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-text-secondary">
-                {d.description}
+              <p className="mt-2 text-sm leading-relaxed text-slate-500">
+                {item.description}
               </p>
             </motion.div>
           ))}

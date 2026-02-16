@@ -2,113 +2,84 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { formatDate, type Insight } from "@/data/insights";
+import { type Insight, formatDate } from "@/data/insights";
+import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 
-export function InsightDetail({ insight }: { insight: Insight }) {
+interface Props {
+  insight: Insight;
+  related: Insight[];
+}
+
+export function InsightDetailClient({ insight, related }: Props) {
   return (
-    <div>
+    <>
       {/* Hero */}
-      <section className="bg-forge-navy py-24 lg:py-32">
+      <section className="bg-white py-20 lg:py-28 border-b border-gray-200">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Link
-              href="/insights"
-              className="inline-flex items-center gap-2 text-sm text-warm-white/50 hover:text-warm-white"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              All Insights
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <Link href="/insights" className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-teal mb-8">
+              <ArrowLeft className="h-4 w-4" /> All Insights
             </Link>
-            <div className="mt-8 flex items-center gap-4">
-              <span className="bg-warm-white/10 px-3 py-1 text-xs uppercase tracking-[1.5px] text-warm-white/70">
-                {insight.category}
-              </span>
-              <span className="text-xs text-warm-white/50">
-                {formatDate(insight.date)} &middot; {insight.readingTime} min read
-              </span>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-xs font-medium text-teal border border-teal/20 bg-teal/5 rounded-md px-2 py-1">{insight.category}</span>
+              <span className="flex items-center gap-1 text-xs text-slate-500"><Clock className="h-3 w-3" /> {insight.readingTime} min read</span>
             </div>
-            <h1 className="mt-8 font-serif text-3xl text-warm-white sm:text-4xl lg:text-5xl">
+            <h1 className="text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
               {insight.title}
             </h1>
+            <div className="mt-6 flex items-center gap-4">
+              <span className="text-sm text-slate-500">{insight.author.name}</span>
+              <span className="text-sm text-slate-400">{formatDate(insight.date)}</span>
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* Content */}
-      <section className="py-16 lg:py-24">
-        <div className="mx-auto max-w-3xl px-6 lg:px-8">
-          <motion.div
-            className="prose-forge"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-          >
+      <section className="bg-white py-16 lg:py-24">
+        <div className="mx-auto max-w-4xl px-6 lg:px-8">
+          <div className="prose-content">
             {insight.content.map((block, i) => {
               if (block.startsWith("## ")) {
-                return (
-                  <h2
-                    key={i}
-                    className="mb-4 mt-12 font-serif text-2xl text-forge-navy first:mt-0"
-                  >
-                    {block.replace("## ", "")}
-                  </h2>
-                );
+                return <h2 key={i}>{block.replace("## ", "")}</h2>;
               }
-              if (block.startsWith("**") && block.endsWith("**")) {
-                return (
-                  <p key={i} className="mt-4 font-medium text-forge-navy">
-                    {block.replace(/\*\*/g, "")}
-                  </p>
-                );
-              }
-              // Handle inline bold
-              const parts = block.split(/(\*\*[^*]+\*\*)/g);
-              return (
-                <p key={i} className="mt-4 text-text-secondary leading-relaxed">
-                  {parts.map((part, j) =>
-                    part.startsWith("**") && part.endsWith("**") ? (
-                      <strong key={j} className="font-medium text-forge-navy">
-                        {part.replace(/\*\*/g, "")}
-                      </strong>
-                    ) : (
-                      <span key={j}>{part}</span>
-                    )
-                  )}
-                </p>
-              );
+              return <p key={i} dangerouslySetInnerHTML={{ __html: block.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>").replace(/\*(.*?)\*/g, "<em>$1</em>") }} />;
             })}
-          </motion.div>
-
-          {/* CTA */}
-          <motion.div
-            className="mt-16 border-t border-border-subtle pt-12 text-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-          >
-            <h3 className="font-serif text-2xl text-forge-navy">
-              Ready to put this into practice?
-            </h3>
-            <div className="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button size="lg" asChild>
-                <Link href="/contact">
-                  Book Discovery Call
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link href="/scorecard">Take AI Scorecard</Link>
-              </Button>
-            </div>
-          </motion.div>
+          </div>
         </div>
       </section>
-    </div>
+
+      {/* Related */}
+      {related.length > 0 && (
+        <section className="bg-gray-100 py-24 lg:py-32">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <h2 className="text-2xl font-bold text-slate-navy mb-8" style={{ fontFamily: "var(--font-space-grotesk)" }}>Related Insights</h2>
+            <div className="grid gap-6 md:grid-cols-2">
+              {related.map((r) => (
+                <Link key={r.slug} href={`/insights/${r.slug}`} className="rounded-lg border border-gray-200 bg-white p-6 hover:border-teal transition-colors group">
+                  <span className="text-xs font-medium text-teal">{r.category}</span>
+                  <h3 className="mt-2 text-lg font-bold text-slate-navy group-hover:text-teal transition-colors" style={{ fontFamily: "var(--font-space-grotesk)" }}>{r.title}</h3>
+                  <p className="mt-2 text-sm text-slate-500 line-clamp-2">{r.excerpt}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* CTA */}
+      <section className="bg-slate-navy py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            Ready to put these ideas to work?
+          </h2>
+          <p className="mt-4 text-base text-slate-400">Book a discovery call and let&apos;s discuss your specific challenges.</p>
+          <Button size="lg" className="mt-8" asChild>
+            <Link href="/contact">Book a Discovery Call</Link>
+          </Button>
+        </div>
+      </section>
+    </>
   );
 }

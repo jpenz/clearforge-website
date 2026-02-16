@@ -1,118 +1,42 @@
-import type { Metadata } from "next";
+import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "Privacy Policy",
-  description:
-    "ClearForge.ai privacy policy — how we collect, use, and protect your information.",
-};
+  description: "ClearForge.ai privacy policy. How we collect, use, and protect your data.",
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (
-    <div className="py-20">
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <h1 className="font-serif text-3xl text-forge-navy sm:text-4xl">
-          Privacy Policy
-        </h1>
-        <p className="mt-4 text-sm text-text-muted">
-          Last updated: February 2026
-        </p>
+    <section className="bg-white py-20 lg:py-28">
+      <div className="mx-auto max-w-4xl px-6 lg:px-8 prose-content">
+        <h1 className="text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>Privacy Policy</h1>
+        <p className="mt-2 text-sm text-slate-400">Last updated: February 2025</p>
 
-        <div className="mt-12 space-y-8 text-text-secondary leading-relaxed">
-          <section>
-            <h2 className="font-serif text-xl text-forge-navy">
-              Information We Collect
-            </h2>
-            <p className="mt-3">
-              We collect information you provide directly, including your name,
-              email address, company name, and any messages you send through our
-              contact forms. When you use our AI Readiness Scorecard or ROI
-              Calculator, we collect your responses and email address if you
-              choose to receive your full report.
-            </p>
-          </section>
+        <h2>Information We Collect</h2>
+        <p>When you interact with ClearForge.ai, we may collect information you provide directly, such as your name, email address, company name, and message content when you submit our contact form or take the AI Readiness Scorecard.</p>
 
-          <section>
-            <h2 className="font-serif text-xl text-forge-navy">
-              How We Use Your Information
-            </h2>
-            <p className="mt-3">
-              We use the information we collect to respond to your inquiries,
-              provide our consulting services, send you relevant content and
-              updates (with your consent), and improve our website and tools. We
-              do not sell your personal information to third parties.
-            </p>
-          </section>
+        <h2>How We Use Your Information</h2>
+        <p>We use the information we collect to respond to your inquiries, provide our services, improve our website, and communicate with you about our services. We do not sell your personal information to third parties.</p>
 
-          <section>
-            <h2 className="font-serif text-xl text-forge-navy">
-              Data Security
-            </h2>
-            <p className="mt-3">
-              We implement appropriate technical and organizational measures to
-              protect your personal information. However, no method of
-              transmission over the Internet is 100% secure, and we cannot
-              guarantee absolute security.
-            </p>
-          </section>
+        <h2>Data Security</h2>
+        <p>We implement appropriate technical and organizational security measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction.</p>
 
-          <section>
-            <h2 className="font-serif text-xl text-forge-navy">
-              Cookies and Analytics
-            </h2>
-            <p className="mt-3">
-              We may use cookies and similar technologies to analyze trends,
-              administer the website, and gather demographic information. You can
-              control cookies through your browser settings.
-            </p>
-          </section>
+        <h2>Cookies</h2>
+        <p>We use essential cookies to ensure our website functions properly. We may also use analytics cookies to understand how visitors interact with our website. You can control cookie settings through your browser preferences.</p>
 
-          <section>
-            <h2 className="font-serif text-xl text-forge-navy">
-              Your Rights
-            </h2>
-            <p className="mt-3">
-              You have the right to access, correct, or delete your personal
-              information. You may also opt out of marketing communications at
-              any time. To exercise these rights, please contact us at{" "}
-              <a
-                href="mailto:privacy@clearforge.ai"
-                className="text-molten-amber hover:underline"
-              >
-                privacy@clearforge.ai
-              </a>
-              .
-            </p>
-          </section>
+        <h2>Third-Party Services</h2>
+        <p>We may use third-party services for analytics and communication. These services have their own privacy policies governing the use of your information.</p>
 
-          <section>
-            <h2 className="font-serif text-xl text-forge-navy">
-              Changes to This Policy
-            </h2>
-            <p className="mt-3">
-              We may update this privacy policy from time to time. We will notify
-              you of any changes by posting the new policy on this page and
-              updating the &ldquo;Last updated&rdquo; date.
-            </p>
-          </section>
+        <h2>Your Rights</h2>
+        <p>You have the right to access, correct, or delete your personal data. You may also opt out of communications at any time. Contact us at hello@clearforge.ai for any privacy-related requests.</p>
 
-          <section>
-            <h2 className="font-serif text-xl text-forge-navy">
-              Contact Us
-            </h2>
-            <p className="mt-3">
-              If you have questions about this privacy policy, please contact us
-              at{" "}
-              <a
-                href="mailto:privacy@clearforge.ai"
-                className="text-molten-amber hover:underline"
-              >
-                privacy@clearforge.ai
-              </a>
-              .
-            </p>
-          </section>
-        </div>
+        <h2>Changes to This Policy</h2>
+        <p>We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy on this page with an updated revision date.</p>
+
+        <h2>Contact Us</h2>
+        <p>If you have questions about this privacy policy, please contact us at <a href="mailto:hello@clearforge.ai" className="text-teal hover:text-teal-light">hello@clearforge.ai</a>.</p>
       </div>
-    </div>
+    </section>
   );
 }

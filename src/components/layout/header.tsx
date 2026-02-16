@@ -16,46 +16,35 @@ const navLinks = [
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
-
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const h = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", h, { passive: true });
+    return () => window.removeEventListener("scroll", h);
   }, []);
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled
-          ? "border-b border-border-subtle bg-warm-white/95 backdrop-blur-sm"
-          : "bg-transparent"
-      )}
-    >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <span className="font-serif text-xl text-forge-navy">
-            ClearForge<span className="text-molten-amber">.ai</span>
+    <header className={cn(
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+      scrolled ? "border-b border-gray-200 bg-white/95 backdrop-blur-sm shadow-sm" : "bg-white"
+    )}>
+      <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-6 lg:px-8">
+        <Link href="/" className="flex items-center gap-1">
+          <span className="text-xl font-bold tracking-tight text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            ClearForge<span className="text-teal">.ai</span>
           </span>
         </Link>
-
-        {/* Desktop Nav */}
         <nav aria-label="Main navigation" className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="amber-underline px-3 py-2 text-sm text-text-secondary transition-colors hover:text-forge-navy"
+              className="px-3 py-2 text-sm font-medium text-slate-500 transition-colors hover:text-slate-navy"
+              style={{ fontFamily: "var(--font-inter)" }}
             >
               {link.label}
             </Link>
           ))}
         </nav>
-
-        {/* Desktop CTAs */}
         <div className="hidden items-center gap-3 lg:flex">
           <Button variant="ghost" size="sm" asChild>
             <Link href="/scorecard">AI Scorecard</Link>
@@ -64,8 +53,6 @@ export function Header() {
             <Link href="/contact">Book a Call</Link>
           </Button>
         </div>
-
-        {/* Mobile */}
         <div className="flex items-center gap-2 lg:hidden">
           <MobileNav links={navLinks} />
         </div>

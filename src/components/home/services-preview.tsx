@@ -2,103 +2,89 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { LineChart, Cog, Rocket } from "lucide-react";
 
-const tiers = [
+const services = [
   {
-    name: "AI Readiness Audit",
-    price: "$15K",
-    timeline: "2 weeks",
-    description:
-      "Rapid diagnostic: stakeholder interviews, process mapping, data assessment, and an executive-ready roadmap with ROI projections.",
-    href: "/pricing",
+    icon: LineChart,
+    title: "AI Revenue Operations",
+    description: "AI-driven sales intelligence, automated prospecting, and pipeline analytics that turn data into deals.",
+    metric: "30%",
+    metricLabel: "avg pipeline increase",
+    href: "/services",
   },
   {
-    name: "Performance Sprint",
-    price: "$50–100K",
-    timeline: "6–8 weeks",
-    description:
-      "Intensive engagement: diagnose your top opportunities, build working solutions, deploy to production with measurable KPIs from day one.",
-    href: "/pricing",
-    featured: true,
+    icon: Cog,
+    title: "Performance Improvement",
+    description: "Process mining, operational diagnostics, and custom automation that find and eliminate hidden inefficiencies.",
+    metric: "$240K",
+    metricLabel: "avg annual savings",
+    href: "/services",
   },
   {
-    name: "AI Agent Retainer",
-    price: "$15K/mo",
-    timeline: "Ongoing",
-    description:
-      "Continuous AI expertise embedded in your business. New agents monthly, ongoing optimization, weekly strategy sessions.",
-    href: "/pricing",
+    icon: Rocket,
+    title: "PE Value Creation",
+    description: "AI-driven value creation for portfolio companies — from 90-day sprints to portfolio-wide AI playbooks.",
+    metric: "10%",
+    metricLabel: "avg EBITDA improvement",
+    href: "/services",
   },
 ];
 
 export function ServicesPreview() {
   return (
-    <section className="bg-warm-white py-24 lg:py-32">
+    <section className="bg-gray-100 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-20">
-          {/* Left: heading */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.4 }}
-          >
-            <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
-              How We Engage
-            </p>
-            <h2 className="mt-6 font-serif text-3xl text-forge-navy sm:text-4xl">
-              Three ways to work with us
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-16 flex items-end justify-between"
+        >
+          <div>
+            <span className="section-label">Services</span>
+            <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              Three ways we drive results.
             </h2>
-            <p className="mt-4 text-text-secondary">
-              Transparent pricing. Clear deliverables. No hourly billing.
-            </p>
-            <Link
-              href="/pricing"
-              className="amber-underline mt-6 inline-flex items-center gap-2 text-sm font-medium text-molten-amber"
-            >
-              View full pricing
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </motion.div>
-
-          {/* Right: tiers */}
-          <div className="divide-y divide-border-subtle border-t border-border-subtle">
-            {tiers.map((tier, i) => (
-              <motion.div
-                key={tier.name}
-                className="grid gap-4 py-8 sm:grid-cols-[auto_1fr_auto] sm:items-center"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-              >
-                <div className="min-w-[140px]">
-                  <h3 className="font-serif text-lg text-forge-navy">
-                    {tier.name}
-                  </h3>
-                  <div className="mt-1 flex items-baseline gap-2">
-                    <span className="metric-display text-2xl text-molten-amber">
-                      {tier.price}
-                    </span>
-                    <span className="text-xs text-text-muted">
-                      {tier.timeline}
-                    </span>
-                  </div>
-                </div>
-                <p className="text-sm text-text-secondary">
-                  {tier.description}
-                </p>
-                <Link
-                  href={tier.href}
-                  className="amber-underline inline-flex items-center gap-1 text-sm text-molten-amber"
-                >
-                  Learn more
-                  <ArrowRight className="h-3 w-3" />
-                </Link>
-              </motion.div>
-            ))}
           </div>
+          <Button variant="outline" size="sm" asChild className="hidden sm:inline-flex">
+            <Link href="/services">View All Services</Link>
+          </Button>
+        </motion.div>
+
+        <div className="grid gap-0 md:grid-cols-3 border border-gray-200 rounded-lg bg-white overflow-hidden">
+          {services.map((service, i) => (
+            <motion.div
+              key={service.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.08 * i }}
+              className={`p-8 lg:p-10 ${i < services.length - 1 ? "border-b md:border-b-0 md:border-r border-gray-200" : ""}`}
+            >
+              <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-md border border-gray-200 text-teal">
+                <service.icon className="h-5 w-5" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                {service.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-500">
+                {service.description}
+              </p>
+              <div className="mt-6 border-t border-gray-200 pt-4">
+                <span className="metric-display text-2xl">{service.metric}</span>
+                <p className="text-xs text-slate-500 mt-1">{service.metricLabel}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-8 text-center sm:hidden">
+          <Button variant="outline" asChild>
+            <Link href="/services">View All Services</Link>
+          </Button>
         </div>
       </div>
     </section>

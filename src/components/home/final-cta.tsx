@@ -2,43 +2,32 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function FinalCTA() {
   return (
-    <section className="bg-forge-navy py-24 lg:py-32">
+    <section className="bg-slate-navy py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
-          className="mx-auto max-w-3xl text-center"
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.4 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mx-auto max-w-2xl text-center"
         >
-          <h2 className="font-serif text-4xl text-warm-white sm:text-5xl lg:text-6xl">
-            Ready to stop planning
-            <br />
-            and start performing?
+          <h2 className="text-3xl font-bold text-white sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            Ready to see what AI can do for your business?
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-warm-white/60">
-            30 minutes. No pitch decks. Just a straightforward conversation
-            about your business and whether AI can help.
+          <p className="mt-4 text-base text-slate-400">
+            30-minute discovery call. No pitch decks. No pressure.
+            Just a straightforward conversation about what&apos;s possible.
           </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button size="xl" asChild>
-              <Link href="/contact">
-                Book Discovery Call
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Button size="lg" asChild>
+              <Link href="/contact">Book a Discovery Call</Link>
             </Button>
-            <Button
-              size="xl"
-              variant="outline"
-              className="border-warm-white/20 text-warm-white hover:bg-warm-white hover:text-forge-navy"
-              asChild
-            >
-              <Link href="/scorecard">Take AI Scorecard</Link>
+            <Button variant="outline" size="lg" className="border-slate-400 text-white hover:bg-white hover:text-slate-navy" asChild>
+              <Link href="/scorecard">Take the AI Scorecard</Link>
             </Button>
           </div>
         </motion.div>

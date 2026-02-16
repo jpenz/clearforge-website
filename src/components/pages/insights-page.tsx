@@ -2,109 +2,64 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { insights, formatDate } from "@/data/insights";
+import { insights, insightCategories, formatDate } from "@/data/insights";
+import { ArrowRight, Clock } from "lucide-react";
 
-export function InsightsPageClient() {
+export function InsightsPage() {
   return (
-    <div className="py-20">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Hero */}
-        <motion.div
-          className="max-w-3xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
-            Insights
-          </p>
-          <h1 className="mt-6 font-serif text-4xl text-forge-navy sm:text-5xl lg:text-6xl">
-            Practical intelligence,
-            <br />
-            not vendor hype
-          </h1>
-          <p className="mt-6 text-lg text-text-secondary">
-            Frameworks, case studies, and guides for business leaders
-            navigating AI strategy and implementation.
-          </p>
-        </motion.div>
-
-        {/* Featured (first article) */}
-        {insights.slice(0, 1).map((insight) => (
-          <motion.div
-            key={insight.slug}
-            className="mt-16 border border-border-accent bg-canvas"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-          >
-            <div className="p-10 sm:p-14">
-              <div className="flex items-center gap-4">
-                <span className="bg-molten-amber/10 px-3 py-1 text-xs font-semibold uppercase tracking-[1.5px] text-molten-amber">
-                  {insight.category}
-                </span>
-                <span className="text-xs text-text-muted">
-                  {formatDate(insight.date)} &middot; {insight.readingTime} min
-                  read
-                </span>
-              </div>
-              <h2 className="mt-6 font-serif text-3xl text-forge-navy">
-                {insight.title}
-              </h2>
-              <p className="mt-4 max-w-2xl text-text-secondary leading-relaxed">
-                {insight.excerpt}
-              </p>
-              <Link
-                href={`/insights/${insight.slug}`}
-                className="amber-underline mt-6 inline-flex items-center gap-2 text-sm font-medium text-molten-amber"
-              >
-                Read article
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
+    <>
+      <section className="bg-white py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-3xl">
+            <span className="section-label">Insights</span>
+            <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              Thinking that <span className="gradient-text">drives action.</span>
+            </h1>
+            <p className="mt-6 text-lg text-slate-500">
+              Practical perspectives on AI implementation, performance improvement, and value creation.
+              No buzzwords — just substance.
+            </p>
           </motion.div>
-        ))}
-
-        {/* All articles */}
-        <div className="mt-16 divide-y divide-border-subtle border-y border-border-subtle">
-          {insights.slice(1).map((insight, i) => (
-            <motion.div
-              key={insight.slug}
-              className="grid gap-4 py-8 sm:grid-cols-[auto_1fr_auto] sm:items-center"
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.3, delay: i * 0.04 }}
-            >
-              <div className="min-w-[140px]">
-                <span className="text-xs text-text-muted">
-                  {formatDate(insight.date)}
-                </span>
-                <p className="mt-1 text-xs uppercase tracking-[1.5px] text-molten-amber">
-                  {insight.category}
-                </p>
-              </div>
-              <div>
-                <h3 className="font-serif text-lg text-forge-navy">
-                  {insight.title}
-                </h3>
-                <p className="mt-1 text-sm text-text-secondary line-clamp-2">
-                  {insight.excerpt}
-                </p>
-              </div>
-              <Link
-                href={`/insights/${insight.slug}`}
-                className="amber-underline inline-flex items-center gap-1 text-sm text-molten-amber"
-              >
-                Read
-                <ArrowRight className="h-3 w-3" />
-              </Link>
-            </motion.div>
-          ))}
         </div>
-      </div>
-    </div>
+      </section>
+
+      <section className="bg-gray-100 py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {insights.map((insight, i) => (
+              <motion.article
+                key={insight.slug}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.08 * i }}
+                className="rounded-lg border border-gray-200 bg-white overflow-hidden group"
+              >
+                <div className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-xs font-medium text-teal border border-teal/20 bg-teal/5 rounded-md px-2 py-1">{insight.category}</span>
+                    <span className="flex items-center gap-1 text-xs text-slate-500">
+                      <Clock className="h-3 w-3" /> {insight.readingTime} min
+                    </span>
+                  </div>
+                  <Link href={`/insights/${insight.slug}`}>
+                    <h2 className="text-lg font-bold text-slate-navy group-hover:text-teal transition-colors" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                      {insight.title}
+                    </h2>
+                  </Link>
+                  <p className="mt-3 text-sm text-slate-500 leading-relaxed line-clamp-3">{insight.excerpt}</p>
+                  <div className="mt-4 flex items-center justify-between">
+                    <span className="text-xs text-slate-400">{formatDate(insight.date)}</span>
+                    <Link href={`/insights/${insight.slug}`} className="text-xs font-medium text-teal hover:text-teal-light transition-colors inline-flex items-center gap-1">
+                      Read <ArrowRight className="h-3 w-3" />
+                    </Link>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

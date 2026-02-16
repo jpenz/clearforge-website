@@ -1,348 +1,160 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
-import { ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { useRef, useEffect, useState } from "react";
+import { getCaseStudy } from "@/data/case-studies";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
-function AnimatedNumber({ end, suffix = "" }: { end: number; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true });
-  const [val, setVal] = useState(0);
-
-  useEffect(() => {
-    if (!inView) return;
-    const start = performance.now();
-    const step = (now: number) => {
-      const p = Math.min((now - start) / 1800, 1);
-      setVal(Math.floor((1 - Math.pow(1 - p, 3)) * end));
-      if (p < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [inView, end]);
+export function IndustrialManufacturerPage() {
+  const cs = getCaseStudy("industrial-manufacturer")!;
 
   return (
-    <span ref={ref} className="metric-display text-4xl text-molten-amber lg:text-5xl">
-      {val}{suffix}
-    </span>
-  );
-}
-
-const outcomes = [
-  { end: 358, suffix: "", label: "Qualified acquisition & prospect targets identified in first market sweep" },
-  { end: 10, suffix: "", label: "Industry verticals analyzed with full competitive landscapes" },
-  { end: 45, suffix: " min", label: "To generate an 82-page strategic market study" },
-  { end: 5, suffix: "", label: "New high-growth market segments discovered" },
-  { end: 60, suffix: "%+", label: "Reduction in manual prospecting time" },
-  { end: 16, suffix: "", label: "Business divisions ranked by growth potential" },
-];
-
-const solutions = [
-  "AI-powered sales intelligence platform built on n8n workflow automation, orchestrating data across all 16 divisions simultaneously",
-  "State-by-state automated prospect research pipelines identifying and qualifying targets across every division's addressable market",
-  "Contact enrichment pipeline using a waterfall approach across multiple data sources for high match rates and accurate decision-maker contacts",
-  "Monthly market intelligence reports — Bain/McKinsey caliber — generated in under 45 minutes, covering competitive landscapes, sizing, and growth trends",
-  "Portfolio strategy analysis ranking all 16 divisions by CAGR, TAM, and margin potential for data-driven capital allocation",
-  "Geographic expansion modeling identifying optimal new territories based on infrastructure spending, regulatory tailwinds, and competitive density",
-];
-
-const continuous = [
-  "AI agents retrained monthly on conversion data — learning which prospects engage, which messaging resonates, which signals predict closed deals",
-  "Market reports auto-refresh with emerging trends: infrastructure spending shifts, regulatory changes, construction activity, competitor moves",
-  "New market segments and territories added automatically as data reveals opportunities the client hadn't previously considered",
-  "Sales teams receive pre-qualified, enriched leads directly in their workflow — eliminating the gap between intelligence and action",
-];
-
-export function IndustrialManufacturerClient() {
-  return (
-    <div>
+    <>
       {/* Hero */}
-      <section className="bg-forge-navy py-24 lg:py-32">
+      <section className="bg-slate-navy py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Link
-              href="/case-studies"
-              className="inline-flex items-center gap-2 text-sm text-warm-white/50 transition-colors hover:text-warm-white"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              All Case Studies
+            <Link href="/case-studies" className="inline-flex items-center gap-1 text-sm text-slate-400 hover:text-teal mb-8">
+              <ArrowLeft className="h-4 w-4" /> All Case Studies
             </Link>
-
-            <div className="mt-8 flex flex-wrap gap-3">
-              <span className="bg-warm-white/10 px-3 py-1 text-xs uppercase tracking-[1.5px] text-warm-white/70">
-                Industrial Manufacturing
-              </span>
-              <span className="bg-warm-white/10 px-3 py-1 text-xs uppercase tracking-[1.5px] text-warm-white/70">
-                AI Revenue Operations
-              </span>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-xs font-medium text-teal border border-teal/30 rounded-md px-2 py-1">{cs.industry}</span>
+              <span className="text-xs text-slate-400">{cs.service}</span>
             </div>
-
-            <h1 className="mt-8 max-w-4xl font-serif text-4xl text-warm-white sm:text-5xl lg:text-6xl">
-              Fortune 1000 Industrial Manufacturer Transforms Sales Intelligence
+            <h1 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl max-w-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              {cs.title}
             </h1>
-
-            <p className="mt-8 max-w-2xl text-lg text-warm-white/70 leading-relaxed">
-              A $2B+ manufacturer with 70+ facilities and 16 business divisions
-              deployed AI-powered sales intelligence to discover new markets,
-              enrich contacts, and deliver strategic intelligence at consulting-firm
-              speed.
-            </p>
+            <p className="mt-6 text-lg text-slate-400 max-w-3xl">{cs.excerpt}</p>
           </motion.div>
+        </div>
+      </section>
 
-          {/* Hero metrics */}
-          <motion.div
-            className="mt-16 grid grid-cols-2 gap-px bg-deep-steel sm:grid-cols-3"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
-          >
-            {[
-              { label: "$2B+", sub: "Revenue" },
-              { label: "70+", sub: "Facilities" },
-              { label: "16", sub: "Business Divisions" },
-            ].map((m) => (
-              <div key={m.sub} className="bg-forge-navy p-8 text-center">
-                <span className="metric-display text-3xl text-molten-amber">
-                  {m.label}
-                </span>
-                <p className="mt-1 text-xs uppercase tracking-[1.5px] text-warm-white/50">
-                  {m.sub}
-                </p>
-              </div>
+      {/* Metrics Bar */}
+      <section className="bg-white border-b border-gray-200">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+            {cs.outcomes.map((outcome, i) => (
+              <motion.div
+                key={outcome.metric}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.08 * i }}
+                className={`p-6 text-center ${i < cs.outcomes.length - 1 ? "border-r border-gray-200" : ""} ${i < 4 ? "border-b border-gray-200 xl:border-b-0" : ""}`}
+              >
+                <div className="metric-display text-2xl lg:text-3xl">{outcome.metric}</div>
+                <p className="mt-1 text-xs text-slate-500">{outcome.description}</p>
+              </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Challenge */}
-      <section className="py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid gap-16 lg:grid-cols-[1fr_2fr]">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.4 }}
-            >
-              <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
-                The Challenge
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.4, delay: 0.05 }}
-            >
-              <h2 className="font-serif text-3xl text-forge-navy">
-                Sales teams across 16 divisions working in silos
-              </h2>
-              <p className="mt-6 text-text-secondary leading-relaxed">
-                Sales teams across divisions operated in silos with no shared market
-                intelligence, targeting prospects based on gut feel rather than data.
-                Each division ran its own prospecting process — duplicating effort,
-                missing cross-sell opportunities, and wasting senior sales talent on
-                manual research.
-              </p>
-              <p className="mt-4 text-text-secondary leading-relaxed">
-                Leadership had no unified view of which markets, geographies, or
-                verticals offered the highest growth potential across their portfolio
-                of businesses. Capital allocation decisions were made on instinct, not
-                intelligence.
-              </p>
-            </motion.div>
-          </div>
+      <section className="bg-white py-24 lg:py-32">
+        <div className="mx-auto max-w-4xl px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="section-label">The Challenge</span>
+            <p className="mt-4 text-base text-slate-700 leading-relaxed">{cs.challenge}</p>
+          </motion.div>
         </div>
       </section>
 
       {/* Solution */}
-      <section className="border-y border-border-subtle bg-canvas py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="bg-gray-100 py-24 lg:py-32">
+        <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.4 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
           >
-            <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
-              The ClearForge Solution
-            </p>
-            <h2 className="mt-6 font-serif text-3xl text-forge-navy sm:text-4xl">
-              AI-powered sales intelligence at portfolio scale
+            <span className="section-label">The Solution</span>
+            <h2 className="mt-4 text-2xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              ClearForge Proprietary AI Platform
             </h2>
+            <ul className="mt-8 space-y-4">
+              {cs.solution.map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <span className="metric-display text-sm mt-0.5">{String(i + 1).padStart(2, "0")}</span>
+                  <p className="text-sm text-slate-700 leading-relaxed">{item}</p>
+                </li>
+              ))}
+            </ul>
           </motion.div>
-
-          <div className="mt-12 space-y-4">
-            {solutions.map((s, i) => (
-              <motion.div
-                key={i}
-                className="flex items-start gap-4 border-b border-border-subtle pb-4"
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.3, delay: i * 0.05 }}
-              >
-                <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-molten-amber" />
-                <p className="text-text-secondary leading-relaxed">{s}</p>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* Continuous Optimization */}
-      <section className="bg-forge-navy py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div
-            className="max-w-2xl"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.4 }}
-          >
-            <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
-              The ClearForge Difference
-            </p>
-            <h2 className="mt-6 font-serif text-3xl text-warm-white sm:text-4xl">
-              AI agents that learn, adapt, and compound
-            </h2>
-            <p className="mt-4 text-warm-white/60">
-              Most consultancies build something and leave. Our agents get
-              smarter every month.
-            </p>
-          </motion.div>
-
-          <div className="mt-12 grid gap-px bg-deep-steel sm:grid-cols-2">
-            {continuous.map((c, i) => (
-              <motion.div
-                key={i}
-                className="bg-forge-navy p-8"
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.3, delay: i * 0.06 }}
-              >
-                <span className="metric-display text-sm text-molten-amber">
-                  0{i + 1}
-                </span>
-                <p className="mt-3 text-sm text-warm-white/70 leading-relaxed">
-                  {c}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Results */}
-      <section className="py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div
-            className="mx-auto max-w-2xl text-center"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.4 }}
-          >
-            <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
-              Results
-            </p>
-            <h2 className="mt-6 font-serif text-3xl text-forge-navy sm:text-4xl">
-              Measurable impact, delivered
-            </h2>
-          </motion.div>
-
-          <div className="mt-16 grid gap-px bg-border-subtle sm:grid-cols-2 lg:grid-cols-3">
-            {outcomes.map((o) => (
-              <motion.div
-                key={o.label}
-                className="bg-warm-white p-8 lg:p-10"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.4 }}
-              >
-                <AnimatedNumber end={o.end} suffix={o.suffix} />
-                <p className="mt-3 text-sm text-text-secondary">{o.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Scale */}
-      <section className="border-t border-border-subtle bg-canvas py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl">
+      {/* Continuous Model */}
+      {cs.continuousModel && (
+        <section className="bg-slate-navy py-24 lg:py-32">
+          <div className="mx-auto max-w-4xl px-6 lg:px-8">
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.4 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
             >
-              <p className="text-xs font-semibold uppercase tracking-[3px] text-molten-amber">
-                What Happened Next
-              </p>
-              <h2 className="mt-6 font-serif text-3xl text-forge-navy">
-                From initiative to strategic platform
+              <span className="section-label text-teal">Continuous Intelligence</span>
+              <h2 className="mt-4 text-2xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                The system gets smarter every month.
               </h2>
-              <p className="mt-6 text-text-secondary leading-relaxed">
-                What began as a sales intelligence initiative for two divisions has
-                expanded into a company-wide strategic platform. The AI agents now run
-                continuous market monitoring across all 16 divisions, automatically
-                surfacing new opportunities as market conditions shift.
-              </p>
-              <p className="mt-4 text-text-secondary leading-relaxed">
-                Leadership uses the portfolio analysis to inform M&A strategy, capital
-                allocation, and geographic expansion decisions. The system compounds —
-                each month of data makes the intelligence sharper, the targeting more
-                precise, and the recommendations more valuable.
-              </p>
+              <ul className="mt-8 space-y-4">
+                {cs.continuousModel.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 rounded-lg border border-charcoal bg-charcoal p-5">
+                    <span className="metric-display text-sm mt-0.5">{String(i + 1).padStart(2, "0")}</span>
+                    <p className="text-sm text-slate-400 leading-relaxed">{item}</p>
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           </div>
+        </section>
+      )}
+
+      {/* Scale */}
+      <section className="bg-white py-24 lg:py-32">
+        <div className="mx-auto max-w-4xl px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="section-label">The Scale</span>
+            <p className="mt-4 text-base text-slate-700 leading-relaxed">{cs.scale}</p>
+          </motion.div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="bg-forge-navy py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.4 }}
-          >
-            <h2 className="font-serif text-3xl text-warm-white sm:text-4xl">
-              Ready for results like these?
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-warm-white/60">
-              Book a 30-minute discovery call to explore how AI-powered
-              intelligence could transform your business.
-            </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button size="xl" asChild>
-                <Link href="/contact">
-                  Book Discovery Call
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button
-                size="xl"
-                variant="outline"
-                className="border-warm-white/20 text-warm-white hover:bg-warm-white hover:text-forge-navy"
-                asChild
-              >
-                <Link href="/case-studies">More Case Studies</Link>
-              </Button>
-            </div>
-          </motion.div>
+      <section className="bg-slate-navy py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            Ready for results like these?
+          </h2>
+          <p className="mt-4 text-base text-slate-400 max-w-xl mx-auto">
+            Every engagement starts with understanding your specific challenges.
+          </p>
+          <div className="mt-8 flex justify-center gap-4 flex-wrap">
+            <Button size="lg" asChild>
+              <Link href="/contact">Book a Discovery Call</Link>
+            </Button>
+            <Button variant="outline" size="lg" className="border-slate-400 text-white hover:bg-white hover:text-slate-navy" asChild>
+              <Link href="/case-studies">More Case Studies <ArrowRight className="ml-2 h-4 w-4" /></Link>
+            </Button>
+          </div>
         </div>
       </section>
-    </div>
+    </>
   );
 }
