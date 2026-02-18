@@ -1,12 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Target, TrendingUp, DollarSign, Clock } from "lucide-react";
 
 const results = [
-  { metric: "1,060", label: "Qualified opportunities identified", context: "Fortune 1000 manufacturer" },
-  { metric: "10%", label: "Average EBITDA improvement", context: "PE portfolio companies" },
-  { metric: "$240K", label: "Annual cost savings", context: "Process automation" },
-  { metric: "90 days", label: "Time to measurable impact", context: "All engagements" },
+  { metric: "1,060", label: "Qualified opportunities identified", context: "Fortune 1000 manufacturer", icon: Target },
+  { metric: "10%", label: "Average EBITDA improvement", context: "PE portfolio companies", icon: TrendingUp },
+  { metric: "$240K", label: "Annual cost savings", context: "Process automation", icon: DollarSign },
+  { metric: "90 days", label: "Time to measurable impact", context: "All engagements", icon: Clock },
 ];
 
 export function Results() {
@@ -36,9 +37,14 @@ export function Results() {
               transition={{ duration: 0.4, delay: 0.08 * i }}
               className={`p-6 lg:p-8 text-center ${i < results.length - 1 ? "border-r border-gray-200" : ""} ${i < 2 ? "border-b border-gray-200 lg:border-b-0" : ""}`}
             >
+              <div className="flex justify-center mb-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal/10">
+                  <item.icon className="h-5 w-5 text-teal" />
+                </div>
+              </div>
               <div className="metric-display text-3xl lg:text-4xl">{item.metric}</div>
-              <p className="mt-2 text-sm font-medium text-slate-700">{item.label}</p>
-              <p className="mt-1 text-xs text-slate-500">{item.context}</p>
+              <p className="mt-2 text-base font-medium text-slate-700">{item.label}</p>
+              <p className="mt-1 text-base text-slate-500">{item.context}</p>
             </motion.div>
           ))}
         </div>

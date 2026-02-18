@@ -22,7 +22,7 @@ export function ScorecardCTA() {
           <h2 className="text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
             How ready is your business for AI?
           </h2>
-          <p className="mt-4 text-base text-slate-500">
+          <p className="mt-4 text-lg text-slate-600">
             Take our 5-minute AI Readiness Scorecard. 18 questions across 5 pillars.
             Get a personalized score with specific recommendations.
           </p>

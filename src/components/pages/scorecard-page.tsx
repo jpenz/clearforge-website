@@ -50,7 +50,7 @@ export function ScorecardPage() {
             <h1 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
               How ready is your business for AI?
             </h1>
-            <p className="mt-4 text-base text-slate-500">
+            <p className="mt-4 text-lg text-slate-600">
               18 questions across 5 pillars. Takes about 5 minutes.
               Get a personalized readiness score with specific recommendations.
             </p>
@@ -59,7 +59,7 @@ export function ScorecardPage() {
           {/* Progress Bar */}
           <div className="mt-10">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-slate-700">{pillar.name}</span>
+              <span className="text-base font-medium text-slate-700">{pillar.name}</span>
               <span className="metric-display text-sm">{answeredCount}/{totalQuestions}</span>
             </div>
             <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
@@ -93,12 +93,12 @@ export function ScorecardPage() {
             >
               <div className="rounded-lg border border-gray-200 bg-gray-100 p-4">
                 <h3 className="text-sm font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>{pillar.name}</h3>
-                <p className="text-xs text-slate-500 mt-1">{pillar.description}</p>
+                <p className="text-base text-slate-500 mt-1">{pillar.description}</p>
               </div>
 
               {pillarQuestions.map((q) => (
                 <div key={q.id} className="rounded-lg border border-gray-200 bg-white p-6">
-                  <p className="text-sm font-medium text-slate-700 mb-4">{q.text}</p>
+                  <p className="text-base font-medium text-slate-700 mb-4">{q.text}</p>
                   <div className="flex gap-2">
                     {scaleLabels.map((label, idx) => {
                       const value = idx + 1;

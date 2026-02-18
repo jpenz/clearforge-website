@@ -23,7 +23,7 @@ export function ScorecardResultsPage() {
       <section className="bg-white py-20 lg:py-28">
         <div className="mx-auto max-w-3xl px-6 lg:px-8 text-center">
           <h1 className="text-3xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>No Results Found</h1>
-          <p className="mt-4 text-base text-slate-500">Please complete the scorecard first.</p>
+          <p className="mt-4 text-lg text-slate-600">Please complete the scorecard first.</p>
           <Button className="mt-8" asChild>
             <Link href="/scorecard">Take the Scorecard</Link>
           </Button>
@@ -45,7 +45,7 @@ export function ScorecardResultsPage() {
               {result.compositeScore}
             </div>
             <p className="mt-2 text-xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>{result.maturityLevel}</p>
-            <p className="mt-4 text-base text-slate-400 max-w-xl mx-auto">{result.maturityDescription}</p>
+            <p className="mt-4 text-lg text-slate-200 max-w-xl mx-auto">{result.maturityDescription}</p>
           </motion.div>
         </div>
       </section>
@@ -83,7 +83,7 @@ export function ScorecardResultsPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <span className="section-label">Our Recommendation</span>
             <h2 className="mt-4 text-2xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>{result.recommendedService}</h2>
-            <p className="mt-4 text-base text-slate-500 leading-relaxed">{result.recommendation}</p>
+            <p className="mt-4 text-lg text-slate-600 leading-relaxed">{result.recommendation}</p>
             <div className="mt-8 flex gap-4 flex-wrap">
               <Button size="lg" asChild>
                 <Link href="/contact">Book a Discovery Call <ArrowRight className="ml-2 h-4 w-4" /></Link>

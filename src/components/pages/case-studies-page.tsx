@@ -21,7 +21,7 @@ export function CaseStudiesPage() {
             <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
               Results that <span className="gradient-text">speak for themselves.</span>
             </h1>
-            <p className="mt-6 text-lg text-slate-500">
+            <p className="mt-6 text-lg text-slate-600">
               Real engagements, real outcomes. Every metric verified, every case anonymized.
             </p>
           </motion.div>
@@ -44,12 +44,12 @@ export function CaseStudiesPage() {
                   <div className="p-8 md:col-span-2">
                     <div className="flex items-center gap-3 mb-4">
                       <span className="text-xs font-medium text-teal border border-teal/20 bg-teal/5 rounded-md px-2 py-1">{cs.industry}</span>
-                      <span className="text-xs text-slate-500">{cs.service}</span>
+                      <span className="text-base text-slate-500">{cs.service}</span>
                     </div>
                     <h2 className="text-xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
                       {cs.title}
                     </h2>
-                    <p className="mt-3 text-sm text-slate-500 leading-relaxed">{cs.excerpt}</p>
+                    <p className="mt-3 text-lg text-slate-600 leading-relaxed">{cs.excerpt}</p>
                     <Button variant="link" className="mt-4 px-0" asChild>
                       <Link href={`/case-studies/${cs.slug}`}>
                         Read Full Case Study <ArrowRight className="ml-1 h-4 w-4" />
@@ -58,7 +58,7 @@ export function CaseStudiesPage() {
                   </div>
                   <div className="bg-slate-navy p-8 flex flex-col justify-center items-center text-center">
                     <div className="metric-display text-4xl">{cs.heroMetric}</div>
-                    <p className="mt-2 text-sm text-slate-400">{cs.heroMetricLabel}</p>
+                    <p className="mt-2 text-lg text-slate-200">{cs.heroMetricLabel}</p>
                   </div>
                 </div>
               </motion.div>
@@ -72,7 +72,7 @@ export function CaseStudiesPage() {
           <h2 className="text-3xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
             Want results like these?
           </h2>
-          <p className="mt-4 text-base text-slate-400 max-w-xl mx-auto">
+          <p className="mt-4 text-lg text-slate-200 max-w-xl mx-auto">
             Every engagement starts with a conversation about your specific challenges and goals.
           </p>
           <Button size="lg" className="mt-8" asChild>

@@ -38,7 +38,7 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="px-3 py-2 text-sm font-medium text-slate-500 transition-colors hover:text-slate-navy"
+              className="px-3 py-2 text-base font-medium text-slate-500 transition-colors hover:text-slate-navy"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               {link.label}

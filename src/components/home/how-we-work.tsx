@@ -1,25 +1,36 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Search, PenTool, Hammer, TrendingUp } from "lucide-react";
 
 const steps = [
   {
     number: "01",
-    title: "Diagnose",
-    description: "We audit your data, processes, and tech stack to identify the highest-impact opportunities. No guesswork — just evidence.",
-    duration: "2 weeks",
+    title: "Discover",
+    description: "We study your market, analyze your competitive landscape, and map where AI creates the most value. Strategy starts with intelligence, not assumptions.",
+    duration: "Week 1-2",
+    icon: Search,
   },
   {
     number: "02",
-    title: "Build",
-    description: "We design and deploy working AI solutions — not prototypes. Real systems integrated with your existing tools and workflows.",
-    duration: "4–6 weeks",
+    title: "Design",
+    description: "We redesign your processes for AI from the top down. Not automating what exists, but architecting what should exist. Every system ties to a business outcome.",
+    duration: "Week 3-4",
+    icon: PenTool,
   },
   {
     number: "03",
+    title: "Build",
+    description: "We ship production AI systems integrated with your existing tools and workflows. Real systems that your team uses on day one, not prototypes that die after the demo.",
+    duration: "Week 5-8",
+    icon: Hammer,
+  },
+  {
+    number: "04",
     title: "Optimize",
-    description: "Our systems learn monthly. Models retrain on real data, intelligence compounds, and performance improves every cycle.",
+    description: "We continuously monitor AI performance and market conditions. Models retrain monthly, intelligence compounds, and results improve every cycle.",
     duration: "Ongoing",
+    icon: TrendingUp,
   },
 ];
 
@@ -34,16 +45,16 @@ export function HowWeWork() {
           transition={{ duration: 0.5 }}
           className="mb-16 max-w-2xl"
         >
-          <span className="section-label">How We Work</span>
+          <span className="section-label">Our Methodology</span>
           <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            Diagnose. Build. Optimize.
+            Discover. Design. Build. Optimize.
           </h2>
-          <p className="mt-4 text-base text-slate-500">
-            Every engagement follows a disciplined structure designed to deliver results fast and compound value over time.
+          <p className="mt-4 text-lg text-slate-600">
+            We don't automate your existing processes. We redesign them for AI, build the systems, and keep them improving.
           </p>
         </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, i) => (
             <motion.div
               key={step.number}
@@ -54,15 +65,25 @@ export function HowWeWork() {
               className="relative rounded-lg border border-gray-200 p-8"
             >
               <div className="flex items-center justify-between mb-4">
-                <span className="metric-display text-3xl">{step.number}</span>
-                <span className="text-xs font-medium text-slate-400 border border-gray-200 rounded-md px-2 py-1">{step.duration}</span>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-teal/10">
+                    <step.icon className="h-5 w-5 text-teal" />
+                  </div>
+                  <span className="metric-display text-3xl">{step.number}</span>
+                </div>
+                <span className="text-sm font-medium text-slate-400 border border-gray-200 rounded-md px-2.5 py-1">{step.duration}</span>
               </div>
               <h3 className="text-xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
                 {step.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-500">
+              <p className="mt-3 text-base leading-relaxed text-slate-600">
                 {step.description}
               </p>
+
+              {/* Connecting line between cards */}
+              {i < 3 && (
+                <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-6 h-px bg-gray-300" />
+              )}
             </motion.div>
           ))}
         </div>

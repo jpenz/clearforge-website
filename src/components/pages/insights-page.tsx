@@ -15,7 +15,7 @@ export function InsightsPage() {
             <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
               Thinking that <span className="gradient-text">drives action.</span>
             </h1>
-            <p className="mt-6 text-lg text-slate-500">
+            <p className="mt-6 text-lg text-slate-600">
               Practical perspectives on AI implementation, performance improvement, and value creation.
               No buzzwords — just substance.
             </p>
@@ -38,7 +38,7 @@ export function InsightsPage() {
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-xs font-medium text-teal border border-teal/20 bg-teal/5 rounded-md px-2 py-1">{insight.category}</span>
-                    <span className="flex items-center gap-1 text-xs text-slate-500">
+                    <span className="flex items-center gap-1 text-base text-slate-500">
                       <Clock className="h-3 w-3" /> {insight.readingTime} min
                     </span>
                   </div>
@@ -47,9 +47,9 @@ export function InsightsPage() {
                       {insight.title}
                     </h2>
                   </Link>
-                  <p className="mt-3 text-sm text-slate-500 leading-relaxed line-clamp-3">{insight.excerpt}</p>
+                  <p className="mt-3 text-lg text-slate-600 leading-relaxed line-clamp-3">{insight.excerpt}</p>
                   <div className="mt-4 flex items-center justify-between">
-                    <span className="text-xs text-slate-400">{formatDate(insight.date)}</span>
+                    <span className="text-base text-slate-200">{formatDate(insight.date)}</span>
                     <Link href={`/insights/${insight.slug}`} className="text-xs font-medium text-teal hover:text-teal-light transition-colors inline-flex items-center gap-1">
                       Read <ArrowRight className="h-3 w-3" />
                     </Link>

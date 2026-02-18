@@ -3,18 +3,12 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-
-const metrics = [
-  { value: "1,060", label: "Opportunities Identified" },
-  { value: "97.5%", label: "Data Accuracy" },
-  { value: "45 min", label: "82-Page Report Generation" },
-  { value: "21.9%", label: "CAGR — Data Center Cooling" },
-];
+import { ArrowRight, ClipboardCheck } from "lucide-react";
 
 export function Hero() {
   return (
     <section className="bg-white">
-      <div className="mx-auto max-w-7xl px-6 pt-20 pb-0 lg:px-8 lg:pt-28">
+      <div className="mx-auto max-w-7xl px-6 pt-20 pb-16 lg:px-8 lg:pt-28 lg:pb-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -27,7 +21,7 @@ export function Hero() {
             <br />
             AI that performs.
           </h1>
-          <p className="mt-6 text-lg leading-relaxed text-slate-500 max-w-2xl">
+          <p className="mt-6 text-xl leading-relaxed text-slate-600 max-w-2xl">
             We combine strategy consulting rigor with hands-on AI engineering to deliver
             measurable results for mid-market companies and PE portfolio companies.
             No decks. No demos. Working systems that drive revenue.
@@ -37,27 +31,31 @@ export function Hero() {
               <Link href="/contact">Book a Discovery Call</Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link href="/case-studies/industrial-manufacturer">See Our Results</Link>
+              <Link href="/scorecard">
+                <ClipboardCheck className="h-4 w-4 mr-2" />
+                Take the AI Readiness Scorecard
+              </Link>
             </Button>
           </div>
         </motion.div>
       </div>
 
-      {/* Metrics Bar */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 mt-20">
-        <div className="grid grid-cols-2 lg:grid-cols-4 border border-gray-200 rounded-lg">
-          {metrics.map((metric, i) => (
-            <motion.div
-              key={metric.label}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1 * (i + 1) }}
-              className={`p-6 lg:p-8 text-center ${i < metrics.length - 1 ? "border-r border-gray-200" : ""} ${i < 2 ? "border-b border-gray-200 lg:border-b-0" : ""}`}
-            >
-              <div className="metric-display text-3xl lg:text-4xl">{metric.value}</div>
-              <p className="mt-2 text-sm text-slate-500">{metric.label}</p>
-            </motion.div>
-          ))}
+      {/* Trust Bar — Anonymized client proof */}
+      <div className="border-y border-gray-200 bg-gray-50">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 py-5">
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
+            <span className="text-sm text-slate-400 uppercase tracking-wider font-medium">Trusted by</span>
+            {[
+              "Fortune 1000 Industrial Manufacturer",
+              "Mid-Market PE Portfolio",
+              "$50M Specialty Manufacturer",
+              "$2B+ Multi-Division Corporation",
+            ].map((client) => (
+              <span key={client} className="text-sm text-slate-500 font-medium">
+                {client}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>

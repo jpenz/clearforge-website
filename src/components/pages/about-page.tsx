@@ -28,7 +28,7 @@ export function AboutPage() {
             <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
               We close the gap between <span className="gradient-text">AI strategy and AI execution.</span>
             </h1>
-            <p className="mt-6 text-lg text-slate-500">
+            <p className="mt-6 text-lg text-slate-600">
               ClearForge was founded on a simple observation: most AI initiatives fail not because the
               technology doesn&apos;t work, but because strategy and execution live in separate silos.
               We put them in the same team.
@@ -58,7 +58,7 @@ export function AboutPage() {
               >
                 <span className="metric-display text-2xl">{item.number}</span>
                 <h3 className="mt-4 text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>{item.title}</h3>
-                <p className="mt-3 text-sm text-slate-500 leading-relaxed">{item.description}</p>
+                <p className="mt-3 text-lg text-slate-600 leading-relaxed">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -85,7 +85,7 @@ export function AboutPage() {
                 className="rounded-lg border border-gray-200 p-8"
               >
                 <h3 className="text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>{value.title}</h3>
-                <p className="mt-3 text-sm text-slate-500 leading-relaxed">{value.description}</p>
+                <p className="mt-3 text-lg text-slate-600 leading-relaxed">{value.description}</p>
               </motion.div>
             ))}
           </div>
@@ -108,7 +108,7 @@ export function AboutPage() {
               ].map((item, i) => (
                 <div key={item.title} className="rounded-lg border border-charcoal bg-charcoal p-6">
                   <h3 className="text-base font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>{item.title}</h3>
-                  <p className="mt-2 text-sm text-slate-400">{item.description}</p>
+                  <p className="mt-2 text-lg text-slate-200">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -122,7 +122,7 @@ export function AboutPage() {
           <h2 className="text-3xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
             Let&apos;s talk about your business.
           </h2>
-          <p className="mt-4 text-base text-slate-500 max-w-xl mx-auto">
+          <p className="mt-4 text-lg text-slate-600 max-w-xl mx-auto">
             30-minute discovery call. Honest assessment. No pressure.
           </p>
           <Button size="lg" className="mt-8" asChild>

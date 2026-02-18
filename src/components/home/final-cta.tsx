@@ -18,7 +18,7 @@ export function FinalCTA() {
           <h2 className="text-3xl font-bold text-white sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
             Ready to see what AI can do for your business?
           </h2>
-          <p className="mt-4 text-base text-slate-400">
+          <p className="mt-4 text-lg text-slate-200">
             30-minute discovery call. No pitch decks. No pressure.
             Just a straightforward conversation about what&apos;s possible.
           </p>

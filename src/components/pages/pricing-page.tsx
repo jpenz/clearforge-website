@@ -19,7 +19,7 @@ export function PricingPage() {
             <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
               Transparent pricing.<br /><span className="gradient-text">No surprises.</span>
             </h1>
-            <p className="mt-6 text-lg text-slate-500">
+            <p className="mt-6 text-lg text-slate-600">
               Two models: Build &amp; Transfer (you own the code) or Managed Services (we run it for you).
               Every engagement maps to measurable outcomes.
             </p>
@@ -51,13 +51,13 @@ export function PricingPage() {
                 <h3 className="text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>{tier.name}</h3>
                 <div className="mt-3 flex items-baseline gap-1">
                   <span className="metric-display text-3xl">{tier.price}</span>
-                  <span className="text-sm text-slate-500">{tier.period}</span>
+                  <span className="text-lg text-slate-600">{tier.period}</span>
                 </div>
-                <div className="mt-1 text-xs text-slate-500">{tier.timeline}</div>
-                <p className="mt-4 text-sm text-slate-500 leading-relaxed flex-grow">{tier.description}</p>
+                <div className="mt-1 text-base text-slate-500">{tier.timeline}</div>
+                <p className="mt-4 text-lg text-slate-600 leading-relaxed flex-grow">{tier.description}</p>
                 <ul className="mt-6 space-y-2 border-t border-gray-200 pt-6">
                   {tier.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2 text-sm text-slate-700">
+                    <li key={feature} className="flex items-start gap-2 text-lg text-slate-700">
                       <Check className="h-4 w-4 text-teal shrink-0 mt-0.5" />
                       {feature}
                     </li>
@@ -82,27 +82,27 @@ export function PricingPage() {
             <div className="mt-12 grid gap-6 md:grid-cols-2">
               <div className="rounded-lg border border-gray-200 p-8">
                 <h3 className="text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>Build &amp; Transfer</h3>
-                <p className="mt-2 text-sm text-slate-500">We build it. You own it. Full code, documentation, and IP transfer.</p>
+                <p className="mt-2 text-lg text-slate-600">We build it. You own it. Full code, documentation, and IP transfer.</p>
                 <ul className="mt-6 space-y-2">
                   {["Full code ownership", "Complete documentation", "Team training and handoff", "Your competitive advantage"].map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
+                    <li key={item} className="flex items-center gap-2 text-lg text-slate-700">
                       <Check className="h-4 w-4 text-teal" /> {item}
                     </li>
                   ))}
                 </ul>
-                <p className="mt-6 text-xs text-slate-500 border-t border-gray-200 pt-4">Best for: Companies with technical teams who want to own and maintain AI systems.</p>
+                <p className="mt-6 text-base text-slate-500 border-t border-gray-200 pt-4">Best for: Companies with technical teams who want to own and maintain AI systems.</p>
               </div>
               <div className="rounded-lg border border-gray-200 p-8">
                 <h3 className="text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>Managed Services</h3>
-                <p className="mt-2 text-sm text-slate-500">We build it. We run it. You get the results without the overhead.</p>
+                <p className="mt-2 text-lg text-slate-600">We build it. We run it. You get the results without the overhead.</p>
                 <ul className="mt-6 space-y-2">
                   {["No engineering team needed", "SLA-backed performance", "Continuous optimization", "Predictable monthly cost"].map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
+                    <li key={item} className="flex items-center gap-2 text-lg text-slate-700">
                       <Check className="h-4 w-4 text-teal" /> {item}
                     </li>
                   ))}
                 </ul>
-                <p className="mt-6 text-xs text-slate-500 border-t border-gray-200 pt-4">Best for: Companies that want AI results without building an internal AI team.</p>
+                <p className="mt-6 text-base text-slate-500 border-t border-gray-200 pt-4">Best for: Companies that want AI results without building an internal AI team.</p>
               </div>
             </div>
           </motion.div>
@@ -123,7 +123,7 @@ export function PricingPage() {
                       <ChevronDown className="h-4 w-4 text-slate-500 transition-transform group-data-[state=open]:rotate-180" />
                     </Accordion.Trigger>
                   </Accordion.Header>
-                  <Accordion.Content className="px-5 pb-5 text-sm text-slate-500 leading-relaxed">
+                  <Accordion.Content className="px-5 pb-5 text-lg text-slate-600 leading-relaxed">
                     {faq.answer}
                   </Accordion.Content>
                 </Accordion.Item>
@@ -139,7 +139,7 @@ export function PricingPage() {
           <h2 className="text-3xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
             Still have questions?
           </h2>
-          <p className="mt-4 text-base text-slate-400 max-w-xl mx-auto">
+          <p className="mt-4 text-lg text-slate-200 max-w-xl mx-auto">
             30-minute discovery call. No pitch decks, no pressure.
           </p>
           <Button size="lg" className="mt-8" asChild>

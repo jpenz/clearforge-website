@@ -49,7 +49,7 @@ export const caseStudies: CaseStudy[] = [
     outcomes: [
       { metric: "1,060", description: "Qualified opportunities identified across all divisions" },
       { metric: "10", description: "Industry verticals analyzed with full competitive landscapes" },
-      { metric: "45 min", description: "Time to generate an 82-page strategic market study (previously weeks)" },
+      { metric: "Monthly", description: "Automated strategy and market intelligence refresh cycle" },
       { metric: "5", description: "New high-growth market segments discovered (data center cooling at 21.9% CAGR, additive manufacturing at 18.6% CAGR)" },
       { metric: "60%+", description: "Reduction in manual prospecting time across sales teams" },
       { metric: "16", description: "Business divisions ranked by growth potential with geographic expansion recommendations" },

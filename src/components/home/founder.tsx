@@ -18,7 +18,7 @@ export function Founder() {
             &ldquo;We don&apos;t sell AI. We sell measurable business outcomes —
             and we build the AI to get there.&rdquo;
           </blockquote>
-          <p className="mt-6 text-base text-slate-500">
+          <p className="mt-6 text-lg text-slate-600">
             ClearForge was founded on a simple premise: the gap between AI strategy and
             AI execution is where most companies lose. We close that gap by combining
             consulting rigor with engineering discipline.

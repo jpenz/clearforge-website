@@ -3,89 +3,107 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { LineChart, Cog, Rocket } from "lucide-react";
+import { Search, Rocket, BarChart3, ClipboardCheck, ArrowRight } from "lucide-react";
 
-const services = [
+const serviceCards = [
   {
-    icon: LineChart,
-    title: "AI Revenue Operations",
-    description: "AI-driven sales intelligence, automated prospecting, and pipeline analytics that turn data into deals.",
-    metric: "30%",
-    metricLabel: "avg pipeline increase",
-    href: "/services",
-  },
-  {
-    icon: Cog,
-    title: "Performance Improvement",
-    description: "Process mining, operational diagnostics, and custom automation that find and eliminate hidden inefficiencies.",
-    metric: "$240K",
-    metricLabel: "avg annual savings",
-    href: "/services",
+    icon: Search,
+    title: "AI Strategy & Market Intelligence",
+    description: "Market studies, competitive analysis, and AI opportunity mapping. Know where AI creates the most value before you build anything.",
+    href: "/services#ai-strategy",
+    tag: "Discover",
   },
   {
     icon: Rocket,
-    title: "PE Value Creation",
-    description: "AI-driven value creation for portfolio companies — from 90-day sprints to portfolio-wide AI playbooks.",
-    metric: "10%",
-    metricLabel: "avg EBITDA improvement",
-    href: "/services",
+    title: "AI Design & Build",
+    description: "Custom AI agents, workflow automation, and production systems. Architected for your business outcome, shipped on schedule.",
+    href: "/services#ai-design-build",
+    tag: "Build",
+  },
+  {
+    icon: BarChart3,
+    title: "Managed AI Operations",
+    description: "Continuous optimization, model retraining, and market monitoring. Your AI compounds in value every month without adding headcount.",
+    href: "/services#managed-ai-operations",
+    tag: "Optimize",
+  },
+  {
+    icon: ClipboardCheck,
+    title: "AI Readiness Assessment",
+    description: "4-week diagnostic across 5 pillars. Scored assessment with a 90-day action plan. The fastest way to know if your business is ready.",
+    href: "/services#ai-readiness-assessment",
+    tag: "$15K · 4 Weeks",
   },
 ];
 
 export function ServicesPreview() {
   return (
-    <section className="bg-gray-100 py-24 lg:py-32">
+    <section className="bg-gray-50 py-24 lg:py-32 border-y border-gray-200">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-16 flex items-end justify-between"
+          className="mb-16"
         >
-          <div>
-            <span className="section-label">Services</span>
-            <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              Three ways we drive results.
-            </h2>
-          </div>
-          <Button variant="outline" size="sm" asChild className="hidden sm:inline-flex">
-            <Link href="/services">View All Services</Link>
-          </Button>
+          <span className="section-label">Services</span>
+          <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            Four services. One focus: measurable results.
+          </h2>
+          <p className="mt-4 text-lg text-slate-600 max-w-2xl">
+            Each service maps to a phase of our methodology. Start anywhere, expand as you see results.
+          </p>
         </motion.div>
 
-        <div className="grid gap-0 md:grid-cols-3 border border-gray-200 rounded-lg bg-white overflow-hidden">
-          {services.map((service, i) => (
+        <div className="grid gap-6 sm:grid-cols-2">
+          {serviceCards.map((service, i) => (
             <motion.div
               key={service.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.08 * i }}
-              className={`p-8 lg:p-10 ${i < services.length - 1 ? "border-b md:border-b-0 md:border-r border-gray-200" : ""}`}
             >
-              <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-md border border-gray-200 text-teal">
-                <service.icon className="h-5 w-5" />
-              </div>
-              <h3 className="text-xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                {service.title}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-500">
-                {service.description}
-              </p>
-              <div className="mt-6 border-t border-gray-200 pt-4">
-                <span className="metric-display text-2xl">{service.metric}</span>
-                <p className="text-xs text-slate-500 mt-1">{service.metricLabel}</p>
-              </div>
+              <Link href={service.href}>
+                <div className="group bg-white border border-gray-200 rounded-xl p-8 h-full hover:border-teal/30 hover:shadow-lg transition-all duration-300">
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-teal/10 group-hover:bg-teal group-hover:text-white transition-colors">
+                      <service.icon className="h-5 w-5 text-teal group-hover:text-white" />
+                    </div>
+                    <span className="text-xs font-medium text-teal uppercase tracking-wider font-[family-name:var(--font-space-grotesk)]">
+                      {service.tag}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                    {service.title}
+                  </h3>
+                  <p className="mt-3 text-base leading-relaxed text-slate-600">
+                    {service.description}
+                  </p>
+                  <div className="mt-5 flex items-center text-base text-teal font-medium group-hover:gap-2 transition-all">
+                    Learn more
+                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </Link>
             </motion.div>
           ))}
         </div>
 
-        <div className="mt-8 text-center sm:hidden">
-          <Button variant="outline" asChild>
-            <Link href="/services">View All Services</Link>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.4 }}
+          className="mt-10 text-center"
+        >
+          <Button variant="outline" size="lg" asChild>
+            <Link href="/services">
+              View All Services & Pricing <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </Button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

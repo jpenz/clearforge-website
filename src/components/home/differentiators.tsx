@@ -7,22 +7,22 @@ const items = [
   {
     icon: Code,
     title: "We Build, Not Just Advise",
-    description: "Senior operators who scope your engagement are the same people who deliver it. Strategy and engineering in the same team.",
+    description: "The people who scope your engagement are the same people who deliver it. Strategy and engineering in the same team, not handed off to juniors.",
   },
   {
     icon: TrendingUp,
-    title: "Tied to Outcomes",
+    title: "Tied to Business Outcomes",
     description: "Every engagement maps to a KPI you care about. If we can't draw a line from the solution to a financial metric, we don't build it.",
   },
   {
     icon: RefreshCw,
     title: "Continuous, Not Static",
-    description: "Our AI systems learn and improve monthly. Models retrained on real data compound in value — the gap widens every cycle.",
+    description: "Our AI systems learn and improve monthly. Models retrained on real data compound in value. The gap between you and your competitors widens every cycle.",
   },
   {
     icon: Shield,
-    title: "You Own Everything",
-    description: "Full code ownership, documentation, and knowledge transfer. No vendor lock-in. Your AI assets are your competitive advantage.",
+    title: "Your Choice of Engagement",
+    description: "Build & Transfer: you own the code. Managed Services: we run it. Either way, you get full transparency, documentation, and zero vendor lock-in.",
   },
 ];
 
@@ -53,13 +53,13 @@ export function Differentiators() {
               transition={{ duration: 0.4, delay: 0.08 * i }}
               className="group"
             >
-              <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-md border border-gray-200 text-teal transition-colors group-hover:bg-teal group-hover:text-white group-hover:border-teal">
+              <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-teal/10 text-teal transition-colors group-hover:bg-teal group-hover:text-white">
                 <item.icon className="h-5 w-5" />
               </div>
               <h3 className="text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
                 {item.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-500">
+              <p className="mt-2 text-base leading-relaxed text-slate-600">
                 {item.description}
               </p>
             </motion.div>
