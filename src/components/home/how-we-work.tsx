@@ -50,7 +50,7 @@ export function HowWeWork() {
             Discover. Design. Build. Optimize.
           </h2>
           <p className="mt-4 text-lg text-slate-600">
-            We don't automate your existing processes. We redesign them for AI, build the systems, and keep them improving.
+            We don't automate your existing processes. We redesign them for AI, prepare your team to work alongside it, and keep both improving.
           </p>
         </motion.div>
 

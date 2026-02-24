@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, Hammer, LineChart, Users } from "lucide-react";
+import { Briefcase, Hammer, LineChart, Users, Workflow } from "lucide-react";
 
 const items = [
   {
@@ -23,6 +23,11 @@ const items = [
     icon: LineChart,
     title: "Scaled for $5M to $5B Businesses",
     description: "We support owner-led firms, PE portfolios, and enterprise teams with the same Strategy to Operate model.",
+  },
+  {
+    icon: Users,
+    title: "Process and People, in Tandem",
+    description: "We modernize your workflows and prepare your team at the same time. AI that your people can't operate doesn't create lasting value.",
   },
 ];
 

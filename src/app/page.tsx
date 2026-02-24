@@ -1,6 +1,7 @@
 import { Hero } from "@/components/home/hero";
 import { Problem } from "@/components/home/problem";
 import { HowWeWork } from "@/components/home/how-we-work";
+import { TransformationFramework } from "@/components/home/transformation-framework";
 import { ServicesPreview } from "@/components/home/services-preview";
 import { CaseStudyPreview } from "@/components/home/case-study-preview";
 import { Differentiators } from "@/components/home/differentiators";
@@ -31,6 +32,11 @@ const homeFaqs = [
     answer:
       "It is one application of our broader platform. The core lifecycle is Growth Strategy & Diagnosis, AI Design & Build, and Managed AI Operations.",
   },
+  {
+    question: "Do you help with change management and team readiness?",
+    answer:
+      "Yes. We modernize processes and prepare your workforce in tandem. AI that your team cannot operate does not create lasting value. We redesign roles, build adoption plans, and measure human and AI performance together.",
+  },
 ];
 
 export default function Home() {
@@ -43,6 +49,7 @@ export default function Home() {
       <Hero />
       <Problem />
       <HowWeWork />
+      <TransformationFramework />
       <ServicesPreview />
       <CaseStudyPreview />
       <Differentiators />
