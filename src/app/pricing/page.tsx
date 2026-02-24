@@ -1,13 +1,34 @@
-import { createMetadata } from "@/lib/metadata";
+import { createMetadata, faqJsonLd, breadcrumbJsonLd } from "@/lib/metadata";
 import { PricingPage } from "@/components/pages/pricing-page";
+import { faqs } from "@/data/pricing";
 
 export const metadata = createMetadata({
-  title: "Pricing | AI Marketing Agent Tiers + Core AI Services",
+  title: "Pricing | AI Strategy, Build, Managed AI Services, and Revenue Ops",
   description:
-    "See ClearForge pricing for AI Marketing Agent tiers (Foundation, Growth, Scale, Enterprise) and core AI strategy/build service options.",
+    "Review ClearForge pricing for Growth Strategy & Diagnosis, AI Design & Build, Managed AI Operations, Legacy System Modernization, and AI Marketing & Revenue Operations tiers.",
   path: "/pricing",
+  keywords: ["managed AI services pricing", "AI strategy consulting pricing"],
 });
 
 export default function Page() {
-  return <PricingPage />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "Pricing", path: "/pricing" },
+            ]),
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faqs)) }}
+      />
+      <PricingPage />
+    </>
+  );
 }

@@ -1,5 +1,5 @@
 import { notFound, redirect } from "next/navigation";
-import { createMetadata } from "@/lib/metadata";
+import { createMetadata, breadcrumbJsonLd } from "@/lib/metadata";
 import { getCaseStudy, caseStudies } from "@/data/case-studies";
 import { CaseStudyDetailClient } from "@/components/case-study-detail";
 
@@ -30,5 +30,21 @@ export default async function Page({ params }: Props) {
   }
   const cs = getCaseStudy(slug);
   if (!cs) notFound();
-  return <CaseStudyDetailClient caseStudy={cs} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "Case Studies", path: "/case-studies" },
+              { name: cs.title, path: `/case-studies/${slug}` },
+            ]),
+          ),
+        }}
+      />
+      <CaseStudyDetailClient caseStudy={cs} />
+    </>
+  );
 }

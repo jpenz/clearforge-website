@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { organizationJsonLd } from "@/lib/metadata";
+import { organizationJsonLd, coreKeywords } from "@/lib/metadata";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -11,7 +11,8 @@ export const metadata: Metadata = {
     template: "%s | ClearForge.ai",
   },
   description:
-    "ClearForge combines strategy consulting rigor with hands-on AI engineering to deliver measurable results for mid-market companies and PE portfolio companies.",
+    "ClearForge is a strategy + AI consulting firm for PE portfolios, mid-market companies, and enterprise teams. We diagnose where to win, build AI systems, and operate them continuously.",
+  keywords: coreKeywords,
   openGraph: { type: "website", locale: "en_US", siteName: "ClearForge.ai" },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },

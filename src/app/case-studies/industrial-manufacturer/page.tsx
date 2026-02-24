@@ -1,12 +1,30 @@
-import { createMetadata } from "@/lib/metadata";
+import { createMetadata, breadcrumbJsonLd } from "@/lib/metadata";
 import { IndustrialManufacturerPage } from "@/components/pages/industrial-manufacturer-page";
 
 export const metadata = createMetadata({
-  title: "Case Study: Fortune 1000 Industrial Manufacturer — 1,060 Opportunities Identified",
-  description: "How a $2B+ industrial manufacturer deployed AI-powered sales intelligence across 16 divisions, discovering 5 new high-growth market segments.",
+  title: "Case Study | Fortune 1000 Manufacturer AI Sales Intelligence",
+  description:
+    "How a Fortune 1000 industrial manufacturer used ClearForge strategy and AI implementation to unify sales intelligence across 16 divisions.",
   path: "/case-studies/industrial-manufacturer",
+  keywords: ["Fortune 1000 AI consulting", "industrial AI strategy"],
 });
 
 export default function Page() {
-  return <IndustrialManufacturerPage />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "Case Studies", path: "/case-studies" },
+              { name: "Industrial Manufacturer", path: "/case-studies/industrial-manufacturer" },
+            ]),
+          ),
+        }}
+      />
+      <IndustrialManufacturerPage />
+    </>
+  );
 }

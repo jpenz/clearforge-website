@@ -21,33 +21,13 @@ export function ServicesPage() {
           >
             <span className="section-label">Services</span>
             <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              AI services designed for operators who need outcomes.
+              Strategy, AI engineering, and managed operations in one firm.
             </h1>
             <p className="mt-6 text-lg text-slate-600">
-              ClearForge combines strategic clarity with hands-on execution across five service lines. The AI Marketing Agent is our flagship offer for companies that need a complete growth engine.
+              ClearForge follows a Strategy to Build to Operate model. AI Marketing & Revenue Operations is one applied
+              service inside that broader platform.
             </p>
           </motion.div>
-        </div>
-      </section>
-
-      <section className="bg-slate-navy py-16">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="rounded-xl border border-teal/30 bg-charcoal p-8 lg:p-10">
-            <div className="flex flex-wrap items-center justify-between gap-6">
-              <div className="max-w-2xl">
-                <span className="section-label text-teal">Flagship</span>
-                <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                  AI Marketing Agent
-                </h2>
-                <p className="mt-3 text-lg text-slate-200">
-                  Full-funnel strategy, execution, and optimization in one monthly operating model.
-                </p>
-              </div>
-              <Button size="lg" asChild>
-                <Link href="/services/ai-marketing-agent">View Dedicated Page <ArrowRight className="ml-2 h-4 w-4" /></Link>
-              </Button>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -72,11 +52,15 @@ export function ServicesPage() {
                       {service.title}
                     </h2>
                     <p className="mt-2 text-lg font-medium text-teal">{service.tagline}</p>
-                    <p className="mt-4 text-lg text-slate-600 leading-relaxed">{service.description}</p>
-                    <p className="mt-4 text-lg text-slate-600"><strong className="text-slate-700">Ideal for:</strong> {service.idealClient}</p>
-                    {service.slug === "ai-marketing-agent" && (
+                    <p className="mt-4 text-lg leading-relaxed text-slate-600">{service.description}</p>
+                    <p className="mt-4 text-lg text-slate-600">
+                      <strong className="text-slate-700">Who it&apos;s for:</strong> {service.idealClient}
+                    </p>
+                    {service.slug === "ai-marketing-revenue-operations" && (
                       <Button className="mt-6" variant="outline" asChild>
-                        <Link href="/services/ai-marketing-agent">Go to dedicated AI Marketing Agent page <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                        <Link href="/services/ai-marketing-agent">
+                          View application page <ArrowRight className="ml-2 h-4 w-4" />
+                        </Link>
                       </Button>
                     )}
                   </div>
@@ -95,22 +79,22 @@ export function ServicesPage() {
 
                 <div className="mt-12 grid gap-8 lg:grid-cols-2">
                   <div>
-                    <h3 className="text-lg font-bold text-slate-navy mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>Deliverables</h3>
+                    <h3 className="mb-4 text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>Deliverables</h3>
                     <ul className="space-y-2">
                       {service.deliverables.map((d) => (
                         <li key={d} className="flex items-start gap-2 text-base text-slate-600">
-                          <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-teal shrink-0" />
+                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-teal" />
                           {d}
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-slate-navy mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>Timeline</h3>
+                    <h3 className="mb-4 text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>Timeline</h3>
                     <div className="space-y-3">
                       {service.workflow.map((step) => (
                         <div key={step.phase} className="flex gap-4 rounded-lg border border-gray-200 bg-white p-4">
-                          <span className="metric-display text-sm whitespace-nowrap">{step.phase}</span>
+                          <span className="metric-display whitespace-nowrap text-sm">{step.phase}</span>
                           <div>
                             <p className="text-base font-semibold text-slate-navy">{step.title}</p>
                             <p className="text-base text-slate-600">{step.description}</p>
@@ -127,19 +111,21 @@ export function ServicesPage() {
       })}
 
       <section className="bg-slate-navy py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+        <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">
           <h2 className="text-3xl font-bold text-white sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            Need help choosing the right starting point?
+            Need help choosing the right service line?
           </h2>
-          <p className="mt-4 text-lg text-slate-200 max-w-xl mx-auto">
-            We can map your highest-impact path in one discovery call.
+          <p className="mx-auto mt-4 max-w-xl text-lg text-slate-200">
+            We can diagnose where to start and map your fastest path to measurable results.
           </p>
-          <div className="mt-8 flex justify-center gap-4 flex-wrap">
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
               <Link href="/contact">Book a Discovery Call</Link>
             </Button>
             <Button variant="outline" size="lg" className="border-slate-400 text-white hover:bg-white hover:text-slate-navy" asChild>
-              <Link href="/pricing">View Pricing <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              <Link href="/pricing">
+                View Pricing <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
           </div>
         </div>

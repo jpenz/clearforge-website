@@ -3,25 +3,26 @@ import { caseStudies } from "@/data/case-studies";
 import { insights } from "@/data/insights";
 
 const siteUrl = "https://clearforge.ai";
+const lastModified = new Date("2026-02-24");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
-    { url: siteUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
-    { url: `${siteUrl}/services`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${siteUrl}/services/ai-marketing-agent`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
-    { url: `${siteUrl}/case-studies`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${siteUrl}/insights`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
-    { url: `${siteUrl}/pricing`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${siteUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${siteUrl}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${siteUrl}/scorecard`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${siteUrl}/privacy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
-    { url: `${siteUrl}/terms`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
+    { url: siteUrl, lastModified, changeFrequency: "weekly", priority: 1 },
+    { url: `${siteUrl}/services`, lastModified, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${siteUrl}/services/ai-marketing-agent`, lastModified, changeFrequency: "weekly", priority: 0.85 },
+    { url: `${siteUrl}/pricing`, lastModified, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${siteUrl}/case-studies`, lastModified, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${siteUrl}/about`, lastModified, changeFrequency: "monthly", priority: 0.75 },
+    { url: `${siteUrl}/contact`, lastModified, changeFrequency: "monthly", priority: 0.75 },
+    { url: `${siteUrl}/scorecard`, lastModified, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${siteUrl}/insights`, lastModified, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${siteUrl}/privacy`, lastModified, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${siteUrl}/terms`, lastModified, changeFrequency: "yearly", priority: 0.3 },
   ];
 
   const caseStudyPages: MetadataRoute.Sitemap = caseStudies.map((cs) => ({
     url: `${siteUrl}/case-studies/${cs.slug}`,
-    lastModified: new Date(),
+    lastModified,
     changeFrequency: "monthly",
     priority: 0.7,
   }));

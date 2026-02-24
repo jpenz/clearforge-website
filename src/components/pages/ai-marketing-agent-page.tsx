@@ -10,40 +10,40 @@ import { images } from "@/lib/images";
 const highlights = [
   {
     icon: Repeat,
-    title: "Always-On Campaign Operations",
-    description: "Awareness, conversion, and retention motions run continuously across channels.",
+    title: "One Application of Managed AI Operations",
+    description: "This service applies the ClearForge platform specifically to your demand generation and revenue workflows.",
   },
   {
     icon: Radar,
-    title: "Lead Intelligence + Prioritization",
-    description: "Prospects are identified, qualified, and routed with clear follow-up paths.",
+    title: "Full-Cycle Revenue Visibility",
+    description: "From channel execution to qualified pipeline, performance is measured in one operating model.",
   },
   {
     icon: Gauge,
-    title: "Real-Time Leadership Visibility",
-    description: "Performance dashboards are live and tied to growth and pipeline outcomes.",
+    title: "Continuous Optimization",
+    description: "Campaigns, workflows, and handoffs are tuned every week based on live results.",
   },
   {
     icon: Sparkles,
-    title: "Continuous Optimization",
-    description: "Campaign strategy and execution are refined weekly, not quarterly.",
+    title: "Integrated with Strategy",
+    description: "Revenue operations are aligned to the growth priorities identified in your broader strategy work.",
   },
 ];
 
 const differentiators = [
-  "AI-driven operating cadence runs 24/7 instead of weekly check-ins",
-  "Playbooks are updated continuously as performance data changes",
-  "Month-to-month after an initial 90-day ramp",
-  "One operating model across paid, organic, content, and outreach",
-  "Designed for buyers who need results without building a full internal team",
+  "Unifies SEO, paid media, outreach, CRM, and pipeline workflows",
+  "Replaces fragmented agency and freelancer stacks with one system",
+  "Operates with the same senior team model used across all ClearForge services",
+  "Runs month-to-month after initial setup periods",
+  "Built to compound over time, not reset every quarter",
 ];
 
-const marketingTiers = pricingTiers.filter((tier) => tier.category === "marketing-agent");
+const marketingTiers = pricingTiers.filter((tier) => tier.category === "marketing-revenue-ops");
 
 export function AiMarketingAgentPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-slate-navy py-20 lg:py-28 min-h-[60vh] flex items-center">
+      <section className="relative flex min-h-[60vh] items-center overflow-hidden bg-slate-navy py-20 lg:py-28">
         <div
           className="pointer-events-none absolute inset-0 opacity-25"
           style={{
@@ -55,26 +55,29 @@ export function AiMarketingAgentPage() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-slate-navy via-slate-navy/90 to-slate-navy/70" />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-4xl">
-            <span className="section-label">Flagship Service</span>
+            <span className="section-label">Service Application</span>
             <h1 className="mt-4 text-4xl font-bold text-white sm:text-5xl lg:text-6xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              AI Marketing Agent
+              AI Marketing & Revenue Operations
             </h1>
-            <p className="mt-6 text-xl text-slate-300 leading-relaxed">
-              A complete marketing operating system for PE-backed and mid-market companies that need predictable pipeline growth. Strategy, execution, and optimization in one monthly engagement.
+            <p className="mt-6 text-xl leading-relaxed text-slate-300">
+              A specific application of ClearForge&apos;s Strategy to Build to Operate platform. We run a complete revenue
+              system spanning demand generation, outreach, CRM workflows, and pipeline management.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Button size="lg" asChild>
                 <Link href="/contact">Book a Discovery Call</Link>
               </Button>
               <Button variant="outline" size="lg" asChild>
-                <Link href="/pricing">View Tiers <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                <Link href="/services">
+                  View All Service Lines <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
             </div>
           </motion.div>
         </div>
       </section>
 
-      <section className="bg-gray-50 py-24 lg:py-32 border-y border-gray-200">
+      <section className="border-y border-gray-200 bg-gray-50 py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-6 sm:grid-cols-2">
             {highlights.map((item, i) => (
@@ -90,7 +93,7 @@ export function AiMarketingAgentPage() {
                 <h2 className="mt-4 text-xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
                   {item.title}
                 </h2>
-                <p className="mt-3 text-base text-slate-600 leading-relaxed">{item.description}</p>
+                <p className="mt-3 text-base leading-relaxed text-slate-600">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -100,9 +103,9 @@ export function AiMarketingAgentPage() {
       <section className="bg-white py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mb-10 max-w-2xl">
-            <span className="section-label">How It Works</span>
+            <span className="section-label">Pricing Tiers</span>
             <h2 className="mt-3 text-3xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              Tiered scope based on service coverage
+              Scope based on coverage and operating complexity
             </h2>
           </div>
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
@@ -124,7 +127,7 @@ export function AiMarketingAgentPage() {
                 <ul className="mt-4 space-y-2">
                   {tier.features.slice(0, 4).map((feature) => (
                     <li key={feature} className="flex items-start gap-2 text-sm text-slate-700">
-                      <Check className="h-4 w-4 text-teal mt-0.5 shrink-0" />
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-teal" />
                       {feature}
                     </li>
                   ))}
@@ -139,12 +142,12 @@ export function AiMarketingAgentPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
             <div>
-              <span className="section-label text-teal">Why Teams Switch</span>
+              <span className="section-label text-teal">What This Looks Like In Market</span>
               <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                Better economics than fragmented agency stacks
+                One accountable revenue system instead of fragmented vendors
               </h2>
               <p className="mt-4 text-lg text-slate-200">
-                The AI Marketing Agent replaces disconnected vendors with one accountable growth system.
+                This application shows how ClearForge takes strategy and turns it into daily operational execution.
               </p>
             </div>
             <div className="space-y-3">
@@ -157,26 +160,27 @@ export function AiMarketingAgentPage() {
           </div>
           <div className="mt-12 rounded-xl border border-white/10 bg-white/[0.03] p-8">
             <h3 className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              Proof in-market: Metro Detroit Services Company
+              Proof in market: Metro Detroit Services Company
             </h3>
-            <p className="mt-3 text-base text-slate-200 leading-relaxed">
-              A legacy services business with no formal marketing program moved from attrition to active growth after launching a complete website, local presence, outreach workflows, and recurring contract motion.
+            <p className="mt-3 text-base leading-relaxed text-slate-200">
+              A legacy services business moved from no formal marketing infrastructure to recurring contracts and stronger
+              acquisition readiness after deploying this revenue operations application.
             </p>
             <Button className="mt-5" variant="outline" asChild>
-              <Link href="/case-studies/metro-detroit-services-company">Read Case Study <LineChart className="ml-2 h-4 w-4" /></Link>
+              <Link href="/case-studies/metro-detroit-services-company">
+                Read Case Study <LineChart className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
           </div>
         </div>
       </section>
 
       <section className="bg-white py-24 lg:py-32">
-        <div className="mx-auto max-w-3xl px-6 lg:px-8 text-center">
+        <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
           <h2 className="text-3xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            Want a marketing system that compounds each month?
+            Want to apply the platform to your revenue engine?
           </h2>
-          <p className="mt-4 text-lg text-slate-600">
-            We can scope the right tier in one working session.
-          </p>
+          <p className="mt-4 text-lg text-slate-600">We can scope the right tier in one working session.</p>
           <Button size="lg" className="mt-8" asChild>
             <Link href="/contact">Book a Discovery Call</Link>
           </Button>

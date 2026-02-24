@@ -1,28 +1,28 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Activity, Clock3, LineChart, Shield } from "lucide-react";
+import { Briefcase, Hammer, LineChart, Users } from "lucide-react";
 
 const items = [
   {
-    icon: Activity,
-    title: "Execution Lives with Strategy",
-    description: "The same senior team sets the plan and ships the systems. No strategy handoff to a junior delivery bench.",
+    icon: Briefcase,
+    title: "Strategy Plus Delivery in One Team",
+    description: "Traditional firms often stop at recommendations. We diagnose where to win, then build and run the systems.",
   },
   {
-    icon: Clock3,
-    title: "Always-On Operating Rhythm",
-    description: "Campaigns and workflows run continuously, with weekly optimization instead of monthly status updates.",
+    icon: Users,
+    title: "Senior Operators, Not Junior Leverage",
+    description: "You work with senior practitioners directly, not a rotating team of early-career analysts.",
+  },
+  {
+    icon: Hammer,
+    title: "Built to Ship, Not Just Advise",
+    description: "MBB-style strategic rigor with engineering and managed operations that execute in production.",
   },
   {
     icon: LineChart,
-    title: "Real-Time Performance Visibility",
-    description: "Leadership sees what is working now, not what happened weeks ago in a static report.",
-  },
-  {
-    icon: Shield,
-    title: "Commercially Aligned Terms",
-    description: "No long lock-ins. Month-to-month after the first 90-day ramp, with clear scope and accountability.",
+    title: "Scaled for $5M to $5B Businesses",
+    description: "We support owner-led firms, PE portfolios, and enterprise teams with the same Strategy to Operate model.",
   },
 ];
 
@@ -35,11 +35,11 @@ export function Differentiators() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-16 max-w-2xl"
+          className="mb-16 max-w-3xl"
         >
           <span className="section-label">Why ClearForge</span>
           <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            Built for operators who need progress they can prove.
+            The strategic caliber of top consulting firms, with engineering and operations that actually ship.
           </h2>
         </motion.div>
 
@@ -59,9 +59,7 @@ export function Differentiators() {
               <h3 className="text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
                 {item.title}
               </h3>
-              <p className="mt-2 text-base leading-relaxed text-slate-600">
-                {item.description}
-              </p>
+              <p className="mt-2 text-base leading-relaxed text-slate-600">{item.description}</p>
             </motion.div>
           ))}
         </div>

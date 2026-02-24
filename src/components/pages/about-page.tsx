@@ -5,16 +5,16 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 const values = [
-  { title: "Outcomes Over Activity", description: "We measure success by operational and growth impact, not by hours billed or decks delivered." },
-  { title: "Senior Team, Direct Delivery", description: "The team that scopes your work is the team that ships it. No handoff to junior execution." },
-  { title: "Systems That Compound", description: "We build operating systems designed to improve with usage, not static projects that decay after launch." },
-  { title: "Plainspoken Communication", description: "Clear scope, clear tradeoffs, and clear accountability at every step." },
+  { title: "Strategy Must End in Execution", description: "We do not stop at recommendations. Every strategy engagement is built to move into delivery." },
+  { title: "Senior-Led Teams", description: "You work directly with experienced consultants and engineers, not a leverage model of junior handoffs." },
+  { title: "Engineering Depth with Operating Discipline", description: "We build real systems, then manage them with clear metrics and accountable cadence." },
+  { title: "Plainspoken, Board-Ready Communication", description: "We keep recommendations clear, practical, and grounded in measurable outcomes." },
 ];
 
 const approach = [
-  { number: "01", title: "Operator-Level Diagnosis", description: "We start with the commercial and operational bottlenecks that matter to owners, CEOs, and operating partners." },
-  { number: "02", title: "Strategy + Engineering in One Team", description: "Our background combines top-tier consulting rigor with implementation depth so plans become operating systems." },
-  { number: "03", title: "Continuous Performance Management", description: "Delivery does not stop at launch. We maintain a cadence of optimization, measurement, and iteration." },
+  { number: "01", title: "Diagnose Where You Should Win", description: "We apply consulting-grade analysis to market position, operational bottlenecks, and AI opportunity sizing." },
+  { number: "02", title: "Build the Systems That Matter", description: "Our engineering team translates strategy into production AI workflows tied to core business metrics." },
+  { number: "03", title: "Operate and Improve Continuously", description: "We run and optimize the systems so value compounds instead of decaying after launch." },
 ];
 
 export function AboutPage() {
@@ -25,10 +25,11 @@ export function AboutPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-3xl">
             <span className="section-label">About ClearForge</span>
             <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              Consulting discipline with builder execution.
+              Strategy consulting discipline with AI engineering and managed operations.
             </h1>
             <p className="mt-6 text-lg text-slate-600">
-              ClearForge combines management consulting backgrounds from firms such as Bain, EY, and Capgemini with hands-on AI engineering. We are built for leaders who need real operating progress, not slideware.
+              ClearForge was built for leaders who need more than recommendations. Our team combines management
+              consulting rigor with hands-on delivery so strategy turns into live systems that perform in production.
             </p>
           </motion.div>
         </div>
@@ -39,7 +40,7 @@ export function AboutPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mb-16">
             <span className="section-label">Our Approach</span>
             <h2 className="mt-4 text-3xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              Diagnose. Build. Improve.
+              Diagnose. Build. Operate.
             </h2>
           </motion.div>
           <div className="grid gap-8 md:grid-cols-3">
@@ -54,7 +55,7 @@ export function AboutPage() {
               >
                 <span className="metric-display text-2xl">{item.number}</span>
                 <h3 className="mt-4 text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>{item.title}</h3>
-                <p className="mt-3 text-lg text-slate-600 leading-relaxed">{item.description}</p>
+                <p className="mt-3 text-lg leading-relaxed text-slate-600">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -66,7 +67,7 @@ export function AboutPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mb-16">
             <span className="section-label">What We Believe</span>
             <h2 className="mt-4 text-3xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              Principles that keep delivery honest.
+              Principles that keep delivery accountable.
             </h2>
           </motion.div>
           <div className="grid gap-6 sm:grid-cols-2">
@@ -80,7 +81,7 @@ export function AboutPage() {
                 className="rounded-lg border border-gray-200 p-8"
               >
                 <h3 className="text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>{value.title}</h3>
-                <p className="mt-3 text-lg text-slate-600 leading-relaxed">{value.description}</p>
+                <p className="mt-3 text-lg leading-relaxed text-slate-600">{value.description}</p>
               </motion.div>
             ))}
           </div>
@@ -92,13 +93,13 @@ export function AboutPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <span className="section-label text-teal">Who We Work With</span>
             <h2 className="mt-4 text-3xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              Operators with high expectations and tight timelines.
+              Teams that need strategy and execution from the same partner.
             </h2>
             <div className="mt-12 grid gap-6 md:grid-cols-3">
               {[
-                { title: "PE Operating Partners", description: "Teams driving post-acquisition value creation across portfolio companies." },
-                { title: "Portfolio Company Leadership", description: "CEOs and functional leaders who need immediate execution support." },
-                { title: "Owner-Led Mid-Market Firms", description: "Businesses scaling from founder-led growth into repeatable systems." },
+                { title: "PE Operating Partners", description: "Value-creation teams driving performance across portfolio companies." },
+                { title: "Business Owners and CEOs", description: "Leaders who need AI outcomes without building an internal AI department." },
+                { title: "Revenue and Functional Leaders", description: "Operators responsible for growth, efficiency, and measurable execution." },
               ].map((item) => (
                 <div key={item.title} className="rounded-lg border border-charcoal bg-charcoal p-6">
                   <h3 className="text-base font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>{item.title}</h3>
@@ -111,12 +112,12 @@ export function AboutPage() {
       </section>
 
       <section className="bg-white py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+        <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">
           <h2 className="text-3xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
             Let&apos;s discuss your priorities.
           </h2>
-          <p className="mt-4 text-lg text-slate-600 max-w-xl mx-auto">
-            30-minute discovery call with practical recommendations and no hard sell.
+          <p className="mx-auto mt-4 max-w-xl text-lg text-slate-600">
+            30-minute discovery call with practical recommendations and clear next steps.
           </p>
           <Button size="lg" className="mt-8" asChild>
             <Link href="/contact">Book a Discovery Call</Link>

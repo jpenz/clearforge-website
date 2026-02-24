@@ -2,19 +2,20 @@ import Link from "next/link";
 
 const footerLinks = {
   Services: [
-    { href: "/services/ai-marketing-agent", label: "AI Marketing Agent" },
     { href: "/services", label: "All Services" },
-    { href: "/pricing", label: "Pricing" },
-    { href: "/case-studies", label: "Case Studies" },
+    { href: "/services#growth-strategy-diagnosis", label: "Growth Strategy & Diagnosis" },
+    { href: "/services#managed-ai-operations", label: "Managed AI Operations" },
+    { href: "/services/ai-marketing-agent", label: "AI Marketing & Revenue Operations" },
   ],
   Company: [
     { href: "/about", label: "About" },
-    { href: "/insights", label: "Insights" },
+    { href: "/case-studies", label: "Case Studies" },
     { href: "/contact", label: "Contact" },
   ],
   Resources: [
+    { href: "/pricing", label: "Pricing" },
     { href: "/scorecard", label: "AI Readiness Scorecard" },
-    { href: "/insights/continuous-ai-agents", label: "The Continuous AI Agent" },
+    { href: "/insights", label: "Insights" },
   ],
 };
 
@@ -29,7 +30,7 @@ export function Footer() {
                 ClearForge<span className="text-teal">.ai</span>
               </span>
             </Link>
-            <p className="text-sm leading-relaxed text-slate-500">Strategy that ships. AI that performs.</p>
+            <p className="text-sm leading-relaxed text-slate-500">We find where your business should be winning, then build and run the AI to get you there.</p>
           </div>
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>

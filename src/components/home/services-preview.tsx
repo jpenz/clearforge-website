@@ -8,50 +8,50 @@ import { images } from "@/lib/images";
 
 const serviceCards = [
   {
-    icon: Bot,
-    title: "AI Marketing Agent",
-    description: "Our flagship service: full-funnel strategy, execution, reporting, and optimization in one monthly operating model.",
-    href: "/services/ai-marketing-agent",
-    tag: "Flagship",
-    image: images.aiMarketingAgent,
-  },
-  {
     icon: Search,
-    title: "AI Strategy & Market Intelligence",
-    description: "Board-ready clarity on where AI should be applied before you commit implementation dollars.",
-    href: "/services#ai-strategy",
+    title: "Growth Strategy & Diagnosis",
+    description: "The entry point: pinpoint where to win and which AI opportunities should be prioritized first.",
+    href: "/services#growth-strategy-diagnosis",
     tag: "$15K · 4 Weeks",
     image: images.serviceStrategy,
   },
   {
     icon: Rocket,
     title: "AI Design & Build",
-    description: "Production AI systems shipped in 6-8 weeks and tied to measurable operating outcomes.",
+    description: "Production AI systems tied to strategy priorities and launched in 6-8 weeks.",
     href: "/services#ai-design-build",
     tag: "$50K-$100K",
     image: images.serviceBuild,
   },
   {
+    icon: BarChart3,
+    title: "Managed AI Operations",
+    description: "We operate and continuously optimize AI systems so your team can focus on the business.",
+    href: "/services#managed-ai-operations",
+    tag: "$15K+/mo",
+    image: images.serviceManaged,
+  },
+  {
     icon: PenTool,
-    title: "AI Agent Retainer",
-    description: "Continuous monthly build capacity with weekly operating cadence. You own the code.",
-    href: "/services#ai-agent-retainer",
-    tag: "$15K/mo",
+    title: "Legacy System Modernization",
+    description: "Make COBOL, mainframes, and old ERP workflows AI-ready without full rip-and-replace.",
+    href: "/services#legacy-system-modernization",
+    tag: "Custom",
     image: images.serviceRetainer,
   },
   {
-    icon: BarChart3,
-    title: "Managed AI Services",
-    description: "We build and run AI systems as an ongoing service for teams that do not want to operate them in-house.",
-    href: "/services#managed-ai-services",
-    tag: "Custom",
-    image: images.serviceManaged,
+    icon: Bot,
+    title: "AI Marketing & Revenue Operations",
+    description: "One application of the platform: end-to-end demand, outreach, CRM, and pipeline operations.",
+    href: "/services/ai-marketing-agent",
+    tag: "Application",
+    image: images.aiMarketingAgent,
   },
 ];
 
 export function ServicesPreview() {
   return (
-    <section className="bg-gray-50 py-24 lg:py-32 border-y border-gray-200">
+    <section className="border-y border-gray-200 bg-gray-50 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -62,10 +62,11 @@ export function ServicesPreview() {
         >
           <span className="section-label">Services</span>
           <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            Five service lines. One operator-first model.
+            Strategy, build, and managed operations across five service lines.
           </h2>
-          <p className="mt-4 text-lg text-slate-600 max-w-2xl">
-            Start with strategy, launch a performance sprint, or move directly to the AI Marketing Agent.
+          <p className="mt-4 max-w-2xl text-lg text-slate-600">
+            We start with where to win, then build and run the systems. AI Marketing & Revenue Operations is one applied
+            example of that model.
           </p>
         </motion.div>
 
@@ -79,11 +80,11 @@ export function ServicesPreview() {
               transition={{ duration: 0.4, delay: 0.08 * i }}
             >
               <Link href={service.href}>
-                <div className="group bg-white border border-gray-200 rounded-xl overflow-hidden h-full hover:border-teal/30 hover:shadow-lg transition-all duration-300">
+                <div className="group h-full overflow-hidden rounded-xl border border-gray-200 bg-white transition-all duration-300 hover:border-teal/30 hover:shadow-lg">
                   {service.image && (
-                    <div className="h-32 w-full overflow-hidden bg-slate-navy relative">
+                    <div className="relative h-32 w-full overflow-hidden bg-slate-navy">
                       <div
-                        className="absolute inset-0 opacity-60 group-hover:opacity-80 transition-opacity"
+                        className="absolute inset-0 opacity-60 transition-opacity group-hover:opacity-80"
                         style={{
                           backgroundImage: `url(${service.image})`,
                           backgroundSize: "cover",
@@ -93,24 +94,22 @@ export function ServicesPreview() {
                     </div>
                   )}
                   <div className="p-8">
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-teal/10 group-hover:bg-teal group-hover:text-white transition-colors">
-                      <service.icon className="h-5 w-5 text-teal group-hover:text-white" />
+                    <div className="mb-5 flex items-center justify-between">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-teal/10 transition-colors group-hover:bg-teal group-hover:text-white">
+                        <service.icon className="h-5 w-5 text-teal group-hover:text-white" />
+                      </div>
+                      <span className="font-[family-name:var(--font-space-grotesk)] text-xs font-medium uppercase tracking-wider text-teal">
+                        {service.tag}
+                      </span>
                     </div>
-                    <span className="text-xs font-medium text-teal uppercase tracking-wider font-[family-name:var(--font-space-grotesk)]">
-                      {service.tag}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                    {service.title}
-                  </h3>
-                  <p className="mt-3 text-base leading-relaxed text-slate-600">
-                    {service.description}
-                  </p>
-                  <div className="mt-5 flex items-center text-base text-teal font-medium group-hover:gap-2 transition-all">
-                    Learn more
-                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </div>
+                    <h3 className="text-xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                      {service.title}
+                    </h3>
+                    <p className="mt-3 text-base leading-relaxed text-slate-600">{service.description}</p>
+                    <div className="mt-5 flex items-center text-base font-medium text-teal transition-all group-hover:gap-2">
+                      Learn more
+                      <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -127,7 +126,7 @@ export function ServicesPreview() {
         >
           <Button variant="outline" size="lg" asChild>
             <Link href="/services">
-              View All Services & Pricing <ArrowRight className="ml-2 h-4 w-4" />
+              View Services and Pricing <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </motion.div>

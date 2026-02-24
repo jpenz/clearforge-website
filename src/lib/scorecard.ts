@@ -216,40 +216,40 @@ export function calculateResults(answers: Answers): ScorecardResult {
     maturityDescription =
       "Your organization is in the early stages of AI readiness. Key foundational elements — data infrastructure, team capability, and process documentation — need attention before AI can deliver reliable value.";
     recommendation =
-      "Start with AI Strategy & Market Intelligence to identify your highest-impact opportunities and build a roadmap.";
-    recommendedService = "AI Strategy & Market Intelligence";
+      "Start with Growth Strategy & Diagnosis to identify your highest-impact opportunities and build a roadmap.";
+    recommendedService = "Growth Strategy & Diagnosis";
     segment = "D";
   } else if (rounded <= 55) {
     maturityLevel = "Emerging";
     maturityDescription =
       "You have some foundational elements in place but gaps remain. With targeted improvements in your weaker areas, you can move quickly toward successful AI implementation.";
     recommendation =
-      "AI Strategy & Market Intelligence will pinpoint exactly where to focus for maximum impact.";
-    recommendedService = "AI Strategy & Market Intelligence";
+      "Growth Strategy & Diagnosis will pinpoint exactly where to focus for maximum impact.";
+    recommendedService = "Growth Strategy & Diagnosis";
     segment = "C";
   } else if (rounded <= 70) {
     maturityLevel = "Developing";
     maturityDescription =
       "Your organization has solid foundations and is ready for targeted AI implementation. Focus on your strongest areas first to generate quick wins and build momentum.";
     recommendation =
-      "A Performance Sprint will tackle your top opportunities and deliver working solutions in 6-8 weeks.";
-    recommendedService = "Performance Sprint";
+      "AI Design & Build will tackle your top opportunities and deliver working systems in 6-8 weeks.";
+    recommendedService = "AI Design & Build";
     segment = "B";
   } else if (rounded <= 85) {
     maturityLevel = "Implemented";
     maturityDescription =
       "You're well-positioned for AI-driven transformation. Your data, team, and processes can support sophisticated AI solutions that drive measurable business impact.";
     recommendation =
-      "Move directly to implementation with a Performance Sprint or Custom AI Agent engagement.";
-    recommendedService = "Performance Sprint";
+      "Move directly to implementation with AI Design & Build and prepare for Managed AI Operations.";
+    recommendedService = "AI Design & Build";
     segment = "A";
   } else {
     maturityLevel = "Leader";
     maturityDescription =
       "Your organization is AI-ready across all dimensions. You're positioned to deploy advanced AI solutions and build sustainable competitive advantages through AI-native operations.";
     recommendation =
-      "An AI Agent Retainer gives you ongoing access to expertise for continuous AI development and optimization.";
-    recommendedService = "AI Agent Retainer";
+      "Managed AI Operations gives you ongoing support for continuous AI optimization and performance management.";
+    recommendedService = "Managed AI Operations";
     segment = "A";
   }
 

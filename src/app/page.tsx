@@ -8,27 +8,28 @@ import { FinalCTA } from "@/components/home/final-cta";
 import { createMetadata, faqJsonLd } from "@/lib/metadata";
 
 export const metadata = createMetadata({
-  title: "ClearForge.ai — AI Marketing Agent & AI Consulting for Mid-Market & PE",
+  title: "AI Strategy Consulting and Managed AI Services for PE and Mid-Market",
   description:
-    "ClearForge delivers AI marketing agents, PE portfolio AI solutions, and AI consulting for mid-market companies. Strategy that ships. AI that performs.",
+    "ClearForge is a strategy + AI consulting firm that helps PE portfolios, mid-market companies, and enterprise teams close the gap between AI potential and business value.",
   path: "",
+  keywords: ["AI value gap", "strategy plus AI consulting"],
 });
 
 const homeFaqs = [
   {
-    question: "What is an AI marketing agent?",
+    question: "What does ClearForge do?",
     answer:
-      "An AI marketing agent is a full-funnel marketing operating system that combines strategy, execution, and continuous optimization in a single monthly engagement — replacing fragmented agencies and freelancers.",
+      "ClearForge diagnoses where your business should be winning, builds production AI systems tied to that strategy, and operates those systems continuously.",
   },
   {
     question: "Who does ClearForge work with?",
     answer:
-      "ClearForge serves PE operating teams, portfolio company CEOs, CMOs under board pressure, and owner-led mid-market businesses that need measurable AI-driven growth.",
+      "We work with PE operating partners, portfolio company CEOs, owner-led businesses, and enterprise leaders that need strategy and execution from one team.",
   },
   {
-    question: "How is ClearForge different from traditional consulting?",
+    question: "Is AI Marketing & Revenue Operations your main service?",
     answer:
-      "We don't just deliver strategy decks. The same senior team that sets the plan also builds and operates the systems. Execution lives with strategy.",
+      "It is one application of our broader platform. The core lifecycle is Growth Strategy & Diagnosis, AI Design & Build, and Managed AI Operations.",
   },
 ];
 

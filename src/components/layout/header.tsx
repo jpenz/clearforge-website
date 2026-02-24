@@ -7,8 +7,8 @@ import { MobileNav } from "@/components/layout/mobile-nav";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: "/services/ai-marketing-agent", label: "AI Marketing Agent" },
   { href: "/services", label: "Services" },
+  { href: "/services/ai-marketing-agent", label: "AI Marketing & RevOps" },
   { href: "/case-studies", label: "Case Studies" },
   { href: "/pricing", label: "Pricing" },
   { href: "/insights", label: "Insights" },
@@ -24,10 +24,12 @@ export function Header() {
   }, []);
 
   return (
-    <header className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      scrolled ? "border-b border-gray-200 bg-white/95 backdrop-blur-sm shadow-sm" : "bg-white"
-    )}>
+    <header
+      className={cn(
+        "fixed left-0 right-0 top-0 z-50 transition-all duration-300",
+        scrolled ? "border-b border-gray-200 bg-white/95 shadow-sm backdrop-blur-sm" : "bg-white",
+      )}
+    >
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-1">
           <span className="text-xl font-bold tracking-tight text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
