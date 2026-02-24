@@ -21,91 +21,68 @@ export interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
+    slug: "metro-detroit-services-company",
+    title: "Metro Detroit Services Company Rebuilds Pipeline from Zero",
+    industry: "Home & Commercial Services",
+    service: "AI Marketing Agent",
+    heroMetric: "Growth Mode",
+    heroMetricLabel: "From Decline to Repeatable Pipeline",
+    featured: true,
+    excerpt:
+      "A legacy services business with no formal marketing system moved from customer attrition and declining revenue to active growth with recurring commercial contracts.",
+    challenge:
+      "The company had operated for more than two decades on referrals and reputation. It had no website, no search presence, no paid campaigns, and no structured outreach motion. As legacy customers churned, revenue steadily eroded and there was no predictable pipeline to replace it.",
+    solution: [
+      "Built and launched a conversion-focused website with clear service positioning and lead capture",
+      "Established local search foundation and profile management so qualified buyers could find the company",
+      "Implemented lead intelligence and qualification workflows for inbound and outbound opportunities",
+      "Deployed coordinated outreach sequences and follow-up workflows",
+      "Introduced CRM-centered call workflow with AI-assisted prep and prioritization",
+      "Created a recurring commercial maintenance contract motion to stabilize revenue",
+      "Built a repeatable review and testimonial engine to strengthen trust in-market",
+    ],
+    outcomes: [
+      { metric: "Active Growth", description: "Revenue direction shifted from decline to expansion" },
+      { metric: "Recurring Contracts", description: "Commercial maintenance agreements created more predictable cash flow" },
+      { metric: "Acquisition-Ready", description: "Documented systems improved buyer confidence for PE interest" },
+      { metric: "Owner Confidence", description: "A repeatable pipeline replaced ad hoc lead generation" },
+    ],
+    scale:
+      "With systems documented and running continuously, the business is no longer dependent on one-off referrals. It now has an operating model that can be scaled, handed off, and diligenced by potential acquirers. Anonymous client quote: \"For the first time, marketing is a system in this business, not a guess.\"",
+  },
+  {
     slug: "industrial-manufacturer",
     title: "Fortune 1000 Industrial Manufacturer Transforms Sales Intelligence",
     industry: "Industrial Manufacturing",
-    service: "AI Revenue Operations",
+    service: "AI Strategy + AI Design & Build",
     heroMetric: "1,060",
     heroMetricLabel: "Qualified Opportunities Identified",
-    featured: true,
     excerpt:
-      "A $2B+ industrial manufacturer with 70+ facilities deployed AI-powered sales intelligence across 16 divisions — discovering 5 new high-growth market segments and reducing manual prospecting time by 60%.",
+      "A $2B+ industrial manufacturer with 70+ facilities deployed AI-powered sales intelligence across 16 divisions, uncovering new growth segments and reducing manual prospecting time.",
     challenge:
-      "A Fortune 1000 industrial manufacturer with $2B+ in revenue, 70+ facilities across North America, and 16 distinct business divisions faced a critical growth challenge. Sales teams across divisions operated in silos with no shared market intelligence, targeting prospects based on gut feel rather than data. Each division ran its own prospecting process — duplicating effort, missing cross-sell opportunities, and wasting senior sales talent on manual research. Leadership had no unified view of which markets, geographies, or verticals offered the highest growth potential across their portfolio of businesses.",
+      "Sales teams across divisions operated in silos with no shared market intelligence. Prospecting was manual and inconsistent, cross-sell opportunities were missed, and leadership lacked a unified view of where growth potential was strongest.",
     solution: [
-      "AI-powered sales intelligence platform proprietary platform orchestrating data collection and analysis across all 16 divisions simultaneously",
-      "State-by-state automated prospect research pipelines that identified and qualified targets across every division's addressable market",
-      "Contact enrichment pipeline using a waterfall approach across multiple data sources — ensuring high match rates and accurate decision-maker contacts",
-      "Strategic market intelligence reports generated in under 45 minutes, covering competitive landscapes, market sizing, and growth trends",
-      "Portfolio strategy analysis that ranked all 16 business divisions by CAGR, total addressable market, and margin potential — giving leadership a data-driven capital allocation framework",
-      "Geographic expansion modeling that identified optimal new territories for each division based on infrastructure spending, regulatory tailwinds, and competitive density",
+      "Unified sales intelligence workflows across 16 divisions",
+      "Automated target identification and qualification by territory and vertical",
+      "Decision-maker enrichment and routing into sales workflows",
+      "Rapid market intelligence reporting for leadership planning",
+      "Portfolio-level prioritization of divisions by growth potential",
+      "Geographic expansion modeling tied to infrastructure and demand signals",
     ],
     continuousModel: [
-      "AI agents retrained monthly on conversion data — learning which prospects engage, which messaging resonates, and which market signals predict closed deals",
-      "Market reports auto-refresh with emerging trends: infrastructure spending shifts, regulatory changes, new construction activity, and competitor moves",
-      "New market segments and territories added automatically as data reveals opportunities the client hadn't previously considered",
-      "Sales teams receive pre-qualified, enriched leads directly in their workflow — eliminating the gap between intelligence and action",
+      "Monthly refresh of market and conversion data to improve targeting quality",
+      "Automated signal monitoring to surface emerging market shifts",
+      "New segment discovery incorporated into ongoing territory planning",
+      "Lead intelligence delivered directly into frontline sales execution",
     ],
     outcomes: [
-      { metric: "1,060", description: "Qualified opportunities identified across all divisions" },
-      { metric: "10", description: "Industry verticals analyzed with full competitive landscapes" },
-      { metric: "Monthly", description: "Automated strategy and market intelligence refresh cycle" },
-      { metric: "5", description: "New high-growth market segments discovered (data center cooling at 21.9% CAGR, additive manufacturing at 18.6% CAGR)" },
-      { metric: "60%+", description: "Reduction in manual prospecting time across sales teams" },
-      { metric: "16", description: "Business divisions ranked by growth potential with geographic expansion recommendations" },
+      { metric: "1,060", description: "Qualified opportunities identified across divisions" },
+      { metric: "16", description: "Business divisions aligned to a shared intelligence model" },
+      { metric: "5", description: "New high-growth segments identified" },
+      { metric: "60%+", description: "Reduction in manual prospecting time" },
     ],
     scale:
-      "What began as a sales intelligence initiative for two divisions has expanded into a company-wide strategic platform. The AI agents now run continuous market monitoring across all 16 divisions, automatically surfacing new opportunities as market conditions shift. Leadership uses the portfolio analysis to inform M&A strategy, capital allocation, and geographic expansion decisions. The system compounds — each month of data makes the intelligence sharper, the targeting more precise, and the recommendations more valuable.",
-  },
-  {
-    slug: "manufacturer-pipeline-automation",
-    title: "$50M Manufacturer Transforms Sales Pipeline",
-    industry: "Manufacturing",
-    service: "AI Revenue Operations",
-    heroMetric: "30%",
-    heroMetricLabel: "Pipeline Increase",
-    excerpt:
-      "AI-powered prospecting and automated outreach drove a 30% increase in qualified pipeline within 90 days.",
-    challenge:
-      "A $50M specialty manufacturer was losing ground to competitors with faster sales cycles. Their sales team spent 60% of their time on manual prospecting and data entry instead of selling.",
-    solution: [
-      "AI-powered sales intelligence system with automated prospect identification using intent signals, firmographic data, and behavioral triggers",
-      "Automated outreach sequences personalized at scale, integrated directly with existing CRM",
-      "Real-time pipeline analytics dashboard for full visibility into deal progression and forecast accuracy",
-    ],
-    outcomes: [
-      { metric: "30%", description: "Increase in qualified pipeline" },
-      { metric: "45%", description: "Reduction in manual prospecting time" },
-      { metric: "2.1x", description: "Improvement in forecast accuracy" },
-      { metric: "18 days", description: "Faster average deal cycle" },
-    ],
-    scale:
-      "After proving the model with one sales team, the client expanded the system across all three regional teams with AI-driven account scoring and competitive intelligence monitoring.",
-  },
-  {
-    slug: "pe-portfolio-value-creation",
-    title: "PE Portfolio Unlocks AI Value Across 3 Companies",
-    industry: "Private Equity",
-    service: "PE Value Creation",
-    heroMetric: "10%",
-    heroMetricLabel: "EBITDA Improvement",
-    excerpt:
-      "A portfolio-wide AI playbook delivered measurable EBITDA improvement across three mid-market companies in under 6 months.",
-    challenge:
-      "A mid-market PE firm had a thesis that AI could accelerate value creation across their portfolio, but lacked the in-house expertise to identify and execute opportunities.",
-    solution: [
-      "Portfolio-wide AI playbook with rapid assessments at each company",
-      "90-day value creation sprints with tailored solutions per business",
-      "Automated quality inspection, intelligent routing, and AI-powered client onboarding across the portfolio",
-    ],
-    outcomes: [
-      { metric: "10%", description: "Average EBITDA improvement per company" },
-      { metric: "90 days", description: "Time to first measurable impact" },
-      { metric: "$2.4M", description: "Combined annual cost savings" },
-      { metric: "3", description: "Companies transformed simultaneously" },
-    ],
-    scale:
-      "The PE firm adopted the ClearForge AI playbook as standard for all new acquisitions. Two portfolio companies moved to ongoing retainers.",
+      "What started with two divisions expanded into a broader company operating system for market visibility and growth planning. Leadership now uses the same intelligence foundation for commercial planning and portfolio decisions.",
   },
 ];
 

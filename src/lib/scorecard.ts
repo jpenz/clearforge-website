@@ -216,16 +216,16 @@ export function calculateResults(answers: Answers): ScorecardResult {
     maturityDescription =
       "Your organization is in the early stages of AI readiness. Key foundational elements — data infrastructure, team capability, and process documentation — need attention before AI can deliver reliable value.";
     recommendation =
-      "Start with an AI Readiness Audit to identify your highest-impact opportunities and build a roadmap.";
-    recommendedService = "AI Readiness Audit";
+      "Start with AI Strategy & Market Intelligence to identify your highest-impact opportunities and build a roadmap.";
+    recommendedService = "AI Strategy & Market Intelligence";
     segment = "D";
   } else if (rounded <= 55) {
     maturityLevel = "Emerging";
     maturityDescription =
       "You have some foundational elements in place but gaps remain. With targeted improvements in your weaker areas, you can move quickly toward successful AI implementation.";
     recommendation =
-      "An AI Readiness Audit will pinpoint exactly where to focus for maximum impact.";
-    recommendedService = "AI Readiness Audit";
+      "AI Strategy & Market Intelligence will pinpoint exactly where to focus for maximum impact.";
+    recommendedService = "AI Strategy & Market Intelligence";
     segment = "C";
   } else if (rounded <= 70) {
     maturityLevel = "Developing";

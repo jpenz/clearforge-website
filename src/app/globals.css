@@ -22,7 +22,12 @@
   --font-mono: var(--font-jetbrains);
 }
 
-:root { color-scheme: light; }
+:root {
+  color-scheme: light;
+  --font-space-grotesk: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
+  --font-inter: "Inter", "Avenir Next", "Segoe UI", sans-serif;
+  --font-jetbrains: "JetBrains Mono", "SFMono-Regular", "Menlo", monospace;
+}
 html { scroll-behavior: smooth; }
 
 body {

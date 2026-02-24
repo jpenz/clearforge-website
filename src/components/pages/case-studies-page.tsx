@@ -19,10 +19,10 @@ export function CaseStudiesPage() {
           >
             <span className="section-label">Case Studies</span>
             <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              Results that <span className="gradient-text">speak for themselves.</span>
+              How ClearForge turns strategy into operating results.
             </h1>
             <p className="mt-6 text-lg text-slate-600">
-              Real engagements, real outcomes. Every metric verified, every case anonymized.
+              A selection of anonymized engagements across growth and operations.
             </p>
           </motion.div>
         </div>
@@ -58,7 +58,7 @@ export function CaseStudiesPage() {
                   </div>
                   <div className="bg-slate-navy p-8 flex flex-col justify-center items-center text-center">
                     <div className="metric-display text-4xl">{cs.heroMetric}</div>
-                    <p className="mt-2 text-lg text-slate-200">{cs.heroMetricLabel}</p>
+                    <p className="mt-2 text-base text-slate-200">{cs.heroMetricLabel}</p>
                   </div>
                 </div>
               </motion.div>
@@ -70,10 +70,10 @@ export function CaseStudiesPage() {
       <section className="bg-slate-navy py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            Want results like these?
+            Want outcomes like these in your business?
           </h2>
           <p className="mt-4 text-lg text-slate-200 max-w-xl mx-auto">
-            Every engagement starts with a conversation about your specific challenges and goals.
+            We start every engagement with your operating priorities and growth targets.
           </p>
           <Button size="lg" className="mt-8" asChild>
             <Link href="/contact">Book a Discovery Call</Link>

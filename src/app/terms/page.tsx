@@ -11,7 +11,7 @@ export default function TermsPage() {
     <section className="bg-white py-20 lg:py-28">
       <div className="mx-auto max-w-4xl px-6 lg:px-8 prose-content">
         <h1 className="text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>Terms of Service</h1>
-        <p className="mt-2 text-sm text-slate-400">Last updated: February 2025</p>
+        <p className="mt-2 text-sm text-slate-400">Last updated: February 24, 2026</p>
 
         <h2>Agreement to Terms</h2>
         <p>By accessing or using the ClearForge.ai website, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you may not access the website.</p>
@@ -23,7 +23,7 @@ export default function TermsPage() {
         <p>The content, features, and functionality of this website are owned by ClearForge and are protected by copyright, trademark, and other intellectual property laws. Client deliverables are governed by individual service agreements.</p>
 
         <h2>AI Readiness Scorecard</h2>
-        <p>The AI Readiness Scorecard is provided for informational purposes only. Results are based on self-reported data and should not be considered a definitive assessment. For a comprehensive evaluation, we recommend a formal AI Readiness Audit.</p>
+        <p>The AI Readiness Scorecard is provided for informational purposes only. Results are based on self-reported data and should not be considered a definitive assessment. For a comprehensive evaluation, we recommend a formal strategy engagement.</p>
 
         <h2>Limitation of Liability</h2>
         <p>ClearForge shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of or inability to use the website or services.</p>

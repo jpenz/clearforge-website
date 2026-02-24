@@ -1,28 +1,28 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code, TrendingUp, RefreshCw, Shield } from "lucide-react";
+import { Activity, Clock3, LineChart, Shield } from "lucide-react";
 
 const items = [
   {
-    icon: Code,
-    title: "We Build, Not Just Advise",
-    description: "The people who scope your engagement are the same people who deliver it. Strategy and engineering in the same team, not handed off to juniors.",
+    icon: Activity,
+    title: "Execution Lives with Strategy",
+    description: "The same senior team sets the plan and ships the systems. No strategy handoff to a junior delivery bench.",
   },
   {
-    icon: TrendingUp,
-    title: "Tied to Business Outcomes",
-    description: "Every engagement maps to a KPI you care about. If we can't draw a line from the solution to a financial metric, we don't build it.",
+    icon: Clock3,
+    title: "Always-On Operating Rhythm",
+    description: "Campaigns and workflows run continuously, with weekly optimization instead of monthly status updates.",
   },
   {
-    icon: RefreshCw,
-    title: "Continuous, Not Static",
-    description: "Our AI systems learn and improve monthly. Models retrained on real data compound in value. The gap between you and your competitors widens every cycle.",
+    icon: LineChart,
+    title: "Real-Time Performance Visibility",
+    description: "Leadership sees what is working now, not what happened weeks ago in a static report.",
   },
   {
     icon: Shield,
-    title: "Your Choice of Engagement",
-    description: "Build & Transfer: you own the code. Managed Services: we run it. Either way, you get full transparency, documentation, and zero vendor lock-in.",
+    title: "Commercially Aligned Terms",
+    description: "No long lock-ins. Month-to-month after the first 90-day ramp, with clear scope and accountability.",
   },
 ];
 
@@ -39,7 +39,7 @@ export function Differentiators() {
         >
           <span className="section-label">Why ClearForge</span>
           <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            Strategy consulting meets AI engineering.
+            Built for operators who need progress they can prove.
           </h2>
         </motion.div>
 

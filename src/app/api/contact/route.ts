@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // Rate limiter
 const rateLimit = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT_MAX = 5;
@@ -114,6 +112,16 @@ export async function POST(req: NextRequest) {
       </div>
     `;
 
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      console.error("Missing RESEND_API_KEY for contact form email delivery.");
+      return NextResponse.json(
+        { error: "Email delivery is not configured yet. Please email us directly." },
+        { status: 503 }
+      );
+    }
+
+    const resend = new Resend(apiKey);
     await resend.emails.send({
       from: "ClearForge <website@clearforge.ai>",
       to: ["james@clearforge.ai"],

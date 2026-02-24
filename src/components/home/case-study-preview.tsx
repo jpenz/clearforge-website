@@ -3,15 +3,15 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BarChart3, Building2, Clock, Layers, Percent, TrendingUp } from "lucide-react";
+import { ArrowRight, Building2, Globe, LineChart, Repeat, Star, Workflow } from "lucide-react";
 
 const stats = [
-  { value: "1,060", label: "Qualified Opportunities", icon: BarChart3 },
-  { value: "16", label: "Divisions Analyzed", icon: Building2 },
-  { value: "Monthly", label: "Strategy & Market Refresh", icon: Clock },
-  { value: "5", label: "New Market Segments", icon: Layers },
-  { value: "60%+", label: "Prospecting Time Saved", icon: Percent },
-  { value: "21.9%", label: "CAGR — Top Segment", icon: TrendingUp },
+  { value: "No Website", label: "Starting Point", icon: Globe },
+  { value: "Recurring Contracts", label: "New Revenue Base", icon: Repeat },
+  { value: "Always-On", label: "Campaign Motion", icon: Workflow },
+  { value: "Review Engine", label: "Reputation System", icon: Star },
+  { value: "Growth Mode", label: "Business Direction", icon: LineChart },
+  { value: "PE-Ready", label: "Documented Systems", icon: Building2 },
 ];
 
 export function CaseStudyPreview() {
@@ -27,15 +27,13 @@ export function CaseStudyPreview() {
           >
             <span className="section-label text-teal">Featured Case Study</span>
             <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              Fortune 1000 Manufacturer Transforms Sales Intelligence
+              Metro Detroit Services Company Rebuilt from Marketing Zero
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-slate-200">
-              A $2B+ industrial manufacturer with 70+ facilities deployed AI-powered sales
-              intelligence across 16 divisions — discovering 5 new high-growth market segments
-              and reducing manual prospecting time by 60%.
+              A 20+ year legacy business with declining customers had no website, no pipeline engine, and no repeatable outreach. ClearForge implemented a complete marketing operating system and moved the company into active growth with recurring commercial contracts.
             </p>
             <Button className="mt-8" size="lg" asChild>
-              <Link href="/case-studies/industrial-manufacturer">
+              <Link href="/case-studies/metro-detroit-services-company">
                 Read Full Case Study <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

@@ -11,7 +11,6 @@ const iconMap: Record<string, typeof Search> = { Search, PenTool, Rocket, BarCha
 export function ServicesPage() {
   return (
     <>
-      {/* Hero */}
       <section className="bg-white py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
@@ -22,17 +21,36 @@ export function ServicesPage() {
           >
             <span className="section-label">Services</span>
             <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              AI solutions that deliver <span className="gradient-text">measurable results.</span>
+              AI services designed for operators who need outcomes.
             </h1>
             <p className="mt-6 text-lg text-slate-600">
-              Four MECE service lines mapped to our methodology: Discover, Design, Build, Optimize.
-              Every engagement ties to a business outcome you can measure.
+              ClearForge combines strategic clarity with hands-on execution across five service lines. The AI Marketing Agent is our flagship offer for companies that need a complete growth engine.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Services Detail */}
+      <section className="bg-slate-navy py-16">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="rounded-xl border border-teal/30 bg-charcoal p-8 lg:p-10">
+            <div className="flex flex-wrap items-center justify-between gap-6">
+              <div className="max-w-2xl">
+                <span className="section-label text-teal">Flagship</span>
+                <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                  AI Marketing Agent
+                </h2>
+                <p className="mt-3 text-lg text-slate-200">
+                  Full-funnel strategy, execution, and optimization in one monthly operating model.
+                </p>
+              </div>
+              <Button size="lg" asChild>
+                <Link href="/services/ai-marketing-agent">View Dedicated Page <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {services.map((service, idx) => {
         const Icon = iconMap[service.icon];
         const isEven = idx % 2 === 0;
@@ -56,6 +74,11 @@ export function ServicesPage() {
                     <p className="mt-2 text-lg font-medium text-teal">{service.tagline}</p>
                     <p className="mt-4 text-lg text-slate-600 leading-relaxed">{service.description}</p>
                     <p className="mt-4 text-lg text-slate-600"><strong className="text-slate-700">Ideal for:</strong> {service.idealClient}</p>
+                    {service.slug === "ai-marketing-agent" && (
+                      <Button className="mt-6" variant="outline" asChild>
+                        <Link href="/services/ai-marketing-agent">Go to dedicated AI Marketing Agent page <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                      </Button>
+                    )}
                   </div>
 
                   <div className="space-y-6">
@@ -75,7 +98,7 @@ export function ServicesPage() {
                     <h3 className="text-lg font-bold text-slate-navy mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>Deliverables</h3>
                     <ul className="space-y-2">
                       {service.deliverables.map((d) => (
-                        <li key={d} className="flex items-start gap-2 text-lg text-slate-600">
+                        <li key={d} className="flex items-start gap-2 text-base text-slate-600">
                           <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-teal shrink-0" />
                           {d}
                         </li>
@@ -103,15 +126,13 @@ export function ServicesPage() {
         );
       })}
 
-      {/* CTA */}
       <section className="bg-slate-navy py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            Not sure which service fits?
+            Need help choosing the right starting point?
           </h2>
           <p className="mt-4 text-lg text-slate-200 max-w-xl mx-auto">
-            Start with a 30-minute discovery call. We&apos;ll assess your situation and
-            recommend the right approach.
+            We can map your highest-impact path in one discovery call.
           </p>
           <div className="mt-8 flex justify-center gap-4 flex-wrap">
             <Button size="lg" asChild>

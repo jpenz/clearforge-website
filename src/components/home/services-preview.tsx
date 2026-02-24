@@ -3,36 +3,43 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Search, Rocket, BarChart3, ClipboardCheck, ArrowRight } from "lucide-react";
+import { Search, Rocket, BarChart3, PenTool, Bot, ArrowRight } from "lucide-react";
 
 const serviceCards = [
   {
+    icon: Bot,
+    title: "AI Marketing Agent",
+    description: "Our flagship service: full-funnel strategy, execution, reporting, and optimization in one monthly operating model.",
+    href: "/services/ai-marketing-agent",
+    tag: "Flagship",
+  },
+  {
     icon: Search,
     title: "AI Strategy & Market Intelligence",
-    description: "Market studies, competitive analysis, and AI opportunity mapping. Know where AI creates the most value before you build anything.",
+    description: "Board-ready clarity on where AI should be applied before you commit implementation dollars.",
     href: "/services#ai-strategy",
-    tag: "Discover",
+    tag: "$15K · 4 Weeks",
   },
   {
     icon: Rocket,
     title: "AI Design & Build",
-    description: "Custom AI agents, workflow automation, and production systems. Architected for your business outcome, shipped on schedule.",
+    description: "Production AI systems shipped in 6-8 weeks and tied to measurable operating outcomes.",
     href: "/services#ai-design-build",
-    tag: "Build",
+    tag: "$50K-$100K",
+  },
+  {
+    icon: PenTool,
+    title: "AI Agent Retainer",
+    description: "Continuous monthly build capacity with weekly operating cadence. You own the code.",
+    href: "/services#ai-agent-retainer",
+    tag: "$15K/mo",
   },
   {
     icon: BarChart3,
-    title: "Managed AI Operations",
-    description: "Continuous optimization, model retraining, and market monitoring. Your AI compounds in value every month without adding headcount.",
-    href: "/services#managed-ai-operations",
-    tag: "Optimize",
-  },
-  {
-    icon: ClipboardCheck,
-    title: "AI Readiness Assessment",
-    description: "4-week diagnostic across 5 pillars. Scored assessment with a 90-day action plan. The fastest way to know if your business is ready.",
-    href: "/services#ai-readiness-assessment",
-    tag: "$15K · 4 Weeks",
+    title: "Managed AI Services",
+    description: "We build and run AI systems as an ongoing service for teams that do not want to operate them in-house.",
+    href: "/services#managed-ai-services",
+    tag: "Custom",
   },
 ];
 
@@ -49,14 +56,14 @@ export function ServicesPreview() {
         >
           <span className="section-label">Services</span>
           <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            Four services. One focus: measurable results.
+            Five service lines. One operator-first model.
           </h2>
           <p className="mt-4 text-lg text-slate-600 max-w-2xl">
-            Each service maps to a phase of our methodology. Start anywhere, expand as you see results.
+            Start with strategy, launch a performance sprint, or move directly to the AI Marketing Agent.
           </p>
         </motion.div>
 
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {serviceCards.map((service, i) => (
             <motion.div
               key={service.title}

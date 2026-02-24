@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const footerLinks = {
   Services: [
+    { href: "/services/ai-marketing-agent", label: "AI Marketing Agent" },
     { href: "/services", label: "All Services" },
     { href: "/pricing", label: "Pricing" },
     { href: "/case-studies", label: "Case Studies" },

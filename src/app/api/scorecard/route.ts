@@ -12,7 +12,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // TODO: Store in Supabase when configured
+    // TODO: Persist scorecard submissions when data storage is configured
     // const { data, error } = await supabase
     //   .from('scorecard_submissions')
     //   .insert({ answers, results, segment: results.segment })
@@ -44,9 +44,9 @@ export async function PUT(request: Request) {
       );
     }
 
-    // TODO: Store email + results in Supabase
-    // TODO: Send report via Resend
-    // TODO: Push to HubSpot CRM with segment tag
+    // TODO: Persist email + results in configured data storage
+    // TODO: Send report through configured email provider
+    // TODO: Push contact and segment to configured CRM
 
     console.log("Scorecard email capture:", {
       email,
