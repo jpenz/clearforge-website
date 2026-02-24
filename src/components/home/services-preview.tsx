@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Search, Rocket, BarChart3, PenTool, Bot, ArrowRight } from "lucide-react";
+import { images } from "@/lib/images";
 
 const serviceCards = [
   {
@@ -12,6 +13,7 @@ const serviceCards = [
     description: "Our flagship service: full-funnel strategy, execution, reporting, and optimization in one monthly operating model.",
     href: "/services/ai-marketing-agent",
     tag: "Flagship",
+    image: images.aiMarketingAgent,
   },
   {
     icon: Search,
@@ -19,6 +21,7 @@ const serviceCards = [
     description: "Board-ready clarity on where AI should be applied before you commit implementation dollars.",
     href: "/services#ai-strategy",
     tag: "$15K · 4 Weeks",
+    image: images.serviceStrategy,
   },
   {
     icon: Rocket,
@@ -26,6 +29,7 @@ const serviceCards = [
     description: "Production AI systems shipped in 6-8 weeks and tied to measurable operating outcomes.",
     href: "/services#ai-design-build",
     tag: "$50K-$100K",
+    image: images.serviceBuild,
   },
   {
     icon: PenTool,
@@ -33,6 +37,7 @@ const serviceCards = [
     description: "Continuous monthly build capacity with weekly operating cadence. You own the code.",
     href: "/services#ai-agent-retainer",
     tag: "$15K/mo",
+    image: images.serviceRetainer,
   },
   {
     icon: BarChart3,
@@ -40,6 +45,7 @@ const serviceCards = [
     description: "We build and run AI systems as an ongoing service for teams that do not want to operate them in-house.",
     href: "/services#managed-ai-services",
     tag: "Custom",
+    image: images.serviceManaged,
   },
 ];
 
@@ -73,7 +79,20 @@ export function ServicesPreview() {
               transition={{ duration: 0.4, delay: 0.08 * i }}
             >
               <Link href={service.href}>
-                <div className="group bg-white border border-gray-200 rounded-xl p-8 h-full hover:border-teal/30 hover:shadow-lg transition-all duration-300">
+                <div className="group bg-white border border-gray-200 rounded-xl overflow-hidden h-full hover:border-teal/30 hover:shadow-lg transition-all duration-300">
+                  {service.image && (
+                    <div className="h-32 w-full overflow-hidden bg-slate-navy relative">
+                      <div
+                        className="absolute inset-0 opacity-60 group-hover:opacity-80 transition-opacity"
+                        style={{
+                          backgroundImage: `url(${service.image})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }}
+                      />
+                    </div>
+                  )}
+                  <div className="p-8">
                   <div className="flex items-center justify-between mb-5">
                     <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-teal/10 group-hover:bg-teal group-hover:text-white transition-colors">
                       <service.icon className="h-5 w-5 text-teal group-hover:text-white" />
@@ -91,6 +110,7 @@ export function ServicesPreview() {
                   <div className="mt-5 flex items-center text-base text-teal font-medium group-hover:gap-2 transition-all">
                     Learn more
                     <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                  </div>
                   </div>
                 </div>
               </Link>

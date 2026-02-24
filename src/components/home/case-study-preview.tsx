@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Building2, Globe, LineChart, Repeat, Star, Workflow } from "lucide-react";
+import { images } from "@/lib/images";
 
 const stats = [
   { value: "No Website", label: "Starting Point", icon: Globe },
@@ -16,7 +17,15 @@ const stats = [
 
 export function CaseStudyPreview() {
   return (
-    <section className="bg-slate-navy py-24 lg:py-32">
+    <section className="bg-slate-navy py-24 lg:py-32 relative overflow-hidden">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-15"
+        style={{
+          backgroundImage: `url(${images.caseStudy})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
           <motion.div

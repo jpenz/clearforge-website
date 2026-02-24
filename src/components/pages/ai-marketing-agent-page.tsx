@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { pricingTiers } from "@/data/pricing";
 import { ArrowRight, Check, Gauge, LineChart, Radar, Repeat, Sparkles } from "lucide-react";
+import { images } from "@/lib/images";
 
 const highlights = [
   {
@@ -42,18 +43,23 @@ const marketingTiers = pricingTiers.filter((tier) => tier.category === "marketin
 export function AiMarketingAgentPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-white py-20 lg:py-28">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -top-28 right-[-120px] h-96 w-96 rounded-full bg-teal/10 blur-3xl" />
-          <div className="absolute -bottom-20 left-[-90px] h-80 w-80 rounded-full bg-cyan/10 blur-3xl" />
-        </div>
+      <section className="relative overflow-hidden bg-slate-navy py-20 lg:py-28 min-h-[60vh] flex items-center">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-25"
+          style={{
+            backgroundImage: `url(${images.aiMarketingAgent})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-slate-navy via-slate-navy/90 to-slate-navy/70" />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-4xl">
             <span className="section-label">Flagship Service</span>
-            <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl lg:text-6xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            <h1 className="mt-4 text-4xl font-bold text-white sm:text-5xl lg:text-6xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
               AI Marketing Agent
             </h1>
-            <p className="mt-6 text-xl text-slate-600 leading-relaxed">
+            <p className="mt-6 text-xl text-slate-300 leading-relaxed">
               A complete marketing operating system for PE-backed and mid-market companies that need predictable pipeline growth. Strategy, execution, and optimization in one monthly engagement.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
