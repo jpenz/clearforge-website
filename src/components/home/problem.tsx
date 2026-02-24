@@ -6,27 +6,27 @@ import { AlertTriangle, BarChart3, Workflow, ArrowRight } from "lucide-react";
 const problems = [
   {
     number: "01",
-    title: "High AI Interest, Low Business Impact",
+    title: "AI Pilots That Never Scale",
     description:
-      "Leaders know AI matters, but most teams still cannot tie AI activity to measurable growth, margin, or speed.",
+      "Most companies run proofs of concept that never become production systems. Meanwhile, competitors are deploying AI agents that operate as part of their workforce every day.",
     icon: AlertTriangle,
-    escalation: "Potential",
+    escalation: "The Pilot Trap",
   },
   {
     number: "02",
     title: "Strategy and Delivery Are Split",
     description:
-      "One partner delivers recommendations. Another vendor attempts implementation. Value gets lost between handoffs.",
+      "The big firms charge for strategy. A different vendor attempts implementation. Value gets lost between handoffs. The companies pulling ahead have one team from diagnosis through operations.",
     icon: Workflow,
-    escalation: "Execution",
+    escalation: "The Handoff Problem",
   },
   {
     number: "03",
-    title: "Systems Stall After Launch",
+    title: "Technology Changes, People Don't",
     description:
-      "Even good builds degrade without ongoing operation and optimization. Performance plateaus and teams lose confidence.",
+      "New systems get deployed but the team isn't prepared to work alongside them. Adoption stalls, confidence drops, and the investment sits unused. AI without workforce readiness doesn't stick.",
     icon: BarChart3,
-    escalation: "Sustained Value",
+    escalation: "The Adoption Gap",
   },
 ];
 
@@ -41,13 +41,14 @@ export function Problem() {
           transition={{ duration: 0.5 }}
           className="mb-12 max-w-3xl"
         >
-          <span className="section-label text-teal">The AI Value Gap</span>
+          <span className="section-label text-teal">The Widening AI Value Gap</span>
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            The gap is not AI potential. The gap is turning potential into operating value.
+            Companies that capture value from AI are pulling away. The rest are falling further behind.
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-slate-300">
-            Most companies are stuck between ideas and outcomes. ClearForge closes that gap with one team that diagnoses,
-            builds, and operates.
+            The gap between AI leaders and everyone else is widening — not closing. Leaders compound their advantage
+            every quarter while most companies are still stuck between pilot projects and real business impact.
+            ClearForge closes that gap with one team that diagnoses, builds, and operates.
           </p>
         </motion.div>
 

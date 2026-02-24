@@ -17,8 +17,8 @@ const serviceCards = [
   },
   {
     icon: Rocket,
-    title: "AI Design & Build",
-    description: "Production AI systems tied to strategy priorities and launched in 6-8 weeks.",
+    title: "AI Agent Design & Build",
+    description: "We deploy AI agents that operate as part of your team — handling workflows, making decisions, and executing tasks in production from day one.",
     href: "/services#ai-design-build",
     tag: "$50K-$100K",
     image: images.serviceBuild,
@@ -26,7 +26,7 @@ const serviceCards = [
   {
     icon: BarChart3,
     title: "Managed AI Operations",
-    description: "We operate and continuously optimize AI systems so your team can focus on the business.",
+    description: "We operate and optimize your AI agents and systems continuously. Performance compounds every cycle — not just at quarterly reviews.",
     href: "/services#managed-ai-operations",
     tag: "$15K+/mo",
     image: images.serviceManaged,
@@ -34,7 +34,7 @@ const serviceCards = [
   {
     icon: PenTool,
     title: "Legacy System Modernization",
-    description: "Make COBOL, mainframes, and old ERP workflows AI-ready without full rip-and-replace.",
+    description: "AI agents that bridge your existing systems — COBOL, mainframes, legacy ERP — without ripping and replacing. Your infrastructure stays, AI makes it work harder.",
     href: "/services#legacy-system-modernization",
     tag: "Custom",
     image: images.serviceRetainer,
@@ -42,7 +42,7 @@ const serviceCards = [
   {
     icon: Bot,
     title: "AI Marketing & Revenue Operations",
-    description: "One application of the platform: end-to-end demand, outreach, CRM, and pipeline operations.",
+    description: "One application of the platform: AI agents that run your full revenue engine — demand generation, outreach, pipeline, and optimization.",
     href: "/services/ai-marketing-agent",
     tag: "Application",
     image: images.aiMarketingAgent,

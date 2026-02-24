@@ -43,8 +43,9 @@ export function Hero() {
               <span className="gradient-text">The gap is execution.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-xl leading-relaxed text-slate-300">
-              The technology is available. The hard part is knowing where to focus, building the right systems,
-              and operating them continuously. ClearForge closes that gap.
+              AI agents are becoming part of the workforce. The companies pulling ahead aren't just buying technology —
+              they're rewiring how their business operates. ClearForge tells you where to focus, deploys the agents,
+              and runs them alongside your team.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Button size="lg" asChild>
@@ -71,8 +72,8 @@ export function Hero() {
             <div className="mt-5 space-y-3">
               {[
                 "Diagnose where your business should be winning",
-                "Build production AI systems tied to outcomes",
-                "Operate and optimize those systems continuously",
+                "Deploy AI agents that operate as part of your team",
+                "Run and optimize those systems continuously",
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3 rounded-lg border border-white/10 bg-white/5 p-3">
                   <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-teal" />

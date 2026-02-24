@@ -6,28 +6,28 @@ import { Briefcase, Hammer, LineChart, Users, Workflow } from "lucide-react";
 const items = [
   {
     icon: Briefcase,
-    title: "Strategy Plus Delivery in One Team",
-    description: "Traditional firms often stop at recommendations. We diagnose where to win, then build and run the systems.",
+    title: "One Team, Strategy Through Operations",
+    description: "The big firms split strategy and implementation across different partners. Value gets lost in the handoff. We keep it under one roof — from diagnosis to running systems.",
   },
   {
     icon: Users,
     title: "Senior Operators, Not Junior Leverage",
-    description: "You work with senior practitioners directly, not a rotating team of early-career analysts.",
+    description: "You work with senior practitioners who've led transformations at Fortune 500 companies. Not a rotating team of 25-year-old analysts.",
   },
   {
     icon: Hammer,
-    title: "Built to Ship, Not Just Advise",
-    description: "MBB-style strategic rigor with engineering and managed operations that execute in production.",
+    title: "We Deploy AI Agents, Not Slide Decks",
+    description: "We build AI agents that operate as part of your workforce — handling real workflows, making real decisions, in production. Not prototypes that die after the demo.",
   },
   {
     icon: LineChart,
-    title: "Scaled for $5M to $5B Businesses",
-    description: "We support owner-led firms, PE portfolios, and enterprise teams with the same Strategy to Operate model.",
+    title: "Scaled for $5M to $5B",
+    description: "The same Strategy-to-Operate model works for a family-owned manufacturer, a PE portfolio company, or a Fortune 1000 enterprise.",
   },
   {
-    icon: Users,
+    icon: Workflow,
     title: "Process and People, in Tandem",
-    description: "We modernize your workflows and prepare your team at the same time. AI that your people can't operate doesn't create lasting value.",
+    description: "We modernize your workflows and prepare your team to work alongside AI agents at the same time. Technology without workforce readiness doesn't stick.",
   },
 ];
 

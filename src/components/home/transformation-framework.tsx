@@ -31,12 +31,12 @@ const phases = [
   {
     label: "Build",
     workflow: {
-      title: "Build and Test in Production",
-      description: "Ship real AI systems your team uses on day one. Test with live data, real users, and actual business conditions — not sandboxes.",
+      title: "Deploy Agents in Production",
+      description: "Ship AI agents that handle real workflows from day one — processing data, making decisions, executing tasks alongside your team. Not sandboxes. Not demos.",
     },
     workforce: {
-      title: "Assess Gaps and Develop Talent",
-      description: "Your people learn alongside the technology. We train teams to work with AI agents, not around them. Human judgment stays in the loop.",
+      title: "Build the Hybrid Team",
+      description: "Your people learn to work with AI agents as teammates, not tools. Human judgment stays in the loop for complex decisions. Agents handle the volume.",
     },
     icon: Gauge,
   },
@@ -47,8 +47,8 @@ const phases = [
       description: "Expand proven AI systems across the organization. Replicate wins from one department to the next. Compound the value.",
     },
     workforce: {
-      title: "Measure Human and Agent Performance",
-      description: "Track productivity across your hybrid workforce — people and AI working together. Continuously improve both sides of the equation.",
+      title: "Measure the Hybrid Workforce",
+      description: "Track productivity across your combined team — human and AI agent output measured together. Know what's working. Continuously improve both sides.",
     },
     icon: Scale,
   },
@@ -73,9 +73,10 @@ export function TransformationFramework() {
             Modernize the work and the workforce in tandem.
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-slate-300">
-            Most AI projects fail because they change the technology without changing how people work.
-            We run two tracks simultaneously — redesigning your processes for AI while preparing your
-            team to operate alongside it. One without the other doesn't stick.
+            AI agents are a new category of worker. Most companies deploy the technology without preparing
+            the humans who work alongside it. We run two tracks simultaneously — redesigning your processes
+            for AI agents while building your team's ability to operate with them. One without the other
+            doesn't stick.
           </p>
         </motion.div>
 
