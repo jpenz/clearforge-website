@@ -181,12 +181,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section
-        className="relative py-28 lg:py-36"
-        style={{ backgroundImage: "url('/api/img?src=https://heyboss.heeyo.ai/replicate-flux-schnell-1771984866-72b35114.webp')", backgroundSize: "cover", backgroundPosition: "center" }}
-      >
-        <div className="pointer-events-none absolute inset-0 bg-gray-50/92" />
-        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="bg-gray-50 py-28 lg:py-36">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-slate-navy sm:text-4xl" style={{ letterSpacing: "-0.02em" }}>Case studies that prove the model</h2>
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {featuredCaseStudies.map((study) => (
