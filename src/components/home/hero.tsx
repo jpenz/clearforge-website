@@ -14,7 +14,7 @@ const proofPoints = [
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[85vh] items-center overflow-hidden bg-slate-navy">
+    <section className="relative flex min-h-[85vh] items-center overflow-hidden bg-slate-navy grain-overlay gradient-mesh">
       <div
         className="pointer-events-none absolute inset-0 opacity-30"
         style={{

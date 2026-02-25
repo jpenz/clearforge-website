@@ -56,7 +56,7 @@ const phases = [
 
 export function TransformationFramework() {
   return (
-    <section className="bg-slate-navy py-24 lg:py-32">
+    <section className="bg-slate-navy py-24 lg:py-32 grain-overlay">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

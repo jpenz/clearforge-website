@@ -51,7 +51,7 @@ const serviceCards = [
 
 export function ServicesPreview() {
   return (
-    <section className="border-y border-gray-200 bg-gray-50 py-24 lg:py-32">
+    <section className="border-y border-gray-200 bg-gray-50 py-24 lg:py-32 section-divider">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

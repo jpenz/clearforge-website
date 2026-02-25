@@ -84,6 +84,35 @@ export const caseStudies: CaseStudy[] = [
     scale:
       "What started with two divisions expanded into a broader company operating system for market visibility and growth planning. Leadership now uses the same intelligence foundation for commercial planning and portfolio decisions.",
   },
+  {
+    slug: "legacy-enterprise-software",
+    title: "Legacy Enterprise Software Provider Modernizes and Grows Revenue",
+    industry: "Enterprise Software",
+    service: "AI Strategy + Legacy System Modernization",
+    heroMetric: "New Revenue",
+    heroMetricLabel: "From Customer Loss to Feature-Led Growth",
+    featured: false,
+    excerpt:
+      "An enterprise software company known for industrial-strength, mission-critical systems was losing customers to modern competitors. ClearForge helped them modernize without abandoning what made them reliable, then identified new AI-powered features that drove revenue growth.",
+    challenge:
+      "The company had built its reputation on extreme reliability, deep vertical customization, and mission-critical stability — the kind of systems that run 24/7 and can't afford downtime. But the technology was antiquated. Customers increasingly demanded modern AI and cloud capabilities, and the cost of a full modernization had always outsized the company's market. They were watching customers leave for newer competitors, unable to offer the features buyers now expected, and struggling to attract new business despite having some of the most stable, deeply customized enterprise systems in their space.",
+    solution: [
+      "Conducted a joint market study to identify where the company should be playing — which customer segments valued reliability most and which new capabilities would drive the highest willingness to pay",
+      "Mapped the existing system architecture to identify where AI could be layered in without compromising the stability that defined the platform",
+      "Designed and deployed AI-powered features targeting the highest-value use cases identified in the market study — giving existing customers capabilities they were leaving for",
+      "Built cloud integration pathways that connected the legacy platform to modern infrastructure without requiring a full rewrite",
+      "Created a product roadmap that sequenced modernization around revenue impact — features that saved customers money and attracted new buyers first",
+      "Implemented AI-driven analytics and reporting that turned decades of customer data into actionable intelligence for end users",
+    ],
+    outcomes: [
+      { metric: "Revenue Growth", description: "New AI features created upsell opportunities across the existing customer base" },
+      { metric: "Customer Retention", description: "Stopped the bleeding — customers who were evaluating competitors stayed after seeing the modernization roadmap" },
+      { metric: "New Customers", description: "AI capabilities attracted buyers who had previously dismissed the platform as outdated" },
+      { metric: "Cost Savings", description: "Customers saved money through AI-powered automation and insights built on top of the existing system" },
+    ],
+    scale:
+      "The company went from a defensive posture — trying to hold onto customers — to an offensive one, actively winning new business with AI-powered features that competitors couldn't match because they lacked the decades of deep vertical data and reliability. The modernization paid for itself through new revenue within the first year. Anonymous client quote: \"ClearForge showed us we didn't have to choose between our reliability and being modern. We could be both.\"",
+  },
 ];
 
 export function getCaseStudy(slug: string): CaseStudy | undefined {
