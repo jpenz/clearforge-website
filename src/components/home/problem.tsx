@@ -46,7 +46,7 @@ export function Problem() {
             Companies that capture value from AI are pulling away. The rest are falling further behind.
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-slate-300">
-            The gap between AI leaders and everyone else is widening — not closing. Leaders compound their advantage
+            The gap between AI leaders and everyone else is widening - not closing. Leaders compound their advantage
             every quarter while most companies are still stuck between pilot projects and real business impact.
             ClearForge closes that gap with one team that diagnoses, builds, and operates.
           </p>

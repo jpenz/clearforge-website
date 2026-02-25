@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { LinePattern } from "@/components/ui/line-pattern";
 
 const values = [
   { title: "Strategy Must End in Execution", description: "We do not stop at recommendations. Every strategy engagement is built to move into delivery." },
@@ -34,6 +35,10 @@ export function AboutPage() {
           </motion.div>
         </div>
       </section>
+
+      <div className="relative h-14 overflow-hidden bg-gray-100">
+        <LinePattern className="pointer-events-none absolute inset-x-0 top-1/2 h-24 w-full -translate-y-1/2" />
+      </div>
 
       <section className="bg-gray-100 py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">

@@ -126,7 +126,7 @@ export async function POST(req: NextRequest) {
       from: "ClearForge <website@clearforge.ai>",
       to: ["james@clearforge.ai"],
       replyTo: email,
-      subject: `ClearForge Inquiry: ${safeName} — ${safeCompany}`,
+      subject: `ClearForge Inquiry: ${safeName} - ${safeCompany}`,
       html: emailHtml,
     });
 

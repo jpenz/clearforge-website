@@ -2,12 +2,15 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { type Industry } from "@/data/industries";
+import { industryIcons } from "@/lib/icons";
 
 interface Props {
   industry: Industry;
 }
 
 export function IndustryDetailPage({ industry }: Props) {
+  const IndustryIcon = industryIcons[industry.icon];
+
   return (
     <>
       <section className="bg-white py-20 lg:py-28 border-b border-gray-200">
@@ -15,7 +18,8 @@ export function IndustryDetailPage({ industry }: Props) {
           <Link href="/industries" className="inline-flex items-center gap-1 text-sm text-slate-600 hover:text-teal">
             <ArrowLeft className="h-4 w-4" /> Back to industries
           </Link>
-          <h1 className="mt-6 text-4xl font-bold text-slate-navy sm:text-5xl">AI strategy for {industry.name}</h1>
+          <IndustryIcon className="mt-6 h-8 w-8 text-teal" aria-hidden />
+          <h1 className="mt-3 text-4xl font-bold text-slate-navy sm:text-5xl">AI strategy for {industry.name}</h1>
           <p className="mt-4 max-w-3xl text-lg text-slate-600">{industry.hero}</p>
         </div>
       </section>

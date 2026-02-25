@@ -64,7 +64,7 @@ export function ScorecardForm() {
         body: JSON.stringify({ answers, results }),
       });
     } catch {
-      // Non-blocking — results still show even if API fails
+      // Non-blocking - results still show even if API fails
     }
 
     // Store results in sessionStorage for the results page

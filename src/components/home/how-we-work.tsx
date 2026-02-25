@@ -21,7 +21,7 @@ const steps = [
   {
     number: "03",
     title: "Build & Deploy",
-    description: "We deploy AI agents that integrate with your existing tools and workflows — including legacy systems. Real agents doing real work from day one, operating alongside your team.",
+    description: "We deploy AI agents that integrate with your existing tools and workflows - including legacy systems. Real agents doing real work from day one, operating alongside your team.",
     duration: "Week 5-8",
     icon: Hammer,
   },

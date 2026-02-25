@@ -49,7 +49,7 @@ export function Hero() {
               <span className="gradient-text">The gap is execution.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-xl leading-relaxed text-slate-300">
-              AI agents are becoming part of the workforce. The companies pulling ahead aren't just buying technology —
+              AI agents are becoming part of the workforce. The companies pulling ahead aren't just buying technology -
               they're rewiring how their business operates. ClearForge tells you where to focus, deploys the agents,
               and runs them alongside your team.
             </p>

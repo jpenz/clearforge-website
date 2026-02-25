@@ -20,7 +20,7 @@ const phases = [
     label: "Modernize",
     workflow: {
       title: "Standardize, Then Reimagine",
-      description: "Clean up and simplify before automating. Then redesign processes from the ground up for AI — not bolting new tech onto broken workflows.",
+      description: "Clean up and simplify before automating. Then redesign processes from the ground up for AI - not bolting new tech onto broken workflows.",
     },
     workforce: {
       title: "Redesign Roles and Skills",
@@ -32,7 +32,7 @@ const phases = [
     label: "Build",
     workflow: {
       title: "Deploy Agents in Production",
-      description: "Ship AI agents that handle real workflows from day one — processing data, making decisions, executing tasks alongside your team. Not sandboxes. Not demos.",
+      description: "Ship AI agents that handle real workflows from day one - processing data, making decisions, executing tasks alongside your team. Not sandboxes. Not demos.",
     },
     workforce: {
       title: "Build the Hybrid Team",
@@ -48,7 +48,7 @@ const phases = [
     },
     workforce: {
       title: "Measure the Hybrid Workforce",
-      description: "Track productivity across your combined team — human and AI agent output measured together. Know what's working. Continuously improve both sides.",
+      description: "Track productivity across your combined team - human and AI agent output measured together. Know what's working. Continuously improve both sides.",
     },
     icon: Scale,
   },
@@ -119,7 +119,7 @@ export function TransformationFramework() {
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-slate-300">
             AI agents are a new category of worker. Most companies deploy the technology without preparing
-            the humans who work alongside it. We run two tracks simultaneously — redesigning your processes
+            the humans who work alongside it. We run two tracks simultaneously - redesigning your processes
             for AI agents while building your team's ability to operate with them. One without the other
             doesn't stick.
           </p>
@@ -182,7 +182,7 @@ export function TransformationFramework() {
           ))}
         </div>
 
-        {/* Bottom bar — enablers */}
+        {/* Bottom bar - enablers */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -195,10 +195,10 @@ export function TransformationFramework() {
           </p>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { title: "Leadership alignment", desc: "Executives understand and champion the change — not just approve the budget." },
+              { title: "Leadership alignment", desc: "Executives understand and champion the change - not just approve the budget." },
               { title: "Strategic workforce planning", desc: "Roles evolve with the technology. No one gets blindsided." },
               { title: "Learning and change management", desc: "Your team builds confidence through hands-on adoption, not training decks." },
-              { title: "Performance measurement", desc: "Clear KPIs for both human and AI output — so you know what's actually working." },
+              { title: "Performance measurement", desc: "Clear KPIs for both human and AI output - so you know what's actually working." },
             ].map((item) => (
               <div key={item.title}>
                 <h4 className="text-sm font-bold text-white">{item.title}</h4>

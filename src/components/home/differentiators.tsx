@@ -7,7 +7,7 @@ const items = [
   {
     icon: Briefcase,
     title: "One Team, Strategy Through Operations",
-    description: "The big firms split strategy and implementation across different partners. Value gets lost in the handoff. We keep it under one roof — from diagnosis to running systems.",
+    description: "The big firms split strategy and implementation across different partners. Value gets lost in the handoff. We keep it under one roof - from diagnosis to running systems.",
   },
   {
     icon: Users,
@@ -17,7 +17,7 @@ const items = [
   {
     icon: Hammer,
     title: "We Deploy AI Agents, Not Slide Decks",
-    description: "We build AI agents that operate as part of your workforce — handling real workflows, making real decisions, in production. Not prototypes that die after the demo.",
+    description: "We build AI agents that operate as part of your workforce - handling real workflows, making real decisions, in production. Not prototypes that die after the demo.",
   },
   {
     icon: LineChart,

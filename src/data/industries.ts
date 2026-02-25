@@ -1,5 +1,8 @@
+export type IndustryIcon = "Factory" | "Briefcase" | "Building2" | "Target";
+
 export interface Industry {
   slug: string;
+  icon: IndustryIcon;
   name: string;
   shortName: string;
   hero: string;
@@ -14,6 +17,7 @@ export interface Industry {
 export const deepIndustries: Industry[] = [
   {
     slug: "manufacturing",
+    icon: "Factory",
     name: "Manufacturing",
     shortName: "Manufacturing",
     hero: "Apply AI to throughput, planning, and commercial execution without disrupting critical operations.",
@@ -39,6 +43,7 @@ export const deepIndustries: Industry[] = [
   },
   {
     slug: "professional-services",
+    icon: "Briefcase",
     name: "Professional Services",
     shortName: "Professional Services",
     hero: "Increase billable capacity and client responsiveness by redesigning delivery workflows with AI.",
@@ -64,6 +69,7 @@ export const deepIndustries: Industry[] = [
   },
   {
     slug: "financial-services",
+    icon: "Building2",
     name: "Financial Services",
     shortName: "Financial Services",
     hero: "Drive speed and consistency in risk, operations, and client-facing workflows while keeping controls intact.",
@@ -89,6 +95,7 @@ export const deepIndustries: Industry[] = [
   },
   {
     slug: "pe-portfolio",
+    icon: "Target",
     name: "PE Portfolio Companies",
     shortName: "PE Portfolios",
     hero: "Deploy repeatable AI value creation plays across portfolio companies with tighter execution control.",

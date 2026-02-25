@@ -41,7 +41,7 @@ export const pillars: Pillar[] = [
     key: "tech",
     name: "Technology & Systems",
     weight: 0.15,
-    description: "Can your infrastructure support AI agents — including legacy systems that need bridging?",
+    description: "Can your infrastructure support AI agents - including legacy systems that need bridging?",
   },
   {
     key: "strategy",
@@ -55,7 +55,7 @@ export const questions: ScorecardQuestion[] = [
   // Data Readiness (Q1-Q4)
   {
     id: 1,
-    text: "Our key business data is centralized and accessible — not trapped in spreadsheets or individual computers",
+    text: "Our key business data is centralized and accessible - not trapped in spreadsheets or individual computers",
     pillar: "data",
   },
   {
@@ -81,7 +81,7 @@ export const questions: ScorecardQuestion[] = [
   },
   {
     id: 6,
-    text: "Our people would embrace AI tools that make their jobs easier — not resist them",
+    text: "Our people would embrace AI tools that make their jobs easier - not resist them",
     pillar: "workforce",
   },
   {
@@ -97,7 +97,7 @@ export const questions: ScorecardQuestion[] = [
   // Process Maturity (Q9-Q12)
   {
     id: 9,
-    text: "Our most important business processes are documented — someone new could follow them",
+    text: "Our most important business processes are documented - someone new could follow them",
     pillar: "process",
   },
   {
@@ -139,7 +139,7 @@ export const questions: ScorecardQuestion[] = [
   // Strategic Alignment (Q17-Q20)
   {
     id: 17,
-    text: "AI is a strategic priority for our leadership — not just an experiment",
+    text: "AI is a strategic priority for our leadership - not just an experiment",
     pillar: "strategy",
   },
   {
@@ -212,8 +212,8 @@ function buildRoadmap(pillarScores: PillarScore[], compositeScore: number): Road
     title: "Growth Strategy & Diagnosis",
     description: `We start by understanding your market, competitive position, and where AI creates the most value for your specific business. ${
       sorted[0].percentage < 50
-        ? `Your ${sorted[0].name.toLowerCase()} scored lowest — we'll prioritize that in our assessment.`
-        : "Your foundations are solid — we'll identify where to accelerate."
+        ? `Your ${sorted[0].name.toLowerCase()} scored lowest - we'll prioritize that in our assessment.`
+        : "Your foundations are solid - we'll identify where to accelerate."
     }`,
     service: "Growth Strategy & Diagnosis",
     timeline: "Weeks 1-4",
@@ -225,7 +225,7 @@ function buildRoadmap(pillarScores: PillarScore[], compositeScore: number): Road
     roadmap.push({
       phase: "Phase 2",
       title: "Process Redesign & Data Foundation",
-      description: "Before deploying AI agents, we standardize and simplify your core workflows. Map what exists, fix what's broken, then redesign for AI — not bolt automation onto broken processes.",
+      description: "Before deploying AI agents, we standardize and simplify your core workflows. Map what exists, fix what's broken, then redesign for AI - not bolt automation onto broken processes.",
       service: "AI Agent Design & Build",
       timeline: "Weeks 5-10",
     });
@@ -233,7 +233,7 @@ function buildRoadmap(pillarScores: PillarScore[], compositeScore: number): Road
     roadmap.push({
       phase: "Phase 2",
       title: "Legacy System Modernization",
-      description: "Your existing systems still run critical operations. We deploy AI agents that bridge those systems — connecting legacy infrastructure to modern capabilities without ripping and replacing.",
+      description: "Your existing systems still run critical operations. We deploy AI agents that bridge those systems - connecting legacy infrastructure to modern capabilities without ripping and replacing.",
       service: "Legacy System Modernization",
       timeline: "Weeks 5-12",
     });
@@ -241,7 +241,7 @@ function buildRoadmap(pillarScores: PillarScore[], compositeScore: number): Road
     roadmap.push({
       phase: "Phase 2",
       title: "AI Agent Design & Build",
-      description: "Your foundations are strong. We deploy AI agents into your highest-impact workflows — handling real tasks, making real decisions, operating alongside your team from day one.",
+      description: "Your foundations are strong. We deploy AI agents into your highest-impact workflows - handling real tasks, making real decisions, operating alongside your team from day one.",
       service: "AI Agent Design & Build",
       timeline: "Weeks 5-12",
     });
@@ -260,7 +260,7 @@ function buildRoadmap(pillarScores: PillarScore[], compositeScore: number): Road
     roadmap.push({
       phase: "Phase 3",
       title: "Scale & Optimize",
-      description: "Expand proven AI systems across the organization. Replicate wins from one area to the next. Your AI agents get smarter every cycle — performance compounds, not plateaus.",
+      description: "Expand proven AI systems across the organization. Replicate wins from one area to the next. Your AI agents get smarter every cycle - performance compounds, not plateaus.",
       service: "Managed AI Operations",
       timeline: "Ongoing",
     });
@@ -315,7 +315,7 @@ export function calculateResults(answers: Answers): ScorecardResult {
   if (rounded <= 35) {
     maturityLevel = "Foundation";
     maturityDescription =
-      "Your organization is in the early stages. The gap between where you are and where AI leaders operate is significant — but closeable. The key is starting with the right diagnosis, not jumping to tools.";
+      "Your organization is in the early stages. The gap between where you are and where AI leaders operate is significant - but closeable. The key is starting with the right diagnosis, not jumping to tools.";
     recommendation =
       "Start with Growth Strategy & Diagnosis. We'll map your operations, identify where AI creates real value, and build a phased roadmap so you're not guessing.";
     recommendedService = "Growth Strategy & Diagnosis";
@@ -323,15 +323,15 @@ export function calculateResults(answers: Answers): ScorecardResult {
   } else if (rounded <= 50) {
     maturityLevel = "Emerging";
     maturityDescription =
-      "You have some foundations in place but gaps remain — especially in your weaker pillars. Companies at this stage often know AI matters but haven't connected it to specific business outcomes yet.";
+      "You have some foundations in place but gaps remain - especially in your weaker pillars. Companies at this stage often know AI matters but haven't connected it to specific business outcomes yet.";
     recommendation =
-      "Growth Strategy & Diagnosis will cut through the noise and show you exactly where to focus. Most companies at this stage try to do too much at once — we'll help you prioritize.";
+      "Growth Strategy & Diagnosis will cut through the noise and show you exactly where to focus. Most companies at this stage try to do too much at once - we'll help you prioritize.";
     recommendedService = "Growth Strategy & Diagnosis";
     segment = "C";
   } else if (rounded <= 65) {
     maturityLevel = "Developing";
     maturityDescription =
-      "Solid foundations. Your organization can support targeted AI agent deployment. The risk at this stage is stalling between strategy and execution — the companies pulling ahead don't pause here.";
+      "Solid foundations. Your organization can support targeted AI agent deployment. The risk at this stage is stalling between strategy and execution - the companies pulling ahead don't pause here.";
     recommendation =
       "Move to AI Agent Design & Build. Deploy agents into your highest-impact workflows while preparing your team to work alongside them.";
     recommendedService = "AI Agent Design & Build";
@@ -347,7 +347,7 @@ export function calculateResults(answers: Answers): ScorecardResult {
   } else {
     maturityLevel = "Leader";
     maturityDescription =
-      "Your organization is AI-ready across all dimensions. You're in the top tier — positioned to build sustainable competitive advantages through AI-native operations and a hybrid workforce.";
+      "Your organization is AI-ready across all dimensions. You're in the top tier - positioned to build sustainable competitive advantages through AI-native operations and a hybrid workforce.";
     recommendation =
       "Managed AI Operations keeps your AI systems compounding in value. Focus on scaling across the organization and measuring human + agent productivity together.";
     recommendedService = "Managed AI Operations";

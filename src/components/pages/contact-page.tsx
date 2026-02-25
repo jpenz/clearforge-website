@@ -89,9 +89,9 @@ export function ContactPage() {
                     <select id="revenue" name="revenue" className="w-full rounded-md border border-gray-200 bg-white px-4 py-2.5 text-lg text-slate-700 focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal">
                       <option value="">Select range</option>
                       <option value="<5M">&lt;$5M</option>
-                      <option value="5M-25M">$5M–$25M</option>
-                      <option value="25M-100M">$25M–$100M</option>
-                      <option value="100M-500M">$100M–$500M</option>
+                      <option value="5M-25M">$5M-$25M</option>
+                      <option value="25M-100M">$25M-$100M</option>
+                      <option value="100M-500M">$100M-$500M</option>
                       <option value="500M+">$500M+</option>
                     </select>
                   </div>

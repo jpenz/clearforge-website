@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { engagementModels, firstWeekPlan, howWeWorkFaqs } from "@/data/how-we-work";
+import { engagementIcons } from "@/lib/icons";
 
 export function HowWeWorkPage() {
   return (
@@ -26,19 +27,23 @@ export function HowWeWorkPage() {
       <section className="bg-gray-50 py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-5 md:grid-cols-2">
-            {engagementModels.map((model) => (
-              <article key={model.title} className="rounded-xl border border-gray-200 bg-white p-6">
-                <h2 className="text-2xl font-bold text-slate-navy">{model.title}</h2>
-                <p className="mt-3 text-base text-slate-600">{model.scope}</p>
-                <p className="mt-3 text-sm text-slate-700"><strong>Timeline:</strong> {model.timeline}</p>
-                <p className="mt-1 text-sm text-slate-700"><strong>Best for:</strong> {model.bestFor}</p>
-                <ul className="mt-4 space-y-2">
-                  {model.includes.map((item) => (
-                    <li key={item} className="text-base text-slate-600">• {item}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
+            {engagementModels.map((model) => {
+              const Icon = engagementIcons[model.icon];
+              return (
+                <article key={model.title} className="rounded-xl border border-gray-200 bg-white p-6">
+                  <Icon className="mb-3 h-8 w-8 text-teal" aria-hidden />
+                  <h2 className="text-2xl font-bold text-slate-navy">{model.title}</h2>
+                  <p className="mt-3 text-base text-slate-600">{model.scope}</p>
+                  <p className="mt-3 text-sm text-slate-700"><strong>Timeline:</strong> {model.timeline}</p>
+                  <p className="mt-1 text-sm text-slate-700"><strong>Best for:</strong> {model.bestFor}</p>
+                  <ul className="mt-4 space-y-2">
+                    {model.includes.map((item) => (
+                      <li key={item} className="text-base text-slate-600">• {item}</li>
+                    ))}
+                  </ul>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>

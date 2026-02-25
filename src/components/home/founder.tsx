@@ -15,7 +15,7 @@ export function Founder() {
         >
           <span className="section-label">Our Approach</span>
           <blockquote className="mt-6 text-2xl font-bold text-slate-navy leading-relaxed sm:text-3xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            &ldquo;We don&apos;t sell AI. We sell measurable business outcomes —
+            &ldquo;We don&apos;t sell AI. We sell measurable business outcomes -
             and we build the AI to get there.&rdquo;
           </blockquote>
           <p className="mt-6 text-lg text-slate-600">

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { broadIndustries, deepIndustries } from "@/data/industries";
+import { industryIcons } from "@/lib/icons";
 
 export function IndustriesPage() {
   return (
@@ -20,17 +21,21 @@ export function IndustriesPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-slate-navy">Where we go deepest</h2>
           <div className="mt-6 grid gap-5 md:grid-cols-2">
-            {deepIndustries.map((industry) => (
-              <article key={industry.slug} className="rounded-xl border border-gray-200 bg-white p-6">
-                <h3 className="text-xl font-bold text-slate-navy">{industry.name}</h3>
-                <p className="mt-3 text-base text-slate-600">{industry.hero}</p>
-                <Button variant="link" className="mt-4 px-0" asChild>
-                  <Link href={`/industries/${industry.slug}`}>
-                    Explore industry playbook <ArrowRight className="ml-1 h-4 w-4" />
-                  </Link>
-                </Button>
-              </article>
-            ))}
+            {deepIndustries.map((industry) => {
+              const Icon = industryIcons[industry.icon];
+              return (
+                <article key={industry.slug} className="rounded-xl border border-gray-200 bg-white p-6">
+                  <Icon className="mb-3 h-8 w-8 text-teal" aria-hidden />
+                  <h3 className="text-xl font-bold text-slate-navy">{industry.name}</h3>
+                  <p className="mt-3 text-base text-slate-600">{industry.hero}</p>
+                  <Button variant="link" className="mt-4 px-0" asChild>
+                    <Link href={`/industries/${industry.slug}`}>
+                      Explore industry playbook <ArrowRight className="ml-1 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </article>
+              );
+            })}
           </div>
 
           <div className="mt-12 rounded-xl border border-gray-200 bg-white p-6">

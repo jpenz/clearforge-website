@@ -59,7 +59,7 @@ export function ScorecardResultsPage() {
         }),
       });
     } catch {
-      // Non-blocking — show results even if capture fails
+      // Non-blocking - show results even if capture fails
     }
 
     setSubmitted(true);
@@ -223,7 +223,7 @@ export function ScorecardResultsPage() {
               Here's how we'd close the gap for your business.
             </h2>
             <p className="mt-3 text-slate-300">
-              Based on your scores, this is the phased approach we'd recommend. Every engagement starts with understanding where you are — then we build from there.
+              Based on your scores, this is the phased approach we'd recommend. Every engagement starts with understanding where you are, then we build from there.
             </p>
           </motion.div>
 

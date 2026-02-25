@@ -1,8 +1,10 @@
 export type JourneyStage = "UNDERSTAND" | "BUILD" | "OPERATE";
+export type SolutionIcon = "Compass" | "Bot" | "Gauge" | "Layers" | "TrendingUp";
 
 export interface Solution {
   slug: string;
   stage: JourneyStage;
+  icon: SolutionIcon;
   title: string;
   shortTitle: string;
   tagline: string;
@@ -25,6 +27,7 @@ export const solutions: Solution[] = [
   {
     slug: "ai-strategy",
     stage: "UNDERSTAND",
+    icon: "Compass",
     title: "AI Strategy & Growth Diagnosis",
     shortTitle: "AI Strategy",
     tagline: "Know where to win before you spend.",
@@ -74,6 +77,7 @@ export const solutions: Solution[] = [
   {
     slug: "ai-agents",
     stage: "BUILD",
+    icon: "Bot",
     title: "AI Agent Design & Build",
     shortTitle: "AI Agents",
     tagline: "Deploy AI agents that work alongside your team.",
@@ -123,6 +127,7 @@ export const solutions: Solution[] = [
   {
     slug: "managed-operations",
     stage: "OPERATE",
+    icon: "Gauge",
     title: "Managed AI Operations",
     shortTitle: "Managed Ops",
     tagline: "We run it. It gets smarter every cycle.",
@@ -171,6 +176,7 @@ export const solutions: Solution[] = [
   {
     slug: "legacy-modernization",
     stage: "BUILD",
+    icon: "Layers",
     title: "Legacy System Modernization",
     shortTitle: "Legacy Modernization",
     tagline: "Bridge your existing systems to AI.",
@@ -220,6 +226,7 @@ export const solutions: Solution[] = [
   {
     slug: "revenue-operations",
     stage: "OPERATE",
+    icon: "TrendingUp",
     title: "AI Marketing & Revenue Operations",
     shortTitle: "Revenue Ops",
     tagline: "One application: your full revenue engine.",

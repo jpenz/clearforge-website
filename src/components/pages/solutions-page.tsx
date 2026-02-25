@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { journeyStages, getSolutionsByStage } from "@/data/solutions";
+import { solutionIcons } from "@/lib/icons";
 
 const stageSubhead: Record<(typeof journeyStages)[number], string> = {
   UNDERSTAND: "Know where to win before you spend.",
@@ -41,18 +42,22 @@ export function SolutionsPage() {
                     </div>
                   </div>
                   <div className="grid gap-5 md:grid-cols-2">
-                    {items.map((solution) => (
-                      <article key={solution.slug} className="rounded-xl border border-gray-200 bg-gray-50 p-6">
-                        <h3 className="text-xl font-bold text-slate-navy">{solution.title}</h3>
-                        <p className="mt-2 text-base text-teal">{solution.tagline}</p>
-                        <p className="mt-3 text-base text-slate-600">{solution.summary}</p>
-                        <Button variant="link" className="mt-4 px-0" asChild>
-                          <Link href={`/solutions/${solution.slug}`}>
-                            Explore solution <ArrowRight className="ml-1 h-4 w-4" />
-                          </Link>
-                        </Button>
-                      </article>
-                    ))}
+                    {items.map((solution) => {
+                      const Icon = solutionIcons[solution.icon];
+                      return (
+                        <article key={solution.slug} className="rounded-xl border border-gray-200 bg-gray-50 p-6">
+                          <Icon className="mb-3 h-8 w-8 text-teal" aria-hidden />
+                          <h3 className="text-xl font-bold text-slate-navy">{solution.title}</h3>
+                          <p className="mt-2 text-base text-teal">{solution.tagline}</p>
+                          <p className="mt-3 text-base text-slate-600">{solution.summary}</p>
+                          <Button variant="link" className="mt-4 px-0" asChild>
+                            <Link href={`/solutions/${solution.slug}`}>
+                              Explore solution <ArrowRight className="ml-1 h-4 w-4" />
+                            </Link>
+                          </Button>
+                        </article>
+                      );
+                    })}
                   </div>
                 </div>
               );

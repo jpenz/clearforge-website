@@ -1,5 +1,8 @@
+export type EngagementIcon = "Zap" | "PenTool" | "Wrench" | "BarChart3";
+
 export interface EngagementModel {
   title: string;
+  icon: EngagementIcon;
   scope: string;
   timeline: string;
   bestFor: string;
@@ -9,6 +12,7 @@ export interface EngagementModel {
 export const engagementModels: EngagementModel[] = [
   {
     title: "AI Strategy Sprint",
+    icon: "Zap",
     scope: "Rapid assessment, opportunity prioritization, and implementation roadmap",
     timeline: "2-4 weeks",
     bestFor: "Companies exploring AI for the first time",
@@ -21,6 +25,7 @@ export const engagementModels: EngagementModel[] = [
   },
   {
     title: "Transformation Design",
+    icon: "PenTool",
     scope: "Deep-dive strategy and implementation architecture",
     timeline: "6-8 weeks",
     bestFor: "Companies ready to invest in AI",
@@ -33,6 +38,7 @@ export const engagementModels: EngagementModel[] = [
   },
   {
     title: "AI Implementation",
+    icon: "Wrench",
     scope: "Hands-on build, deployment, and team enablement",
     timeline: "3-6 months",
     bestFor: "Companies building AI systems",
@@ -45,6 +51,7 @@ export const engagementModels: EngagementModel[] = [
   },
   {
     title: "Managed AI Advisory",
+    icon: "BarChart3",
     scope: "Ongoing AI operations, optimization, and strategy refresh",
     timeline: "Monthly",
     bestFor: "Companies scaling AI across the organization",

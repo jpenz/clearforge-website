@@ -2,12 +2,15 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { type Solution } from "@/data/solutions";
+import { solutionIcons } from "@/lib/icons";
 
 interface Props {
   solution: Solution;
 }
 
 export function SolutionDetailPage({ solution }: Props) {
+  const SolutionIcon = solutionIcons[solution.icon];
+
   return (
     <>
       <section className="bg-white py-20 lg:py-28 border-b border-gray-200">
@@ -15,7 +18,8 @@ export function SolutionDetailPage({ solution }: Props) {
           <Link href="/solutions" className="inline-flex items-center gap-1 text-sm text-slate-600 hover:text-teal">
             <ArrowLeft className="h-4 w-4" /> Back to solutions
           </Link>
-          <p className="mt-6 section-label">{solution.stage}</p>
+          <SolutionIcon className="mt-6 h-8 w-8 text-teal" aria-hidden />
+          <p className="mt-3 section-label">{solution.stage}</p>
           <h1 className="mt-3 text-4xl font-bold text-slate-navy sm:text-5xl">{solution.headline}</h1>
           <p className="mt-5 max-w-3xl text-lg text-slate-600">{solution.summary}</p>
           <div className="mt-8 flex flex-wrap gap-4">
