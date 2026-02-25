@@ -7,11 +7,11 @@ import { MobileNav } from "@/components/layout/mobile-nav";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: "/services", label: "Services" },
-  { href: "/services/ai-marketing-agent", label: "AI Marketing & RevOps" },
-  { href: "/case-studies", label: "Case Studies" },
-  { href: "/pricing", label: "Pricing" },
+  { href: "/solutions", label: "Solutions" },
+  { href: "/industries", label: "Industries" },
   { href: "/insights", label: "Insights" },
+  { href: "/case-studies", label: "Case Studies" },
+  { href: "/how-we-work", label: "How We Work" },
   { href: "/about", label: "About" },
 ];
 
@@ -53,7 +53,7 @@ export function Header() {
             <Link href="/scorecard">AI Scorecard</Link>
           </Button>
           <Button size="sm" asChild>
-            <Link href="/contact">Book a Call</Link>
+            <Link href="/advisor">Get Your AI Recommendation</Link>
           </Button>
         </div>
         <div className="flex items-center gap-2 lg:hidden">

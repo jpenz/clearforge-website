@@ -26,11 +26,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://clearforge.ai"),
   title: {
-    default: "ClearForge.ai — Strategy that ships. AI that performs.",
+    default: "ClearForge.ai / AI Strategy That Actually Ships",
     template: "%s | ClearForge.ai",
   },
   description:
-    "ClearForge is a strategy + AI consulting firm for PE portfolios, mid-market companies, and enterprise teams. We diagnose where to win, build AI systems, and operate them continuously.",
+    "ClearForge helps companies close the AI value gap with strategy, AI implementation, and managed operations delivered by one team.",
   keywords: coreKeywords,
   openGraph: { type: "website", locale: "en_US", siteName: "ClearForge.ai" },
   twitter: { card: "summary_large_image" },

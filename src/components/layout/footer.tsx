@@ -1,21 +1,24 @@
 import Link from "next/link";
 
 const footerLinks = {
-  Services: [
-    { href: "/services", label: "All Services" },
-    { href: "/services#growth-strategy-diagnosis", label: "Growth Strategy & Diagnosis" },
-    { href: "/services#managed-ai-operations", label: "Managed AI Operations" },
-    { href: "/services/ai-marketing-agent", label: "AI Marketing & Revenue Operations" },
+  Solutions: [
+    { href: "/solutions", label: "All Solutions" },
+    { href: "/solutions/ai-strategy", label: "AI Strategy & Growth Diagnosis" },
+    { href: "/solutions/ai-agents", label: "AI Agent Design & Build" },
+    { href: "/solutions/managed-operations", label: "Managed AI Operations" },
+  ],
+  Industries: [
+    { href: "/industries", label: "All Industries" },
+    { href: "/industries/manufacturing", label: "Manufacturing" },
+    { href: "/industries/professional-services", label: "Professional Services" },
+    { href: "/industries/pe-portfolio", label: "PE Portfolios" },
   ],
   Company: [
-    { href: "/about", label: "About" },
+    { href: "/how-we-work", label: "How We Work" },
     { href: "/case-studies", label: "Case Studies" },
-    { href: "/contact", label: "Contact" },
-  ],
-  Resources: [
-    { href: "/pricing", label: "Pricing" },
-    { href: "/scorecard", label: "AI Readiness Scorecard" },
     { href: "/insights", label: "Insights" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
   ],
 };
 
@@ -30,7 +33,7 @@ export function Footer() {
                 ClearForge<span className="text-teal">.ai</span>
               </span>
             </Link>
-            <p className="text-sm leading-relaxed text-slate-500">We find where your business should be winning, then build and run the AI to get you there.</p>
+            <p className="text-sm leading-relaxed text-slate-500">AI strategy and implementation that closes the gap between ambition and operating results.</p>
           </div>
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>

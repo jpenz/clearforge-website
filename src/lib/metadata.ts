@@ -6,11 +6,12 @@ const siteName = "ClearForge.ai";
 export const coreKeywords = [
   "AI consulting",
   "AI strategy consulting",
-  "PE portfolio AI",
-  "AI for mid-market companies",
-  "legacy system modernization AI",
-  "AI marketing agent",
-  "managed AI services",
+  "AI agent design and build",
+  "managed AI operations",
+  "legacy system modernization",
+  "AI marketing and revenue operations",
+  "industry AI transformation",
+  "AI value gap",
 ];
 
 export function createMetadata({

@@ -22,7 +22,7 @@ export function MobileNav({ links }: MobileNavProps) {
           ))}
           <div className="mt-8 flex flex-col gap-3">
             <Button variant="outline" asChild><Link href="/scorecard" onClick={() => setOpen(false)}>Take AI Scorecard</Link></Button>
-            <Button asChild><Link href="/contact" onClick={() => setOpen(false)}>Book a Call</Link></Button>
+            <Button asChild><Link href="/advisor" onClick={() => setOpen(false)}>Get AI Recommendation</Link></Button>
           </div>
         </nav>
       </div>

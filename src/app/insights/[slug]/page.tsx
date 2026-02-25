@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import { createMetadata } from "@/lib/metadata";
-import { getInsight, insights, getRelatedInsights, formatDate } from "@/data/insights";
+import { createMetadata, faqJsonLd, articleJsonLd } from "@/lib/metadata";
+import { getInsight, insights, getRelatedInsights } from "@/data/insights";
 import { InsightDetailClient } from "@/components/insight-detail";
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return insights.map((i) => ({ slug: i.slug }));
+  return insights.map((insight) => ({ slug: insight.slug }));
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -16,9 +16,10 @@ export async function generateMetadata({ params }: Props) {
   const insight = getInsight(slug);
   if (!insight) return {};
   return createMetadata({
-    title: insight.title,
-    description: insight.excerpt,
+    title: insight.seo.title,
+    description: insight.seo.description,
     path: `/insights/${slug}`,
+    keywords: insight.seo.keywords,
   });
 }
 
@@ -27,5 +28,25 @@ export default async function Page({ params }: Props) {
   const insight = getInsight(slug);
   if (!insight) notFound();
   const related = getRelatedInsights(insight.relatedSlugs);
-  return <InsightDetailClient insight={insight} related={related} />;
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            articleJsonLd({
+              title: insight.title,
+              description: insight.excerpt,
+              slug: insight.slug,
+              date: insight.date,
+              author: insight.author.name,
+            }),
+          ),
+        }}
+      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(insight.faqs)) }} />
+      <InsightDetailClient insight={insight} related={related} />
+    </>
+  );
 }
