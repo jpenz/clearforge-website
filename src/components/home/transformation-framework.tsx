@@ -61,7 +61,7 @@ export function TransformationFramework() {
         <div
           className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: "url('/api/img?url=https://heyboss.heeyo.ai/replicate-flux-schnell-1771984857-4e80a244.webp')",
+            backgroundImage: "url('/api/img?src=https://heyboss.heeyo.ai/replicate-flux-schnell-1771984857-4e80a244.webp')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

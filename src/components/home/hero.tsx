@@ -16,7 +16,7 @@ export function Hero() {
     <section
       className="relative flex min-h-[85vh] items-center overflow-hidden bg-slate-navy grain-overlay gradient-mesh section-clip-bottom"
       style={{
-        backgroundImage: "url('/api/img?url=https://heyboss.heeyo.ai/replicate-flux-schnell-1771984828-99d96676.webp')",
+        backgroundImage: "url('/api/img?src=https://heyboss.heeyo.ai/replicate-flux-schnell-1771984828-99d96676.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

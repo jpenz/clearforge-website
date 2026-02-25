@@ -48,7 +48,7 @@ export default function Home() {
 
       <section
         className="relative overflow-hidden bg-slate-navy py-24 lg:py-32 section-clip-bottom"
-        style={{ backgroundImage: "url('/api/img?url=https://heyboss.heeyo.ai/replicate-flux-schnell-1771984828-99d96676.webp')", backgroundSize: "cover", backgroundPosition: "center" }}
+        style={{ backgroundImage: "url('/api/img?src=https://heyboss.heeyo.ai/replicate-flux-schnell-1771984828-99d96676.webp')", backgroundSize: "cover", backgroundPosition: "center" }}
       >
         {/* Dark overlay for readability */}
         <div className="pointer-events-none absolute inset-0 bg-slate-navy/70" />
@@ -153,7 +153,7 @@ export default function Home() {
 
       <section
         className="relative py-20 lg:py-24"
-        style={{ backgroundImage: "url('/api/img?url=https://heyboss.heeyo.ai/replicate-flux-schnell-1771984866-72b35114.webp')", backgroundSize: "cover", backgroundPosition: "center" }}
+        style={{ backgroundImage: "url('/api/img?src=https://heyboss.heeyo.ai/replicate-flux-schnell-1771984866-72b35114.webp')", backgroundSize: "cover", backgroundPosition: "center" }}
       >
         <div className="pointer-events-none absolute inset-0 bg-gray-50/92" />
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">

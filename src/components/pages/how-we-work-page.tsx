@@ -8,7 +8,7 @@ export function HowWeWorkPage() {
       <section
         className="relative overflow-hidden bg-slate-navy py-20 lg:py-28"
         style={{
-          backgroundImage: "url('/api/img?url=https://heyboss.heeyo.ai/replicate-flux-schnell-1771984863-0d8df5ff.webp')",
+          backgroundImage: "url('/api/img?src=https://heyboss.heeyo.ai/replicate-flux-schnell-1771984863-0d8df5ff.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
