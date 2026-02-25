@@ -184,7 +184,7 @@ export function AdvisorPage() {
           <div className="h-full rounded-full bg-teal transition-all duration-300" style={{ width: `${(progressStep / 5) * 100}%` }} />
         </div>
 
-        <div className="mt-8 rounded-xl border border-gray-200 bg-gray-50 p-6 sm:p-8">
+        <div className="mt-8 rounded-xl glass p-6 sm:p-8">
           {step === 1 && (
             <>
               <h2 className="text-2xl font-bold text-slate-navy">Step 1: Let&apos;s start with your business.</h2>
@@ -197,7 +197,7 @@ export function AdvisorPage() {
                       setIndustry(item);
                       setStep(2);
                     }}
-                    className="rounded-lg border border-gray-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-700 transition-colors hover:border-teal hover:text-teal"
+                    className="rounded-lg glass glass-hover px-4 py-3 text-left text-sm font-medium text-slate-700"
                   >
                     {item}
                   </button>
@@ -357,8 +357,8 @@ export function AdvisorPage() {
                   return (
                     <div
                       key={item}
-                      className={`flex items-center gap-3 rounded-lg border px-4 py-3 transition-colors ${
-                        isComplete || isActive ? "border-teal bg-teal/5" : "border-gray-200 bg-white"
+                      className={`flex items-center gap-3 rounded-lg px-4 py-3 transition-colors ${
+                        isComplete || isActive ? "glass-teal" : "glass"
                       }`}
                     >
                       <span
@@ -379,11 +379,11 @@ export function AdvisorPage() {
           {step === 5 && result && (
             <>
               <h2 className="text-2xl font-bold text-slate-navy">Step 5: Your personalized recommendation.</h2>
-              <div className="mt-5 rounded-lg border border-gray-200 bg-white p-6">
+              <div className="mt-5 rounded-lg glass p-6">
                 <MarkdownContent markdown={result.recommendation} />
               </div>
 
-              <div className="mt-5 rounded-lg border border-gray-200 bg-white p-5">
+              <div className="mt-5 rounded-lg glass p-5">
                 <h3 className="text-lg font-semibold text-slate-navy">Recommended solutions</h3>
                 <ul className="mt-3 list-disc space-y-2 pl-5">
                   {result.suggestedSolutions.map((item) => (
@@ -396,7 +396,7 @@ export function AdvisorPage() {
               </div>
 
               {result.companyResearch && result.companyResearch !== "No company URL provided." && (
-                <div className="mt-5 rounded-lg border border-gray-200 bg-white p-5">
+                <div className="mt-5 rounded-lg glass p-5">
                   <h3 className="text-lg font-semibold text-slate-navy">Company research snapshot</h3>
                   <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-slate-700">{result.companyResearch}</p>
                 </div>

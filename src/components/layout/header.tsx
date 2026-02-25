@@ -27,7 +27,7 @@ export function Header() {
     <header
       className={cn(
         "fixed left-0 right-0 top-0 z-50 transition-all duration-300",
-        scrolled ? "border-b border-gray-200 bg-white/95 shadow-sm backdrop-blur-sm" : "bg-white",
+        scrolled ? "border-b border-gray-200 bg-white/80 shadow-sm backdrop-blur-xl backdrop-saturate-150" : "bg-white",
       )}
     >
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-6 lg:px-8">

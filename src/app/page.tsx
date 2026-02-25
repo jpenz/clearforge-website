@@ -128,7 +128,7 @@ export default function Home() {
           </div>
           <div className="mt-10 flex flex-wrap gap-3">
             {proof.map((item) => (
-              <span key={item} className="rounded-full border border-white/20 bg-white/5 px-4 py-2 text-sm text-slate-200">{item}</span>
+              <span key={item} className="rounded-full glass-pill px-4 py-2 text-sm text-slate-200">{item}</span>
             ))}
           </div>
         </div>
@@ -148,7 +148,7 @@ export default function Home() {
               ["Strategy and execution are split", "One partner writes the plan, another partner attempts delivery, and value is lost in handoffs."],
               ["Technology without workforce change", "Systems launch, but teams are not prepared to operate with them, so adoption stalls."],
             ].map(([title, desc]) => (
-              <article key={title} className="rounded-xl border border-white/15 bg-white/5 p-6">
+              <article key={title} className="rounded-xl glass-dark glass-dark-hover p-6">
                 <h3 className="text-xl font-bold text-white">{title}</h3>
                 <p className="mt-3 text-base text-slate-200">{desc}</p>
               </article>
@@ -166,7 +166,7 @@ export default function Home() {
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {frameworkCards.map((item) => (
-              <article key={item.phase} className="rounded-xl border border-gray-200 bg-gray-50 p-5">
+              <article key={item.phase} className="rounded-xl glass glass-hover p-5">
                 <item.icon className="mb-3 h-8 w-8 text-teal" aria-hidden />
                 <p className="text-sm font-semibold text-teal">{item.phase}</p>
                 <p className="mt-2 text-base text-slate-700">{item.text}</p>
@@ -185,7 +185,7 @@ export default function Home() {
             {solutions.map((solution) => {
               const SolutionIcon = solutionIcons[solution.icon];
               return (
-                <article key={solution.slug} className="rounded-xl border border-gray-200 bg-white p-6">
+                <article key={solution.slug} className="rounded-xl glass glass-hover p-6">
                   <SolutionIcon className="mb-3 h-8 w-8 text-teal" aria-hidden />
                   <p className="text-xs font-semibold text-teal">{solution.stage}</p>
                   <h3 className="mt-2 text-xl font-bold text-slate-navy">{solution.title}</h3>
@@ -209,7 +209,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-slate-navy sm:text-4xl">Case studies that prove the model</h2>
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {featuredCaseStudies.map((study) => (
-              <article key={study.slug} className="rounded-xl border border-gray-200 bg-white p-6">
+              <article key={study.slug} className="rounded-xl glass glass-hover p-6">
                 <p className="text-sm text-slate-500">{study.industry}</p>
                 <h3 className="mt-2 text-xl font-bold text-slate-navy">{study.title}</h3>
                 <p className="mt-3 text-base text-slate-600">{study.excerpt}</p>
@@ -230,7 +230,7 @@ export default function Home() {
             {deepIndustries.map((industry) => {
               const IndustryIcon = industryIcons[industry.icon];
               return (
-                <Link key={industry.slug} href={`/industries/${industry.slug}`} className="rounded-xl border border-gray-200 bg-gray-50 p-5 transition-colors hover:border-teal">
+                <Link key={industry.slug} href={`/industries/${industry.slug}`} className="rounded-xl glass glass-hover p-5">
                   <IndustryIcon className="mb-3 h-8 w-8 text-teal" aria-hidden />
                   <h3 className="text-xl font-bold text-slate-navy">{industry.shortName}</h3>
                   <p className="mt-2 text-base text-slate-600">{industry.hero}</p>
@@ -247,7 +247,7 @@ export default function Home() {
           <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl">Questions leaders ask before moving forward</h2>
           <div className="mt-8 space-y-4">
             {homeFaqs.map((faq) => (
-              <article key={faq.question} className="rounded-xl border border-gray-200 bg-white p-5">
+              <article key={faq.question} className="rounded-xl glass p-5">
                 <MessageCircle className="mb-3 h-8 w-8 text-teal" aria-hidden />
                 <h3 className="text-lg font-semibold text-slate-navy">{faq.question}</h3>
                 <p className="mt-2 text-base text-slate-600">{faq.answer}</p>
@@ -262,7 +262,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-slate-navy sm:text-4xl">Why ClearForge</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {differentiators.map((item) => (
-              <article key={item.title} className="rounded-xl border border-gray-200 bg-gray-50 p-5">
+              <article key={item.title} className="rounded-xl glass glass-hover p-5">
                 <item.icon className="mb-3 h-8 w-8 text-teal" aria-hidden />
                 <h3 className="text-lg font-bold text-slate-navy">{item.title}</h3>
                 <p className="mt-2 text-base text-slate-600">{item.text}</p>

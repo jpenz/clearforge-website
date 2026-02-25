@@ -24,7 +24,7 @@ export function IndustriesPage() {
             {deepIndustries.map((industry) => {
               const Icon = industryIcons[industry.icon];
               return (
-                <article key={industry.slug} className="rounded-xl border border-gray-200 bg-white p-6">
+                <article key={industry.slug} className="rounded-xl glass glass-hover p-6">
                   <Icon className="mb-3 h-8 w-8 text-teal" aria-hidden />
                   <h3 className="text-xl font-bold text-slate-navy">{industry.name}</h3>
                   <p className="mt-3 text-base text-slate-600">{industry.hero}</p>
@@ -38,11 +38,11 @@ export function IndustriesPage() {
             })}
           </div>
 
-          <div className="mt-12 rounded-xl border border-gray-200 bg-white p-6">
+          <div className="mt-12 rounded-xl glass p-6">
             <h3 className="text-xl font-bold text-slate-navy">We also serve</h3>
             <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-4">
               {broadIndustries.map((industry) => (
-                <div key={industry} className="rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-medium text-slate-700">
+                <div key={industry} className="rounded-lg glass glass-hover px-4 py-3 text-sm font-medium text-slate-700">
                   {industry}
                 </div>
               ))}

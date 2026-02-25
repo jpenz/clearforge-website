@@ -26,13 +26,13 @@ export function IndustryDetailPage({ industry }: Props) {
 
       <section className="bg-gray-50 py-16 lg:py-20">
         <div className="mx-auto grid max-w-6xl gap-6 px-6 lg:grid-cols-2 lg:px-8">
-          <article className="rounded-xl border border-gray-200 bg-white p-6">
+          <article className="rounded-xl glass p-6">
             <h2 className="text-2xl font-bold text-slate-navy">Industry context</h2>
             {industry.overview.map((paragraph) => (
               <p key={paragraph} className="mt-4 text-base leading-relaxed text-slate-600">{paragraph}</p>
             ))}
           </article>
-          <article className="rounded-xl border border-gray-200 bg-white p-6">
+          <article className="rounded-xl glass p-6">
             <h2 className="text-2xl font-bold text-slate-navy">Top challenges</h2>
             <ul className="mt-4 space-y-3">
               {industry.challenges.map((item) => (
@@ -51,7 +51,7 @@ export function IndustryDetailPage({ industry }: Props) {
           <h2 className="text-2xl font-bold text-slate-navy">Use cases we prioritize</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {industry.useCases.map((useCase) => (
-              <div key={useCase} className="rounded-xl border border-gray-200 bg-gray-50 p-5 text-base text-slate-700">{useCase}</div>
+              <div key={useCase} className="rounded-xl glass glass-hover p-5 text-base text-slate-700">{useCase}</div>
             ))}
           </div>
         </div>
@@ -59,7 +59,7 @@ export function IndustryDetailPage({ industry }: Props) {
 
       <section className="bg-gray-50 py-16 lg:py-20">
         <div className="mx-auto grid max-w-6xl gap-6 px-6 lg:grid-cols-2 lg:px-8">
-          <div className="rounded-xl border border-gray-200 bg-white p-6">
+          <div className="rounded-xl glass p-6">
             <h2 className="text-2xl font-bold text-slate-navy">Related case study</h2>
             <p className="mt-3 text-base text-slate-600">Proof from field execution.</p>
             <Button className="mt-4" asChild>
@@ -68,7 +68,7 @@ export function IndustryDetailPage({ industry }: Props) {
               </Link>
             </Button>
           </div>
-          <div className="rounded-xl border border-gray-200 bg-white p-6">
+          <div className="rounded-xl glass p-6">
             <h2 className="text-2xl font-bold text-slate-navy">Related insights</h2>
             <ul className="mt-4 space-y-2">
               {industry.relatedInsights.map((slug) => (

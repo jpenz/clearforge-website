@@ -30,7 +30,7 @@ export function HowWeWorkPage() {
             {engagementModels.map((model) => {
               const Icon = engagementIcons[model.icon];
               return (
-                <article key={model.title} className="rounded-xl border border-gray-200 bg-white p-6">
+                <article key={model.title} className="rounded-xl glass glass-hover p-6">
                   <Icon className="mb-3 h-8 w-8 text-teal" aria-hidden />
                   <h2 className="text-2xl font-bold text-slate-navy">{model.title}</h2>
                   <p className="mt-3 text-base text-slate-600">{model.scope}</p>
@@ -53,7 +53,7 @@ export function HowWeWorkPage() {
           <h2 className="text-2xl font-bold text-slate-navy">What to expect in week one</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {firstWeekPlan.map((item) => (
-              <div key={item} className="rounded-xl border border-gray-200 bg-gray-50 p-5 text-base text-slate-700">{item}</div>
+              <div key={item} className="rounded-xl glass glass-hover p-5 text-base text-slate-700">{item}</div>
             ))}
           </div>
         </div>
@@ -64,7 +64,7 @@ export function HowWeWorkPage() {
           <h2 className="text-2xl font-bold text-slate-navy">FAQ</h2>
           <div className="mt-6 space-y-4">
             {howWeWorkFaqs.map((faq) => (
-              <article key={faq.question} className="rounded-xl border border-gray-200 bg-white p-5">
+              <article key={faq.question} className="rounded-xl glass p-5">
                 <h3 className="text-lg font-semibold text-slate-navy">{faq.question}</h3>
                 <p className="mt-2 text-base text-slate-600">{faq.answer}</p>
               </article>

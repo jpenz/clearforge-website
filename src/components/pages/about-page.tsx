@@ -56,7 +56,7 @@ export function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.1 * i }}
-                className="rounded-lg border border-gray-200 bg-white p-8"
+                className="rounded-lg glass glass-hover p-8"
               >
                 <span className="metric-display text-2xl">{item.number}</span>
                 <h3 className="mt-4 text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>{item.title}</h3>
@@ -83,7 +83,7 @@ export function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.08 * i }}
-                className="rounded-lg border border-gray-200 p-8"
+                className="rounded-lg glass glass-hover p-8"
               >
                 <h3 className="text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>{value.title}</h3>
                 <p className="mt-3 text-lg leading-relaxed text-slate-600">{value.description}</p>

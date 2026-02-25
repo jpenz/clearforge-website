@@ -26,7 +26,7 @@ export function SolutionsPage() {
 
       <section className="bg-gray-50 py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mb-8 rounded-2xl border border-gray-200 bg-white p-6 text-center text-xl font-semibold text-slate-navy sm:text-2xl">
+          <div className="mb-8 rounded-2xl glass p-6 text-center text-xl font-semibold text-slate-navy sm:text-2xl">
             UNDERSTAND <span className="text-slate-400">→</span> BUILD <span className="text-slate-400">→</span> OPERATE
           </div>
 
@@ -34,7 +34,7 @@ export function SolutionsPage() {
             {journeyStages.map((stage) => {
               const items = getSolutionsByStage(stage);
               return (
-                <div key={stage} className="rounded-2xl border border-gray-200 bg-white p-7">
+                <div key={stage} className="rounded-2xl glass p-7">
                   <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
                     <div>
                       <p className="section-label">{stage}</p>
@@ -45,7 +45,7 @@ export function SolutionsPage() {
                     {items.map((solution) => {
                       const Icon = solutionIcons[solution.icon];
                       return (
-                        <article key={solution.slug} className="rounded-xl border border-gray-200 bg-gray-50 p-6">
+                        <article key={solution.slug} className="rounded-xl glass glass-hover p-6">
                           <Icon className="mb-3 h-8 w-8 text-teal" aria-hidden />
                           <h3 className="text-xl font-bold text-slate-navy">{solution.title}</h3>
                           <p className="mt-2 text-base text-teal">{solution.tagline}</p>
