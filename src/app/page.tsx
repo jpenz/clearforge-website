@@ -86,7 +86,7 @@ export default function Home() {
 
   return (
     <>
-      <section className="dark-section relative overflow-hidden bg-navy py-20 lg:py-28">
+      <section className="dark-section relative overflow-hidden bg-dark grid-pattern py-20 lg:py-28">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(15,118,110,0.08),transparent_48%)]" />
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
           <h1 className="mt-4 max-w-4xl text-4xl font-bold text-white sm:text-5xl lg:text-6xl">AI Strategy That Actually Ships</h1>
@@ -97,23 +97,23 @@ export default function Home() {
             <Button size="lg" asChild>
               <Link href="/solutions">See Our Solutions</Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white hover:text-text" asChild>
+            <Button size="lg" variant="outline" className="border-white/15 text-white hover:bg-white hover:text-text" asChild>
               <Link href="/advisor">Get Your AI Recommendation</Link>
             </Button>
           </div>
           <div className="mt-10 flex flex-wrap gap-3">
             {proof.map((item) => (
-              <span key={item} className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white/80">{item}</span>
+              <span key={item} className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80">{item}</span>
             ))}
           </div>
         </div>
       </section>
 
-      <div className="relative h-14 overflow-hidden bg-navy">
+      <div className="relative h-14 overflow-hidden bg-dark">
         <LinePattern className="pointer-events-none absolute inset-x-0 top-1/2 h-24 w-full -translate-y-1/2" />
       </div>
 
-      <section className="dark-section bg-navy py-20 lg:py-28">
+      <section className="dark-section bg-dark grid-pattern py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl" style={{ letterSpacing: "-0.02em" }}>The AI Value Gap Is Widening</h2>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
@@ -122,7 +122,7 @@ export default function Home() {
               ["Strategy and execution are split", "One partner writes the plan, another partner attempts delivery, and value is lost in handoffs."],
               ["Technology without workforce change", "Systems launch, but teams are not prepared to operate with them, so adoption stalls."],
             ].map(([title, desc]) => (
-              <article key={title} className="rounded-xl border border-white/10 bg-navy-surface p-6">
+              <article key={title} className="rounded-xl border border-white/8 bg-dark-surface p-6">
                 <h3 className="text-xl font-bold text-white">{title}</h3>
                 <p className="mt-3 text-base text-white/80">{desc}</p>
               </article>
@@ -141,15 +141,15 @@ export default function Home() {
             {frameworkCards.map((item, index) => (
               <li key={item.phase} className="relative">
                 <article className="rounded-xl border border-border bg-white p-6">
-                  <item.icon className="h-12 w-12 text-teal" aria-hidden />
-                  <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-teal">{item.phase}</p>
+                  <item.icon className="h-12 w-12 text-cyan" aria-hidden />
+                  <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-cyan">{item.phase}</p>
                   <p className="mt-2 text-base text-text-secondary">{item.text}</p>
                 </article>
                 {index < frameworkCards.length - 1 && (
                   <>
-                    <div className="absolute left-6 top-full h-8 w-px bg-teal/40 md:hidden" />
-                    <div className="absolute left-full top-1/2 hidden h-px w-5 -translate-y-1/2 bg-teal/40 md:block" />
-                    <ArrowRight className="absolute left-full top-1/2 ml-5 hidden h-4 w-4 -translate-y-1/2 text-teal md:block" />
+                    <div className="absolute left-6 top-full h-8 w-px bg-cyan/40 md:hidden" />
+                    <div className="absolute left-full top-1/2 hidden h-px w-5 -translate-y-1/2 bg-cyan/40 md:block" />
+                    <ArrowRight className="absolute left-full top-1/2 ml-5 hidden h-4 w-4 -translate-y-1/2 text-cyan md:block" />
                   </>
                 )}
               </li>
@@ -167,11 +167,11 @@ export default function Home() {
               const SolutionIcon = solutionIcons[solution.icon];
               return (
                 <article key={solution.slug} className="rounded-xl border border-border border-l-4 border-l-teal bg-white p-6">
-                  <SolutionIcon className="mb-3 h-8 w-8 text-teal" aria-hidden />
-                  <p className="text-xs font-semibold text-teal">{solution.stage}</p>
+                  <SolutionIcon className="mb-3 h-8 w-8 text-cyan" aria-hidden />
+                  <p className="text-xs font-semibold text-cyan">{solution.stage}</p>
                   <h3 className="mt-2 text-xl font-bold text-text">{solution.title}</h3>
                   <p className="mt-3 text-base text-text-secondary">{solution.tagline}</p>
-                  <Link className="mt-4 inline-flex items-center text-sm font-medium text-teal" href={`/solutions/${solution.slug}`}>
+                  <Link className="mt-4 inline-flex items-center text-sm font-medium text-cyan" href={`/solutions/${solution.slug}`}>
                     Learn more <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>
                 </article>
@@ -190,8 +190,8 @@ export default function Home() {
                 <p className="text-sm text-text-tertiary">{study.industry}</p>
                 <h3 className="mt-2 text-xl font-bold text-text">{study.title}</h3>
                 <p className="mt-3 text-base text-text-secondary">{study.excerpt}</p>
-                <p className="mt-4 text-sm text-teal">{study.heroMetric} {study.heroMetricLabel}</p>
-                <Link className="mt-3 inline-flex items-center text-sm font-medium text-teal" href={`/case-studies/${study.slug}`}>
+                <p className="mt-4 text-sm text-cyan">{study.heroMetric} {study.heroMetricLabel}</p>
+                <Link className="mt-3 inline-flex items-center text-sm font-medium text-cyan" href={`/case-studies/${study.slug}`}>
                   Read case study <ArrowRight className="ml-1 h-4 w-4" />
                 </Link>
               </article>
@@ -209,7 +209,7 @@ export default function Home() {
               const IndustryIcon = industryIcons[industry.icon];
               return (
                 <Link key={industry.slug} href={`/industries/${industry.slug}`} className="rounded-xl border border-border bg-surface p-5">
-                  <IndustryIcon className="mb-3 h-8 w-8 text-teal" aria-hidden />
+                  <IndustryIcon className="mb-3 h-8 w-8 text-cyan" aria-hidden />
                   <h3 className="text-lg font-bold text-text">{industry.shortName}</h3>
                   <p className="mt-2 truncate text-sm text-text-secondary">{industryTileDescriptions[industry.slug] ?? industry.hero}</p>
                 </Link>
@@ -225,7 +225,7 @@ export default function Home() {
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {differentiators.map((item) => (
               <article key={item.title} className="rounded-xl border border-border bg-white p-6">
-                <item.icon className="mb-4 h-12 w-12 text-teal" aria-hidden />
+                <item.icon className="mb-4 h-12 w-12 text-cyan" aria-hidden />
                 <h3 className="text-lg font-bold text-text">{item.title}</h3>
                 <p className="mt-2 text-base text-text-secondary">{item.text}</p>
               </article>
@@ -234,19 +234,19 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="relative h-14 overflow-hidden bg-navy">
+      <div className="relative h-14 overflow-hidden bg-dark">
         <LinePattern className="pointer-events-none absolute inset-x-0 top-1/2 h-24 w-full -translate-y-1/2" />
       </div>
 
-      <section className="dark-section relative overflow-hidden bg-navy py-20 lg:py-28 grain-overlay gradient-mesh">
+      <section className="dark-section relative overflow-hidden bg-dark grid-pattern py-20 lg:py-28 grain-overlay gradient-mesh">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(15,118,110,0.24),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(20,184,166,0.22),transparent_40%)]" />
         <div className="relative z-10 mx-auto max-w-5xl px-6 text-center lg:px-8">
           <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl" style={{ letterSpacing: "-0.02em" }}>Move from AI ambition to measurable execution.</h2>
           <p className="mx-auto mt-4 max-w-3xl text-lg text-white/80">Choose the path that fits your context today and build from there.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild><Link href="/contact">Book a Discovery Call</Link></Button>
-            <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white hover:text-text" asChild><Link href="/scorecard">Take the AI Maturity Scorecard</Link></Button>
-            <Button size="lg" variant="outline" className="border-teal/80 text-white hover:bg-teal hover:text-white" asChild><Link href="/advisor">Get Your AI Recommendation</Link></Button>
+            <Button size="lg" variant="outline" className="border-white/15 text-white hover:bg-white hover:text-text" asChild><Link href="/scorecard">Take the AI Maturity Scorecard</Link></Button>
+            <Button size="lg" variant="outline" className="border-cyan/80 text-white hover:bg-cyan hover:text-white" asChild><Link href="/advisor">Get Your AI Recommendation</Link></Button>
           </div>
         </div>
       </section>
