@@ -43,7 +43,7 @@ const marketingTiers = pricingTiers.filter((tier) => tier.category === "marketin
 export function AiMarketingAgentPage() {
   return (
     <>
-      <section className="relative flex min-h-[60vh] items-center overflow-hidden bg-slate-navy py-20 lg:py-28">
+      <section className="relative flex min-h-[60vh] items-center overflow-hidden bg-navy py-20 lg:py-28">
         <div
           className="pointer-events-none absolute inset-0 opacity-25"
           style={{
@@ -52,14 +52,14 @@ export function AiMarketingAgentPage() {
             backgroundPosition: "center",
           }}
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-slate-navy via-slate-navy/90 to-slate-navy/70" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy via-navy/90 to-navy/70" />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-4xl">
             <span className="section-label">Service Application</span>
-            <h1 className="mt-4 text-4xl font-bold text-white sm:text-5xl lg:text-6xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            <h1 className="mt-4 text-4xl font-bold text-white sm:text-5xl lg:text-6xl" style={{ fontFamily: "var(--font-heading)" }}>
               AI Marketing & Revenue Operations
             </h1>
-            <p className="mt-6 text-xl leading-relaxed text-slate-300">
+            <p className="mt-6 text-xl leading-relaxed text-white/70">
               A specific application of ClearForge&apos;s Strategy to Build to Operate platform. We run a complete revenue
               system spanning demand generation, outreach, CRM workflows, and pipeline management.
             </p>
@@ -67,7 +67,7 @@ export function AiMarketingAgentPage() {
               <Button size="lg" asChild>
                 <Link href="/contact">Book a Discovery Call</Link>
               </Button>
-              <Button variant="outline" size="lg" asChild>
+              <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white hover:text-text" asChild>
                 <Link href="/services">
                   View All Service Lines <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -77,7 +77,7 @@ export function AiMarketingAgentPage() {
         </div>
       </section>
 
-      <section className="border-y border-gray-200 bg-gray-50 py-24 lg:py-32">
+      <section className="border-y border-border bg-surface py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-6 sm:grid-cols-2">
             {highlights.map((item, i) => (
@@ -87,24 +87,24 @@ export function AiMarketingAgentPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.08 * i }}
-                className="rounded-xl border border-gray-200 bg-white p-8"
+                className="rounded-xl border border-border bg-white p-8"
               >
                 <item.icon className="h-6 w-6 text-teal" />
-                <h2 className="mt-4 text-xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                <h2 className="mt-4 text-xl font-bold text-text" style={{ fontFamily: "var(--font-heading)" }}>
                   {item.title}
                 </h2>
-                <p className="mt-3 text-base leading-relaxed text-slate-600">{item.description}</p>
+                <p className="mt-3 text-base leading-relaxed text-text-secondary">{item.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-24 lg:py-32">
+      <section className="bg-white py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mb-10 max-w-2xl">
             <span className="section-label">Pricing Tiers</span>
-            <h2 className="mt-3 text-3xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            <h2 className="mt-3 text-3xl font-bold text-text" style={{ fontFamily: "var(--font-heading)" }}>
               Scope based on coverage and operating complexity
             </h2>
           </div>
@@ -116,17 +116,17 @@ export function AiMarketingAgentPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.08 * i }}
-                className={`rounded-lg border bg-white p-7 ${tier.popular ? "border-teal ring-1 ring-teal" : "border-gray-200"}`}
+                className={`rounded-lg border bg-white p-7 ${tier.popular ? "border-teal ring-1 ring-teal" : "border-border"}`}
               >
-                <h3 className="text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>{tier.name}</h3>
+                <h3 className="text-lg font-bold text-text" style={{ fontFamily: "var(--font-heading)" }}>{tier.name}</h3>
                 <div className="mt-2 flex items-baseline gap-1">
                   <span className="metric-display text-2xl">{tier.price}</span>
-                  <span className="text-base text-slate-600">{tier.period}</span>
+                  <span className="text-base text-text-secondary">{tier.period}</span>
                 </div>
-                <p className="mt-3 text-base text-slate-600">{tier.description}</p>
+                <p className="mt-3 text-base text-text-secondary">{tier.description}</p>
                 <ul className="mt-4 space-y-2">
                   {tier.features.slice(0, 4).map((feature) => (
-                    <li key={feature} className="flex items-start gap-2 text-sm text-slate-700">
+                    <li key={feature} className="flex items-start gap-2 text-sm text-text-secondary">
                       <Check className="mt-0.5 h-4 w-4 shrink-0 text-teal" />
                       {feature}
                     </li>
@@ -138,35 +138,35 @@ export function AiMarketingAgentPage() {
         </div>
       </section>
 
-      <section className="bg-slate-navy py-24 lg:py-32">
+      <section className="bg-navy py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
             <div>
               <span className="section-label text-teal">What This Looks Like In Market</span>
-              <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl" style={{ fontFamily: "var(--font-heading)" }}>
                 One accountable revenue system instead of fragmented vendors
               </h2>
-              <p className="mt-4 text-lg text-slate-200">
+              <p className="mt-4 text-lg text-white/80">
                 This application shows how ClearForge takes strategy and turns it into daily operational execution.
               </p>
             </div>
             <div className="space-y-3">
               {differentiators.map((item) => (
-                <div key={item} className="rounded-lg border border-charcoal bg-charcoal p-5 text-base text-slate-200">
+                <div key={item} className="rounded-lg border border-white/10 bg-navy-surface p-5 text-base text-white/80">
                   {item}
                 </div>
               ))}
             </div>
           </div>
           <div className="mt-12 rounded-xl border border-white/10 bg-white/[0.03] p-8">
-            <h3 className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            <h3 className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-heading)" }}>
               Proof in market: Metro Detroit Services Company
             </h3>
-            <p className="mt-3 text-base leading-relaxed text-slate-200">
+            <p className="mt-3 text-base leading-relaxed text-white/80">
               A legacy services business moved from no formal marketing infrastructure to recurring contracts and stronger
               acquisition readiness after deploying this revenue operations application.
             </p>
-            <Button className="mt-5" variant="outline" asChild>
+            <Button className="mt-5 border-white/20 text-white hover:bg-white hover:text-text" variant="outline" asChild>
               <Link href="/case-studies/metro-detroit-services-company">
                 Read Case Study <LineChart className="ml-2 h-4 w-4" />
               </Link>
@@ -175,12 +175,12 @@ export function AiMarketingAgentPage() {
         </div>
       </section>
 
-      <section className="bg-white py-24 lg:py-32">
+      <section className="bg-white py-20 lg:py-28">
         <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
-          <h2 className="text-3xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+          <h2 className="text-3xl font-bold text-text" style={{ fontFamily: "var(--font-heading)" }}>
             Want to apply the platform to your revenue engine?
           </h2>
-          <p className="mt-4 text-lg text-slate-600">We can scope the right tier in one working session.</p>
+          <p className="mt-4 text-lg text-text-secondary">We can scope the right tier in one working session.</p>
           <Button size="lg" className="mt-8" asChild>
             <Link href="/contact">Book a Discovery Call</Link>
           </Button>

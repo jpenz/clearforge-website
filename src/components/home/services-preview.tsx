@@ -51,7 +51,7 @@ const serviceCards = [
 
 export function ServicesPreview() {
   return (
-    <section className="border-y border-gray-200 bg-gray-50 py-24 lg:py-32 section-divider">
+    <section className="border-y border-border bg-surface py-20 lg:py-28 section-divider">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -61,10 +61,10 @@ export function ServicesPreview() {
           className="mb-16"
         >
           <span className="section-label">Services</span>
-          <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+          <h2 className="mt-4 text-3xl font-bold text-text sm:text-4xl" style={{ fontFamily: "var(--font-heading)" }}>
             Strategy, build, and managed operations across five service lines.
           </h2>
-          <p className="mt-4 max-w-2xl text-lg text-slate-600">
+          <p className="mt-4 max-w-2xl text-lg text-text-secondary">
             We start with where to win, then build and run the systems. AI Marketing & Revenue Operations is one applied
             example of that model.
           </p>
@@ -80,9 +80,9 @@ export function ServicesPreview() {
               transition={{ duration: 0.4, delay: 0.08 * i }}
             >
               <Link href={service.href}>
-                <div className="group h-full overflow-hidden rounded-xl border border-gray-200 bg-white transition-all duration-300 hover:border-teal/30 hover:shadow-lg">
+                <div className="group h-full overflow-hidden rounded-xl border border-border bg-white transition-all duration-300 hover:border-teal/30 hover:shadow-lg">
                   {service.image && (
-                    <div className="relative h-32 w-full overflow-hidden bg-slate-navy">
+                    <div className="relative h-32 w-full overflow-hidden bg-navy">
                       <div
                         className="absolute inset-0 opacity-60 transition-opacity group-hover:opacity-80"
                         style={{
@@ -98,14 +98,14 @@ export function ServicesPreview() {
                       <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-teal/10 transition-colors group-hover:bg-teal group-hover:text-white">
                         <service.icon className="h-5 w-5 text-teal group-hover:text-white" />
                       </div>
-                      <span className="font-[family-name:var(--font-space-grotesk)] text-xs font-medium uppercase tracking-wider text-teal">
+                      <span className="font-[family-name:var(--font-heading)] text-xs font-medium uppercase tracking-wider text-teal">
                         {service.tag}
                       </span>
                     </div>
-                    <h3 className="text-xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                    <h3 className="text-xl font-bold text-text" style={{ fontFamily: "var(--font-heading)" }}>
                       {service.title}
                     </h3>
-                    <p className="mt-3 text-base leading-relaxed text-slate-600">{service.description}</p>
+                    <p className="mt-3 text-base leading-relaxed text-text-secondary">{service.description}</p>
                     <div className="mt-5 flex items-center text-base font-medium text-teal transition-all group-hover:gap-2">
                       Learn more
                       <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />

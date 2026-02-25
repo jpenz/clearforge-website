@@ -28,8 +28,8 @@ export function ScorecardResultsPage() {
     return (
       <section className="bg-white py-20 lg:py-28">
         <div className="mx-auto max-w-3xl px-6 lg:px-8 text-center">
-          <h1 className="text-3xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>No Results Found</h1>
-          <p className="mt-4 text-lg text-slate-600">Please complete the scorecard first.</p>
+          <h1 className="text-3xl font-bold text-text" style={{ fontFamily: "var(--font-heading)" }}>No Results Found</h1>
+          <p className="mt-4 text-lg text-text-secondary">Please complete the scorecard first.</p>
           <Button className="mt-8" asChild>
             <Link href="/scorecard">Take the Scorecard</Link>
           </Button>
@@ -67,20 +67,20 @@ export function ScorecardResultsPage() {
     setSubmitting(false);
   }
 
-  const scoreColor = result.compositeScore >= 70 ? "text-teal" : result.compositeScore >= 50 ? "text-cyan" : "text-slate-400";
+  const scoreColor = result.compositeScore >= 70 ? "text-teal" : result.compositeScore >= 50 ? "text-teal-light" : "text-text-tertiary";
 
   // Lead capture gate
   if (gated && !submitted) {
     return (
-      <section className="bg-slate-navy min-h-[80vh] flex items-center py-20">
+      <section className="bg-navy min-h-[80vh] flex items-center py-20">
         <div className="mx-auto max-w-lg px-6 lg:px-8 w-full">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <div className="text-center mb-8">
               <span className="section-label text-teal">Assessment Complete</span>
-              <h1 className="mt-4 text-3xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              <h1 className="mt-4 text-3xl font-bold text-white" style={{ fontFamily: "var(--font-heading)" }}>
                 Your results are ready.
               </h1>
-              <p className="mt-3 text-lg text-slate-300">
+              <p className="mt-3 text-lg text-white/70">
                 Enter your details to see your AI maturity score, pillar breakdown, and a personalized roadmap.
               </p>
             </div>
@@ -90,41 +90,41 @@ export function ScorecardResultsPage() {
               <div className={`metric-display text-6xl ${scoreColor}`}>
                 {result.compositeScore}
               </div>
-              <p className="mt-1 text-sm text-slate-400">Your AI Maturity Score</p>
+              <p className="mt-1 text-sm text-text-tertiary">Your AI Maturity Score</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="relative">
-                <User className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
+                <User className="absolute left-3 top-3.5 h-4 w-4 text-text-tertiary" />
                 <input
                   type="text"
                   required
                   placeholder="Your name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-10 pr-4 text-white placeholder:text-slate-500 focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal"
+                  className="w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-10 pr-4 text-white placeholder:text-text-tertiary focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal"
                 />
               </div>
               <div className="relative">
-                <Mail className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
+                <Mail className="absolute left-3 top-3.5 h-4 w-4 text-text-tertiary" />
                 <input
                   type="email"
                   required
                   placeholder="Work email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-10 pr-4 text-white placeholder:text-slate-500 focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal"
+                  className="w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-10 pr-4 text-white placeholder:text-text-tertiary focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal"
                 />
               </div>
               <div className="relative">
-                <Building2 className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
+                <Building2 className="absolute left-3 top-3.5 h-4 w-4 text-text-tertiary" />
                 <input
                   type="text"
                   required
                   placeholder="Company name"
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
-                  className="w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-10 pr-4 text-white placeholder:text-slate-500 focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal"
+                  className="w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-10 pr-4 text-white placeholder:text-text-tertiary focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal"
                 />
               </div>
               <Button
@@ -136,7 +136,7 @@ export function ScorecardResultsPage() {
                 {submitting ? "Loading..." : "See My Full Results & Roadmap"}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <p className="text-center text-xs text-slate-500">
+              <p className="text-center text-xs text-text-tertiary">
                 We'll send your detailed assessment to this email. No spam, ever.
               </p>
             </form>
@@ -149,7 +149,7 @@ export function ScorecardResultsPage() {
   return (
     <>
       {/* Score Hero */}
-      <section className="bg-slate-navy py-20 lg:py-28">
+      <section className="bg-navy py-20 lg:py-28">
         <div className="mx-auto max-w-3xl px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             {submitted && (
@@ -162,18 +162,18 @@ export function ScorecardResultsPage() {
             <div className={`mt-6 metric-display text-7xl lg:text-8xl ${scoreColor}`}>
               {result.compositeScore}
             </div>
-            <p className="mt-2 text-xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>{result.maturityLevel}</p>
-            <p className="mt-4 text-lg text-slate-200 max-w-xl mx-auto">{result.maturityDescription}</p>
+            <p className="mt-2 text-xl font-bold text-white" style={{ fontFamily: "var(--font-heading)" }}>{result.maturityLevel}</p>
+            <p className="mt-4 text-lg text-white/80 max-w-xl mx-auto">{result.maturityDescription}</p>
           </motion.div>
         </div>
       </section>
 
       {/* Pillar Breakdown */}
-      <section className="bg-white py-24 lg:py-32">
+      <section className="bg-white py-20 lg:py-28">
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <h2 className="text-2xl font-bold text-slate-navy mb-2" style={{ fontFamily: "var(--font-space-grotesk)" }}>Pillar Breakdown</h2>
-            <p className="text-slate-600 mb-8">How you scored across each dimension of AI readiness.</p>
+            <h2 className="text-2xl font-bold text-text mb-2" style={{ fontFamily: "var(--font-heading)" }}>Pillar Breakdown</h2>
+            <p className="text-text-secondary mb-8">How you scored across each dimension of AI readiness.</p>
             <div className="space-y-6">
               {result.pillarScores.map((ps, i) => {
                 const isWeakest = ps.key === result.weakestPillar;
@@ -186,18 +186,18 @@ export function ScorecardResultsPage() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: 0.08 * i }}
                     className={`rounded-lg border p-6 ${
-                      isWeakest ? "border-red-200 bg-red-50/50" : isStrongest ? "border-teal/20 bg-teal/5" : "border-gray-200 bg-white"
+                      isWeakest ? "border-red-200 bg-red-50/50" : isStrongest ? "border-teal/20 bg-teal/5" : "border-border bg-white"
                     }`}
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
-                        <h3 className="text-sm font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>{ps.name}</h3>
+                        <h3 className="text-sm font-bold text-text" style={{ fontFamily: "var(--font-heading)" }}>{ps.name}</h3>
                         {isWeakest && <span className="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-medium">Priority Area</span>}
                         {isStrongest && <span className="text-xs bg-teal/10 text-teal px-2 py-0.5 rounded-full font-medium">Strongest</span>}
                       </div>
                       <span className="metric-display text-lg">{Math.round(ps.percentage)}%</span>
                     </div>
-                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="h-2 bg-border rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${ps.percentage}%` }}
@@ -215,14 +215,14 @@ export function ScorecardResultsPage() {
       </section>
 
       {/* Personalized Roadmap */}
-      <section className="bg-slate-navy py-24 lg:py-32">
+      <section className="bg-navy py-20 lg:py-28">
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <span className="section-label text-teal">Your Personalized Roadmap</span>
-            <h2 className="mt-4 text-2xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            <h2 className="mt-4 text-2xl font-bold text-white" style={{ fontFamily: "var(--font-heading)" }}>
               Here's how we'd close the gap for your business.
             </h2>
-            <p className="mt-3 text-slate-300">
+            <p className="mt-3 text-white/70">
               Based on your scores, this is the phased approach we'd recommend. Every engagement starts with understanding where you are, then we build from there.
             </p>
           </motion.div>
@@ -243,12 +243,12 @@ export function ScorecardResultsPage() {
                   </span>
                   <div>
                     <span className="text-xs font-semibold uppercase tracking-wider text-teal">{step.phase} · {step.timeline}</span>
-                    <h3 className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>{step.title}</h3>
+                    <h3 className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-heading)" }}>{step.title}</h3>
                   </div>
                 </div>
-                <p className="text-slate-300 leading-relaxed">{step.description}</p>
+                <p className="text-white/70 leading-relaxed">{step.description}</p>
                 <div className="mt-3">
-                  <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-400">
+                  <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-text-tertiary">
                     Service: {step.service}
                   </span>
                 </div>
@@ -259,14 +259,14 @@ export function ScorecardResultsPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-white py-24 lg:py-32">
+      <section className="bg-white py-20 lg:py-28">
         <div className="mx-auto max-w-3xl px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <span className="section-label">Next Step</span>
-            <h2 className="mt-4 text-2xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            <h2 className="mt-4 text-2xl font-bold text-text" style={{ fontFamily: "var(--font-heading)" }}>
               Ready to close the gap?
             </h2>
-            <p className="mt-4 text-lg text-slate-600 max-w-xl mx-auto">
+            <p className="mt-4 text-lg text-text-secondary max-w-xl mx-auto">
               Book a 30-minute discovery call. We'll walk through your results, answer questions, and discuss whether ClearForge is the right fit.
             </p>
             <div className="mt-8 flex gap-4 flex-wrap justify-center">

@@ -27,12 +27,12 @@ export function Header() {
     <header
       className={cn(
         "fixed left-0 right-0 top-0 z-50 transition-all duration-300",
-        scrolled ? "glass border-b border-gray-200 shadow-sm" : "bg-white",
+        scrolled ? "nav-scroll-state" : "bg-white",
       )}
     >
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-1">
-          <span className="text-xl font-bold tracking-tight text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+          <span className="text-2xl tracking-tight text-text" style={{ fontFamily: "var(--font-heading)" }}>
             ClearForge<span className="text-teal">.ai</span>
           </span>
         </Link>
@@ -41,8 +41,8 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="px-3 py-2 text-base font-medium text-slate-500 transition-colors hover:text-slate-navy"
-              style={{ fontFamily: "var(--font-inter)" }}
+              className="px-3 py-2 text-sm font-medium text-text-secondary transition-colors hover:text-text"
+              style={{ fontFamily: "var(--font-body)" }}
             >
               {link.label}
             </Link>

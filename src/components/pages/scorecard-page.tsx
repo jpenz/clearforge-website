@@ -47,10 +47,10 @@ export function ScorecardPage() {
             transition={{ duration: 0.5 }}
           >
             <span className="section-label">AI Maturity Scorecard</span>
-            <h1 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            <h1 className="mt-4 text-3xl font-bold text-text sm:text-4xl" style={{ fontFamily: "var(--font-heading)" }}>
               How ready is your business for AI agents?
             </h1>
-            <p className="mt-4 text-lg text-slate-600">
+            <p className="mt-4 text-lg text-text-secondary">
               20 questions across 5 pillars. Takes about 5 minutes.
               Get your AI maturity score, pillar breakdown, and a personalized roadmap with specific next steps.
             </p>
@@ -59,10 +59,10 @@ export function ScorecardPage() {
           {/* Progress Bar */}
           <div className="mt-10">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-base font-medium text-slate-700">{pillar.name}</span>
+              <span className="text-base font-medium text-text-secondary">{pillar.name}</span>
               <span className="metric-display text-sm">{answeredCount}/{totalQuestions}</span>
             </div>
-            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div className="h-2 bg-border rounded-full overflow-hidden">
               <div
                 className="h-full bg-teal rounded-full transition-all duration-500"
                 style={{ width: `${progress}%` }}
@@ -74,7 +74,7 @@ export function ScorecardPage() {
                   key={p.key}
                   onClick={() => setCurrentPillar(i)}
                   className={`flex-1 h-1.5 rounded-full transition-colors ${
-                    i === currentPillar ? "bg-teal" : i < currentPillar ? "bg-teal/40" : "bg-gray-200"
+                    i === currentPillar ? "bg-teal" : i < currentPillar ? "bg-teal/40" : "bg-border"
                   }`}
                 />
               ))}
@@ -91,14 +91,14 @@ export function ScorecardPage() {
               transition={{ duration: 0.3 }}
               className="mt-10 space-y-6"
             >
-              <div className="rounded-lg border border-gray-200 bg-gray-100 p-4">
-                <h3 className="text-sm font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>{pillar.name}</h3>
-                <p className="text-base text-slate-500 mt-1">{pillar.description}</p>
+              <div className="rounded-lg border border-border bg-surface p-4">
+                <h3 className="text-sm font-bold text-text" style={{ fontFamily: "var(--font-heading)" }}>{pillar.name}</h3>
+                <p className="text-base text-text-tertiary mt-1">{pillar.description}</p>
               </div>
 
               {pillarQuestions.map((q) => (
-                <div key={q.id} className="rounded-lg border border-gray-200 bg-white p-6">
-                  <p className="text-base font-medium text-slate-700 mb-4">{q.text}</p>
+                <div key={q.id} className="rounded-lg border border-border bg-white p-6">
+                  <p className="text-base font-medium text-text-secondary mb-4">{q.text}</p>
                   <div className="flex gap-2">
                     {scaleLabels.map((label, idx) => {
                       const value = idx + 1;
@@ -110,7 +110,7 @@ export function ScorecardPage() {
                           className={`flex-1 rounded-md border px-2 py-2.5 text-xs font-medium transition-all ${
                             isSelected
                               ? "border-teal bg-teal text-white"
-                              : "border-gray-200 text-slate-500 hover:border-teal hover:text-teal"
+                              : "border-border text-text-tertiary hover:border-teal hover:text-teal"
                           }`}
                         >
                           <span className="hidden sm:inline">{label}</span>

@@ -16,7 +16,7 @@ const stats = [
 
 export function CaseStudyPreview() {
   return (
-    <section className="bg-slate-navy py-24 lg:py-32 relative overflow-hidden">
+    <section className="bg-navy py-20 lg:py-28 relative overflow-hidden">
       <div
         className="pointer-events-none absolute inset-0 opacity-15"
         style={{
@@ -34,10 +34,10 @@ export function CaseStudyPreview() {
             transition={{ duration: 0.5 }}
           >
             <span className="section-label text-teal">Featured Case Study</span>
-            <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl" style={{ fontFamily: "var(--font-heading)" }}>
               Metro Detroit Services Company Rebuilt from Marketing Zero
             </h2>
-            <p className="mt-6 text-lg leading-relaxed text-slate-200">
+            <p className="mt-6 text-lg leading-relaxed text-white/80">
               A 20+ year legacy business with declining customers had no website, no pipeline engine, and no repeatable outreach. ClearForge implemented a complete marketing operating system and moved the company into active growth with recurring commercial contracts.
             </p>
             <Button className="mt-8" size="lg" asChild>
@@ -57,11 +57,11 @@ export function CaseStudyPreview() {
             {stats.map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-lg border border-charcoal bg-charcoal p-5"
+                className="rounded-lg border border-white/10 bg-navy-surface p-5"
               >
                 <stat.icon className="h-5 w-5 text-teal mb-2" />
                 <div className="metric-display text-2xl">{stat.value}</div>
-                <p className="mt-1 text-base text-slate-200">{stat.label}</p>
+                <p className="mt-1 text-base text-white/80">{stat.label}</p>
               </div>
             ))}
           </motion.div>

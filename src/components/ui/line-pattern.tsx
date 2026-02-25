@@ -14,10 +14,10 @@ export function LinePattern({ className }: LinePatternProps) {
       <path d="M0 80 Q200 10 400 80 Q600 150 800 80" stroke={`url(#${gradientId})`} strokeWidth="1" strokeLinecap="round" opacity="0.15" />
       <defs>
         <linearGradient id={gradientId} x1="0" y1="0" x2="800" y2="0">
-          <stop offset="0%" stopColor="#0D9488" stopOpacity="0" />
-          <stop offset="30%" stopColor="#0D9488" stopOpacity="1" />
-          <stop offset="70%" stopColor="#06B6D4" stopOpacity="1" />
-          <stop offset="100%" stopColor="#06B6D4" stopOpacity="0" />
+          <stop offset="0%" stopColor="#0F766E" stopOpacity="0" />
+          <stop offset="30%" stopColor="#0F766E" stopOpacity="1" />
+          <stop offset="70%" stopColor="#14B8A6" stopOpacity="1" />
+          <stop offset="100%" stopColor="#14B8A6" stopOpacity="0" />
         </linearGradient>
       </defs>
     </svg>

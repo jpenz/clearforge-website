@@ -86,34 +86,34 @@ export default function Home() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-slate-navy py-28 lg:py-36 section-clip-bottom">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(13,148,136,0.15),transparent_45%),radial-gradient(circle_at_bottom_left,rgba(6,182,212,0.12),transparent_40%)]" />
+      <section className="dark-section relative overflow-hidden bg-navy py-20 lg:py-28">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(15,118,110,0.08),transparent_48%)]" />
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
           <h1 className="mt-4 max-w-4xl text-4xl font-bold text-white sm:text-5xl lg:text-6xl">AI Strategy That Actually Ships</h1>
-          <p className="mt-6 max-w-3xl text-xl text-slate-200">
+          <p className="mt-6 max-w-3xl text-xl text-white/80">
             Most companies know AI should be driving more value. The gap is not technology. The gap is knowing where to focus and having a team that can execute.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Button size="lg" asChild>
               <Link href="/solutions">See Our Solutions</Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-slate-400 text-white hover:bg-white hover:text-slate-navy" asChild>
+            <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white hover:text-text" asChild>
               <Link href="/advisor">Get Your AI Recommendation</Link>
             </Button>
           </div>
           <div className="mt-10 flex flex-wrap gap-3">
             {proof.map((item) => (
-              <span key={item} className="rounded-full glass-pill px-4 py-2 text-sm text-slate-200">{item}</span>
+              <span key={item} className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white/80">{item}</span>
             ))}
           </div>
         </div>
       </section>
 
-      <div className="relative h-14 overflow-hidden bg-slate-navy">
+      <div className="relative h-14 overflow-hidden bg-navy">
         <LinePattern className="pointer-events-none absolute inset-x-0 top-1/2 h-24 w-full -translate-y-1/2" />
       </div>
 
-      <section className="bg-slate-navy py-28 lg:py-36">
+      <section className="dark-section bg-navy py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl" style={{ letterSpacing: "-0.02em" }}>The AI Value Gap Is Widening</h2>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
@@ -122,28 +122,28 @@ export default function Home() {
               ["Strategy and execution are split", "One partner writes the plan, another partner attempts delivery, and value is lost in handoffs."],
               ["Technology without workforce change", "Systems launch, but teams are not prepared to operate with them, so adoption stalls."],
             ].map(([title, desc]) => (
-              <article key={title} className="rounded-xl glass-dark glass-dark-hover p-6">
+              <article key={title} className="rounded-xl border border-white/10 bg-navy-surface p-6">
                 <h3 className="text-xl font-bold text-white">{title}</h3>
-                <p className="mt-3 text-base text-slate-200">{desc}</p>
+                <p className="mt-3 text-base text-white/80">{desc}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-28 lg:py-36">
+      <section className="bg-surface py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ letterSpacing: "-0.02em" }}>Modernize Work and Workforce in Tandem</h2>
-          <p className="mt-4 max-w-3xl text-lg text-slate-600">
+          <h2 className="mt-4 text-3xl font-bold text-text sm:text-4xl" style={{ letterSpacing: "-0.02em" }}>Modernize Work and Workforce in Tandem</h2>
+          <p className="mt-4 max-w-3xl text-lg text-text-secondary">
             ClearForge runs a dual-track transformation model: redesign critical workflows for AI while preparing teams to operate in a hybrid human-plus-agent model.
           </p>
           <ol className="mt-10 grid gap-8 md:grid-cols-4 md:gap-6">
             {frameworkCards.map((item, index) => (
               <li key={item.phase} className="relative">
-                <article className="rounded-xl border border-gray-200 bg-gray-50 p-6">
+                <article className="rounded-xl border border-border bg-white p-6">
                   <item.icon className="h-12 w-12 text-teal" aria-hidden />
                   <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-teal">{item.phase}</p>
-                  <p className="mt-2 text-base text-slate-700">{item.text}</p>
+                  <p className="mt-2 text-base text-text-secondary">{item.text}</p>
                 </article>
                 {index < frameworkCards.length - 1 && (
                   <>
@@ -158,19 +158,19 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-28 lg:py-36">
+      <section className="bg-bg py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ letterSpacing: "-0.02em" }}>Choose your point on the AI journey</h2>
-          <p className="mt-4 max-w-3xl text-lg text-slate-600">Where are you now, what we do next, and what outcomes you should expect.</p>
+          <h2 className="mt-4 text-3xl font-bold text-text sm:text-4xl" style={{ letterSpacing: "-0.02em" }}>Choose your point on the AI journey</h2>
+          <p className="mt-4 max-w-3xl text-lg text-text-secondary">Where are you now, what we do next, and what outcomes you should expect.</p>
           <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {solutions.map((solution) => {
               const SolutionIcon = solutionIcons[solution.icon];
               return (
-                <article key={solution.slug} className="rounded-xl border border-gray-200 border-l-4 border-l-teal bg-white p-6">
+                <article key={solution.slug} className="rounded-xl border border-border border-l-4 border-l-teal bg-white p-6">
                   <SolutionIcon className="mb-3 h-8 w-8 text-teal" aria-hidden />
                   <p className="text-xs font-semibold text-teal">{solution.stage}</p>
-                  <h3 className="mt-2 text-xl font-bold text-slate-navy">{solution.title}</h3>
-                  <p className="mt-3 text-base text-slate-600">{solution.tagline}</p>
+                  <h3 className="mt-2 text-xl font-bold text-text">{solution.title}</h3>
+                  <p className="mt-3 text-base text-text-secondary">{solution.tagline}</p>
                   <Link className="mt-4 inline-flex items-center text-sm font-medium text-teal" href={`/solutions/${solution.slug}`}>
                     Learn more <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>
@@ -181,15 +181,15 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-28 lg:py-36">
+      <section className="bg-surface py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-slate-navy sm:text-4xl" style={{ letterSpacing: "-0.02em" }}>Case studies that prove the model</h2>
+          <h2 className="text-3xl font-bold text-text sm:text-4xl" style={{ letterSpacing: "-0.02em" }}>Case studies that prove the model</h2>
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {featuredCaseStudies.map((study) => (
-              <article key={study.slug} className="rounded-xl border border-gray-200 bg-white p-6">
-                <p className="text-sm text-slate-500">{study.industry}</p>
-                <h3 className="mt-2 text-xl font-bold text-slate-navy">{study.title}</h3>
-                <p className="mt-3 text-base text-slate-600">{study.excerpt}</p>
+              <article key={study.slug} className="rounded-xl border border-border bg-white p-6">
+                <p className="text-sm text-text-tertiary">{study.industry}</p>
+                <h3 className="mt-2 text-xl font-bold text-text">{study.title}</h3>
+                <p className="mt-3 text-base text-text-secondary">{study.excerpt}</p>
                 <p className="mt-4 text-sm text-teal">{study.heroMetric} {study.heroMetricLabel}</p>
                 <Link className="mt-3 inline-flex items-center text-sm font-medium text-teal" href={`/case-studies/${study.slug}`}>
                   Read case study <ArrowRight className="ml-1 h-4 w-4" />
@@ -200,18 +200,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-white py-28 lg:py-36">
+      <section className="bg-bg py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-slate-navy sm:text-4xl" style={{ letterSpacing: "-0.02em" }}>Industry depth where it matters most</h2>
-          <p className="mt-4 max-w-3xl text-lg text-slate-600">Focused execution playbooks for the operating environments where we go deepest.</p>
+          <h2 className="text-3xl font-bold text-text sm:text-4xl" style={{ letterSpacing: "-0.02em" }}>Industry depth where it matters most</h2>
+          <p className="mt-4 max-w-3xl text-lg text-text-secondary">Focused execution playbooks for the operating environments where we go deepest.</p>
           <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {deepIndustries.map((industry) => {
               const IndustryIcon = industryIcons[industry.icon];
               return (
-                <Link key={industry.slug} href={`/industries/${industry.slug}`} className="rounded-xl border border-gray-200 bg-gray-50 p-5">
+                <Link key={industry.slug} href={`/industries/${industry.slug}`} className="rounded-xl border border-border bg-surface p-5">
                   <IndustryIcon className="mb-3 h-8 w-8 text-teal" aria-hidden />
-                  <h3 className="text-lg font-bold text-slate-navy">{industry.shortName}</h3>
-                  <p className="mt-2 truncate text-sm text-slate-600">{industryTileDescriptions[industry.slug] ?? industry.hero}</p>
+                  <h3 className="text-lg font-bold text-text">{industry.shortName}</h3>
+                  <p className="mt-2 truncate text-sm text-text-secondary">{industryTileDescriptions[industry.slug] ?? industry.hero}</p>
                 </Link>
               );
             })}
@@ -219,33 +219,33 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-28 lg:py-36">
+      <section className="bg-surface py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-slate-navy sm:text-4xl" style={{ letterSpacing: "-0.02em" }}>Why ClearForge</h2>
+          <h2 className="text-3xl font-bold text-text sm:text-4xl" style={{ letterSpacing: "-0.02em" }}>Why ClearForge</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {differentiators.map((item) => (
-              <article key={item.title} className="rounded-xl border border-gray-200 bg-white p-6">
+              <article key={item.title} className="rounded-xl border border-border bg-white p-6">
                 <item.icon className="mb-4 h-12 w-12 text-teal" aria-hidden />
-                <h3 className="text-lg font-bold text-slate-navy">{item.title}</h3>
-                <p className="mt-2 text-base text-slate-600">{item.text}</p>
+                <h3 className="text-lg font-bold text-text">{item.title}</h3>
+                <p className="mt-2 text-base text-text-secondary">{item.text}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <div className="relative h-14 overflow-hidden bg-slate-navy">
+      <div className="relative h-14 overflow-hidden bg-navy">
         <LinePattern className="pointer-events-none absolute inset-x-0 top-1/2 h-24 w-full -translate-y-1/2" />
       </div>
 
-      <section className="relative overflow-hidden bg-slate-navy py-28 lg:py-36 grain-overlay gradient-mesh">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(13,148,136,0.24),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(6,182,212,0.22),transparent_40%)]" />
+      <section className="dark-section relative overflow-hidden bg-navy py-20 lg:py-28 grain-overlay gradient-mesh">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(15,118,110,0.24),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(20,184,166,0.22),transparent_40%)]" />
         <div className="relative z-10 mx-auto max-w-5xl px-6 text-center lg:px-8">
           <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl" style={{ letterSpacing: "-0.02em" }}>Move from AI ambition to measurable execution.</h2>
-          <p className="mx-auto mt-4 max-w-3xl text-lg text-slate-200">Choose the path that fits your context today and build from there.</p>
+          <p className="mx-auto mt-4 max-w-3xl text-lg text-white/80">Choose the path that fits your context today and build from there.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild><Link href="/contact">Book a Discovery Call</Link></Button>
-            <Button size="lg" variant="outline" className="border-slate-400 text-white hover:bg-white hover:text-slate-navy" asChild><Link href="/scorecard">Take the AI Maturity Scorecard</Link></Button>
+            <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white hover:text-text" asChild><Link href="/scorecard">Take the AI Maturity Scorecard</Link></Button>
             <Button size="lg" variant="outline" className="border-teal/80 text-white hover:bg-teal hover:text-white" asChild><Link href="/advisor">Get Your AI Recommendation</Link></Button>
           </div>
         </div>

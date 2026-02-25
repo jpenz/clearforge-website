@@ -10,8 +10,8 @@ export default function TermsPage() {
   return (
     <section className="bg-white py-20 lg:py-28">
       <div className="mx-auto max-w-4xl px-6 lg:px-8 prose-content">
-        <h1 className="text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>Terms of Service</h1>
-        <p className="mt-2 text-sm text-slate-400">Last updated: February 24, 2026</p>
+        <h1 className="text-3xl font-bold text-text sm:text-4xl" style={{ fontFamily: "var(--font-heading)" }}>Terms of Service</h1>
+        <p className="mt-2 text-sm text-text-tertiary">Last updated: February 24, 2026</p>
 
         <h2>Agreement to Terms</h2>
         <p>By accessing or using the ClearForge.ai website, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you may not access the website.</p>

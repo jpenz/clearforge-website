@@ -56,7 +56,7 @@ const phases = [
 
 export function TransformationFramework() {
   return (
-    <section className="relative overflow-hidden bg-slate-navy py-24 lg:py-32 grain-overlay">
+    <section className="relative overflow-hidden bg-navy py-20 lg:py-28 grain-overlay">
       <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[52%] lg:block">
         <div
           className="absolute inset-0 opacity-20"
@@ -113,11 +113,11 @@ export function TransformationFramework() {
           <span className="section-label text-teal">The ClearForge Framework</span>
           <h2
             className="mt-4 text-3xl font-bold text-white sm:text-4xl"
-            style={{ fontFamily: "var(--font-space-grotesk)" }}
+            style={{ fontFamily: "var(--font-heading)" }}
           >
             Modernize the work and the workforce in tandem.
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-300">
+          <p className="mt-4 text-lg leading-relaxed text-white/70">
             AI agents are a new category of worker. Most companies deploy the technology without preparing
             the humans who work alongside it. We run two tracks simultaneously - redesigning your processes
             for AI agents while building your team's ability to operate with them. One without the other
@@ -145,7 +145,7 @@ export function TransformationFramework() {
                   <span className="text-xs font-semibold uppercase tracking-wider text-teal">Phase {i + 1}</span>
                   <h3
                     className="text-lg font-bold text-white"
-                    style={{ fontFamily: "var(--font-space-grotesk)" }}
+                    style={{ fontFamily: "var(--font-heading)" }}
                   >
                     {phase.label}
                   </h3>
@@ -159,22 +159,22 @@ export function TransformationFramework() {
                   <span className="text-xs font-semibold uppercase tracking-wider text-teal-light">Process</span>
                 </div>
                 <h4 className="text-sm font-bold text-white">{phase.workflow.title}</h4>
-                <p className="mt-1.5 text-sm leading-relaxed text-slate-400">{phase.workflow.description}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-text-tertiary">{phase.workflow.description}</p>
               </div>
 
               {/* Workforce track */}
               <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
                 <div className="mb-2 flex items-center gap-2">
-                  <Users className="h-4 w-4 text-slate-300" />
-                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-300">Team</span>
+                  <Users className="h-4 w-4 text-white/70" />
+                  <span className="text-xs font-semibold uppercase tracking-wider text-white/70">Team</span>
                 </div>
                 <h4 className="text-sm font-bold text-white">{phase.workforce.title}</h4>
-                <p className="mt-1.5 text-sm leading-relaxed text-slate-400">{phase.workforce.description}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-text-tertiary">{phase.workforce.description}</p>
               </div>
 
               {/* Connecting arrow */}
               {i < 3 && (
-                <div className="absolute -right-3 top-1/2 z-10 hidden h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-slate-navy lg:flex">
+                <div className="absolute -right-3 top-1/2 z-10 hidden h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-navy lg:flex">
                   <ArrowRight className="h-3 w-3 text-teal" />
                 </div>
               )}
@@ -202,7 +202,7 @@ export function TransformationFramework() {
             ].map((item) => (
               <div key={item.title}>
                 <h4 className="text-sm font-bold text-white">{item.title}</h4>
-                <p className="mt-1 text-sm text-slate-400">{item.desc}</p>
+                <p className="mt-1 text-sm text-text-tertiary">{item.desc}</p>
               </div>
             ))}
           </div>

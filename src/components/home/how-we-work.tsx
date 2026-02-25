@@ -36,7 +36,7 @@ const steps = [
 
 export function HowWeWork() {
   return (
-    <section className="bg-white py-24 lg:py-32">
+    <section className="bg-white py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -46,10 +46,10 @@ export function HowWeWork() {
           className="mb-16 max-w-2xl"
         >
           <span className="section-label">Our Methodology</span>
-          <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+          <h2 className="mt-4 text-3xl font-bold text-text sm:text-4xl" style={{ fontFamily: "var(--font-heading)" }}>
             Discover. Design. Build. Optimize.
           </h2>
-          <p className="mt-4 text-lg text-slate-600">
+          <p className="mt-4 text-lg text-text-secondary">
             We don't automate your existing processes. We redesign them for AI, prepare your team to work alongside it, and keep both improving.
           </p>
         </motion.div>
@@ -62,7 +62,7 @@ export function HowWeWork() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.1 * i }}
-              className="relative rounded-lg border border-gray-200 p-8"
+              className="relative rounded-lg border border-border p-8"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
@@ -71,18 +71,18 @@ export function HowWeWork() {
                   </div>
                   <span className="metric-display text-3xl">{step.number}</span>
                 </div>
-                <span className="text-sm font-medium text-slate-400 border border-gray-200 rounded-md px-2.5 py-1">{step.duration}</span>
+                <span className="text-sm font-medium text-text-tertiary border border-border rounded-md px-2.5 py-1">{step.duration}</span>
               </div>
-              <h3 className="text-xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              <h3 className="text-xl font-bold text-text" style={{ fontFamily: "var(--font-heading)" }}>
                 {step.title}
               </h3>
-              <p className="mt-3 text-base leading-relaxed text-slate-600">
+              <p className="mt-3 text-base leading-relaxed text-text-secondary">
                 {step.description}
               </p>
 
               {/* Connecting line between cards */}
               {i < 3 && (
-                <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-6 h-px bg-gray-300" />
+                <div className="absolute -right-3 top-1/2 z-10 hidden h-px w-6 -translate-y-1/2 bg-border-hover lg:block" />
               )}
             </motion.div>
           ))}

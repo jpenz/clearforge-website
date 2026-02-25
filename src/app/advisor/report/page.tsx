@@ -85,7 +85,7 @@ export default function AdvisorReportPage() {
 
   if (!loaded) {
     return (
-      <main className="mx-auto flex min-h-screen max-w-3xl items-center justify-center px-6 text-center text-slate-600">
+      <main className="mx-auto flex min-h-screen max-w-3xl items-center justify-center px-6 text-center text-text-secondary">
         Preparing your report...
       </main>
     );
@@ -94,8 +94,8 @@ export default function AdvisorReportPage() {
   if (!report) {
     return (
       <main className="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center px-6 text-center">
-        <h1 className="text-3xl font-bold text-slate-navy">No report found</h1>
-        <p className="mt-3 text-base text-slate-600">Go back to the AI Advisor, generate a recommendation, then download the report.</p>
+        <h1 className="text-3xl font-bold text-text">No report found</h1>
+        <p className="mt-3 text-base text-text-secondary">Go back to the AI Advisor, generate a recommendation, then download the report.</p>
         <Button asChild className="mt-6">
           <Link href="/advisor">Return to AI Advisor</Link>
         </Button>
@@ -104,7 +104,7 @@ export default function AdvisorReportPage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-100 px-4 py-8 print:bg-white print:p-0">
+    <main className="min-h-screen bg-surface px-4 py-8 print:bg-white print:p-0">
       <style jsx global>{`
         @page {
           size: A4;
@@ -146,78 +146,78 @@ export default function AdvisorReportPage() {
       </div>
 
       <article
-        className="report-shell mx-auto w-full rounded-2xl border border-gray-200 bg-white p-6 shadow-2xl sm:p-10"
+        className="report-shell mx-auto w-full rounded-2xl border border-border bg-white p-6 shadow-2xl sm:p-10"
         style={{ maxWidth: "210mm", minHeight: "297mm" }}
       >
-        <header className="border-b border-gray-200 pb-8">
+        <header className="border-b border-border pb-8">
           <div className="flex flex-wrap items-start justify-between gap-6">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal">ClearForge.ai</p>
-              <h1 className="mt-2 text-3xl font-bold text-slate-navy">AI Strategy Recommendation Report</h1>
-              <p className="mt-2 text-sm text-slate-600">Prepared for leadership review and planning discussion.</p>
+              <h1 className="mt-2 text-3xl font-bold text-text">AI Strategy Recommendation Report</h1>
+              <p className="mt-2 text-sm text-text-secondary">Prepared for leadership review and planning discussion.</p>
             </div>
-            <div className="rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-right text-sm text-slate-600">
-              <p className="font-semibold text-slate-800">Report Date</p>
+            <div className="rounded-lg border border-border bg-surface px-4 py-3 text-right text-sm text-text-secondary">
+              <p className="font-semibold text-text">Report Date</p>
               <p>{reportDate}</p>
             </div>
           </div>
         </header>
 
-        <section className="mt-8 grid gap-4 border-b border-gray-200 pb-8 text-sm text-slate-700 sm:grid-cols-2">
+        <section className="mt-8 grid gap-4 border-b border-border pb-8 text-sm text-text-secondary sm:grid-cols-2">
           <div>
-            <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Client</p>
-            <p className="mt-1 font-semibold text-slate-900">{report.clientName}</p>
+            <p className="text-xs uppercase tracking-[0.14em] text-text-tertiary">Client</p>
+            <p className="mt-1 font-semibold text-text">{report.clientName}</p>
             <p>{report.clientRole}</p>
             <p>{report.clientCompany}</p>
             <p>{report.clientEmail}</p>
             {report.clientPhone && <p>{report.clientPhone}</p>}
           </div>
           <div>
-            <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Advisory Context</p>
-            <p className="mt-1"><span className="font-semibold text-slate-900">Industry:</span> {report.industry}</p>
-            <p className="mt-1"><span className="font-semibold text-slate-900">Challenge:</span> {report.challenge}</p>
+            <p className="text-xs uppercase tracking-[0.14em] text-text-tertiary">Advisory Context</p>
+            <p className="mt-1"><span className="font-semibold text-text">Industry:</span> {report.industry}</p>
+            <p className="mt-1"><span className="font-semibold text-text">Challenge:</span> {report.challenge}</p>
             {report.companyUrl && (
               <p className="mt-1 break-all">
-                <span className="font-semibold text-slate-900">Company URL:</span> {report.companyUrl}
+                <span className="font-semibold text-text">Company URL:</span> {report.companyUrl}
               </p>
             )}
           </div>
         </section>
 
         <section className="report-prose mt-8">
-          <h2 className="text-2xl font-bold text-slate-navy">Strategic Recommendation</h2>
-          <div className="mt-4 rounded-xl border border-gray-200 bg-white p-6">
+          <h2 className="text-2xl font-bold text-text">Strategic Recommendation</h2>
+          <div className="mt-4 rounded-xl border border-border bg-white p-6">
             <MarkdownContent markdown={report.recommendation} />
           </div>
         </section>
 
         {report.companyResearch && report.companyResearch !== "No company URL provided." && (
           <section className="mt-8">
-            <h2 className="text-xl font-bold text-slate-navy">Company Research Summary</h2>
-            <div className="mt-3 rounded-xl border border-gray-200 bg-gray-50 p-5">
-              <p className="whitespace-pre-line text-sm leading-relaxed text-slate-700">{report.companyResearch}</p>
+            <h2 className="text-xl font-bold text-text">Company Research Summary</h2>
+            <div className="mt-3 rounded-xl border border-border bg-surface p-5">
+              <p className="whitespace-pre-line text-sm leading-relaxed text-text-secondary">{report.companyResearch}</p>
             </div>
           </section>
         )}
 
         <section className="mt-8 grid gap-5 sm:grid-cols-2">
-          <div className="rounded-xl border border-gray-200 bg-gray-50 p-5">
-            <h2 className="text-lg font-bold text-slate-navy">Recommended ClearForge Solutions</h2>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-slate-700">
+          <div className="rounded-xl border border-border bg-surface p-5">
+            <h2 className="text-lg font-bold text-text">Recommended ClearForge Solutions</h2>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-text-secondary">
               {report.suggestedSolutions.map((solution) => (
                 <li key={solution}>{solution}</li>
               ))}
             </ul>
           </div>
 
-          <div className="rounded-xl border border-gray-200 bg-gray-50 p-5">
-            <h2 className="text-lg font-bold text-slate-navy">Suggested Engagement</h2>
-            <p className="mt-3 text-sm leading-relaxed text-slate-700">{report.suggestedEngagement}</p>
+          <div className="rounded-xl border border-border bg-surface p-5">
+            <h2 className="text-lg font-bold text-text">Suggested Engagement</h2>
+            <p className="mt-3 text-sm leading-relaxed text-text-secondary">{report.suggestedEngagement}</p>
           </div>
         </section>
 
-        <footer className="mt-10 border-t border-gray-200 pt-6 text-xs text-slate-500">
-          <p className="font-semibold uppercase tracking-[0.14em] text-slate-700">ClearForge.ai</p>
+        <footer className="mt-10 border-t border-border pt-6 text-xs text-text-tertiary">
+          <p className="font-semibold uppercase tracking-[0.14em] text-text-secondary">ClearForge.ai</p>
           <p className="mt-1">This report is prepared as strategic guidance for discovery planning.</p>
         </footer>
       </article>

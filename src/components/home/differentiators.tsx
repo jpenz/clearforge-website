@@ -33,7 +33,7 @@ const items = [
 
 export function Differentiators() {
   return (
-    <section className="bg-white py-24 lg:py-32">
+    <section className="bg-white py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -43,7 +43,7 @@ export function Differentiators() {
           className="mb-16 max-w-3xl"
         >
           <span className="section-label">Why ClearForge</span>
-          <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+          <h2 className="mt-4 text-3xl font-bold text-text sm:text-4xl" style={{ fontFamily: "var(--font-heading)" }}>
             The strategic caliber of top consulting firms, with engineering and operations that actually ship.
           </h2>
         </motion.div>
@@ -61,10 +61,10 @@ export function Differentiators() {
               <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-teal/10 text-teal transition-colors group-hover:bg-teal group-hover:text-white">
                 <item.icon className="h-5 w-5" />
               </div>
-              <h3 className="text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              <h3 className="text-lg font-bold text-text" style={{ fontFamily: "var(--font-heading)" }}>
                 {item.title}
               </h3>
-              <p className="mt-2 text-base leading-relaxed text-slate-600">{item.description}</p>
+              <p className="mt-2 text-base leading-relaxed text-text-secondary">{item.description}</p>
             </motion.div>
           ))}
         </div>

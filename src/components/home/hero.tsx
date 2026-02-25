@@ -14,15 +14,15 @@ const proofPoints = [
 export function Hero() {
   return (
     <section
-      className="relative flex min-h-[85vh] items-center overflow-hidden bg-slate-navy grain-overlay gradient-mesh section-clip-bottom"
+      className="relative flex min-h-[85vh] items-center overflow-hidden bg-navy grain-overlay gradient-mesh"
       style={{
         backgroundImage: "url('/api/img?src=https://heyboss.heeyo.ai/replicate-flux-schnell-1771984828-99d96676.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="pointer-events-none absolute inset-0 bg-slate-navy/50" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-slate-navy via-slate-navy/95 to-slate-navy/70" />
+      <div className="pointer-events-none absolute inset-0 bg-navy/50" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy via-navy/95 to-navy/70" />
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.06]"
         style={{
@@ -42,13 +42,13 @@ export function Hero() {
             <span className="section-label">For PE Operators, CEOs, and Revenue Leaders</span>
             <h1
               className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl"
-              style={{ fontFamily: "var(--font-space-grotesk)" }}
+              style={{ fontFamily: "var(--font-heading)" }}
             >
               Most companies know AI should be driving more value.
               <br />
               <span className="gradient-text">The gap is execution.</span>
             </h1>
-            <p className="mt-6 max-w-2xl text-xl leading-relaxed text-slate-300">
+            <p className="mt-6 max-w-2xl text-xl leading-relaxed text-white/70">
               AI agents are becoming part of the workforce. The companies pulling ahead aren't just buying technology -
               they're rewiring how their business operates. ClearForge tells you where to focus, deploys the agents,
               and runs them alongside your team.
@@ -62,7 +62,7 @@ export function Hero() {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-slate-400 text-white hover:bg-white hover:text-slate-navy"
+                className="border-white/20 text-white hover:bg-white hover:text-text"
                 asChild
               >
                 <Link href="/scorecard">
@@ -73,7 +73,7 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur-sm">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-7">
             <p className="text-sm font-semibold uppercase tracking-wider text-teal-light">How ClearForge closes the gap</p>
             <div className="mt-5 space-y-3">
               {[
@@ -83,14 +83,14 @@ export function Hero() {
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3 rounded-lg border border-white/10 bg-white/5 p-3">
                   <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-teal" />
-                  <p className="text-base font-medium text-slate-200">{item}</p>
+                  <p className="text-base font-medium text-white/80">{item}</p>
                 </div>
               ))}
             </div>
-            <p className="mt-5 text-sm text-slate-400">Recent applications</p>
+            <p className="mt-5 text-sm text-text-tertiary">Recent applications</p>
             <ul className="mt-2 space-y-1">
               {proofPoints.map((point) => (
-                <li key={point} className="text-sm text-slate-300">
+                <li key={point} className="text-sm text-white/70">
                   {point}
                 </li>
               ))}
@@ -100,13 +100,13 @@ export function Hero() {
       </div>
 
       <div className="absolute bottom-16 right-8 z-20 hidden flex-col gap-3 lg:flex">
-        <div className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 backdrop-blur-sm">
+        <div className="rounded-xl border border-white/10 bg-white/5 px-5 py-3">
           <p className="text-2xl font-bold text-white">60%+</p>
-          <p className="text-sm text-slate-300">Reduction in manual prospecting</p>
+          <p className="text-sm text-white/70">Reduction in manual prospecting</p>
         </div>
-        <div className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 backdrop-blur-sm">
+        <div className="rounded-xl border border-white/10 bg-white/5 px-5 py-3">
           <p className="text-2xl font-bold text-white">1,060</p>
-          <p className="text-sm text-slate-300">Qualified opportunities identified</p>
+          <p className="text-sm text-white/70">Qualified opportunities identified</p>
         </div>
       </div>
     </section>

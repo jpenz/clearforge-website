@@ -18,17 +18,17 @@ export function CaseStudiesPage() {
             className="max-w-3xl"
           >
             <span className="section-label">Case Studies</span>
-            <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+            <h1 className="mt-4 text-4xl font-bold text-text sm:text-5xl" style={{ fontFamily: "var(--font-heading)" }}>
               How ClearForge turns strategy into operating results.
             </h1>
-            <p className="mt-6 text-lg text-slate-600">
+            <p className="mt-6 text-lg text-text-secondary">
               A selection of anonymized engagements across growth and operations.
             </p>
           </motion.div>
         </div>
       </section>
 
-      <section className="bg-gray-100 py-24 lg:py-32">
+      <section className="bg-surface py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="space-y-8">
             {caseStudies.map((cs, i) => (
@@ -38,27 +38,27 @@ export function CaseStudiesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.08 * i }}
-                className="rounded-lg border border-gray-200 bg-white overflow-hidden"
+                className="rounded-lg border border-border bg-white overflow-hidden"
               >
                 <div className="grid md:grid-cols-3">
                   <div className="p-8 md:col-span-2">
                     <div className="flex items-center gap-3 mb-4">
                       <span className="text-xs font-medium text-teal border border-teal/20 bg-teal/5 rounded-md px-2 py-1">{cs.industry}</span>
-                      <span className="text-base text-slate-500">{cs.service}</span>
+                      <span className="text-base text-text-tertiary">{cs.service}</span>
                     </div>
-                    <h2 className="text-xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                    <h2 className="text-xl font-bold text-text" style={{ fontFamily: "var(--font-heading)" }}>
                       {cs.title}
                     </h2>
-                    <p className="mt-3 text-lg text-slate-600 leading-relaxed">{cs.excerpt}</p>
+                    <p className="mt-3 text-lg text-text-secondary leading-relaxed">{cs.excerpt}</p>
                     <Button variant="link" className="mt-4 px-0" asChild>
                       <Link href={`/case-studies/${cs.slug}`}>
                         Read Full Case Study <ArrowRight className="ml-1 h-4 w-4" />
                       </Link>
                     </Button>
                   </div>
-                  <div className="bg-slate-navy p-8 flex flex-col justify-center items-center text-center">
+                  <div className="bg-navy p-8 flex flex-col justify-center items-center text-center">
                     <div className="metric-display text-4xl">{cs.heroMetric}</div>
-                    <p className="mt-2 text-base text-slate-200">{cs.heroMetricLabel}</p>
+                    <p className="mt-2 text-base text-white/80">{cs.heroMetricLabel}</p>
                   </div>
                 </div>
               </motion.div>
@@ -67,12 +67,12 @@ export function CaseStudiesPage() {
         </div>
       </section>
 
-      <section className="bg-slate-navy py-24 lg:py-32">
+      <section className="bg-navy py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+          <h2 className="text-3xl font-bold text-white" style={{ fontFamily: "var(--font-heading)" }}>
             Want outcomes like these in your business?
           </h2>
-          <p className="mt-4 text-lg text-slate-200 max-w-xl mx-auto">
+          <p className="mt-4 text-lg text-white/80 max-w-xl mx-auto">
             We start every engagement with your operating priorities and growth targets.
           </p>
           <Button size="lg" className="mt-8" asChild>

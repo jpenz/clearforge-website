@@ -177,18 +177,18 @@ export function AdvisorPage() {
     <section className="bg-white py-20 lg:py-28">
       <div className="mx-auto max-w-4xl px-6 lg:px-8">
         <span className="section-label">AI Advisor</span>
-        <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl">Get your AI recommendation in five guided steps.</h1>
-        <p className="mt-4 text-lg text-slate-600">Structured input, consultant-level output, and a printable strategy report.</p>
+        <h1 className="mt-4 text-4xl font-bold text-text sm:text-5xl">Get your AI recommendation in five guided steps.</h1>
+        <p className="mt-4 text-lg text-text-secondary">Structured input, consultant-level output, and a printable strategy report.</p>
 
-        <div className="mt-8 h-2 overflow-hidden rounded-full bg-gray-200">
+        <div className="mt-8 h-2 overflow-hidden rounded-full bg-border">
           <div className="h-full rounded-full bg-teal transition-all duration-300" style={{ width: `${(progressStep / 5) * 100}%` }} />
         </div>
 
-        <div className="mt-8 rounded-xl glass p-6 sm:p-8">
+        <div className="mt-8 rounded-xl border border-border bg-surface p-6 sm:p-8">
           {step === 1 && (
             <>
-              <h2 className="text-2xl font-bold text-slate-navy">Step 1: Let&apos;s start with your business.</h2>
-              <p className="mt-2 text-base text-slate-600">Select your industry.</p>
+              <h2 className="text-2xl font-bold text-text">Step 1: Let&apos;s start with your business.</h2>
+              <p className="mt-2 text-base text-text-secondary">Select your industry.</p>
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 {industries.map((item) => (
                   <button
@@ -197,7 +197,7 @@ export function AdvisorPage() {
                       setIndustry(item);
                       setStep(2);
                     }}
-                    className="rounded-lg glass glass-hover px-4 py-3 text-left text-sm font-medium text-slate-700"
+                    className="rounded-lg border border-border bg-white px-4 py-3 text-left text-sm font-medium text-text-secondary transition-colors hover:border-border-hover hover:bg-surface"
                   >
                     {item}
                   </button>
@@ -208,31 +208,31 @@ export function AdvisorPage() {
 
           {step === 2 && (
             <>
-              <h2 className="text-2xl font-bold text-slate-navy">Step 2: Describe your challenge.</h2>
-              <p className="mt-2 text-base text-slate-600">Describe your biggest AI challenge in a few sentences.</p>
+              <h2 className="text-2xl font-bold text-text">Step 2: Describe your challenge.</h2>
+              <p className="mt-2 text-base text-text-secondary">Describe your biggest AI challenge in a few sentences.</p>
 
               <Textarea
-                className="mt-5 min-h-[160px] border-gray-200 bg-white text-slate-700 placeholder:text-slate-400 focus:border-teal focus:ring-teal"
+                className="mt-5 min-h-[160px] border-border bg-white text-text-secondary placeholder:text-text-tertiary focus:border-teal focus:ring-teal"
                 placeholder="Example: We have 15 salespeople manually prospecting and our CRM data is a mess. We know AI could help but every vendor just wants to sell us chatbots."
                 value={challenge}
                 onChange={(event) => setChallenge(event.target.value)}
               />
-              <p className={`mt-2 text-sm ${challengeValid ? "text-slate-500" : "text-amber-700"}`}>
+              <p className={`mt-2 text-sm ${challengeValid ? "text-text-tertiary" : "text-amber-700"}`}>
                 {challengeLength}/20 minimum characters
               </p>
 
               <div className="mt-6">
-                <label htmlFor="company-url" className="text-sm font-medium text-slate-700">
+                <label htmlFor="company-url" className="text-sm font-medium text-text-secondary">
                   Your company website
                 </label>
                 <Input
                   id="company-url"
-                  className="mt-2 border-gray-200 bg-white text-slate-700 placeholder:text-slate-400 focus:border-teal focus:ring-teal"
+                  className="mt-2 border-border bg-white text-text-secondary placeholder:text-text-tertiary focus:border-teal focus:ring-teal"
                   placeholder="https://yourcompany.com"
                   value={companyUrl}
                   onChange={(event) => setCompanyUrl(event.target.value)}
                 />
-                <p className="mt-2 text-sm text-slate-500">We&apos;ll research your market to give a better recommendation.</p>
+                <p className="mt-2 text-sm text-text-tertiary">We&apos;ll research your market to give a better recommendation.</p>
                 {!companyUrlValid && (
                   <p className="mt-2 text-sm text-red-600">Please enter a full URL starting with http:// or https://</p>
                 )}
@@ -251,11 +251,11 @@ export function AdvisorPage() {
 
           {step === 3 && (
             <>
-              <h2 className="text-2xl font-bold text-slate-navy">Step 3: Tell us where to send your strategy report.</h2>
+              <h2 className="text-2xl font-bold text-text">Step 3: Tell us where to send your strategy report.</h2>
 
               <div className="mt-5 grid gap-4 sm:grid-cols-2">
                 <div className="sm:col-span-2">
-                  <label htmlFor="name" className="text-sm font-medium text-slate-700">
+                  <label htmlFor="name" className="text-sm font-medium text-text-secondary">
                     Name *
                   </label>
                   <Input
@@ -263,12 +263,12 @@ export function AdvisorPage() {
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                     placeholder="Jane Smith"
-                    className="mt-2 border-gray-200 bg-white text-slate-700 placeholder:text-slate-400 focus:border-teal focus:ring-teal"
+                    className="mt-2 border-border bg-white text-text-secondary placeholder:text-text-tertiary focus:border-teal focus:ring-teal"
                   />
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label htmlFor="email" className="text-sm font-medium text-slate-700">
+                  <label htmlFor="email" className="text-sm font-medium text-text-secondary">
                     Work email *
                   </label>
                   <Input
@@ -277,12 +277,12 @@ export function AdvisorPage() {
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
                     placeholder="jane@company.com"
-                    className="mt-2 border-gray-200 bg-white text-slate-700 placeholder:text-slate-400 focus:border-teal focus:ring-teal"
+                    className="mt-2 border-border bg-white text-text-secondary placeholder:text-text-tertiary focus:border-teal focus:ring-teal"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="company" className="text-sm font-medium text-slate-700">
+                  <label htmlFor="company" className="text-sm font-medium text-text-secondary">
                     Company name *
                   </label>
                   <Input
@@ -290,19 +290,19 @@ export function AdvisorPage() {
                     value={company}
                     onChange={(event) => setCompany(event.target.value)}
                     placeholder="Acme Corp"
-                    className="mt-2 border-gray-200 bg-white text-slate-700 placeholder:text-slate-400 focus:border-teal focus:ring-teal"
+                    className="mt-2 border-border bg-white text-text-secondary placeholder:text-text-tertiary focus:border-teal focus:ring-teal"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="role" className="text-sm font-medium text-slate-700">
+                  <label htmlFor="role" className="text-sm font-medium text-text-secondary">
                     Your role *
                   </label>
                   <select
                     id="role"
                     value={role}
                     onChange={(event) => setRole(event.target.value)}
-                    className="mt-2 h-10 w-full rounded-md border border-gray-200 bg-white px-3 text-sm text-slate-700 focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal"
+                    className="mt-2 h-10 w-full rounded-md border border-border bg-white px-3 text-sm text-text-secondary focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal"
                   >
                     <option value="">Select your role</option>
                     {roles.map((item) => (
@@ -314,7 +314,7 @@ export function AdvisorPage() {
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label htmlFor="phone" className="text-sm font-medium text-slate-700">
+                  <label htmlFor="phone" className="text-sm font-medium text-text-secondary">
                     Phone (optional)
                   </label>
                   <Input
@@ -322,7 +322,7 @@ export function AdvisorPage() {
                     value={phone}
                     onChange={(event) => setPhone(event.target.value)}
                     placeholder="(555) 123-4567"
-                    className="mt-2 border-gray-200 bg-white text-slate-700 placeholder:text-slate-400 focus:border-teal focus:ring-teal"
+                    className="mt-2 border-border bg-white text-text-secondary placeholder:text-text-tertiary focus:border-teal focus:ring-teal"
                   />
                 </div>
               </div>
@@ -346,8 +346,8 @@ export function AdvisorPage() {
 
           {step === 4 && (
             <>
-              <h2 className="text-2xl font-bold text-slate-navy">Step 4: Building your recommendation.</h2>
-              <p className="mt-2 text-base text-slate-600">We are analyzing your inputs and preparing your strategy report.</p>
+              <h2 className="text-2xl font-bold text-text">Step 4: Building your recommendation.</h2>
+              <p className="mt-2 text-base text-text-secondary">We are analyzing your inputs and preparing your strategy report.</p>
 
               <div className="mt-6 space-y-3">
                 {processingSteps.map((item, index) => {
@@ -358,47 +358,47 @@ export function AdvisorPage() {
                     <div
                       key={item}
                       className={`flex items-center gap-3 rounded-lg px-4 py-3 transition-colors ${
-                        isComplete || isActive ? "glass-teal" : "glass"
+                        isComplete || isActive ? "border border-teal/30 bg-teal/10" : "border border-border bg-white"
                       }`}
                     >
                       <span
                         className={`h-2.5 w-2.5 rounded-full ${
-                          isComplete ? "bg-teal" : isActive ? "bg-teal animate-pulse" : "bg-gray-300"
+                          isComplete ? "bg-teal" : isActive ? "bg-teal animate-pulse" : "bg-border-hover"
                         }`}
                       />
-                      <p className={`text-sm ${isComplete || isActive ? "text-slate-800" : "text-slate-500"}`}>{item}</p>
+                      <p className={`text-sm ${isComplete || isActive ? "text-text" : "text-text-tertiary"}`}>{item}</p>
                     </div>
                   );
                 })}
               </div>
 
-              <p className="mt-4 text-sm text-slate-500">This usually takes 10 to 20 seconds.</p>
+              <p className="mt-4 text-sm text-text-tertiary">This usually takes 10 to 20 seconds.</p>
             </>
           )}
 
           {step === 5 && result && (
             <>
-              <h2 className="text-2xl font-bold text-slate-navy">Step 5: Your personalized recommendation.</h2>
-              <div className="mt-5 rounded-lg glass p-6">
+              <h2 className="text-2xl font-bold text-text">Step 5: Your personalized recommendation.</h2>
+              <div className="mt-5 rounded-lg border border-border bg-white p-6">
                 <MarkdownContent markdown={result.recommendation} />
               </div>
 
-              <div className="mt-5 rounded-lg glass p-5">
-                <h3 className="text-lg font-semibold text-slate-navy">Recommended solutions</h3>
+              <div className="mt-5 rounded-lg border border-border bg-white p-5">
+                <h3 className="text-lg font-semibold text-text">Recommended solutions</h3>
                 <ul className="mt-3 list-disc space-y-2 pl-5">
                   {result.suggestedSolutions.map((item) => (
-                    <li key={item} className="text-base text-slate-700">{item}</li>
+                    <li key={item} className="text-base text-text-secondary">{item}</li>
                   ))}
                 </ul>
-                <p className="mt-4 text-sm text-slate-600">
+                <p className="mt-4 text-sm text-text-secondary">
                   <strong>Suggested engagement:</strong> {result.suggestedEngagement}
                 </p>
               </div>
 
               {result.companyResearch && result.companyResearch !== "No company URL provided." && (
-                <div className="mt-5 rounded-lg glass p-5">
-                  <h3 className="text-lg font-semibold text-slate-navy">Company research snapshot</h3>
-                  <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-slate-700">{result.companyResearch}</p>
+                <div className="mt-5 rounded-lg border border-border bg-white p-5">
+                  <h3 className="text-lg font-semibold text-text">Company research snapshot</h3>
+                  <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-text-secondary">{result.companyResearch}</p>
                 </div>
               )}
 
