@@ -46,9 +46,17 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(homeFaqs)) }} />
 
-      <section className="relative overflow-hidden bg-slate-navy py-24 lg:py-32">
+      <section
+        className="relative overflow-hidden bg-slate-navy py-24 lg:py-32 section-clip-bottom"
+        style={{ backgroundImage: "url('/api/img?url=https://heyboss.heeyo.ai/replicate-flux-schnell-1771984828-99d96676.webp')", backgroundSize: "cover", backgroundPosition: "center" }}
+      >
+        {/* Dark overlay for readability */}
+        <div className="pointer-events-none absolute inset-0 bg-slate-navy/70" />
+        {/* Gradient accent overlay */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(13,148,136,0.30),transparent_45%),radial-gradient(circle_at_bottom_left,rgba(6,182,212,0.18),transparent_40%)]" />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Dot grid pattern */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
           <span className="section-label">CLARIFY</span>
           <h1 className="mt-4 max-w-4xl text-4xl font-bold text-white sm:text-5xl lg:text-6xl">AI Strategy That Actually Ships</h1>
           <p className="mt-6 max-w-3xl text-xl text-slate-200">
@@ -66,6 +74,17 @@ export default function Home() {
             {proof.map((item) => (
               <span key={item} className="rounded-full border border-white/20 bg-white/5 px-4 py-2 text-sm text-slate-200">{item}</span>
             ))}
+          </div>
+        </div>
+        {/* Floating metric cards */}
+        <div className="absolute bottom-16 right-8 z-10 hidden flex-col gap-3 lg:flex">
+          <div className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 backdrop-blur-sm">
+            <p className="text-2xl font-bold text-white">60%+</p>
+            <p className="text-sm text-slate-300">Reduction in manual prospecting</p>
+          </div>
+          <div className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 backdrop-blur-sm">
+            <p className="text-2xl font-bold text-white">1,060</p>
+            <p className="text-sm text-slate-300">Qualified opportunities identified</p>
           </div>
         </div>
       </section>
@@ -132,8 +151,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section
+        className="relative py-20 lg:py-24"
+        style={{ backgroundImage: "url('/api/img?url=https://heyboss.heeyo.ai/replicate-flux-schnell-1771984866-72b35114.webp')", backgroundSize: "cover", backgroundPosition: "center" }}
+      >
+        <div className="pointer-events-none absolute inset-0 bg-gray-50/92" />
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-slate-navy sm:text-4xl">Case studies that prove the model</h2>
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {featuredCaseStudies.map((study) => (

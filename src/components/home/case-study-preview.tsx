@@ -20,7 +20,7 @@ export function CaseStudyPreview() {
       <div
         className="pointer-events-none absolute inset-0 opacity-15"
         style={{
-          backgroundImage: "url('/images/case-study-texture.webp')",
+          backgroundImage: "url('/api/img?url=https://heyboss.heeyo.ai/replicate-flux-schnell-1771984866-72b35114.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
