@@ -46,13 +46,13 @@ export function ScorecardPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="section-label">AI Readiness Scorecard</span>
+            <span className="section-label">AI Maturity Scorecard</span>
             <h1 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              How ready is your business for AI?
+              How ready is your business for AI agents?
             </h1>
             <p className="mt-4 text-lg text-slate-600">
-              18 questions across 5 pillars. Takes about 5 minutes.
-              Get a personalized readiness score with specific recommendations.
+              20 questions across 5 pillars. Takes about 5 minutes.
+              Get your AI maturity score, pillar breakdown, and a personalized roadmap with specific next steps.
             </p>
           </motion.div>
 

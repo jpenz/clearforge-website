@@ -1,64 +1,27 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { answers, results } = body;
+    const data = await request.json();
 
-    if (!answers || !results) {
-      return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 }
-      );
-    }
+    // Log the lead capture (in production, send to CRM/email/Supabase)
+    console.log("[scorecard-lead]", JSON.stringify({
+      name: data.name,
+      email: data.email,
+      company: data.company,
+      score: data.score,
+      maturityLevel: data.maturityLevel,
+      segment: data.segment,
+      recommendedService: data.recommendedService,
+      pillarScores: data.pillarScores,
+      capturedAt: new Date().toISOString(),
+    }));
 
-    // TODO: Persist scorecard submissions when data storage is configured
-    // const { data, error } = await supabase
-    //   .from('scorecard_submissions')
-    //   .insert({ answers, results, segment: results.segment })
-
-    console.log("Scorecard submission:", {
-      compositeScore: results.compositeScore,
-      maturityLevel: results.maturityLevel,
-      segment: results.segment,
-    });
+    // TODO: Send to Supabase, Smartlead, or email notification
+    // For now, we capture to server logs
 
     return NextResponse.json({ success: true });
   } catch {
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
-  }
-}
-
-export async function PUT(request: Request) {
-  try {
-    const body = await request.json();
-    const { email, results, segment } = body;
-
-    if (!email || !results) {
-      return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 }
-      );
-    }
-
-    // TODO: Persist email + results in configured data storage
-    // TODO: Send report through configured email provider
-    // TODO: Push contact and segment to configured CRM
-
-    console.log("Scorecard email capture:", {
-      email,
-      segment,
-      compositeScore: results.compositeScore,
-    });
-
-    return NextResponse.json({ success: true });
-  } catch {
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to capture lead" }, { status: 500 });
   }
 }
