@@ -31,7 +31,7 @@ export function SolutionDetailPage({ solution }: Props) {
 
       <section className="bg-gray-50 py-16 lg:py-20">
         <div className="mx-auto grid max-w-6xl gap-6 px-6 lg:grid-cols-2 lg:px-8">
-          <div className="rounded-xl glass glass-hover p-6">
+          <div className="rounded-xl border border-gray-200 bg-white p-6">
             <h2 className="text-2xl font-bold text-slate-navy">Is this right for you?</h2>
             <ul className="mt-4 space-y-3">
               {solution.rightForYou.map((item) => (
@@ -43,7 +43,7 @@ export function SolutionDetailPage({ solution }: Props) {
             </ul>
           </div>
 
-          <div className="rounded-xl glass glass-hover p-6">
+          <div className="rounded-xl border border-gray-200 bg-white p-6">
             <h2 className="text-2xl font-bold text-slate-navy">What we do</h2>
             <ul className="mt-4 space-y-3">
               {solution.whatWeDo.map((item) => (
@@ -62,7 +62,7 @@ export function SolutionDetailPage({ solution }: Props) {
           <h2 className="text-2xl font-bold text-slate-navy">How it works</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {solution.howItWorks.map((step) => (
-              <div key={step.phase} className="rounded-xl glass glass-hover p-5">
+              <div key={step.phase} className="rounded-xl border border-gray-200 bg-gray-50 p-5">
                 <p className="text-sm font-semibold text-teal">{step.phase}</p>
                 <p className="mt-2 text-base text-slate-700">{step.detail}</p>
               </div>
@@ -73,7 +73,7 @@ export function SolutionDetailPage({ solution }: Props) {
 
       <section className="bg-gray-50 py-16 lg:py-20">
         <div className="mx-auto grid max-w-6xl gap-6 px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8">
-          <div className="rounded-xl glass p-6">
+          <div className="rounded-xl border border-gray-200 bg-white p-6">
             <h2 className="text-2xl font-bold text-slate-navy">Typical engagement scope</h2>
             <p className="mt-4 text-base text-slate-700"><strong>Timeline:</strong> {solution.scope.timeline}</p>
             <p className="mt-2 text-base text-slate-700"><strong>Core team:</strong> {solution.scope.team}</p>
@@ -83,7 +83,7 @@ export function SolutionDetailPage({ solution }: Props) {
               ))}
             </ul>
           </div>
-          <div className="rounded-xl glass p-6">
+          <div className="rounded-xl border border-gray-200 bg-white p-6">
             <h2 className="text-2xl font-bold text-slate-navy">Related case study</h2>
             <p className="mt-3 text-base text-slate-600">See how this capability shows up in real-world operations.</p>
             <Button className="mt-4" asChild>
@@ -100,7 +100,7 @@ export function SolutionDetailPage({ solution }: Props) {
           <h2 className="text-2xl font-bold text-slate-navy">FAQ</h2>
           <div className="mt-6 space-y-4">
             {solution.faqs.map((faq) => (
-              <div key={faq.question} className="rounded-xl glass p-5">
+              <div key={faq.question} className="rounded-xl border border-gray-200 bg-gray-50 p-5">
                 <h3 className="text-lg font-semibold text-slate-navy">{faq.question}</h3>
                 <p className="mt-2 text-base text-slate-600">{faq.answer}</p>
               </div>
