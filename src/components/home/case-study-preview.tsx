@@ -4,7 +4,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Building2, Globe, LineChart, Repeat, Star, Workflow } from "lucide-react";
-import { images } from "@/lib/images";
 
 const stats = [
   { value: "No Website", label: "Starting Point", icon: Globe },
@@ -21,7 +20,7 @@ export function CaseStudyPreview() {
       <div
         className="pointer-events-none absolute inset-0 opacity-15"
         style={{
-          backgroundImage: `url(${images.caseStudy})`,
+          backgroundImage: "url('/images/case-study-texture.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

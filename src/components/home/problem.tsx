@@ -32,7 +32,7 @@ const problems = [
 
 export function Problem() {
   return (
-    <section className="bg-slate-navy py-24 lg:py-32 grain-overlay section-divider">
+    <section className="bg-slate-navy py-24 lg:py-32 grain-overlay section-divider section-clip-top">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

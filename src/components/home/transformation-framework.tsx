@@ -56,8 +56,53 @@ const phases = [
 
 export function TransformationFramework() {
   return (
-    <section className="bg-slate-navy py-24 lg:py-32 grain-overlay">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="relative overflow-hidden bg-slate-navy py-24 lg:py-32 grain-overlay">
+      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[52%] lg:block">
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: "url('/images/solutions-visual.webp')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <svg
+          className="absolute right-8 top-1/2 h-[520px] w-[520px] -translate-y-1/2 text-teal-light/40"
+          viewBox="0 0 520 520"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden
+        >
+          <g stroke="currentColor" strokeWidth="1.4">
+            <polygon points="260,70 344,118 344,214 260,262 176,214 176,118" />
+            <polygon points="260,262 344,310 344,406 260,454 176,406 176,310" />
+            <polygon points="344,118 428,166 428,262 344,310 260,262 260,166" />
+            <polygon points="176,118 260,166 260,262 176,310 92,262 92,166" />
+          </g>
+          <g stroke="currentColor" strokeWidth="1.1">
+            <line x1="260" y1="70" x2="260" y2="454" />
+            <line x1="92" y1="262" x2="428" y2="262" />
+            <line x1="176" y1="118" x2="344" y2="406" />
+            <line x1="344" y1="118" x2="176" y2="406" />
+          </g>
+          <g fill="currentColor">
+            <circle cx="260" cy="70" r="4" />
+            <circle cx="344" cy="118" r="4" />
+            <circle cx="428" cy="166" r="4" />
+            <circle cx="428" cy="262" r="4" />
+            <circle cx="344" cy="406" r="4" />
+            <circle cx="260" cy="454" r="4" />
+            <circle cx="176" cy="406" r="4" />
+            <circle cx="92" cy="262" r="4" />
+            <circle cx="176" cy="118" r="4" />
+            <circle cx="260" cy="262" r="4" />
+            <circle cx="344" cy="310" r="4" />
+            <circle cx="176" cy="310" r="4" />
+          </g>
+        </svg>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

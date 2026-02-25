@@ -5,11 +5,19 @@ import { engagementModels, firstWeekPlan, howWeWorkFaqs } from "@/data/how-we-wo
 export function HowWeWorkPage() {
   return (
     <>
-      <section className="bg-white py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <span className="section-label">How We Work</span>
-          <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl">Engagement models built for execution, not slideware.</h1>
-          <p className="mt-6 max-w-3xl text-lg text-slate-600">
+      <section
+        className="relative overflow-hidden bg-slate-navy py-20 lg:py-28"
+        style={{
+          backgroundImage: "url('/images/how-we-work-bg.webp')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="pointer-events-none absolute inset-0 bg-slate-navy/75" />
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+          <span className="section-label text-teal-light">How We Work</span>
+          <h1 className="mt-4 text-4xl font-bold text-white sm:text-5xl">Engagement models built for execution, not slideware.</h1>
+          <p className="mt-6 max-w-3xl text-lg text-slate-200">
             ClearForge engagements are scoped around your operating priorities, timeline, and internal capacity. We focus on measurable business outcomes and practical adoption.
           </p>
         </div>

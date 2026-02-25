@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight, ClipboardCheck } from "lucide-react";
-import { images } from "@/lib/images";
 
 const proofPoints = [
   "Fortune 1000 industrial manufacturer",
@@ -14,18 +13,25 @@ const proofPoints = [
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[85vh] items-center overflow-hidden bg-slate-navy grain-overlay gradient-mesh">
+    <section
+      className="relative flex min-h-[85vh] items-center overflow-hidden bg-slate-navy grain-overlay gradient-mesh section-clip-bottom"
+      style={{
+        backgroundImage: "url('/images/hero-bg.webp')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="pointer-events-none absolute inset-0 bg-slate-navy/50" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-slate-navy via-slate-navy/95 to-slate-navy/70" />
       <div
-        className="pointer-events-none absolute inset-0 opacity-30"
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
         style={{
-          backgroundImage: `url(${images.heroBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
         }}
       />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-slate-navy via-slate-navy/95 to-slate-navy/70" />
 
-      <div className="relative mx-auto w-full max-w-7xl px-6 pb-16 pt-20 lg:px-8 lg:pb-20 lg:pt-28">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-16 pt-20 lg:px-8 lg:pb-20 lg:pt-28">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -91,6 +97,17 @@ export function Hero() {
             </ul>
           </div>
         </motion.div>
+      </div>
+
+      <div className="absolute bottom-16 right-8 z-20 hidden flex-col gap-3 lg:flex">
+        <div className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 backdrop-blur-sm">
+          <p className="text-2xl font-bold text-white">60%+</p>
+          <p className="text-sm text-slate-300">Reduction in manual prospecting</p>
+        </div>
+        <div className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 backdrop-blur-sm">
+          <p className="text-2xl font-bold text-white">1,060</p>
+          <p className="text-sm text-slate-300">Qualified opportunities identified</p>
+        </div>
       </div>
     </section>
   );
