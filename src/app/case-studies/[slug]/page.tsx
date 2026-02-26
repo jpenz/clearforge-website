@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
-import { createMetadata } from "@/lib/metadata";
+import { createMetadata, breadcrumbJsonLd } from "@/lib/metadata";
 import { getCaseStudy, caseStudies } from "@/data/case-studies";
-import { CaseStudyDetail } from "@/components/case-study-detail";
+import { CaseStudyDetailClient } from "@/components/case-study-detail";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -30,5 +30,21 @@ export default async function Page({ params }: Props) {
   }
   const cs = getCaseStudy(slug);
   if (!cs) notFound();
-  return <CaseStudyDetail caseStudy={cs} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "Case Studies", path: "/case-studies" },
+              { name: cs.title, path: `/case-studies/${slug}` },
+            ]),
+          ),
+        }}
+      />
+      <CaseStudyDetailClient caseStudy={cs} />
+    </>
+  );
 }

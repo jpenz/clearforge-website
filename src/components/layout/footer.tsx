@@ -1,6 +1,12 @@
 import Link from "next/link";
 
 const footerLinks = {
+  Journey: [
+    { href: "/solutions", label: "Solutions" },
+    { href: "/industries", label: "Industries" },
+    { href: "/how-we-work", label: "How We Work" },
+    { href: "/advisor", label: "AI Advisor" },
+  ],
   Services: [
     { href: "/services/ai-revenue-operations", label: "AI Revenue Operations" },
     { href: "/services/performance-improvement", label: "Performance Improvement" },
@@ -10,8 +16,8 @@ const footerLinks = {
   Company: [
     { href: "/about", label: "About" },
     { href: "/case-studies", label: "Case Studies" },
-    { href: "/pricing", label: "Pricing" },
     { href: "/insights", label: "Insights" },
+    { href: "/pricing", label: "Pricing" },
   ],
   Tools: [
     { href: "/scorecard", label: "AI Readiness Scorecard" },

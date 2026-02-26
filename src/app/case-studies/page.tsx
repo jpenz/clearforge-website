@@ -1,5 +1,5 @@
 import { createMetadata } from "@/lib/metadata";
-import { CaseStudiesPageClient } from "@/components/pages/case-studies-page";
+import { CaseStudiesPage } from "@/components/pages/case-studies-page";
 
 export const metadata = createMetadata({
   title: "Case Studies — Real Results from AI Implementation",
@@ -8,5 +8,5 @@ export const metadata = createMetadata({
 });
 
 export default function Page() {
-  return <CaseStudiesPageClient />;
+  return <CaseStudiesPage />;
 }

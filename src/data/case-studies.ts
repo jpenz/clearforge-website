@@ -1,3 +1,8 @@
+export interface CaseStudyOutcome {
+  metric: string;
+  description: string;
+}
+
 export interface CaseStudy {
   slug: string;
   title: string;
@@ -6,100 +11,107 @@ export interface CaseStudy {
   heroMetric: string;
   heroMetricLabel: string;
   excerpt: string;
+  featured?: boolean;
   challenge: string;
-  solution: string;
-  outcomes: { metric: string; description: string }[];
+  solution: string[];
+  continuousModel?: string[];
+  outcomes: CaseStudyOutcome[];
   scale: string;
 }
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: "manufacturer-pipeline-automation",
-    title: "$50M Manufacturer Transforms Sales Pipeline",
-    industry: "Manufacturing",
-    service: "AI Revenue Operations",
-    heroMetric: "30%",
-    heroMetricLabel: "Pipeline Increase",
+    slug: "metro-detroit-services-company",
+    title: "Metro Detroit Services Company Rebuilds Pipeline from Zero",
+    industry: "Home & Commercial Services",
+    service: "AI Marketing Agent",
+    heroMetric: "Growth Mode",
+    heroMetricLabel: "From Decline to Repeatable Pipeline",
+    featured: true,
     excerpt:
-      "AI-powered prospecting and automated outreach drove a 30% increase in qualified pipeline within 90 days.",
+      "A legacy services business with no formal marketing system moved from customer attrition and declining revenue to active growth with recurring commercial contracts.",
     challenge:
-      "A $50M specialty manufacturer was losing ground to competitors with faster sales cycles. Their sales team spent 60% of their time on manual prospecting and data entry instead of selling. Pipeline visibility was poor — leadership couldn't forecast accurately, and high-value leads were falling through the cracks. Despite a strong product, their go-to-market motion was stuck in spreadsheets and gut instinct.",
-    solution:
-      "We deployed an AI-powered sales intelligence system that automated prospect identification using intent signals, firmographic data, and behavioral triggers. We built automated outreach sequences personalized at scale, integrated directly with their existing CRM. A real-time pipeline analytics dashboard gave leadership full visibility into deal progression, conversion rates, and forecast accuracy for the first time.",
+      "The company had operated for more than two decades on referrals and reputation. It had no website, no search presence, no paid campaigns, and no structured outreach motion. As legacy customers churned, revenue steadily eroded and there was no predictable pipeline to replace it.",
+    solution: [
+      "Built and launched a conversion-focused website with clear service positioning and lead capture",
+      "Established local search foundation and profile management so qualified buyers could find the company",
+      "Implemented lead intelligence and qualification workflows for inbound and outbound opportunities",
+      "Deployed coordinated outreach sequences and follow-up workflows",
+      "Introduced CRM-centered call workflow with AI-assisted prep and prioritization",
+      "Created a recurring commercial maintenance contract motion to stabilize revenue",
+      "Built a repeatable review and testimonial engine to strengthen trust in-market",
+    ],
     outcomes: [
-      { metric: "30%", description: "Increase in qualified pipeline" },
-      { metric: "45%", description: "Reduction in manual prospecting time" },
-      { metric: "2.1x", description: "Improvement in forecast accuracy" },
-      { metric: "18 days", description: "Faster average deal cycle" },
+      { metric: "Active Growth", description: "Revenue direction shifted from decline to expansion" },
+      { metric: "Recurring Contracts", description: "Commercial maintenance agreements created more predictable cash flow" },
+      { metric: "Acquisition-Ready", description: "Documented systems improved buyer confidence for PE interest" },
+      { metric: "Owner Confidence", description: "A repeatable pipeline replaced ad hoc lead generation" },
     ],
     scale:
-      "After proving the model with one sales team, the client expanded the system across all three regional teams. They've since added AI-driven account scoring and competitive intelligence monitoring, turning their sales operation into a data-driven growth engine.",
+      "With systems documented and running continuously, the business is no longer dependent on one-off referrals. It now has an operating model that can be scaled, handed off, and diligenced by potential acquirers. Anonymous client quote: \"For the first time, marketing is a system in this business, not a guess.\"",
   },
   {
-    slug: "pe-portfolio-value-creation",
-    title: "PE Portfolio Unlocks AI Value Across 3 Companies",
-    industry: "Private Equity",
-    service: "PE Value Creation",
-    heroMetric: "10%",
-    heroMetricLabel: "EBITDA Improvement",
+    slug: "industrial-manufacturer",
+    title: "Fortune 1000 Industrial Manufacturer Transforms Sales Intelligence",
+    industry: "Industrial Manufacturing",
+    service: "AI Strategy + AI Design & Build",
+    heroMetric: "1,060",
+    heroMetricLabel: "Qualified Opportunities Identified",
     excerpt:
-      "A portfolio-wide AI playbook delivered measurable EBITDA improvement across three mid-market companies in under 6 months.",
+      "A $2B+ industrial manufacturer with 70+ facilities deployed AI-powered sales intelligence across 16 divisions, uncovering new growth segments and reducing manual prospecting time.",
     challenge:
-      "A mid-market PE firm had a thesis that AI could accelerate value creation across their portfolio, but lacked the in-house expertise to identify and execute opportunities. Their portfolio companies — spanning manufacturing, services, and logistics — each had different tech stacks, team capabilities, and operational challenges. Previous technology initiatives had stalled due to vendor dependency and lack of strategic alignment.",
-    solution:
-      "We designed a portfolio-wide AI playbook starting with rapid assessments at each company. Using 90-day sprints, we identified and built high-impact solutions tailored to each business: automated quality inspection for the manufacturer, intelligent routing for the logistics company, and AI-powered client onboarding for the services firm. Each sprint followed our Diagnose → Design → Build → Optimize methodology with clear KPIs tied to EBITDA impact.",
+      "Sales teams across divisions operated in silos with no shared market intelligence. Prospecting was manual and inconsistent, cross-sell opportunities were missed, and leadership lacked a unified view of where growth potential was strongest.",
+    solution: [
+      "Unified sales intelligence workflows across 16 divisions",
+      "Automated target identification and qualification by territory and vertical",
+      "Decision-maker enrichment and routing into sales workflows",
+      "Rapid market intelligence reporting for leadership planning",
+      "Portfolio-level prioritization of divisions by growth potential",
+      "Geographic expansion modeling tied to infrastructure and demand signals",
+    ],
+    continuousModel: [
+      "Monthly refresh of market and conversion data to improve targeting quality",
+      "Automated signal monitoring to surface emerging market shifts",
+      "New segment discovery incorporated into ongoing territory planning",
+      "Lead intelligence delivered directly into frontline sales execution",
+    ],
     outcomes: [
-      { metric: "10%", description: "Average EBITDA improvement per company" },
-      { metric: "90 days", description: "Time to first measurable impact" },
-      { metric: "$2.4M", description: "Combined annual cost savings" },
-      { metric: "3", description: "Companies transformed simultaneously" },
+      { metric: "1,060", description: "Qualified opportunities identified across divisions" },
+      { metric: "16", description: "Business divisions aligned to a shared intelligence model" },
+      { metric: "5", description: "New high-growth segments identified" },
+      { metric: "60%+", description: "Reduction in manual prospecting time" },
     ],
     scale:
-      "The PE firm has adopted the ClearForge AI playbook as a standard part of their value creation plan for all new acquisitions. Two of the three portfolio companies have moved to ongoing retainers for continued AI development, and the firm now uses AI readiness as part of their due diligence process.",
+      "What started with two divisions expanded into a broader company operating system for market visibility and growth planning. Leadership now uses the same intelligence foundation for commercial planning and portfolio decisions.",
   },
   {
-    slug: "services-company-process-automation",
-    title: "$25M Services Company Saves $240K Annually",
-    industry: "Professional Services",
-    service: "Performance Improvement",
-    heroMetric: "$240K",
-    heroMetricLabel: "Annual Savings",
+    slug: "legacy-enterprise-software",
+    title: "Legacy Enterprise Software Provider Modernizes and Grows Revenue",
+    industry: "Enterprise Software",
+    service: "AI Strategy + Legacy System Modernization",
+    heroMetric: "New Revenue",
+    heroMetricLabel: "From Customer Loss to Feature-Led Growth",
+    featured: false,
     excerpt:
-      "Process mining and targeted automation eliminated bottlenecks and saved $240K annually in a professional services firm.",
+      "An enterprise software company known for industrial-strength, mission-critical systems was losing customers to modern competitors. ClearForge helped them modernize without abandoning what made them reliable, then identified new AI-powered features that drove revenue growth.",
     challenge:
-      "A $25M professional services company was growing revenue but margins were declining. Process inefficiencies were hidden across disconnected systems — billing errors, duplicate data entry, and manual reporting consumed thousands of hours annually. The leadership team knew they had operational drag but couldn't pinpoint where the biggest opportunities were or what to fix first.",
-    solution:
-      "We conducted a comprehensive process mining engagement, mapping every major workflow from client onboarding to billing. We identified $400K+ in addressable waste across 12 processes and prioritized the top three for immediate automation: invoice reconciliation, project status reporting, and client onboarding documentation. Each solution integrated with their existing project management and accounting systems — no rip-and-replace required.",
+      "The company had built its reputation on extreme reliability, deep vertical customization, and mission-critical stability. The kind of systems that run 24/7 and can't afford downtime. But the technology was antiquated. Customers increasingly demanded modern AI and cloud capabilities, and the cost of a full modernization had always outsized the company's market. They were watching customers leave for newer competitors, unable to offer the features buyers now expected, and struggling to attract new business despite having some of the most stable, deeply customized enterprise systems in their space.",
+    solution: [
+      "Conducted a joint market study to identify where the company should be playing, specifically which customer segments valued reliability most and which new capabilities would drive the highest willingness to pay",
+      "Mapped the existing system architecture to identify where AI could be layered in without compromising the stability that defined the platform",
+      "Designed and deployed AI-powered features targeting the highest-value use cases identified in the market study, giving existing customers capabilities they were leaving for",
+      "Built cloud integration pathways that connected the legacy platform to modern infrastructure without requiring a full rewrite",
+      "Created a product roadmap that sequenced modernization around revenue impact. Features that saved customers money and attracted new buyers first",
+      "Implemented AI-driven analytics and reporting that turned decades of customer data into actionable intelligence for end users",
+    ],
     outcomes: [
-      { metric: "$240K", description: "Annual cost savings from automation" },
-      { metric: "1,200 hrs", description: "Staff hours reclaimed per year" },
-      { metric: "85%", description: "Reduction in billing errors" },
-      { metric: "3 weeks", description: "Faster client onboarding" },
+      { metric: "Revenue Growth", description: "New AI features created upsell opportunities across the existing customer base" },
+      { metric: "Customer Retention", description: "Stopped the bleeding. Customers who were evaluating competitors stayed after seeing the modernization roadmap" },
+      { metric: "New Customers", description: "AI capabilities attracted buyers who had previously dismissed the platform as outdated" },
+      { metric: "Cost Savings", description: "Customers saved money through AI-powered automation and insights built on top of the existing system" },
     ],
     scale:
-      "With the quick wins generating immediate ROI, the client expanded the engagement to tackle the remaining nine identified opportunities. They've built an internal automation playbook based on our methodology and now evaluate every major process through an AI-readiness lens.",
-  },
-  {
-    slug: "b2b-software-ai-sdr",
-    title: "B2B Software Company Achieves 3.5x Conversion Lift",
-    industry: "B2B Software",
-    service: "Custom AI Agents",
-    heroMetric: "3.5x",
-    heroMetricLabel: "Conversion Improvement",
-    excerpt:
-      "Custom AI SDR agents transformed top-of-funnel conversion, generating 3.5x more qualified meetings from the same traffic.",
-    challenge:
-      "A growing B2B software company had strong inbound traffic but poor lead conversion. Their SDR team was overwhelmed — response times averaged 4+ hours, most leads went cold, and reps spent more time qualifying than selling. They'd tried chatbots and form automation, but nothing moved the needle on actual qualified meetings booked.",
-    solution:
-      "We built custom AI SDR agents that handled initial prospect engagement 24/7. The agents could understand product questions, qualify leads based on firmographic and behavioral signals, handle objections with contextual responses, and book meetings directly on rep calendars. We integrated with their CRM and enrichment tools so every interaction was logged and scored. The agents learned from successful rep conversations and improved over time.",
-    outcomes: [
-      { metric: "3.5x", description: "Increase in qualified meetings booked" },
-      { metric: "< 2 min", description: "Average lead response time (was 4+ hrs)" },
-      { metric: "62%", description: "Of meetings booked outside business hours" },
-      { metric: "28%", description: "Higher close rate on AI-qualified leads" },
-    ],
-    scale:
-      "The client has expanded AI agents across their entire go-to-market motion — including renewal outreach, expansion opportunity identification, and customer success check-ins. The initial SDR agent now handles 70% of inbound qualification autonomously, freeing the human team to focus on high-value conversations.",
+      "The company went from a defensive posture. They had been trying to hold onto customers, but shifted to an offensive posture, actively winning new business with AI-powered features that competitors couldn't match because they lacked the decades of deep vertical data and reliability. The modernization paid for itself through new revenue within the first year. Anonymous client quote: \"ClearForge showed us we didn't have to choose between our reliability and being modern. We could be both.\"",
   },
 ];
 
@@ -111,6 +123,6 @@ export function getCaseStudiesByService(service: string): CaseStudy[] {
   return caseStudies.filter((cs) => cs.service === service);
 }
 
-export function getCaseStudiesByIndustry(industry: string): CaseStudy[] {
-  return caseStudies.filter((cs) => cs.industry === industry);
+export function getFeaturedCaseStudy(): CaseStudy | undefined {
+  return caseStudies.find((cs) => cs.featured);
 }

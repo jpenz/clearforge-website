@@ -44,8 +44,8 @@ export function MobileNav({ links }: MobileNavProps) {
 
           <div className="mt-8 flex flex-col gap-3">
             <Button variant="outline" asChild>
-              <Link href="/scorecard" onClick={() => setOpen(false)}>
-                Take AI Scorecard
+              <Link href="/advisor" onClick={() => setOpen(false)}>
+                Get AI Recommendation
               </Link>
             </Button>
             <Button asChild>

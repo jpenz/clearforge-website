@@ -3,22 +3,37 @@ import type { Metadata } from "next";
 const siteUrl = "https://clearforge.ai";
 const siteName = "ClearForge.ai";
 
+export const coreKeywords = [
+  "AI consulting",
+  "AI strategy consulting",
+  "AI agent design and build",
+  "managed AI operations",
+  "legacy system modernization",
+  "AI marketing and revenue operations",
+  "industry AI transformation",
+  "AI value gap",
+];
+
 export function createMetadata({
   title,
   description,
   path = "",
   noIndex = false,
+  keywords = [],
 }: {
   title: string;
   description: string;
   path?: string;
   noIndex?: boolean;
+  keywords?: string[];
 }): Metadata {
   const url = `${siteUrl}${path}`;
+  const mergedKeywords = [...new Set([...coreKeywords, ...keywords])];
 
   return {
     title,
     description,
+    keywords: mergedKeywords,
     ...(noIndex && { robots: { index: false, follow: false } }),
     alternates: {
       canonical: url,
@@ -46,7 +61,7 @@ export const organizationJsonLd = {
   url: siteUrl,
   logo: `${siteUrl}/logo.png`,
   description:
-    "ClearForge helps CEOs, PE operating partners, and owner-led businesses turn AI into measurable operating performance, including lower-middle-market companies with $2M-$15M seller earnings.",
+    "ClearForge is a strategy and AI consulting firm that diagnoses where businesses should win, builds the AI systems to execute, and operates them continuously.",
   contactPoint: {
     "@type": "ContactPoint",
     email: "hello@clearforge.ai",
@@ -58,8 +73,11 @@ export const organizationJsonLd = {
 export function serviceJsonLd(service: {
   title: string;
   description: string;
-  slug: string;
+  slug?: string;
+  path?: string;
 }) {
+  const servicePath = service.path ?? (service.slug ? `/services/${service.slug}` : "/services");
+
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -70,7 +88,7 @@ export function serviceJsonLd(service: {
       name: "ClearForge",
       url: siteUrl,
     },
-    url: `${siteUrl}/services/${service.slug}`,
+    url: `${siteUrl}${servicePath}`,
   };
 }
 
@@ -85,6 +103,21 @@ export function faqJsonLd(faqs: { question: string; answer: string }[]) {
         "@type": "Answer",
         text: faq.answer,
       },
+    })),
+  };
+}
+
+export function breadcrumbJsonLd(
+  items: { name: string; path: string }[],
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${siteUrl}${item.path}`,
     })),
   };
 }
