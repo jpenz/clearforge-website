@@ -7,10 +7,10 @@ import { caseStudies } from "@/data/case-studies";
 import { industryIcons } from "@/lib/icons";
 
 const proof = [
-  "Owner-led businesses and PE operating teams",
-  "Fortune 1000 manufacturing programs",
-  "PE portfolio value creation",
-  "Legacy-to-AI modernization initiatives",
+  "Fortune 1000 and upper-mid-market operators",
+  "Private equity portfolio value creation",
+  "Owner-led and family-run businesses",
+  "Strategy, AI delivery, and workforce transformation in one team",
 ];
 
 const valueGapCards = [
@@ -34,23 +34,52 @@ const valueGapCards = [
 const frameworkCards = [
   {
     phase: "Prepare",
-    text: "Map value pools, define governance, and align leadership decisions.",
+    text: "Set priorities, define ownership, and baseline the metrics that matter.",
     icon: Compass,
   },
   {
     phase: "Modernize",
-    text: "Refactor high-friction processes and create AI-ready data pathways.",
+    text: "Redesign high-friction workflows and clean up data and handoffs.",
     icon: Layers,
   },
   {
     phase: "Build",
-    text: "Deploy production AI agents into real workflows with controls.",
+    text: "Deploy production AI agents into daily work with controls and governance.",
     icon: Bot,
   },
   {
     phase: "Scale",
-    text: "Expand what works and continuously improve outcomes.",
+    text: "Expand what works, train teams, and continuously improve outcomes.",
     icon: TrendingUp,
+  },
+];
+
+const peopleCapabilityTrack = [
+  "Role-based AI skills training for leadership, managers, and frontline teams",
+  "Human-plus-agent operating playbooks so adoption sticks",
+  "Manager coaching and governance rhythm to reinforce behavior change",
+];
+
+const serviceEngines = [
+  {
+    title: "Growth Strategy Engine",
+    text: "Use market intelligence and a business strategy agent to identify where to grow, where to defend, and where to win first.",
+    points: [
+      "Map industry tailwinds and customer demand pockets",
+      "Prioritize core and target markets for profitable expansion",
+      "Translate strategy into a practical 12-month growth plan",
+    ],
+    icon: Compass,
+  },
+  {
+    title: "Performance Improvement Engine",
+    text: "Use AI agents and workflow redesign to increase capacity, reduce friction, and run the organization more efficiently.",
+    points: [
+      "Find bottlenecks across revenue, operations, and support",
+      "Deploy human-plus-agent workflows with clear controls",
+      "Build internal capability so improvements compound over time",
+    ],
+    icon: Bot,
   },
 ];
 
@@ -58,7 +87,7 @@ const transformationJourney = [
   {
     stage: "UNDERSTAND" as const,
     title: "Find the value and name the real bottleneck",
-    text: "We define growth goals, capture the pain in your own language, and quantify where performance is leaking.",
+    text: "We define growth goals, capture the pain in your language, and quantify where value is leaking.",
     outcome: "Decision-ready strategy, not generic AI advice.",
     icon: Compass,
   },
@@ -122,7 +151,7 @@ export default function Home() {
             <span className="gradient-text">AI that performs.</span>
           </h1>
           <p className="mt-6 max-w-3xl text-xl text-text-secondary">
-            Whether you are a PE operator improving portfolio performance or a long-time owner running one company, we help you close the AI value gap with one accountable team.
+            Whether you are a PE operator, a Fortune 1000 leader, or a long-time owner running one company, we help you close the AI value gap with one accountable team.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Button size="lg" asChild>
@@ -143,8 +172,7 @@ export default function Home() {
           <div className="mt-8 rounded-xl border border-border bg-white p-6">
             <h2 className="text-2xl font-bold text-text-primary">Built for operators who need results, not another AI slide deck.</h2>
             <p className="mt-3 max-w-3xl text-base text-text-secondary">
-              We help owner-operators and lean leadership teams target the workflows that move growth, margin, and reliability, build practical systems,
-              and prepare teams to run in a human-plus-agent model.
+              If you know demand exists but your team does not have the capacity to capture it, we can help. We set the strategy, ship the systems, and train people to run a human-plus-agent operating model.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Button variant="outline" asChild>
@@ -181,13 +209,12 @@ export default function Home() {
           <span className="section-label">How We Close the Gap</span>
           <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">Modernize Work and Workforce in Tandem</h2>
           <p className="mt-4 max-w-3xl text-lg text-text-secondary">
-            ClearForge runs a dual-track transformation model: redesign critical workflows for AI while preparing teams to
-            operate in a hybrid human-plus-agent model.
+            We redesign workflows and upgrade workforce capability at the same time. This is how companies move from pilots to reliable business outcomes.
           </p>
-          <ol className="mt-10 grid gap-8 md:grid-cols-4 md:gap-6">
+          <ol className="mt-10 grid gap-6 md:grid-cols-4">
             {frameworkCards.map((item, index) => (
-              <li key={item.phase} className="relative">
-                <article className="rounded-xl border border-border bg-white p-6">
+              <li key={item.phase} className="relative h-full">
+                <article className="h-full rounded-xl border border-border bg-white p-6">
                   <item.icon className="h-10 w-10 text-blue" aria-hidden />
                   <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-blue">{item.phase}</p>
                   <p className="mt-2 text-base text-text-secondary">{item.text}</p>
@@ -198,8 +225,16 @@ export default function Home() {
               </li>
             ))}
           </ol>
-          <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-emerald/20 bg-emerald/10 px-4 py-2 text-sm font-medium text-emerald">
-            Value model to aligned strategy, shipped systems, adopted operations
+
+          <div className="mt-8 rounded-xl border border-emerald/20 bg-emerald/10 p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-emerald">People Capability Track (Runs Through Every Phase)</p>
+            <div className="mt-4 grid gap-3 md:grid-cols-3">
+              {peopleCapabilityTrack.map((item) => (
+                <div key={item} className="rounded-lg border border-emerald/25 bg-white/70 p-4 text-sm text-text-secondary">
+                  {item}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -208,7 +243,29 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">How We Transform Your Company, Step by Step</h2>
           <p className="mt-4 max-w-3xl text-lg text-text-secondary">
-            A linear path from strategy to build to operation, tied to business outcomes and operating discipline.
+            Two coordinated engines run in parallel: one to find where to grow, one to improve how the company performs.
+          </p>
+
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            {serviceEngines.map((engine) => (
+              <article key={engine.title} className="rounded-xl border border-border bg-white p-6">
+                <engine.icon className="h-9 w-9 text-blue" aria-hidden />
+                <h3 className="mt-3 text-2xl font-bold text-text-primary">{engine.title}</h3>
+                <p className="mt-3 text-base text-text-secondary">{engine.text}</p>
+                <ul className="mt-4 space-y-2">
+                  {engine.points.map((item) => (
+                    <li key={item} className="flex gap-2 text-sm text-text-secondary">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+
+          <p className="mt-8 max-w-3xl text-lg text-text-secondary">
+            From there, we execute in a linear operating sequence tied to business outcomes.
           </p>
           <div className="mt-8 grid gap-6 lg:grid-cols-3">
             {transformationJourney.map((step, index) => (
@@ -235,6 +292,18 @@ export default function Home() {
                 )}
               </article>
             ))}
+          </div>
+
+          <div className="mt-8 rounded-xl border border-border bg-white p-6">
+            <h3 className="text-xl font-bold text-text-primary">One partner for the full transformation.</h3>
+            <p className="mt-3 text-base text-text-secondary">
+              We cover strategy, AI delivery, and workforce transformation in one integrated program so leaders can move faster without losing control.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Button asChild>
+                <Link href="/contact">Talk with ClearForge</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
