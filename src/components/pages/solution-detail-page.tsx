@@ -8,6 +8,12 @@ interface Props {
   solution: Solution;
 }
 
+const closerLabelByStage: Record<Solution["stage"], string> = {
+  UNDERSTAND: "CLOSER: Clarify + Label",
+  BUILD: "CLOSER: Overview + execution plan",
+  OPERATE: "CLOSER: Sell outcome + Explain + Reinforce",
+};
+
 export function SolutionDetailPage({ solution }: Props) {
   const SolutionIcon = solutionIcons[solution.icon];
 
@@ -19,7 +25,12 @@ export function SolutionDetailPage({ solution }: Props) {
             <ArrowLeft className="h-4 w-4" /> Back to solutions
           </Link>
           <SolutionIcon className="mt-6 h-8 w-8 text-teal" aria-hidden />
-          <p className="mt-3 section-label">{solution.stage}</p>
+          <div className="mt-3 flex flex-wrap items-center gap-3">
+            <p className="section-label">{solution.stage}</p>
+            <p className="rounded-full border border-teal/20 bg-teal/10 px-3 py-1 text-xs font-semibold text-teal">
+              {closerLabelByStage[solution.stage]}
+            </p>
+          </div>
           <h1 className="mt-3 text-4xl font-bold text-text sm:text-5xl">{solution.headline}</h1>
           <p className="mt-5 max-w-3xl text-lg text-text-secondary">{solution.summary}</p>
           <div className="mt-8 flex flex-wrap gap-4">

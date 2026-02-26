@@ -210,6 +210,9 @@ export function AssessmentPage() {
           We combine readiness scoring, company research, industry best-practice benchmarking, and a CLOSER sales strategy report in a
           single workflow.
         </p>
+        <p className="mt-3 max-w-3xl text-base text-text-tertiary">
+          We start by Clarifying and Labeling your real bottleneck in your words, then translate it into an execution plan leadership can act on.
+        </p>
 
         {phase === "questions" && (
           <div className="mt-10 rounded-xl border border-border bg-surface p-6 sm:p-8">
@@ -256,7 +259,12 @@ export function AssessmentPage() {
         {phase === "details" && (
           <div className="mt-10 rounded-xl border border-border bg-surface p-6 sm:p-8">
             <h2 className="text-2xl font-bold text-text">Add your business context</h2>
-            <p className="mt-2 text-text-secondary">We use this to personalize the report and benchmark to your exact operating environment.</p>
+            <p className="mt-2 text-text-secondary">
+              We use this to personalize the report and benchmark to your exact operating environment.
+            </p>
+            <p className="mt-1 text-sm text-text-tertiary">
+              Use plain language in the pain-point field. We will mirror your words in the CLOSER report.
+            </p>
 
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <div>

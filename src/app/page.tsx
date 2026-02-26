@@ -7,7 +7,7 @@ import { caseStudies } from "@/data/case-studies";
 import { industryIcons } from "@/lib/icons";
 
 const proof = [
-  "Owner-led companies around $2M+ EBITDA",
+  "Owner-led businesses and PE operating teams",
   "Fortune 1000 manufacturing programs",
   "PE portfolio value creation",
   "Legacy-to-AI modernization initiatives",
@@ -125,7 +125,7 @@ export default function Home() {
             <span className="gradient-text">AI that performs.</span>
           </h1>
           <p className="mt-6 max-w-3xl text-xl text-text-secondary">
-            If you are running a business around $2M+ EBITDA and feel AI pressure but no clear execution path, we help you close the AI value gap with one accountable team.
+            Whether you are a PE operator improving portfolio performance or a long-time owner running one company, we help you close the AI value gap with one accountable team.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Button size="lg" asChild>
@@ -146,7 +146,7 @@ export default function Home() {
           <div className="mt-8 rounded-xl border border-border bg-white p-6">
             <h2 className="text-2xl font-bold text-text-primary">Built for operators who need results, not another AI slide deck.</h2>
             <p className="mt-3 max-w-3xl text-base text-text-secondary">
-              We help owner-operators and lean leadership teams target the workflows that move EBITDA, build practical systems,
+              We help owner-operators and lean leadership teams target the workflows that move growth, margin, and reliability, build practical systems,
               and prepare teams to run in a human-plus-agent model.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
