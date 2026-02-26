@@ -137,14 +137,14 @@ export default function Home() {
     <>
       <section className="grid-pattern bg-bg py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <span className="section-label">For owner-led companies, CEOs, COOs, and PE operating teams</span>
+          <span className="section-label">For operators who need measurable transformation</span>
           <h1 className="mt-4 max-w-4xl text-4xl font-bold text-text-primary sm:text-5xl lg:text-6xl">
-            Strategy that ships.
+            Transform your company with one accountable team.
             <br />
-            <span className="gradient-text">AI that performs.</span>
+            <span className="gradient-text">Strategy, AI delivery, and workforce adoption.</span>
           </h1>
           <p className="mt-6 max-w-3xl text-xl text-text-secondary">
-            We help operators close the AI value gap by aligning growth strategy, AI delivery, and workforce capability in one accountable team.
+            We do more than find demand. We redesign how your business grows and operates: define where to win, modernize workflows, deploy AI systems, and train teams to run the new model.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Button size="lg" asChild>
@@ -164,9 +164,9 @@ export default function Home() {
           </div>
 
           <div className="mt-8 rounded-xl border border-border bg-white p-6">
-            <h2 className="text-2xl font-bold text-text-primary">Built for operators who need results, not another AI slide deck.</h2>
+            <h2 className="text-2xl font-bold text-text-primary">This is a full operating transformation, not a pilot program.</h2>
             <p className="mt-3 max-w-3xl text-base text-text-secondary">
-              If you know demand exists but your team does not have the capacity to capture it, we can help. We set the strategy, ship the systems, and train people to run a human-plus-agent operating model.
+              From strategy through build and scale, we execute with your leaders and operators so results show up in growth, margin, capacity, and execution speed.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Button variant="outline" asChild>
@@ -179,9 +179,9 @@ export default function Home() {
 
       <section className="bg-surface py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">The AI Value Gap Is Widening</h2>
+          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">Why AI Initiatives Stall</h2>
           <p className="mt-4 max-w-3xl text-lg text-text-secondary">
-            Most companies do not fail because of AI tools. They fail because execution ownership is fragmented.
+            Most programs do not fail because of the models. They fail because ownership, workflow redesign, and workforce adoption are disconnected.
           </p>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {valueGapCards.map((item) => (
@@ -192,16 +192,16 @@ export default function Home() {
               </article>
             ))}
           </div>
-          <p className="mt-8 text-sm font-medium text-text-secondary">Fragmented ownership creates value leakage and slower growth.</p>
+          <p className="mt-8 text-sm font-medium text-text-secondary">Disconnected execution turns promising pilots into slow, expensive programs.</p>
         </div>
       </section>
 
       <section className="bg-bg py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <span className="section-label">How We Close the Gap</span>
-          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">Modernize Work and Workforce in Tandem</h2>
+          <span className="section-label">Our Transformation Model</span>
+          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">Modernize the Business and the Workforce Together</h2>
           <p className="mt-4 max-w-3xl text-lg text-text-secondary">
-            We redesign workflows and upgrade workforce capability at the same time. This is how companies move from pilots to reliable business outcomes.
+            We run a four-phase model that moves from readiness to scale while building internal AI capability in parallel.
           </p>
           <p className="mt-3 max-w-3xl text-base text-text-tertiary">
             We do not automate broken processes. We simplify workflow debt first, then layer AI and feedback loops so performance keeps improving.
@@ -236,9 +236,9 @@ export default function Home() {
 
       <section className="bg-surface py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">How We Transform Your Company, Step by Step</h2>
+          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">How We Transform Your Company from Strategy to Scale</h2>
           <p className="mt-4 max-w-3xl text-lg text-text-secondary">
-            Two coordinated engines run in parallel: one to find where to grow, one to improve how the company performs.
+            Two coordinated engines run in parallel: one defines where you should grow, the other improves how the company performs every day.
           </p>
 
           <div className="mt-8 grid gap-6 md:grid-cols-2">
@@ -260,7 +260,7 @@ export default function Home() {
           </div>
 
           <p className="mt-8 max-w-3xl text-lg text-text-secondary">
-            From there, we execute in a linear operating sequence tied to business outcomes.
+            Then we execute in a clear operating sequence with defined owners and measurable business outcomes.
           </p>
           <div className="mt-8 grid gap-6 lg:grid-cols-3">
             {transformationJourney.map((step, index) => (
@@ -290,9 +290,9 @@ export default function Home() {
           </div>
 
           <div className="mt-8 rounded-xl border border-border bg-white p-6">
-            <h3 className="text-xl font-bold text-text-primary">One partner for the full transformation.</h3>
+            <h3 className="text-xl font-bold text-text-primary">One partner accountable for the full transformation.</h3>
             <p className="mt-3 text-base text-text-secondary">
-              We cover strategy, AI delivery, and workforce transformation in one integrated program so leaders can move faster without losing control.
+              Strategy, delivery, and workforce enablement run as one integrated program, so momentum compounds instead of stalling at handoffs.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Button asChild>
