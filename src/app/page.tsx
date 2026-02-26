@@ -6,13 +6,6 @@ import { getSolutionsByStage } from "@/data/solutions";
 import { caseStudies } from "@/data/case-studies";
 import { industryIcons } from "@/lib/icons";
 
-const proof = [
-  "Fortune 1000 and upper-mid-market operators",
-  "Private equity portfolio value creation",
-  "Owner-led and family-run businesses",
-  "Strategy, AI delivery, and workforce transformation in one team",
-];
-
 const valueGapCards = [
   {
     title: "Pilots that never scale",
@@ -138,7 +131,7 @@ const industryTileDescriptions: Record<string, string> = {
 };
 
 export default function Home() {
-  const featuredCaseStudies = caseStudies.filter((item) => item.featured).slice(0, 2);
+  const featuredCaseStudies = caseStudies.filter((item) => item.featured).slice(0, 3);
 
   return (
     <>
@@ -151,7 +144,7 @@ export default function Home() {
             <span className="gradient-text">AI that performs.</span>
           </h1>
           <p className="mt-6 max-w-3xl text-xl text-text-secondary">
-            Whether you are a PE operator, a Fortune 1000 leader, or a long-time owner running one company, we help you close the AI value gap with one accountable team.
+            We help operators close the AI value gap by aligning growth strategy, AI delivery, and workforce capability in one accountable team.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Button size="lg" asChild>
@@ -162,22 +155,12 @@ export default function Home() {
             </Button>
           </div>
           <div className="mt-4 flex flex-wrap items-center gap-4 text-sm">
-            <a href="mailto:james@clearforge.ai" className="font-medium text-blue hover:text-emerald">
-              Email james@clearforge.ai
+            <a href="mailto:hello@clearforge.ai" className="font-medium text-blue hover:text-emerald">
+              Email hello@clearforge.ai
             </a>
             <a href="tel:+12489637440" className="font-medium text-blue hover:text-emerald">
               Call (248) 963-7440
             </a>
-            <Link href="/contact" className="font-medium text-text-secondary hover:text-text-primary">
-              Prefer we call you? Send your details and we will reach out.
-            </Link>
-          </div>
-          <div className="mt-10 flex flex-wrap gap-3">
-            {proof.map((item) => (
-              <span key={item} className="rounded-full border border-border bg-surface px-4 py-2 text-sm text-text-secondary">
-                {item}
-              </span>
-            ))}
           </div>
 
           <div className="mt-8 rounded-xl border border-border bg-white p-6">
@@ -209,9 +192,7 @@ export default function Home() {
               </article>
             ))}
           </div>
-          <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-blue/20 bg-blue/5 px-4 py-2 text-sm font-medium text-blue">
-            Problem pattern to value leakage to slower growth
-          </div>
+          <p className="mt-8 text-sm font-medium text-text-secondary">Fragmented ownership creates value leakage and slower growth.</p>
         </div>
       </section>
 
@@ -325,7 +306,7 @@ export default function Home() {
       <section className="bg-bg py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">Case Studies That Prove the Model</h2>
-          <div className="mt-8 grid gap-5 md:grid-cols-2">
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
             {featuredCaseStudies.map((study) => (
               <article key={study.slug} className="rounded-xl border border-border bg-white p-6">
                 <p className="text-sm text-text-tertiary">{study.industry}</p>

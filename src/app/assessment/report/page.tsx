@@ -231,7 +231,7 @@ export default function AssessmentReportPage() {
         <footer className="mt-10 border-t border-border pt-6 text-xs text-text-tertiary">
           <p className="font-semibold uppercase tracking-[0.14em] text-text-secondary">ClearForge.ai</p>
           <p className="mt-1">Strategy that ships. AI that performs.</p>
-          <p className="mt-1">Contact: james@clearforge.ai · (248) 963-7440 · clearforge.ai/contact</p>
+          <p className="mt-1">Contact: hello@clearforge.ai · (248) 963-7440 · clearforge.ai/contact</p>
         </footer>
       </article>
     </main>
