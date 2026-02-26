@@ -2,14 +2,33 @@ import Link from "next/link";
 import { ArrowRight, Bot, Compass, Layers, Puzzle, Shield, TrendingUp, Users, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { deepIndustries } from "@/data/industries";
-import { solutions } from "@/data/solutions";
+import { getSolutionsByStage } from "@/data/solutions";
 import { caseStudies } from "@/data/case-studies";
-import { industryIcons, solutionIcons } from "@/lib/icons";
+import { industryIcons } from "@/lib/icons";
 
 const proof = [
+  "Owner-led companies around $2M+ EBITDA",
   "Fortune 1000 manufacturing programs",
   "PE portfolio value creation",
   "Legacy-to-AI modernization initiatives",
+];
+
+const valueGapCards = [
+  {
+    title: "Pilots that never scale",
+    text: "Teams run isolated pilots that never become production operations.",
+    icon: Bot,
+  },
+  {
+    title: "Strategy and execution are split",
+    text: "One partner writes the plan, another partner attempts delivery, and value is lost in handoffs.",
+    icon: Layers,
+  },
+  {
+    title: "Technology without workforce change",
+    text: "Systems launch, but teams are not prepared to operate with them, so adoption stalls.",
+    icon: Users,
+  },
 ];
 
 const frameworkCards = [
@@ -31,6 +50,33 @@ const frameworkCards = [
   {
     phase: "Scale",
     text: "Expand what works and continuously improve outcomes.",
+    icon: TrendingUp,
+  },
+];
+
+const transformationJourney = [
+  {
+    stage: "UNDERSTAND" as const,
+    closer: "Clarify + Label",
+    title: "Find the value and name the real bottleneck",
+    text: "We clarify growth goals, label the pain in your own language, and quantify where EBITDA leakage is happening.",
+    outcome: "Decision-ready strategy, not generic AI advice.",
+    icon: Compass,
+  },
+  {
+    stage: "BUILD" as const,
+    closer: "Overview + Design",
+    title: "Redesign workflows and build controlled AI systems",
+    text: "We review what was already tried, identify what failed, and build practical AI workflows with your operators.",
+    outcome: "Working systems with owners, controls, and KPI baselines.",
+    icon: Layers,
+  },
+  {
+    stage: "OPERATE" as const,
+    closer: "Sell + Explain + Reinforce",
+    title: "Run, optimize, and reinforce adoption",
+    text: "We turn early wins into operating rhythm, handle adoption concerns with proof, and reinforce execution discipline.",
+    outcome: "Compounding gains in throughput, margin, and leadership confidence.",
     icon: TrendingUp,
   },
 ];
@@ -72,14 +118,14 @@ export default function Home() {
     <>
       <section className="grid-pattern bg-bg py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <span className="section-label">For CEOs, COOs, and PE Operating Teams</span>
+          <span className="section-label">For owner-led companies, CEOs, COOs, and PE operating teams</span>
           <h1 className="mt-4 max-w-4xl text-4xl font-bold text-text-primary sm:text-5xl lg:text-6xl">
             Strategy that ships.
             <br />
             <span className="gradient-text">AI that performs.</span>
           </h1>
           <p className="mt-6 max-w-3xl text-xl text-text-secondary">
-            ClearForge helps companies close the AI value gap with strategy, implementation, and managed operations in one team.
+            If you are running a business around $2M+ EBITDA and feel AI pressure but no clear execution path, we help you close the AI value gap with one accountable team.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Button size="lg" asChild>
@@ -96,38 +142,46 @@ export default function Home() {
               </span>
             ))}
           </div>
+
+          <div className="mt-8 rounded-xl border border-border bg-white p-6">
+            <h2 className="text-2xl font-bold text-text-primary">Built for operators who need results, not another AI slide deck.</h2>
+            <p className="mt-3 max-w-3xl text-base text-text-secondary">
+              We help owner-operators and lean leadership teams target the workflows that move EBITDA, build practical systems,
+              and prepare teams to run in a human-plus-agent model.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Button variant="outline" asChild>
+                <Link href="/assessment">Run the AI Readiness & Opportunity Assessment</Link>
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
 
       <section className="bg-surface py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">The AI Value Gap Is Widening</h2>
+          <p className="mt-4 max-w-3xl text-lg text-text-secondary">
+            Most companies do not fail because of AI tools. They fail because execution ownership is fragmented.
+          </p>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
-            {[
-              [
-                "Pilots that never scale",
-                "Teams run isolated pilots that never become production operations.",
-              ],
-              [
-                "Strategy and execution are split",
-                "One partner writes the plan, another partner attempts delivery, and value is lost in handoffs.",
-              ],
-              [
-                "Technology without workforce change",
-                "Systems launch, but teams are not prepared to operate with them, so adoption stalls.",
-              ],
-            ].map(([title, desc]) => (
-              <article key={title} className="rounded-xl border border-border bg-white p-6">
-                <h3 className="text-xl font-bold text-text-primary">{title}</h3>
-                <p className="mt-3 text-base text-text-secondary">{desc}</p>
+            {valueGapCards.map((item) => (
+              <article key={item.title} className="rounded-xl border border-border bg-white p-6">
+                <item.icon className="mb-4 h-9 w-9 text-blue" aria-hidden />
+                <h3 className="text-xl font-bold text-text-primary">{item.title}</h3>
+                <p className="mt-3 text-base text-text-secondary">{item.text}</p>
               </article>
             ))}
+          </div>
+          <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-blue/20 bg-blue/5 px-4 py-2 text-sm font-medium text-blue">
+            Problem pattern to value leakage to slower growth
           </div>
         </div>
       </section>
 
       <section className="bg-bg py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <span className="section-label">How We Close the Gap</span>
           <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">Modernize Work and Workforce in Tandem</h2>
           <p className="mt-4 max-w-3xl text-lg text-text-secondary">
             ClearForge runs a dual-track transformation model: redesign critical workflows for AI while preparing teams to
@@ -147,30 +201,46 @@ export default function Home() {
               </li>
             ))}
           </ol>
+          <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-emerald/20 bg-emerald/10 px-4 py-2 text-sm font-medium text-emerald">
+            Value model to aligned strategy, shipped systems, adopted operations
+          </div>
         </div>
       </section>
 
       <section className="bg-surface py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">Choose Your Point on the AI Journey</h2>
+          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">How We Transform Your Company, Step by Step</h2>
           <p className="mt-4 max-w-3xl text-lg text-text-secondary">
-            Where you are now, what we do next, and what outcomes you should expect.
+            A linear path from strategy to build to operation, framed in CLOSER language and tied to business outcomes.
           </p>
-          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {solutions.map((solution) => {
-              const SolutionIcon = solutionIcons[solution.icon];
-              return (
-                <article key={solution.slug} className="rounded-xl border border-border bg-white p-6">
-                  <SolutionIcon className="mb-3 h-8 w-8 text-blue" aria-hidden />
-                  <p className="text-xs font-semibold text-blue">{solution.stage}</p>
-                  <h3 className="mt-2 text-xl font-bold text-text-primary">{solution.title}</h3>
-                  <p className="mt-3 text-base text-text-secondary">{solution.tagline}</p>
-                  <Link className="mt-4 inline-flex items-center text-sm font-medium text-blue hover:text-emerald" href={`/solutions/${solution.slug}`}>
-                    Learn more <ArrowRight className="ml-1 h-4 w-4" />
-                  </Link>
-                </article>
-              );
-            })}
+          <div className="mt-8 grid gap-6 lg:grid-cols-3">
+            {transformationJourney.map((step, index) => (
+              <article key={step.stage} className="relative rounded-xl border border-border bg-white p-6">
+                <step.icon className="mb-4 h-9 w-9 text-blue" aria-hidden />
+                <div className="flex items-center justify-between">
+                  <p className="text-xs font-semibold text-blue">{step.stage}</p>
+                  <p className="text-xs font-semibold text-emerald">{step.closer}</p>
+                </div>
+                <h3 className="mt-3 text-xl font-bold text-text-primary">{step.title}</h3>
+                <p className="mt-3 text-base text-text-secondary">{step.text}</p>
+                <p className="mt-3 text-sm font-medium text-blue">{step.outcome}</p>
+                <div className="mt-4 border-t border-border pt-4">
+                  <p className="text-xs uppercase tracking-[0.12em] text-text-tertiary">Relevant solutions</p>
+                  <ul className="mt-2 space-y-1">
+                    {getSolutionsByStage(step.stage).map((solution) => (
+                      <li key={solution.slug}>
+                        <Link href={`/solutions/${solution.slug}`} className="text-sm text-text-secondary hover:text-blue">
+                          {solution.shortTitle}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {index < transformationJourney.length - 1 && (
+                  <ArrowRight className="absolute -right-3 top-1/2 hidden h-5 w-5 -translate-y-1/2 text-blue lg:block" />
+                )}
+              </article>
+            ))}
           </div>
         </div>
       </section>
