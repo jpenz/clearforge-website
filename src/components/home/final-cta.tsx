@@ -2,36 +2,40 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowRight, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function FinalCTA() {
   return (
-    <section className="bg-white py-24 lg:py-30">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          className="mx-auto max-w-2xl text-center"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="border border-fog bg-ivory px-8 py-10 text-center lg:px-14 lg:py-14"
         >
-          <p className="section-label">Next Step</p>
-          <h2 className="mt-4 text-4xl leading-tight text-midnight sm:text-5xl">
-            If AI is on the agenda, let&apos;s make it operational.
+          <Calendar className="mx-auto h-10 w-10 text-blue" />
+          <h2 className="mt-6 text-3xl font-bold text-text-primary sm:text-4xl">
+            Ready to See What AI Can Do for You?
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate">
-            30-minute discovery call for CEOs, PE operating partners, and owner-led companies. We&apos;ll evaluate
-            where value exists, what can ship fast, and what supports a clean transition if ownership change is on
-            the horizon.
+          <p className="mt-4 text-lg text-text-secondary">
+            Book a free 30-minute discovery call. We&apos;ll discuss your
+            challenges, identify quick wins, and outline a path to measurable
+            ROI.
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button size="lg" asChild>
-              <Link href="/contact">Book a Discovery Call</Link>
-            </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link href="/scorecard">Take the AI Scorecard</Link>
+          <div className="mt-8">
+            <Button size="xl" asChild>
+              <Link href="/contact">
+                Book Discovery Call
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
             </Button>
           </div>
+          <p className="mt-4 text-sm text-text-muted">
+            No commitment &middot; 30 minutes &middot; Actionable insights
+          </p>
         </motion.div>
       </div>
     </section>

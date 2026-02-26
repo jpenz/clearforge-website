@@ -4,11 +4,39 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getCaseStudy } from "@/data/case-studies";
+
+const study = {
+  industry: "Industrial Manufacturing",
+  service: "AI Revenue Operations",
+  title: "Fortune 1000 Industrial Group Rebuilt Sales Intelligence Across 16 Divisions",
+  excerpt:
+    "A portfolio-scale AI deployment unified fragmented market intelligence and prospecting workflows into one measurable revenue operating system.",
+  challenge:
+    "The commercial organization operated across multiple business units with inconsistent prospecting methods, siloed market data, and low visibility into segment-level opportunity quality. Leadership needed one repeatable system that could support enterprise planning and field-level execution.",
+  solution: [
+    "Built a centralized intelligence pipeline that combined internal CRM data, market signals, and firmographic enrichment across divisions.",
+    "Deployed AI-assisted account prioritization and segment scoring to identify high-probability opportunities by market cluster.",
+    "Implemented standardized workflows for prospecting, qualification, and handoff so teams could execute consistently with less manual effort.",
+    "Introduced executive and operator dashboards that tied activity to conversion quality, speed-to-contact, and pipeline movement.",
+  ],
+  outcomes: [
+    { metric: "1,060", description: "Qualified opportunities identified" },
+    { metric: "16", description: "Divisions analyzed and ranked" },
+    { metric: "5", description: "New high-growth segments identified" },
+    { metric: "60%+", description: "Prospecting effort reduced" },
+    { metric: "Monthly", description: "Signal refresh cadence established" },
+    { metric: "2x", description: "Commercial prioritization speed" },
+  ],
+  continuousModel: [
+    "Monthly market-signal refreshes updated targeting models as demand patterns shifted.",
+    "Prompt and qualification logic were tuned continuously based on conversion feedback.",
+    "Leadership reviews used shared KPI views to redirect focus quickly when segments changed.",
+  ],
+  scale:
+    "After initial rollout, the operating model expanded to additional commercial teams and became the default framework for opportunity planning across the enterprise.",
+};
 
 export function IndustrialManufacturerPage() {
-  const study = getCaseStudy("industrial-manufacturer")!;
-
   return (
     <>
       <section className="bg-midnight py-20 lg:py-28">

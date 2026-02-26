@@ -4,15 +4,15 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap border text-sm font-semibold tracking-wide transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer rounded-none",
+  "inline-flex items-center justify-center whitespace-nowrap border text-sm font-semibold tracking-wide transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer rounded-md",
   {
     variants: {
       variant: {
-        default: "border-midnight bg-midnight text-white hover:bg-charcoal",
-        secondary: "border-fog bg-ivory text-midnight hover:bg-white",
-        outline: "border-midnight bg-transparent text-midnight hover:bg-midnight hover:text-white",
-        ghost: "border-transparent bg-transparent text-stone hover:border-fog hover:bg-ivory hover:text-midnight",
-        link: "border-transparent bg-transparent text-midnight underline-offset-4 hover:underline",
+        default: "border-blue bg-blue text-white hover:border-teal-light hover:bg-teal-light",
+        secondary: "border-border-subtle bg-bg-card text-text-primary hover:bg-white",
+        outline: "border-border-medium bg-transparent text-text-primary hover:border-blue hover:bg-blue hover:text-white",
+        ghost: "border-transparent bg-transparent text-text-secondary hover:border-border-subtle hover:bg-bg-card hover:text-text-primary",
+        link: "border-transparent bg-transparent text-text-primary underline-offset-4 hover:underline",
       },
       size: {
         default: "h-11 px-6 py-2",

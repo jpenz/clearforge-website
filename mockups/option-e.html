@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClearForge — Option E: Industrial Signal</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --coal: #10161d;
+  --graphite: #1b242f;
+  --steel: #415368;
+  --ash: #96a5b8;
+  --line: #2a3644;
+  --paper: #f5f7fa;
+  --accent: #49b1c6;
+  --accent-soft: #85d1df;
+}
+body {
+  font-family: 'Work Sans', 'Segoe UI', sans-serif;
+  background: var(--coal);
+  color: #e6edf6;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(73,177,198,0.14), transparent 42%),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: auto, 56px 56px, 56px 56px;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 36px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(16,22,29,0.85);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+}
+.logo {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: 24px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: #f2f7ff;
+}
+.logo span { color: var(--accent); }
+.links { display: flex; gap: 20px; font-size: 12px; letter-spacing: 1.3px; text-transform: uppercase; color: var(--ash); }
+.cta-btn {
+  background: var(--accent);
+  color: #0f1720;
+  border: 1px solid transparent;
+  padding: 10px 18px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+}
+
+.hero {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 84px 36px 62px;
+}
+.hero .eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: var(--accent-soft);
+}
+.hero h1 {
+  margin-top: 14px;
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: clamp(48px, 7vw, 90px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  max-width: 900px;
+}
+.hero h1 span { color: var(--accent); }
+.hero p {
+  margin-top: 24px;
+  max-width: 700px;
+  color: #cad5e4;
+  line-height: 1.75;
+  font-size: 18px;
+}
+.actions { margin-top: 30px; display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary, .btn-secondary {
+  padding: 12px 20px;
+  border: 1px solid;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  font-weight: 700;
+}
+.btn-primary { background: var(--accent); color: #10161d; border-color: var(--accent); }
+.btn-secondary { background: transparent; color: #e4ebf5; border-color: #3b4a5c; }
+
+.metrics {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 36px 64px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.metric {
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.01) 100%);
+  padding: 16px;
+}
+.metric .num {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent);
+  font-size: 34px;
+}
+.metric .label {
+  margin-top: 4px;
+  color: var(--ash);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.sections {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 36px 92px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(12, 1fr);
+}
+.panel {
+  border: 1px solid var(--line);
+  background: rgba(20, 29, 39, 0.92);
+  padding: 24px;
+}
+.panel h2 {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: clamp(28px, 3vw, 48px);
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+.panel p { margin-top: 12px; line-height: 1.7; color: #c2d0e1; }
+.panel.full { grid-column: span 12; }
+.panel.third { grid-column: span 4; }
+.panel .tag { color: var(--accent-soft); font-size: 11px; text-transform: uppercase; letter-spacing: 1.8px; font-weight: 700; }
+.panel h3 {
+  margin-top: 10px;
+  font-family: 'Archivo Narrow', sans-serif;
+  text-transform: uppercase;
+  font-size: 24px;
+}
+.panel .cost {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--accent-soft);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+.footer-label {
+  border-top: 1px solid var(--line);
+  text-align: center;
+  padding: 24px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ash);
+}
+
+@media (max-width: 960px) {
+  .links { display: none; }
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+  .panel.third { grid-column: span 12; }
+}
+@media (max-width: 640px) {
+  nav, .hero, .metrics, .sections { padding-left: 18px; padding-right: 18px; }
+  .metrics { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">ClearForge<span>.ai</span></div>
+  <div class="links">
+    <span>Services</span>
+    <span>Case Studies</span>
+    <span>Pricing</span>
+    <span>Insights</span>
+    <span>About</span>
+  </div>
+  <button class="cta-btn">Book a Call</button>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">AI operating systems for serious operators</div>
+  <h1>Strategy that ships.<br><span>AI that performs.</span></h1>
+  <p>ClearForge builds practical AI systems for mid-market leadership teams that need operating leverage, not presentation theater.</p>
+  <div class="actions">
+    <button class="btn-primary">Book Discovery Call</button>
+    <button class="btn-secondary">Run AI Scorecard</button>
+  </div>
+</section>
+
+<section class="metrics">
+  <article class="metric"><div class="num">1,060</div><div class="label">Qualified opportunities</div></article>
+  <article class="metric"><div class="num">16</div><div class="label">Divisions ranked</div></article>
+  <article class="metric"><div class="num">60%+</div><div class="label">Prospecting time reduced</div></article>
+  <article class="metric"><div class="num">Monthly</div><div class="label">Optimization cadence</div></article>
+</section>
+
+<section class="sections">
+  <article class="panel full">
+    <div class="tag">Where initiatives fail</div>
+    <h2>Most AI programs don’t fail in the model. They fail in execution design.</h2>
+    <p>Leadership teams often fund software first, then discover their process, ownership model, and governance cannot absorb it.</p>
+  </article>
+  <article class="panel third">
+    <div class="tag">01</div>
+    <h3>Decks, no deployment</h3>
+    <p>Advisory outputs without production-grade implementation leave teams in the same operational state.</p>
+    <div class="cost">Cost: budget burn, no KPI delta</div>
+  </article>
+  <article class="panel third">
+    <div class="tag">02</div>
+    <h3>Tool chaos</h3>
+    <p>Point tools get layered in quickly, but no integrated workflow or accountable ownership structure exists.</p>
+    <div class="cost">Cost: fragmented pilots, weak adoption</div>
+  </article>
+  <article class="panel third">
+    <div class="tag">03</div>
+    <h3>Static deployments</h3>
+    <p>Without feedback loops and retuning, performance decays and business trust erodes in one or two quarters.</p>
+    <div class="cost">Cost: AI fatigue across leadership</div>
+  </article>
+</section>
+
+<div class="footer-label">Option E — Industrial Signal • Dark Steel + Cyan Accent • Archivo Narrow + Work Sans</div>
+</body>
+</html>

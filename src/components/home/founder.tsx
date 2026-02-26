@@ -1,29 +1,47 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { User } from "lucide-react";
 
 export function Founder() {
   return (
-    <section className="bg-white py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <span className="section-label">Our Approach</span>
-          <blockquote className="mt-6 text-2xl font-bold text-slate-navy leading-relaxed sm:text-3xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            &ldquo;We don&apos;t sell AI. We sell measurable business outcomes —
-            and we build the AI to get there.&rdquo;
-          </blockquote>
-          <p className="mt-6 text-lg text-slate-600">
-            ClearForge was founded on a simple premise: the gap between AI strategy and
-            AI execution is where most companies lose. We close that gap by combining
-            consulting rigor with engineering discipline.
-          </p>
-        </motion.div>
+    <section className="border-t border-border-subtle py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <motion.div
+            className="flex flex-col items-center gap-8 md:flex-row md:items-start md:gap-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+          >
+            {/* Photo placeholder */}
+            <div className="flex h-32 w-32 shrink-0 items-center justify-center rounded-2xl border border-border-subtle bg-bg-card md:h-48 md:w-48">
+              <User className="h-12 w-12 text-text-muted md:h-16 md:w-16" />
+            </div>
+
+            <div>
+              <p className="text-sm font-medium uppercase tracking-wider text-blue">
+                From the Founder
+              </p>
+              <h2 className="mt-2 text-2xl font-bold text-text-primary sm:text-3xl">
+                Built by an Operator, for Operators
+              </h2>
+              <p className="mt-4 text-text-secondary leading-relaxed">
+                After years at the intersection of management consulting and AI
+                engineering, I saw the same problem everywhere: strategy teams
+                that couldn&apos;t build, and engineering teams that couldn&apos;t
+                think strategically.
+              </p>
+              <p className="mt-4 text-text-secondary leading-relaxed">
+                ClearForge was built to bridge that gap. We bring both the
+                business acumen to identify high-impact opportunities and the
+                technical depth to deliver working solutions — not just
+                recommendations.
+              </p>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

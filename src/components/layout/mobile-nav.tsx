@@ -17,7 +17,7 @@ export function MobileNav({ links }: MobileNavProps) {
     <>
       <button
         onClick={() => setOpen(!open)}
-        className="inline-flex h-10 w-10 items-center justify-center border border-fog bg-white text-midnight"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border-subtle bg-white text-text-primary transition-colors hover:bg-bg-card"
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
       >
@@ -26,7 +26,7 @@ export function MobileNav({ links }: MobileNavProps) {
 
       <div
         className={cn(
-          "fixed inset-0 top-[72px] z-40 border-t border-fog bg-white transition-opacity duration-200 lg:hidden",
+          "fixed inset-0 top-[72px] z-40 border-t border-border-subtle bg-white transition-opacity duration-200 lg:hidden",
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         )}
       >
@@ -36,7 +36,7 @@ export function MobileNav({ links }: MobileNavProps) {
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="border-b border-fog py-4 text-sm font-semibold uppercase tracking-[0.11em] text-midnight"
+              className="border-b border-border-subtle py-4 text-sm font-semibold text-text-primary"
             >
               {link.label}
             </Link>

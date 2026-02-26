@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { createMetadata } from "@/lib/metadata";
-import { getInsight, insights, getRelatedInsights } from "@/data/insights";
-import { InsightDetailClient } from "@/components/insight-detail";
+import { getInsight, insights } from "@/data/insights";
+import { InsightDetail } from "@/components/insight-detail";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -26,6 +26,5 @@ export default async function Page({ params }: Props) {
   const { slug } = await params;
   const insight = getInsight(slug);
   if (!insight) notFound();
-  const related = getRelatedInsights(insight.relatedSlugs);
-  return <InsightDetailClient insight={insight} related={related} />;
+  return <InsightDetail insight={insight} />;
 }

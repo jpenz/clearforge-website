@@ -2,91 +2,88 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowRight, Bot, LineChart, Rocket, Cog } from "lucide-react";
 
 const services = [
   {
-    title: "AI Strategy & Market Intelligence",
-    outcome: "Opportunity map in 4 weeks",
-    text: "Identify and rank where AI creates commercial lift before engineering spend begins.",
-    href: "/services#ai-strategy",
+    icon: LineChart,
+    title: "AI Revenue Operations",
+    description:
+      "Sales automation, intent signals, and pipeline analytics that turn data into deals.",
+    href: "/services/ai-revenue-operations",
   },
   {
-    title: "AI Design & Build",
-    outcome: "Production systems in 6-8 weeks",
-    text: "Design and deploy AI-enabled workflows tied directly to operating metrics.",
-    href: "/services#ai-design-build",
+    icon: Cog,
+    title: "Performance Improvement",
+    description:
+      "Process mining, operational diagnostics, and custom automation to cut waste.",
+    href: "/services/performance-improvement",
   },
   {
-    title: "Managed AI Operations",
-    outcome: "Monthly optimization cadence",
-    text: "Retuning, retraining, and monitoring so results compound instead of deteriorate.",
-    href: "/services#managed-ai-operations",
+    icon: Rocket,
+    title: "PE Value Creation",
+    description:
+      "90-day sprints and portfolio-wide AI playbooks that drive EBITDA improvement.",
+    href: "/services/pe-value-creation",
   },
   {
-    title: "AI Readiness Assessment",
-    outcome: "Fixed-price 4-week diagnostic",
-    text: "A low-risk entry engagement with a scored baseline and 90-day action plan.",
-    href: "/services#ai-readiness-assessment",
+    icon: Bot,
+    title: "Custom AI Agents",
+    description:
+      "Bespoke agents for sales, ops, and finance — built for your workflows.",
+    href: "/services/custom-ai-agents",
   },
 ];
 
 export function ServicesPreview() {
   return (
-    <section className="bg-white py-24 lg:py-30">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="border-t border-border-subtle py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          className="mx-auto max-w-2xl text-center"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="max-w-3xl"
         >
-          <span className="section-label">Service Lines</span>
-          <h2 className="mt-4 text-4xl leading-tight text-midnight sm:text-5xl">
-            Structured around the way value is actually created.
+          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+            What We Build
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-slate">
-            Each service aligns to a distinct stage in the transformation cycle. Start where you have urgency,
-            then expand as proof accumulates.
+          <p className="mt-4 text-text-secondary">
+            Four practice areas, one goal: measurable business impact.
           </p>
         </motion.div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2">
-          {services.map((service, index) => (
-            <motion.article
+        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          {services.map((service, i) => (
+            <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.08 }}
-              className="group border border-fog bg-ivory p-7 transition-colors hover:bg-white"
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <p className="text-xs uppercase tracking-[0.14em] text-brass">{service.outcome}</p>
-              <h3 className="mt-3 text-2xl leading-tight text-midnight">{service.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate">{service.text}</p>
               <Link
                 href={service.href}
-                className="mt-6 inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-[0.1em] text-midnight"
+                className="group flex h-full flex-col rounded-xl border border-border-subtle bg-bg-card p-8 transition-all hover:border-blue/30 hover:bg-bg-elevated"
               >
-                Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue/10">
+                  <service.icon className="h-6 w-6 text-blue" />
+                </div>
+                <h3 className="mt-6 text-xl font-semibold text-text-primary">
+                  {service.title}
+                </h3>
+                <p className="mt-3 flex-1 text-text-secondary leading-relaxed">
+                  {service.description}
+                </p>
+                <div className="mt-6 flex items-center text-sm font-medium text-blue">
+                  Learn more
+                  <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </div>
               </Link>
-            </motion.article>
+            </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.35, delay: 0.28 }}
-          className="mt-10"
-        >
-          <Button variant="outline" size="lg" asChild>
-            <Link href="/services">View Full Services and Deliverables</Link>
-          </Button>
-        </motion.div>
       </div>
     </section>
   );

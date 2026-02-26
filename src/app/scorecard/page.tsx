@@ -1,5 +1,5 @@
 import { createMetadata } from "@/lib/metadata";
-import { ScorecardPage } from "@/components/pages/scorecard-page";
+import { ScorecardPageClient } from "@/components/pages/scorecard-page";
 
 export const metadata = createMetadata({
   title: "AI Readiness Scorecard — Assess Your Business in 5 Minutes",
@@ -8,5 +8,5 @@ export const metadata = createMetadata({
 });
 
 export default function Page() {
-  return <ScorecardPage />;
+  return <ScorecardPageClient />;
 }

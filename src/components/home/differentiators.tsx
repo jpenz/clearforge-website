@@ -1,81 +1,68 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Layers, Users, TrendingUp } from "lucide-react";
 
-const differentiators = [
+const items = [
   {
-    title: "Senior Team, End to End",
-    detail:
-      "The people in discovery are the people in delivery. No handoff to junior execution layers.",
+    icon: Layers,
+    title: "Bridge the Gap",
+    description:
+      "We sit at the intersection of strategy and engineering. Your AI initiatives get both executive alignment and working code.",
   },
   {
-    title: "KPI-Backed Scope",
-    detail:
-      "Every workstream maps to a measured business outcome before build begins.",
+    icon: Users,
+    title: "Senior-Led Delivery",
+    description:
+      "No bait-and-switch. The senior consultants who scope the work are the ones who build it.",
   },
   {
-    title: "Boardroom Clarity",
-    detail:
-      "Transparent pricing, explicit milestones, and plain-language reporting at every stage.",
-  },
-  {
-    title: "Continuous Performance Model",
-    detail:
-      "We optimize monthly so model quality and workflow fit improve over time.",
-  },
-];
-
-const engagementModels = [
-  {
-    heading: "Build & Transfer",
-    description: "You own the codebase, documentation, and operating playbook.",
-  },
-  {
-    heading: "Managed Services",
-    description: "We build and operate the system with SLA-backed performance and optimization.",
+    icon: TrendingUp,
+    title: "Results, Not Decks",
+    description:
+      "Every engagement has measurable outcomes tied to revenue, margin, or efficiency. We don't ship PowerPoints.",
   },
 ];
 
 export function Differentiators() {
   return (
-    <section className="bg-ivory py-24 lg:py-30">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          className="mx-auto max-w-2xl text-center"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="max-w-3xl"
         >
-          <span className="section-label">Why Operators Choose ClearForge</span>
-          <h2 className="mt-4 text-4xl leading-tight text-midnight sm:text-5xl">
-            Consulting discipline with engineering accountability.
+          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+            How We&apos;re Different
           </h2>
+          <p className="mt-4 text-text-secondary">
+            Built for operators who need AI that actually works.
+          </p>
         </motion.div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
-          {differentiators.map((item, index) => (
-            <motion.article
+        <div className="mt-12 grid gap-8 md:grid-cols-3">
+          {items.map((item, i) => (
+            <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 20 }}
+              className="group rounded-xl border border-border-subtle bg-bg-card p-8 transition-colors hover:border-border-medium"
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: index * 0.08 }}
-              className="border border-fog bg-white p-7"
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <h3 className="text-2xl leading-tight text-midnight">{item.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate">{item.detail}</p>
-            </motion.article>
-          ))}
-        </div>
-
-        <div className="mt-10 grid gap-5 border-t border-fog pt-8 md:grid-cols-2">
-          {engagementModels.map((model) => (
-            <div key={model.heading} className="border border-fog bg-white p-6">
-              <p className="section-label">Engagement Model</p>
-              <h3 className="mt-3 text-2xl text-midnight">{model.heading}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate">{model.description}</p>
-            </div>
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue/10">
+                <item.icon className="h-6 w-6 text-blue" />
+              </div>
+              <h3 className="mt-6 text-xl font-semibold text-text-primary">
+                {item.title}
+              </h3>
+              <p className="mt-3 text-text-secondary leading-relaxed">
+                {item.description}
+              </p>
+            </motion.div>
           ))}
         </div>
       </div>

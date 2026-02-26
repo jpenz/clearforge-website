@@ -1,9 +1,10 @@
 import { Hero } from "@/components/home/hero";
 import { Problem } from "@/components/home/problem";
-import { HowWeWork } from "@/components/home/how-we-work";
-import { ServicesPreview } from "@/components/home/services-preview";
-import { CaseStudyPreview } from "@/components/home/case-study-preview";
 import { Differentiators } from "@/components/home/differentiators";
+import { ServicesPreview } from "@/components/home/services-preview";
+import { Results } from "@/components/home/results";
+import { ScorecardCTA } from "@/components/home/scorecard-cta";
+import { Founder } from "@/components/home/founder";
 import { FinalCTA } from "@/components/home/final-cta";
 
 export default function Home() {
@@ -11,10 +12,11 @@ export default function Home() {
     <>
       <Hero />
       <Problem />
-      <HowWeWork />
-      <ServicesPreview />
-      <CaseStudyPreview />
       <Differentiators />
+      <ServicesPreview />
+      <Results />
+      <ScorecardCTA />
+      <Founder />
       <FinalCTA />
     </>
   );

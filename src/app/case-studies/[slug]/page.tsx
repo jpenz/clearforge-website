@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { createMetadata } from "@/lib/metadata";
 import { getCaseStudy, caseStudies } from "@/data/case-studies";
-import { CaseStudyDetailClient } from "@/components/case-study-detail";
+import { CaseStudyDetail } from "@/components/case-study-detail";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -30,5 +30,5 @@ export default async function Page({ params }: Props) {
   }
   const cs = getCaseStudy(slug);
   if (!cs) notFound();
-  return <CaseStudyDetailClient caseStudy={cs} />;
+  return <CaseStudyDetail caseStudy={cs} />;
 }

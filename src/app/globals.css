@@ -1,48 +1,57 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-midnight: #0f1a2e;
-  --color-charcoal: #1c2b3a;
-  --color-slate: #4a5568;
-  --color-stone: #718096;
-  --color-fog: #e2e8f0;
-  --color-ivory: #f7f8fa;
-  --color-white: #ffffff;
-  --color-brass: #b8860b;
-  --color-gold: #d4a84b;
-  --color-forest: #1b5e3b;
-  --color-error: #b42318;
+  /* Option B system tokens */
+  --color-blue: #0d9488;
+  --color-emerald: #06b6d4;
+  --color-bg-dark: #ffffff;
+  --color-bg-card: #f8fafc;
+  --color-bg-elevated: #ffffff;
+  --color-bg-light: #ffffff;
+  --color-border-subtle: #e5e7eb;
+  --color-border-medium: #cbd5e1;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #6b7280;
+  --color-text-light-primary: #0f172a;
 
-  /* Backwards-compatible aliases used across existing components */
+  /* Backwards-compatible aliases */
+  --color-midnight: var(--color-text-primary);
+  --color-charcoal: #1e293b;
+  --color-slate: var(--color-text-secondary);
+  --color-stone: #64748b;
+  --color-fog: var(--color-border-subtle);
+  --color-ivory: var(--color-bg-card);
+  --color-white: #ffffff;
+  --color-brass: var(--color-blue);
+  --color-gold: var(--color-emerald);
+  --color-forest: #059669;
+  --color-error: #b42318;
   --color-slate-navy: var(--color-midnight);
-  --color-teal: var(--color-brass);
-  --color-teal-light: var(--color-gold);
-  --color-cyan: #9d7f35;
+  --color-teal: var(--color-blue);
+  --color-teal-light: var(--color-emerald);
+  --color-cyan: var(--color-emerald);
   --color-slate-700: var(--color-slate);
-  --color-slate-600: #5d6778;
+  --color-slate-600: #52637a;
   --color-slate-500: var(--color-stone);
-  --color-slate-400: #8a94a6;
+  --color-slate-400: #94a3b8;
   --color-gray-200: var(--color-fog);
   --color-gray-100: var(--color-ivory);
-
-  --color-background: var(--color-white);
-  --color-foreground: var(--color-slate);
-
-  --font-heading: var(--font-libre-bodoni);
-  --font-sans: var(--font-plus-jakarta);
+  --color-background: var(--color-bg-dark);
+  --color-foreground: var(--color-text-primary);
+  --font-heading: var(--font-space-grotesk);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains);
 }
 
 :root {
   color-scheme: light;
-  --font-libre-bodoni: "Libre Bodoni", "Bodoni Moda", "Didot", "Bodoni 72", "Iowan Old Style", serif;
-  --font-plus-jakarta: "Plus Jakarta Sans", "Avenir Next", "Avenir", "Segoe UI", sans-serif;
+  --font-space-grotesk: "Space Grotesk", "Plus Jakarta Sans", "Inter", "Avenir Next", "Segoe UI", sans-serif;
+  --font-inter: "Inter", "Plus Jakarta Sans", "Avenir Next", "Segoe UI", sans-serif;
   --font-jetbrains: "JetBrains Mono", "IBM Plex Mono", "SF Mono", "Menlo", monospace;
-
-  /* Aliases to avoid touching every component in one pass */
-  --font-space-grotesk: var(--font-libre-bodoni);
-  --font-inter: var(--font-plus-jakarta);
-  --font-bodoni: var(--font-libre-bodoni);
+  --font-libre-bodoni: var(--font-space-grotesk);
+  --font-plus-jakarta: var(--font-inter);
+  --font-bodoni: var(--font-space-grotesk);
 }
 
 html {
@@ -50,40 +59,41 @@ html {
 }
 
 body {
-  background: #ffffff;
-  color: #4a5568;
-  font-family: var(--font-plus-jakarta), sans-serif;
+  background: var(--color-bg-dark);
+  color: var(--color-text-secondary);
+  font-family: var(--font-inter), "Avenir Next", "Segoe UI", sans-serif;
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
 a {
-  text-decoration-thickness: 0.06em;
-  text-underline-offset: 0.2em;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.22em;
 }
 
 ::selection {
-  background: rgba(184, 134, 11, 0.18);
-  color: #0f1a2e;
+  background: rgba(13, 148, 136, 0.16);
+  color: var(--color-text-primary);
 }
 
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f7f8fa;
+  background: #f8fafc;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c7cdd8;
+  background: #cbd5e1;
+  border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #8a94a6;
+  background: #94a3b8;
 }
 
 h1,
@@ -92,62 +102,62 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-libre-bodoni), serif;
-  font-weight: 600;
+  font-family: var(--font-space-grotesk), "Inter", sans-serif;
+  font-weight: 700;
   letter-spacing: -0.02em;
-  color: #0f1a2e;
+  color: var(--color-text-primary);
 }
 
 .metric-display {
-  font-family: var(--font-jetbrains), monospace;
+  font-family: var(--font-jetbrains), "JetBrains Mono", monospace;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.015em;
   font-weight: 500;
-  color: #b8860b;
+  color: var(--color-blue);
 }
 
 .section-label {
-  font-family: var(--font-plus-jakarta), sans-serif;
+  font-family: var(--font-space-grotesk), "Inter", sans-serif;
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #b8860b;
+  color: var(--color-blue);
 }
 
 .gradient-text {
-  color: #b8860b;
-  background: none;
-  -webkit-text-fill-color: currentColor;
+  background: linear-gradient(135deg, var(--color-blue), var(--color-emerald));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .prose-content h2 {
-  font-family: var(--font-libre-bodoni), serif;
-  font-weight: 600;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-weight: 700;
   font-size: 2rem;
-  color: #0f1a2e;
+  color: var(--color-text-primary);
   margin-top: 2.75rem;
   margin-bottom: 0.85rem;
   letter-spacing: -0.02em;
 }
 
 .prose-content h3 {
-  font-family: var(--font-libre-bodoni), serif;
-  font-weight: 600;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-weight: 700;
   font-size: 1.4rem;
-  color: #0f1a2e;
+  color: var(--color-text-primary);
   margin-top: 2rem;
   margin-bottom: 0.8rem;
 }
 
 .prose-content p {
-  color: #4a5568;
+  color: var(--color-text-secondary);
   line-height: 1.85;
   margin-top: 1rem;
 }
 
 .prose-content strong {
-  color: #0f1a2e;
+  color: var(--color-text-primary);
   font-weight: 600;
 }
 
@@ -155,7 +165,7 @@ h6 {
   list-style-type: disc;
   padding-left: 1.25rem;
   margin-top: 1rem;
-  color: #4a5568;
+  color: var(--color-text-secondary);
 }
 
 .prose-content li {
@@ -164,9 +174,9 @@ h6 {
 }
 
 .prose-content a {
-  color: #0f1a2e;
+  color: var(--color-text-primary);
   text-decoration: underline;
-  text-decoration-color: rgba(184, 134, 11, 0.7);
+  text-decoration-color: rgba(13, 148, 136, 0.8);
 }
 
 @keyframes fadeUp {

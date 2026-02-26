@@ -7,7 +7,6 @@ export interface PricingTier {
   features: string[];
   cta: string;
   popular?: boolean;
-  badge?: string;
 }
 
 export interface FAQ {
@@ -20,8 +19,9 @@ export const pricingTiers: PricingTier[] = [
     name: "AI Readiness Audit",
     price: "$15K",
     period: "one-time",
-    timeline: "4 weeks",
-    description: "A comprehensive diagnostic to assess your AI readiness and identify the highest-impact opportunities.",
+    timeline: "2 weeks",
+    description:
+      "A rapid diagnostic to assess your AI readiness and identify the highest-impact opportunities.",
     features: [
       "Stakeholder interviews with leadership and key operators",
       "Process mapping of core workflows",
@@ -34,10 +34,11 @@ export const pricingTiers: PricingTier[] = [
   },
   {
     name: "Performance Sprint",
-    price: "$50K\u2013$100K",
+    price: "$50K–$100K",
     period: "one-time",
-    timeline: "6\u20138 weeks",
-    description: "An intensive engagement to diagnose, build, and deploy AI solutions that drive measurable results.",
+    timeline: "6–8 weeks",
+    description:
+      "An intensive engagement to diagnose, build, and deploy AI solutions that drive measurable results.",
     features: [
       "Process mining and operational diagnostics",
       "Top-3 opportunity deep-dives with business cases",
@@ -55,45 +56,70 @@ export const pricingTiers: PricingTier[] = [
     price: "$15K",
     period: "/month",
     timeline: "Ongoing",
-    description: "Continuous AI expertise embedded in your business \u2014 new agents, optimization, and strategic guidance. You own everything we build.",
+    description:
+      "Continuous AI expertise embedded in your business — new agents, optimization, and strategic guidance.",
     features: [
       "20+ hours of senior AI expertise per month",
-      "1\u20132 new AI agents built and deployed monthly",
+      "1–2 new AI agents built and deployed monthly",
       "Continuous optimization of existing solutions",
       "Weekly strategy sessions with leadership",
       "Priority support and rapid iteration",
       "Quarterly business impact reviews",
-      "Full code ownership and documentation",
+      "Access to ClearForge agent library",
     ],
     cta: "Start Retainer",
-    badge: "You own the code",
-  },
-  {
-    name: "Managed AI Services",
-    price: "Custom",
-    period: "/month",
-    timeline: "Ongoing",
-    description: "ClearForge builds, owns, and maintains AI applications and agents for your business. You get best-in-class tools on a subscription \u2014 without the overhead of owning the infrastructure.",
-    features: [
-      "ClearForge-built AI agents tailored to your workflows",
-      "Fully managed hosting, monitoring, and maintenance",
-      "Monthly retraining and optimization on your data",
-      "No engineering team required on your end",
-      "SLA-backed uptime and performance guarantees",
-      "Scale up or down as needs evolve",
-      "Predictable monthly cost, no surprise invoices",
-    ],
-    cta: "Learn More",
-    badge: "We run it for you",
   },
 ];
 
 export const faqs: FAQ[] = [
-  { question: "How do I know which package is right for my business?", answer: "Start with the AI Readiness Audit if you're unsure where to begin. It gives you a clear picture of your current state and a prioritized roadmap. If you already know your highest-impact opportunity, a Performance Sprint gets you to a working solution in 6\u20138 weeks. For ongoing development, choose between the Retainer (you own the code) or Managed Services (we run it for you) based on your team's capacity." },
-  { question: "What's the difference between the Retainer and Managed Services?", answer: "With the Retainer, we build AI solutions and transfer full ownership to you \u2014 code, documentation, and all. Your team maintains it. With Managed Services, ClearForge builds, hosts, and maintains the AI applications. You get the results without the engineering overhead. Both models include continuous optimization." },
-  { question: "What's included in the discovery call?", answer: "A 30-minute conversation where we learn about your business, current challenges, and goals. We'll give you an honest assessment of whether AI can help and which engagement makes sense. No pitch decks, no pressure." },
-  { question: "Do you work with companies of any size?", answer: "We focus on mid-market and lower-middle-market companies, PE portfolio companies, and owner-led businesses. That includes companies with $2M-$15M seller earnings where owners are planning succession or exit." },
-  { question: "How quickly can we see results?", answer: "Most clients see measurable results within 90 days. The AI Readiness Audit delivers a roadmap in 4 weeks. Performance Sprints produce working solutions in 6\u20138 weeks." },
-  { question: "Who actually does the work?", answer: "Senior operators \u2014 the same people who scope your engagement are the ones who deliver it. No bait-and-switch with junior consultants." },
-  { question: "What's your payment structure?", answer: "Audits and Sprints are billed 50% upfront, 50% on completion. Retainers and Managed Services are billed monthly. We're flexible on structure for larger engagements." },
+  {
+    question: "How do I know which package is right for my business?",
+    answer:
+      "Start with the AI Readiness Audit if you're unsure where to begin. It gives you a clear picture of your current state and a prioritized roadmap. If you already know your highest-impact opportunity, a Performance Sprint gets you to a working solution in 6–8 weeks. The Retainer is for companies ready for continuous AI development.",
+  },
+  {
+    question: "What's included in the discovery call?",
+    answer:
+      "A 30-minute conversation where we learn about your business, current challenges, and goals. We'll give you an honest assessment of whether AI can help and which engagement makes sense. No pitch decks, no pressure — just a straightforward conversation.",
+  },
+  {
+    question: "Do you work with companies of any size?",
+    answer:
+      "We focus on mid-market companies ($5M–$500M revenue) and PE portfolio companies. Our approach is designed for organizations large enough to benefit from AI but agile enough to move quickly.",
+  },
+  {
+    question: "What industries do you serve?",
+    answer:
+      "We work across industries including manufacturing, professional services, B2B software, healthcare, and financial services. Our methodology is industry-agnostic — we focus on the business processes and data patterns that drive results.",
+  },
+  {
+    question: "How quickly can we see results?",
+    answer:
+      "Most clients see measurable results within 90 days. The AI Readiness Audit delivers a roadmap in 2 weeks. Performance Sprints produce working solutions in 6–8 weeks. Quick wins identified during the Audit can often be implemented immediately.",
+  },
+  {
+    question: "Do you replace our existing tech stack?",
+    answer:
+      "No. We build on top of your existing tools and infrastructure. Our solutions integrate with your CRM, ERP, data warehouse, and other systems. We're additive, not disruptive.",
+  },
+  {
+    question: "Who actually does the work?",
+    answer:
+      "Senior operators — the same people who scope your engagement are the ones who deliver it. No bait-and-switch with junior consultants. You get experienced professionals with dual expertise in business strategy and AI engineering.",
+  },
+  {
+    question: "What happens after the engagement ends?",
+    answer:
+      "Everything we build is yours. We include comprehensive documentation and team training so you can maintain and extend solutions independently. Many clients continue with a Retainer for ongoing development, but it's never required.",
+  },
+  {
+    question: "Can you scope a custom engagement?",
+    answer:
+      "Absolutely. Our packages cover the most common needs, but we regularly design custom engagements for larger or more complex projects. Book a discovery call and we'll scope something that fits.",
+  },
+  {
+    question: "What's your payment structure?",
+    answer:
+      "Audits and Sprints are billed 50% upfront, 50% on completion. Retainers are billed monthly. We're flexible on structure for larger engagements — the goal is to align incentives around results.",
+  },
 ];

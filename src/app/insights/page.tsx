@@ -1,5 +1,5 @@
 import { createMetadata } from "@/lib/metadata";
-import { InsightsPage } from "@/components/pages/insights-page";
+import { InsightsPageClient } from "@/components/pages/insights-page";
 
 export const metadata = createMetadata({
   title: "Insights — AI Strategy, Performance Improvement, and Value Creation",
@@ -8,5 +8,5 @@ export const metadata = createMetadata({
 });
 
 export default function Page() {
-  return <InsightsPage />;
+  return <InsightsPageClient />;
 }

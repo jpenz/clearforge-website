@@ -1,50 +1,93 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Target, TrendingUp, DollarSign, Clock } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 
-const results = [
-  { metric: "1,060", label: "Qualified opportunities identified", context: "Fortune 1000 manufacturer", icon: Target },
-  { metric: "10%", label: "Average EBITDA improvement", context: "PE portfolio companies", icon: TrendingUp },
-  { metric: "$240K", label: "Annual cost savings", context: "Process automation", icon: DollarSign },
-  { metric: "90 days", label: "Time to measurable impact", context: "All engagements", icon: Clock },
+const metrics = [
+  { value: 30, suffix: "%", label: "Pipeline Increase" },
+  { value: 10, suffix: "%", label: "EBITDA Improvement" },
+  { value: 90, suffix: "-Day", label: "Time to ROI" },
+  { value: 240, prefix: "$", suffix: "K", label: "Average Savings" },
 ];
 
-export function Results() {
+function AnimatedCounter({
+  value,
+  prefix = "",
+  suffix = "",
+  inView,
+}: {
+  value: number;
+  prefix?: string;
+  suffix?: string;
+  inView: boolean;
+}) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const duration = 2000;
+    const increment = value / (duration / 16);
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= value) {
+        setCount(value);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 16);
+    return () => clearInterval(timer);
+  }, [inView, value]);
+
   return (
-    <section className="bg-white py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <span className="text-5xl font-bold text-text-primary sm:text-6xl">
+      {prefix}
+      {count}
+      {suffix}
+    </span>
+  );
+}
+
+export function Results() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <section className="py-20" ref={ref}>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          className="mx-auto max-w-2xl text-center"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="mb-16 text-center"
         >
-          <span className="section-label">Results</span>
-          <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            Numbers, not narratives.
+          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+            Results That Speak
           </h2>
+          <p className="mt-4 text-text-secondary">
+            Across engagements, our clients see measurable impact.
+          </p>
         </motion.div>
 
-        <div className="grid gap-0 grid-cols-2 lg:grid-cols-4 border border-gray-200 rounded-lg overflow-hidden">
-          {results.map((item, i) => (
+        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {metrics.map((metric, i) => (
             <motion.div
-              key={item.label}
-              initial={{ opacity: 0, y: 16 }}
+              key={metric.label}
+              className="text-center"
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.08 * i }}
-              className={`p-6 lg:p-8 text-center ${i < results.length - 1 ? "border-r border-gray-200" : ""} ${i < 2 ? "border-b border-gray-200 lg:border-b-0" : ""}`}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <div className="flex justify-center mb-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal/10">
-                  <item.icon className="h-5 w-5 text-teal" />
-                </div>
-              </div>
-              <div className="metric-display text-3xl lg:text-4xl">{item.metric}</div>
-              <p className="mt-2 text-base font-medium text-slate-700">{item.label}</p>
-              <p className="mt-1 text-base text-slate-500">{item.context}</p>
+              <AnimatedCounter
+                value={metric.value}
+                prefix={metric.prefix}
+                suffix={metric.suffix}
+                inView={inView}
+              />
+              <p className="mt-2 text-text-secondary">{metric.label}</p>
             </motion.div>
           ))}
         </div>

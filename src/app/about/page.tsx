@@ -1,5 +1,5 @@
 import { createMetadata } from "@/lib/metadata";
-import { AboutPage } from "@/components/pages/about-page";
+import { AboutPageClient } from "@/components/pages/about-page";
 
 export const metadata = createMetadata({
   title: "About ClearForge — Strategy Meets AI Engineering",
@@ -8,5 +8,5 @@ export const metadata = createMetadata({
 });
 
 export default function Page() {
-  return <AboutPage />;
+  return <AboutPageClient />;
 }

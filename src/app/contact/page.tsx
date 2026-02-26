@@ -1,5 +1,5 @@
 import { createMetadata } from "@/lib/metadata";
-import { ContactPage } from "@/components/pages/contact-page";
+import { ContactPageClient } from "@/components/pages/contact-page";
 
 export const metadata = createMetadata({
   title: "Contact ClearForge — Book a Discovery Call",
@@ -8,5 +8,5 @@ export const metadata = createMetadata({
 });
 
 export default function Page() {
-  return <ContactPage />;
+  return <ContactPageClient />;
 }

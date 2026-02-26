@@ -1,5 +1,5 @@
 import { createMetadata } from "@/lib/metadata";
-import { ServicesPage } from "@/components/pages/services-page";
+import { ServicesPageClient } from "@/components/pages/services-page";
 
 export const metadata = createMetadata({
   title: "Services — AI Operating Systems for CEOs, PE Teams, and Owner-Led Businesses",
@@ -8,5 +8,5 @@ export const metadata = createMetadata({
 });
 
 export default function Page() {
-  return <ServicesPage />;
+  return <ServicesPageClient />;
 }

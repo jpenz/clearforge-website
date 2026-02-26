@@ -1,5 +1,5 @@
 import { createMetadata } from "@/lib/metadata";
-import { PricingPage } from "@/components/pages/pricing-page";
+import { PricingPageClient } from "@/components/pages/pricing-page";
 
 export const metadata = createMetadata({
   title: "Pricing — AI Readiness Audit, Performance Sprint, Retainer, Managed Services",
@@ -8,5 +8,5 @@ export const metadata = createMetadata({
 });
 
 export default function Page() {
-  return <PricingPage />;
+  return <PricingPageClient />;
 }
