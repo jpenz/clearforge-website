@@ -161,6 +161,14 @@ export default function Home() {
               <Link href="/assessment">Start AI Assessment</Link>
             </Button>
           </div>
+          <div className="mt-4 flex flex-wrap items-center gap-4 text-sm">
+            <a href="mailto:james@clearforge.ai" className="font-medium text-blue hover:text-emerald">
+              Email james@clearforge.ai
+            </a>
+            <Link href="/contact" className="font-medium text-text-secondary hover:text-text-primary">
+              Prefer a call? Send your details and we will reach out.
+            </Link>
+          </div>
           <div className="mt-10 flex flex-wrap gap-3">
             {proof.map((item) => (
               <span key={item} className="rounded-full border border-border bg-surface px-4 py-2 text-sm text-text-secondary">
