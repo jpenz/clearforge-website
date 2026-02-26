@@ -98,7 +98,7 @@ export function AssessmentPage() {
       "Scoring AI readiness across your operating pillars...",
       "Researching your company and market context...",
       "Mapping best-in-class patterns for your industry...",
-      "Building your CLOSER strategy report...",
+      "Building your leadership strategy report...",
       "Preparing branded deliverables and email copy...",
     ],
     [],
@@ -207,11 +207,11 @@ export function AssessmentPage() {
         <span className="section-label">AI Readiness & Opportunity Assessment</span>
         <h1 className="mt-4 text-4xl font-bold text-text sm:text-5xl">One assessment. One strategy. One execution path.</h1>
         <p className="mt-4 max-w-3xl text-lg text-text-secondary">
-          We combine readiness scoring, company research, industry best-practice benchmarking, and a CLOSER sales strategy report in a
+          We combine readiness scoring, company research, industry best-practice benchmarking, and a sales-ready strategy report in a
           single workflow.
         </p>
         <p className="mt-3 max-w-3xl text-base text-text-tertiary">
-          We start by Clarifying and Labeling your real bottleneck in your words, then translate it into an execution plan leadership can act on.
+          We start with your real bottleneck in your own words, then translate it into an execution plan leadership can act on.
         </p>
 
         {phase === "questions" && (
@@ -263,7 +263,7 @@ export function AssessmentPage() {
               We use this to personalize the report and benchmark to your exact operating environment.
             </p>
             <p className="mt-1 text-sm text-text-tertiary">
-              Use plain language in the pain-point field. We will mirror your words in the CLOSER report.
+              Use plain language in the pain-point field. We will mirror your words in the strategy report.
             </p>
 
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -366,7 +366,7 @@ export function AssessmentPage() {
         {phase === "loading" && (
           <div className="mt-10 rounded-xl border border-border bg-surface p-6 sm:p-8">
             <h2 className="text-2xl font-bold text-text">Building your full assessment...</h2>
-            <p className="mt-2 text-text-secondary">This includes scoring, company research, industry benchmarks, and your CLOSER report.</p>
+            <p className="mt-2 text-text-secondary">This includes scoring, company research, industry benchmarks, and your strategy report.</p>
 
             <div className="mt-6 space-y-3">
               {processingSteps.map((step, index) => {
@@ -406,7 +406,7 @@ export function AssessmentPage() {
             </div>
 
             <div className="rounded-xl border border-border bg-white p-6 sm:p-8">
-              <h2 className="text-2xl font-bold text-text">CLOSER strategy report</h2>
+              <h2 className="text-2xl font-bold text-text">Strategy report</h2>
               <div className="mt-4 rounded-lg border border-border bg-surface p-6">
                 <MarkdownContent markdown={result.closerReport} />
               </div>
@@ -458,7 +458,7 @@ export function AssessmentPage() {
         <div className="mt-10 grid gap-3 text-sm text-text-tertiary sm:grid-cols-3">
           <div className="inline-flex items-center gap-2">
             <User2 className="h-4 w-4 text-teal" />
-            Uses your exact words for problem labeling
+            Uses your exact words for problem definition
           </div>
           <div className="inline-flex items-center gap-2">
             <Building2 className="h-4 w-4 text-teal" />

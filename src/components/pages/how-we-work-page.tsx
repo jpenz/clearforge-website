@@ -13,9 +13,6 @@ export function HowWeWorkPage() {
           <p className="mt-6 max-w-3xl text-lg text-white/80">
             ClearForge engagements are scoped around your operating priorities, timeline, and internal capacity. We focus on measurable business outcomes and practical adoption.
           </p>
-          <p className="mt-4 max-w-3xl text-base text-white/70">
-            Our operating language follows CLOSER: Clarify and Label first, then Overview, outcome vision, concern handling, and reinforced execution.
-          </p>
         </div>
       </section>
 

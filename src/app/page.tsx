@@ -57,15 +57,13 @@ const frameworkCards = [
 const transformationJourney = [
   {
     stage: "UNDERSTAND" as const,
-    closer: "Clarify + Label",
     title: "Find the value and name the real bottleneck",
-    text: "We clarify growth goals, label the pain in your own language, and quantify where EBITDA leakage is happening.",
+    text: "We define growth goals, capture the pain in your own language, and quantify where performance is leaking.",
     outcome: "Decision-ready strategy, not generic AI advice.",
     icon: Compass,
   },
   {
     stage: "BUILD" as const,
-    closer: "Overview + Design",
     title: "Redesign workflows and build controlled AI systems",
     text: "We review what was already tried, identify what failed, and build practical AI workflows with your operators.",
     outcome: "Working systems with owners, controls, and KPI baselines.",
@@ -73,7 +71,6 @@ const transformationJourney = [
   },
   {
     stage: "OPERATE" as const,
-    closer: "Sell + Explain + Reinforce",
     title: "Run, optimize, and reinforce adoption",
     text: "We turn early wins into operating rhythm, handle adoption concerns with proof, and reinforce execution discipline.",
     outcome: "Compounding gains in throughput, margin, and leadership confidence.",
@@ -211,16 +208,13 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">How We Transform Your Company, Step by Step</h2>
           <p className="mt-4 max-w-3xl text-lg text-text-secondary">
-            A linear path from strategy to build to operation, framed in CLOSER language and tied to business outcomes.
+            A linear path from strategy to build to operation, tied to business outcomes and operating discipline.
           </p>
           <div className="mt-8 grid gap-6 lg:grid-cols-3">
             {transformationJourney.map((step, index) => (
               <article key={step.stage} className="relative rounded-xl border border-border bg-white p-6">
                 <step.icon className="mb-4 h-9 w-9 text-blue" aria-hidden />
-                <div className="flex items-center justify-between">
-                  <p className="text-xs font-semibold text-blue">{step.stage}</p>
-                  <p className="text-xs font-semibold text-emerald">{step.closer}</p>
-                </div>
+                <p className="text-xs font-semibold text-blue">{step.stage}</p>
                 <h3 className="mt-3 text-xl font-bold text-text-primary">{step.title}</h3>
                 <p className="mt-3 text-base text-text-secondary">{step.text}</p>
                 <p className="mt-3 text-sm font-medium text-blue">{step.outcome}</p>

@@ -141,7 +141,7 @@ export default function AssessmentReportPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal">ClearForge.ai</p>
               <h1 className="mt-2 text-3xl font-bold text-text">AI Readiness & Opportunity Report</h1>
               <p className="mt-2 text-sm text-text-secondary">
-                CLOSER framework strategy plan for leadership decision and execution alignment.
+                Strategy plan for leadership decision and execution alignment.
               </p>
             </div>
             <div className="rounded-lg border border-border bg-surface px-4 py-3 text-right text-sm text-text-secondary">
@@ -202,7 +202,7 @@ export default function AssessmentReportPage() {
         </section>
 
         <section className="report-prose mt-8">
-          <h2 className="text-2xl font-bold text-text">CLOSER Strategy Plan</h2>
+          <h2 className="text-2xl font-bold text-text">Strategy Plan</h2>
           <div className="mt-4 rounded-xl border border-border bg-white p-6">
             <MarkdownContent markdown={report.closerReport} />
           </div>

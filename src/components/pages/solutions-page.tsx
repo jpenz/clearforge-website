@@ -10,12 +10,6 @@ const stageSubhead: Record<(typeof journeyStages)[number], string> = {
   OPERATE: "Run and improve AI workflows as a managed capability.",
 };
 
-const stageCloser: Record<(typeof journeyStages)[number], string> = {
-  UNDERSTAND: "CLOSER focus: Clarify + Label",
-  BUILD: "CLOSER focus: Overview + practical execution design",
-  OPERATE: "CLOSER focus: Sell the outcome, Explain concerns, Reinforce decisions",
-};
-
 export function SolutionsPage() {
   return (
     <>
@@ -26,9 +20,6 @@ export function SolutionsPage() {
           <p className="mt-6 max-w-3xl text-lg text-text-secondary">
             ClearForge follows a practical transformation path: <strong>UNDERSTAND</strong> where value is,
             <strong> BUILD</strong> production systems, then <strong>OPERATE</strong> and optimize for compounding returns.
-          </p>
-          <p className="mt-3 max-w-3xl text-base text-text-tertiary">
-            We use CLOSER language throughout delivery so leaders and operators align quickly on what matters and what to do next.
           </p>
         </div>
       </section>
@@ -48,7 +39,6 @@ export function SolutionsPage() {
                     <div>
                       <p className="section-label">{stage}</p>
                       <h2 className="mt-2 text-2xl font-bold text-text">{stageSubhead[stage]}</h2>
-                      <p className="mt-2 text-sm font-medium text-teal">{stageCloser[stage]}</p>
                     </div>
                   </div>
                   <div className="grid gap-5 md:grid-cols-2">

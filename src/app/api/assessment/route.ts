@@ -211,22 +211,22 @@ function buildFallbackCloser(params: {
     ? `${params.company} appears to operate with real pressure to move faster while staying reliable in ${params.industry}.`
     : `This guidance is based on your assessment responses and common ${params.industry} patterns because no website research was provided.`;
 
-  return `## Clarify Why You Are Here
+  return `## Why This Matters Now
 You are here because "${params.challenge}" is now blocking growth and execution quality. ${researchSentence} Your score (${params.scorecard.compositeScore}/100) shows this is solvable, but it needs an operating plan, not another pilot.
 
-## Label the Problem
+## The Core Problem
 The core issue is not access to AI tools. The issue is a strategy-to-execution gap where process design, team habits, and system readiness are misaligned. The result is effort without compounding business value.
 
-## Overview Past Attempts
+## What You've Already Tried
 Most teams in this position have tested disconnected tools, generated local wins, and then hit adoption stalls. This pattern often happens when ownership is split and workflow redesign is treated as an afterthought. Your readiness profile points to this same risk if the next move is not integrated.
 
-## Sell the Vacation (Outcome Vision)
+## What Best-in-Class Looks Like
 Best-in-class in ${params.industry} looks like disciplined execution with AI embedded in daily workflows, not novelty use cases. In 12 months, this means faster cycle times, clearer decision ownership, and measurable KPI lift with less operational drag. ${params.industryBestInClass}
 
-## Explain Away Concerns
+## Concerns and How to Handle Them
 Concern: "Will this become a long consulting project?" Micro-story: A portfolio operations team started with one workflow, measured weekly, and expanded only after metrics proved lift. Concern: "Will our team adopt this?" Micro-story: A services firm paired workflow redesign with role-level training and adoption exceeded prior software rollouts in one quarter.
 
-## Reinforce the Decision
+## Recommended Next Decision
 You have enough signal to act with confidence and without overcommitting. The right next step is a ${params.suggestedEngagement}. This gives you a focused 90-day execution path with clear owners, metrics, and checkpoints.`;
 }
 
@@ -247,13 +247,13 @@ async function generateCloserReport(params: {
   }
 
   const systemPrompt = `You are a senior ClearForge advisor writing a sales-driven AI readiness plan.
-Follow the CLOSER framework exactly with these section headings:
-## Clarify Why You Are Here
-## Label the Problem
-## Overview Past Attempts
-## Sell the Vacation (Outcome Vision)
-## Explain Away Concerns
-## Reinforce the Decision
+Write in six sections with these exact headings:
+## Why This Matters Now
+## The Core Problem
+## What You've Already Tried
+## What Best-in-Class Looks Like
+## Concerns and How to Handle Them
+## Recommended Next Decision
 
 Style rules:
 - Use the prospect's own pain-point wording verbatim at least twice
@@ -279,7 +279,7 @@ Company research: ${params.companyResearch}
 Industry best-in-class benchmark: ${params.industryBestInClass}
 Recommended engagement: ${params.suggestedEngagement}
 
-Write the full CLOSER report in markdown with the exact headings above.`;
+Write the full strategy report in markdown with the exact headings above.`;
 
   const models = ["llama-3.3-70b-versatile", "llama-3.1-70b-versatile"];
 
