@@ -61,7 +61,7 @@ export function ScorecardForm() {
       await fetch("/api/scorecard", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ answers, results }),
+        body: JSON.stringify({ answers, results, source: "scorecard-form" }),
       });
     } catch {
       // Non-blocking — results still show even if API fails

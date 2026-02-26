@@ -23,7 +23,8 @@ export function ScorecardPageClient() {
           </h1>
           <p className="mt-4 text-text-secondary">
             Answer 18 questions across 5 key pillars to get your personalized AI
-            readiness score with actionable recommendations.
+            readiness score with actionable recommendations. After your score, add
+            your biggest pain point and website to unlock a tailored 90-day plan.
           </p>
 
           <div className="mt-8 flex flex-col items-center justify-center gap-4 text-sm text-text-muted sm:flex-row sm:gap-6">

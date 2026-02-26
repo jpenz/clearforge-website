@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MarkdownContent } from "@/components/markdown-content";
 import { ADVISOR_REPORT_STORAGE_KEY, AdvisorReportPayload } from "@/lib/advisor-report";
+import { SCORECARD_LEAD_CONTEXT_KEY, type ScorecardLeadContext } from "@/lib/scorecard-lead-context";
 
 const industries = [
   "Manufacturing",
@@ -27,6 +28,16 @@ interface AdvisorResponse {
   suggestedEngagement: string;
 }
 
+function isScorecardLeadContext(value: unknown): value is ScorecardLeadContext {
+  if (!value || typeof value !== "object") return false;
+  const data = value as Partial<ScorecardLeadContext>;
+  return (
+    typeof data.email === "string" &&
+    typeof data.challenge === "string" &&
+    data.source === "scorecard-results"
+  );
+}
+
 function validateEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -37,6 +48,7 @@ function isHttpUrl(url: string): boolean {
 
 export function AdvisorPage() {
   const [step, setStep] = useState(1);
+  const [prefillNotice, setPrefillNotice] = useState(false);
 
   const [industry, setIndustry] = useState("");
   const [challenge, setChallenge] = useState("");
@@ -84,6 +96,39 @@ export function AdvisorPage() {
 
     return () => window.clearInterval(timer);
   }, [step, submitting, processingSteps.length]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const raw = window.sessionStorage.getItem(SCORECARD_LEAD_CONTEXT_KEY);
+    if (!raw) {
+      return;
+    }
+
+    try {
+      const parsed = JSON.parse(raw) as unknown;
+      if (!isScorecardLeadContext(parsed)) {
+        return;
+      }
+
+      const normalizedChallenge = parsed.challenge.trim();
+      const normalizedCompanyUrl = parsed.companyUrl?.trim();
+      const normalizedEmail = parsed.email.trim();
+      const normalizedCompany = parsed.company?.trim();
+
+      setChallenge((current) => (current.trim() || !normalizedChallenge ? current : normalizedChallenge));
+      setCompanyUrl((current) => (current.trim() || !normalizedCompanyUrl ? current : normalizedCompanyUrl));
+      setEmail((current) => (current.trim() || !normalizedEmail ? current : normalizedEmail));
+      setCompany((current) => (current.trim() || !normalizedCompany ? current : normalizedCompany));
+
+      setPrefillNotice(true);
+      window.sessionStorage.removeItem(SCORECARD_LEAD_CONTEXT_KEY);
+    } catch {
+      // Ignore invalid stored payloads.
+    }
+  }, []);
 
   async function submitAdvisor() {
     if (!industry || !challengeValid || !leadDetailsValid || !companyUrlValid) {
@@ -179,6 +224,11 @@ export function AdvisorPage() {
         <span className="section-label">AI Advisor</span>
         <h1 className="mt-4 text-4xl font-bold text-text sm:text-5xl">Get your AI recommendation in five guided steps.</h1>
         <p className="mt-4 text-lg text-text-secondary">Structured input, consultant-level output, and a printable strategy report.</p>
+        {prefillNotice && (
+          <div className="mt-4 rounded-lg border border-teal/30 bg-teal/5 px-4 py-3 text-sm text-text-secondary">
+            We prefilled your challenge and contact details from the scorecard.
+          </div>
+        )}
 
         <div className="mt-8 h-2 overflow-hidden rounded-full bg-border">
           <div className="h-full rounded-full bg-teal transition-all duration-300" style={{ width: `${(progressStep / 5) * 100}%` }} />
