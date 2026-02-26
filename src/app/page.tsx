@@ -165,8 +165,11 @@ export default function Home() {
             <a href="mailto:james@clearforge.ai" className="font-medium text-blue hover:text-emerald">
               Email james@clearforge.ai
             </a>
+            <a href="tel:+12489637440" className="font-medium text-blue hover:text-emerald">
+              Call (248) 963-7440
+            </a>
             <Link href="/contact" className="font-medium text-text-secondary hover:text-text-primary">
-              Prefer a call? Send your details and we will reach out.
+              Prefer we call you? Send your details and we will reach out.
             </Link>
           </div>
           <div className="mt-10 flex flex-wrap gap-3">

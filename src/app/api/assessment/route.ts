@@ -390,7 +390,7 @@ async function sendAssessmentEmails(params: {
     <hr style="border:none;border-top:1px solid #e2e8f0;margin:28px 0;" />
     <p style="margin:0;color:#64748b;font-size:12px;line-height:1.6;">
       ClearForge.ai · Strategy that ships. AI that performs.<br/>
-      Contact: james@clearforge.ai · https://clearforge.ai/contact
+      Contact: james@clearforge.ai · (248) 963-7440 · https://clearforge.ai/contact
     </p>
   `;
 
