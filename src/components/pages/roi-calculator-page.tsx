@@ -376,7 +376,7 @@ export function ROICalculatorPageClient() {
               </Link>
             </Button>
             <Button size="xl" variant="secondary" asChild>
-              <Link href="/scorecard">Take AI Scorecard</Link>
+              <Link href="/assessment">Start AI Assessment</Link>
             </Button>
           </div>
         </motion.div>

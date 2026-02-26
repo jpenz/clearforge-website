@@ -14,12 +14,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/solutions`, lastModified, changeFrequency: "weekly", priority: 0.92 },
     { url: `${siteUrl}/industries`, lastModified, changeFrequency: "weekly", priority: 0.88 },
     { url: `${siteUrl}/how-we-work`, lastModified, changeFrequency: "monthly", priority: 0.86 },
-    { url: `${siteUrl}/advisor`, lastModified, changeFrequency: "weekly", priority: 0.9 },
     { url: `${siteUrl}/insights`, lastModified, changeFrequency: "weekly", priority: 0.82 },
     { url: `${siteUrl}/case-studies`, lastModified, changeFrequency: "monthly", priority: 0.82 },
     { url: `${siteUrl}/about`, lastModified, changeFrequency: "monthly", priority: 0.74 },
     { url: `${siteUrl}/contact`, lastModified, changeFrequency: "monthly", priority: 0.74 },
-    { url: `${siteUrl}/scorecard`, lastModified, changeFrequency: "monthly", priority: 0.76 },
     { url: `${siteUrl}/privacy`, lastModified, changeFrequency: "yearly", priority: 0.3 },
     { url: `${siteUrl}/terms`, lastModified, changeFrequency: "yearly", priority: 0.3 },
   ];

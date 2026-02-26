@@ -211,6 +211,9 @@ export default function Home() {
           <p className="mt-4 max-w-3xl text-lg text-text-secondary">
             We redesign workflows and upgrade workforce capability at the same time. This is how companies move from pilots to reliable business outcomes.
           </p>
+          <p className="mt-3 max-w-3xl text-base text-text-tertiary">
+            We do not automate broken processes. We simplify workflow debt first, then layer AI and feedback loops so performance keeps improving.
+          </p>
           <ol className="mt-10 grid gap-6 md:grid-cols-4">
             {frameworkCards.map((item, index) => (
               <li key={item.phase} className="relative h-full">
@@ -376,9 +379,6 @@ export default function Home() {
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
               <Link href="/contact">Book a Discovery Call</Link>
-            </Button>
-            <Button size="lg" variant="outline" className="border-white/25 text-white hover:bg-white hover:text-text-primary" asChild>
-              <Link href="/scorecard">Take the AI Maturity Scorecard</Link>
             </Button>
             <Button size="lg" variant="outline" className="border-blue text-blue hover:bg-blue hover:text-white" asChild>
               <Link href="/assessment">Start AI Assessment</Link>

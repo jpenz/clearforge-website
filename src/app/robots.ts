@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/scorecard/results"],
+      disallow: ["/api/"],
     },
     sitemap: "https://clearforge.ai/sitemap.xml",
   };

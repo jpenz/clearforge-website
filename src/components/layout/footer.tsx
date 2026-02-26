@@ -20,7 +20,7 @@ const footerLinks = {
     { href: "/pricing", label: "Pricing" },
   ],
   Tools: [
-    { href: "/scorecard", label: "AI Readiness Scorecard" },
+    { href: "/assessment", label: "AI Assessment" },
     { href: "/roi-calculator", label: "ROI Calculator" },
     { href: "/contact", label: "Contact" },
   ],
