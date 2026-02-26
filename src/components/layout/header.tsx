@@ -56,7 +56,7 @@ export function Header() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <Button variant="ghost" size="sm" asChild>
-            <Link href="/advisor">AI Advisor</Link>
+            <Link href="/assessment">AI Assessment</Link>
           </Button>
           <Button size="sm" asChild>
             <Link href="/contact">Book a Call</Link>

@@ -86,7 +86,7 @@ export default function Home() {
               <Link href="/contact">Book a Discovery Call</Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="/advisor">Get Your AI Recommendation</Link>
+              <Link href="/assessment">Start AI Assessment</Link>
             </Button>
           </div>
           <div className="mt-10 flex flex-wrap gap-3">
@@ -248,7 +248,7 @@ export default function Home() {
               <Link href="/scorecard">Take the AI Maturity Scorecard</Link>
             </Button>
             <Button size="lg" variant="outline" className="border-blue text-blue hover:bg-blue hover:text-white" asChild>
-              <Link href="/advisor">Get Your AI Recommendation</Link>
+              <Link href="/assessment">Start AI Assessment</Link>
             </Button>
           </div>
         </div>

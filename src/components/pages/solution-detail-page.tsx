@@ -23,7 +23,7 @@ export function SolutionDetailPage({ solution }: Props) {
           <h1 className="mt-3 text-4xl font-bold text-text sm:text-5xl">{solution.headline}</h1>
           <p className="mt-5 max-w-3xl text-lg text-text-secondary">{solution.summary}</p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <Button asChild><Link href="/advisor">Get Your AI Recommendation</Link></Button>
+            <Button asChild><Link href="/assessment">Start AI Assessment</Link></Button>
             <Button variant="outline" asChild><Link href="/contact">Book a Discovery Call</Link></Button>
           </div>
         </div>
@@ -114,7 +114,7 @@ export function SolutionDetailPage({ solution }: Props) {
           <h2 className="text-3xl font-bold text-white">Ready to apply this in your business?</h2>
           <p className="mt-4 text-lg text-white/80">Get a tailored recommendation and an execution path designed for your context.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button size="lg" asChild><Link href="/advisor">Get Your AI Recommendation</Link></Button>
+            <Button size="lg" asChild><Link href="/assessment">Start AI Assessment</Link></Button>
             <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white hover:text-text" asChild><Link href="/contact">Book a Discovery Call</Link></Button>
           </div>
         </div>

@@ -2,10 +2,10 @@ import Link from "next/link";
 
 const footerLinks = {
   Journey: [
+    { href: "/assessment", label: "AI Assessment" },
     { href: "/solutions", label: "Solutions" },
     { href: "/industries", label: "Industries" },
     { href: "/how-we-work", label: "How We Work" },
-    { href: "/advisor", label: "AI Advisor" },
   ],
   Services: [
     { href: "/services/ai-revenue-operations", label: "AI Revenue Operations" },

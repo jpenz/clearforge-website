@@ -70,11 +70,11 @@ export function SolutionsPage() {
         <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">
           <h2 className="text-3xl font-bold text-white">Not sure where to start in the journey?</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
-            Use the AI Advisor to get a tailored recommendation based on your industry, current challenge, and timeline.
+            Use the AI Assessment to score readiness, benchmark your industry, and get a tailored recommendation.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
-              <Link href="/advisor">Get Your AI Recommendation</Link>
+              <Link href="/assessment">Start AI Assessment</Link>
             </Button>
             <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white hover:text-text" asChild>
               <Link href="/contact">Book a Discovery Call</Link>

@@ -54,9 +54,9 @@ export function IndustriesPage() {
       <section className="bg-navy py-20 lg:py-28">
         <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
           <h2 className="text-3xl font-bold text-white">Want a recommendation mapped to your industry context?</h2>
-          <p className="mt-4 text-lg text-white/80">Use the advisor to get a tailored path across solutions, engagement model, and likely time-to-impact.</p>
+          <p className="mt-4 text-lg text-white/80">Use the assessment to get a tailored path across solutions, engagement model, and likely time-to-impact.</p>
           <Button className="mt-8" size="lg" asChild>
-            <Link href="/advisor">Get Your AI Recommendation</Link>
+            <Link href="/assessment">Start AI Assessment</Link>
           </Button>
         </div>
       </section>

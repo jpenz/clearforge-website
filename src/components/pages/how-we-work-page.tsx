@@ -74,7 +74,7 @@ export function HowWeWorkPage() {
               <Link href="/contact">Book a Discovery Call</Link>
             </Button>
             <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white hover:text-text" asChild>
-              <Link href="/advisor">Get Your AI Recommendation</Link>
+              <Link href="/assessment">Start AI Assessment</Link>
             </Button>
           </div>
         </div>

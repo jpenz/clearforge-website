@@ -78,9 +78,9 @@ export function InsightDetailClient({ insight, related }: Props) {
       <section className="bg-navy py-20 lg:py-28">
         <div className="mx-auto max-w-5xl px-6 text-center lg:px-8">
           <h2 className="text-3xl font-bold text-white">Turn insight into execution.</h2>
-          <p className="mt-4 text-lg text-white/80">Use the AI Advisor for a recommendation tailored to your industry and challenge.</p>
+          <p className="mt-4 text-lg text-white/80">Run the AI Assessment for a tailored recommendation and execution path.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button size="lg" asChild><Link href="/advisor">Get Your AI Recommendation</Link></Button>
+            <Button size="lg" asChild><Link href="/assessment">Start AI Assessment</Link></Button>
             <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white hover:text-text" asChild>
               <Link href="/contact">Book a Discovery Call <ArrowRight className="ml-2 h-4 w-4" /></Link>
             </Button>
