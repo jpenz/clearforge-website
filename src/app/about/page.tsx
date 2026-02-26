@@ -3,7 +3,7 @@ import { AboutPage } from "@/components/pages/about-page";
 
 export const metadata = createMetadata({
   title: "About ClearForge — Strategy Meets AI Engineering",
-  description: "ClearForge combines strategy consulting rigor with hands-on AI engineering. We close the gap between AI strategy and AI execution.",
+  description: "ClearForge supports CEOs, PE operating teams, and owner-led businesses with hands-on AI execution that improves operating performance and enterprise value.",
   path: "/about",
 });
 

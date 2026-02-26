@@ -4,21 +4,21 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer rounded-md",
+  "inline-flex items-center justify-center whitespace-nowrap border text-sm font-semibold tracking-wide transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer rounded-none",
   {
     variants: {
       variant: {
-        default: "bg-teal text-white hover:bg-teal-light",
-        secondary: "bg-gray-100 border border-gray-200 text-slate-700 hover:bg-gray-200",
-        outline: "border border-slate-navy text-slate-navy hover:bg-slate-navy hover:text-white",
-        ghost: "text-slate-500 hover:text-slate-navy hover:bg-gray-100",
-        link: "text-teal underline-offset-4 hover:underline",
+        default: "border-midnight bg-midnight text-white hover:bg-charcoal",
+        secondary: "border-fog bg-ivory text-midnight hover:bg-white",
+        outline: "border-midnight bg-transparent text-midnight hover:bg-midnight hover:text-white",
+        ghost: "border-transparent bg-transparent text-stone hover:border-fog hover:bg-ivory hover:text-midnight",
+        link: "border-transparent bg-transparent text-midnight underline-offset-4 hover:underline",
       },
       size: {
         default: "h-11 px-6 py-2",
         sm: "h-9 px-4 text-xs",
         lg: "h-12 px-8 text-base",
-        xl: "h-14 px-10 text-base tracking-wide",
+        xl: "h-14 px-10 text-base tracking-[0.08em]",
         icon: "h-10 w-10",
       },
     },

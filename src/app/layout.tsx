@@ -1,30 +1,8 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { organizationJsonLd } from "@/lib/metadata";
 import "./globals.css";
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-});
-
-const jetbrains = JetBrains_Mono({
-  variable: "--font-jetbrains",
-  subsets: ["latin"],
-  weight: ["500"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://clearforge.ai"),
@@ -33,7 +11,7 @@ export const metadata: Metadata = {
     template: "%s | ClearForge.ai",
   },
   description:
-    "ClearForge combines strategy consulting rigor with hands-on AI engineering to deliver measurable results for mid-market companies and PE portfolio companies.",
+    "ClearForge helps CEOs, PE operating partners, and owner-led companies turn AI into measurable operating performance, including businesses in the $2M-$15M seller-earnings range.",
   openGraph: { type: "website", locale: "en_US", siteName: "ClearForge.ai" },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
@@ -44,13 +22,21 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrains.variable} antialiased`}>
+      <body className="antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:text-midnight"
+        >
+          Skip to content
+        </a>
         <Header />
-        <main id="main-content" className="min-h-screen pt-[72px]">{children}</main>
+        <main id="main-content" className="min-h-screen pt-[72px]">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

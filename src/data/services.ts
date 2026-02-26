@@ -21,7 +21,7 @@ export const services: Service[] = [
       "We conduct deep market studies, competitive landscape analysis, and AI opportunity mapping to build a strategic roadmap that prioritizes the highest-ROI initiatives. This isn't a generic AI maturity assessment. It's a custom strategy built from your market position, your data assets, and your competitive threats.",
     icon: "Search",
     idealClient:
-      "CEOs, COOs, and PE operating partners who need to know where AI fits in their business before committing capital.",
+      "CEOs, COOs, PE operating partners, and owner-led companies ($2M-$15M seller earnings) who need clarity before committing capital.",
     deliverables: [
       "Market and competitive intelligence study",
       "AI opportunity map with ROI projections",
@@ -51,7 +51,7 @@ export const services: Service[] = [
       "We architect and build custom AI systems end-to-end: from data infrastructure and model development to workflow integration and production deployment. Every system is designed around the business outcome it needs to deliver, with built-in measurement from day one.",
     icon: "Rocket",
     idealClient:
-      "Companies with a clear AI opportunity who need senior engineering talent to design, build, and deploy production systems.",
+      "Mid-market and lower-middle-market leadership teams with a clear AI opportunity who need senior talent to design, build, and deploy production systems.",
     deliverables: [
       "System architecture and technical design",
       "Custom AI agents and workflow automation",
@@ -81,7 +81,7 @@ export const services: Service[] = [
       "AI systems depreciate the moment you stop optimizing them. We run continuous operations: model retraining, market monitoring, performance optimization, and proactive improvements. Your AI compounds in value while your team focuses on the business.",
     icon: "BarChart3",
     idealClient:
-      "Companies with deployed AI systems who want continuous optimization without building an in-house AI ops team.",
+      "Companies with deployed AI systems, including founder-led teams near transition, who want continuous optimization without building an in-house AI ops team.",
     deliverables: [
       "Monthly model retraining on fresh data",
       "Continuous market and competitive intelligence monitoring",
@@ -111,7 +111,7 @@ export const services: Service[] = [
       "A structured 4-week diagnostic that evaluates your data maturity, process readiness, team capability, and competitive position. You get a scored assessment across 5 pillars with a specific, prioritized action plan. Low-risk, high-clarity starting point.",
     icon: "Search",
     idealClient:
-      "Business leaders who suspect AI could help but aren't sure where to start or how ready their organization is.",
+      "Business leaders, PE portfolio teams, and 60-year-old owners planning succession who need a low-risk starting point.",
     deliverables: [
       "AI readiness scorecard across 5 pillars",
       "Data maturity and infrastructure evaluation",

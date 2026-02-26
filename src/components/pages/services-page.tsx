@@ -2,100 +2,95 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { services } from "@/data/services";
-import { Search, PenTool, Rocket, BarChart3, Bot, ArrowRight } from "lucide-react";
-
-const iconMap: Record<string, typeof Search> = { Search, PenTool, Rocket, BarChart3, Bot };
 
 export function ServicesPage() {
   return (
     <>
-      {/* Hero */}
       <section className="bg-white py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="max-w-3xl"
+            className="max-w-4xl"
           >
             <span className="section-label">Services</span>
-            <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              AI solutions that deliver <span className="gradient-text">measurable results.</span>
+            <h1 className="mt-4 text-4xl leading-tight text-midnight sm:text-5xl lg:text-6xl">
+              Services designed for measurable operating lift.
             </h1>
-            <p className="mt-6 text-lg text-slate-600">
-              Four MECE service lines mapped to our methodology: Discover, Design, Build, Optimize.
-              Every engagement ties to a business outcome you can measure.
+            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate">
+              Built for CEO teams, PE operating partners, and owner-led businesses in the mid-market and lower
+              middle market. Our service architecture covers the full cycle: identify value, ship systems, and
+              continuously improve results.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Services Detail */}
       {services.map((service, idx) => {
-        const Icon = iconMap[service.icon];
         const isEven = idx % 2 === 0;
+
         return (
-          <section key={service.slug} id={service.slug} className={isEven ? "bg-gray-50 py-24 lg:py-32" : "bg-white py-24 lg:py-32"}>
+          <section
+            key={service.slug}
+            id={service.slug}
+            className={isEven ? "bg-ivory py-24 lg:py-30" : "bg-white py-24 lg:py-30"}
+          >
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.45 }}
               >
-                <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+                <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
                   <div>
-                    <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-teal/10 text-teal">
-                      {Icon && <Icon className="h-5 w-5" />}
-                    </div>
-                    <h2 className="text-3xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                      {service.title}
-                    </h2>
-                    <p className="mt-2 text-lg font-medium text-teal">{service.tagline}</p>
-                    <p className="mt-4 text-lg text-slate-600 leading-relaxed">{service.description}</p>
-                    <p className="mt-4 text-lg text-slate-600"><strong className="text-slate-700">Ideal for:</strong> {service.idealClient}</p>
+                    <p className="section-label">{service.tagline}</p>
+                    <h2 className="mt-4 text-4xl leading-tight text-midnight sm:text-5xl">{service.title}</h2>
+                    <p className="mt-5 text-lg leading-relaxed text-slate">{service.description}</p>
+                    <p className="mt-5 border-l-2 border-brass pl-4 text-sm leading-relaxed text-stone">
+                      Ideal for: {service.idealClient}
+                    </p>
                   </div>
 
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-2 gap-4">
-                      {service.outcomes.map((outcome) => (
-                        <div key={outcome.metric} className="rounded-lg border border-gray-200 bg-white p-5">
-                          <div className="metric-display text-2xl">{outcome.metric}</div>
-                          <p className="mt-1 text-base text-slate-600">{outcome.description}</p>
-                        </div>
-                      ))}
-                    </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    {service.outcomes.map((outcome) => (
+                      <div key={outcome.metric} className="border border-fog bg-white p-5">
+                        <p className="metric-display text-3xl">{outcome.metric}</p>
+                        <p className="mt-1 text-sm leading-relaxed text-slate">{outcome.description}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
                 <div className="mt-12 grid gap-8 lg:grid-cols-2">
-                  <div>
-                    <h3 className="text-lg font-bold text-slate-navy mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>Deliverables</h3>
-                    <ul className="space-y-2">
-                      {service.deliverables.map((d) => (
-                        <li key={d} className="flex items-start gap-2 text-lg text-slate-600">
-                          <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-teal shrink-0" />
-                          {d}
+                  <article className="border border-fog bg-white p-6">
+                    <h3 className="text-2xl text-midnight">Deliverables</h3>
+                    <ul className="mt-4 space-y-2">
+                      {service.deliverables.map((item) => (
+                        <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-slate">
+                          <span className="mt-2 h-1.5 w-1.5 bg-brass" />
+                          <span>{item}</span>
                         </li>
                       ))}
                     </ul>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-slate-navy mb-4" style={{ fontFamily: "var(--font-space-grotesk)" }}>Timeline</h3>
-                    <div className="space-y-3">
+                  </article>
+
+                  <article className="border border-fog bg-white p-6">
+                    <h3 className="text-2xl text-midnight">Timeline</h3>
+                    <div className="mt-4 space-y-3">
                       {service.workflow.map((step) => (
-                        <div key={step.phase} className="flex gap-4 rounded-lg border border-gray-200 bg-white p-4">
-                          <span className="metric-display text-sm whitespace-nowrap">{step.phase}</span>
-                          <div>
-                            <p className="text-base font-semibold text-slate-navy">{step.title}</p>
-                            <p className="text-base text-slate-600">{step.description}</p>
-                          </div>
+                        <div key={step.phase} className="border border-fog bg-ivory p-4">
+                          <p className="text-xs uppercase tracking-[0.12em] text-brass">{step.phase}</p>
+                          <p className="mt-1 text-base font-semibold text-midnight">{step.title}</p>
+                          <p className="mt-1 text-sm leading-relaxed text-slate">{step.description}</p>
                         </div>
                       ))}
                     </div>
-                  </div>
+                  </article>
                 </div>
               </motion.div>
             </div>
@@ -103,22 +98,21 @@ export function ServicesPage() {
         );
       })}
 
-      {/* CTA */}
-      <section className="bg-slate-navy py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            Not sure which service fits?
-          </h2>
-          <p className="mt-4 text-lg text-slate-200 max-w-xl mx-auto">
-            Start with a 30-minute discovery call. We&apos;ll assess your situation and
-            recommend the right approach.
+      <section className="bg-midnight py-24 lg:py-30">
+        <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">
+          <h2 className="text-4xl leading-tight text-white sm:text-5xl">Need help selecting the right starting point?</h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-200">
+            We&apos;ll map your situation to the right starting point, including succession-sensitive plans for
+            owner-led companies with $2M-$15M seller earnings.
           </p>
-          <div className="mt-8 flex justify-center gap-4 flex-wrap">
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button size="lg" asChild>
               <Link href="/contact">Book a Discovery Call</Link>
             </Button>
-            <Button variant="outline" size="lg" className="border-slate-400 text-white hover:bg-white hover:text-slate-navy" asChild>
-              <Link href="/pricing">View Pricing <ArrowRight className="ml-2 h-4 w-4" /></Link>
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-midnight" asChild>
+              <Link href="/pricing">
+                View Pricing <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
           </div>
         </div>

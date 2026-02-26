@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { createMetadata } from "@/lib/metadata";
-import { getInsight, insights, getRelatedInsights, formatDate } from "@/data/insights";
+import { getInsight, insights, getRelatedInsights } from "@/data/insights";
 import { InsightDetailClient } from "@/components/insight-detail";
 
 interface Props {

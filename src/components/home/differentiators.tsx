@@ -1,68 +1,81 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code, TrendingUp, RefreshCw, Shield } from "lucide-react";
 
-const items = [
+const differentiators = [
   {
-    icon: Code,
-    title: "We Build, Not Just Advise",
-    description: "The people who scope your engagement are the same people who deliver it. Strategy and engineering in the same team, not handed off to juniors.",
+    title: "Senior Team, End to End",
+    detail:
+      "The people in discovery are the people in delivery. No handoff to junior execution layers.",
   },
   {
-    icon: TrendingUp,
-    title: "Tied to Business Outcomes",
-    description: "Every engagement maps to a KPI you care about. If we can't draw a line from the solution to a financial metric, we don't build it.",
+    title: "KPI-Backed Scope",
+    detail:
+      "Every workstream maps to a measured business outcome before build begins.",
   },
   {
-    icon: RefreshCw,
-    title: "Continuous, Not Static",
-    description: "Our AI systems learn and improve monthly. Models retrained on real data compound in value. The gap between you and your competitors widens every cycle.",
+    title: "Boardroom Clarity",
+    detail:
+      "Transparent pricing, explicit milestones, and plain-language reporting at every stage.",
   },
   {
-    icon: Shield,
-    title: "Your Choice of Engagement",
-    description: "Build & Transfer: you own the code. Managed Services: we run it. Either way, you get full transparency, documentation, and zero vendor lock-in.",
+    title: "Continuous Performance Model",
+    detail:
+      "We optimize monthly so model quality and workflow fit improve over time.",
+  },
+];
+
+const engagementModels = [
+  {
+    heading: "Build & Transfer",
+    description: "You own the codebase, documentation, and operating playbook.",
+  },
+  {
+    heading: "Managed Services",
+    description: "We build and operate the system with SLA-backed performance and optimization.",
   },
 ];
 
 export function Differentiators() {
   return (
-    <section className="bg-white py-24 lg:py-32">
+    <section className="bg-ivory py-24 lg:py-30">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-16 max-w-2xl"
+          className="max-w-3xl"
         >
-          <span className="section-label">Why ClearForge</span>
-          <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            Strategy consulting meets AI engineering.
+          <span className="section-label">Why Operators Choose ClearForge</span>
+          <h2 className="mt-4 text-4xl leading-tight text-midnight sm:text-5xl">
+            Consulting discipline with engineering accountability.
           </h2>
         </motion.div>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map((item, i) => (
-            <motion.div
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
+          {differentiators.map((item, index) => (
+            <motion.article
               key={item.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.08 * i }}
-              className="group"
+              transition={{ duration: 0.35, delay: index * 0.08 }}
+              className="border border-fog bg-white p-7"
             >
-              <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-teal/10 text-teal transition-colors group-hover:bg-teal group-hover:text-white">
-                <item.icon className="h-5 w-5" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                {item.title}
-              </h3>
-              <p className="mt-2 text-base leading-relaxed text-slate-600">
-                {item.description}
-              </p>
-            </motion.div>
+              <h3 className="text-2xl leading-tight text-midnight">{item.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate">{item.detail}</p>
+            </motion.article>
+          ))}
+        </div>
+
+        <div className="mt-10 grid gap-5 border-t border-fog pt-8 md:grid-cols-2">
+          {engagementModels.map((model) => (
+            <div key={model.heading} className="border border-fog bg-white p-6">
+              <p className="section-label">Engagement Model</p>
+              <h3 className="mt-3 text-2xl text-midnight">{model.heading}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate">{model.description}</p>
+            </div>
           ))}
         </div>
       </div>

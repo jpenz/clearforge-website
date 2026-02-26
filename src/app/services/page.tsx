@@ -2,8 +2,8 @@ import { createMetadata } from "@/lib/metadata";
 import { ServicesPage } from "@/components/pages/services-page";
 
 export const metadata = createMetadata({
-  title: "Services — AI Revenue Operations, Performance Improvement, PE Value Creation",
-  description: "Three service lines focused on turning AI into measurable business outcomes. From sales intelligence to portfolio-wide value creation.",
+  title: "Services — AI Operating Systems for CEOs, PE Teams, and Owner-Led Businesses",
+  description: "Service lines built for mid-market and lower-middle-market operators, including owner-led businesses with $2M-$15M seller earnings preparing for succession.",
   path: "/services",
 });
 

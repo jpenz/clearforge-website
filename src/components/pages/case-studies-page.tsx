@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { caseStudies } from "@/data/case-studies";
-import { ArrowRight } from "lucide-react";
 
 export function CaseStudiesPage() {
   return (
@@ -15,67 +15,63 @@ export function CaseStudiesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="max-w-3xl"
+            className="max-w-4xl"
           >
             <span className="section-label">Case Studies</span>
-            <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              Results that <span className="gradient-text">speak for themselves.</span>
+            <h1 className="mt-4 text-4xl leading-tight text-midnight sm:text-5xl lg:text-6xl">
+              Verified outcomes from real operating environments.
             </h1>
-            <p className="mt-6 text-lg text-slate-600">
-              Real engagements, real outcomes. Every metric verified, every case anonymized.
+            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate">
+              These engagements are anonymized but specific. Every metric shown maps to operational improvements
+              clients use in leadership reporting.
             </p>
           </motion.div>
         </div>
       </section>
 
-      <section className="bg-gray-100 py-24 lg:py-32">
+      <section className="bg-ivory py-24 lg:py-30">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="space-y-8">
-            {caseStudies.map((cs, i) => (
-              <motion.div
-                key={cs.slug}
+          <div className="space-y-5">
+            {caseStudies.map((study, i) => (
+              <motion.article
+                key={study.slug}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.08 * i }}
-                className="rounded-lg border border-gray-200 bg-white overflow-hidden"
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                className="grid border border-fog bg-white md:grid-cols-[1.15fr_0.85fr]"
               >
-                <div className="grid md:grid-cols-3">
-                  <div className="p-8 md:col-span-2">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="text-xs font-medium text-teal border border-teal/20 bg-teal/5 rounded-md px-2 py-1">{cs.industry}</span>
-                      <span className="text-base text-slate-500">{cs.service}</span>
-                    </div>
-                    <h2 className="text-xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                      {cs.title}
-                    </h2>
-                    <p className="mt-3 text-lg text-slate-600 leading-relaxed">{cs.excerpt}</p>
-                    <Button variant="link" className="mt-4 px-0" asChild>
-                      <Link href={`/case-studies/${cs.slug}`}>
-                        Read Full Case Study <ArrowRight className="ml-1 h-4 w-4" />
-                      </Link>
-                    </Button>
+                <div className="p-7">
+                  <div className="mb-4 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.11em] text-stone">
+                    <span className="border border-fog bg-ivory px-2 py-1">{study.industry}</span>
+                    <span>{study.service}</span>
                   </div>
-                  <div className="bg-slate-navy p-8 flex flex-col justify-center items-center text-center">
-                    <div className="metric-display text-4xl">{cs.heroMetric}</div>
-                    <p className="mt-2 text-lg text-slate-200">{cs.heroMetricLabel}</p>
-                  </div>
+                  <h2 className="text-3xl leading-tight text-midnight">{study.title}</h2>
+                  <p className="mt-4 text-sm leading-relaxed text-slate">{study.excerpt}</p>
+                  <Button variant="link" className="mt-5 px-0" asChild>
+                    <Link href={`/case-studies/${study.slug}`}>
+                      Read Full Case Study <ArrowRight className="ml-1 h-4 w-4" />
+                    </Link>
+                  </Button>
                 </div>
-              </motion.div>
+
+                <div className="border-l border-fog bg-midnight p-7 text-center md:text-left">
+                  <p className="metric-display text-4xl">{study.heroMetric}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-200">{study.heroMetricLabel}</p>
+                </div>
+              </motion.article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-slate-navy py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            Want results like these?
-          </h2>
-          <p className="mt-4 text-lg text-slate-200 max-w-xl mx-auto">
-            Every engagement starts with a conversation about your specific challenges and goals.
+      <section className="bg-midnight py-24 text-center lg:py-30">
+        <div className="mx-auto max-w-3xl px-6 lg:px-8">
+          <h2 className="text-4xl text-white sm:text-5xl">Want similar performance outcomes?</h2>
+          <p className="mt-4 text-lg leading-relaxed text-slate-200">
+            We can map these patterns to your current operating constraints.
           </p>
-          <Button size="lg" className="mt-8" asChild>
+          <Button className="mt-8" size="lg" asChild>
             <Link href="/contact">Book a Discovery Call</Link>
           </Button>
         </div>

@@ -13,39 +13,54 @@ const footerLinks = {
   ],
   Resources: [
     { href: "/scorecard", label: "AI Readiness Scorecard" },
-    { href: "/insights/continuous-ai-agents", label: "The Continuous AI Agent" },
+    { href: "/insights/continuous-ai-agents", label: "Continuous AI Systems" },
   ],
 };
 
 export function Footer() {
   return (
-    <footer role="contentinfo" className="border-t border-gray-200 bg-gray-100">
-      <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+    <footer role="contentinfo" className="border-t border-fog bg-ivory">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
-            <Link href="/" className="inline-block">
-              <span className="text-xl font-bold tracking-tight text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                ClearForge<span className="text-teal">.ai</span>
+            <Link href="/" className="inline-flex items-end gap-0.5" aria-label="ClearForge home">
+              <span className="text-2xl text-midnight" style={{ fontFamily: "var(--font-libre-bodoni)" }}>
+                ClearForge
               </span>
+              <span className="text-xl text-brass">.ai</span>
             </Link>
-            <p className="text-lg leading-relaxed text-slate-500">Strategy that ships. AI that performs.</p>
+            <p className="max-w-xs text-base leading-relaxed text-slate">
+              Strategy that ships. AI that performs.
+            </p>
           </div>
+
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
-              <h3 className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-500" style={{ fontFamily: "var(--font-inter)" }}>{title}</h3>
+              <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone">
+                {title}
+              </h3>
               <ul className="space-y-3">
                 {links.map((link) => (
-                  <li key={link.href}><Link href={link.href} className="text-lg text-slate-600 transition-colors hover:text-teal">{link.label}</Link></li>
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-base text-slate transition-colors hover:text-midnight">
+                      {link.label}
+                    </Link>
+                  </li>
                 ))}
               </ul>
             </div>
           ))}
         </div>
-        <div className="mt-20 flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-8 sm:flex-row">
-          <p className="text-lg text-slate-600">&copy; {new Date().getFullYear()} ClearForge.ai. All rights reserved.</p>
+
+        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-fog pt-6 sm:flex-row sm:items-center">
+          <p className="text-sm text-stone">&copy; {new Date().getFullYear()} ClearForge.ai. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="text-lg text-slate-600 hover:text-teal">Privacy</Link>
-            <Link href="/terms" className="text-lg text-slate-600 hover:text-teal">Terms</Link>
+            <Link href="/privacy" className="text-sm text-stone hover:text-midnight">
+              Privacy
+            </Link>
+            <Link href="/terms" className="text-sm text-stone hover:text-midnight">
+              Terms
+            </Link>
           </div>
         </div>
       </div>

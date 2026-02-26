@@ -2,58 +2,64 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { insights, insightCategories, formatDate } from "@/data/insights";
 import { ArrowRight, Clock } from "lucide-react";
+import { insights, formatDate } from "@/data/insights";
 
 export function InsightsPage() {
   return (
     <>
       <section className="bg-white py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="max-w-4xl"
+          >
             <span className="section-label">Insights</span>
-            <h1 className="mt-4 text-4xl font-bold text-slate-navy sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-              Thinking that <span className="gradient-text">drives action.</span>
+            <h1 className="mt-4 text-4xl leading-tight text-midnight sm:text-5xl lg:text-6xl">
+              Field notes from shipping AI in real organizations.
             </h1>
-            <p className="mt-6 text-lg text-slate-600">
-              Practical perspectives on AI implementation, performance improvement, and value creation.
-              No buzzwords — just substance.
+            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate">
+              Briefs for operators, not trend spectators. We publish what works, what fails, and what executives
+              need to run high-confidence programs.
             </p>
           </motion.div>
         </div>
       </section>
 
-      <section className="bg-gray-100 py-24 lg:py-32">
+      <section className="bg-ivory py-24 lg:py-30">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {insights.map((insight, i) => (
               <motion.article
                 key={insight.slug}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.08 * i }}
-                className="rounded-lg border border-gray-200 bg-white overflow-hidden group"
+                transition={{ duration: 0.38, delay: i * 0.06 }}
+                className="group border border-fog bg-white p-6"
               >
-                <div className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-medium text-teal border border-teal/20 bg-teal/5 rounded-md px-2 py-1">{insight.category}</span>
-                    <span className="flex items-center gap-1 text-base text-slate-500">
-                      <Clock className="h-3 w-3" /> {insight.readingTime} min
-                    </span>
-                  </div>
-                  <Link href={`/insights/${insight.slug}`}>
-                    <h2 className="text-lg font-bold text-slate-navy group-hover:text-teal transition-colors" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                      {insight.title}
-                    </h2>
+                <div className="mb-3 flex items-center justify-between gap-3 text-[11px] uppercase tracking-[0.1em] text-stone">
+                  <span className="border border-fog bg-ivory px-2 py-1">{insight.category}</span>
+                  <span className="inline-flex items-center gap-1">
+                    <Clock className="h-3.5 w-3.5" /> {insight.readingTime} min
+                  </span>
+                </div>
+
+                <Link href={`/insights/${insight.slug}`}>
+                  <h2 className="text-2xl leading-tight text-midnight transition-colors group-hover:text-brass">
+                    {insight.title}
+                  </h2>
+                </Link>
+
+                <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-slate">{insight.excerpt}</p>
+
+                <div className="mt-5 flex items-center justify-between text-xs uppercase tracking-[0.08em]">
+                  <span className="text-stone">{formatDate(insight.date)}</span>
+                  <Link href={`/insights/${insight.slug}`} className="inline-flex items-center gap-1 font-semibold text-midnight">
+                    Read <ArrowRight className="h-4 w-4" />
                   </Link>
-                  <p className="mt-3 text-lg text-slate-600 leading-relaxed line-clamp-3">{insight.excerpt}</p>
-                  <div className="mt-4 flex items-center justify-between">
-                    <span className="text-base text-slate-200">{formatDate(insight.date)}</span>
-                    <Link href={`/insights/${insight.slug}`} className="text-xs font-medium text-teal hover:text-teal-light transition-colors inline-flex items-center gap-1">
-                      Read <ArrowRight className="h-3 w-3" />
-                    </Link>
-                  </div>
                 </div>
               </motion.article>
             ))}

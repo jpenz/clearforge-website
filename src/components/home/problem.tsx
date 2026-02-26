@@ -1,117 +1,66 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { FileX, Bot, Battery, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
-const problems = [
+const traps = [
   {
     number: "01",
-    title: "Strategy Without Execution",
-    description: "Traditional consultants deliver decks and disappear. You get recommendations nobody implements and a bill that doesn't tie to outcomes.",
-    icon: FileX,
-    escalation: "The starting point",
+    title: "Advisory Without Delivery",
+    body: "Leadership receives a strategy deck, but no production system. Momentum fades and teams return to manual work.",
+    cost: "Cost: six figures spent, no operating delta.",
   },
   {
     number: "02",
-    title: "AI Without Strategy",
-    description: "Tech vendors push tools without understanding your business. You end up with shiny demos that never make it to production and pilots that die after 90 days.",
-    icon: Bot,
-    escalation: "The overcorrection",
+    title: "Tool Adoption Without Business Design",
+    body: "Teams buy AI tools quickly, but workflows, governance, and ownership are never redesigned to support them.",
+    cost: "Cost: fragmented pilots and low adoption.",
   },
   {
     number: "03",
-    title: "Static Systems That Decay",
-    description: "One-time AI implementations depreciate on day one. Models trained on stale data make increasingly wrong decisions while the team that built them has moved on.",
-    icon: Battery,
-    escalation: "The compounding cost",
+    title: "One-Time Deployment",
+    body: "Even successful launches degrade when data, prompts, and decision rules are not continuously tuned.",
+    cost: "Cost: performance decay within quarters.",
   },
 ];
 
 export function Problem() {
   return (
-    <section className="bg-slate-navy py-24 lg:py-32">
+    <section className="bg-midnight py-24 lg:py-30">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Tighter header block — label + headline + bridge copy together */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-12 max-w-3xl"
+          className="max-w-3xl"
         >
-          <span className="section-label text-teal">The Problem</span>
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            Most AI initiatives fail. Not because the tech doesn&apos;t work.
+          <span className="section-label">Why Programs Stall</span>
+          <h2 className="mt-4 text-4xl leading-tight text-white sm:text-5xl">
+            Most AI efforts fail in the operating model, not the model weights.
           </h2>
-          <p className="mt-4 text-lg text-slate-300 leading-relaxed">
-            Companies cycle through the same three traps. Each one feeds the next, and the cost compounds with every failed attempt.
+          <p className="mt-5 text-lg leading-relaxed text-slate-200">
+            We repeatedly see the same failure sequence. Each stage compounds cost, delays value capture,
+            and erodes confidence across the leadership team.
           </p>
         </motion.div>
 
-        {/* Cards with escalating visual weight */}
-        <div className="grid gap-6 md:grid-cols-3">
-          {problems.map((problem, i) => (
-            <motion.div
-              key={problem.number}
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
+          {traps.map((trap, index) => (
+            <motion.article
+              key={trap.number}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.1 * i }}
-              className={`relative rounded-xl p-8 transition-all ${
-                i === 0
-                  ? "bg-white/[0.04] border border-white/10"
-                  : i === 1
-                  ? "bg-white/[0.07] border border-white/15"
-                  : "bg-white/[0.10] border border-white/20 ring-1 ring-teal/20"
-              }`}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
+              className="border border-white/16 bg-white/[0.04] p-7"
             >
-              {/* Escalation label */}
-              <span className="text-xs font-medium uppercase tracking-wider text-teal font-[family-name:var(--font-space-grotesk)]">
-                {problem.escalation}
-              </span>
-
-              {/* Icon + Number row */}
-              <div className="flex items-center gap-3 mt-4 mb-5">
-                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-white/5 border border-white/10">
-                  <problem.icon className="h-5 w-5 text-slate-300" />
-                </div>
-                <span className="text-3xl font-bold text-white/20 font-[family-name:var(--font-space-grotesk)]">{problem.number}</span>
-              </div>
-
-              {/* Title — significantly larger than body */}
-              <h3 className="text-2xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                {problem.title}
-              </h3>
-
-              {/* Body — clear size separation from title */}
-              <p className="mt-3 text-base leading-relaxed text-slate-300">
-                {problem.description}
-              </p>
-
-              {/* Connecting arrow on first two cards */}
-              {i < 2 && (
-                <div className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 h-6 w-6 items-center justify-center rounded-full bg-slate-navy border border-white/10">
-                  <ArrowRight className="h-3 w-3 text-slate-400" />
-                </div>
-              )}
-            </motion.div>
+              <p className="metric-display text-3xl">{trap.number}</p>
+              <h3 className="mt-4 text-2xl leading-tight text-white">{trap.title}</h3>
+              <p className="mt-3 text-base leading-relaxed text-slate-200">{trap.body}</p>
+              <p className="mt-5 border-t border-white/12 pt-3 text-sm font-medium text-brass">{trap.cost}</p>
+            </motion.article>
           ))}
         </div>
-
-        {/* Directional CTA — leads to the solution */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.4 }}
-          className="mt-12 flex items-center justify-center gap-4"
-        >
-          <div className="h-px w-16 bg-gradient-to-r from-transparent to-white/20" />
-          <p className="text-base text-slate-400">There&apos;s a better way.</p>
-          <div className="h-px w-16 bg-gradient-to-l from-transparent to-white/20" />
-        </motion.div>
       </div>
     </section>
   );

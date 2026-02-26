@@ -2,106 +2,89 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Search, Rocket, BarChart3, ClipboardCheck, ArrowRight } from "lucide-react";
 
-const serviceCards = [
+const services = [
   {
-    icon: Search,
     title: "AI Strategy & Market Intelligence",
-    description: "Market studies, competitive analysis, and AI opportunity mapping. Know where AI creates the most value before you build anything.",
+    outcome: "Opportunity map in 4 weeks",
+    text: "Identify and rank where AI creates commercial lift before engineering spend begins.",
     href: "/services#ai-strategy",
-    tag: "Discover",
   },
   {
-    icon: Rocket,
     title: "AI Design & Build",
-    description: "Custom AI agents, workflow automation, and production systems. Architected for your business outcome, shipped on schedule.",
+    outcome: "Production systems in 6-8 weeks",
+    text: "Design and deploy AI-enabled workflows tied directly to operating metrics.",
     href: "/services#ai-design-build",
-    tag: "Build",
   },
   {
-    icon: BarChart3,
     title: "Managed AI Operations",
-    description: "Continuous optimization, model retraining, and market monitoring. Your AI compounds in value every month without adding headcount.",
+    outcome: "Monthly optimization cadence",
+    text: "Retuning, retraining, and monitoring so results compound instead of deteriorate.",
     href: "/services#managed-ai-operations",
-    tag: "Optimize",
   },
   {
-    icon: ClipboardCheck,
     title: "AI Readiness Assessment",
-    description: "4-week diagnostic across 5 pillars. Scored assessment with a 90-day action plan. The fastest way to know if your business is ready.",
+    outcome: "Fixed-price 4-week diagnostic",
+    text: "A low-risk entry engagement with a scored baseline and 90-day action plan.",
     href: "/services#ai-readiness-assessment",
-    tag: "$15K · 4 Weeks",
   },
 ];
 
 export function ServicesPreview() {
   return (
-    <section className="bg-gray-50 py-24 lg:py-32 border-y border-gray-200">
+    <section className="bg-white py-24 lg:py-30">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-16"
+          className="max-w-3xl"
         >
-          <span className="section-label">Services</span>
-          <h2 className="mt-4 text-3xl font-bold text-slate-navy sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            Four services. One focus: measurable results.
+          <span className="section-label">Service Lines</span>
+          <h2 className="mt-4 text-4xl leading-tight text-midnight sm:text-5xl">
+            Structured around the way value is actually created.
           </h2>
-          <p className="mt-4 text-lg text-slate-600 max-w-2xl">
-            Each service maps to a phase of our methodology. Start anywhere, expand as you see results.
+          <p className="mt-5 text-lg leading-relaxed text-slate">
+            Each service aligns to a distinct stage in the transformation cycle. Start where you have urgency,
+            then expand as proof accumulates.
           </p>
         </motion.div>
 
-        <div className="grid gap-6 sm:grid-cols-2">
-          {serviceCards.map((service, i) => (
-            <motion.div
+        <div className="mt-12 grid gap-5 sm:grid-cols-2">
+          {services.map((service, index) => (
+            <motion.article
               key={service.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.08 * i }}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
+              className="group border border-fog bg-ivory p-7 transition-colors hover:bg-white"
             >
-              <Link href={service.href}>
-                <div className="group bg-white border border-gray-200 rounded-xl p-8 h-full hover:border-teal/30 hover:shadow-lg transition-all duration-300">
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-teal/10 group-hover:bg-teal group-hover:text-white transition-colors">
-                      <service.icon className="h-5 w-5 text-teal group-hover:text-white" />
-                    </div>
-                    <span className="text-xs font-medium text-teal uppercase tracking-wider font-[family-name:var(--font-space-grotesk)]">
-                      {service.tag}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-navy" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                    {service.title}
-                  </h3>
-                  <p className="mt-3 text-base leading-relaxed text-slate-600">
-                    {service.description}
-                  </p>
-                  <div className="mt-5 flex items-center text-base text-teal font-medium group-hover:gap-2 transition-all">
-                    Learn more
-                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
+              <p className="text-xs uppercase tracking-[0.14em] text-brass">{service.outcome}</p>
+              <h3 className="mt-3 text-2xl leading-tight text-midnight">{service.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate">{service.text}</p>
+              <Link
+                href={service.href}
+                className="mt-6 inline-flex items-center gap-1 text-sm font-semibold uppercase tracking-[0.1em] text-midnight"
+              >
+                Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.4 }}
-          className="mt-10 text-center"
+          transition={{ duration: 0.35, delay: 0.28 }}
+          className="mt-10"
         >
           <Button variant="outline" size="lg" asChild>
-            <Link href="/services">
-              View All Services & Pricing <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
+            <Link href="/services">View Full Services and Deliverables</Link>
           </Button>
         </motion.div>
       </div>

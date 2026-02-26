@@ -46,7 +46,7 @@ export const organizationJsonLd = {
   url: siteUrl,
   logo: `${siteUrl}/logo.png`,
   description:
-    "ClearForge combines management consulting rigor with hands-on AI engineering to deliver measurable results for mid-market companies and PE portfolio companies.",
+    "ClearForge helps CEOs, PE operating partners, and owner-led businesses turn AI into measurable operating performance, including lower-middle-market companies with $2M-$15M seller earnings.",
   contactPoint: {
     "@type": "ContactPoint",
     email: "hello@clearforge.ai",
