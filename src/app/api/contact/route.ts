@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResendClient(): Resend | null {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return null;
+  return new Resend(apiKey);
+}
 
 // Rate limiter
 const rateLimit = new Map<string, { count: number; resetAt: number }>();
@@ -113,6 +117,15 @@ export async function POST(req: NextRequest) {
         </div>
       </div>
     `;
+
+    const resend = getResendClient();
+    if (!resend) {
+      console.error("RESEND_API_KEY is missing; skipping contact email send.");
+      return NextResponse.json(
+        { error: "Contact service is temporarily unavailable." },
+        { status: 503 }
+      );
+    }
 
     await resend.emails.send({
       from: "ClearForge <website@clearforge.ai>",
