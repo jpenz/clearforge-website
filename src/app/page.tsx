@@ -139,12 +139,12 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <span className="section-label">For operators who need measurable transformation</span>
           <h1 className="mt-4 max-w-4xl text-4xl font-bold text-text-primary sm:text-5xl lg:text-6xl">
-            Transform your company with one accountable team.
+            Win Where It Matters.
             <br />
-            <span className="gradient-text">Strategy, AI delivery, and workforce adoption.</span>
+            <span className="gradient-text">Execute with Human and AI Leverage.</span>
           </h1>
           <p className="mt-6 max-w-3xl text-xl text-text-secondary">
-            We do more than find demand. We redesign how your business grows and operates: define where to win, modernize workflows, deploy AI systems, and train teams to run the new model.
+            We identify where you should compete, redesign how the work gets done, and deploy human plus AI systems that increase capacity, sharpen focus, and compound performance.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Button size="lg" asChild>
