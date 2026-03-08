@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
+function getResendClient(): Resend | null {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return null;
+  return new Resend(apiKey);
+}
+
 // Rate limiter
 const rateLimit = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT_MAX = 5;
@@ -112,21 +118,20 @@ export async function POST(req: NextRequest) {
       </div>
     `;
 
-    const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey) {
-      console.error("Missing RESEND_API_KEY for contact form email delivery.");
+    const resend = getResendClient();
+    if (!resend) {
+      console.error("RESEND_API_KEY is missing; skipping contact email send.");
       return NextResponse.json(
-        { error: "Email delivery is not configured yet. Please email us directly." },
+        { error: "Contact service is temporarily unavailable." },
         { status: 503 }
       );
     }
 
-    const resend = new Resend(apiKey);
     await resend.emails.send({
       from: "ClearForge <website@clearforge.ai>",
       to: ["james@clearforge.ai"],
       replyTo: email,
-      subject: `ClearForge Inquiry: ${safeName} - ${safeCompany}`,
+      subject: `ClearForge Inquiry: ${safeName} — ${safeCompany}`,
       html: emailHtml,
     });
 

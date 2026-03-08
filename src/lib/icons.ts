@@ -1,8 +1,7 @@
 import {
-  Search,
-  PenTool,
+  LineChart,
+  Cog,
   Rocket,
-  BarChart3,
   Bot,
   Compass,
   Gauge,
@@ -13,7 +12,9 @@ import {
   Building2,
   Target,
   Zap,
+  PenTool,
   Wrench,
+  BarChart3,
   type LucideIcon,
 } from "lucide-react";
 import type { ServiceIcon } from "@/data/services";
@@ -22,10 +23,9 @@ import type { IndustryIcon } from "@/data/industries";
 import type { EngagementIcon } from "@/data/how-we-work";
 
 export const serviceIcons: Record<ServiceIcon, LucideIcon> = {
-  Search,
-  PenTool,
+  LineChart,
+  Cog,
   Rocket,
-  BarChart3,
   Bot,
 };
 

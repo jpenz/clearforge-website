@@ -115,8 +115,8 @@ export const deepIndustries: Industry[] = [
       "Monthly performance cadence and operating reviews",
       "Exit-readiness narratives supported by operating KPI improvements",
     ],
-    caseStudySlug: "metro-detroit-services-company",
-    caseStudyTitle: "Metro Detroit Services Company",
+    caseStudySlug: "pe-portfolio-diagnostic-plan",
+    caseStudyTitle: "PE Portfolio Diagnostic and Execution Plan",
     relatedInsights: ["widening-ai-value-gap", "hybrid-workforce-playbook"],
   },
 ];

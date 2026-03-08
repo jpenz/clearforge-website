@@ -7,8 +7,6 @@ export interface PricingTier {
   features: string[];
   cta: string;
   popular?: boolean;
-  badge?: string;
-  category: "strategy-build-operate" | "marketing-revenue-ops";
 }
 
 export interface FAQ {
@@ -18,162 +16,110 @@ export interface FAQ {
 
 export const pricingTiers: PricingTier[] = [
   {
-    category: "strategy-build-operate",
-    name: "Growth Strategy & Diagnosis",
+    name: "AI Readiness Audit",
     price: "$15K",
     period: "one-time",
-    timeline: "4 weeks",
-    description: "Clarify exactly where to focus before committing build budget.",
+    timeline: "2 weeks",
+    description:
+      "A rapid diagnostic to assess your AI readiness and identify the highest-impact opportunities.",
     features: [
-      "Market and competitive diagnosis",
-      "Operational gap analysis",
-      "Prioritized AI opportunity stack",
-      "Board-ready strategy and implementation roadmap",
+      "Stakeholder interviews with leadership and key operators",
+      "Process mapping of core workflows",
+      "Data quality and infrastructure assessment",
+      "AI opportunity identification and prioritization",
+      "Executive-ready roadmap with ROI projections",
+      "Recommended quick wins for immediate impact",
     ],
-    cta: "Book Strategy Diagnostic",
-    badge: "Entry Point",
+    cta: "Book an Audit",
   },
   {
-    category: "strategy-build-operate",
-    name: "AI Design & Build",
-    price: "$50K-$100K",
+    name: "Performance Sprint",
+    price: "$50K–$100K",
     period: "one-time",
-    timeline: "6-8 weeks",
-    description: "Design and launch production AI systems tied to business outcomes.",
+    timeline: "6–8 weeks",
+    description:
+      "An intensive engagement to diagnose, build, and deploy AI solutions that drive measurable results.",
     features: [
-      "Custom AI agent and workflow implementation",
-      "System integrations with core operations",
-      "Production deployment and instrumentation",
-      "Post-launch stabilization and enablement",
+      "Process mining and operational diagnostics",
+      "Top-3 opportunity deep-dives with business cases",
+      "Working MVP of highest-impact solution",
+      "Team training and knowledge transfer",
+      "Integration with existing tech stack",
+      "30-day post-launch support included",
+      "Measurable KPIs tracked from day one",
     ],
-    cta: "Start Design & Build",
+    cta: "Start a Sprint",
+    popular: true,
   },
   {
-    category: "strategy-build-operate",
-    name: "Managed AI Operations",
-    price: "$15K+",
+    name: "AI Agent Retainer",
+    price: "$15K",
     period: "/month",
     timeline: "Ongoing",
-    description: "Operate and optimize AI systems continuously with executive visibility.",
+    description:
+      "Continuous AI expertise embedded in your business — new agents, optimization, and strategic guidance.",
     features: [
-      "Managed operation and reliability",
-      "Continuous optimization cycles",
-      "Live executive reporting",
-      "Quarterly roadmap evolution",
+      "20+ hours of senior AI expertise per month",
+      "1–2 new AI agents built and deployed monthly",
+      "Continuous optimization of existing solutions",
+      "Weekly strategy sessions with leadership",
+      "Priority support and rapid iteration",
+      "Quarterly business impact reviews",
+      "Access to ClearForge agent library",
     ],
-    cta: "Discuss Managed Operations",
-    popular: true,
-    badge: "Most Common Operating Model",
-  },
-  {
-    category: "strategy-build-operate",
-    name: "Legacy System Modernization",
-    price: "Custom",
-    period: "project",
-    timeline: "Phased",
-    description: "Modernize legacy systems so AI can create value without full replacement.",
-    features: [
-      "Legacy architecture and risk assessment",
-      "Phased modernization and integration roadmap",
-      "AI-ready workflow modernization",
-      "Governance and change management support",
-    ],
-    cta: "Scope Modernization",
-    badge: "COBOL to AI-Ready",
-  },
-  {
-    category: "marketing-revenue-ops",
-    name: "Foundation",
-    price: "$3K-$5K",
-    period: "/month",
-    timeline: "AI Marketing & Revenue Operations",
-    description: "For teams building a reliable demand engine with clear reporting and conversion basics.",
-    features: [
-      "SEO and on-site conversion foundation",
-      "Core analytics and reporting setup",
-      "Baseline CRM and pipeline alignment",
-      "Monthly optimization and priority planning",
-    ],
-    cta: "Start Foundation",
-  },
-  {
-    category: "marketing-revenue-ops",
-    name: "Growth",
-    price: "$7.5K-$10K",
-    period: "/month",
-    timeline: "AI Marketing & Revenue Operations",
-    description: "Adds paid acquisition and tighter revenue operations workflows for faster qualified pipeline growth.",
-    features: [
-      "Everything in Foundation",
-      "Paid media management",
-      "Lead intelligence and follow-up workflows",
-      "CRM process automation",
-    ],
-    cta: "Start Growth",
-    popular: true,
-  },
-  {
-    category: "marketing-revenue-ops",
-    name: "Scale",
-    price: "$15K-$25K",
-    period: "/month",
-    timeline: "AI Marketing & Revenue Operations",
-    description: "Multi-channel execution with deeper strategy, automation, and leadership cadence.",
-    features: [
-      "Everything in Growth",
-      "Advanced multi-channel orchestration",
-      "Pipeline acceleration workflows",
-      "Executive operating rhythm",
-    ],
-    cta: "Start Scale",
-    badge: "Full Revenue Engine",
-  },
-  {
-    category: "marketing-revenue-ops",
-    name: "Enterprise",
-    price: "Custom",
-    period: "/month",
-    timeline: "AI Marketing & Revenue Operations",
-    description: "Portfolio-wide or multi-brand implementations with custom governance and delivery.",
-    features: [
-      "Multi-brand or portfolio rollout",
-      "Custom integration architecture",
-      "Shared executive reporting across entities",
-      "Dedicated delivery team",
-    ],
-    cta: "Discuss Enterprise",
+    cta: "Start Retainer",
   },
 ];
 
 export const faqs: FAQ[] = [
   {
-    question: "Where should most companies start?",
+    question: "How do I know which package is right for my business?",
     answer:
-      "Most companies start with Growth Strategy & Diagnosis. It identifies where AI should be applied first so budget goes to high-impact work.",
+      "Start with the AI Readiness Audit if you're unsure where to begin. It gives you a clear picture of your current state and a prioritized roadmap. If you already know your highest-impact opportunity, a Performance Sprint gets you to a working solution in 6–8 weeks. The Retainer is for companies ready for continuous AI development.",
   },
   {
-    question: "Is AI Marketing & Revenue Operations your core offer?",
+    question: "What's included in the discovery call?",
     answer:
-      "It is one application of the broader ClearForge platform. The core model is Strategy, Design & Build, then Managed AI Operations.",
+      "A 30-minute conversation where we learn about your business, current challenges, and goals. We'll give you an honest assessment of whether AI can help and which engagement makes sense. No pitch decks, no pressure — just a straightforward conversation.",
   },
   {
-    question: "How do Managed AI Operations and AI Design & Build differ?",
+    question: "Do you work with companies of any size?",
     answer:
-      "Design & Build is a time-bound engagement to launch production systems. Managed AI Operations is the ongoing model for running and continuously improving those systems.",
+      "We focus on mid-market companies ($5M–$500M revenue) and PE portfolio companies. Our approach is designed for organizations large enough to benefit from AI but agile enough to move quickly.",
   },
   {
-    question: "Can you work with legacy infrastructure?",
+    question: "What industries do you serve?",
     answer:
-      "Yes. Legacy System Modernization is designed for COBOL, mainframes, older ERP systems, and spreadsheet-heavy workflows that still need AI-driven outcomes.",
+      "We work across industries including manufacturing, professional services, B2B software, healthcare, and financial services. Our methodology is industry-agnostic — we focus on the business processes and data patterns that drive results.",
   },
   {
-    question: "Do you require long-term contracts?",
+    question: "How quickly can we see results?",
     answer:
-      "No annual lock-ins by default. Ongoing services are structured as monthly operating relationships after initial setup periods.",
+      "Most clients see measurable results within 90 days. The AI Readiness Audit delivers a roadmap in 2 weeks. Performance Sprints produce working solutions in 6–8 weeks. Quick wins identified during the Audit can often be implemented immediately.",
   },
   {
-    question: "Who do you work with?",
+    question: "Do you replace our existing tech stack?",
     answer:
-      "We work with PE operating partners, portfolio company leaders, owner-led businesses, and Fortune 1000 teams that need strategy plus execution.",
+      "No. We build on top of your existing tools and infrastructure. Our solutions integrate with your CRM, ERP, data warehouse, and other systems. We're additive, not disruptive.",
+  },
+  {
+    question: "Who actually does the work?",
+    answer:
+      "Senior operators — the same people who scope your engagement are the ones who deliver it. No bait-and-switch with junior consultants. You get experienced professionals with dual expertise in business strategy and AI engineering.",
+  },
+  {
+    question: "What happens after the engagement ends?",
+    answer:
+      "Everything we build is yours. We include comprehensive documentation and team training so you can maintain and extend solutions independently. Many clients continue with a Retainer for ongoing development, but it's never required.",
+  },
+  {
+    question: "Can you scope a custom engagement?",
+    answer:
+      "Absolutely. Our packages cover the most common needs, but we regularly design custom engagements for larger or more complex projects. Book a discovery call and we'll scope something that fits.",
+  },
+  {
+    question: "What's your payment structure?",
+    answer:
+      "Audits and Sprints are billed 50% upfront, 50% on completion. Retainers are billed monthly. We're flexible on structure for larger engagements — the goal is to align incentives around results.",
   },
 ];

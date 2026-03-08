@@ -57,6 +57,7 @@ export const caseStudies: CaseStudy[] = [
     service: "AI Strategy + AI Design & Build",
     heroMetric: "1,060",
     heroMetricLabel: "Qualified Opportunities Identified",
+    featured: true,
     excerpt:
       "A $2B+ industrial manufacturer with 70+ facilities deployed AI-powered sales intelligence across 16 divisions, uncovering new growth segments and reducing manual prospecting time.",
     challenge:
@@ -85,33 +86,33 @@ export const caseStudies: CaseStudy[] = [
       "What started with two divisions expanded into a broader company operating system for market visibility and growth planning. Leadership now uses the same intelligence foundation for commercial planning and portfolio decisions.",
   },
   {
-    slug: "legacy-enterprise-software",
-    title: "Legacy Enterprise Software Provider Modernizes and Grows Revenue",
-    industry: "Enterprise Software",
-    service: "AI Strategy + Legacy System Modernization",
-    heroMetric: "New Revenue",
-    heroMetricLabel: "From Customer Loss to Feature-Led Growth",
-    featured: false,
+    slug: "pe-portfolio-diagnostic-plan",
+    title: "PE Operating Team Runs Portfolio Diagnostic and Builds Execution Plan",
+    industry: "Private Equity Portfolio Operations",
+    service: "PE Value Creation + AI Strategy",
+    heroMetric: "90 Days",
+    heroMetricLabel: "Diagnostic to Portfolio Execution Plan",
+    featured: true,
     excerpt:
-      "An enterprise software company known for industrial-strength, mission-critical systems was losing customers to modern competitors. ClearForge helped them modernize without abandoning what made them reliable, then identified new AI-powered features that drove revenue growth.",
+      "A PE operating team needed a practical AI value creation roadmap across portfolio companies. ClearForge delivered a cross-portfolio diagnostic, prioritized value levers, and mapped a 12-month execution plan tied to EBITDA improvement.",
     challenge:
-      "The company had built its reputation on extreme reliability, deep vertical customization, and mission-critical stability. The kind of systems that run 24/7 and can't afford downtime. But the technology was antiquated. Customers increasingly demanded modern AI and cloud capabilities, and the cost of a full modernization had always outsized the company's market. They were watching customers leave for newer competitors, unable to offer the features buyers now expected, and struggling to attract new business despite having some of the most stable, deeply customized enterprise systems in their space.",
+      "The PE team had strong hypotheses about where AI could create value, but no shared diagnostic framework to compare opportunities across portfolio companies. Initiatives were fragmented, management teams had different levels of readiness, and leadership needed a plan that could move quickly while preserving operating control.",
     solution: [
-      "Conducted a joint market study to identify where the company should be playing, specifically which customer segments valued reliability most and which new capabilities would drive the highest willingness to pay",
-      "Mapped the existing system architecture to identify where AI could be layered in without compromising the stability that defined the platform",
-      "Designed and deployed AI-powered features targeting the highest-value use cases identified in the market study, giving existing customers capabilities they were leaving for",
-      "Built cloud integration pathways that connected the legacy platform to modern infrastructure without requiring a full rewrite",
-      "Created a product roadmap that sequenced modernization around revenue impact. Features that saved customers money and attracted new buyers first",
-      "Implemented AI-driven analytics and reporting that turned decades of customer data into actionable intelligence for end users",
+      "Ran a portfolio-wide AI opportunity diagnostic across revenue, operations, and support workflows",
+      "Benchmarked each company on readiness, data quality, execution risk, and speed-to-value",
+      "Identified and scored high-impact use cases tied to clear EBITDA levers",
+      "Built company-level and portfolio-level sequencing for 30, 90, and 180-day execution",
+      "Defined governance cadence, operating ownership, and KPI instrumentation for each initiative",
+      "Prepared an implementation playbook that operating partners could reuse across additional companies",
     ],
     outcomes: [
-      { metric: "Revenue Growth", description: "New AI features created upsell opportunities across the existing customer base" },
-      { metric: "Customer Retention", description: "Stopped the bleeding. Customers who were evaluating competitors stayed after seeing the modernization roadmap" },
-      { metric: "New Customers", description: "AI capabilities attracted buyers who had previously dismissed the platform as outdated" },
-      { metric: "Cost Savings", description: "Customers saved money through AI-powered automation and insights built on top of the existing system" },
+      { metric: "3", description: "Portfolio companies assessed with a common diagnostic model" },
+      { metric: "12-Month Plan", description: "Execution roadmap aligned to value creation targets" },
+      { metric: "8 Priority Plays", description: "High-confidence initiatives selected for rollout" },
+      { metric: "Governance Ready", description: "Operating rhythm and KPI cadence defined for execution" },
     ],
     scale:
-      "The company went from a defensive posture. They had been trying to hold onto customers, but shifted to an offensive posture, actively winning new business with AI-powered features that competitors couldn't match because they lacked the decades of deep vertical data and reliability. The modernization paid for itself through new revenue within the first year. Anonymous client quote: \"ClearForge showed us we didn't have to choose between our reliability and being modern. We could be both.\"",
+      "The operating team left with a repeatable portfolio playbook, not a one-off report. The plan gave deal teams and management teams a shared language for prioritization, clear ownership by function, and a practical path to scale proven workflows across future portfolio companies.",
   },
 ];
 
