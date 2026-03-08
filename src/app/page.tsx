@@ -1,379 +1,476 @@
 import Link from "next/link";
-import { ArrowRight, Bot, Compass, Layers, Puzzle, Shield, TrendingUp, Users, Zap } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { deepIndustries } from "@/data/industries";
-import { getSolutionsByStage } from "@/data/solutions";
+import { createMetadata } from "@/lib/metadata";
 import { caseStudies } from "@/data/case-studies";
-import { industryIcons } from "@/lib/icons";
+import { AnimatedMetric } from "@/components/home/animated-metric";
+import { SectionReveal, StaggerReveal, StaggerChild } from "@/components/home/section-reveal";
+import { ScrollMarquee } from "@/components/home/marquee";
 
-const valueGapCards = [
-  {
-    title: "Pilots that never scale",
-    text: "Teams run isolated pilots that never become production operations.",
-    icon: Bot,
-  },
-  {
-    title: "Strategy and execution are split",
-    text: "One partner writes the plan, another partner attempts delivery, and value is lost in handoffs.",
-    icon: Layers,
-  },
-  {
-    title: "Technology without workforce change",
-    text: "Systems launch, but teams are not prepared to operate with them, so adoption stalls.",
-    icon: Users,
-  },
+export const metadata = createMetadata({
+  title: "ClearForge — AI Strategy & Execution for Mid-Market Companies",
+  description:
+    "We find where AI should drive growth, build the systems that get you there, and get your people to actually use them. Strategy through production — one partner, no handoffs.",
+  path: "",
+  keywords: ["AI strategy", "AI execution", "mid-market AI consulting", "AI agents", "PE value creation"],
+});
+
+/* ── Data ── */
+
+const stallReasons = [
+  { title: "Pilots that never scale", description: "Teams run isolated experiments disconnected from operations. Value stays trapped in demos." },
+  { title: "Strategy-execution gap", description: "One partner writes the plan, another attempts delivery. Value is lost in the handoff." },
+  { title: "Tech without workforce change", description: "Systems launch but teams aren't prepared. Adoption stalls because people were an afterthought." },
 ];
 
-const frameworkCards = [
-  {
-    phase: "Prepare",
-    text: "Set priorities, define ownership, and baseline the metrics that matter.",
-    icon: Compass,
-  },
-  {
-    phase: "Modernize",
-    text: "Redesign high-friction workflows and clean up data and handoffs.",
-    icon: Layers,
-  },
-  {
-    phase: "Build",
-    text: "Deploy production AI agents into daily work with controls and governance.",
-    icon: Bot,
-  },
-  {
-    phase: "Scale",
-    text: "Expand what works, train teams, and continuously improve outcomes.",
-    icon: TrendingUp,
-  },
+const pastAttempts = [
+  "You hired a consultancy. They left you with slides.",
+  "You tried building internally. Your best engineers are still figuring out infrastructure.",
+  "You bought a platform. Adoption peaked at 15%.",
+  "Or you haven't started — because nobody could tell you where to begin.",
 ];
 
-const peopleCapabilityTrack = [
-  "Role-based AI skills training for leadership, managers, and frontline teams",
-  "Human-plus-agent operating playbooks so adoption sticks",
-  "Manager coaching and governance rhythm to reinforce behavior change",
+const phases = [
+  { num: "01", title: "Prepare", description: "Set priorities, define ownership, baseline the metrics that matter." },
+  { num: "02", title: "Modernize", description: "Redesign workflows and clean up data before layering AI." },
+  { num: "03", title: "Build", description: "Deploy production AI agents with controls, governance, and KPI baselines." },
+  { num: "04", title: "Scale", description: "Expand what works. Train teams. Build internal capability that compounds." },
 ];
 
-const serviceEngines = [
+const engines = [
   {
     title: "Growth Strategy Engine",
-    text: "Use market intelligence and a business strategy agent to identify where to grow, where to defend, and where to win first.",
-    points: [
-      "Map industry tailwinds and customer demand pockets",
-      "Prioritize core and target markets for profitable expansion",
-      "Translate strategy into a practical 12-month growth plan",
-    ],
-    icon: Compass,
+    subtitle: "Where to win",
+    description: "Market intelligence and business strategy to identify where to grow, defend, and win first.",
+    items: ["Map industry tailwinds and demand pockets", "Prioritize markets for profitable expansion", "Translate strategy into a 12-month growth plan"],
   },
   {
     title: "Performance Improvement Engine",
-    text: "Use AI agents and workflow redesign to increase capacity, reduce friction, and run the organization more efficiently.",
-    points: [
-      "Find bottlenecks across revenue, operations, and support",
-      "Deploy human-plus-agent workflows with clear controls",
-      "Build internal capability so improvements compound over time",
-    ],
-    icon: Bot,
+    subtitle: "How to win",
+    description: "AI agents and workflow redesign to increase capacity, reduce friction, and run more efficiently.",
+    items: ["Find bottlenecks across revenue, ops, and support", "Deploy human-plus-agent workflows with controls", "Build capability so improvements compound"],
   },
 ];
 
-const transformationJourney = [
-  {
-    stage: "UNDERSTAND" as const,
-    title: "Find the value and name the real bottleneck",
-    text: "We define growth goals, capture the pain in your language, and quantify where value is leaking.",
-    outcome: "Decision-ready strategy, not generic AI advice.",
-    icon: Compass,
-  },
-  {
-    stage: "BUILD" as const,
-    title: "Redesign workflows and build controlled AI systems",
-    text: "We review what was already tried, identify what failed, and build practical AI workflows with your operators.",
-    outcome: "Working systems with owners, controls, and KPI baselines.",
-    icon: Layers,
-  },
-  {
-    stage: "OPERATE" as const,
-    title: "Run, optimize, and reinforce adoption",
-    text: "We turn early wins into operating rhythm, handle adoption concerns with proof, and reinforce execution discipline.",
-    outcome: "Compounding gains in throughput, margin, and leadership confidence.",
-    icon: TrendingUp,
-  },
+const executionSteps = [
+  { phase: "Understand", title: "Find the value and name the real bottleneck", description: "We define growth goals, capture the pain in your language, and quantify where value is leaking." },
+  { phase: "Build", title: "Redesign workflows and build controlled AI systems", description: "We build practical AI workflows with your operators. Working systems with owners, controls, and KPI baselines." },
+  { phase: "Operate", title: "Run, optimize, and reinforce adoption", description: "We turn early wins into operating rhythm and reinforce execution discipline. Compounding gains." },
 ];
 
-const differentiators = [
-  {
-    title: "One team from strategy to execution",
-    text: "No split accountability between advisory and implementation vendors.",
-    icon: Users,
-  },
-  {
-    title: "Senior operators",
-    text: "Direct access to experienced consultants and builders, not a junior leverage model.",
-    icon: Shield,
-  },
-  {
-    title: "Agents, not decks",
-    text: "We deploy operating systems and agent workflows that run in the real business.",
-    icon: Zap,
-  },
-  {
-    title: "Process and people together",
-    text: "Technology deployment and workforce adoption are delivered as one program.",
-    icon: Puzzle,
-  },
+const objections = [
+  { q: "We're not big enough for this.", a: "We work with $5M-$500M companies. AI advantage matters more at your scale — you don't have a 50-person data science team. That's exactly why we exist." },
+  { q: "We tried AI and it didn't work.", a: "It probably wasn't tied to a business metric. Every system we deploy is measured against revenue, cost, or throughput." },
+  { q: "This sounds expensive.", a: "A strategy engagement starts in the low five figures. The real question is what it costs to wait 12 more months." },
+  { q: "We don't have the right data.", a: "Almost nobody does at first. That's literally step one. If you had perfect data infrastructure, you wouldn't need us." },
 ];
-
-const industryTileDescriptions: Record<string, string> = {
-  manufacturing: "Throughput, planning, and execution modernization.",
-  "professional-services": "Higher billable capacity with faster delivery.",
-  "financial-services": "Controlled speed gains across risk and operations.",
-  "pe-portfolio": "Repeatable AI plays across portfolio companies.",
-};
 
 export default function Home() {
-  const featuredCaseStudies = caseStudies.filter((item) => item.featured).slice(0, 3);
+  const featured = caseStudies.find((cs) => cs.slug === "industrial-manufacturer");
 
   return (
     <>
-      <section className="grid-pattern bg-bg py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <span className="section-label">For operators who need measurable transformation</span>
-          <h1 className="mt-4 max-w-4xl text-4xl font-bold text-text-primary sm:text-5xl lg:text-6xl">
-            Win Where It Matters.
-            <br />
-            <span className="gradient-text">Execute with Human and AI Leverage.</span>
+      {/* ═══ HERO — Full bleed, massive type, left-aligned ═══ */}
+      <section className="relative min-h-[100vh] flex items-end overflow-hidden bg-bg-deep">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero-network.png"
+            alt=""
+            fill
+            className="object-cover object-center opacity-40"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-bg-deep/70 to-bg-deep/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-bg-deep/80 via-transparent to-transparent" />
+        </div>
+
+        {/* Teal glow orb — atmospheric */}
+        <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-accent/5 blur-[120px] pointer-events-none" />
+
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-20 pt-40 lg:px-8 lg:pb-28">
+          <p className="section-label opacity-0 animate-fade-in-up">AI Strategy & Execution</p>
+
+          <h1 className="mt-6 max-w-4xl text-[clamp(3.5rem,9vw,7rem)] leading-[0.92] tracking-tighter text-text-primary opacity-0 animate-fade-in-up delay-1">
+            Find the growth.{" "}
+            <em className="accent-gradient-text not-italic">Build the machine.</em>
           </h1>
-          <p className="mt-6 max-w-3xl text-xl text-text-secondary">
-            We identify where you should compete, redesign how the work gets done, and deploy human plus AI systems that increase capacity, sharpen focus, and compound performance.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Button size="lg" asChild>
-              <Link href="/contact">Book a Discovery Call</Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link href="/assessment">Start AI Assessment</Link>
-            </Button>
-          </div>
-          <div className="mt-4 flex flex-wrap items-center gap-4 text-sm">
-            <a href="mailto:hello@clearforge.ai" className="font-medium text-blue hover:text-emerald">
-              Email hello@clearforge.ai
-            </a>
-            <a href="tel:+12489637440" className="font-medium text-blue hover:text-emerald">
-              Call (248) 963-7440
-            </a>
+
+          <div className="mt-10 max-w-lg opacity-0 animate-fade-in-up delay-2">
+            <p className="text-lg leading-relaxed text-text-secondary">
+              We find where AI drives growth, build the systems,
+              and get your people to actually use them.
+            </p>
           </div>
 
-          <div className="mt-8 rounded-xl border border-border bg-white p-6">
-            <h2 className="text-2xl font-bold text-text-primary">This is a full operating transformation, not a pilot program.</h2>
-            <p className="mt-3 max-w-3xl text-base text-text-secondary">
-              From strategy through build and scale, we execute with your leaders and operators so results show up in growth, margin, capacity, and execution speed.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-3">
-              <Button variant="outline" asChild>
-                <Link href="/assessment">Run the AI Readiness & Opportunity Assessment</Link>
-              </Button>
+          <div className="mt-8 flex flex-wrap gap-4 opacity-0 animate-fade-in-up delay-3">
+            <Button size="lg" asChild>
+              <Link href="/assessment">Get Your AI Readiness Score</Link>
+            </Button>
+            <Button size="lg" variant="secondary" asChild>
+              <Link href="/contact">
+                Request a Proposal <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ STAT BAR — Tight context ═══ */}
+      <section className="bg-bg-primary py-8 lg:py-10 border-y border-border-subtle">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+            {[
+              { value: "$4.4T", label: "AI market by 2030" },
+              { value: "72%", label: "Stall at pilot stage" },
+              { value: "3.2x", label: "Early mover margin advantage" },
+              { value: "<10%", label: "Reach production" },
+            ].map((s) => (
+              <div key={s.label} className="text-center">
+                <p className="metric text-lg font-bold">{s.value}</p>
+                <p className="mt-1 text-xs text-text-muted">{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ WHY AI STALLS — Light, asymmetric split ═══ */}
+      <SectionReveal animation="slide-left">
+        <section className="bg-bg-light py-28 lg:py-36">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="lg:grid lg:grid-cols-12 lg:gap-20">
+              <div className="lg:col-span-5">
+                <p className="section-label text-accent-dark">Why AI Initiatives Stall</p>
+                <h2 className="mt-4 text-[clamp(2.5rem,5vw,3.5rem)] text-text-on-light">
+                  Most programs don&apos;t fail because of the&nbsp;models.
+                </h2>
+              </div>
+
+              <StaggerReveal className="lg:col-span-7 mt-14 lg:mt-0 space-y-10" stagger={0.12}>
+                {stallReasons.map((r, i) => (
+                  <StaggerChild key={r.title}>
+                    <div className="flex items-baseline gap-6">
+                      <span className="metric text-sm text-accent-dark shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                      <div>
+                        <h3 className="text-xl font-bold text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
+                          {r.title}
+                        </h3>
+                        <p className="mt-2 text-base leading-relaxed text-text-on-light-sub">{r.description}</p>
+                      </div>
+                    </div>
+                  </StaggerChild>
+                ))}
+                <StaggerChild>
+                  <p className="text-lg font-semibold text-accent-dark mt-6 border-l-2 border-accent pl-6">
+                    Disconnected execution turns promising pilots into expensive programs that never ship.
+                  </p>
+                </StaggerChild>
+              </StaggerReveal>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </SectionReveal>
 
-      <section className="bg-surface py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">Why AI Initiatives Stall</h2>
-          <p className="mt-4 max-w-3xl text-lg text-text-secondary">
-            Most programs do not fail because of the models. They fail because ownership, workflow redesign, and workforce adoption are disconnected.
-          </p>
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
-            {valueGapCards.map((item) => (
-              <article key={item.title} className="rounded-xl border border-border bg-white p-6">
-                <item.icon className="mb-4 h-9 w-9 text-blue" aria-hidden />
-                <h3 className="text-xl font-bold text-text-primary">{item.title}</h3>
-                <p className="mt-3 text-base text-text-secondary">{item.text}</p>
-              </article>
-            ))}
+      {/* ═══ SOUND FAMILIAR — Dark, centered, atmospheric ═══ */}
+      <SectionReveal animation="scale-up">
+        <section className="bg-bg-deep py-28 lg:py-36 noise-texture relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-accent/[0.03] via-transparent to-transparent pointer-events-none" />
+          <div className="relative z-10 mx-auto max-w-2xl px-6 lg:px-8">
+            <p className="section-label">Sound Familiar?</p>
+            <div className="mt-10 space-y-8">
+              {pastAttempts.map((attempt, i) => (
+                <p
+                  key={attempt}
+                  className="text-xl leading-snug text-text-secondary"
+                  style={{ fontFamily: "var(--font-heading)", opacity: 1 - i * 0.12 }}
+                >
+                  {attempt}
+                </p>
+              ))}
+            </div>
+            <div className="mt-14 gradient-divider" />
+            <p className="mt-10 text-[clamp(1.5rem,4vw,2.25rem)] text-text-primary leading-tight tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
+              The problem was never the technology.
+            </p>
+            <p className="mt-3 text-base text-text-muted">
+              It was the gap between strategy and execution — and forgetting
+              that people have to actually change how they work.
+            </p>
           </div>
-          <p className="mt-8 text-sm font-medium text-text-secondary">Disconnected execution turns promising pilots into slow, expensive programs.</p>
-        </div>
-      </section>
+        </section>
+      </SectionReveal>
 
-      <section className="bg-bg py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <span className="section-label">Our Transformation Model</span>
-          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">Modernize the Business and the Workforce Together</h2>
-          <p className="mt-4 max-w-3xl text-lg text-text-secondary">
-            We run a four-phase model that moves from readiness to scale while building internal AI capability in parallel.
-          </p>
-          <p className="mt-3 max-w-3xl text-base text-text-tertiary">
-            We do not automate broken processes. We simplify workflow debt first, then layer AI and feedback loops so performance keeps improving.
-          </p>
-          <ol className="mt-10 grid gap-6 md:grid-cols-4">
-            {frameworkCards.map((item, index) => (
-              <li key={item.phase} className="relative h-full">
-                <article className="h-full rounded-xl border border-border bg-white p-6">
-                  <item.icon className="h-10 w-10 text-blue" aria-hidden />
-                  <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-blue">{item.phase}</p>
-                  <p className="mt-2 text-base text-text-secondary">{item.text}</p>
-                </article>
-                {index < frameworkCards.length - 1 && (
-                  <ArrowRight className="absolute left-full top-1/2 ml-1 hidden h-4 w-4 -translate-y-1/2 text-blue md:block" />
-                )}
-              </li>
-            ))}
-          </ol>
+      {/* ═══ MARQUEE ═══ */}
+      <ScrollMarquee text="Prepare / Modernize / Build / Scale" className="bg-bg-primary" />
 
-          <div className="mt-8 rounded-xl border border-emerald/20 bg-emerald/10 p-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-emerald">People Capability Track (Runs Through Every Phase)</p>
-            <div className="mt-4 grid gap-3 md:grid-cols-3">
-              {peopleCapabilityTrack.map((item) => (
-                <div key={item} className="rounded-lg border border-emerald/25 bg-white/70 p-4 text-sm text-text-secondary">
-                  {item}
+      {/* ═══ TRANSFORMATION MODEL — Light, inline SVG diagram ═══ */}
+      <SectionReveal animation="fade-up">
+        <section className="bg-bg-light py-28 lg:py-36">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <p className="section-label text-accent-dark">Our Transformation Model</p>
+            <h2 className="mt-4 max-w-4xl text-[clamp(2.5rem,5vw,3.5rem)] text-text-on-light">
+              Modernize the business and the workforce&nbsp;together.
+            </h2>
+
+            {/* Phase flow — CSS, not an image */}
+            <div className="mt-16 grid grid-cols-1 gap-1 sm:grid-cols-4">
+              {phases.map((phase, i) => (
+                <div key={phase.num} className="relative group">
+                  <div className="p-6 lg:p-8">
+                    <span className="metric text-xs text-accent-dark">{phase.num}</span>
+                    <h3 className="mt-2 text-2xl text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
+                      {phase.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-text-on-light-sub">
+                      {phase.description}
+                    </p>
+                  </div>
+                  {/* Connector line */}
+                  {i < 3 && (
+                    <div className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M8 12h8m0 0l-4-4m4 4l-4 4" stroke="#059E87" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                  )}
+                  {/* Top accent bar */}
+                  <div className="absolute top-0 left-6 right-6 h-0.5 bg-gradient-to-r from-accent/60 to-accent/10" />
                 </div>
               ))}
             </div>
+
+            {/* People Track */}
+            <div className="mt-12 border-l-2 border-accent pl-6">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent-dark mb-4">
+                People Capability Track — Every Phase
+              </p>
+              <div className="grid gap-6 sm:grid-cols-3">
+                {[
+                  "Role-based AI skills training for leadership, managers, and frontline teams",
+                  "Human-plus-agent operating playbooks so adoption sticks",
+                  "Manager coaching and governance rhythm to reinforce behavior change",
+                ].map((item) => (
+                  <p key={item} className="text-sm text-text-on-light-sub leading-relaxed">{item}</p>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </SectionReveal>
 
-      <section className="bg-surface py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">How We Transform Your Company from Strategy to Scale</h2>
-          <p className="mt-4 max-w-3xl text-lg text-text-secondary">
-            Two coordinated engines run in parallel: one defines where you should grow, the other improves how the company performs every day.
-          </p>
+      {/* ═══ DUAL ENGINE — Dark, split layout ═══ */}
+      <SectionReveal animation="slide-right">
+        <section className="bg-bg-deep py-28 lg:py-36 relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.04] via-transparent to-transparent pointer-events-none" />
+          <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+            <p className="section-label">Two Engines, One Transformation</p>
+            <h2 className="mt-4 max-w-3xl text-[clamp(2.5rem,5vw,3.5rem)] text-text-primary">
+              Find where you should grow.
+            </h2>
+            <p className="mt-3 text-xl text-text-secondary" style={{ fontFamily: "var(--font-heading)" }}>
+              Then build the machine that gets you there.
+            </p>
 
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-            {serviceEngines.map((engine) => (
-              <article key={engine.title} className="rounded-xl border border-border bg-white p-6">
-                <engine.icon className="h-9 w-9 text-blue" aria-hidden />
-                <h3 className="mt-3 text-2xl font-bold text-text-primary">{engine.title}</h3>
-                <p className="mt-3 text-base text-text-secondary">{engine.text}</p>
-                <ul className="mt-4 space-y-2">
-                  {engine.points.map((item) => (
-                    <li key={item} className="flex gap-2 text-sm text-text-secondary">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-
-          <p className="mt-8 max-w-3xl text-lg text-text-secondary">
-            Then we execute in a clear operating sequence with defined owners and measurable business outcomes.
-          </p>
-          <div className="mt-8 grid gap-6 lg:grid-cols-3">
-            {transformationJourney.map((step, index) => (
-              <article key={step.stage} className="relative rounded-xl border border-border bg-white p-6">
-                <step.icon className="mb-4 h-9 w-9 text-blue" aria-hidden />
-                <p className="text-xs font-semibold text-blue">{step.stage}</p>
-                <h3 className="mt-3 text-xl font-bold text-text-primary">{step.title}</h3>
-                <p className="mt-3 text-base text-text-secondary">{step.text}</p>
-                <p className="mt-3 text-sm font-medium text-blue">{step.outcome}</p>
-                <div className="mt-4 border-t border-border pt-4">
-                  <p className="text-xs uppercase tracking-[0.12em] text-text-tertiary">Relevant solutions</p>
-                  <ul className="mt-2 space-y-1">
-                    {getSolutionsByStage(step.stage).map((solution) => (
-                      <li key={solution.slug}>
-                        <Link href={`/solutions/${solution.slug}`} className="text-sm text-text-secondary hover:text-blue">
-                          {solution.shortTitle}
-                        </Link>
+            {/* Engine details — editorial split */}
+            <div className="mt-16 grid gap-16 md:grid-cols-2">
+              {engines.map((engine) => (
+                <div key={engine.title}>
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">{engine.subtitle}</p>
+                  <h3 className="mt-2 text-2xl text-text-primary" style={{ fontFamily: "var(--font-heading)" }}>
+                    {engine.title}
+                  </h3>
+                  <div className="mt-3 h-0.5 w-12 bg-accent/40" />
+                  <p className="mt-4 text-base leading-relaxed text-text-secondary">{engine.description}</p>
+                  <ul className="mt-6 space-y-3">
+                    {engine.items.map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-sm text-text-secondary">
+                        <svg className="mt-1 h-4 w-4 shrink-0 text-accent" viewBox="0 0 16 16" fill="none">
+                          <path d="M2 8h12M10 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        {item}
                       </li>
                     ))}
                   </ul>
                 </div>
-                {index < transformationJourney.length - 1 && (
-                  <ArrowRight className="absolute -right-3 top-1/2 hidden h-5 w-5 -translate-y-1/2 text-blue lg:block" />
-                )}
-              </article>
-            ))}
+              ))}
+            </div>
           </div>
+        </section>
+      </SectionReveal>
 
-          <div className="mt-8 rounded-xl border border-border bg-white p-6">
-            <h3 className="text-xl font-bold text-text-primary">One partner accountable for the full transformation.</h3>
-            <p className="mt-3 text-base text-text-secondary">
-              Strategy, delivery, and workforce enablement run as one integrated program, so momentum compounds instead of stalling at handoffs.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-3">
-              <Button asChild>
-                <Link href="/contact">Talk with ClearForge</Link>
+      {/* ═══ EXECUTION — Light, right-aligned editorial ═══ */}
+      <SectionReveal animation="slide-left">
+        <section className="bg-bg-light py-28 lg:py-36">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="lg:grid lg:grid-cols-12 lg:gap-20">
+              <div className="lg:col-start-6 lg:col-span-7">
+                <p className="section-label text-accent-dark">How We Execute</p>
+                <h2 className="mt-4 text-[clamp(2.5rem,5vw,3.5rem)] text-text-on-light">
+                  Understand.<br />Build.<br />Operate.
+                </h2>
+
+                <div className="mt-14 space-y-12">
+                  {executionSteps.map((step, i) => (
+                    <div key={step.phase}>
+                      <div className="flex items-baseline gap-4">
+                        <span className="metric text-sm text-accent-dark">{String(i + 1).padStart(2, "0")}</span>
+                        <p className="text-lg font-bold uppercase tracking-wider text-accent-dark" style={{ fontFamily: "var(--font-heading)" }}>
+                          {step.phase}
+                        </p>
+                      </div>
+                      <h3 className="mt-3 text-xl text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
+                        {step.title}
+                      </h3>
+                      <p className="mt-2 text-base leading-relaxed text-text-on-light-sub">
+                        {step.description}
+                      </p>
+                      {i < executionSteps.length - 1 && <div className="mt-10 h-px bg-border-light/50" />}
+                    </div>
+                  ))}
+                </div>
+
+                <p className="mt-14 text-xl text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
+                  One partner accountable for the full transformation.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </SectionReveal>
+
+      {/* ═══ RESULTS — Dark, big metrics ═══ */}
+      {featured && (
+        <SectionReveal animation="scale-up">
+          <section className="bg-bg-deep py-28 lg:py-36 relative noise-texture">
+            <div className="absolute inset-0 bg-bg-deep/90 pointer-events-none" />
+            <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+              <p className="section-label">Results</p>
+              <h2 className="mt-4 max-w-3xl text-[clamp(2rem,4vw,3rem)] text-text-primary">
+                {featured.title}
+              </h2>
+              <p className="mt-4 max-w-xl text-base text-text-secondary">{featured.excerpt}</p>
+
+              {/* Metrics — large, no boxes */}
+              <div className="mt-14 grid grid-cols-2 gap-10 lg:grid-cols-4">
+                {featured.outcomes.slice(0, 4).map((o) => (
+                  <div key={o.description}>
+                    <AnimatedMetric value={o.metric} className="metric text-[clamp(2.5rem,5vw,4rem)] font-bold" />
+                    <p className="mt-2 text-sm text-text-muted">{o.description}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-10">
+                <Button variant="secondary" asChild>
+                  <Link href={`/case-studies/${featured.slug}`}>
+                    Read the Full Case Study <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </section>
+        </SectionReveal>
+      )}
+
+      {/* ═══ ASSESSMENT CTA — Light, centered ═══ */}
+      <SectionReveal animation="fade-up">
+        <section className="bg-bg-light py-28 lg:py-36">
+          <div className="mx-auto max-w-3xl px-6 lg:px-8">
+            <div className="text-center">
+              <p className="section-label text-accent-dark">Free AI Readiness Report</p>
+              <h2 className="mt-4 text-[clamp(2.5rem,5vw,3.5rem)] text-text-on-light">
+                Find out where you stand — and where to focus first.
+              </h2>
+              <p className="mt-6 text-lg text-text-on-light-sub">
+                20 questions. 5 minutes. Get a customized AI readiness report
+                with a prioritized action plan for your business.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-6 sm:grid-cols-3">
+              {[
+                { title: "Benchmark your readiness", description: "See how your AI maturity compares across strategy, data, technology, and people." },
+                { title: "Get a prioritized plan", description: "We score each dimension and show you exactly where to focus for maximum impact." },
+                { title: "No commitment required", description: "It's free. No sales call needed. Just clarity on where you are and where to go." },
+              ].map((item) => (
+                <div key={item.title}>
+                  <h3 className="text-base font-bold text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-text-on-light-sub leading-relaxed">{item.description}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-10 text-center">
+              <Button size="lg" asChild>
+                <Link href="/assessment">
+                  Get Your AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </SectionReveal>
 
-      <section className="bg-bg py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">Case Studies That Prove the Model</h2>
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
-            {featuredCaseStudies.map((study) => (
-              <article key={study.slug} className="rounded-xl border border-border bg-white p-6">
-                <p className="text-sm text-text-tertiary">{study.industry}</p>
-                <h3 className="mt-2 text-xl font-bold text-text-primary">{study.title}</h3>
-                <p className="mt-3 text-base text-text-secondary">{study.excerpt}</p>
-                <p className="mt-4 text-sm text-blue">
-                  {study.heroMetric} {study.heroMetricLabel}
-                </p>
-                <Link className="mt-3 inline-flex items-center text-sm font-medium text-blue hover:text-emerald" href={`/case-studies/${study.slug}`}>
-                  Read case study <ArrowRight className="ml-1 h-4 w-4" />
-                </Link>
-              </article>
-            ))}
+      {/* ═══ MARQUEE ═══ */}
+      <ScrollMarquee text="Understand / Build / Operate" className="bg-bg-primary" />
+
+      {/* ═══ OBJECTIONS — Dark, asymmetric ═══ */}
+      <SectionReveal animation="slide-right">
+        <section className="bg-bg-deep py-28 lg:py-36 noise-texture relative">
+          <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="lg:grid lg:grid-cols-12 lg:gap-20">
+              <div className="lg:col-span-4">
+                <p className="section-label">Honest Answers</p>
+                <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] text-text-primary">
+                  Questions we get in every first&nbsp;call.
+                </h2>
+              </div>
+
+              <div className="lg:col-span-8 mt-12 lg:mt-0 space-y-0">
+                {objections.map((o, i) => (
+                  <div key={o.q}>
+                    <div className="py-8">
+                      <p className="text-xl text-text-primary leading-snug" style={{ fontFamily: "var(--font-heading)" }}>
+                        &ldquo;{o.q}&rdquo;
+                      </p>
+                      <p className="mt-3 text-base leading-relaxed text-text-secondary">{o.a}</p>
+                    </div>
+                    {i < objections.length - 1 && <div className="gradient-divider" />}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </SectionReveal>
 
-      <section className="bg-surface py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">Industry Depth Where It Matters Most</h2>
-          <p className="mt-4 max-w-3xl text-lg text-text-secondary">
-            Focused execution playbooks for the operating environments where we go deepest.
+      {/* ═══ FINAL CTA — Light, centered ═══ */}
+      <section className="bg-bg-light py-28 lg:py-36">
+        <div className="mx-auto max-w-2xl px-6 text-center lg:px-8">
+          <h2 className="text-[clamp(2.5rem,5vw,3.5rem)] text-text-on-light">
+            One conversation to find&nbsp;out.
+          </h2>
+          <p className="mt-6 text-base text-text-on-light-sub">
+            Tell us about your business. We&apos;ll be honest about whether we
+            can help — and if so, how.
           </p>
-          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {deepIndustries.map((industry) => {
-              const IndustryIcon = industryIcons[industry.icon];
-              return (
-                <Link key={industry.slug} href={`/industries/${industry.slug}`} className="rounded-xl border border-border bg-white p-5">
-                  <IndustryIcon className="mb-3 h-8 w-8 text-blue" aria-hidden />
-                  <h3 className="text-lg font-bold text-text-primary">{industry.shortName}</h3>
-                  <p className="mt-2 text-sm text-text-secondary">
-                    {industryTileDescriptions[industry.slug] ?? industry.hero}
-                  </p>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
-      <section className="bg-bg py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">Why ClearForge</h2>
-          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {differentiators.map((item) => (
-              <article key={item.title} className="rounded-xl border border-border bg-white p-6">
-                <item.icon className="mb-4 h-10 w-10 text-blue" aria-hidden />
-                <h3 className="text-lg font-bold text-text-primary">{item.title}</h3>
-                <p className="mt-2 text-base text-text-secondary">{item.text}</p>
-              </article>
-            ))}
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-8 text-sm text-text-on-light-muted">
+            <span><strong className="text-accent-dark">01</strong> — We listen</span>
+            <span><strong className="text-accent-dark">02</strong> — We&apos;re honest about fit</span>
+            <span><strong className="text-accent-dark">03</strong> — We scope it</span>
           </div>
-        </div>
-      </section>
 
-      <section className="bg-navy py-20 lg:py-28">
-        <div className="mx-auto max-w-5xl px-6 text-center lg:px-8">
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">Move from AI ambition to measurable execution.</h2>
-          <p className="mx-auto mt-4 max-w-3xl text-lg text-white/80">
-            Choose the path that fits your context today and build from there.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
-              <Link href="/contact">Book a Discovery Call</Link>
+              <Link href="/contact">Request a Proposal</Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-blue text-blue hover:bg-blue hover:text-white" asChild>
-              <Link href="/assessment">Start AI Assessment</Link>
+            <Button size="lg" variant="outline" className="border-border-light text-text-on-light hover:bg-bg-light-alt hover:text-text-on-light" asChild>
+              <Link href="mailto:james@clearforge.ai">Email Us Directly</Link>
             </Button>
           </div>
         </div>

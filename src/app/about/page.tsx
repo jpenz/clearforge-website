@@ -1,12 +1,29 @@
-import { createMetadata } from "@/lib/metadata";
-import { AboutPageClient } from "@/components/pages/about-page";
+import { createMetadata, breadcrumbJsonLd } from "@/lib/metadata";
+import { AboutPage } from "@/components/pages/about-page";
 
 export const metadata = createMetadata({
-  title: "About ClearForge — Strategy Meets AI Engineering",
-  description: "ClearForge supports CEOs, PE operating teams, and owner-led businesses with hands-on AI execution that improves operating performance and enterprise value.",
+  title: "About ClearForge | Strategy + AI Consulting and Engineering Team",
+  description:
+    "Meet ClearForge, a strategy + AI consulting firm that combines consulting rigor with engineering and managed AI operations.",
   path: "/about",
+  keywords: ["AI strategy consulting firm", "consulting and engineering team"],
 });
 
 export default function Page() {
-  return <AboutPageClient />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "About", path: "/about" },
+            ]),
+          ),
+        }}
+      />
+      <AboutPage />
+    </>
+  );
 }

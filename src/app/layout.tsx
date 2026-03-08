@@ -1,18 +1,39 @@
 import type { Metadata } from "next";
+import { Fraunces, Outfit, IBM_Plex_Mono } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { organizationJsonLd } from "@/lib/metadata";
+import { organizationJsonLd, coreKeywords } from "@/lib/metadata";
 import "./globals.css";
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://clearforge.ai"),
   title: {
-    default: "ClearForge.ai — Strategy that ships. AI that performs.",
-    template: "%s | ClearForge.ai",
+    default: "ClearForge — AI Strategy & Execution for Mid-Market Companies",
+    template: "%s | ClearForge",
   },
   description:
-    "ClearForge helps CEOs, PE operating partners, and owner-led companies turn AI into measurable operating performance, including businesses in the $2M-$15M seller-earnings range.",
-  openGraph: { type: "website", locale: "en_US", siteName: "ClearForge.ai" },
+    "ClearForge builds AI systems that drive real operational results. Strategy through execution — one team, no handoffs.",
+  keywords: coreKeywords,
+  openGraph: { type: "website", locale: "en_US", siteName: "ClearForge" },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
 };
@@ -22,21 +43,15 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased">
+      <body
+        className={`${fraunces.variable} ${outfit.variable} ${ibmPlexMono.variable} font-sans antialiased`}
+      >
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:text-text-primary focus:shadow-md"
-        >
-          Skip to content
-        </a>
         <Header />
-        <main id="main-content" className="min-h-screen pt-[72px]">
-          {children}
-        </main>
+        <main id="main-content">{children}</main>
         <Footer />
       </body>
     </html>
