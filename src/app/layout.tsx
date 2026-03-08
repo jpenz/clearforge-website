@@ -1,25 +1,25 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Outfit, IBM_Plex_Mono } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { organizationJsonLd, coreKeywords } from "@/lib/metadata";
 import "./globals.css";
 
-const instrumentSerif = Instrument_Serif({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: "400",
   variable: "--font-heading",
   display: "swap",
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
+const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   variable: "--font-mono",
   display: "swap",
 });
@@ -27,13 +27,13 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://clearforge.ai"),
   title: {
-    default: "ClearForge.ai / AI Strategy That Actually Ships",
-    template: "%s | ClearForge.ai",
+    default: "ClearForge — AI Strategy & Execution for Mid-Market Companies",
+    template: "%s | ClearForge",
   },
   description:
-    "ClearForge helps companies close the AI value gap with strategy, AI implementation, and managed operations delivered by one team.",
+    "ClearForge builds AI systems that drive real operational results. Strategy through execution — one team, no handoffs.",
   keywords: coreKeywords,
-  openGraph: { type: "website", locale: "en_US", siteName: "ClearForge.ai" },
+  openGraph: { type: "website", locale: "en_US", siteName: "ClearForge" },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
 };
@@ -43,13 +43,15 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${instrumentSerif.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <body
+        className={`${fraunces.variable} ${outfit.variable} ${ibmPlexMono.variable} font-sans antialiased`}
+      >
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <Header />
-        <main id="main-content" className="min-h-screen pt-[72px]">{children}</main>
+        <main id="main-content">{children}</main>
         <Footer />
       </body>
     </html>

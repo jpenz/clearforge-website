@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { pillars, questions, scaleLabels, type Answers, type PillarKey, getQuestionsForPillar } from "@/lib/scorecard";
+import { pillars, questions, scaleLabels, type Answers, getQuestionsForPillar } from "@/lib/scorecard";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export function ScorecardPage() {
@@ -39,7 +39,7 @@ export function ScorecardPage() {
 
   return (
     <>
-      <section className="bg-white py-20 lg:py-28">
+      <section className="bg-bg-deep pt-32 pb-20 lg:pt-40 lg:pb-28">
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -47,12 +47,15 @@ export function ScorecardPage() {
             transition={{ duration: 0.5 }}
           >
             <span className="section-label">AI Maturity Scorecard</span>
-            <h1 className="mt-4 text-3xl font-bold text-text sm:text-4xl" style={{ fontFamily: "var(--font-heading)" }}>
+            <h1
+              className="mt-4 text-3xl text-text-primary sm:text-4xl"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
               How ready is your business for AI agents?
             </h1>
             <p className="mt-4 text-lg text-text-secondary">
               20 questions across 5 pillars. Takes about 5 minutes.
-              Get your AI maturity score, pillar breakdown, and a personalized roadmap with specific next steps.
+              Get your AI maturity score, pillar breakdown, and a personalized roadmap.
             </p>
           </motion.div>
 
@@ -60,11 +63,11 @@ export function ScorecardPage() {
           <div className="mt-10">
             <div className="flex items-center justify-between mb-2">
               <span className="text-base font-medium text-text-secondary">{pillar.name}</span>
-              <span className="metric-display text-sm">{answeredCount}/{totalQuestions}</span>
+              <span className="metric text-sm">{answeredCount}/{totalQuestions}</span>
             </div>
-            <div className="h-2 bg-border rounded-full overflow-hidden">
+            <div className="h-1 bg-border-subtle overflow-hidden">
               <div
-                className="h-full bg-teal rounded-full transition-all duration-500"
+                className="h-full bg-accent transition-all duration-500"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -73,8 +76,8 @@ export function ScorecardPage() {
                 <button
                   key={p.key}
                   onClick={() => setCurrentPillar(i)}
-                  className={`flex-1 h-1.5 rounded-full transition-colors ${
-                    i === currentPillar ? "bg-teal" : i < currentPillar ? "bg-teal/40" : "bg-border"
+                  className={`flex-1 h-1.5 transition-colors ${
+                    i === currentPillar ? "bg-accent" : i < currentPillar ? "bg-accent/40" : "bg-border-subtle"
                   }`}
                 />
               ))}
@@ -91,13 +94,13 @@ export function ScorecardPage() {
               transition={{ duration: 0.3 }}
               className="mt-10 space-y-6"
             >
-              <div className="rounded-lg border border-border bg-surface p-4">
-                <h3 className="text-sm font-bold text-text" style={{ fontFamily: "var(--font-heading)" }}>{pillar.name}</h3>
-                <p className="text-base text-text-tertiary mt-1">{pillar.description}</p>
+              <div className="border border-border-subtle bg-bg-surface p-4">
+                <h3 className="text-sm font-bold text-text-primary" style={{ fontFamily: "var(--font-heading)" }}>{pillar.name}</h3>
+                <p className="text-base text-text-muted mt-1">{pillar.description}</p>
               </div>
 
               {pillarQuestions.map((q) => (
-                <div key={q.id} className="rounded-lg border border-border bg-white p-6">
+                <div key={q.id} className="border border-border-subtle bg-bg-primary p-6">
                   <p className="text-base font-medium text-text-secondary mb-4">{q.text}</p>
                   <div className="flex gap-2">
                     {scaleLabels.map((label, idx) => {
@@ -107,10 +110,10 @@ export function ScorecardPage() {
                         <button
                           key={value}
                           onClick={() => handleAnswer(q.id, value)}
-                          className={`flex-1 rounded-md border px-2 py-2.5 text-xs font-medium transition-all ${
+                          className={`flex-1 border px-2 py-2.5 text-xs font-medium transition-all ${
                             isSelected
-                              ? "border-teal bg-teal text-white"
-                              : "border-border text-text-tertiary hover:border-teal hover:text-teal"
+                              ? "border-accent bg-accent text-white"
+                              : "border-border-subtle text-text-muted hover:border-accent hover:text-accent"
                           }`}
                         >
                           <span className="hidden sm:inline">{label}</span>

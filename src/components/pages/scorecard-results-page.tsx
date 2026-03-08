@@ -26,9 +26,9 @@ export function ScorecardResultsPage() {
 
   if (!result) {
     return (
-      <section className="bg-white py-20 lg:py-28">
+      <section className="bg-bg-deep pt-32 pb-20 lg:pt-40 lg:pb-28">
         <div className="mx-auto max-w-3xl px-6 lg:px-8 text-center">
-          <h1 className="text-3xl font-bold text-text" style={{ fontFamily: "var(--font-heading)" }}>No Results Found</h1>
+          <h1 className="text-3xl text-text-primary" style={{ fontFamily: "var(--font-heading)" }}>No Results Found</h1>
           <p className="mt-4 text-lg text-text-secondary">Please complete the scorecard first.</p>
           <Button className="mt-8" asChild>
             <Link href="/scorecard">Take the Scorecard</Link>
@@ -59,7 +59,7 @@ export function ScorecardResultsPage() {
         }),
       });
     } catch {
-      // Non-blocking - show results even if capture fails
+      // Non-blocking
     }
 
     setSubmitted(true);
@@ -67,77 +67,63 @@ export function ScorecardResultsPage() {
     setSubmitting(false);
   }
 
-  const scoreColor = result.compositeScore >= 70 ? "text-teal" : result.compositeScore >= 50 ? "text-teal-light" : "text-text-tertiary";
+  const scoreColor = result.compositeScore >= 70 ? "text-accent" : result.compositeScore >= 50 ? "text-accent-hover" : "text-text-muted";
+
+  const inputClasses =
+    "w-full border-0 border-b border-border-default bg-transparent px-0 py-3 text-base text-text-primary placeholder:text-text-muted focus:border-accent focus:outline-none focus:ring-0 transition-colors";
 
   // Lead capture gate
   if (gated && !submitted) {
     return (
-      <section className="bg-navy min-h-[80vh] flex items-center py-20">
+      <section className="bg-bg-deep min-h-[80vh] flex items-center pt-32 pb-20">
         <div className="mx-auto max-w-lg px-6 lg:px-8 w-full">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <div className="text-center mb-8">
-              <span className="section-label text-teal">Assessment Complete</span>
-              <h1 className="mt-4 text-3xl font-bold text-white" style={{ fontFamily: "var(--font-heading)" }}>
+              <span className="section-label">Assessment Complete</span>
+              <h1 className="mt-4 text-3xl text-text-primary" style={{ fontFamily: "var(--font-heading)" }}>
                 Your results are ready.
               </h1>
-              <p className="mt-3 text-lg text-white/70">
-                Enter your details to see your AI maturity score, pillar breakdown, and a personalized roadmap.
+              <p className="mt-3 text-lg text-text-secondary">
+                Enter your details to see your AI maturity score, pillar breakdown, and personalized roadmap.
               </p>
             </div>
 
-            {/* Score preview (teaser) */}
             <div className="text-center mb-8">
-              <div className={`metric-display text-6xl ${scoreColor}`}>
+              <div className={`metric text-6xl ${scoreColor}`}>
                 {result.compositeScore}
               </div>
-              <p className="mt-1 text-sm text-text-tertiary">Your AI Maturity Score</p>
+              <p className="mt-1 text-sm text-text-muted">Your AI Maturity Score</p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="relative">
-                <User className="absolute left-3 top-3.5 h-4 w-4 text-text-tertiary" />
-                <input
-                  type="text"
-                  required
-                  placeholder="Your name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-10 pr-4 text-white placeholder:text-text-tertiary focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal"
-                />
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-widest text-text-muted mb-2">Name *</label>
+                <div className="relative">
+                  <User className="absolute left-0 top-3.5 h-4 w-4 text-text-muted" />
+                  <input type="text" required placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} className={`${inputClasses} pl-6`} />
+                </div>
               </div>
-              <div className="relative">
-                <Mail className="absolute left-3 top-3.5 h-4 w-4 text-text-tertiary" />
-                <input
-                  type="email"
-                  required
-                  placeholder="Work email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-10 pr-4 text-white placeholder:text-text-tertiary focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal"
-                />
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-widest text-text-muted mb-2">Work Email *</label>
+                <div className="relative">
+                  <Mail className="absolute left-0 top-3.5 h-4 w-4 text-text-muted" />
+                  <input type="email" required placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} className={`${inputClasses} pl-6`} />
+                </div>
               </div>
-              <div className="relative">
-                <Building2 className="absolute left-3 top-3.5 h-4 w-4 text-text-tertiary" />
-                <input
-                  type="text"
-                  required
-                  placeholder="Company name"
-                  value={company}
-                  onChange={(e) => setCompany(e.target.value)}
-                  className="w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-10 pr-4 text-white placeholder:text-text-tertiary focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal"
-                />
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-widest text-text-muted mb-2">Company *</label>
+                <div className="relative">
+                  <Building2 className="absolute left-0 top-3.5 h-4 w-4 text-text-muted" />
+                  <input type="text" required placeholder="Company name" value={company} onChange={(e) => setCompany(e.target.value)} className={`${inputClasses} pl-6`} />
+                </div>
               </div>
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full"
-                disabled={submitting}
-              >
-                {submitting ? "Loading..." : "See My Full Results & Roadmap"}
-                <ArrowRight className="ml-2 h-4 w-4" />
+              <Button type="submit" size="lg" className="w-full" disabled={submitting}>
+                {submitting ? "Loading..." : (
+                  <>See My Full Results & Roadmap <ArrowRight className="ml-2 h-4 w-4" /></>
+                )}
               </Button>
-              <p className="text-center text-xs text-text-tertiary">
-                We'll send your detailed assessment to this email. No spam, ever.
+              <p className="text-center text-xs text-text-muted">
+                We&apos;ll send your detailed assessment to this email. No spam, ever.
               </p>
             </form>
           </motion.div>
@@ -149,32 +135,32 @@ export function ScorecardResultsPage() {
   return (
     <>
       {/* Score Hero */}
-      <section className="bg-navy py-20 lg:py-28">
+      <section className="bg-bg-deep pt-32 pb-20 lg:pt-40 lg:pb-28">
         <div className="mx-auto max-w-3xl px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             {submitted && (
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-teal/20 bg-teal/10 px-4 py-2 text-sm text-teal">
+              <div className="mb-6 inline-flex items-center gap-2 border border-accent/20 bg-accent/10 px-4 py-2 text-sm text-accent">
                 <CheckCircle className="h-4 w-4" />
                 Results sent to {email}
               </div>
             )}
-            <span className="section-label text-teal">Your AI Maturity Score</span>
-            <div className={`mt-6 metric-display text-7xl lg:text-8xl ${scoreColor}`}>
+            <span className="section-label">Your AI Maturity Score</span>
+            <div className={`mt-6 metric text-7xl lg:text-8xl ${scoreColor}`}>
               {result.compositeScore}
             </div>
-            <p className="mt-2 text-xl font-bold text-white" style={{ fontFamily: "var(--font-heading)" }}>{result.maturityLevel}</p>
-            <p className="mt-4 text-lg text-white/80 max-w-xl mx-auto">{result.maturityDescription}</p>
+            <p className="mt-2 text-xl text-text-primary" style={{ fontFamily: "var(--font-heading)" }}>{result.maturityLevel}</p>
+            <p className="mt-4 text-lg text-text-secondary max-w-xl mx-auto">{result.maturityDescription}</p>
           </motion.div>
         </div>
       </section>
 
-      {/* Pillar Breakdown */}
-      <section className="bg-white py-20 lg:py-28">
+      {/* Pillar Breakdown — Light */}
+      <section className="bg-bg-light py-20 lg:py-28">
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <h2 className="text-2xl font-bold text-text mb-2" style={{ fontFamily: "var(--font-heading)" }}>Pillar Breakdown</h2>
-            <p className="text-text-secondary mb-8">How you scored across each dimension of AI readiness.</p>
-            <div className="space-y-6">
+            <p className="section-label text-accent-dark">Pillar Breakdown</p>
+            <h2 className="mt-4 text-2xl text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>How you scored across each dimension.</h2>
+            <div className="mt-8 space-y-6">
               {result.pillarScores.map((ps, i) => {
                 const isWeakest = ps.key === result.weakestPillar;
                 const isStrongest = ps.key === result.strongestPillar;
@@ -185,25 +171,25 @@ export function ScorecardResultsPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: 0.08 * i }}
-                    className={`rounded-lg border p-6 ${
-                      isWeakest ? "border-red-200 bg-red-50/50" : isStrongest ? "border-teal/20 bg-teal/5" : "border-border bg-white"
+                    className={`border p-6 ${
+                      isWeakest ? "border-red-400/30 bg-red-50/50" : isStrongest ? "border-accent/30 bg-accent/5" : "border-border-light bg-bg-light"
                     }`}
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
-                        <h3 className="text-sm font-bold text-text" style={{ fontFamily: "var(--font-heading)" }}>{ps.name}</h3>
-                        {isWeakest && <span className="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-medium">Priority Area</span>}
-                        {isStrongest && <span className="text-xs bg-teal/10 text-teal px-2 py-0.5 rounded-full font-medium">Strongest</span>}
+                        <h3 className="text-sm font-bold text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>{ps.name}</h3>
+                        {isWeakest && <span className="text-xs bg-red-100 text-red-700 px-2 py-0.5 font-medium">Priority Area</span>}
+                        {isStrongest && <span className="text-xs bg-accent/10 text-accent-dark px-2 py-0.5 font-medium">Strongest</span>}
                       </div>
-                      <span className="metric-display text-lg">{Math.round(ps.percentage)}%</span>
+                      <span className="metric text-lg text-accent-dark">{Math.round(ps.percentage)}%</span>
                     </div>
-                    <div className="h-2 bg-border rounded-full overflow-hidden">
+                    <div className="h-1 bg-border-light overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${ps.percentage}%` }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.2 + 0.08 * i }}
-                        className={`h-full rounded-full ${isWeakest ? "bg-red-400" : "bg-teal"}`}
+                        className={`h-full ${isWeakest ? "bg-red-400" : "bg-accent"}`}
                       />
                     </div>
                   </motion.div>
@@ -214,16 +200,16 @@ export function ScorecardResultsPage() {
         </div>
       </section>
 
-      {/* Personalized Roadmap */}
-      <section className="bg-navy py-20 lg:py-28">
+      {/* Roadmap — Dark */}
+      <section className="bg-bg-deep py-20 lg:py-28">
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <span className="section-label text-teal">Your Personalized Roadmap</span>
-            <h2 className="mt-4 text-2xl font-bold text-white" style={{ fontFamily: "var(--font-heading)" }}>
-              Here's how we'd close the gap for your business.
+            <span className="section-label">Your Personalized Roadmap</span>
+            <h2 className="mt-4 text-2xl text-text-primary" style={{ fontFamily: "var(--font-heading)" }}>
+              Here&apos;s how we&apos;d close the gap.
             </h2>
-            <p className="mt-3 text-white/70">
-              Based on your scores, this is the phased approach we'd recommend. Every engagement starts with understanding where you are, then we build from there.
+            <p className="mt-3 text-text-secondary">
+              Based on your scores, this is the phased approach we&apos;d recommend.
             </p>
           </motion.div>
 
@@ -235,20 +221,20 @@ export function ScorecardResultsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.1 * i }}
-                className="relative rounded-xl border border-white/10 bg-white/[0.04] p-6 lg:p-8"
+                className="border border-border-subtle bg-bg-primary p-6 lg:p-8"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal/20 text-xs font-bold text-teal">
+                  <span className="metric text-xs shrink-0">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-teal">{step.phase} · {step.timeline}</span>
-                    <h3 className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-heading)" }}>{step.title}</h3>
+                    <span className="text-xs font-semibold uppercase tracking-wider text-accent">{step.phase} · {step.timeline}</span>
+                    <h3 className="text-lg text-text-primary" style={{ fontFamily: "var(--font-heading)" }}>{step.title}</h3>
                   </div>
                 </div>
-                <p className="text-white/70 leading-relaxed">{step.description}</p>
+                <p className="text-text-secondary leading-relaxed">{step.description}</p>
                 <div className="mt-3">
-                  <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-text-tertiary">
+                  <span className="inline-flex items-center gap-1 border border-border-subtle bg-bg-surface px-3 py-1 text-xs text-text-muted">
                     Service: {step.service}
                   </span>
                 </div>
@@ -258,22 +244,24 @@ export function ScorecardResultsPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-white py-20 lg:py-28">
+      {/* CTA — Light */}
+      <section className="bg-bg-light py-20 lg:py-28">
         <div className="mx-auto max-w-3xl px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <span className="section-label">Next Step</span>
-            <h2 className="mt-4 text-2xl font-bold text-text" style={{ fontFamily: "var(--font-heading)" }}>
+            <h2
+              className="text-3xl text-text-on-light sm:text-4xl"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
               Ready to close the gap?
             </h2>
-            <p className="mt-4 text-lg text-text-secondary max-w-xl mx-auto">
-              Book a 30-minute discovery call. We'll walk through your results, answer questions, and discuss whether ClearForge is the right fit.
+            <p className="mt-4 text-lg text-text-on-light-sub max-w-xl mx-auto">
+              Book a 30-minute discovery call. We&apos;ll walk through your results and discuss whether ClearForge is the right fit.
             </p>
             <div className="mt-8 flex gap-4 flex-wrap justify-center">
               <Button size="lg" asChild>
-                <Link href="/contact">Book a Discovery Call <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                <Link href="/contact">Request a Proposal <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
-              <Button variant="outline" size="lg" asChild>
+              <Button variant="outline" size="lg" className="border-border-light text-text-on-light hover:bg-bg-light-alt" asChild>
                 <Link href="/services">Explore Our Services</Link>
               </Button>
             </div>

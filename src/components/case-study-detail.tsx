@@ -4,9 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { type CaseStudy } from "@/data/case-studies";
-import { ArrowLeft, ArrowRight, CheckCircle2, Target, TrendingUp, DollarSign, Clock } from "lucide-react";
-
-const outcomeIcons = [Target, TrendingUp, DollarSign, Clock];
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 interface Props {
   caseStudy: CaseStudy;
@@ -15,92 +13,137 @@ interface Props {
 export function CaseStudyDetailClient({ caseStudy: cs }: Props) {
   return (
     <>
-      <section className="bg-navy py-20 lg:py-28">
+      {/* Hero */}
+      <section className="bg-bg-deep pt-32 pb-16 lg:pt-40 lg:pb-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <Link href="/case-studies" className="inline-flex items-center gap-1 text-base text-white/80 hover:text-teal mb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <Link
+              href="/case-studies"
+              className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-text-primary transition-colors mb-8"
+            >
               <ArrowLeft className="h-4 w-4" /> All Case Studies
             </Link>
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-sm font-medium text-teal border border-teal/30 rounded-md px-2.5 py-1">{cs.industry}</span>
-              <span className="text-base text-white/80">{cs.service}</span>
+              <span className="text-xs font-semibold uppercase tracking-widest text-accent">
+                {cs.industry}
+              </span>
+              <span className="text-xs text-text-muted">·</span>
+              <span className="text-xs text-text-muted">{cs.service}</span>
             </div>
-            <h1 className="text-3xl font-bold text-white sm:text-4xl max-w-4xl" style={{ fontFamily: "var(--font-heading)" }}>
+            <h1
+              className="text-3xl text-text-primary sm:text-4xl lg:text-5xl max-w-4xl"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
               {cs.title}
             </h1>
-            <p className="mt-6 text-xl text-white/80 max-w-3xl leading-relaxed">{cs.excerpt}</p>
+            <p className="mt-6 text-lg text-text-secondary max-w-3xl leading-relaxed">
+              {cs.excerpt}
+            </p>
           </motion.div>
         </div>
       </section>
 
-      <section className="bg-white border-b border-border">
+      {/* Metrics strip — Light */}
+      <section className="bg-bg-light">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4">
-            {cs.outcomes.slice(0, 4).map((o, i) => {
-              const Icon = outcomeIcons[i % outcomeIcons.length];
-              return (
-                <div key={o.metric} className={`p-6 text-center ${i < 3 ? "border-r border-border" : ""}`}>
-                  <div className="flex justify-center mb-2">
-                    <Icon className="h-5 w-5 text-teal" />
-                  </div>
-                  <div className="metric-display text-2xl lg:text-3xl">{o.metric}</div>
-                  <p className="mt-1 text-base text-text-secondary">{o.description}</p>
-                </div>
-              );
-            })}
+          <div className="grid grid-cols-2 gap-px bg-border-light lg:grid-cols-4">
+            {cs.outcomes.slice(0, 4).map((o) => (
+              <div key={o.metric} className="bg-bg-light p-6 text-center lg:p-8">
+                <p className="metric text-2xl font-bold text-accent-dark lg:text-3xl">{o.metric}</p>
+                <p className="mt-1 text-sm text-text-on-light-muted">{o.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-20 lg:py-28">
+      {/* Challenge */}
+      <section className="bg-bg-deep py-20 lg:py-28">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <span className="section-label">The Challenge</span>
-          <p className="mt-4 text-lg text-text-secondary leading-relaxed">{cs.challenge}</p>
+          <p className="section-label">The Challenge</p>
+          <p className="mt-4 text-lg leading-relaxed text-text-secondary">
+            {cs.challenge}
+          </p>
         </div>
       </section>
 
-      <section className="bg-surface py-20 lg:py-28">
+      {/* Solution — Light */}
+      <section className="bg-bg-light py-20 lg:py-28">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <span className="section-label">The Solution</span>
-          <div className="mt-8 space-y-5">
+          <p className="section-label text-accent-dark">The Solution</p>
+          <div className="mt-8 space-y-4">
             {cs.solution.map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: 0.08 * i }}
-                className="flex items-start gap-4 rounded-lg border border-border bg-white p-6"
+                transition={{ duration: 0.4, delay: 0.06 * i }}
+                className="flex items-start gap-4 border border-border-light p-6"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-teal/10">
-                  <CheckCircle2 className="h-5 w-5 text-teal" />
-                </div>
-                <p className="text-lg text-text-secondary leading-relaxed">{item}</p>
+                <span className="metric text-xs mt-1 shrink-0 text-accent-dark">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <p className="text-base leading-relaxed text-text-on-light-sub">
+                  {item}
+                </p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-20 lg:py-28">
+      {/* Continuous model */}
+      {cs.continuousModel && cs.continuousModel.length > 0 && (
+        <section className="bg-bg-deep py-20 lg:py-28">
+          <div className="mx-auto max-w-4xl px-6 lg:px-8">
+            <p className="section-label">Continuous Model</p>
+            <ul className="mt-6 space-y-3">
+              {cs.continuousModel.map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-base text-text-secondary">
+                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      {/* Scale */}
+      <section className="bg-bg-primary py-20 lg:py-28">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <span className="section-label">The Scale</span>
-          <p className="mt-4 text-lg text-text-secondary leading-relaxed">{cs.scale}</p>
+          <p className="section-label">The Scale</p>
+          <p className="mt-4 text-lg leading-relaxed text-text-secondary">
+            {cs.scale}
+          </p>
         </div>
       </section>
 
-      <section className="bg-navy py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white sm:text-4xl" style={{ fontFamily: "var(--font-heading)" }}>Ready for results like these?</h2>
-          <p className="mt-4 text-lg text-white/80 max-w-xl mx-auto">
+      {/* CTA */}
+      <section className="bg-bg-deep py-20 lg:py-28 hero-glow">
+        <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
+          <h2
+            className="text-3xl text-text-primary sm:text-4xl"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            Ready for results like these?
+          </h2>
+          <p className="mt-4 text-lg text-text-secondary">
             Every engagement starts with understanding your specific challenges.
           </p>
-          <div className="mt-8 flex justify-center gap-4 flex-wrap">
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
-              <Link href="/contact">Book a Discovery Call</Link>
+              <Link href="/contact">Request a Proposal</Link>
             </Button>
-            <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white hover:text-text" asChild>
-              <Link href="/case-studies">More Case Studies <ArrowRight className="ml-2 h-4 w-4" /></Link>
+            <Button variant="secondary" size="lg" asChild>
+              <Link href="/case-studies">
+                More Case Studies <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
           </div>
         </div>
