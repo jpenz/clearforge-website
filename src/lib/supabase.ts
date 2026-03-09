@@ -1,10 +1,13 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-// Server-side client with service role for API routes
-export const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
+// Server-side client with service role for API routes — null if not configured
+let supabaseAdmin: SupabaseClient | null = null;
+if (supabaseUrl && serviceRoleKey) {
+  supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
+}
 
 export interface AssessmentLead {
   id?: string;
@@ -29,6 +32,11 @@ export interface AssessmentLead {
 }
 
 export async function saveAssessmentLead(lead: AssessmentLead): Promise<string | null> {
+  if (!supabaseAdmin) {
+    console.warn("Supabase not configured; skipping lead save.");
+    return null;
+  }
+
   const { data, error } = await supabaseAdmin
     .from("assessment_leads")
     .insert(lead)
@@ -51,6 +59,11 @@ export async function saveContactLead(lead: {
   message: string;
   source: string;
 }): Promise<string | null> {
+  if (!supabaseAdmin) {
+    console.warn("Supabase not configured; skipping contact lead save.");
+    return null;
+  }
+
   const { data, error } = await supabaseAdmin
     .from("assessment_leads")
     .insert({
