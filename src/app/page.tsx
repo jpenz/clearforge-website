@@ -4,9 +4,9 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { createMetadata } from "@/lib/metadata";
 import { caseStudies } from "@/data/case-studies";
-import { AnimatedMetric } from "@/components/home/animated-metric";
-import { SectionReveal, StaggerReveal, StaggerChild } from "@/components/home/section-reveal";
-import { ScrollMarquee } from "@/components/home/marquee";
+import { GSAPCounter } from "@/components/home/gsap-counter";
+import { GSAPSectionReveal, StaggerRevealGSAP } from "@/components/home/gsap-section-reveal";
+import { GSAPMarquee } from "@/components/home/gsap-marquee";
 
 export const metadata = createMetadata({
   title: "ClearForge — AI Strategy & Execution for Mid-Market Companies",
@@ -137,7 +137,7 @@ export default function Home() {
       </section>
 
       {/* ═══ WHY AI STALLS — Light, asymmetric split ═══ */}
-      <SectionReveal animation="slide-left">
+      <GSAPSectionReveal animation="slide-left">
         <section className="bg-bg-light py-28 lg:py-36">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="lg:grid lg:grid-cols-12 lg:gap-20">
@@ -148,33 +148,29 @@ export default function Home() {
                 </h2>
               </div>
 
-              <StaggerReveal className="lg:col-span-7 mt-14 lg:mt-0 space-y-10" stagger={0.12}>
+              <StaggerRevealGSAP className="lg:col-span-7 mt-14 lg:mt-0 space-y-10" stagger={0.12}>
                 {stallReasons.map((r, i) => (
-                  <StaggerChild key={r.title}>
-                    <div className="flex items-baseline gap-6">
-                      <span className="metric text-sm text-accent-dark shrink-0">{String(i + 1).padStart(2, "0")}</span>
-                      <div>
-                        <h3 className="text-xl font-bold text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
-                          {r.title}
-                        </h3>
-                        <p className="mt-2 text-base leading-relaxed text-text-on-light-sub">{r.description}</p>
-                      </div>
+                  <div key={r.title} className="flex items-baseline gap-6">
+                    <span className="metric text-sm text-accent-dark shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                    <div>
+                      <h3 className="text-xl font-bold text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
+                        {r.title}
+                      </h3>
+                      <p className="mt-2 text-base leading-relaxed text-text-on-light-sub">{r.description}</p>
                     </div>
-                  </StaggerChild>
+                  </div>
                 ))}
-                <StaggerChild>
-                  <p className="text-lg font-semibold text-accent-dark mt-6 border-l-2 border-accent pl-6">
-                    Disconnected execution turns promising pilots into expensive programs that never ship.
-                  </p>
-                </StaggerChild>
-              </StaggerReveal>
+                <p className="text-lg font-semibold text-accent-dark mt-6 border-l-2 border-accent pl-6">
+                  Disconnected execution turns promising pilots into expensive programs that never ship.
+                </p>
+              </StaggerRevealGSAP>
             </div>
           </div>
         </section>
-      </SectionReveal>
+      </GSAPSectionReveal>
 
       {/* ═══ SOUND FAMILIAR — Dark, centered, atmospheric ═══ */}
-      <SectionReveal animation="scale-up">
+      <GSAPSectionReveal animation="scale-up">
         <section className="bg-bg-deep py-28 lg:py-36 noise-texture relative">
           <div className="absolute inset-0 bg-gradient-to-b from-accent/[0.03] via-transparent to-transparent pointer-events-none" />
           <div className="relative z-10 mx-auto max-w-2xl px-6 lg:px-8">
@@ -200,13 +196,13 @@ export default function Home() {
             </p>
           </div>
         </section>
-      </SectionReveal>
+      </GSAPSectionReveal>
 
       {/* ═══ MARQUEE ═══ */}
-      <ScrollMarquee text="Prepare / Modernize / Build / Scale" className="bg-bg-primary" />
+      <GSAPMarquee text="Prepare / Modernize / Build / Scale" className="bg-bg-primary" />
 
       {/* ═══ TRANSFORMATION MODEL — Light, inline SVG diagram ═══ */}
-      <SectionReveal animation="fade-up">
+      <GSAPSectionReveal animation="fade-up">
         <section className="bg-bg-light py-28 lg:py-36">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <p className="section-label text-accent-dark">Our Transformation Model</p>
@@ -258,10 +254,10 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </SectionReveal>
+      </GSAPSectionReveal>
 
       {/* ═══ DUAL ENGINE — Dark, split layout ═══ */}
-      <SectionReveal animation="slide-right">
+      <GSAPSectionReveal animation="slide-right">
         <section className="bg-bg-deep py-28 lg:py-36 relative">
           <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.04] via-transparent to-transparent pointer-events-none" />
           <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
@@ -298,10 +294,10 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </SectionReveal>
+      </GSAPSectionReveal>
 
       {/* ═══ EXECUTION — Light, right-aligned editorial ═══ */}
-      <SectionReveal animation="slide-left">
+      <GSAPSectionReveal animation="slide-left">
         <section className="bg-bg-light py-28 lg:py-36">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="lg:grid lg:grid-cols-12 lg:gap-20">
@@ -338,11 +334,11 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </SectionReveal>
+      </GSAPSectionReveal>
 
       {/* ═══ RESULTS — Dark, big metrics ═══ */}
       {featured && (
-        <SectionReveal animation="scale-up">
+        <GSAPSectionReveal animation="scale-up">
           <section className="bg-bg-deep py-28 lg:py-36 relative noise-texture">
             <div className="absolute inset-0 bg-bg-deep/90 pointer-events-none" />
             <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
@@ -356,7 +352,7 @@ export default function Home() {
               <div className="mt-14 grid grid-cols-2 gap-10 lg:grid-cols-4">
                 {featured.outcomes.slice(0, 4).map((o) => (
                   <div key={o.description}>
-                    <AnimatedMetric value={o.metric} className="metric text-[clamp(2.5rem,5vw,4rem)] font-bold" />
+                    <GSAPCounter value={o.metric} className="metric text-[clamp(2.5rem,5vw,4rem)] font-bold" />
                     <p className="mt-2 text-sm text-text-muted">{o.description}</p>
                   </div>
                 ))}
@@ -371,11 +367,11 @@ export default function Home() {
               </div>
             </div>
           </section>
-        </SectionReveal>
+        </GSAPSectionReveal>
       )}
 
       {/* ═══ ASSESSMENT CTA — Light, centered ═══ */}
-      <SectionReveal animation="fade-up">
+      <GSAPSectionReveal animation="fade-up">
         <section className="bg-bg-light py-28 lg:py-36">
           <div className="mx-auto max-w-3xl px-6 lg:px-8">
             <div className="text-center">
@@ -413,13 +409,13 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </SectionReveal>
+      </GSAPSectionReveal>
 
       {/* ═══ MARQUEE ═══ */}
-      <ScrollMarquee text="Understand / Build / Operate" className="bg-bg-primary" />
+      <GSAPMarquee text="Understand / Build / Operate" className="bg-bg-primary" />
 
       {/* ═══ OBJECTIONS — Dark, asymmetric ═══ */}
-      <SectionReveal animation="slide-right">
+      <GSAPSectionReveal animation="slide-right">
         <section className="bg-bg-deep py-28 lg:py-36 noise-texture relative">
           <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
             <div className="lg:grid lg:grid-cols-12 lg:gap-20">
@@ -446,7 +442,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </SectionReveal>
+      </GSAPSectionReveal>
 
       {/* ═══ FINAL CTA — Light, centered ═══ */}
       <section className="bg-bg-light py-28 lg:py-36">

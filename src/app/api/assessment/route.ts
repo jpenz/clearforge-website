@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { calculateResults, questions, type Answers, type ScorecardResult } from "@/lib/scorecard";
+import { saveAssessmentLead } from "@/lib/supabase";
 
 interface AssessmentInput {
   answers?: Record<string, unknown>;
@@ -157,14 +158,22 @@ async function queryPerplexity(prompt: string): Promise<string> {
 }
 
 async function fetchCompanyResearch(companyUrl: string, industry: string, challenge: string): Promise<string> {
-  const prompt = `Research ${companyUrl}. In 280 words or less, summarize:
-1) What the company appears to sell (services, products, buyers)
-2) Their likely industry positioning and business model
-3) Operational realities relevant to this challenge: "${challenge}"
-4) 2 practical risks if they pursue AI poorly
-5) 2 strategic advantages if they execute AI well
+  const prompt = `Research ${companyUrl}. In 400 words or less, provide:
 
-Write for an executive audience in plain language. Industry context: ${industry}.`;
+1) BUSINESS OVERVIEW: What the company sells (services, products, buyers), their market positioning, and business model.
+
+2) VALUE CHAIN MAP: Break down their core value chain into 5-7 stages (e.g., Lead Generation > Sales > Delivery > Support > Retention). For each stage, note the likely current state (manual, semi-automated, or automated).
+
+3) AUTOMATION HOTSPOTS: Identify the top 3-4 highest-value automation opportunities aligned to their challenge: "${challenge}". For each hotspot:
+   - Which value chain stage it targets
+   - What an AI agent or workflow could do
+   - Estimated impact (time saved, revenue uplift, cost reduction)
+   - Implementation complexity (low/medium/high)
+
+4) GROWTH LEVERS: 2 ways AI could help them find new growth (where to grow)
+5) MACHINE BUILDING: 2 ways AI could operationalize that growth (how to build the machine)
+
+Write for a CEO/COO audience in plain, direct language. Industry: ${industry}.`;
 
   return queryPerplexity(prompt);
 }
@@ -173,13 +182,14 @@ async function fetchIndustryBestInClass(industry: string, challenge: string): Pr
   const prompt = `For the ${industry} industry, define what best-in-class AI-enabled operations look like for this core pain point: "${challenge}".
 
 Provide:
-1) A 12-month target operating model snapshot
-2) 5 capabilities that separate leaders from followers
-3) 5 KPI ranges leaders monitor
-4) Common execution mistakes to avoid
-5) A practical maturity path (Now, Next, Scale)
+1) 12-MONTH TARGET OPERATING MODEL: What the operation looks like when AI is working at scale
+2) 5 SEPARATING CAPABILITIES: What leaders do that followers don't
+3) 5 KPI RANGES: Specific metrics leaders monitor with benchmark ranges
+4) AI AGENT USE CASES: 3 specific AI agent workflows that top performers deploy for this pain point
+5) EXECUTION MISTAKES: 3 common mistakes companies make when trying to solve this with AI
+6) MATURITY PATH: Now (quick wins, 30 days) > Next (system builds, 90 days) > Scale (compound value, 12 months)
 
-Keep it under 320 words, practical and specific.`;
+Keep it under 400 words. Be specific with numbers and examples. Write for operators, not technologists.`;
 
   return queryPerplexity(prompt);
 }
@@ -217,17 +227,23 @@ You are here because "${params.challenge}" is now blocking growth and execution 
 ## The Core Problem
 The core issue is not access to AI tools. The issue is a strategy-to-execution gap where process design, team habits, and system readiness are misaligned. The result is effort without compounding business value.
 
-## What You've Already Tried
-Most teams in this position have tested disconnected tools, generated local wins, and then hit adoption stalls. This pattern often happens when ownership is split and workflow redesign is treated as an afterthought. Your readiness profile points to this same risk if the next move is not integrated.
+## Your Value Chain and Where AI Fits
+Every ${params.industry} business runs through a core sequence: lead generation, qualification, delivery, fulfillment, and retention. Based on your assessment, the friction is concentrated in the middle stages where manual handoffs, inconsistent processes, and information gaps slow execution. These are exactly the stages where AI agents create compounding value when deployed with proper controls.
+
+## Top Automation Opportunities
+Based on your challenge and industry context, three high-impact automation opportunities stand out: (1) An AI-powered workflow that reduces manual touchpoints in your core bottleneck area. (2) Automated intelligence gathering that gives your team better data before every decision. (3) A monitoring and alerting system that catches issues before they become problems. Each of these can be built and measured within 60 days.
 
 ## What Best-in-Class Looks Like
-Best-in-class in ${params.industry} looks like disciplined execution with AI embedded in daily workflows, not novelty use cases. In 12 months, this means faster cycle times, clearer decision ownership, and measurable KPI lift with less operational drag. ${params.industryBestInClass}
+Best-in-class in ${params.industry} looks like disciplined execution with AI embedded in daily workflows, not novelty use cases. In 12 months, this means faster cycle times, clearer decision ownership, and measurable KPI lift with less operational drag.
+
+## What You've Already Tried
+Most teams in this position have tested disconnected tools, generated local wins, and then hit adoption stalls. This pattern often happens when ownership is split and workflow redesign is treated as an afterthought. Your readiness profile points to this same risk if the next move is not integrated.
 
 ## Concerns and How to Handle Them
 Concern: "Will this become a long consulting project?" Micro-story: A portfolio operations team started with one workflow, measured weekly, and expanded only after metrics proved lift. Concern: "Will our team adopt this?" Micro-story: A services firm paired workflow redesign with role-level training and adoption exceeded prior software rollouts in one quarter.
 
 ## Recommended Next Decision
-You have enough signal to act with confidence and without overcommitting. The right next step is a ${params.suggestedEngagement}. This gives you a focused 90-day execution path with clear owners, metrics, and checkpoints.`;
+You have enough signal to act with confidence and without overcommitting. The right next step is a ${params.suggestedEngagement}. This gives you a focused 90-day execution path with clear owners, metrics, and checkpoints. We will show you the value chain map, automation hotspots, and exactly where to start. No commitment beyond the conversation.`;
 }
 
 async function generateCloserReport(params: {
@@ -246,12 +262,14 @@ async function generateCloserReport(params: {
     throw new Error("GROQ_API_KEY is not configured");
   }
 
-  const systemPrompt = `You are a senior ClearForge advisor writing a sales-driven AI readiness plan.
-Write in six sections with these exact headings:
+  const systemPrompt = `You are a senior ClearForge advisor writing an AI transformation strategy report.
+Write in eight sections with these exact headings:
 ## Why This Matters Now
 ## The Core Problem
-## What You've Already Tried
+## Your Value Chain and Where AI Fits
+## Top Automation Opportunities
 ## What Best-in-Class Looks Like
+## What You've Already Tried
 ## Concerns and How to Handle Them
 ## Recommended Next Decision
 
@@ -259,9 +277,11 @@ Style rules:
 - Use the prospect's own pain-point wording verbatim at least twice
 - Emotional truth first, rational evidence second
 - Calm confidence, no pressure language
-- Use short micro-stories in the "Explain Away Concerns" section (2 concise examples)
-- Mention where "pause and reflection" matter for decision quality
-- Keep each section 2 to 4 sentences
+- In "Your Value Chain" section: map 5-7 stages of their business, mark which are manual vs automated, identify the bottleneck
+- In "Top Automation Opportunities" section: list 3-4 specific AI agent workflows with estimated ROI
+- Use short micro-stories in the "Concerns" section (2 concise examples)
+- End with a clear, low-commitment next step that creates urgency without pressure
+- Keep each section 3 to 5 sentences
 - No em dashes
 - No buzzwords like leverage, synergy, paradigm, holistic
 - Write for a CEO/COO audience in plain language`;
@@ -549,6 +569,36 @@ export async function POST(req: NextRequest) {
       suggestedSolutions,
     });
 
+    // Save lead to Supabase
+    const pillarScoresMap: Record<string, number> = {};
+    for (const p of scorecard.pillarScores) {
+      pillarScoresMap[p.key] = Math.round(p.percentage);
+    }
+
+    const leadId = await saveAssessmentLead({
+      name,
+      email,
+      company,
+      role,
+      industry,
+      challenge,
+      company_url: companyUrl || undefined,
+      phone: phone || undefined,
+      composite_score: scorecard.compositeScore,
+      maturity_level: scorecard.maturityLevel,
+      pillar_scores: pillarScoresMap,
+      suggested_solutions: suggestedSolutions,
+      suggested_engagement: suggestedEngagement,
+      closer_report: closerReport,
+      company_research: companyResearch,
+      industry_best_in_class: industryBestInClass,
+      source: "assessment",
+    });
+
+    if (leadId) {
+      console.log(`Assessment lead saved: ${leadId} (${email})`);
+    }
+
     return NextResponse.json({
       generatedAt: new Date().toISOString(),
       scorecard,
@@ -558,6 +608,7 @@ export async function POST(req: NextRequest) {
       suggestedSolutions,
       suggestedEngagement,
       emailSent,
+      leadSaved: !!leadId,
       lead: {
         name,
         email,

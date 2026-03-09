@@ -202,27 +202,29 @@ export function AssessmentPage() {
   }
 
   return (
-    <section className="bg-white py-20 lg:py-28">
-      <div className="mx-auto max-w-5xl px-6 lg:px-8">
+    <section className="noise-texture relative bg-bg-deep py-20 lg:py-28">
+      <div className="relative z-10 mx-auto max-w-5xl px-6 lg:px-8">
         <span className="section-label">AI Readiness & Opportunity Assessment</span>
-        <h1 className="mt-4 text-4xl font-bold text-text sm:text-5xl">One assessment. One strategy. One execution path.</h1>
+        <h1 className="mt-4 font-heading text-[clamp(2.5rem,5vw,3.5rem)] leading-[1.0] tracking-tight text-text-primary">
+          One assessment. One strategy. One execution path.
+        </h1>
         <p className="mt-4 max-w-3xl text-lg text-text-secondary">
           We combine readiness scoring, company research, industry best-practice benchmarking, and a sales-ready strategy report in a
           single workflow.
         </p>
-        <p className="mt-3 max-w-3xl text-base text-text-tertiary">
+        <p className="mt-3 max-w-3xl text-base text-text-muted">
           We start with your real bottleneck in your own words, then translate it into an execution plan leadership can act on.
         </p>
 
         {phase === "questions" && (
-          <div className="mt-10 rounded-xl border border-border bg-surface p-6 sm:p-8">
-            <div className="mb-6 flex items-center gap-4 text-sm text-text-tertiary">
+          <div className="mt-10 rounded-xl border border-border-subtle bg-bg-surface p-6 sm:p-8">
+            <div className="mb-6 flex items-center gap-4 text-sm text-text-muted">
               <span className="inline-flex items-center gap-1.5">
-                <BarChart3 className="h-4 w-4 text-teal" />
+                <BarChart3 className="h-4 w-4 text-accent" />
                 18 readiness questions
               </span>
               <span className="inline-flex items-center gap-1.5">
-                <Globe className="h-4 w-4 text-teal" />
+                <Globe className="h-4 w-4 text-accent" />
                 market research included
               </span>
             </div>
@@ -257,12 +259,12 @@ export function AssessmentPage() {
         )}
 
         {phase === "details" && (
-          <div className="mt-10 rounded-xl border border-border bg-surface p-6 sm:p-8">
-            <h2 className="text-2xl font-bold text-text">Add your business context</h2>
+          <div className="mt-10 rounded-xl border border-border-subtle bg-bg-surface p-6 sm:p-8">
+            <h2 className="text-2xl font-bold text-text-primary">Add your business context</h2>
             <p className="mt-2 text-text-secondary">
               We use this to personalize the report and benchmark to your exact operating environment.
             </p>
-            <p className="mt-1 text-sm text-text-tertiary">
+            <p className="mt-1 text-sm text-text-muted">
               Use plain language in the pain-point field. We will mirror your words in the strategy report.
             </p>
 
@@ -272,7 +274,7 @@ export function AssessmentPage() {
                 <select
                   value={industry}
                   onChange={(event) => setIndustry(event.target.value)}
-                  className="mt-2 h-10 w-full rounded-md border border-border bg-white px-3 text-sm text-text-secondary focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal"
+                  className="mt-2 h-10 w-full rounded-md border border-border-subtle bg-bg-surface px-3 text-sm text-text-secondary focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
                 >
                   <option value="">Select your industry</option>
                   {industries.map((item) => (
@@ -288,7 +290,7 @@ export function AssessmentPage() {
                 <select
                   value={role}
                   onChange={(event) => setRole(event.target.value)}
-                  className="mt-2 h-10 w-full rounded-md border border-border bg-white px-3 text-sm text-text-secondary focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal"
+                  className="mt-2 h-10 w-full rounded-md border border-border-subtle bg-bg-surface px-3 text-sm text-text-secondary focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
                 >
                   <option value="">Select your role</option>
                   {roles.map((item) => (
@@ -307,7 +309,7 @@ export function AssessmentPage() {
                   placeholder="Use your own words. Example: We keep running pilots, but nothing gets adopted by operations."
                   className="mt-2 min-h-[140px]"
                 />
-                <p className={`mt-2 text-sm ${challengeValid ? "text-text-tertiary" : "text-amber-700"}`}>
+                <p className={`mt-2 text-sm ${challengeValid ? "text-text-muted" : "text-accent-dark"}`}>
                   {challengeLength}/20 minimum characters
                 </p>
               </div>
@@ -319,7 +321,7 @@ export function AssessmentPage() {
               <div>
                 <label className="text-sm font-medium text-text-secondary">Work email *</label>
                 <Input value={email} onChange={(event) => setEmail(event.target.value)} placeholder="jane@company.com" className="mt-2" />
-                {!!email.trim() && !emailValid && <p className="mt-2 text-sm text-red-600">Please enter a valid email address.</p>}
+                {!!email.trim() && !emailValid && <p className="mt-2 text-sm text-error">Please enter a valid email address.</p>}
               </div>
 
               <div>
@@ -344,11 +346,11 @@ export function AssessmentPage() {
                   placeholder="https://yourcompany.com"
                   className="mt-2"
                 />
-                {!companyUrlValid && <p className="mt-2 text-sm text-red-600">Use a full URL starting with http:// or https://.</p>}
+                {!companyUrlValid && <p className="mt-2 text-sm text-error">Use a full URL starting with http:// or https://.</p>}
               </div>
             </div>
 
-            {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+            {error && <p className="mt-4 text-sm text-error">{error}</p>}
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Button variant="ghost" onClick={() => setPhase("questions")} className="gap-2">
@@ -364,8 +366,8 @@ export function AssessmentPage() {
         )}
 
         {phase === "loading" && (
-          <div className="mt-10 rounded-xl border border-border bg-surface p-6 sm:p-8">
-            <h2 className="text-2xl font-bold text-text">Building your full assessment...</h2>
+          <div className="mt-10 rounded-xl border border-border-subtle bg-bg-surface p-6 sm:p-8">
+            <h2 className="text-2xl font-bold text-text-primary">Building your full assessment...</h2>
             <p className="mt-2 text-text-secondary">This includes scoring, company research, industry benchmarks, and your strategy report.</p>
 
             <div className="mt-6 space-y-3">
@@ -373,15 +375,46 @@ export function AssessmentPage() {
                 const isDone = index < processingIndex;
                 const isActive = index === processingIndex;
                 return (
-                  <div
+                  <motion.div
                     key={step}
-                    className={`flex items-center gap-3 rounded-lg border px-4 py-3 ${
-                      isDone || isActive ? "border-teal/30 bg-teal/10" : "border-border bg-white"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.08, duration: 0.35 }}
+                    className={`flex items-center gap-3 rounded-lg border px-4 py-3 transition-all duration-500 ${
+                      isDone || isActive ? "border-accent/30 bg-accent/10" : "border-border-subtle bg-bg-primary"
                     }`}
                   >
-                    <span className={`h-2.5 w-2.5 rounded-full ${isDone ? "bg-teal" : isActive ? "bg-teal animate-pulse" : "bg-border-hover"}`} />
-                    <p className={`text-sm ${isDone || isActive ? "text-text" : "text-text-tertiary"}`}>{step}</p>
-                  </div>
+                    <span
+                      className={`h-2.5 w-2.5 rounded-full transition-colors duration-500 ${
+                        isDone
+                          ? "bg-accent"
+                          : isActive
+                            ? "bg-accent animate-[pulse-glow_1.8s_ease-in-out_infinite]"
+                            : "bg-border-default"
+                      }`}
+                    />
+                    <p className={`text-sm transition-colors duration-500 ${isDone || isActive ? "text-text-primary" : "text-text-muted"}`}>
+                      {step}
+                    </p>
+                    {isActive && (
+                      <motion.span
+                        className="ml-auto inline-flex gap-1"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        {[0, 1, 2].map((dot) => (
+                          <span
+                            key={dot}
+                            className="h-1 w-1 rounded-full bg-accent"
+                            style={{
+                              animation: `pulse-glow 1.2s ease-in-out ${dot * 0.2}s infinite`,
+                            }}
+                          />
+                        ))}
+                      </motion.span>
+                    )}
+                  </motion.div>
                 );
               })}
             </div>
@@ -390,41 +423,41 @@ export function AssessmentPage() {
 
         {phase === "results" && result && (
           <div className="mt-10 space-y-6">
-            <div className="rounded-xl border border-border bg-white p-6 sm:p-8">
-              <h2 className="text-2xl font-bold text-text">Your readiness score</h2>
+            <div className="rounded-xl border border-border-subtle bg-bg-primary p-6 sm:p-8">
+              <h2 className="text-2xl font-bold text-text-primary">Your readiness score</h2>
               <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                <article className="rounded-lg border border-border bg-surface p-4">
-                  <p className="text-sm text-text-tertiary">Composite score</p>
-                  <p className="metric-display mt-2 text-4xl">{result.scorecard.compositeScore}</p>
+                <article className="rounded-lg border border-border-subtle bg-bg-surface p-4">
+                  <p className="text-sm text-text-muted">Composite score</p>
+                  <p className="metric mt-2 text-4xl">{result.scorecard.compositeScore}</p>
                 </article>
-                <article className="rounded-lg border border-border bg-surface p-4 sm:col-span-3">
-                  <p className="text-sm text-text-tertiary">Maturity level</p>
-                  <p className="mt-2 text-lg font-semibold text-text">{result.scorecard.maturityLevel}</p>
+                <article className="rounded-lg border border-border-subtle bg-bg-surface p-4 sm:col-span-3">
+                  <p className="text-sm text-text-muted">Maturity level</p>
+                  <p className="mt-2 text-lg font-semibold text-text-primary">{result.scorecard.maturityLevel}</p>
                   <p className="mt-1 text-sm text-text-secondary">{result.scorecard.maturityDescription}</p>
                 </article>
               </div>
             </div>
 
-            <div className="rounded-xl border border-border bg-white p-6 sm:p-8">
-              <h2 className="text-2xl font-bold text-text">Strategy report</h2>
-              <div className="mt-4 rounded-lg border border-border bg-surface p-6">
+            <div className="rounded-xl border border-border-subtle bg-bg-primary p-6 sm:p-8">
+              <h2 className="text-2xl font-bold text-text-primary">Strategy report</h2>
+              <div className="mt-4 rounded-lg border border-border-subtle bg-bg-surface p-6">
                 <MarkdownContent markdown={result.closerReport} />
               </div>
             </div>
 
             <div className="grid gap-6 lg:grid-cols-2">
-              <div className="rounded-xl border border-border bg-white p-6">
-                <h3 className="text-xl font-bold text-text">Company research snapshot</h3>
+              <div className="rounded-xl border border-border-subtle bg-bg-primary p-6">
+                <h3 className="text-xl font-bold text-text-primary">Company research snapshot</h3>
                 <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-text-secondary">{result.companyResearch}</p>
               </div>
-              <div className="rounded-xl border border-border bg-white p-6">
-                <h3 className="text-xl font-bold text-text">Best-in-class in your industry</h3>
+              <div className="rounded-xl border border-border-subtle bg-bg-primary p-6">
+                <h3 className="text-xl font-bold text-text-primary">Best-in-class in your industry</h3>
                 <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-text-secondary">{result.industryBestInClass}</p>
               </div>
             </div>
 
-            <div className="rounded-xl border border-border bg-white p-6 sm:p-8">
-              <h3 className="text-xl font-bold text-text">Execution path</h3>
+            <div className="rounded-xl border border-border-subtle bg-bg-primary p-6 sm:p-8">
+              <h3 className="text-xl font-bold text-text-primary">Execution path</h3>
               <p className="mt-3 text-sm text-text-secondary">
                 <strong>Suggested engagement:</strong> {result.suggestedEngagement}
               </p>
@@ -434,7 +467,7 @@ export function AssessmentPage() {
                 ))}
               </ul>
 
-              <div className="mt-6 rounded-lg border border-teal/30 bg-teal/5 p-4">
+              <div className="mt-6 rounded-lg border border-accent/30 bg-accent/5 p-4">
                 <p className="text-sm text-text-secondary">
                   {result.emailSent
                     ? "We emailed this report to your inbox with ClearForge branding and contact details."
@@ -455,17 +488,17 @@ export function AssessmentPage() {
           </div>
         )}
 
-        <div className="mt-10 grid gap-3 text-sm text-text-tertiary sm:grid-cols-3">
+        <div className="mt-10 grid gap-3 text-sm text-text-muted sm:grid-cols-3">
           <div className="inline-flex items-center gap-2">
-            <User2 className="h-4 w-4 text-teal" />
+            <User2 className="h-4 w-4 text-accent" />
             Uses your exact words for problem definition
           </div>
           <div className="inline-flex items-center gap-2">
-            <Building2 className="h-4 w-4 text-teal" />
+            <Building2 className="h-4 w-4 text-accent" />
             Includes company + industry context
           </div>
           <div className="inline-flex items-center gap-2">
-            <Mail className="h-4 w-4 text-teal" />
+            <Mail className="h-4 w-4 text-accent" />
             Branded report for leadership review
           </div>
         </div>

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { saveContactLead } from "@/lib/supabase";
 
 function getResendClient(): Resend | null {
   const apiKey = process.env.RESEND_API_KEY;
@@ -133,6 +134,16 @@ export async function POST(req: NextRequest) {
       replyTo: email,
       subject: `ClearForge Inquiry: ${safeName} — ${safeCompany}`,
       html: emailHtml,
+    });
+
+    // Save contact lead to Supabase
+    await saveContactLead({
+      name: safeName,
+      email: safeEmail,
+      company: safeCompany,
+      revenue: safeRevenue,
+      message: safeMessage,
+      source: "contact_form",
     });
 
     return NextResponse.json({ success: true });
