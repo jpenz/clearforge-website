@@ -7,6 +7,8 @@ import { caseStudies } from "@/data/case-studies";
 import { GSAPCounter } from "@/components/home/gsap-counter";
 import { GSAPSectionReveal, StaggerRevealGSAP } from "@/components/home/gsap-section-reveal";
 import { GSAPMarquee } from "@/components/home/gsap-marquee";
+import { GSAPStatStrip } from "@/components/home/gsap-stat-strip";
+import { GSAPPinnedPhases } from "@/components/home/gsap-pinned-phases";
 
 export const metadata = createMetadata({
   title: "ClearForge — AI Strategy & Execution for Mid-Market Companies",
@@ -117,24 +119,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ STAT BAR — Tight context ═══ */}
-      <section className="bg-bg-primary py-8 lg:py-10 border-y border-border-subtle">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-            {[
-              { value: "$4.4T", label: "AI market by 2030" },
-              { value: "72%", label: "Stall at pilot stage" },
-              { value: "3.2x", label: "Early mover margin advantage" },
-              { value: "<10%", label: "Reach production" },
-            ].map((s) => (
-              <div key={s.label} className="text-center">
-                <p className="metric text-lg font-bold">{s.value}</p>
-                <p className="mt-1 text-xs text-text-muted">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ═══ STAT STRIP — Oversized, scroll-scrubbed ═══ */}
+      <GSAPStatStrip
+        className="bg-bg-primary"
+        stats={[
+          { value: "$4.4T", label: "AI market by 2030" },
+          { value: "72%", label: "Stall at pilot stage" },
+          { value: "3.2x", label: "Early mover margin advantage" },
+          { value: "<10%", label: "Reach production" },
+        ]}
+      />
 
       {/* ═══ WHY AI STALLS — Light, asymmetric split ═══ */}
       <GSAPSectionReveal animation="slide-left">
@@ -156,7 +150,7 @@ export default function Home() {
                       <h3 className="text-xl font-bold text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
                         {r.title}
                       </h3>
-                      <p className="mt-2 text-base leading-relaxed text-text-on-light-sub">{r.description}</p>
+                      <p className="mt-2 text-base leading-relaxed text-text-on-light-sub font-medium">{r.description}</p>
                     </div>
                   </div>
                 ))}
@@ -201,60 +195,35 @@ export default function Home() {
       {/* ═══ MARQUEE ═══ */}
       <GSAPMarquee text="Prepare / Modernize / Build / Scale" className="bg-bg-primary" />
 
-      {/* ═══ TRANSFORMATION MODEL — Light, inline SVG diagram ═══ */}
-      <GSAPSectionReveal animation="fade-up">
-        <section className="bg-bg-light py-28 lg:py-36">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <p className="section-label text-accent-dark">Our Transformation Model</p>
-            <h2 className="mt-4 max-w-4xl text-[clamp(2.5rem,5vw,3.5rem)] text-text-on-light">
-              Modernize the business and the workforce&nbsp;together.
-            </h2>
+      {/* ═══ TRANSFORMATION MODEL — Light, pinned phases ═══ */}
+      <section className="bg-bg-light py-28 lg:py-36">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <p className="section-label text-accent-dark">Our Transformation Model</p>
+          <h2 className="mt-4 max-w-4xl text-[clamp(2.5rem,5vw,3.5rem)] text-text-on-light">
+            Modernize the business and the workforce&nbsp;together.
+          </h2>
 
-            {/* Phase flow — CSS, not an image */}
-            <div className="mt-16 grid grid-cols-1 gap-1 sm:grid-cols-4">
-              {phases.map((phase, i) => (
-                <div key={phase.num} className="relative group">
-                  <div className="p-6 lg:p-8">
-                    <span className="metric text-xs text-accent-dark">{phase.num}</span>
-                    <h3 className="mt-2 text-2xl text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
-                      {phase.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-text-on-light-sub">
-                      {phase.description}
-                    </p>
-                  </div>
-                  {/* Connector line */}
-                  {i < 3 && (
-                    <div className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M8 12h8m0 0l-4-4m4 4l-4 4" stroke="#059E87" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                  )}
-                  {/* Top accent bar */}
-                  <div className="absolute top-0 left-6 right-6 h-0.5 bg-gradient-to-r from-accent/60 to-accent/10" />
-                </div>
+          <div className="mt-16">
+            <GSAPPinnedPhases phases={phases} />
+          </div>
+
+          {/* People Track */}
+          <div className="mt-16 border-l-2 border-accent pl-6">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent-dark mb-4">
+              People Capability Track — Every Phase
+            </p>
+            <div className="grid gap-6 sm:grid-cols-3">
+              {[
+                "Role-based AI skills training for leadership, managers, and frontline teams",
+                "Human-plus-agent operating playbooks so adoption sticks",
+                "Manager coaching and governance rhythm to reinforce behavior change",
+              ].map((item) => (
+                <p key={item} className="text-sm text-text-on-light-sub font-medium leading-relaxed">{item}</p>
               ))}
             </div>
-
-            {/* People Track */}
-            <div className="mt-12 border-l-2 border-accent pl-6">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent-dark mb-4">
-                People Capability Track — Every Phase
-              </p>
-              <div className="grid gap-6 sm:grid-cols-3">
-                {[
-                  "Role-based AI skills training for leadership, managers, and frontline teams",
-                  "Human-plus-agent operating playbooks so adoption sticks",
-                  "Manager coaching and governance rhythm to reinforce behavior change",
-                ].map((item) => (
-                  <p key={item} className="text-sm text-text-on-light-sub leading-relaxed">{item}</p>
-                ))}
-              </div>
-            </div>
           </div>
-        </section>
-      </GSAPSectionReveal>
+        </div>
+      </section>
 
       {/* ═══ DUAL ENGINE — Dark, split layout ═══ */}
       <GSAPSectionReveal animation="slide-right">
@@ -296,45 +265,48 @@ export default function Home() {
         </section>
       </GSAPSectionReveal>
 
-      {/* ═══ EXECUTION — Light, right-aligned editorial ═══ */}
-      <GSAPSectionReveal animation="slide-left">
-        <section className="bg-bg-light py-28 lg:py-36">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="lg:grid lg:grid-cols-12 lg:gap-20">
-              <div className="lg:col-start-6 lg:col-span-7">
-                <p className="section-label text-accent-dark">How We Execute</p>
-                <h2 className="mt-4 text-[clamp(2.5rem,5vw,3.5rem)] text-text-on-light">
-                  Understand.<br />Build.<br />Operate.
-                </h2>
-
-                <div className="mt-14 space-y-12">
-                  {executionSteps.map((step, i) => (
-                    <div key={step.phase}>
-                      <div className="flex items-baseline gap-4">
-                        <span className="metric text-sm text-accent-dark">{String(i + 1).padStart(2, "0")}</span>
-                        <p className="text-lg font-bold uppercase tracking-wider text-accent-dark" style={{ fontFamily: "var(--font-heading)" }}>
-                          {step.phase}
-                        </p>
-                      </div>
-                      <h3 className="mt-3 text-xl text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
-                        {step.title}
-                      </h3>
-                      <p className="mt-2 text-base leading-relaxed text-text-on-light-sub">
-                        {step.description}
-                      </p>
-                      {i < executionSteps.length - 1 && <div className="mt-10 h-px bg-border-light/50" />}
-                    </div>
-                  ))}
-                </div>
-
-                <p className="mt-14 text-xl text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
-                  One partner accountable for the full transformation.
-                </p>
-              </div>
+      {/* ═══ EXECUTION — Light, alternating left/right ═══ */}
+      <section className="bg-bg-light py-28 lg:py-36">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <GSAPSectionReveal animation="clip-reveal">
+            <div className="text-center mb-20">
+              <p className="section-label text-accent-dark">How We Execute</p>
+              <h2 className="mt-4 text-[clamp(2.5rem,5vw,3.5rem)] text-text-on-light">
+                Understand. Build. Operate.
+              </h2>
             </div>
+          </GSAPSectionReveal>
+
+          <div className="space-y-24 lg:space-y-32">
+            {executionSteps.map((step, i) => (
+              <GSAPSectionReveal key={step.phase} animation={i % 2 === 0 ? "slide-left" : "slide-right"}>
+                <div className={`lg:grid lg:grid-cols-12 lg:gap-16 ${i % 2 !== 0 ? "lg:text-right" : ""}`}>
+                  <div className={`${i % 2 === 0 ? "lg:col-span-5" : "lg:col-start-8 lg:col-span-5"}`}>
+                    <div className={`flex items-baseline gap-4 ${i % 2 !== 0 ? "lg:justify-end" : ""}`}>
+                      <span className="metric text-3xl lg:text-5xl text-accent/30 font-bold">{String(i + 1).padStart(2, "0")}</span>
+                      <p className="text-lg font-bold uppercase tracking-wider text-accent-dark" style={{ fontFamily: "var(--font-heading)" }}>
+                        {step.phase}
+                      </p>
+                    </div>
+                    <h3 className="mt-4 text-2xl lg:text-3xl text-text-on-light tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
+                      {step.title}
+                    </h3>
+                    <p className="mt-4 text-base leading-relaxed text-text-on-light-sub font-medium">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              </GSAPSectionReveal>
+            ))}
           </div>
-        </section>
-      </GSAPSectionReveal>
+
+          <GSAPSectionReveal animation="fade-up">
+            <p className="mt-20 text-center text-2xl lg:text-3xl text-text-on-light tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
+              One partner accountable for the full transformation.
+            </p>
+          </GSAPSectionReveal>
+        </div>
+      </section>
 
       {/* ═══ RESULTS — Dark, big metrics ═══ */}
       {featured && (
@@ -379,7 +351,7 @@ export default function Home() {
               <h2 className="mt-4 text-[clamp(2.5rem,5vw,3.5rem)] text-text-on-light">
                 Find out where you stand — and where to focus first.
               </h2>
-              <p className="mt-6 text-lg text-text-on-light-sub">
+              <p className="mt-6 text-lg text-text-on-light-sub font-medium">
                 20 questions. 5 minutes. Get a customized AI readiness report
                 with a prioritized action plan for your business.
               </p>
@@ -395,7 +367,7 @@ export default function Home() {
                   <h3 className="text-base font-bold text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-sm text-text-on-light-sub leading-relaxed">{item.description}</p>
+                  <p className="mt-2 text-sm text-text-on-light-sub font-medium leading-relaxed">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -450,7 +422,7 @@ export default function Home() {
           <h2 className="text-[clamp(2.5rem,5vw,3.5rem)] text-text-on-light">
             One conversation to find&nbsp;out.
           </h2>
-          <p className="mt-6 text-base text-text-on-light-sub">
+          <p className="mt-6 text-base text-text-on-light-sub font-medium">
             Tell us about your business. We&apos;ll be honest about whether we
             can help — and if so, how.
           </p>
