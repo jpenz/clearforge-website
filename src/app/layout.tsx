@@ -3,6 +3,7 @@ import { Fraunces, Outfit, IBM_Plex_Mono } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
+import { PageTransition } from "@/components/page-transition";
 import { organizationJsonLd, coreKeywords } from "@/lib/metadata";
 import "./globals.css";
 
@@ -53,7 +54,9 @@ export default function RootLayout({
         />
         <SmoothScrollProvider>
           <Header />
-          <main id="main-content">{children}</main>
+          <main id="main-content">
+            <PageTransition>{children}</PageTransition>
+          </main>
           <Footer />
         </SmoothScrollProvider>
       </body>
