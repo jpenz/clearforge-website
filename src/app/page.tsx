@@ -9,6 +9,7 @@ import { GSAPSectionReveal, StaggerRevealGSAP } from "@/components/home/gsap-sec
 import { GSAPMarquee } from "@/components/home/gsap-marquee";
 import { GSAPStatStrip } from "@/components/home/gsap-stat-strip";
 import { GSAPPinnedPhases } from "@/components/home/gsap-pinned-phases";
+import { AnalyzeVisual, SystemVisual, DashboardVisual } from "@/components/home/execution-visuals";
 
 export const metadata = createMetadata({
   title: "ClearForge — AI Strategy & Execution for Mid-Market Companies",
@@ -227,8 +228,16 @@ export default function Home() {
 
       {/* ═══ DUAL ENGINE — Dark, split layout ═══ */}
       <GSAPSectionReveal animation="slide-right">
-        <section className="bg-bg-deep py-28 lg:py-36 relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.04] via-transparent to-transparent pointer-events-none" />
+        <section className="bg-bg-deep py-28 lg:py-36 relative overflow-hidden">
+          <div className="absolute inset-0">
+            <Image
+              src="/images/network-nodes.png"
+              alt=""
+              fill
+              className="object-cover opacity-15"
+            />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-br from-bg-deep via-bg-deep/90 to-bg-deep/70 pointer-events-none" />
           <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
             <p className="section-label">Two Engines, One Transformation</p>
             <h2 className="mt-4 max-w-3xl text-[clamp(2.5rem,5vw,3.5rem)] text-text-primary">
@@ -237,6 +246,17 @@ export default function Home() {
             <p className="mt-3 text-xl text-text-secondary" style={{ fontFamily: "var(--font-heading)" }}>
               Then build the machine that gets you there.
             </p>
+
+            {/* Engine visual */}
+            <div className="mt-14 relative">
+              <Image
+                src="/images/dual-engines.png"
+                alt="Two precision systems — strategy and execution — connected by teal energy"
+                width={1344}
+                height={768}
+                className="w-full max-w-4xl mx-auto rounded-sm opacity-80"
+              />
+            </div>
 
             {/* Engine details — editorial split */}
             <div className="mt-16 grid gap-16 md:grid-cols-2">
@@ -278,26 +298,37 @@ export default function Home() {
           </GSAPSectionReveal>
 
           <div className="space-y-24 lg:space-y-32">
-            {executionSteps.map((step, i) => (
-              <GSAPSectionReveal key={step.phase} animation={i % 2 === 0 ? "slide-left" : "slide-right"}>
-                <div className={`lg:grid lg:grid-cols-12 lg:gap-16 ${i % 2 !== 0 ? "lg:text-right" : ""}`}>
-                  <div className={`${i % 2 === 0 ? "lg:col-span-5" : "lg:col-start-8 lg:col-span-5"}`}>
-                    <div className={`flex items-baseline gap-4 ${i % 2 !== 0 ? "lg:justify-end" : ""}`}>
-                      <span className="metric text-3xl lg:text-5xl text-accent/30 font-bold">{String(i + 1).padStart(2, "0")}</span>
-                      <p className="text-lg font-bold uppercase tracking-wider text-accent-dark" style={{ fontFamily: "var(--font-heading)" }}>
-                        {step.phase}
+            {executionSteps.map((step, i) => {
+              const Visual = [AnalyzeVisual, SystemVisual, DashboardVisual][i];
+              const isOdd = i % 2 !== 0;
+              return (
+                <GSAPSectionReveal key={step.phase} animation={isOdd ? "slide-right" : "slide-left"}>
+                  <div className={`lg:grid lg:grid-cols-12 lg:gap-16 items-center ${isOdd ? "lg:text-right" : ""}`}>
+                    {/* Text column */}
+                    <div className={`${isOdd ? "lg:col-start-7 lg:col-span-6 lg:order-2" : "lg:col-span-5"}`}>
+                      <div className={`flex items-baseline gap-4 ${isOdd ? "lg:justify-end" : ""}`}>
+                        <span className="metric text-3xl lg:text-5xl text-accent/30 font-bold">{String(i + 1).padStart(2, "0")}</span>
+                        <p className="text-lg font-bold uppercase tracking-wider text-accent-dark" style={{ fontFamily: "var(--font-heading)" }}>
+                          {step.phase}
+                        </p>
+                      </div>
+                      <h3 className="mt-4 text-2xl lg:text-3xl text-text-on-light tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
+                        {step.title}
+                      </h3>
+                      <p className="mt-4 text-base leading-relaxed text-text-on-light-sub font-medium">
+                        {step.description}
                       </p>
                     </div>
-                    <h3 className="mt-4 text-2xl lg:text-3xl text-text-on-light tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
-                      {step.title}
-                    </h3>
-                    <p className="mt-4 text-base leading-relaxed text-text-on-light-sub font-medium">
-                      {step.description}
-                    </p>
+                    {/* Visual column */}
+                    <div className={`mt-10 lg:mt-0 ${isOdd ? "lg:col-span-5 lg:order-1" : "lg:col-start-7 lg:col-span-6"}`}>
+                      <div className="max-w-sm mx-auto lg:max-w-none">
+                        <Visual />
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </GSAPSectionReveal>
-            ))}
+                </GSAPSectionReveal>
+              );
+            })}
           </div>
 
           <GSAPSectionReveal animation="fade-up">
