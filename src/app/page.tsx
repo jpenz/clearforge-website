@@ -166,8 +166,20 @@ export default function Home() {
 
       {/* ═══ SOUND FAMILIAR — Dark, centered, atmospheric ═══ */}
       <GSAPSectionReveal animation="scale-up">
-        <section className="bg-bg-deep py-28 lg:py-36 noise-texture relative">
+        <section className="bg-bg-deep py-28 lg:py-36 noise-texture relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-accent/[0.03] via-transparent to-transparent pointer-events-none" />
+          {/* Scattered fragments — visual chaos before clarity */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden>
+            <line x1="10%" y1="15%" x2="25%" y2="20%" stroke="rgba(0,229,195,0.06)" strokeWidth="1" />
+            <line x1="70%" y1="10%" x2="85%" y2="18%" stroke="rgba(0,229,195,0.04)" strokeWidth="1" />
+            <line x1="60%" y1="75%" x2="75%" y2="80%" stroke="rgba(0,229,195,0.05)" strokeWidth="1" />
+            <line x1="5%" y1="60%" x2="18%" y2="55%" stroke="rgba(0,229,195,0.04)" strokeWidth="1" />
+            <line x1="80%" y1="40%" x2="95%" y2="45%" stroke="rgba(0,229,195,0.06)" strokeWidth="1" />
+            <line x1="30%" y1="85%" x2="45%" y2="90%" stroke="rgba(0,229,195,0.03)" strokeWidth="1" />
+            <line x1="50%" y1="5%" x2="55%" y2="12%" stroke="rgba(0,229,195,0.05)" strokeWidth="1" />
+            <line x1="15%" y1="40%" x2="22%" y2="35%" stroke="rgba(0,229,195,0.04)" strokeWidth="1" />
+            <line x1="88%" y1="65%" x2="95%" y2="72%" stroke="rgba(0,229,195,0.03)" strokeWidth="1" />
+          </svg>
           <div className="relative z-10 mx-auto max-w-2xl px-6 lg:px-8">
             <p className="section-label">Sound Familiar?</p>
             <div className="mt-10 space-y-8">
@@ -375,8 +387,15 @@ export default function Home() {
 
       {/* ═══ ASSESSMENT CTA — Light, centered ═══ */}
       <GSAPSectionReveal animation="fade-up">
-        <section className="bg-bg-light py-28 lg:py-36">
-          <div className="mx-auto max-w-3xl px-6 lg:px-8">
+        <section className="bg-bg-light py-28 lg:py-36 relative overflow-hidden">
+          {/* Subtle contour map background — "your terrain awaits" */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden>
+            <path d="M -5%,85% Q 20%,75% 40%,80% Q 60%,85% 80%,78% Q 100%,70% 105%,75%" fill="none" stroke="rgba(5,158,135,0.06)" strokeWidth="1" />
+            <path d="M -5%,70% Q 25%,60% 45%,68% Q 65%,75% 85%,65% Q 100%,55% 105%,60%" fill="none" stroke="rgba(5,158,135,0.05)" strokeWidth="1" />
+            <path d="M -5%,55% Q 30%,45% 50%,52% Q 70%,60% 90%,48% Q 105%,38% 110%,42%" fill="none" stroke="rgba(5,158,135,0.04)" strokeWidth="1" />
+            <path d="M -5%,40% Q 35%,30% 55%,38% Q 75%,45% 95%,32% Q 105%,22% 110%,28%" fill="none" stroke="rgba(5,158,135,0.03)" strokeWidth="1" />
+          </svg>
+          <div className="relative z-10 mx-auto max-w-3xl px-6 lg:px-8">
             <div className="text-center">
               <p className="section-label text-accent-dark">Free AI Readiness Report</p>
               <h2 className="mt-4 text-[clamp(2.5rem,5vw,3.5rem)] text-text-on-light">
@@ -448,8 +467,18 @@ export default function Home() {
       </GSAPSectionReveal>
 
       {/* ═══ FINAL CTA — Light, centered ═══ */}
-      <section className="bg-bg-light py-28 lg:py-36">
-        <div className="mx-auto max-w-2xl px-6 text-center lg:px-8">
+      <section className="bg-bg-light py-28 lg:py-36 relative overflow-hidden">
+        {/* Lighthouse beam — pointing toward the viewer / CTAs */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden>
+          <defs>
+            <linearGradient id="ctaBeam" x1="1" y1="0" x2="0.3" y2="1">
+              <stop offset="0%" stopColor="#059E87" stopOpacity="0.08" />
+              <stop offset="100%" stopColor="#059E87" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <polygon points="100%,0% 40%,65% 60%,65% 100%,5%" fill="url(#ctaBeam)" />
+        </svg>
+        <div className="relative z-10 mx-auto max-w-2xl px-6 text-center lg:px-8">
           <h2 className="text-[clamp(2.5rem,5vw,3.5rem)] text-text-on-light">
             One conversation to find&nbsp;out.
           </h2>
