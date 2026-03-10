@@ -262,7 +262,7 @@ export default function Home() {
             {/* Engine visual */}
             <div className="mt-14 relative">
               <Image
-                src="/images/dual-engines.png"
+                src="/images/dual-engines-v4.png"
                 alt="Two precision systems — strategy and execution — connected by teal energy"
                 width={1344}
                 height={768}

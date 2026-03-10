@@ -34,7 +34,6 @@ export function GSAPPinnedPhases({ phases }: GSAPPinnedPhasesProps) {
       const phaseIcons = el.querySelectorAll<SVGElement>(".phase-icon");
       if (!items.length) return;
 
-      // Set initial state — all hidden except first
       items.forEach((item, i) => {
         if (i > 0) gsap.set(item, { opacity: 0, y: 30 });
       });
@@ -52,29 +51,15 @@ export function GSAPPinnedPhases({ phases }: GSAPPinnedPhasesProps) {
         },
       });
 
-      // Animate each phase in/out
       items.forEach((item, i) => {
         if (i > 0) {
           tl.to(items[i - 1], { opacity: 0, y: -20, duration: 0.3 }, `phase${i}`);
-          tl.fromTo(
-            item,
-            { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 0.3 },
-            `phase${i}`
-          );
+          tl.fromTo(item, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3 }, `phase${i}`);
           if (progressFill) {
-            tl.to(progressFill, {
-              scaleY: (i + 1) / phases.length,
-              duration: 0.3,
-              ease: "power2.out",
-            }, `phase${i}`);
+            tl.to(progressFill, { scaleY: (i + 1) / phases.length, duration: 0.3, ease: "power2.out" }, `phase${i}`);
           }
           if (progressDots[i]) {
-            tl.to(progressDots[i], {
-              backgroundColor: "#059E87",
-              scale: 1.3,
-              duration: 0.2,
-            }, `phase${i}`);
+            tl.to(progressDots[i], { backgroundColor: "#059E87", scale: 1.3, duration: 0.2 }, `phase${i}`);
           }
           if (phaseIcons[i - 1]) {
             tl.to(phaseIcons[i - 1], { opacity: 0, scale: 0.5, duration: 0.2 }, `phase${i}`);
@@ -91,148 +76,270 @@ export function GSAPPinnedPhases({ phases }: GSAPPinnedPhasesProps) {
     { scope: containerRef, dependencies: [phases] }
   );
 
-  /* ── Phase Icons — Lighthouse-to-Engine transformation arc ── */
+  /* ─────────────────────────────────────────────────
+     UNIFIED VISUAL SYSTEM: "The Signal Path"
+
+     Same ~16 dots in 4 progressive states:
+     scattered → organized → assembled → scaled
+
+     Visual vocabulary:
+     • 3px dots = data points
+     • 5px dots = key nodes
+     • 8px dots = system hubs
+     • 1px lines = connections
+     • 2px lines = active flows
+     • Monospace labels
+  ───────────────────────────────────────────────── */
+
+  // Shared dot positions (scattered state)
+  // These same conceptual elements appear in every icon
   const phaseIcons = [
-    /* 01 Prepare — The Lighthouse scanning the horizon */
+
+    /* ── 01 PREPARE: Map the landscape ──
+       Scattered dots. A scan line sweeps left-to-right,
+       revealing which signals matter. Discovery phase.
+    */
     <svg key="p0" className="phase-icon absolute inset-0" viewBox="0 0 220 220" fill="none" aria-hidden>
-      {/* Lighthouse tower */}
-      <rect x="30" y="60" width="14" height="80" rx="1" stroke="rgba(5,158,135,0.35)" strokeWidth="1.5" fill="rgba(5,158,135,0.05)" />
-      <rect x="26" y="140" width="22" height="6" rx="1" fill="rgba(5,158,135,0.15)" />
-      {/* Lantern room */}
-      <rect x="28" y="48" width="18" height="14" rx="2" stroke="rgba(5,158,135,0.45)" strokeWidth="1.5" fill="rgba(5,158,135,0.1)" />
-      <circle cx="37" cy="55" r="4" fill="#059E87" opacity="0.8" />
-      {/* Lighthouse beam — scanning */}
-      <polygon points="45,52 200,20 200,90 45,58" fill="url(#lhBeam1)" />
-      {/* Beam rays */}
-      <line x1="45" y1="55" x2="200" y2="35" stroke="rgba(5,158,135,0.12)" strokeWidth="0.5" />
-      <line x1="45" y1="55" x2="200" y2="55" stroke="rgba(5,158,135,0.15)" strokeWidth="0.5" />
-      <line x1="45" y1="55" x2="200" y2="75" stroke="rgba(5,158,135,0.12)" strokeWidth="0.5" />
-      {/* Horizon line */}
-      <line x1="0" y1="150" x2="220" y2="150" stroke="rgba(5,158,135,0.1)" strokeWidth="0.5" />
-      {/* Data points in beam path */}
-      <circle cx="90" cy="48" r="2.5" fill="rgba(5,158,135,0.15)" />
-      <circle cx="130" cy="42" r="2.5" fill="rgba(5,158,135,0.25)" />
-      <circle cx="155" cy="55" r="3" fill="#059E87" opacity="0.5" />
-      <circle cx="180" cy="38" r="2" fill="rgba(5,158,135,0.2)" />
-      <circle cx="170" cy="68" r="2" fill="rgba(5,158,135,0.15)" />
-      {/* Ground texture */}
-      <line x1="60" y1="160" x2="90" y2="158" stroke="rgba(5,158,135,0.08)" strokeWidth="0.5" />
-      <line x1="100" y1="162" x2="140" y2="160" stroke="rgba(5,158,135,0.06)" strokeWidth="0.5" />
-      <line x1="150" y1="165" x2="200" y2="162" stroke="rgba(5,158,135,0.04)" strokeWidth="0.5" />
+      {/* Scan line — vertical bar sweeping across */}
+      <rect x="62" y="15" width="3" height="190" fill="url(#scanGrad)" rx="1.5" />
+      <rect x="58" y="15" width="10" height="190" fill="rgba(5,158,135,0.06)" rx="4" />
+
+      {/* Already scanned (left of line) — bright, tagged */}
+      <circle cx="30" cy="45" r="7" fill="#059E87" opacity="0.9" />
+      <line x1="38" y1="45" x2="52" y2="45" stroke="#059E87" strokeWidth="1.5" opacity="0.6" />
+      <text x="55" y="48" fill="#059E87" fontSize="8" fontFamily="monospace" fontWeight="600" opacity="0.8">REV</text>
+
+      <circle cx="45" cy="95" r="5.5" fill="#059E87" opacity="0.8" />
+      <line x1="51" y1="95" x2="58" y2="88" stroke="#059E87" strokeWidth="1.5" opacity="0.5" />
+
+      <circle cx="25" cy="140" r="7" fill="#059E87" opacity="0.9" />
+      <line x1="33" y1="140" x2="48" y2="140" stroke="#059E87" strokeWidth="1.5" opacity="0.6" />
+      <text x="51" y="143" fill="#059E87" fontSize="8" fontFamily="monospace" fontWeight="600" opacity="0.8">OPS</text>
+
+      <circle cx="50" cy="175" r="5" fill="#059E87" opacity="0.7" />
+      <circle cx="35" cy="70" r="4.5" fill="#059E87" opacity="0.65" />
+
+      {/* Not yet scanned (right of line) — dim, waiting */}
+      <circle cx="100" cy="38" r="5" fill="rgba(5,158,135,0.3)" />
+      <circle cx="140" cy="65" r="5.5" fill="rgba(5,158,135,0.25)" />
+      <circle cx="175" cy="42" r="4.5" fill="rgba(5,158,135,0.2)" />
+      <circle cx="120" cy="110" r="5" fill="rgba(5,158,135,0.28)" />
+      <circle cx="160" cy="130" r="5.5" fill="rgba(5,158,135,0.25)" />
+      <circle cx="190" cy="95" r="4.5" fill="rgba(5,158,135,0.2)" />
+      <circle cx="145" cy="170" r="5" fill="rgba(5,158,135,0.25)" />
+      <circle cx="180" cy="155" r="4.5" fill="rgba(5,158,135,0.2)" />
+      <circle cx="110" cy="155" r="4.5" fill="rgba(5,158,135,0.28)" />
+      <circle cx="195" cy="175" r="4" fill="rgba(5,158,135,0.18)" />
+      <circle cx="85" cy="140" r="4" fill="rgba(5,158,135,0.3)" />
+
+      {/* Progress bar at bottom */}
+      <rect x="15" y="207" width="190" height="4" rx="2" fill="rgba(5,158,135,0.15)" />
+      <rect x="15" y="207" width="52" height="4" rx="2" fill="#059E87" opacity="0.8" />
+      <text x="15" y="203" fill="#059E87" fontSize="7" fontFamily="monospace" fontWeight="600" opacity="0.6">SCANNING</text>
+
       <defs>
-        <linearGradient id="lhBeam1" x1="0" y1="0.5" x2="1" y2="0.5">
-          <stop offset="0%" stopColor="#059E87" stopOpacity="0.3" />
+        <linearGradient id="scanGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#059E87" stopOpacity="0" />
+          <stop offset="20%" stopColor="#059E87" stopOpacity="0.8" />
+          <stop offset="50%" stopColor="#059E87" stopOpacity="1" />
+          <stop offset="80%" stopColor="#059E87" stopOpacity="0.8" />
           <stop offset="100%" stopColor="#059E87" stopOpacity="0" />
         </linearGradient>
       </defs>
     </svg>,
 
-    /* 02 Modernize — Infrastructure exposed and reorganized */
+    /* ── 02 MODERNIZE: Organize the flows ──
+       The scattered dots now slide into 4 clean rows.
+       Old tangled connections fade. New parallel channels form.
+    */
     <svg key="p1" className="phase-icon absolute inset-0" viewBox="0 0 220 220" fill="none" aria-hidden>
-      {/* Lighthouse silhouette — faded in background */}
-      <rect x="20" y="50" width="10" height="60" rx="1" stroke="rgba(5,158,135,0.08)" strokeWidth="1" fill="none" />
-      <rect x="18" y="44" width="14" height="8" rx="1" stroke="rgba(5,158,135,0.08)" strokeWidth="1" fill="none" />
-      {/* Cross-section frame */}
-      <rect x="55" y="30" width="140" height="160" rx="4" stroke="rgba(5,158,135,0.2)" strokeWidth="1.5" fill="rgba(5,158,135,0.03)" />
-      <line x1="125" y1="30" x2="125" y2="190" stroke="rgba(5,158,135,0.15)" strokeWidth="1" strokeDasharray="4 4" />
-      <text x="82" y="25" fill="rgba(5,158,135,0.3)" fontSize="6" fontFamily="monospace">BEFORE</text>
-      <text x="148" y="25" fill="#059E87" fontSize="6" fontFamily="monospace" opacity="0.6">AFTER</text>
-      {/* Left side — tangled */}
-      <path d="M 70,55 Q 85,70 75,90 Q 65,110 90,120 Q 100,115 80,135 Q 70,155 95,165" stroke="rgba(5,158,135,0.25)" strokeWidth="1" fill="none" />
-      <path d="M 85,50 Q 100,80 80,100 Q 70,120 100,130 Q 110,125 95,145 Q 85,160 110,170" stroke="rgba(5,158,135,0.2)" strokeWidth="1" fill="none" />
-      <path d="M 95,60 Q 80,75 95,95 Q 110,115 85,125 Q 75,140 105,155" stroke="rgba(5,158,135,0.18)" strokeWidth="1" fill="none" />
-      {/* Right side — clean parallel channels */}
-      <line x1="140" y1="50" x2="140" y2="180" stroke="rgba(5,158,135,0.35)" strokeWidth="1" />
-      <line x1="155" y1="50" x2="155" y2="180" stroke="rgba(5,158,135,0.3)" strokeWidth="1" />
-      <line x1="170" y1="50" x2="170" y2="180" stroke="rgba(5,158,135,0.35)" strokeWidth="1" />
-      <line x1="185" y1="50" x2="185" y2="180" stroke="rgba(5,158,135,0.3)" strokeWidth="1" />
-      {/* Flow dots on clean channels */}
-      <circle cx="140" cy="80" r="2" fill="#059E87" opacity="0.6" />
-      <circle cx="155" cy="100" r="2" fill="#059E87" opacity="0.5" />
-      <circle cx="170" cy="70" r="2" fill="#059E87" opacity="0.6" />
-      <circle cx="185" cy="120" r="2" fill="#059E87" opacity="0.5" />
-      {/* Connection nodes */}
-      <circle cx="140" cy="50" r="3" fill="rgba(5,158,135,0.3)" />
-      <circle cx="155" cy="50" r="3" fill="rgba(5,158,135,0.3)" />
-      <circle cx="170" cy="50" r="3" fill="rgba(5,158,135,0.3)" />
-      <circle cx="185" cy="50" r="3" fill="rgba(5,158,135,0.3)" />
-      {/* Arrow indicating direction */}
-      <polygon points="118,105 125,100 118,95" fill="rgba(5,158,135,0.3)" />
+      {/* Ghost traces — where dots used to be (old positions) */}
+      <circle cx="30" cy="45" r="3" fill="rgba(5,158,135,0.12)" />
+      <circle cx="175" cy="42" r="3" fill="rgba(5,158,135,0.1)" />
+      <circle cx="50" cy="175" r="3" fill="rgba(5,158,135,0.1)" />
+      <path d="M 30,45 Q 80,60 100,38 Q 130,20 175,42" fill="none" stroke="rgba(5,158,135,0.1)" strokeWidth="1" strokeDasharray="3 4" />
+      <path d="M 45,95 Q 90,120 120,110 Q 150,100 190,95" fill="none" stroke="rgba(5,158,135,0.1)" strokeWidth="1" strokeDasharray="3 4" />
+
+      {/* Row labels */}
+      <text x="10" y="55" fill="#059E87" fontSize="8" fontFamily="monospace" fontWeight="600" opacity="0.6">01</text>
+      <text x="10" y="95" fill="#059E87" fontSize="8" fontFamily="monospace" fontWeight="600" opacity="0.6">02</text>
+      <text x="10" y="135" fill="#059E87" fontSize="8" fontFamily="monospace" fontWeight="600" opacity="0.6">03</text>
+      <text x="10" y="175" fill="#059E87" fontSize="8" fontFamily="monospace" fontWeight="600" opacity="0.6">04</text>
+
+      {/* Row 1 — Revenue (highlighted as optimized) */}
+      <line x1="30" y1="52" x2="200" y2="52" stroke="#059E87" strokeWidth="2" opacity="0.6" />
+      <circle cx="45" cy="52" r="7" fill="#059E87" opacity="0.9" />
+      <circle cx="90" cy="52" r="5.5" fill="#059E87" opacity="0.8" />
+      <circle cx="135" cy="52" r="6" fill="#059E87" opacity="0.85" />
+      <circle cx="180" cy="52" r="5.5" fill="#059E87" opacity="0.8" />
+
+      {/* Row 2 — Ops */}
+      <line x1="30" y1="92" x2="200" y2="92" stroke="#059E87" strokeWidth="2" opacity="0.5" />
+      <circle cx="50" cy="92" r="5.5" fill="#059E87" opacity="0.65" />
+      <circle cx="100" cy="92" r="5" fill="#059E87" opacity="0.6" />
+      <circle cx="150" cy="92" r="5.5" fill="#059E87" opacity="0.65" />
+      <circle cx="190" cy="92" r="4.5" fill="#059E87" opacity="0.55" />
+
+      {/* Row 3 — Data */}
+      <line x1="30" y1="132" x2="200" y2="132" stroke="#059E87" strokeWidth="2" opacity="0.45" />
+      <circle cx="40" cy="132" r="5" fill="#059E87" opacity="0.6" />
+      <circle cx="85" cy="132" r="5.5" fill="#059E87" opacity="0.65" />
+      <circle cx="140" cy="132" r="5" fill="#059E87" opacity="0.6" />
+      <circle cx="185" cy="132" r="4.5" fill="#059E87" opacity="0.55" />
+
+      {/* Row 4 — People */}
+      <line x1="30" y1="172" x2="200" y2="172" stroke="#059E87" strokeWidth="2" opacity="0.4" />
+      <circle cx="55" cy="172" r="5" fill="#059E87" opacity="0.55" />
+      <circle cx="110" cy="172" r="4.5" fill="#059E87" opacity="0.5" />
+      <circle cx="165" cy="172" r="5" fill="#059E87" opacity="0.55" />
+
+      {/* Status */}
+      <text x="30" y="203" fill="#059E87" fontSize="7" fontFamily="monospace" fontWeight="600" opacity="0.6">4 WORKFLOWS ORGANIZED</text>
+      <rect x="30" y="207" width="170" height="4" rx="2" fill="rgba(5,158,135,0.15)" />
+      <rect x="30" y="207" width="85" height="4" rx="2" fill="#059E87" opacity="0.8" />
     </svg>,
 
-    /* 03 Build — Engine assembly with lighthouse lens core */
+    /* ── 03 BUILD: Assemble the system ──
+       The 4 organized rows converge into a central engine.
+       Clear INPUT → ENGINE → OUTPUT flow.
+    */
     <svg key="p2" className="phase-icon absolute inset-0" viewBox="0 0 220 220" fill="none" aria-hidden>
-      {/* Machine frame */}
-      <rect x="40" y="40" width="140" height="140" rx="5" stroke="rgba(5,158,135,0.25)" strokeWidth="1.5" fill="rgba(5,158,135,0.03)" />
-      {/* Component blocks assembling */}
-      <rect x="50" y="50" width="35" height="22" rx="2" fill="rgba(5,158,135,0.1)" stroke="rgba(5,158,135,0.25)" strokeWidth="1" />
-      <rect x="135" y="50" width="35" height="22" rx="2" fill="rgba(5,158,135,0.1)" stroke="rgba(5,158,135,0.25)" strokeWidth="1" />
-      <rect x="50" y="148" width="35" height="22" rx="2" fill="rgba(5,158,135,0.1)" stroke="rgba(5,158,135,0.25)" strokeWidth="1" />
-      <rect x="135" y="148" width="35" height="22" rx="2" fill="rgba(5,158,135,0.1)" stroke="rgba(5,158,135,0.25)" strokeWidth="1" />
-      {/* Connection paths to center */}
-      <line x1="85" y1="61" x2="95" y2="95" stroke="rgba(5,158,135,0.3)" strokeWidth="1" />
-      <line x1="135" y1="61" x2="125" y2="95" stroke="rgba(5,158,135,0.3)" strokeWidth="1" />
-      <line x1="85" y1="159" x2="95" y2="125" stroke="rgba(5,158,135,0.3)" strokeWidth="1" />
-      <line x1="135" y1="159" x2="125" y2="125" stroke="rgba(5,158,135,0.3)" strokeWidth="1" />
-      {/* The Fresnel lens — THE lighthouse core, installed in the machine */}
-      <circle cx="110" cy="110" r="25" fill="none" stroke="#059E87" strokeWidth="2" />
-      <circle cx="110" cy="110" r="17" fill="none" stroke="rgba(5,158,135,0.4)" strokeWidth="1" strokeDasharray="4 3" />
-      <circle cx="110" cy="110" r="9" fill="none" stroke="rgba(5,158,135,0.5)" strokeWidth="1" />
-      <circle cx="110" cy="110" r="3.5" fill="#059E87" />
-      {/* Flow dots on connections */}
-      <circle cx="90" cy="78" r="2" fill="#059E87" opacity="0.5" />
-      <circle cx="130" cy="78" r="2" fill="#059E87" opacity="0.5" />
-      {/* Control panel — bottom */}
-      <rect x="55" y="185" width="110" height="12" rx="2" fill="rgba(5,158,135,0.06)" stroke="rgba(5,158,135,0.15)" strokeWidth="0.75" />
-      <rect x="60" y="188" width="8" height="6" rx="1" fill="rgba(5,158,135,0.2)" />
-      <rect x="72" y="188" width="8" height="6" rx="1" fill="rgba(5,158,135,0.15)" />
-      <rect x="84" y="188" width="8" height="6" rx="1" fill="#059E87" opacity="0.4" />
-      <rect x="96" y="188" width="8" height="6" rx="1" fill="rgba(5,158,135,0.2)" />
-      <rect x="108" y="188" width="8" height="6" rx="1" fill="rgba(5,158,135,0.15)" />
-      <rect x="120" y="188" width="8" height="6" rx="1" fill="rgba(5,158,135,0.2)" />
-      <rect x="132" y="188" width="8" height="6" rx="1" fill="rgba(5,158,135,0.15)" />
-      <rect x="144" y="188" width="8" height="6" rx="1" fill="#059E87" opacity="0.3" />
+      {/* Input channels — left side, converging */}
+      <line x1="15" y1="50" x2="70" y2="85" stroke="#059E87" strokeWidth="2" opacity="0.6" />
+      <line x1="15" y1="90" x2="70" y2="100" stroke="#059E87" strokeWidth="2" opacity="0.6" />
+      <line x1="15" y1="130" x2="70" y2="115" stroke="#059E87" strokeWidth="2" opacity="0.6" />
+      <line x1="15" y1="170" x2="70" y2="130" stroke="#059E87" strokeWidth="2" opacity="0.6" />
+
+      {/* Input dots */}
+      <circle cx="15" cy="50" r="6" fill="#059E87" opacity="0.85" />
+      <circle cx="15" cy="90" r="6" fill="#059E87" opacity="0.75" />
+      <circle cx="15" cy="130" r="6" fill="#059E87" opacity="0.75" />
+      <circle cx="15" cy="170" r="6" fill="#059E87" opacity="0.85" />
+
+      {/* Input labels */}
+      <text x="4" y="38" fill="#059E87" fontSize="7" fontFamily="monospace" fontWeight="600" opacity="0.7">DATA</text>
+      <text x="4" y="78" fill="#059E87" fontSize="7" fontFamily="monospace" fontWeight="600" opacity="0.7">FLOW</text>
+      <text x="4" y="122" fill="#059E87" fontSize="7" fontFamily="monospace" fontWeight="600" opacity="0.7">RULES</text>
+      <text x="4" y="162" fill="#059E87" fontSize="7" fontFamily="monospace" fontWeight="600" opacity="0.7">TEAM</text>
+
+      {/* Central ENGINE — the hub */}
+      <rect x="68" y="70" width="84" height="75" rx="5" fill="rgba(5,158,135,0.1)" stroke="#059E87" strokeWidth="2.5" opacity="0.7" />
+      {/* Engine core — concentric circles */}
+      <circle cx="110" cy="108" r="24" fill="none" stroke="#059E87" strokeWidth="3" />
+      <circle cx="110" cy="108" r="16" fill="none" stroke="#059E87" strokeWidth="2" opacity="0.6" strokeDasharray="4 3" />
+      <circle cx="110" cy="108" r="8" fill="none" stroke="#059E87" strokeWidth="1.5" opacity="0.7" />
+      <circle cx="110" cy="108" r="4" fill="#059E87" />
+      {/* Engine glow */}
+      <circle cx="110" cy="108" r="30" fill="rgba(5,158,135,0.06)" />
+
+      {/* Output channels — right side, diverging */}
+      <line x1="152" y1="90" x2="200" y2="60" stroke="#059E87" strokeWidth="2" opacity="0.7" />
+      <line x1="152" y1="108" x2="200" y2="108" stroke="#059E87" strokeWidth="2" opacity="0.7" />
+      <line x1="152" y1="126" x2="200" y2="155" stroke="#059E87" strokeWidth="2" opacity="0.7" />
+
+      {/* Output nodes */}
+      <circle cx="200" cy="60" r="7" fill="#059E87" opacity="0.9" stroke="#059E87" strokeWidth="1.5" />
+      <circle cx="200" cy="108" r="7" fill="#059E87" opacity="0.8" stroke="#059E87" strokeWidth="1.5" />
+      <circle cx="200" cy="155" r="7" fill="#059E87" opacity="0.9" stroke="#059E87" strokeWidth="1.5" />
+
+      {/* Output labels */}
+      <text x="185" y="48" fill="#059E87" fontSize="7" fontFamily="monospace" fontWeight="600" textAnchor="end" opacity="0.7">AGENTS</text>
+      <text x="185" y="98" fill="#059E87" fontSize="7" fontFamily="monospace" fontWeight="600" textAnchor="end" opacity="0.7">CONTROLS</text>
+      <text x="185" y="148" fill="#059E87" fontSize="7" fontFamily="monospace" fontWeight="600" textAnchor="end" opacity="0.7">KPIs</text>
+
+      {/* Governance strip at bottom */}
+      <line x1="68" y1="158" x2="152" y2="158" stroke="rgba(5,158,135,0.3)" strokeWidth="1" />
+      <rect x="72" y="162" width="16" height="6" rx="2" fill="#059E87" opacity="0.5" />
+      <rect x="92" y="162" width="16" height="6" rx="2" fill="#059E87" opacity="0.4" />
+      <rect x="112" y="162" width="16" height="6" rx="2" fill="#059E87" opacity="0.65" />
+      <rect x="132" y="162" width="16" height="6" rx="2" fill="#059E87" opacity="0.45" />
+      <text x="110" y="180" textAnchor="middle" fill="#059E87" fontSize="6" fontFamily="monospace" fontWeight="600" opacity="0.55">GOVERNANCE</text>
+
+      {/* Flow dots */}
+      <circle r="3" fill="#059E87">
+        <animateMotion dur="2.5s" repeatCount="indefinite" path="M 15,90 L 70,100 L 110,108" />
+      </circle>
+      <circle r="3" fill="#059E87" opacity="0.8">
+        <animateMotion dur="2s" repeatCount="indefinite" path="M 152,108 L 200,108" begin="0.5s" />
+      </circle>
+
+      {/* Status */}
+      <text x="30" y="203" fill="#059E87" fontSize="7" fontFamily="monospace" fontWeight="600" opacity="0.6">SYSTEM ASSEMBLED</text>
+      <rect x="30" y="207" width="160" height="4" rx="2" fill="rgba(5,158,135,0.15)" />
+      <rect x="30" y="207" width="120" height="4" rx="2" fill="#059E87" opacity="0.8" />
     </svg>,
 
-    /* 04 Scale — Network radiating from the central machine */
+    /* ── 04 SCALE: Multiply and sustain ──
+       The central engine now replicates outward.
+       Multiple connected systems. People attached. Data flowing.
+    */
     <svg key="p3" className="phase-icon absolute inset-0" viewBox="0 0 220 220" fill="none" aria-hidden>
-      {/* Expansion rings */}
-      <circle cx="110" cy="110" r="90" stroke="rgba(5,158,135,0.06)" strokeWidth="1" />
-      <circle cx="110" cy="110" r="65" stroke="rgba(5,158,135,0.1)" strokeWidth="1" strokeDasharray="4 6" />
-      <circle cx="110" cy="110" r="40" stroke="rgba(5,158,135,0.15)" strokeWidth="1" />
-      {/* Central machine — small version with lens */}
-      <rect x="95" y="95" width="30" height="30" rx="3" fill="rgba(5,158,135,0.08)" stroke="rgba(5,158,135,0.3)" strokeWidth="1" />
-      <circle cx="110" cy="110" r="8" fill="none" stroke="#059E87" strokeWidth="1.5" />
-      <circle cx="110" cy="110" r="3" fill="#059E87" />
-      {/* Connection lines to outer nodes */}
-      <line x1="125" y1="100" x2="168" y2="55" stroke="rgba(5,158,135,0.2)" strokeWidth="1" />
-      <line x1="125" y1="120" x2="175" y2="145" stroke="rgba(5,158,135,0.2)" strokeWidth="1" />
-      <line x1="95" y1="100" x2="52" y2="60" stroke="rgba(5,158,135,0.2)" strokeWidth="1" />
-      <line x1="95" y1="120" x2="50" y2="155" stroke="rgba(5,158,135,0.2)" strokeWidth="1" />
-      <line x1="110" y1="95" x2="110" y2="30" stroke="rgba(5,158,135,0.2)" strokeWidth="1" />
-      <line x1="110" y1="125" x2="110" y2="190" stroke="rgba(5,158,135,0.2)" strokeWidth="1" />
-      {/* Outer nodes — replicated machines */}
-      <rect x="160" y="42" width="20" height="20" rx="2" fill="rgba(5,158,135,0.08)" stroke="rgba(5,158,135,0.25)" strokeWidth="0.75" />
-      <circle cx="170" cy="52" r="4" fill="none" stroke="#059E87" strokeWidth="0.75" />
-      <rect x="165" y="135" width="20" height="20" rx="2" fill="rgba(5,158,135,0.08)" stroke="rgba(5,158,135,0.25)" strokeWidth="0.75" />
-      <circle cx="175" cy="145" r="4" fill="none" stroke="#059E87" strokeWidth="0.75" />
-      <rect x="40" y="47" width="20" height="20" rx="2" fill="rgba(5,158,135,0.08)" stroke="rgba(5,158,135,0.25)" strokeWidth="0.75" />
-      <circle cx="50" cy="57" r="4" fill="none" stroke="#059E87" strokeWidth="0.75" />
-      <rect x="38" y="143" width="20" height="20" rx="2" fill="rgba(5,158,135,0.08)" stroke="rgba(5,158,135,0.25)" strokeWidth="0.75" />
-      <circle cx="48" cy="153" r="4" fill="none" stroke="#059E87" strokeWidth="0.75" />
-      <rect x="100" y="18" width="20" height="20" rx="2" fill="rgba(5,158,135,0.08)" stroke="rgba(5,158,135,0.25)" strokeWidth="0.75" />
-      <circle cx="110" cy="28" r="4" fill="none" stroke="#059E87" strokeWidth="0.75" />
-      <rect x="100" y="180" width="20" height="20" rx="2" fill="rgba(5,158,135,0.08)" stroke="rgba(5,158,135,0.25)" strokeWidth="0.75" />
-      <circle cx="110" cy="190" r="4" fill="none" stroke="#059E87" strokeWidth="0.75" />
-      {/* People figures — simple circles near nodes */}
-      <circle cx="185" cy="48" r="2.5" fill="rgba(5,158,135,0.35)" />
-      <line x1="185" y1="51" x2="185" y2="58" stroke="rgba(5,158,135,0.3)" strokeWidth="1" />
-      <circle cx="30" cy="62" r="2.5" fill="rgba(5,158,135,0.35)" />
-      <line x1="30" y1="65" x2="30" y2="72" stroke="rgba(5,158,135,0.3)" strokeWidth="1" />
-      <circle cx="190" cy="140" r="2.5" fill="rgba(5,158,135,0.35)" />
-      <line x1="190" y1="143" x2="190" y2="150" stroke="rgba(5,158,135,0.3)" strokeWidth="1" />
-      <circle cx="30" cy="158" r="2.5" fill="rgba(5,158,135,0.35)" />
-      <line x1="30" y1="161" x2="30" y2="168" stroke="rgba(5,158,135,0.3)" strokeWidth="1" />
+      {/* Central engine — small version */}
+      <rect x="88" y="88" width="44" height="44" rx="4" fill="rgba(5,158,135,0.12)" stroke="#059E87" strokeWidth="2.5" opacity="0.7" />
+      <circle cx="110" cy="110" r="14" fill="none" stroke="#059E87" strokeWidth="2.5" />
+      <circle cx="110" cy="110" r="5" fill="#059E87" />
+
+      {/* Expansion rings — subtle */}
+      <circle cx="110" cy="110" r="55" fill="none" stroke="rgba(5,158,135,0.15)" strokeWidth="1.5" strokeDasharray="4 6" />
+      <circle cx="110" cy="110" r="90" fill="none" stroke="rgba(5,158,135,0.1)" strokeWidth="1" strokeDasharray="3 8" />
+
+      {/* Connection lines to satellite systems */}
+      <line x1="110" y1="88" x2="110" y2="30" stroke="#059E87" strokeWidth="2" opacity="0.55" />
+      <line x1="132" y1="98" x2="178" y2="52" stroke="#059E87" strokeWidth="2" opacity="0.55" />
+      <line x1="132" y1="122" x2="178" y2="168" stroke="#059E87" strokeWidth="2" opacity="0.55" />
+      <line x1="88" y1="122" x2="42" y2="168" stroke="#059E87" strokeWidth="2" opacity="0.55" />
+      <line x1="88" y1="98" x2="42" y2="52" stroke="#059E87" strokeWidth="2" opacity="0.55" />
+
+      {/* Satellite system 1 — top */}
+      <rect x="95" y="10" width="30" height="22" rx="4" fill="rgba(5,158,135,0.12)" stroke="#059E87" strokeWidth="1.5" opacity="0.65" />
+      <circle cx="110" cy="21" r="5" fill="none" stroke="#059E87" strokeWidth="1.5" />
+      <circle cx="110" cy="21" r="2" fill="#059E87" />
+      <circle cx="130" cy="15" r="4" fill="#059E87" opacity="0.6" />
+      <line x1="130" y1="19" x2="130" y2="28" stroke="#059E87" strokeWidth="1.5" opacity="0.5" />
+
+      {/* Satellite system 2 — top-right */}
+      <rect x="166" y="34" width="30" height="22" rx="4" fill="rgba(5,158,135,0.12)" stroke="#059E87" strokeWidth="1.5" opacity="0.65" />
+      <circle cx="181" cy="45" r="5" fill="none" stroke="#059E87" strokeWidth="1.5" />
+      <circle cx="181" cy="45" r="2" fill="#059E87" />
+      <circle cx="201" cy="39" r="4" fill="#059E87" opacity="0.6" />
+      <line x1="201" y1="43" x2="201" y2="52" stroke="#059E87" strokeWidth="1.5" opacity="0.5" />
+
+      {/* Satellite system 3 — bottom-right */}
+      <rect x="166" y="156" width="30" height="22" rx="4" fill="rgba(5,158,135,0.12)" stroke="#059E87" strokeWidth="1.5" opacity="0.65" />
+      <circle cx="181" cy="167" r="5" fill="none" stroke="#059E87" strokeWidth="1.5" />
+      <circle cx="181" cy="167" r="2" fill="#059E87" />
+      <circle cx="201" cy="161" r="4" fill="#059E87" opacity="0.6" />
+      <line x1="201" y1="165" x2="201" y2="174" stroke="#059E87" strokeWidth="1.5" opacity="0.5" />
+
+      {/* Satellite system 4 — bottom-left */}
+      <rect x="24" y="156" width="30" height="22" rx="4" fill="rgba(5,158,135,0.12)" stroke="#059E87" strokeWidth="1.5" opacity="0.65" />
+      <circle cx="39" cy="167" r="5" fill="none" stroke="#059E87" strokeWidth="1.5" />
+      <circle cx="39" cy="167" r="2" fill="#059E87" />
+      <circle cx="19" cy="161" r="4" fill="#059E87" opacity="0.6" />
+      <line x1="19" y1="165" x2="19" y2="174" stroke="#059E87" strokeWidth="1.5" opacity="0.5" />
+
+      {/* Satellite system 5 — top-left */}
+      <rect x="24" y="34" width="30" height="22" rx="4" fill="rgba(5,158,135,0.12)" stroke="#059E87" strokeWidth="1.5" opacity="0.65" />
+      <circle cx="39" cy="45" r="5" fill="none" stroke="#059E87" strokeWidth="1.5" />
+      <circle cx="39" cy="45" r="2" fill="#059E87" />
+      <circle cx="19" cy="39" r="4" fill="#059E87" opacity="0.6" />
+      <line x1="19" y1="43" x2="19" y2="52" stroke="#059E87" strokeWidth="1.5" opacity="0.5" />
+
+      {/* Flow dots on connections */}
+      <circle r="3" fill="#059E87" opacity="0.9">
+        <animateMotion dur="1.8s" repeatCount="indefinite" path="M 110,88 L 110,30" />
+      </circle>
+      <circle r="3" fill="#059E87" opacity="0.8">
+        <animateMotion dur="2s" repeatCount="indefinite" path="M 132,122 L 178,168" begin="0.3s" />
+      </circle>
+      <circle r="3" fill="#059E87" opacity="0.8">
+        <animateMotion dur="2.2s" repeatCount="indefinite" path="M 88,98 L 42,52" begin="0.7s" />
+      </circle>
+
+      {/* Status */}
+      <text x="30" y="203" fill="#059E87" fontSize="7" fontFamily="monospace" fontWeight="600" opacity="0.6">5 TEAMS RUNNING</text>
+      <rect x="30" y="207" width="160" height="4" rx="2" fill="rgba(5,158,135,0.15)" />
+      <rect x="30" y="207" width="160" height="4" rx="2" fill="#059E87" opacity="0.8" />
     </svg>,
   ];
 
@@ -262,19 +369,13 @@ export function GSAPPinnedPhases({ phases }: GSAPPinnedPhasesProps) {
         <div className="lg:pl-12 w-full lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
           <div className="relative">
             {phases.map((phase) => (
-              <div
-                key={phase.num}
-                className="phase-item absolute inset-0 flex items-center first:relative"
-              >
+              <div key={phase.num} className="phase-item absolute inset-0 flex items-center first:relative">
                 <div className="flex items-baseline gap-6 max-w-xl">
                   <span className="metric text-4xl lg:text-6xl text-accent-dark/30 font-bold shrink-0">
                     {phase.num}
                   </span>
                   <div>
-                    <h3
-                      className="text-3xl lg:text-5xl text-text-on-light tracking-tight"
-                      style={{ fontFamily: "var(--font-heading)" }}
-                    >
+                    <h3 className="text-3xl lg:text-5xl text-text-on-light tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
                       {phase.title}
                     </h3>
                     <p className="mt-4 text-lg leading-relaxed text-text-on-light-sub font-medium">
@@ -286,8 +387,7 @@ export function GSAPPinnedPhases({ phases }: GSAPPinnedPhasesProps) {
             ))}
           </div>
 
-          {/* Phase icon — animated, swaps with each phase */}
-          <div className="hidden lg:block relative w-full aspect-square max-w-[280px] mx-auto">
+          <div className="hidden lg:block relative w-full aspect-square max-w-[420px] mx-auto">
             {phaseIcons}
           </div>
         </div>
