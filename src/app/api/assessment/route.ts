@@ -246,23 +246,7 @@ Concern: "Will this become a long consulting project?" Micro-story: A portfolio 
 You have enough signal to act with confidence and without overcommitting. The right next step is a ${params.suggestedEngagement}. This gives you a focused 90-day execution path with clear owners, metrics, and checkpoints. We will show you the value chain map, automation hotspots, and exactly where to start. No commitment beyond the conversation.`;
 }
 
-async function generateCloserReport(params: {
-  name: string;
-  company: string;
-  industry: string;
-  role: string;
-  challenge: string;
-  scorecard: ScorecardResult;
-  companyResearch: string;
-  industryBestInClass: string;
-  suggestedEngagement: string;
-}): Promise<string> {
-  const groqApiKey = process.env.GROQ_API_KEY;
-  if (!groqApiKey) {
-    throw new Error("GROQ_API_KEY is not configured");
-  }
-
-  const systemPrompt = `You are a senior ClearForge advisor writing an AI transformation strategy report.
+const CLOSER_SYSTEM_PROMPT = `You are a senior ClearForge advisor writing an AI transformation strategy report.
 Write in eight sections with these exact headings:
 ## Why This Matters Now
 ## The Core Problem
@@ -286,7 +270,18 @@ Style rules:
 - No buzzwords like leverage, synergy, paradigm, holistic
 - Write for a CEO/COO audience in plain language`;
 
-  const userPrompt = `Client name: ${params.name}
+function buildUserPrompt(params: {
+  name: string;
+  company: string;
+  industry: string;
+  role: string;
+  challenge: string;
+  scorecard: ScorecardResult;
+  companyResearch: string;
+  industryBestInClass: string;
+  suggestedEngagement: string;
+}): string {
+  return `Client name: ${params.name}
 Client company: ${params.company}
 Role: ${params.role}
 Industry: ${params.industry}
@@ -300,6 +295,42 @@ Industry best-in-class benchmark: ${params.industryBestInClass}
 Recommended engagement: ${params.suggestedEngagement}
 
 Write the full strategy report in markdown with the exact headings above.`;
+}
+
+async function generateWithClaude(userPrompt: string): Promise<string | null> {
+  const anthropicKey = process.env.ANTHROPIC_API_KEY;
+  if (!anthropicKey) return null;
+
+  const response = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": anthropicKey,
+      "anthropic-version": "2023-06-01",
+    },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-6",
+      max_tokens: 2048,
+      temperature: 0.3,
+      system: CLOSER_SYSTEM_PROMPT,
+      messages: [{ role: "user", content: userPrompt }],
+    }),
+  });
+
+  if (!response.ok) {
+    const details = await response.text();
+    console.error("Claude CLOSER report request failed:", details);
+    return null;
+  }
+
+  const result = await response.json();
+  const text = result.content?.[0]?.text?.trim();
+  return text || null;
+}
+
+async function generateWithGroq(userPrompt: string): Promise<string | null> {
+  const groqApiKey = process.env.GROQ_API_KEY;
+  if (!groqApiKey) return null;
 
   const models = ["llama-3.3-70b-versatile", "llama-3.1-70b-versatile"];
 
@@ -314,7 +345,7 @@ Write the full strategy report in markdown with the exact headings above.`;
         model,
         temperature: 0.35,
         messages: [
-          { role: "system", content: systemPrompt },
+          { role: "system", content: CLOSER_SYSTEM_PROMPT },
           { role: "user", content: userPrompt },
         ],
       }),
@@ -322,18 +353,46 @@ Write the full strategy report in markdown with the exact headings above.`;
 
     if (!response.ok) {
       const details = await response.text();
-      console.error(`Groq assessment request failed for model ${model}`, details);
+      console.error(`Groq request failed for ${model}:`, details);
       continue;
     }
 
     const result = await response.json();
     const report = result.choices?.[0]?.message?.content?.trim();
-    if (report) {
-      return report.replace(/\u2014/g, "-");
-    }
+    if (report) return report;
   }
 
-  throw new Error("Groq failed to produce an assessment report");
+  return null;
+}
+
+async function generateCloserReport(params: {
+  name: string;
+  company: string;
+  industry: string;
+  role: string;
+  challenge: string;
+  scorecard: ScorecardResult;
+  companyResearch: string;
+  industryBestInClass: string;
+  suggestedEngagement: string;
+}): Promise<string> {
+  const userPrompt = buildUserPrompt(params);
+
+  // Primary: Claude Sonnet 4.6
+  const claudeReport = await generateWithClaude(userPrompt);
+  if (claudeReport) {
+    console.log("CLOSER report generated via Claude Sonnet 4.6");
+    return claudeReport.replace(/\u2014/g, "-");
+  }
+
+  // Fallback: Groq Llama
+  const groqReport = await generateWithGroq(userPrompt);
+  if (groqReport) {
+    console.log("CLOSER report generated via Groq (fallback)");
+    return groqReport.replace(/\u2014/g, "-");
+  }
+
+  throw new Error("All AI providers failed to produce a CLOSER report");
 }
 
 function getResendClient(): Resend | null {
