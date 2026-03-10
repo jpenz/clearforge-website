@@ -8,8 +8,6 @@ import { GSAPSectionReveal, StaggerRevealGSAP } from "@/components/home/gsap-sec
 import { GSAPStatStrip } from "@/components/home/gsap-stat-strip";
 import { HeroCanvas } from "@/components/home/hero-canvas";
 import { TransformationAssembly } from "@/components/home/transformation-assembly";
-import { EngineSyncVisual } from "@/components/home/engine-sync-visual";
-import { AnalyzeVisual, SystemVisual, DashboardVisual } from "@/components/home/execution-visuals";
 
 export const metadata = createMetadata({
   title: "ClearForge — AI Strategy & Execution for Mid-Market Companies",
@@ -34,32 +32,43 @@ const pastAttempts = [
   "Or you haven't started — because nobody could tell you where to begin.",
 ];
 
-const phases = [
-  { num: "01", title: "Prepare", description: "Set priorities, define ownership, baseline the metrics that matter." },
-  { num: "02", title: "Modernize", description: "Redesign workflows and clean up data before layering AI." },
-  { num: "03", title: "Build", description: "Deploy production AI agents with controls, governance, and KPI baselines." },
-  { num: "04", title: "Scale", description: "Expand what works. Train teams. Build internal capability that compounds." },
-];
-
-const engines = [
+const methodologyPhases = [
   {
-    title: "Growth Strategy Engine",
-    subtitle: "Where to win",
-    description: "Market intelligence and business strategy to identify where to grow, defend, and win first.",
-    items: ["Map industry tailwinds and demand pockets", "Prioritize markets for profitable expansion", "Translate strategy into a 12-month growth plan"],
+    num: "01",
+    title: "Find the growth and name the real bottleneck",
+    subtitle: "Understand",
+    description: "We define growth goals, map your value chain, and quantify where value is leaking — so every decision starts with evidence, not assumptions.",
+    details: [
+      "Map revenue, operations, and support workflows end to end",
+      "Identify AI opportunities tied to clear business metrics",
+      "Benchmark readiness across data, technology, and people",
+      "Deliver a prioritized action plan with owners and timelines",
+    ],
   },
   {
-    title: "Performance Improvement Engine",
-    subtitle: "How to win",
-    description: "AI agents and workflow redesign to increase capacity, reduce friction, and run more efficiently.",
-    items: ["Find bottlenecks across revenue, ops, and support", "Deploy human-plus-agent workflows with controls", "Build capability so improvements compound"],
+    num: "02",
+    title: "Redesign workflows and deploy controlled AI systems",
+    subtitle: "Build",
+    description: "We build practical AI agents with your operators — working systems with owners, governance, and KPI baselines. Not proofs of concept. Production systems.",
+    details: [
+      "Redesign workflows before layering AI on top",
+      "Deploy AI agents with human-in-the-loop controls",
+      "Build dashboards and execution platforms your team uses daily",
+      "Establish KPI baselines and feedback loops from day one",
+    ],
   },
-];
-
-const executionSteps = [
-  { phase: "Understand", title: "Find the value and name the real bottleneck", description: "We define growth goals, capture the pain in your language, and quantify where value is leaking." },
-  { phase: "Build", title: "Redesign workflows and build controlled AI systems", description: "We build practical AI workflows with your operators. Working systems with owners, controls, and KPI baselines." },
-  { phase: "Operate", title: "Run, optimize, and reinforce adoption", description: "We turn early wins into operating rhythm and reinforce execution discipline. Compounding gains." },
+  {
+    num: "03",
+    title: "Run, optimize, and reinforce adoption",
+    subtitle: "Operate",
+    description: "We turn early wins into operating rhythm, train teams on human-plus-agent workflows, and expand what works. Compounding gains, not one-off projects.",
+    details: [
+      "Managed operations with continuous optimization",
+      "Role-based AI training for leadership and frontline teams",
+      "Expand proven systems to new divisions and use cases",
+      "The system gets smarter every month — compounding precision",
+    ],
+  },
 ];
 
 const objections = [
@@ -75,17 +84,14 @@ export default function Home() {
   return (
     <>
       {/* ═══ HERO — Interactive canvas, chaos-to-order ═══ */}
-      <section className="relative min-h-[100vh] flex items-end overflow-hidden bg-bg-deep">
+      <section className="relative min-h-[100svh] flex items-end overflow-hidden bg-bg-deep">
         <HeroCanvas />
 
-        {/* Gradient overlays for text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-bg-deep/60 to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-r from-bg-deep/70 via-transparent to-transparent pointer-events-none" />
-
-        {/* Teal glow orb — atmospheric */}
         <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-accent/5 blur-[120px] pointer-events-none" />
 
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-20 pt-40 lg:px-8 lg:pb-28">
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-28 pt-40 lg:px-8 lg:pb-28">
           <p className="section-label opacity-0 animate-fade-in-up">AI Strategy & Execution</p>
 
           <h1 className="mt-6 max-w-4xl text-[clamp(2.8rem,9vw,7rem)] leading-[0.92] tracking-tighter text-text-primary opacity-0 animate-fade-in-up delay-1">
@@ -113,7 +119,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ STAT STRIP — Oversized, scroll-scrubbed ═══ */}
+      {/* ═══ STAT STRIP ═══ */}
       <GSAPStatStrip
         className="bg-bg-primary"
         stats={[
@@ -124,7 +130,7 @@ export default function Home() {
         ]}
       />
 
-      {/* ═══ WHY AI STALLS — Light, asymmetric split ═══ */}
+      {/* ═══ WHY AI STALLS — The Core Problem ═══ */}
       <GSAPSectionReveal animation="slide-left">
         <section className="bg-bg-light py-20 lg:py-32">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -157,7 +163,7 @@ export default function Home() {
         </section>
       </GSAPSectionReveal>
 
-      {/* ═══ SOUND FAMILIAR — Dark, centered, atmospheric ═══ */}
+      {/* ═══ SOUND FAMILIAR — What You've Already Tried ═══ */}
       <GSAPSectionReveal animation="scale-up">
         <section className="bg-bg-deep py-20 lg:py-32 noise-texture relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-accent/[0.03] via-transparent to-transparent pointer-events-none" />
@@ -186,127 +192,43 @@ export default function Home() {
         </section>
       </GSAPSectionReveal>
 
-      {/* ═══ TRANSFORMATION MODEL — Scroll-driven assembly animation ═══ */}
-      <TransformationAssembly phases={phases} />
-
-      {/* People Capability Track */}
-      <section className="bg-bg-light py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="border-l-2 border-accent pl-6">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent-dark mb-4">
-              People Capability Track — Every Phase
-            </p>
-            <div className="grid gap-6 sm:grid-cols-3">
-              {[
-                "Role-based AI skills training for leadership, managers, and frontline teams",
-                "Human-plus-agent operating playbooks so adoption sticks",
-                "Manager coaching and governance rhythm to reinforce behavior change",
-              ].map((item) => (
-                <p key={item} className="text-sm text-text-on-light-sub font-medium leading-relaxed">{item}</p>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ DUAL ENGINE — Dark, animated sync visual ═══ */}
+      {/* ═══ HOW WE WORK — Section header ═══ */}
       <GSAPSectionReveal animation="fade-up">
-        <section className="bg-bg-deep py-20 lg:py-32 relative overflow-hidden noise-texture">
-          <div className="absolute inset-0 bg-bg-deep/95 pointer-events-none" />
-          <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-            <p className="section-label">Two Engines, One Transformation</p>
+        <section className="bg-bg-deep pt-20 pb-10 lg:pt-32 lg:pb-14">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <p className="section-label">How We Work</p>
             <h2 className="mt-4 max-w-3xl text-[clamp(2rem,5vw,3.5rem)] text-text-primary">
-              Find where you should grow.
+              Strategy through production.{" "}
+              <span className="text-text-muted">One partner, no handoffs.</span>
             </h2>
-            <p className="mt-3 text-xl text-text-secondary" style={{ fontFamily: "var(--font-heading)" }}>
-              Then build the machine that gets you there.
+            <p className="mt-4 text-lg text-text-secondary max-w-2xl">
+              Every engagement follows three phases — each with clear owners,
+              measurable outcomes, and the same team from start to finish.
             </p>
-
-            {/* Animated engine visual */}
-            <div className="mt-14 relative max-w-4xl mx-auto">
-              <EngineSyncVisual />
-            </div>
-
-            {/* Engine details — editorial split */}
-            <div className="mt-16 grid gap-16 md:grid-cols-2">
-              {engines.map((engine) => (
-                <div key={engine.title}>
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">{engine.subtitle}</p>
-                  <h3 className="mt-2 text-2xl text-text-primary" style={{ fontFamily: "var(--font-heading)" }}>
-                    {engine.title}
-                  </h3>
-                  <div className="mt-3 h-0.5 w-12 bg-accent/40" />
-                  <p className="mt-4 text-base leading-relaxed text-text-secondary">{engine.description}</p>
-                  <ul className="mt-6 space-y-3">
-                    {engine.items.map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-sm text-text-secondary">
-                        <svg className="mt-1 h-4 w-4 shrink-0 text-accent" viewBox="0 0 16 16" fill="none">
-                          <path d="M2 8h12M10 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
           </div>
         </section>
       </GSAPSectionReveal>
 
-      {/* ═══ EXECUTION — Light, alternating left/right ═══ */}
-      <section className="bg-bg-light py-20 lg:py-32">
+      {/* ═══ METHODOLOGY — Scroll-driven assembly (Understand → Build → Operate) ═══ */}
+      <TransformationAssembly phases={methodologyPhases} />
+
+      {/* ═══ PEOPLE CAPABILITY — Accent callout ═══ */}
+      <section className="bg-bg-deep py-14 lg:py-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <GSAPSectionReveal animation="clip-reveal">
-            <div className="text-center mb-20">
-              <p className="section-label text-accent-dark">How We Execute</p>
-              <h2 className="mt-4 text-[clamp(2rem,5vw,3.5rem)] text-text-on-light">
-                Understand. Build. Operate.
-              </h2>
-            </div>
-          </GSAPSectionReveal>
-
-          <div className="space-y-20 lg:space-y-28">
-            {executionSteps.map((step, i) => {
-              const Visual = [AnalyzeVisual, SystemVisual, DashboardVisual][i];
-              const isOdd = i % 2 !== 0;
-              return (
-                <GSAPSectionReveal key={step.phase} animation={isOdd ? "slide-right" : "slide-left"}>
-                  <div className={`lg:grid lg:grid-cols-12 lg:gap-16 items-center ${isOdd ? "lg:text-right" : ""}`}>
-                    <div className={`${isOdd ? "lg:col-start-7 lg:col-span-6 lg:order-2" : "lg:col-span-5"}`}>
-                      <div className={`flex items-baseline gap-4 ${isOdd ? "lg:justify-end" : ""}`}>
-                        <span className="metric text-3xl lg:text-5xl text-accent/30 font-bold">{String(i + 1).padStart(2, "0")}</span>
-                        <p className="text-lg font-bold uppercase tracking-wider text-accent-dark" style={{ fontFamily: "var(--font-heading)" }}>
-                          {step.phase}
-                        </p>
-                      </div>
-                      <h3 className="mt-4 text-2xl lg:text-3xl text-text-on-light tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
-                        {step.title}
-                      </h3>
-                      <p className="mt-4 text-base leading-relaxed text-text-on-light-sub font-medium">
-                        {step.description}
-                      </p>
-                    </div>
-                    <div className={`mt-10 lg:mt-0 ${isOdd ? "lg:col-span-5 lg:order-1" : "lg:col-start-7 lg:col-span-6"}`}>
-                      <div className="max-w-sm mx-auto lg:max-w-none">
-                        <Visual />
-                      </div>
-                    </div>
-                  </div>
-                </GSAPSectionReveal>
-              );
-            })}
-          </div>
-
-          <GSAPSectionReveal animation="fade-up">
-            <p className="mt-20 text-center text-2xl lg:text-3xl text-text-on-light tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
-              One partner accountable for the full transformation.
+          <div className="border-l-2 border-accent pl-6 max-w-3xl">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent mb-3">
+              People Capability — Every Phase
             </p>
-          </GSAPSectionReveal>
+            <p className="text-base text-text-secondary leading-relaxed">
+              Role-based AI training for leadership and frontline teams.
+              Human-plus-agent operating playbooks so adoption sticks.
+              Manager coaching and governance rhythm to reinforce behavior change.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* ═══ RESULTS — Dark, big metrics ═══ */}
+      {/* ═══ RESULTS — Case study proof ═══ */}
       {featured && (
         <GSAPSectionReveal animation="scale-up">
           <section className="bg-bg-deep py-20 lg:py-32 relative noise-texture">
@@ -339,15 +261,13 @@ export default function Home() {
         </GSAPSectionReveal>
       )}
 
-      {/* ═══ ASSESSMENT CTA — Light, centered ═══ */}
+      {/* ═══ ASSESSMENT CTA ═══ */}
       <GSAPSectionReveal animation="fade-up">
         <section className="bg-bg-light py-20 lg:py-32 relative overflow-hidden">
-          {/* Subtle contour lines */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1440 800" preserveAspectRatio="none" aria-hidden>
             <path d="M -72,680 Q 288,600 576,640 Q 864,680 1152,624 Q 1440,560 1512,600" fill="none" stroke="rgba(5,158,135,0.06)" strokeWidth="1" />
             <path d="M -72,560 Q 360,480 648,544 Q 936,600 1224,520 Q 1440,440 1512,480" fill="none" stroke="rgba(5,158,135,0.05)" strokeWidth="1" />
             <path d="M -72,440 Q 432,360 720,416 Q 1008,480 1296,384 Q 1512,304 1584,336" fill="none" stroke="rgba(5,158,135,0.04)" strokeWidth="1" />
-            <path d="M -72,320 Q 504,240 792,304 Q 1080,360 1368,256 Q 1512,176 1584,224" fill="none" stroke="rgba(5,158,135,0.03)" strokeWidth="1" />
           </svg>
           <div className="relative z-10 mx-auto max-w-3xl px-6 lg:px-8">
             <div className="text-center">
@@ -387,7 +307,7 @@ export default function Home() {
         </section>
       </GSAPSectionReveal>
 
-      {/* ═══ OBJECTIONS — Dark, asymmetric ═══ */}
+      {/* ═══ OBJECTIONS — Concerns and How to Handle Them ═══ */}
       <GSAPSectionReveal animation="slide-right">
         <section className="bg-bg-deep py-20 lg:py-32 noise-texture relative">
           <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
@@ -417,7 +337,7 @@ export default function Home() {
         </section>
       </GSAPSectionReveal>
 
-      {/* ═══ FINAL CTA — Light, centered ═══ */}
+      {/* ═══ FINAL CTA — Recommended Next Decision ═══ */}
       <section className="bg-bg-light py-20 lg:py-32 relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1440 800" preserveAspectRatio="none" aria-hidden>
           <defs>

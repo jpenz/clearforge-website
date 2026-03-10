@@ -36,7 +36,7 @@ import {
   Database,
   Search,
   Filter,
-  Kanban,
+  LayoutGrid,
 } from "lucide-react";
 
 const fadeUp = {
@@ -136,7 +136,7 @@ export function IndustrialManufacturerPage() {
                 {
                   icon: Factory,
                   label: "Sectors",
-                  value: "Pressure Vessels · Automation · Metals",
+                  value: "Heavy Equipment · Industrial Automation · Specialty Metals",
                   detail:
                     "Serving energy, pharmaceutical, automotive, aerospace, food processing, and infrastructure markets",
                 },
@@ -223,7 +223,7 @@ export function IndustrialManufacturerPage() {
                 items: [
                   "Deployed proprietary AI agents calibrated to the client's exact product lines and industrial capabilities",
                   "Built 24 active intelligence triggers scanning capital projects, industrial demand, and competitive movements",
-                  "Generated 1,181 scored opportunities across Pressure Vessel, Automation, and Data Center divisions",
+                  "Generated 1,181 scored opportunities across three core business divisions",
                   "Produced 631+ tailored sales playbooks with entry strategies and competitive analysis",
                 ],
               },
@@ -233,10 +233,10 @@ export function IndustrialManufacturerPage() {
                 subtitle: "Months 3–5",
                 icon: LayoutDashboard,
                 items: [
-                  "Built SightForge — a purpose-built sales intelligence dashboard deployed at a dedicated subdomain",
-                  "Dual-view pipeline management (table + Kanban) with advanced filtering and saved views",
-                  "AI playbook rendering with structured 4-dimension feedback loops",
-                  "Contact enrichment, performance scorecards, and territory assignment intelligence",
+                  "Built a purpose-built sales intelligence platform deployed on a dedicated subdomain for the sales team",
+                  "Visual pipeline management with list and board views, advanced filtering, and saved views",
+                  "AI-generated playbooks with structured 4-dimension feedback loops that improve over time",
+                  "Automated decision-maker discovery, performance scorecards, and territory assignment intelligence",
                 ],
               },
               {
@@ -373,52 +373,52 @@ export function IndustrialManufacturerPage() {
               We didn&apos;t just find opportunities. We built the system to act on them.
             </h2>
             <p className="mt-4 text-base text-text-secondary max-w-3xl">
-              SightForge is a purpose-built sales intelligence dashboard — deployed on a dedicated
+              A purpose-built sales intelligence platform — deployed on a dedicated
               subdomain for the client&apos;s sales team. It transforms AI-generated intelligence
-              into structured, accountable sales execution.
+              into structured, accountable sales execution that reps actually use every day.
             </p>
           </motion.div>
 
           <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: Kanban,
+                icon: LayoutGrid,
                 title: "Pipeline Management",
                 items: [
-                  "Dual-view: Table + Kanban",
-                  "Advanced filtering by territory, group, and score",
-                  "Saved views and command palette (Cmd+K)",
-                  "Drag-and-drop stage progression",
+                  "See every opportunity in list or board view — your choice",
+                  "Filter by territory, group, score, or any field that matters",
+                  "Saved views so each rep sees exactly their pipeline",
+                  "Move deals through stages with a click — nothing falls through the cracks",
                 ],
               },
               {
                 icon: BookOpen,
                 title: "AI Sales Playbooks",
                 items: [
-                  "Auto-generated per opportunity",
-                  "Entry strategy + competitive analysis",
-                  "1–5 star feedback across 4 dimensions",
-                  "Rich HTML with annotations",
+                  "A custom playbook generated for every opportunity — not templates",
+                  "Entry strategy, competitive positioning, and key talking points",
+                  "Sales reps rate each playbook so the AI gets smarter over time",
+                  "Detailed briefs your team can review in minutes, not hours",
                 ],
               },
               {
                 icon: UserCheck,
                 title: "Contact Intelligence",
                 items: [
-                  "Multi-source enrichment (Apollo, LeadMagic)",
-                  "Email, phone, LinkedIn for decision-makers",
-                  "One-click outreach actions",
-                  "Decision-maker hierarchy mapping",
+                  "AI finds the right decision-makers automatically across multiple data sources",
+                  "Direct contact info — email, phone, LinkedIn — ready for outreach",
+                  "One-click actions to start a conversation",
+                  "See who reports to whom so you start at the right level",
                 ],
               },
               {
                 icon: LineChart,
                 title: "Metrics & Analytics",
                 items: [
-                  "Discovery quality tracking",
-                  "Playbook effectiveness ratings",
-                  "Override tracking (AI vs. human)",
-                  "Win rate and days-to-close dashboards",
+                  "See which opportunities are highest quality at a glance",
+                  "Track which playbooks actually lead to closed deals",
+                  "Understand where reps override AI recommendations — and why",
+                  "Win rate and time-to-close dashboards for leadership visibility",
                 ],
               },
             ].map((pillar, i) => (
@@ -464,7 +464,7 @@ export function IndustrialManufacturerPage() {
                 metric: "1,181",
                 label: "Qualified Opportunities",
                 detail:
-                  "Across Pressure Vessel (954), Automation (123), and Data Center (50) — each scored, enriched, and matched to the client's specific product capabilities. The top 10 opportunities alone represent over $20 billion in combined capital investment.",
+                  "Across three core divisions — with the largest generating over 950 opportunities alone — each scored, enriched, and matched to the client's specific product capabilities. The top 10 opportunities alone represent over $20 billion in combined capital investment.",
               },
               {
                 metric: "99.8%",
@@ -571,28 +571,28 @@ export function IndustrialManufacturerPage() {
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               {
-                title: "Roll Form Group",
-                detail: "IIJA infrastructure creating demand for roll-formed steel products across highway, bridge, and transit construction",
+                title: "Structural Steel Products",
+                detail: "Infrastructure legislation creating demand across highway, bridge, and transit construction — AI agents identify the earliest procurement signals",
                 triggers: "8 trigger categories · 12 states",
               },
               {
-                title: "Sierra Aluminum",
-                detail: "Nearshoring wave driving demand for domestically sourced aluminum extrusions across automotive and construction",
+                title: "Aluminum Extrusion",
+                detail: "Nearshoring wave driving demand for domestically sourced materials across automotive and construction",
                 triggers: "6 trigger categories · 170+ buyers identified",
               },
               {
-                title: "Advanced Fabrication",
-                detail: "Direct architecture transfer from Pressure Vessel — capital projects and industrial demand triggers validated and ready",
+                title: "Custom Fabrication",
+                detail: "Direct architecture transfer from the first deployed division — capital project triggers validated and ready to deploy",
                 triggers: "10 trigger categories · 8 states",
               },
               {
-                title: "Stainless Tubing",
-                detail: "Pharmaceutical cleanroom and semiconductor fab construction creating demand for high-purity stainless systems",
+                title: "Specialty Tubing",
+                detail: "Pharmaceutical cleanroom and semiconductor fab construction creating demand for high-purity systems",
                 triggers: "5 trigger categories · 7 states",
               },
               {
-                title: "Packaging Systems",
-                detail: "E-commerce volume driving unprecedented demand for automated packaging equipment across fulfillment and pharma",
+                title: "Packaging & Automation",
+                detail: "E-commerce volume driving demand for automated packaging equipment across fulfillment and pharma",
                 triggers: "7 trigger categories · High-volume, short-cycle",
               },
               {

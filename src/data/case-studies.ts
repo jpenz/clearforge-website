@@ -64,16 +64,16 @@ export const caseStudies: CaseStudy[] = [
       "Sales teams across 16 divisions operated in silos with no shared market intelligence. Prospecting was manual, inconsistent, and untethered from the company's actual product capabilities. Cross-sell opportunities across divisions were invisible. Leadership had no unified view of where capital projects were happening, which accounts were under-served, and where the real white space existed. The commercial model had not evolved even as the market, the tools, and buyer behavior had fundamentally changed.",
     solution: [
       "Deployed proprietary AI agents scanning capital projects, industrial demand signals, and competitive movements across 20+ states — calibrated specifically to the client's product lines",
-      "Built 24 active intelligence triggers across three divisions: Pressure Vessel (14 triggers), Automation (10 triggers), and Data Center — each generating scored, enriched opportunities in real time",
+      "Built 24 active intelligence triggers across three core business divisions — each generating scored, enriched opportunities in real time",
       "Created 631+ AI-generated sales playbooks tailored by opportunity, vertical, and buyer persona — with entry strategies, competitive analysis, and risk assessments",
-      "Built and deployed SightForge, a purpose-built sales intelligence dashboard at a dedicated subdomain — with dual-view pipeline management, AI playbook rendering, contact enrichment, and performance analytics",
+      "Built and deployed a purpose-built sales intelligence platform — with visual pipeline management, AI-generated playbooks, automated contact discovery, and performance analytics the sales team uses daily",
       "Designed a portfolio-level expansion model prioritizing 5 additional divisions for AI deployment based on market size, AI fit scoring, and transferable trigger architecture",
       "Mapped a commercial model redesign framework — diagnostic-first approach to aligning sales structure, compensation, and AI tools to margin-focused growth",
     ],
     continuousModel: [
       "AI agents monitor thousands of market signals daily — every closed-won and closed-lost data point refines the scoring model, compounding precision month over month",
       "New triggers, territories, and divisions are added continuously — the intelligence architecture scales horizontally, with each deployment accelerating faster than the last",
-      "SightForge captures structured feedback on every playbook (1–5 star ratings across 4 dimensions), creating a closed-loop system that improves AI output quality automatically",
+      "The platform captures structured feedback on every playbook (1–5 star ratings across 4 dimensions), creating a closed-loop system that improves AI output quality automatically",
       "Market shifts are auto-captured within hours, not weeks — ensuring the sales team always has the freshest intelligence and first-mover advantage on capital projects",
     ],
     outcomes: [
@@ -85,7 +85,7 @@ export const caseStudies: CaseStudy[] = [
       { metric: "$20B+", description: "Combined investment value in the top 10 opportunities alone" },
     ],
     scale:
-      "What began as a two-division pilot expanded into an enterprise-wide intelligence system in under six months. The platform now covers Pressure Vessel (954 opportunities), Automation (123), and Data Center (50) — with five additional divisions ready for deployment. ClearForge built a custom SightForge dashboard that the sales team uses daily to manage the full pipeline, and is now designing a commercial model transformation to align the client's sales structure, compensation, and coverage model to the intelligence the AI is generating. The system gets exponentially smarter every month — by Month 12, the precision and coverage will be fundamentally different from Month 1.",
+      "What began as a two-division pilot expanded into an enterprise-wide intelligence system in under six months. The platform now covers three core divisions — with the largest generating over 950 opportunities alone — and five additional divisions ready for deployment. ClearForge built a custom sales intelligence dashboard that the team uses daily to manage the full pipeline, and is now designing a commercial model transformation to align sales structure, compensation, and coverage to the intelligence the AI is generating. The system gets exponentially smarter every month — by Month 12, the precision and coverage will be fundamentally different from Month 1.",
   },
   {
     slug: "pe-portfolio-diagnostic-plan",
