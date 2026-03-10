@@ -148,21 +148,25 @@ export default function Home() {
                 </h2>
               </div>
 
-              <StaggerRevealGSAP className="lg:col-span-7 mt-14 lg:mt-0 space-y-10" stagger={0.12}>
+              <StaggerRevealGSAP className="lg:col-span-7 mt-14 lg:mt-0 space-y-6" stagger={0.12}>
                 {stallReasons.map((r, i) => (
-                  <div key={r.title} className="flex items-baseline gap-6">
-                    <span className="metric text-sm text-accent-dark shrink-0">{String(i + 1).padStart(2, "0")}</span>
-                    <div>
-                      <h3 className="text-xl font-bold text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
-                        {r.title}
-                      </h3>
-                      <p className="mt-2 text-base leading-relaxed text-text-on-light-sub">{r.description}</p>
+                  <div key={r.title} className="rounded-xl border border-black/[0.06] bg-white/70 p-6 shadow-sm">
+                    <div className="flex items-baseline gap-5">
+                      <span className="metric text-sm text-accent-dark shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                      <div>
+                        <h3 className="text-lg font-bold text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
+                          {r.title}
+                        </h3>
+                        <p className="mt-2 text-[15px] leading-relaxed text-text-on-light-sub">{r.description}</p>
+                      </div>
                     </div>
                   </div>
                 ))}
-                <p className="text-lg font-semibold text-accent-dark mt-6 border-l-2 border-accent pl-6">
-                  Disconnected execution turns promising pilots into expensive programs that never ship.
-                </p>
+                <div className="rounded-xl border border-accent/20 bg-accent/[0.06] p-6">
+                  <p className="text-base font-semibold text-accent-dark border-l-2 border-accent pl-5 leading-relaxed">
+                    Disconnected execution turns promising pilots into expensive programs that never ship.
+                  </p>
+                </div>
               </StaggerRevealGSAP>
             </div>
           </div>
@@ -210,36 +214,36 @@ export default function Home() {
               Modernize the business and the workforce&nbsp;together.
             </h2>
 
-            {/* Phase flow — CSS, not an image */}
-            <div className="mt-16 grid grid-cols-1 gap-1 sm:grid-cols-4">
+            {/* Phase flow */}
+            <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-4">
               {phases.map((phase, i) => (
-                <div key={phase.num} className="relative group">
-                  <div className="p-6 lg:p-8">
+                <div key={phase.num} className="relative group rounded-xl border border-black/[0.06] bg-white/70 shadow-sm overflow-hidden">
+                  {/* Top accent bar */}
+                  <div className="h-1 bg-gradient-to-r from-accent to-accent/30" />
+                  <div className="p-6">
                     <span className="metric text-xs text-accent-dark">{phase.num}</span>
-                    <h3 className="mt-2 text-2xl text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
+                    <h3 className="mt-2 text-xl text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
                       {phase.title}
                     </h3>
                     <p className="mt-3 text-sm leading-relaxed text-text-on-light-sub">
                       {phase.description}
                     </p>
                   </div>
-                  {/* Connector line */}
+                  {/* Connector arrow */}
                   {i < 3 && (
-                    <div className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M8 12h8m0 0l-4-4m4 4l-4 4" stroke="#059E87" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <div className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 h-8 w-8 items-center justify-center rounded-full bg-white shadow-md border border-black/[0.06]">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M3 7h8m0 0L8 4m3 3L8 10" stroke="#059E87" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
                   )}
-                  {/* Top accent bar */}
-                  <div className="absolute top-0 left-6 right-6 h-0.5 bg-gradient-to-r from-accent/60 to-accent/10" />
                 </div>
               ))}
             </div>
 
             {/* People Track */}
-            <div className="mt-12 border-l-2 border-accent pl-6">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent-dark mb-4">
+            <div className="mt-12 rounded-xl border border-accent/15 bg-accent/[0.04] p-6">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent-dark mb-4 border-l-2 border-accent pl-4">
                 People Capability Track — Every Phase
               </p>
               <div className="grid gap-6 sm:grid-cols-3">
@@ -307,22 +311,21 @@ export default function Home() {
                   Understand.<br />Build.<br />Operate.
                 </h2>
 
-                <div className="mt-14 space-y-12">
+                <div className="mt-14 space-y-5">
                   {executionSteps.map((step, i) => (
-                    <div key={step.phase}>
+                    <div key={step.phase} className="rounded-xl border border-black/[0.06] bg-white/70 p-6 shadow-sm">
                       <div className="flex items-baseline gap-4">
                         <span className="metric text-sm text-accent-dark">{String(i + 1).padStart(2, "0")}</span>
-                        <p className="text-lg font-bold uppercase tracking-wider text-accent-dark" style={{ fontFamily: "var(--font-heading)" }}>
+                        <p className="text-base font-bold uppercase tracking-wider text-accent-dark" style={{ fontFamily: "var(--font-heading)" }}>
                           {step.phase}
                         </p>
                       </div>
-                      <h3 className="mt-3 text-xl text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
+                      <h3 className="mt-3 text-lg text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
                         {step.title}
                       </h3>
-                      <p className="mt-2 text-base leading-relaxed text-text-on-light-sub">
+                      <p className="mt-2 text-[15px] leading-relaxed text-text-on-light-sub">
                         {step.description}
                       </p>
-                      {i < executionSteps.length - 1 && <div className="mt-10 h-px bg-border-light/50" />}
                     </div>
                   ))}
                 </div>
@@ -385,14 +388,15 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="mt-10 grid gap-6 sm:grid-cols-3">
+            <div className="mt-10 grid gap-5 sm:grid-cols-3">
               {[
-                { title: "Benchmark your readiness", description: "See how your AI maturity compares across strategy, data, technology, and people." },
-                { title: "Get a prioritized plan", description: "We score each dimension and show you exactly where to focus for maximum impact." },
-                { title: "No commitment required", description: "It's free. No sales call needed. Just clarity on where you are and where to go." },
+                { num: "01", title: "Benchmark your readiness", description: "See how your AI maturity compares across strategy, data, technology, and people." },
+                { num: "02", title: "Get a prioritized plan", description: "We score each dimension and show you exactly where to focus for maximum impact." },
+                { num: "03", title: "No commitment required", description: "It's free. No sales call needed. Just clarity on where you are and where to go." },
               ].map((item) => (
-                <div key={item.title}>
-                  <h3 className="text-base font-bold text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
+                <div key={item.title} className="rounded-xl border border-black/[0.06] bg-white/70 p-5 shadow-sm">
+                  <span className="metric text-xs text-accent-dark">{item.num}</span>
+                  <h3 className="mt-2 text-base font-bold text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
                     {item.title}
                   </h3>
                   <p className="mt-2 text-sm text-text-on-light-sub leading-relaxed">{item.description}</p>
@@ -444,28 +448,30 @@ export default function Home() {
         </section>
       </GSAPSectionReveal>
 
-      {/* ═══ FINAL CTA — Light, centered ═══ */}
-      <section className="bg-bg-light py-28 lg:py-36">
-        <div className="mx-auto max-w-2xl px-6 text-center lg:px-8">
-          <h2 className="text-[clamp(2.5rem,5vw,3.5rem)] text-text-on-light">
+      {/* ═══ FINAL CTA — Dark, centered, atmospheric ═══ */}
+      <section className="relative bg-bg-deep py-28 lg:py-36 noise-texture overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.06] via-transparent to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-accent/[0.04] blur-[100px] pointer-events-none" />
+        <div className="relative z-10 mx-auto max-w-2xl px-6 text-center lg:px-8">
+          <h2 className="text-[clamp(2.5rem,5vw,3.5rem)] text-text-primary">
             One conversation to find&nbsp;out.
           </h2>
-          <p className="mt-6 text-base text-text-on-light-sub">
+          <p className="mt-6 text-base text-text-secondary leading-relaxed">
             Tell us about your business. We&apos;ll be honest about whether we
             can help — and if so, how.
           </p>
 
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-8 text-sm text-text-on-light-muted">
-            <span><strong className="text-accent-dark">01</strong> — We listen</span>
-            <span><strong className="text-accent-dark">02</strong> — We&apos;re honest about fit</span>
-            <span><strong className="text-accent-dark">03</strong> — We scope it</span>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-8 text-sm text-text-muted">
+            <span><strong className="text-accent">01</strong> — We listen</span>
+            <span><strong className="text-accent">02</strong> — We&apos;re honest about fit</span>
+            <span><strong className="text-accent">03</strong> — We scope it</span>
           </div>
 
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
               <Link href="/contact">Request a Proposal</Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-border-light text-text-on-light hover:bg-bg-light-alt hover:text-text-on-light" asChild>
+            <Button size="lg" variant="secondary" asChild>
               <Link href="mailto:james@clearforge.ai">Email Us Directly</Link>
             </Button>
           </div>
