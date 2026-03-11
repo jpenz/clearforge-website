@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect, useMemo } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -27,575 +27,547 @@ interface TransformationAssemblyProps {
 
 const TEAL = "#00E5C3";
 const BG = "#060B14";
-const PARTICLE_COUNT = 60;
 
-/* ── Particle state targets for each phase ── */
+/* ══════════════════════════════════════════════
+   SVG Visual — Connected Business Architecture
 
-interface ParticleState {
-  x: number;
-  y: number;
-  r: number;
-  opacity: number;
+   Three phases that build on each other:
+   1. Understand: Scattered business nodes scanned & diagnosed
+   2. Build: Nodes reorganize into engineered system with AI agents
+   3. Operate: System runs — data flows, metrics pulse, scale expands
+   ══════════════════════════════════════════════ */
+
+/* Layout coordinates on a 600x450 viewBox */
+const SCATTERED_NODES = [
+  { x: 95,  y: 80,  label: "Revenue" },
+  { x: 480, y: 65,  label: "Sales" },
+  { x: 140, y: 340, label: "Operations" },
+  { x: 510, y: 310, label: "Service" },
+  { x: 300, y: 170, label: "Data" },
+  { x: 210, y: 230, label: "Marketing" },
+  { x: 430, y: 200, label: "Finance" },
+];
+
+const ORGANIZED_NODES = [
+  { x: 120, y: 110 },
+  { x: 480, y: 110 },
+  { x: 120, y: 340 },
+  { x: 480, y: 340 },
+  { x: 300, y: 225 }, // center hub
+  { x: 200, y: 225 },
+  { x: 400, y: 225 },
+];
+
+const CONNECTIONS: [number, number][] = [
+  [0, 4], [1, 4], [2, 4], [3, 4],
+  [0, 5], [5, 4], [1, 6], [6, 4],
+  [2, 5], [3, 6],
+];
+
+const DIAG_LINES: [number, number][] = [
+  [0, 4], [1, 4], [2, 5], [3, 6], [4, 5], [4, 6], [0, 5], [1, 6],
+];
+
+const AI_POSITIONS = [
+  { x: 300, y: 160 },
+  { x: 190, y: 290 },
+  { x: 410, y: 290 },
+];
+
+const METRIC_POSITIONS = [
+  { x: 120, y: 110 },
+  { x: 480, y: 110 },
+  { x: 120, y: 340 },
+  { x: 480, y: 340 },
+];
+
+/* ── Helper functions ── */
+
+function easeOut(t: number): number {
+  return 1 - Math.pow(1 - t, 3);
 }
 
-function seededRandom(seed: number): number {
-  const x = Math.sin(seed * 9301 + 49297) * 49297;
-  return x - Math.floor(x);
+function easeInOut(t: number): number {
+  return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
 }
 
-function lerp(a: number, b: number, t: number): number {
-  return a + (b - a) * t;
+function clamp01(v: number): number {
+  return Math.max(0, Math.min(1, v));
 }
 
-/** Generate three target states (Understand → Build → Operate). */
-function generateParticleStates(
-  count: number,
-  w: number,
-  h: number
-): ParticleState[][] {
-  const states: ParticleState[][] = [[], [], []];
-  const cx = w * 0.5;
-  const cy = h * 0.5;
+/* ── SVG Visual (desktop, ref-driven) ── */
 
-  // Cluster centers for Understand phase (loose business areas being diagnosed)
-  const clusters = [
-    { x: w * 0.2, y: h * 0.25 },
-    { x: w * 0.7, y: h * 0.2 },
-    { x: w * 0.3, y: h * 0.75 },
-    { x: w * 0.8, y: h * 0.72 },
-  ];
+function DesktopVisual({ progressRef }: { progressRef: React.RefObject<{ value: number }> }) {
+  const svgRef = useRef<SVGSVGElement>(null);
 
-  // Satellite positions for Operate phase
-  const sats = [
-    { x: w * 0.14, y: h * 0.14 },
-    { x: w * 0.86, y: h * 0.14 },
-    { x: w * 0.86, y: h * 0.86 },
-    { x: w * 0.14, y: h * 0.86 },
-  ];
+  useEffect(() => {
+    let raf: number;
 
-  for (let i = 0; i < count; i++) {
-    const s = seededRandom(i + 1);
-    const s2 = seededRandom(i + 100);
-    const s3 = seededRandom(i + 200);
-    const s4 = seededRandom(i + 300);
+    const animate = () => {
+      const svg = svgRef.current;
+      if (!svg || !progressRef.current) { raf = requestAnimationFrame(animate); return; }
 
-    // ── UNDERSTAND: Loose clusters being mapped ──
-    const cIdx = i % 4;
-    const cl = clusters[cIdx];
-    const spread = 35 + s * 55;
-    const a0 = s2 * Math.PI * 2;
-    const bright = s3 > 0.65;
-    states[0].push({
-      x: cl.x + Math.cos(a0) * spread * s3,
-      y: cl.y + Math.sin(a0) * spread * s4,
-      r: 2 + s * 2,
-      opacity: bright ? 0.65 + s4 * 0.35 : 0.12 + s4 * 0.2,
-    });
+      const progress = progressRef.current.value;
+      const phase = progress < 0.33 ? 0 : progress < 0.66 ? 1 : 2;
+      const localT = phase === 0
+        ? progress / 0.33
+        : phase === 1
+          ? (progress - 0.33) / 0.33
+          : (progress - 0.66) / 0.34;
 
-    // ── BUILD: Organized hub-and-spoke network ──
-    const isCore = i < 10;
-    const isPathway = i >= 10 && i < 34;
+      /* ── Query elements (cached by browser) ── */
+      const nodes = svg.querySelectorAll<SVGElement>(".n-group");
+      const connLines = svg.querySelectorAll<SVGElement>(".c-line");
+      const scanLine = svg.querySelector<SVGElement>(".s-line");
+      const scanGlow = svg.querySelector<SVGElement>(".s-glow");
+      const hubRings = svg.querySelectorAll<SVGElement>(".h-ring");
+      const aiIcons = svg.querySelectorAll<SVGElement>(".a-icon");
+      const flowDots = svg.querySelectorAll<SVGElement>(".f-dot");
+      const metricPulses = svg.querySelectorAll<SVGElement>(".m-pulse");
+      const diagLines = svg.querySelectorAll<SVGElement>(".d-line");
+      const nodeLabels = svg.querySelectorAll<SVGElement>(".n-label");
+      const operateGlow = svg.querySelector<SVGElement>(".o-glow");
+      const scaleRings = svg.querySelectorAll<SVGElement>(".sc-ring");
 
-    if (isCore) {
-      const ring = i < 3 ? 0 : i < 7 ? 1 : 2;
-      const rR = ring === 0 ? 0 : ring === 1 ? 20 : 40;
-      const rA =
-        (i / (ring === 0 ? 3 : ring === 1 ? 4 : 3)) * Math.PI * 2 + s * 0.4;
-      states[1].push({
-        x: cx + (rR > 0 ? Math.cos(rA) * rR : (s - 0.5) * 6),
-        y: cy + (rR > 0 ? Math.sin(rA) * rR : (s2 - 0.5) * 6),
-        r: ring === 0 ? 3.5 : ring === 1 ? 2.5 : 2,
-        opacity: ring === 0 ? 0.9 : 0.6,
+      /* ── Interpolate node positions ── */
+      nodes.forEach((node, i) => {
+        const sn = SCATTERED_NODES[i];
+        const on = ORGANIZED_NODES[i];
+        if (!sn || !on) return;
+
+        let nx: number, ny: number;
+        if (phase === 0) {
+          nx = sn.x;
+          ny = sn.y;
+        } else {
+          const moveT = easeInOut(clamp01(phase === 1 ? localT * 1.5 : 1));
+          nx = sn.x + (on.x - sn.x) * moveT;
+          ny = sn.y + (on.y - sn.y) * moveT;
+        }
+        node.setAttribute("transform", `translate(${nx}, ${ny})`);
+
+        /* Node appearance */
+        const core = node.querySelector<SVGElement>(".n-core");
+        const ring = node.querySelector<SVGElement>(".n-ring");
+        if (core && ring) {
+          if (phase === 0) {
+            const scanThreshold = (sn.x / 600) * 0.8;
+            const scanned = localT > scanThreshold;
+            core.style.opacity = scanned ? "0.8" : "0.15";
+            ring.style.opacity = scanned ? "0.4" : "0.06";
+            ring.setAttribute("r", "18");
+          } else if (phase === 1) {
+            core.style.opacity = "0.9";
+            ring.style.opacity = "0.35";
+            ring.setAttribute("r", i === 4 ? "28" : "20");
+          } else {
+            core.style.opacity = "1";
+            ring.style.opacity = "0.45";
+            ring.setAttribute("r", i === 4 ? "32" : "22");
+          }
+        }
       });
-    } else if (isPathway) {
-      const pIdx = (i - 10) % 6;
-      const pPos = Math.floor((i - 10) / 6);
-      const endpoints = [
-        { x: w * 0.04, y: h * 0.22 },
-        { x: w * 0.04, y: h * 0.78 },
-        { x: w * 0.96, y: h * 0.18 },
-        { x: w * 0.96, y: h * 0.82 },
-        { x: w * 0.5, y: h * 0.04 },
-        { x: w * 0.5, y: h * 0.96 },
-      ];
-      const ep = endpoints[pIdx];
-      const t = 0.15 + (pPos / 4) * 0.72;
-      states[1].push({
-        x: ep.x + (cx - ep.x) * t,
-        y: ep.y + (cy - ep.y) * t,
-        r: 2 + t * 1.5,
-        opacity: 0.25 + t * 0.45,
-      });
-    } else {
-      const oAngle = ((i - 34) / (count - 34)) * Math.PI * 2;
-      const oR = 58 + s * 22;
-      states[1].push({
-        x: cx + Math.cos(oAngle) * oR,
-        y: cy + Math.sin(oAngle) * oR,
-        r: 1.5 + s3,
-        opacity: 0.18 + s4 * 0.18,
-      });
-    }
 
-    // ── OPERATE: Running machine with satellites ──
-    const isCoreOp = i < 8;
-    const isFlow = i >= 8 && i < 28;
-    const isSat = i >= 28 && i < 44;
+      /* ── Scan line ── */
+      if (scanLine && scanGlow) {
+        if (phase === 0) {
+          const scanX = easeOut(localT) * 600;
+          scanLine.setAttribute("x1", String(scanX));
+          scanLine.setAttribute("x2", String(scanX));
+          scanLine.style.opacity = String(0.6 * (1 - localT * 0.4));
+          scanGlow.setAttribute("cx", String(scanX));
+          scanGlow.style.opacity = String(0.25 * (1 - localT * 0.4));
+        } else {
+          scanLine.style.opacity = "0";
+          scanGlow.style.opacity = "0";
+        }
+      }
 
-    if (isCoreOp) {
-      const cA = (i / 8) * Math.PI * 2;
-      const cR = i < 3 ? 0 : i < 6 ? 14 : 26;
-      states[2].push({
-        x: cx + (cR > 0 ? Math.cos(cA) * cR : (s - 0.5) * 5),
-        y: cy + (cR > 0 ? Math.sin(cA) * cR : (s2 - 0.5) * 5),
-        r: cR === 0 ? 4 : 2.5,
-        opacity: 0.95,
+      /* ── Diagnostic dashed lines ── */
+      diagLines.forEach((line, i) => {
+        if (phase === 0) {
+          const threshold = (i / diagLines.length) * 0.65;
+          line.style.opacity = String(localT > threshold ? clamp01((localT - threshold) / 0.25) * 0.3 : 0);
+        } else if (phase === 1) {
+          line.style.opacity = String(0.3 * (1 - easeOut(clamp01(localT * 2))));
+        } else {
+          line.style.opacity = "0";
+        }
       });
-    } else if (isFlow) {
-      const fSat = (i - 8) % 4;
-      const sat = sats[fSat];
-      const fT = ((i - 8) / 20) * 0.78 + 0.11;
-      states[2].push({
-        x: cx + (sat.x - cx) * fT,
-        y: cy + (sat.y - cy) * fT,
-        r: 2,
-        opacity: 0.35 + (1 - Math.abs(fT - 0.5) * 2) * 0.4,
-      });
-    } else if (isSat) {
-      const sIdx = (i - 28) % 4;
-      const sI = Math.floor((i - 28) / 4);
-      const sat = sats[sIdx];
-      const sA = (sI / 4) * Math.PI * 2;
-      const sR = 8 + (sI % 2) * 11;
-      states[2].push({
-        x: sat.x + Math.cos(sA) * sR,
-        y: sat.y + Math.sin(sA) * sR,
-        r: 2,
-        opacity: 0.55 + s3 * 0.25,
-      });
-    } else {
-      // Feedback ring + expansion
-      const eA = ((i - 44) / (count - 44)) * Math.PI * 2;
-      const isRing = i % 2 === 0;
-      const eR = isRing ? 44 : 82 + s * 30;
-      states[2].push({
-        x: cx + Math.cos(eA) * eR,
-        y: cy + Math.sin(eA) * eR,
-        r: isRing ? 1.5 : 2,
-        opacity: isRing ? 0.45 : 0.2 + s3 * 0.2,
-      });
-    }
-  }
 
-  return states;
+      /* ── Node labels ── */
+      nodeLabels.forEach((label, i) => {
+        if (phase === 0) {
+          const threshold = 0.15 + (i / nodeLabels.length) * 0.5;
+          label.style.opacity = localT > threshold ? String(clamp01((localT - threshold) / 0.2) * 0.55) : "0";
+        } else if (phase === 1) {
+          label.style.opacity = String(0.55 * (1 - easeOut(clamp01(localT * 2))));
+        } else {
+          label.style.opacity = "0";
+        }
+      });
+
+      /* ── Connection lines (Build → Operate) ── */
+      connLines.forEach((line, i) => {
+        if (phase === 0) {
+          line.style.opacity = "0";
+          line.style.strokeDashoffset = "1";
+        } else if (phase === 1) {
+          const threshold = (i / connLines.length) * 0.5;
+          const drawT = clamp01((localT - threshold) / 0.35);
+          line.style.opacity = String(drawT * 0.45);
+          line.style.strokeDashoffset = String(1 - easeOut(drawT));
+        } else {
+          line.style.opacity = "0.55";
+          line.style.strokeDashoffset = "0";
+        }
+      });
+
+      /* ── Hub rings ── */
+      hubRings.forEach((ring, i) => {
+        if (phase < 1) {
+          ring.style.opacity = "0";
+          ring.style.transform = "scale(0.3)";
+        } else if (phase === 1) {
+          const hubT = easeOut(clamp01((localT - 0.3) / 0.5));
+          ring.style.opacity = String(hubT * (0.28 - i * 0.07));
+          ring.style.transform = `scale(${0.3 + hubT * 0.7})`;
+        } else {
+          ring.style.opacity = String(0.28 - i * 0.07);
+          ring.style.transform = "scale(1)";
+        }
+      });
+
+      /* ── AI agent icons ── */
+      aiIcons.forEach((icon, i) => {
+        if (phase < 1) {
+          icon.style.opacity = "0";
+          icon.style.transform = "scale(0)";
+        } else if (phase === 1) {
+          const aiT = easeOut(clamp01((localT - 0.5 - i * 0.1) / 0.3));
+          icon.style.opacity = String(aiT * 0.85);
+          icon.style.transform = `scale(${aiT})`;
+        } else {
+          icon.style.opacity = "0.9";
+          icon.style.transform = "scale(1)";
+        }
+      });
+
+      /* ── Flow dots (Operate) ── */
+      flowDots.forEach((dot, i) => {
+        if (phase < 2) {
+          dot.style.opacity = "0";
+        } else {
+          dot.style.opacity = String(easeOut(clamp01(localT * 2)) * 0.7);
+        }
+      });
+
+      /* ── Metric pulses (Operate) ── */
+      metricPulses.forEach((pulse, i) => {
+        if (phase < 2) {
+          pulse.style.opacity = "0";
+        } else {
+          pulse.style.opacity = String(easeOut(clamp01((localT - 0.15 - i * 0.08) / 0.35)) * 0.75);
+        }
+      });
+
+      /* ── Operate glow ── */
+      if (operateGlow) {
+        operateGlow.style.opacity = phase === 2 ? String(easeOut(localT) * 0.12) : "0";
+      }
+
+      /* ── Scale rings ── */
+      scaleRings.forEach((ring, i) => {
+        if (phase < 2) {
+          ring.style.opacity = "0";
+          ring.style.transform = "scale(0.5)";
+        } else {
+          const scaleT = easeOut(clamp01((localT - 0.3 - i * 0.12) / 0.4));
+          ring.style.opacity = String(scaleT * (0.1 - i * 0.025));
+          ring.style.transform = `scale(${0.5 + scaleT * 0.5})`;
+        }
+      });
+
+      raf = requestAnimationFrame(animate);
+    };
+
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+  }, [progressRef]);
+
+  return (
+    <svg
+      ref={svgRef}
+      viewBox="0 0 600 450"
+      fill="none"
+      className="w-full h-full"
+      style={{ background: BG }}
+    >
+      <defs>
+        <filter id="nodeGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+        <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="8" />
+        </filter>
+      </defs>
+
+      {/* ── Operate center glow ── */}
+      <circle
+        className="o-glow"
+        cx="300" cy="225" r="100"
+        fill={TEAL}
+        filter="url(#softGlow)"
+        style={{ opacity: 0 }}
+      />
+
+      {/* ── Scale expansion rings (Operate) ── */}
+      {[150, 190, 230].map((r, i) => (
+        <circle
+          key={`sc-${i}`}
+          className="sc-ring"
+          cx="300" cy="225" r={r}
+          stroke={TEAL}
+          strokeWidth="0.8"
+          strokeDasharray="5 8"
+          fill="none"
+          style={{ opacity: 0, transformOrigin: "300px 225px" }}
+        />
+      ))}
+
+      {/* ── Hub rings (Build → Operate) ── */}
+      {[55, 40, 26].map((r, i) => (
+        <circle
+          key={`hr-${i}`}
+          className="h-ring"
+          cx="300" cy="225" r={r}
+          stroke={TEAL}
+          strokeWidth={i === 2 ? 1.8 : 1}
+          strokeDasharray={i === 1 ? "4 3" : "none"}
+          fill="none"
+          style={{ opacity: 0, transformOrigin: "300px 225px" }}
+        />
+      ))}
+
+      {/* ── Diagnostic dashed lines (Understand) ── */}
+      {DIAG_LINES.map(([a, b], i) => (
+        <line
+          key={`dl-${i}`}
+          className="d-line"
+          x1={SCATTERED_NODES[a].x}
+          y1={SCATTERED_NODES[a].y}
+          x2={SCATTERED_NODES[b].x}
+          y2={SCATTERED_NODES[b].y}
+          stroke={TEAL}
+          strokeWidth="0.8"
+          strokeDasharray="4 6"
+          style={{ opacity: 0 }}
+        />
+      ))}
+
+      {/* ── Scan line (Understand) ── */}
+      <line
+        className="s-line"
+        x1="0" y1="0" x2="0" y2="450"
+        stroke={TEAL}
+        strokeWidth="1.5"
+        style={{ opacity: 0 }}
+      />
+      <ellipse
+        className="s-glow"
+        cx="0" cy="225" rx="25" ry="200"
+        fill={TEAL}
+        filter="url(#softGlow)"
+        style={{ opacity: 0 }}
+      />
+
+      {/* ── Connection lines (Build/Operate) ── */}
+      {CONNECTIONS.map(([a, b], i) => (
+        <line
+          key={`cl-${i}`}
+          className="c-line"
+          x1={ORGANIZED_NODES[a].x} y1={ORGANIZED_NODES[a].y}
+          x2={ORGANIZED_NODES[b].x} y2={ORGANIZED_NODES[b].y}
+          stroke={TEAL}
+          strokeWidth="1.2"
+          pathLength={1}
+          strokeDasharray="1"
+          strokeDashoffset="1"
+          style={{ opacity: 0 }}
+        />
+      ))}
+
+      {/* ── Flow dots (Operate — SVG animateMotion) ── */}
+      {CONNECTIONS.slice(0, 6).map(([a, b], i) => (
+        <g key={`fg-${i}`}>
+          <circle className="f-dot" r="2.5" fill={TEAL} filter="url(#nodeGlow)" style={{ opacity: 0 }}>
+            <animateMotion
+              dur={`${2.5 + (i % 3) * 0.6}s`}
+              repeatCount="indefinite"
+              path={`M${ORGANIZED_NODES[a].x},${ORGANIZED_NODES[a].y} L${ORGANIZED_NODES[b].x},${ORGANIZED_NODES[b].y}`}
+            />
+          </circle>
+          <circle className="f-dot" r="2" fill={TEAL} style={{ opacity: 0 }}>
+            <animateMotion
+              dur={`${2.5 + (i % 3) * 0.6}s`}
+              repeatCount="indefinite"
+              begin={`${1.2 + i * 0.25}s`}
+              path={`M${ORGANIZED_NODES[b].x},${ORGANIZED_NODES[b].y} L${ORGANIZED_NODES[a].x},${ORGANIZED_NODES[a].y}`}
+            />
+          </circle>
+        </g>
+      ))}
+
+      {/* ── Business process nodes ── */}
+      {SCATTERED_NODES.map((sn, i) => (
+        <g key={`ng-${i}`} className="n-group" transform={`translate(${sn.x}, ${sn.y})`}>
+          <circle className="n-ring" cx="0" cy="0" r="18" stroke={TEAL} strokeWidth="1" fill="none" style={{ opacity: 0.06 }} />
+          <circle className="n-core" cx="0" cy="0" r="6" fill={TEAL} style={{ opacity: 0.15 }} />
+          <circle cx="0" cy="0" r="2.5" fill={TEAL} opacity="0.7" />
+          <text className="n-label" x="0" y="28" textAnchor="middle" fill={TEAL} fontSize="9" fontFamily="system-ui, sans-serif" letterSpacing="0.5" style={{ opacity: 0 }}>
+            {sn.label}
+          </text>
+        </g>
+      ))}
+
+      {/* ── AI agent markers (Build → Operate) ── */}
+      {AI_POSITIONS.map((pos, i) => (
+        <g key={`ai-${i}`} className="a-icon" style={{ opacity: 0, transformOrigin: `${pos.x}px ${pos.y}px` }}>
+          <circle cx={pos.x} cy={pos.y} r="14" fill={BG} stroke={TEAL} strokeWidth="1.2" opacity="0.5" />
+          {/* Neural network dots */}
+          <circle cx={pos.x - 4} cy={pos.y - 3} r="1.8" fill={TEAL} opacity="0.85" />
+          <circle cx={pos.x + 4} cy={pos.y - 3} r="1.8" fill={TEAL} opacity="0.85" />
+          <circle cx={pos.x} cy={pos.y + 4} r="1.8" fill={TEAL} opacity="0.85" />
+          <line x1={pos.x - 4} y1={pos.y - 3} x2={pos.x + 4} y2={pos.y - 3} stroke={TEAL} strokeWidth="0.7" opacity="0.45" />
+          <line x1={pos.x - 4} y1={pos.y - 3} x2={pos.x} y2={pos.y + 4} stroke={TEAL} strokeWidth="0.7" opacity="0.45" />
+          <line x1={pos.x + 4} y1={pos.y - 3} x2={pos.x} y2={pos.y + 4} stroke={TEAL} strokeWidth="0.7" opacity="0.45" />
+          <text x={pos.x} y={pos.y + 25} textAnchor="middle" fill={TEAL} fontSize="7.5" fontFamily="system-ui, sans-serif" letterSpacing="0.8" opacity="0.55">
+            AI AGENT
+          </text>
+        </g>
+      ))}
+
+      {/* ── Metric indicators (Operate) ── */}
+      {METRIC_POSITIONS.map((pos, i) => (
+        <g key={`mp-${i}`} className="m-pulse" style={{ opacity: 0 }}>
+          <rect x={pos.x + 24} y={pos.y - 6} width="3" height="5" rx="0.5" fill={TEAL} opacity="0.45" />
+          <rect x={pos.x + 29} y={pos.y - 12} width="3" height="11" rx="0.5" fill={TEAL} opacity="0.6" />
+          <rect x={pos.x + 34} y={pos.y - 16} width="3" height="15" rx="0.5" fill={TEAL} opacity="0.75" />
+          <circle cx={pos.x} cy={pos.y} r="24" stroke={TEAL} strokeWidth="0.5" fill="none" opacity="0.15">
+            <animate attributeName="r" values="24;29;24" dur="2.5s" repeatCount="indefinite" begin={`${i * 0.6}s`} />
+            <animate attributeName="opacity" values="0.15;0.04;0.15" dur="2.5s" repeatCount="indefinite" begin={`${i * 0.6}s`} />
+          </circle>
+        </g>
+      ))}
+
+      {/* Subtle vignette */}
+      <rect x="0" y="0" width="600" height="450" fill="url(#vignette)" pointerEvents="none" />
+      <defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="60%">
+          <stop offset="0%" stopColor="transparent" />
+          <stop offset="100%" stopColor={BG} stopOpacity="0.4" />
+        </radialGradient>
+      </defs>
+    </svg>
+  );
 }
 
-/* ── Mobile static SVG icons per phase ── */
+/* ── Mobile phase icons ── */
 
 function MobilePhaseIcon({ phaseIndex }: { phaseIndex: number }) {
   const icons = [
-    // Understand: Scattered clusters being scanned
-    <svg key="m0" viewBox="0 0 120 120" fill="none" className="w-20 h-20 mx-auto">
-      <rect x="38" y="8" width="2" height="104" fill={TEAL} opacity={0.35} rx={1} />
-      {/* Cluster 1 */}
-      <circle cx="18" cy="28" r="4" fill={TEAL} opacity={0.8} />
-      <circle cx="26" cy="22" r="3" fill={TEAL} opacity={0.5} />
-      <circle cx="14" cy="36" r="2.5" fill={TEAL} opacity={0.4} />
-      {/* Cluster 2 */}
-      <circle cx="80" cy="30" r="3.5" fill={TEAL} opacity={0.7} />
-      <circle cx="90" cy="25" r="3" fill={TEAL} opacity={0.4} />
-      {/* Cluster 3 */}
-      <circle cx="25" cy="85" r="3.5" fill={TEAL} opacity={0.6} />
-      <circle cx="18" cy="78" r="2.5" fill={TEAL} opacity={0.35} />
-      {/* Cluster 4 */}
-      <circle cx="85" cy="80" r="3" fill={TEAL} opacity={0.5} />
-      <circle cx="78" cy="88" r="2.5" fill={TEAL} opacity={0.3} />
-      {/* Dim unscanned */}
-      <circle cx="60" cy="55" r="2" fill={TEAL} opacity={0.12} />
-      <circle cx="100" cy="60" r="2" fill={TEAL} opacity={0.1} />
+    // Understand: Scattered nodes being diagnosed
+    <svg key="m0" viewBox="0 0 120 120" fill="none" className="w-24 h-24 mx-auto">
+      <line x1="38" y1="8" x2="38" y2="112" stroke={TEAL} strokeWidth="1.5" opacity="0.25" />
+      <circle cx="25" cy="30" r="7" stroke={TEAL} strokeWidth="0.8" fill="none" opacity="0.3" />
+      <circle cx="25" cy="30" r="2.5" fill={TEAL} opacity="0.7" />
+      <circle cx="85" cy="28" r="7" stroke={TEAL} strokeWidth="0.8" fill="none" opacity="0.12" />
+      <circle cx="85" cy="28" r="2.5" fill={TEAL} opacity="0.25" />
+      <circle cx="60" cy="60" r="7" stroke={TEAL} strokeWidth="0.8" fill="none" opacity="0.3" />
+      <circle cx="60" cy="60" r="2.5" fill={TEAL} opacity="0.7" />
+      <circle cx="30" cy="90" r="7" stroke={TEAL} strokeWidth="0.8" fill="none" opacity="0.3" />
+      <circle cx="30" cy="90" r="2.5" fill={TEAL} opacity="0.7" />
+      <circle cx="90" cy="88" r="7" stroke={TEAL} strokeWidth="0.8" fill="none" opacity="0.12" />
+      <circle cx="90" cy="88" r="2.5" fill={TEAL} opacity="0.25" />
+      <line x1="25" y1="30" x2="60" y2="60" stroke={TEAL} strokeWidth="0.6" strokeDasharray="3 4" opacity="0.2" />
+      <line x1="30" y1="90" x2="60" y2="60" stroke={TEAL} strokeWidth="0.6" strokeDasharray="3 4" opacity="0.2" />
     </svg>,
 
-    // Build: Hub with pathways
-    <svg key="m1" viewBox="0 0 120 120" fill="none" className="w-20 h-20 mx-auto">
-      {/* Central hub */}
-      <circle cx="60" cy="60" r="30" fill="none" stroke={TEAL} strokeWidth={1.5} opacity={0.25} />
-      <circle cx="60" cy="60" r="18" fill="none" stroke={TEAL} strokeWidth={1.5} opacity={0.4} strokeDasharray="4 3" />
-      <circle cx="60" cy="60" r="3.5" fill={TEAL} opacity={0.9} />
-      {/* Pathways */}
-      <line x1="8" y1="25" x2="42" y2="48" stroke={TEAL} strokeWidth={1} opacity={0.4} />
-      <line x1="8" y1="95" x2="42" y2="72" stroke={TEAL} strokeWidth={1} opacity={0.4} />
-      <line x1="112" y1="20" x2="78" y2="46" stroke={TEAL} strokeWidth={1} opacity={0.4} />
-      <line x1="112" y1="100" x2="78" y2="74" stroke={TEAL} strokeWidth={1} opacity={0.4} />
-      <line x1="60" y1="6" x2="60" y2="30" stroke={TEAL} strokeWidth={1} opacity={0.4} />
-      <line x1="60" y1="114" x2="60" y2="90" stroke={TEAL} strokeWidth={1} opacity={0.4} />
-      {/* Pathway dots */}
-      <circle cx="25" cy="36" r="2.5" fill={TEAL} opacity={0.5} />
-      <circle cx="25" cy="84" r="2.5" fill={TEAL} opacity={0.5} />
-      <circle cx="95" cy="33" r="2.5" fill={TEAL} opacity={0.5} />
-      <circle cx="95" cy="87" r="2.5" fill={TEAL} opacity={0.5} />
-      <circle cx="60" cy="18" r="2.5" fill={TEAL} opacity={0.5} />
-      <circle cx="60" cy="102" r="2.5" fill={TEAL} opacity={0.5} />
+    // Build: Organized system with AI agents
+    <svg key="m1" viewBox="0 0 120 120" fill="none" className="w-24 h-24 mx-auto">
+      <circle cx="60" cy="60" r="26" stroke={TEAL} strokeWidth="0.8" fill="none" opacity="0.2" />
+      <circle cx="60" cy="60" r="16" stroke={TEAL} strokeWidth="0.8" strokeDasharray="3 3" fill="none" opacity="0.3" />
+      <circle cx="60" cy="60" r="5" fill={TEAL} opacity="0.8" />
+      <line x1="25" y1="25" x2="60" y2="60" stroke={TEAL} strokeWidth="1" opacity="0.35" />
+      <line x1="95" y1="25" x2="60" y2="60" stroke={TEAL} strokeWidth="1" opacity="0.35" />
+      <line x1="25" y1="95" x2="60" y2="60" stroke={TEAL} strokeWidth="1" opacity="0.35" />
+      <line x1="95" y1="95" x2="60" y2="60" stroke={TEAL} strokeWidth="1" opacity="0.35" />
+      <circle cx="25" cy="25" r="7" stroke={TEAL} strokeWidth="0.8" fill="none" opacity="0.3" />
+      <circle cx="25" cy="25" r="2.5" fill={TEAL} opacity="0.65" />
+      <circle cx="95" cy="25" r="7" stroke={TEAL} strokeWidth="0.8" fill="none" opacity="0.3" />
+      <circle cx="95" cy="25" r="2.5" fill={TEAL} opacity="0.65" />
+      <circle cx="25" cy="95" r="7" stroke={TEAL} strokeWidth="0.8" fill="none" opacity="0.3" />
+      <circle cx="25" cy="95" r="2.5" fill={TEAL} opacity="0.65" />
+      <circle cx="95" cy="95" r="7" stroke={TEAL} strokeWidth="0.8" fill="none" opacity="0.3" />
+      <circle cx="95" cy="95" r="2.5" fill={TEAL} opacity="0.65" />
+      {/* AI agent */}
+      <circle cx="60" cy="40" r="6" fill={BG} stroke={TEAL} strokeWidth="0.8" opacity="0.5" />
+      <circle cx="58" cy="38" r="1" fill={TEAL} opacity="0.8" />
+      <circle cx="62" cy="38" r="1" fill={TEAL} opacity="0.8" />
+      <circle cx="60" cy="42" r="1" fill={TEAL} opacity="0.8" />
     </svg>,
 
-    // Operate: Running machine with satellites
-    <svg key="m2" viewBox="0 0 120 120" fill="none" className="w-20 h-20 mx-auto">
-      {/* Hub */}
-      <circle cx="60" cy="60" r="18" fill="none" stroke={TEAL} strokeWidth={2} opacity={0.5} />
-      <circle cx="60" cy="60" r="4" fill={TEAL} opacity={0.95} />
-      {/* Feedback ring */}
-      <circle cx="60" cy="60" r="32" fill="none" stroke={TEAL} strokeWidth={1} opacity={0.2} strokeDasharray="3 5" />
-      {/* Satellites + connections */}
-      <line x1="60" y1="60" x2="18" y2="18" stroke={TEAL} strokeWidth={1} opacity={0.3} />
-      <line x1="60" y1="60" x2="102" y2="18" stroke={TEAL} strokeWidth={1} opacity={0.3} />
-      <line x1="60" y1="60" x2="102" y2="102" stroke={TEAL} strokeWidth={1} opacity={0.3} />
-      <line x1="60" y1="60" x2="18" y2="102" stroke={TEAL} strokeWidth={1} opacity={0.3} />
-      <circle cx="18" cy="18" r="7" fill="none" stroke={TEAL} strokeWidth={1.5} opacity={0.5} />
-      <circle cx="18" cy="18" r="2.5" fill={TEAL} opacity={0.7} />
-      <circle cx="102" cy="18" r="7" fill="none" stroke={TEAL} strokeWidth={1.5} opacity={0.5} />
-      <circle cx="102" cy="18" r="2.5" fill={TEAL} opacity={0.7} />
-      <circle cx="102" cy="102" r="7" fill="none" stroke={TEAL} strokeWidth={1.5} opacity={0.5} />
-      <circle cx="102" cy="102" r="2.5" fill={TEAL} opacity={0.7} />
-      <circle cx="18" cy="102" r="7" fill="none" stroke={TEAL} strokeWidth={1.5} opacity={0.5} />
-      <circle cx="18" cy="102" r="2.5" fill={TEAL} opacity={0.7} />
-      {/* Flow dots */}
-      <circle cx="38" cy="38" r="2" fill={TEAL} opacity={0.6} />
-      <circle cx="82" cy="38" r="2" fill={TEAL} opacity={0.6} />
-      <circle cx="82" cy="82" r="2" fill={TEAL} opacity={0.6} />
-      <circle cx="38" cy="82" r="2" fill={TEAL} opacity={0.6} />
+    // Operate: Running system with flow and metrics
+    <svg key="m2" viewBox="0 0 120 120" fill="none" className="w-24 h-24 mx-auto">
+      <circle cx="60" cy="60" r="18" stroke={TEAL} strokeWidth="1.2" fill="none" opacity="0.3" />
+      <circle cx="60" cy="60" r="5" fill={TEAL} opacity="0.85" />
+      <circle cx="60" cy="60" r="36" stroke={TEAL} strokeWidth="0.6" strokeDasharray="4 6" fill="none" opacity="0.1" />
+      <circle cx="60" cy="60" r="48" stroke={TEAL} strokeWidth="0.4" strokeDasharray="3 8" fill="none" opacity="0.06" />
+      <line x1="60" y1="60" x2="22" y2="22" stroke={TEAL} strokeWidth="0.8" opacity="0.3" />
+      <line x1="60" y1="60" x2="98" y2="22" stroke={TEAL} strokeWidth="0.8" opacity="0.3" />
+      <line x1="60" y1="60" x2="98" y2="98" stroke={TEAL} strokeWidth="0.8" opacity="0.3" />
+      <line x1="60" y1="60" x2="22" y2="98" stroke={TEAL} strokeWidth="0.8" opacity="0.3" />
+      <circle cx="22" cy="22" r="7" stroke={TEAL} strokeWidth="0.8" fill="none" opacity="0.3" />
+      <circle cx="22" cy="22" r="2.5" fill={TEAL} opacity="0.65" />
+      <circle cx="98" cy="22" r="7" stroke={TEAL} strokeWidth="0.8" fill="none" opacity="0.3" />
+      <circle cx="98" cy="22" r="2.5" fill={TEAL} opacity="0.65" />
+      <circle cx="98" cy="98" r="7" stroke={TEAL} strokeWidth="0.8" fill="none" opacity="0.3" />
+      <circle cx="98" cy="98" r="2.5" fill={TEAL} opacity="0.65" />
+      <circle cx="22" cy="98" r="7" stroke={TEAL} strokeWidth="0.8" fill="none" opacity="0.3" />
+      <circle cx="22" cy="98" r="2.5" fill={TEAL} opacity="0.65" />
+      {/* Metrics */}
+      <rect x="103" y="16" width="2" height="4" rx="0.5" fill={TEAL} opacity="0.45" />
+      <rect x="107" y="12" width="2" height="8" rx="0.5" fill={TEAL} opacity="0.6" />
+      <rect x="111" y="9" width="2" height="11" rx="0.5" fill={TEAL} opacity="0.75" />
+      {/* Flow indicators */}
+      <circle cx="40" cy="40" r="1.5" fill={TEAL} opacity="0.5">
+        <animate attributeName="opacity" values="0.5;0.15;0.5" dur="1.5s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="80" cy="40" r="1.5" fill={TEAL} opacity="0.35">
+        <animate attributeName="opacity" values="0.35;0.6;0.35" dur="1.8s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="80" cy="80" r="1.5" fill={TEAL} opacity="0.5">
+        <animate attributeName="opacity" values="0.5;0.15;0.5" dur="2s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="40" cy="80" r="1.5" fill={TEAL} opacity="0.35">
+        <animate attributeName="opacity" values="0.35;0.7;0.35" dur="1.6s" repeatCount="indefinite" />
+      </circle>
     </svg>,
   ];
 
   return icons[phaseIndex] ?? null;
 }
 
-/* ── Main Component ── */
+/* ══════════════════════════════════════════════
+   Main Component
+   ══════════════════════════════════════════════ */
 
 export function TransformationAssembly({ phases }: TransformationAssemblyProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const progressRef = useRef({ value: 0 });
-  const animFrameRef = useRef<number>(0);
-  const particleStatesRef = useRef<ParticleState[][] | null>(null);
-  const dimensionsRef = useRef({ w: 0, h: 0 });
 
-  const rebuildStates = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const rect = canvas.getBoundingClientRect();
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const w = rect.width;
-    const h = rect.height;
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
-    dimensionsRef.current = { w, h };
-    particleStatesRef.current = generateParticleStates(PARTICLE_COUNT, w, h);
-  }, []);
-
-  /* ── Canvas draw loop ── */
-
-  const draw = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const allStates = particleStatesRef.current;
-    if (!allStates) return;
-
-    const { w, h } = dimensionsRef.current;
-    const dpr = canvas.width / w;
-    const progress = progressRef.current.value;
-
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, w, h);
-
-    const cx = w * 0.5;
-    const cy = h * 0.5;
-
-    // Determine interpolation between 3 phases (0..2)
-    const totalPhases = 3;
-    const phaseFloat = progress * (totalPhases - 1);
-    const phaseA = Math.min(Math.floor(phaseFloat), totalPhases - 2);
-    const phaseB = phaseA + 1;
-    const t = phaseFloat - phaseA;
-
-    const statesA = allStates[phaseA];
-    const statesB = allStates[phaseB];
-
-    // ── Background elements per phase ──
-
-    // Understand: Blueprint grid + scan line
-    const gridOpacity = Math.max(0, 0.07 - progress * 0.06);
-    if (gridOpacity > 0.004) {
-      ctx.strokeStyle = `rgba(0, 229, 195, ${gridOpacity})`;
-      ctx.lineWidth = 0.5;
-      const spacing = 40;
-      ctx.beginPath();
-      for (let x = 0; x < w; x += spacing) {
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, h);
-      }
-      for (let y = 0; y < h; y += spacing) {
-        ctx.moveTo(0, y);
-        ctx.lineTo(w, y);
-      }
-      ctx.stroke();
-    }
-
-    // Scan line (Understand phase)
-    if (progress < 0.4) {
-      const scanP = Math.min(progress / 0.35, 1);
-      const scanX = scanP * w;
-      const grad = ctx.createLinearGradient(scanX - 8, 0, scanX + 8, 0);
-      grad.addColorStop(0, "rgba(0, 229, 195, 0)");
-      grad.addColorStop(0.5, `rgba(0, 229, 195, ${0.35 * (1 - scanP)})`);
-      grad.addColorStop(1, "rgba(0, 229, 195, 0)");
-      ctx.fillStyle = grad;
-      ctx.fillRect(scanX - 10, 0, 20, h);
-
-      ctx.strokeStyle = `rgba(0, 229, 195, ${0.5 * (1 - scanP)})`;
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.moveTo(scanX, 0);
-      ctx.lineTo(scanX, h);
-      ctx.stroke();
-    }
-
-    // Cluster highlight rings (Understand → fade into Build)
-    if (progress < 0.6) {
-      const clusterOp = progress < 0.15
-        ? progress / 0.15
-        : progress > 0.4
-          ? 1 - (progress - 0.4) / 0.2
-          : 1;
-      if (clusterOp > 0) {
-        const cls = [
-          { x: w * 0.2, y: h * 0.25 },
-          { x: w * 0.7, y: h * 0.2 },
-          { x: w * 0.3, y: h * 0.75 },
-          { x: w * 0.8, y: h * 0.72 },
-        ];
-        cls.forEach((c) => {
-          ctx.strokeStyle = `rgba(0, 229, 195, ${0.15 * clusterOp})`;
-          ctx.lineWidth = 1;
-          ctx.setLineDash([4, 4]);
-          ctx.beginPath();
-          ctx.arc(c.x, c.y, 50, 0, Math.PI * 2);
-          ctx.stroke();
-        });
-        ctx.setLineDash([]);
-      }
-    }
-
-    // Build: Hub rings + pathway lines
-    if (progress > 0.25 && progress < 0.85) {
-      const hubOp = progress < 0.4
-        ? (progress - 0.25) / 0.15
-        : progress > 0.7
-          ? 1 - (progress - 0.7) / 0.15
-          : 1;
-      if (hubOp > 0) {
-        // Concentric hub rings
-        [42, 28, 14].forEach((r, ri) => {
-          ctx.strokeStyle = `rgba(0, 229, 195, ${(0.2 - ri * 0.04) * hubOp})`;
-          ctx.lineWidth = ri === 2 ? 2 : 1.5;
-          if (ri === 1) ctx.setLineDash([4, 3]);
-          else ctx.setLineDash([]);
-          ctx.beginPath();
-          ctx.arc(cx, cy, r, 0, Math.PI * 2);
-          ctx.stroke();
-        });
-        ctx.setLineDash([]);
-
-        // Hub core glow
-        const glowG = ctx.createRadialGradient(cx, cy, 0, cx, cy, 50);
-        glowG.addColorStop(0, `rgba(0, 229, 195, ${0.08 * hubOp})`);
-        glowG.addColorStop(1, "rgba(0, 229, 195, 0)");
-        ctx.fillStyle = glowG;
-        ctx.beginPath();
-        ctx.arc(cx, cy, 50, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Hub core dot
-        ctx.fillStyle = `rgba(0, 229, 195, ${0.9 * hubOp})`;
-        ctx.beginPath();
-        ctx.arc(cx, cy, 4, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Pathway lines from edges to center
-        const eps = [
-          { x: w * 0.04, y: h * 0.22 },
-          { x: w * 0.04, y: h * 0.78 },
-          { x: w * 0.96, y: h * 0.18 },
-          { x: w * 0.96, y: h * 0.82 },
-          { x: w * 0.5, y: h * 0.04 },
-          { x: w * 0.5, y: h * 0.96 },
-        ];
-        eps.forEach((ep) => {
-          ctx.strokeStyle = `rgba(0, 229, 195, ${0.12 * hubOp})`;
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(ep.x, ep.y);
-          ctx.lineTo(cx, cy);
-          ctx.stroke();
-        });
-      }
-    }
-
-    // Operate: Satellites + energy flow + feedback ring
-    if (progress > 0.6) {
-      const opOp = (progress - 0.6) / 0.4;
-
-      // Feedback ring
-      ctx.strokeStyle = `rgba(0, 229, 195, ${0.15 * opOp})`;
-      ctx.lineWidth = 1;
-      ctx.setLineDash([3, 5]);
-      ctx.beginPath();
-      ctx.arc(cx, cy, 44, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      // Expansion rings
-      ctx.strokeStyle = `rgba(0, 229, 195, ${0.06 * opOp})`;
-      ctx.setLineDash([4, 8]);
-      ctx.beginPath();
-      ctx.arc(cx, cy, Math.min(w, h) * 0.35, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      // Satellite connections and nodes
-      const sats = [
-        { x: w * 0.14, y: h * 0.14 },
-        { x: w * 0.86, y: h * 0.14 },
-        { x: w * 0.86, y: h * 0.86 },
-        { x: w * 0.14, y: h * 0.86 },
-      ];
-
-      sats.forEach((sat) => {
-        // Connection line
-        ctx.strokeStyle = `rgba(0, 229, 195, ${0.2 * opOp})`;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(cx, cy);
-        ctx.lineTo(sat.x, sat.y);
-        ctx.stroke();
-
-        // Satellite ring
-        ctx.strokeStyle = `rgba(0, 229, 195, ${0.4 * opOp})`;
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        ctx.arc(sat.x, sat.y, 14, 0, Math.PI * 2);
-        ctx.stroke();
-
-        // Satellite core
-        ctx.fillStyle = `rgba(0, 229, 195, ${0.7 * opOp})`;
-        ctx.beginPath();
-        ctx.arc(sat.x, sat.y, 3, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      // Animated energy flow dots
-      const time = Date.now() * 0.001;
-      sats.forEach((sat, si) => {
-        const frac = ((time * 0.6 + si * 0.5) % 1.5) / 1.5;
-        const fx = cx + (sat.x - cx) * frac;
-        const fy = cy + (sat.y - cy) * frac;
-        const fOp = (0.8 - frac * 0.5) * opOp;
-        ctx.fillStyle = `rgba(0, 229, 195, ${fOp})`;
-        ctx.beginPath();
-        ctx.arc(fx, fy, 2.5, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Second dot staggered
-        const frac2 = ((time * 0.6 + si * 0.5 + 0.75) % 1.5) / 1.5;
-        const fx2 = cx + (sat.x - cx) * frac2;
-        const fy2 = cy + (sat.y - cy) * frac2;
-        ctx.fillStyle = `rgba(0, 229, 195, ${(0.6 - frac2 * 0.4) * opOp})`;
-        ctx.beginPath();
-        ctx.arc(fx2, fy2, 2, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      // Hub glow intensifies
-      const hubGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 55);
-      hubGlow.addColorStop(0, `rgba(0, 229, 195, ${0.12 * opOp})`);
-      hubGlow.addColorStop(1, "rgba(0, 229, 195, 0)");
-      ctx.fillStyle = hubGlow;
-      ctx.beginPath();
-      ctx.arc(cx, cy, 55, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Hub core (stays visible through Operate)
-      ctx.fillStyle = `rgba(0, 229, 195, ${0.95 * opOp})`;
-      ctx.beginPath();
-      ctx.arc(cx, cy, 4.5, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    // ── Draw particles ──
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const a = statesA[i];
-      const b = statesB[i];
-      if (!a || !b) continue;
-
-      const eased = t * t * (3 - 2 * t); // smoothstep
-
-      const px = lerp(a.x, b.x, eased);
-      const py = lerp(a.y, b.y, eased);
-      const pr = lerp(a.r, b.r, eased);
-      const po = lerp(a.opacity, b.opacity, eased);
-
-      // Glow
-      const glowR = pr * 3;
-      const glow = ctx.createRadialGradient(px, py, 0, px, py, glowR);
-      glow.addColorStop(0, `rgba(0, 229, 195, ${po * 0.25})`);
-      glow.addColorStop(1, "rgba(0, 229, 195, 0)");
-      ctx.fillStyle = glow;
-      ctx.beginPath();
-      ctx.arc(px, py, glowR, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Core dot
-      ctx.fillStyle = `rgba(0, 229, 195, ${po})`;
-      ctx.beginPath();
-      ctx.arc(px, py, pr, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    animFrameRef.current = requestAnimationFrame(draw);
-  }, []);
-
-  /* ── Resize ── */
-
-  useEffect(() => {
-    const handleResize = () => rebuildStates();
-
-    const mql = window.matchMedia("(min-width: 1024px)");
-    if (mql.matches) {
-      rebuildStates();
-      animFrameRef.current = requestAnimationFrame(draw);
-    }
-
-    const onMediaChange = (e: MediaQueryListEvent) => {
-      if (e.matches) {
-        rebuildStates();
-        animFrameRef.current = requestAnimationFrame(draw);
-      } else {
-        cancelAnimationFrame(animFrameRef.current);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    mql.addEventListener("change", onMediaChange);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      mql.removeEventListener("change", onMediaChange);
-      cancelAnimationFrame(animFrameRef.current);
-    };
-  }, [rebuildStates, draw]);
-
-  /* ── GSAP ScrollTrigger ── */
+  /* ── GSAP ScrollTrigger with SEQUENTIAL transitions ── */
 
   useGSAP(
     () => {
@@ -619,79 +591,71 @@ export function TransformationAssembly({ phases }: TransformationAssemblyProps) 
           end: "+=250%",
           pin: true,
           pinSpacing: true,
-          scrub: 0.5,
+          scrub: 0.3,
           onUpdate: (self) => {
             progressRef.current.value = self.progress;
           },
         },
       });
 
-      for (let i = 1; i < phases.length; i++) {
-        const label = `phase${i}`;
+      /*
+       * Timeline structure — SEQUENTIAL, no overlap:
+       *
+       * 0.00 – 0.30  Phase 1 holds (Understand visible)
+       * 0.30 – 0.38  Phase 1 fades out
+       * 0.38 – 0.46  Phase 2 fades in (Build)
+       * 0.46 – 0.62  Phase 2 holds
+       * 0.62 – 0.70  Phase 2 fades out
+       * 0.70 – 0.78  Phase 3 fades in (Operate)
+       * 0.78 – 1.00  Phase 3 holds
+       */
 
-        tl.to(
-          phaseItems[i - 1],
-          { opacity: 0, y: -20, duration: 0.2, ease: "power2.in" },
-          label
-        );
+      // Phase 1 hold
+      tl.to({}, { duration: 0.30 });
 
-        tl.fromTo(
-          phaseItems[i],
-          { opacity: 0, y: 24 },
-          { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" },
-          `${label}+=0.05`
-        );
+      // Phase 1 → 2 transition
+      tl.to(phaseItems[0], { opacity: 0, y: -16, duration: 0.08, ease: "power2.in" });
+      tl.fromTo(phaseItems[1], { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.08, ease: "power2.out" });
 
-        if (progressFill) {
-          tl.to(
-            progressFill,
-            {
-              scaleY: (i + 1) / phases.length,
-              duration: 0.2,
-              ease: "power2.out",
-            },
-            label
-          );
-        }
-
-        if (progressDots[i]) {
-          tl.to(
-            progressDots[i],
-            { backgroundColor: TEAL, scale: 1.4, duration: 0.15 },
-            label
-          );
-        }
-        if (progressDots[i - 1] && i > 0) {
-          tl.to(
-            progressDots[i - 1],
-            { scale: 1, opacity: 0.5, duration: 0.15 },
-            label
-          );
-        }
-
-        if (mobileIcons.length > 0) {
-          if (mobileIcons[i - 1]) {
-            tl.to(
-              mobileIcons[i - 1],
-              { opacity: 0, scale: 0.8, duration: 0.15 },
-              label
-            );
-          }
-          if (mobileIcons[i]) {
-            tl.to(
-              mobileIcons[i],
-              { opacity: 1, scale: 1, duration: 0.2 },
-              `${label}+=0.05`
-            );
-          }
-        }
-
-        if (i < phases.length - 1) {
-          tl.to({}, { duration: 0.4 });
-        }
+      // Update progress bar and dots for phase 2
+      if (progressFill) {
+        tl.to(progressFill, { scaleY: 2 / phases.length, duration: 0.05 }, "<-0.08");
+      }
+      if (progressDots[1]) {
+        tl.to(progressDots[1], { backgroundColor: TEAL, scale: 1.4, duration: 0.05 }, "<");
+      }
+      if (progressDots[0]) {
+        tl.to(progressDots[0], { scale: 1, opacity: 0.5, duration: 0.05 }, "<");
+      }
+      if (mobileIcons.length > 0) {
+        if (mobileIcons[0]) tl.to(mobileIcons[0], { opacity: 0, scale: 0.8, duration: 0.06 }, "<");
+        if (mobileIcons[1]) tl.to(mobileIcons[1], { opacity: 1, scale: 1, duration: 0.06 }, "<+=0.04");
       }
 
-      tl.to({}, { duration: 0.3 });
+      // Phase 2 hold
+      tl.to({}, { duration: 0.16 });
+
+      // Phase 2 → 3 transition
+      tl.to(phaseItems[1], { opacity: 0, y: -16, duration: 0.08, ease: "power2.in" });
+      tl.fromTo(phaseItems[2], { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.08, ease: "power2.out" });
+
+      // Update progress bar and dots for phase 3
+      if (progressFill) {
+        tl.to(progressFill, { scaleY: 1, duration: 0.05 }, "<-0.08");
+      }
+      if (progressDots[2]) {
+        tl.to(progressDots[2], { backgroundColor: TEAL, scale: 1.4, duration: 0.05 }, "<");
+      }
+      if (progressDots[1]) {
+        tl.to(progressDots[1], { scale: 1, opacity: 0.5, duration: 0.05 }, "<");
+      }
+      if (mobileIcons.length > 0) {
+        if (mobileIcons[1]) tl.to(mobileIcons[1], { opacity: 0, scale: 0.8, duration: 0.06 }, "<");
+        if (mobileIcons[2]) tl.to(mobileIcons[2], { opacity: 1, scale: 1, duration: 0.06 }, "<+=0.04");
+      }
+
+      // Phase 3 hold
+      tl.to({}, { duration: 0.22 });
     },
     { scope: containerRef, dependencies: [phases] }
   );
@@ -772,26 +736,15 @@ export function TransformationAssembly({ phases }: TransformationAssemblyProps) 
             </div>
           </div>
 
-          {/* ── Right column: Canvas (desktop) / Static icons (mobile) ── */}
+          {/* ── Right column: SVG Visual (desktop) / Static icons (mobile) ── */}
           <div className="lg:col-span-7 mt-10 lg:mt-0">
 
-            {/* Desktop canvas */}
+            {/* Desktop: SVG with ref-driven animation */}
             <div
               className="hidden lg:block relative w-full rounded-lg overflow-hidden"
-              style={{ aspectRatio: "4 / 3", backgroundColor: BG }}
+              style={{ aspectRatio: "4 / 3" }}
             >
-              <canvas
-                ref={canvasRef}
-                className="absolute inset-0 w-full h-full"
-                style={{ display: "block" }}
-              />
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: `radial-gradient(ellipse at center, transparent 40%, ${BG} 100%)`,
-                  opacity: 0.5,
-                }}
-              />
+              <DesktopVisual progressRef={progressRef} />
             </div>
 
             {/* Mobile: static SVG icons */}

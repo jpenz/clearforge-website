@@ -11,7 +11,7 @@ export function QuestionCard({ question, value, onChange, index }: QuestionCardP
       <p className="text-sm font-medium text-text leading-relaxed"><span className="metric-display mr-2 text-xs text-text-secondary">Q{question.id}</span>{question.text}</p>
       <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
         {[1, 2, 3, 4, 5].map((score) => (
-          <button key={score} type="button" onClick={() => onChange(question.id, score)} className={`flex flex-1 flex-col items-center gap-1 border px-3 py-3 text-xs transition-all ${value === score ? "border-amber bg-amber/5 text-amber" : "border-border text-text-secondary hover:border-amber/30 hover:text-text"}`} aria-label={`${scaleLabels[score - 1]} - ${score} out of 5`}>
+          <button key={score} type="button" onClick={() => onChange(question.id, score)} className={`flex flex-1 flex-col items-center gap-1 border-2 px-3 py-3 text-xs transition-all rounded-md ${value === score ? "border-accent bg-accent/15 text-accent ring-1 ring-accent/30 shadow-[0_0_12px_rgba(0,229,195,0.15)]" : "border-border text-text-secondary hover:border-accent/40 hover:text-text hover:bg-white/[0.02]"}`} aria-label={`${scaleLabels[score - 1]} - ${score} out of 5`}>
             <span className="metric-display text-lg font-bold">{score}</span><span className="hidden text-center sm:block">{scaleLabels[score - 1]}</span>
           </button>
         ))}
