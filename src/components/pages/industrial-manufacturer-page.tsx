@@ -4,661 +4,310 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { getCaseStudy } from "@/data/case-studies";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Brain,
-  MapPin,
-  Users,
-  BarChart3,
-  Building2,
-  Globe,
-  RefreshCw,
-  TrendingUp,
-  Zap,
-  Send,
-  Target,
-  Clock,
-  Layers,
-  Percent,
-  Factory,
-  Shield,
-  Crosshair,
-  LayoutDashboard,
-  BookOpen,
-  UserCheck,
-  LineChart,
-  GitBranch,
-  CheckCircle2,
-  ChevronRight,
-  Activity,
-  Gauge,
-  Database,
-  Search,
-  Filter,
-  LayoutGrid,
-} from "lucide-react";
+import { CaseStudyScrollStory } from "./case-study-scroll-story";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
-  transition: { duration: 0.5 },
+  transition: { duration: 0.6 },
 };
-
-const stagger = (i: number) => ({
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.4, delay: 0.08 * i },
-});
 
 export function IndustrialManufacturerPage() {
   const cs = getCaseStudy("industrial-manufacturer")!;
 
   return (
     <>
-      {/* ===== HERO ===== */}
-      <section className="relative bg-bg-deep pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
-        <div className="absolute inset-0 hero-glow opacity-40" />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+      {/* ===== INTRO ===== */}
+      <section className="relative bg-bg-deep pt-32 pb-12 lg:pt-40 lg:pb-16 overflow-hidden">
+        <div className="absolute inset-0 hero-glow opacity-30" />
+        <div className="relative mx-auto max-w-4xl px-6 lg:px-8 z-10">
           <motion.div {...fadeUp}>
             <Link
               href="/case-studies"
-              className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-text-primary transition-colors mb-8"
+              className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-text-primary transition-colors mb-10"
             >
               <ArrowLeft className="h-4 w-4" /> All Case Studies
             </Link>
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-xs font-semibold uppercase tracking-widest text-accent">
-                {cs.industry}
-              </span>
-              <span className="text-xs text-text-muted">·</span>
-              <span className="text-xs text-text-muted">{cs.service}</span>
-            </div>
+            <p className="section-label mb-6">Case Study</p>
             <h1
-              className="text-3xl text-text-primary sm:text-4xl lg:text-5xl xl:text-6xl max-w-5xl leading-tight"
+              className="text-3xl text-text-primary sm:text-4xl lg:text-5xl xl:text-[3.5rem] max-w-4xl"
               style={{ fontFamily: "var(--font-heading)" }}
             >
-              {cs.title}
+              A multi-billion dollar enterprise deployed AI across its
+              commercial organization — and built the growth engine
+              it never had.
             </h1>
-            <p className="mt-6 text-lg text-text-secondary max-w-3xl leading-relaxed lg:text-xl">
-              {cs.excerpt}
+            <p className="mt-8 text-lg text-text-secondary max-w-2xl leading-relaxed lg:text-xl">
+              Multiple divisions. Decades of market leadership. No shared intelligence,
+              no unified pipeline, and no system to find revenue growth hiding across
+              the portfolio. ClearForge changed that in six months.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* ===== METRICS STRIP ===== */}
-      <section className="bg-bg-light border-y border-border-light">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 divide-x divide-border-light">
-            {cs.outcomes.map((outcome, i) => (
-              <motion.div
-                key={outcome.metric}
-                {...stagger(i)}
-                className="py-8 px-4 text-center lg:py-10"
-              >
-                <div
-                  className="text-3xl font-bold text-accent-dark lg:text-4xl"
-                  style={{ fontFamily: "var(--font-mono)" }}
-                >
-                  {outcome.metric}
-                </div>
-                <p className="mt-2 text-xs text-text-on-light-muted leading-snug uppercase tracking-wide">
-                  {outcome.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ===== SCROLL-DRIVEN STORY ANIMATION ===== */}
+      <CaseStudyScrollStory />
 
-      {/* ===== CLIENT PROFILE ===== */}
-      <section className="bg-bg-deep py-20 lg:py-28">
-        <div className="mx-auto max-w-5xl px-6 lg:px-8">
-          <motion.div {...fadeUp}>
-            <p className="section-label">The Client</p>
-            <h2
-              className="mt-4 text-2xl text-text-primary sm:text-3xl lg:text-4xl"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              A $4 billion industrial conglomerate with a century of market leadership.
-            </h2>
-            <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                {
-                  icon: Building2,
-                  label: "Scale",
-                  value: "$4B+ Revenue",
-                  detail: "16 divisions, 70+ manufacturing facilities across North America",
-                },
-                {
-                  icon: Factory,
-                  label: "Sectors",
-                  value: "Heavy Equipment · Industrial Automation · Specialty Metals",
-                  detail:
-                    "Serving energy, pharmaceutical, automotive, aerospace, food processing, and infrastructure markets",
-                },
-                {
-                  icon: Globe,
-                  label: "Coverage",
-                  value: "20+ U.S. States",
-                  detail:
-                    "Southeastern hub expanding into Gulf Coast, Midwest, and Mid-Atlantic industrial corridors",
-                },
-              ].map((item, i) => (
-                <motion.div
-                  key={item.label}
-                  {...stagger(i)}
-                  className="border border-border-subtle bg-bg-surface p-6"
-                >
-                  <item.icon className="h-5 w-5 text-accent mb-3" />
-                  <p className="text-xs uppercase tracking-widest text-text-muted mb-1">
-                    {item.label}
-                  </p>
-                  <p className="text-base font-semibold text-text-primary">{item.value}</p>
-                  <p className="mt-2 text-sm text-text-secondary leading-relaxed">{item.detail}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ===== THE CHALLENGE ===== */}
-      <section className="bg-bg-light py-20 lg:py-28">
+      {/* ===== METRICS ===== */}
+      <section className="bg-bg-deep py-24 lg:py-32">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <motion.div {...fadeUp}>
-            <p className="section-label text-accent-dark">The Challenge</p>
-            <h2
-              className="mt-4 text-2xl text-text-on-light sm:text-3xl"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              Sixteen divisions. Zero shared intelligence.
-            </h2>
-            <p className="mt-6 text-lg text-text-on-light-sub leading-relaxed">{cs.challenge}</p>
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                "No unified view of capital projects or market signals across divisions",
-                "Manual prospecting untethered from actual product capabilities",
-                "Cross-sell opportunities between divisions completely invisible",
-                "Commercial model unchanged as market and buyer behavior evolved",
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  {...stagger(i)}
-                  className="flex items-start gap-3 p-4 border border-border-light bg-white/60"
-                >
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center bg-red-50 rounded-full mt-0.5">
-                    <span className="text-red-500 text-xs font-bold">{i + 1}</span>
-                  </div>
-                  <p className="text-sm text-text-on-light-sub leading-relaxed">{item}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ===== THE APPROACH — 3 PHASES ===== */}
-      <section className="bg-bg-deep py-20 lg:py-28">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
-          <motion.div {...fadeUp}>
-            <p className="section-label">The Approach</p>
-            <h2
-              className="mt-4 text-2xl text-text-primary sm:text-3xl lg:text-4xl max-w-3xl"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              Three phases. Intelligence first, then execution, then transformation.
-            </h2>
-          </motion.div>
-          <div className="mt-14 grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {[
-              {
-                phase: "01",
-                title: "AI Intelligence Engine",
-                subtitle: "Months 1–3",
-                icon: Brain,
-                items: [
-                  "Deployed proprietary AI agents calibrated to the client's exact product lines and industrial capabilities",
-                  "Built 24 active intelligence triggers scanning capital projects, industrial demand, and competitive movements",
-                  "Generated 1,181 scored opportunities across three core business divisions",
-                  "Produced 631+ tailored sales playbooks with entry strategies and competitive analysis",
-                ],
-              },
-              {
-                phase: "02",
-                title: "Sales Execution Platform",
-                subtitle: "Months 3–5",
-                icon: LayoutDashboard,
-                items: [
-                  "Built a purpose-built sales intelligence platform deployed on a dedicated subdomain for the sales team",
-                  "Visual pipeline management with list and board views, advanced filtering, and saved views",
-                  "AI-generated playbooks with structured 4-dimension feedback loops that improve over time",
-                  "Automated decision-maker discovery, performance scorecards, and territory assignment intelligence",
-                ],
-              },
-              {
-                phase: "03",
-                title: "Commercial Model Design",
-                subtitle: "Month 6+",
-                icon: GitBranch,
-                items: [
-                  "Diagnostic-first framework measuring Sales ROI Ratio against 4–6x industrial benchmarks",
-                  "Account segmentation by margin contribution — identifying over-served, under-served, and white space",
-                  "Role architecture redesign: Account Managers, Hunters, and BDRs aligned to margin growth",
-                  "Structured cold calling program with 90-day pilot and clear pass/fail criteria",
-                ],
-              },
-            ].map((phase, i) => (
-              <motion.div
-                key={phase.phase}
-                {...stagger(i)}
-                className="border border-border-subtle bg-bg-surface p-8 relative"
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="flex h-10 w-10 items-center justify-center bg-accent/10 border border-accent/20">
-                    <phase.icon className="h-5 w-5 text-accent" />
-                  </div>
-                  <div>
-                    <p
-                      className="text-xs uppercase tracking-widest text-accent"
-                      style={{ fontFamily: "var(--font-mono)" }}
-                    >
-                      Phase {phase.phase}
-                    </p>
-                    <p className="text-xs text-text-muted">{phase.subtitle}</p>
-                  </div>
-                </div>
-                <h3 className="text-lg font-semibold text-text-primary mb-4">{phase.title}</h3>
-                <ul className="space-y-3">
-                  {phase.items.map((item, j) => (
-                    <li key={j} className="flex items-start gap-2">
-                      <ChevronRight className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                      <span className="text-sm text-text-secondary leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== SOLUTION DETAIL ===== */}
-      <section className="bg-bg-light py-20 lg:py-28">
-        <div className="mx-auto max-w-5xl px-6 lg:px-8">
-          <motion.div {...fadeUp}>
-            <p className="section-label text-accent-dark">The Intelligence Engine</p>
-            <h2
-              className="mt-4 text-2xl text-text-on-light sm:text-3xl"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              24 AI triggers. 20+ states. Real-time precision.
-            </h2>
-            <p className="mt-4 text-base text-text-on-light-muted max-w-3xl">
-              ClearForge&apos;s proprietary AI agents continuously scan market signals, score
-              opportunities by relevance, and generate actionable playbooks — calibrated specifically
-              to the client&apos;s product lines and geographic footprint.
-            </p>
+            <p className="section-label mb-6">The Numbers</p>
           </motion.div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              {
-                icon: Crosshair,
-                title: "Capital Project Intelligence",
-                stat: "37.6%",
-                detail:
-                  "Monitors FID announcements, EPC contract awards, FEED commencements, refinery turnarounds, and LNG terminal construction — capturing the earliest actionable signals for equipment procurement.",
-              },
-              {
-                icon: Shield,
-                title: "Specialized Solution Demand",
-                stat: "30.2%",
-                detail:
-                  "Detects pharmaceutical facility expansions, water treatment projects, hydrogen infrastructure, food processing investments, and specialty chemical construction — niche industrial demand matched to specific capabilities.",
-              },
-              {
-                icon: Activity,
-                title: "Strategic Market Intelligence",
-                stat: "12.9%",
-                detail:
-                  "Early-warning signals on competitor capacity changes, M&A activity, regulatory shifts, trade policy disruptions, and supply chain volatility — creating buy-domestic opportunities.",
-              },
-              {
-                icon: Gauge,
-                title: "Technology & Process Demand",
-                stat: "19.3%",
-                detail:
-                  "Identifies EV and battery plant construction, robotics adoption, machine vision systems, production line modernization, and conveyor automation — cross-category triggers surfacing multi-signal opportunities.",
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={item.title}
-                {...stagger(i)}
-                className="border border-border-light bg-white p-6 flex gap-5"
-              >
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-accent/10">
-                  <item.icon className="h-6 w-6 text-accent-dark" />
-                </div>
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-base font-semibold text-text-on-light">{item.title}</h3>
-                    <span
-                      className="text-sm font-bold text-accent-dark"
-                      style={{ fontFamily: "var(--font-mono)" }}
-                    >
-                      {item.stat}
-                    </span>
-                  </div>
-                  <p className="text-sm text-text-on-light-muted leading-relaxed">{item.detail}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== SIGHTFORGE PLATFORM ===== */}
-      <section className="bg-bg-deep py-20 lg:py-28">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
-          <motion.div {...fadeUp}>
-            <p className="section-label">The Platform</p>
-            <h2
-              className="mt-4 text-2xl text-text-primary sm:text-3xl lg:text-4xl max-w-4xl"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              We didn&apos;t just find opportunities. We built the system to act on them.
-            </h2>
-            <p className="mt-4 text-base text-text-secondary max-w-3xl">
-              A purpose-built sales intelligence platform — deployed on a dedicated
-              subdomain for the client&apos;s sales team. It transforms AI-generated intelligence
-              into structured, accountable sales execution that reps actually use every day.
-            </p>
-          </motion.div>
-
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: LayoutGrid,
-                title: "Pipeline Management",
-                items: [
-                  "See every opportunity in list or board view — your choice",
-                  "Filter by territory, group, score, or any field that matters",
-                  "Saved views so each rep sees exactly their pipeline",
-                  "Move deals through stages with a click — nothing falls through the cracks",
-                ],
-              },
-              {
-                icon: BookOpen,
-                title: "AI Sales Playbooks",
-                items: [
-                  "A custom playbook generated for every opportunity — not templates",
-                  "Entry strategy, competitive positioning, and key talking points",
-                  "Sales reps rate each playbook so the AI gets smarter over time",
-                  "Detailed briefs your team can review in minutes, not hours",
-                ],
-              },
-              {
-                icon: UserCheck,
-                title: "Contact Intelligence",
-                items: [
-                  "AI finds the right decision-makers automatically across multiple data sources",
-                  "Direct contact info — email, phone, LinkedIn — ready for outreach",
-                  "One-click actions to start a conversation",
-                  "See who reports to whom so you start at the right level",
-                ],
-              },
-              {
-                icon: LineChart,
-                title: "Metrics & Analytics",
-                items: [
-                  "See which opportunities are highest quality at a glance",
-                  "Track which playbooks actually lead to closed deals",
-                  "Understand where reps override AI recommendations — and why",
-                  "Win rate and time-to-close dashboards for leadership visibility",
-                ],
-              },
-            ].map((pillar, i) => (
-              <motion.div
-                key={pillar.title}
-                {...stagger(i)}
-                className="border border-border-subtle bg-bg-surface p-6"
-              >
-                <div className="flex h-10 w-10 items-center justify-center bg-accent/10 border border-accent/20 mb-4">
-                  <pillar.icon className="h-5 w-5 text-accent" />
-                </div>
-                <h3 className="text-base font-semibold text-text-primary mb-3">{pillar.title}</h3>
-                <ul className="space-y-2">
-                  {pillar.items.map((item, j) => (
-                    <li key={j} className="flex items-start gap-2">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-accent shrink-0 mt-0.5" />
-                      <span className="text-xs text-text-secondary leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== RESULTS DEEP DIVE ===== */}
-      <section className="bg-bg-light py-20 lg:py-28">
-        <div className="mx-auto max-w-5xl px-6 lg:px-8">
-          <motion.div {...fadeUp}>
-            <p className="section-label text-accent-dark">The Results</p>
-            <h2
-              className="mt-4 text-2xl text-text-on-light sm:text-3xl"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              Six months. Three divisions. Exponential compounding.
-            </h2>
-          </motion.div>
-
-          <div className="mt-12 space-y-6">
+          <div className="space-y-20 mt-12">
             {[
               {
                 metric: "1,181",
-                label: "Qualified Opportunities",
-                detail:
-                  "Across three core divisions — with the largest generating over 950 opportunities alone — each scored, enriched, and matched to the client's specific product capabilities. The top 10 opportunities alone represent over $20 billion in combined capital investment.",
+                label: "qualified opportunities identified in six months",
+                body: "Each one scored, enriched, and matched to the client\u2019s actual capabilities. Not scraped leads. Not bought lists. AI-discovered, precision-matched revenue opportunities the sales team had never seen.",
               },
               {
                 metric: "99.8%",
-                label: "Match Rate",
-                detail:
-                  "Only 2 of 1,181 identified opportunities fell outside the client's addressable market. ClearForge's proprietary targeting models are calibrated to the client's exact product lines, geographies, and industrial verticals — not generic industry data.",
+                label: "match rate to addressable market",
+                body: "Two mismatches out of 1,181. The intelligence model was calibrated to the client\u2019s exact product lines, geographies, and verticals \u2014 not generic industry data. Precision that sales teams trust.",
               },
               {
                 metric: "32x",
-                label: "Monthly Scaling",
-                detail:
-                  "The system ramped from 19 opportunities in October to 613 at peak in December — a 32x increase as the AI models learned the client's market. After seasonal adjustment in January, the system rebounded and continues to grow.",
+                label: "ramp in monthly pipeline velocity",
+                body: "From 19 opportunities in month one to 613 at peak. The system learned the market as it ran \u2014 every signal processed, every score refined, every trigger sharpened. Compounding, not linear.",
               },
               {
                 metric: "631+",
-                label: "Sales Playbooks Generated",
-                detail:
-                  "Each playbook includes an executive summary, entry strategy, key talking points, competitive analysis, and risk assessment — tailored to the specific opportunity, vertical, and buyer persona. Not templates. Custom intelligence.",
-              },
-            ].map((result, i) => (
-              <motion.div
-                key={result.label}
-                {...stagger(i)}
-                className="flex flex-col sm:flex-row items-start gap-6 p-6 border border-border-light bg-white"
-              >
-                <div className="sm:w-32 shrink-0 text-center sm:text-right">
-                  <div
-                    className="text-3xl font-bold text-accent-dark lg:text-4xl"
-                    style={{ fontFamily: "var(--font-mono)" }}
-                  >
-                    {result.metric}
-                  </div>
-                  <p className="text-xs uppercase tracking-widest text-text-on-light-muted mt-1">
-                    {result.label}
-                  </p>
-                </div>
-                <div className="border-l border-border-light pl-6">
-                  <p className="text-sm text-text-on-light-sub leading-relaxed">{result.detail}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== CONTINUOUS MODEL ===== */}
-      {cs.continuousModel && (
-        <section className="bg-bg-deep py-20 lg:py-28">
-          <div className="mx-auto max-w-4xl px-6 lg:px-8">
-            <motion.div {...fadeUp}>
-              <p className="section-label">Continuous Intelligence</p>
-              <h2
-                className="mt-4 text-2xl text-text-primary sm:text-3xl"
-                style={{ fontFamily: "var(--font-heading)" }}
-              >
-                The system gets exponentially smarter every month.
-              </h2>
-              <p className="mt-4 text-base text-text-secondary max-w-3xl">
-                ClearForge&apos;s AI agents don&apos;t just execute — they learn. Every market
-                signal processed, every opportunity scored, and every playbook rated feeds back into
-                the intelligence model.
-              </p>
-              <div className="mt-10 space-y-4">
-                {cs.continuousModel.map((item, i) => {
-                  const icons = [RefreshCw, TrendingUp, Zap, Send];
-                  const Icon = icons[i % icons.length];
-                  return (
-                    <motion.div
-                      key={i}
-                      {...stagger(i)}
-                      className="flex items-start gap-4 border border-border-subtle bg-bg-surface p-6"
-                    >
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-accent/10 border border-accent/20">
-                        <Icon className="h-5 w-5 text-accent" />
-                      </div>
-                      <p className="text-base text-text-secondary leading-relaxed">{item}</p>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </motion.div>
-          </div>
-        </section>
-      )}
-
-      {/* ===== WHAT'S NEXT — EXPANSION ===== */}
-      <section className="bg-bg-light py-20 lg:py-28">
-        <div className="mx-auto max-w-5xl px-6 lg:px-8">
-          <motion.div {...fadeUp}>
-            <p className="section-label text-accent-dark">What&apos;s Next</p>
-            <h2
-              className="mt-4 text-2xl text-text-on-light sm:text-3xl"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              Five additional divisions. Commercial model transformation. The intelligence compounds.
-            </h2>
-            <p className="mt-4 text-base text-text-on-light-muted max-w-3xl">
-              The architecture built for the first three divisions transfers directly — new
-              deployments accelerate faster than the last because the base model has already learned
-              the client&apos;s market.
-            </p>
-          </motion.div>
-
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              {
-                title: "Structural Steel Products",
-                detail: "Infrastructure legislation creating demand across highway, bridge, and transit construction — AI agents identify the earliest procurement signals",
-                triggers: "8 trigger categories · 12 states",
-              },
-              {
-                title: "Aluminum Extrusion",
-                detail: "Nearshoring wave driving demand for domestically sourced materials across automotive and construction",
-                triggers: "6 trigger categories · 170+ buyers identified",
-              },
-              {
-                title: "Custom Fabrication",
-                detail: "Direct architecture transfer from the first deployed division — capital project triggers validated and ready to deploy",
-                triggers: "10 trigger categories · 8 states",
-              },
-              {
-                title: "Specialty Tubing",
-                detail: "Pharmaceutical cleanroom and semiconductor fab construction creating demand for high-purity systems",
-                triggers: "5 trigger categories · 7 states",
-              },
-              {
-                title: "Packaging & Automation",
-                detail: "E-commerce volume driving demand for automated packaging equipment across fulfillment and pharma",
-                triggers: "7 trigger categories · High-volume, short-cycle",
-              },
-              {
-                title: "Commercial Model Redesign",
-                detail: "Diagnostic-first approach to aligning sales structure, compensation, and AI tools to margin-focused growth across the enterprise",
-                triggers: "Phase 1 diagnostic · 4–6 week engagement",
+                label: "AI-generated sales playbooks",
+                body: "Custom intelligence for every opportunity. Entry strategies, competitive positioning, key talking points, risk assessments \u2014 briefs a rep can act on in minutes. Not templates. Not decks. Working intelligence.",
               },
             ].map((item, i) => (
               <motion.div
-                key={item.title}
-                {...stagger(i)}
-                className="p-5 border border-border-light bg-white"
+                key={item.metric}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.1 }}
               >
-                <h3 className="text-base font-semibold text-text-on-light">{item.title}</h3>
-                <p className="mt-2 text-sm text-text-on-light-muted leading-relaxed">
-                  {item.detail}
+                <div className="flex items-baseline gap-4 mb-4">
+                  <span
+                    className="text-5xl lg:text-7xl font-bold text-accent"
+                    style={{ fontFamily: "var(--font-mono)" }}
+                  >
+                    {item.metric}
+                  </span>
+                  <span className="text-base lg:text-lg text-text-secondary">
+                    {item.label}
+                  </span>
+                </div>
+                <p className="text-base text-text-muted max-w-2xl leading-relaxed pl-1">
+                  {item.body}
                 </p>
-                <p
-                  className="mt-3 text-xs text-accent-dark font-medium"
-                  style={{ fontFamily: "var(--font-mono)" }}
-                >
-                  {item.triggers}
-                </p>
+                {i < 3 && (
+                  <div className="mt-16 h-px bg-gradient-to-r from-border-subtle via-border-subtle/50 to-transparent" />
+                )}
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===== SCALE ===== */}
-      <section className="bg-bg-primary py-20 lg:py-28">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
+      {/* ===== THE CHALLENGE — narrative, no cards ===== */}
+      <section className="bg-bg-light py-24 lg:py-32">
+        <div className="mx-auto max-w-3xl px-6 lg:px-8">
           <motion.div {...fadeUp}>
-            <p className="section-label">The Scale</p>
-            <blockquote className="mt-6">
+            <p className="section-label text-accent-dark mb-6">The Starting Point</p>
+            <h2
+              className="text-2xl text-text-on-light sm:text-3xl lg:text-4xl"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              Growth was there. The system to find it wasn&apos;t.
+            </h2>
+            <div className="mt-10 space-y-6 text-base text-text-on-light-sub leading-[1.8]">
+              <p>
+                The organization had operated for decades on relationships and reputation.
+                Each group ran its own sales motion — different tools, different processes,
+                different definitions of a qualified lead. There was no shared view of where
+                capital was flowing, which accounts were under-served, or where the real white
+                space existed across the portfolio.
+              </p>
+              <p>
+                Prospecting was manual and untethered from what the business actually sells.
+                Cross-division opportunities were invisible. The commercial model hadn&apos;t
+                evolved even as the market, the tools, and buyer behavior had fundamentally changed.
+              </p>
+              <p>
+                Leadership knew the growth was there. They needed a system to surface it,
+                a platform to act on it, and an operating model that could scale without
+                adding headcount.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ===== HOW WE WORK — narrative flow, no cards ===== */}
+      <section className="bg-bg-deep py-24 lg:py-32">
+        <div className="mx-auto max-w-3xl px-6 lg:px-8">
+          <motion.div {...fadeUp}>
+            <p className="section-label mb-6">How It Works</p>
+            <h2
+              className="text-2xl text-text-primary sm:text-3xl lg:text-4xl mb-16"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              AI agents do the work. Your team orchestrates the growth.
+            </h2>
+          </motion.div>
+
+          {/* Phase by phase — large type, no boxes */}
+          <div className="space-y-24">
+            <motion.div {...fadeUp}>
               <p
-                className="text-xl text-text-primary leading-relaxed lg:text-2xl"
+                className="text-xs uppercase tracking-[0.2em] text-accent mb-4"
+                style={{ fontFamily: "var(--font-mono)" }}
+              >
+                Intelligence Engine
+              </p>
+              <h3
+                className="text-xl text-text-primary sm:text-2xl lg:text-3xl mb-6"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
-                &ldquo;What started as a two-division pilot became an enterprise-wide intelligence
-                system in under six months — with a custom platform the sales team uses daily and a
-                roadmap to transform the commercial model entirely.&rdquo;
+                Proprietary AI agents scan the market continuously.
+              </h3>
+              <p className="text-base text-text-secondary leading-[1.8] max-w-2xl">
+                Calibrated to the client&apos;s exact capabilities, the agents monitor
+                capital projects, demand signals, and competitive movements across
+                20+ states. Every opportunity is scored, enriched, and matched in
+                real time. The model gets sharper with every signal it processes.
+              </p>
+            </motion.div>
+
+            <motion.div {...fadeUp}>
+              <p
+                className="text-xs uppercase tracking-[0.2em] text-accent mb-4"
+                style={{ fontFamily: "var(--font-mono)" }}
+              >
+                Sales Execution Platform
+              </p>
+              <h3
+                className="text-xl text-text-primary sm:text-2xl lg:text-3xl mb-6"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                A purpose-built platform your team uses every day.
+              </h3>
+              <p className="text-base text-text-secondary leading-[1.8] max-w-2xl">
+                Pipeline management, AI-generated playbooks, automated contact
+                discovery, performance analytics — deployed on a dedicated instance
+                for the client&apos;s sales organization. Not a dashboard they log into
+                once. A system they run their business from. Structured feedback loops
+                ensure every interaction makes the AI smarter.
+              </p>
+            </motion.div>
+
+            <motion.div {...fadeUp}>
+              <p
+                className="text-xs uppercase tracking-[0.2em] text-accent mb-4"
+                style={{ fontFamily: "var(--font-mono)" }}
+              >
+                Commercial Model Design
+              </p>
+              <h3
+                className="text-xl text-text-primary sm:text-2xl lg:text-3xl mb-6"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                Then we redesign the commercial engine around the intelligence.
+              </h3>
+              <p className="text-base text-text-secondary leading-[1.8] max-w-2xl">
+                Diagnostic-first. Revenue assessment, account segmentation by margin
+                contribution, role architecture aligned to where the growth is. The AI
+                tells you where to aim. The commercial model ensures the organization
+                is structured to get there. No guessing. No adding bodies. Just precision.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== THE LOOP — continuous intelligence ===== */}
+      <section className="bg-bg-light py-24 lg:py-32">
+        <div className="mx-auto max-w-3xl px-6 lg:px-8">
+          <motion.div {...fadeUp}>
+            <p className="section-label text-accent-dark mb-6">The Compounding Loop</p>
+            <h2
+              className="text-2xl text-text-on-light sm:text-3xl lg:text-4xl mb-10"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              The system doesn&apos;t plateau. It compounds.
+            </h2>
+            <div className="space-y-6 text-base text-text-on-light-sub leading-[1.8]">
+              <p>
+                AI agents monitor thousands of market signals daily. Every closed-won
+                and closed-lost data point refines the scoring model. Precision compounds
+                month over month.
+              </p>
+              <p>
+                New territories and groups are added continuously. The intelligence
+                architecture scales horizontally — each deployment accelerates faster
+                than the last because the base model has already learned the market.
+              </p>
+              <p>
+                Structured feedback on every playbook creates a closed-loop system.
+                Sales reps rate quality across four dimensions. The AI improves automatically.
+                Market shifts are captured within hours, not weeks — ensuring the team
+                always has first-mover advantage.
+              </p>
+              <p className="text-text-on-light font-medium">
+                By month twelve, the precision and coverage will be fundamentally
+                different from month one. That&apos;s the design.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ===== SCALE — full-bleed quote ===== */}
+      <section className="bg-bg-deep py-28 lg:py-36">
+        <div className="mx-auto max-w-4xl px-6 lg:px-8">
+          <motion.div {...fadeUp}>
+            <blockquote>
+              <p
+                className="text-2xl text-text-primary leading-[1.4] lg:text-4xl"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                &ldquo;What started as a pilot across a few groups became an
+                enterprise-wide intelligence system in under six months — with a
+                custom platform the sales team uses daily, a pipeline that didn&apos;t
+                exist before, and a roadmap to transform the commercial model
+                entirely.&rdquo;
               </p>
             </blockquote>
-            <p className="mt-8 text-base text-text-secondary leading-relaxed">{cs.scale}</p>
+            <p className="mt-10 text-base text-text-secondary leading-relaxed max-w-3xl">
+              The architecture now covers multiple groups with over a thousand active
+              opportunities — and additional divisions ready for deployment. The system
+              gets exponentially smarter every month. ClearForge is now designing a
+              commercial model transformation to align the client&apos;s sales structure,
+              compensation, and coverage model to the intelligence the AI is generating.
+            </p>
           </motion.div>
         </div>
       </section>
 
       {/* ===== CTA ===== */}
-      <section className="bg-bg-deep py-20 lg:py-28 hero-glow">
+      <section className="bg-bg-deep py-24 lg:py-32 hero-glow">
         <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
           <motion.div {...fadeUp}>
-            <p className="section-label">Your Move</p>
+            <p className="section-label mb-6">Your Move</p>
             <h2
-              className="mt-4 text-3xl text-text-primary sm:text-4xl"
+              className="text-3xl text-text-primary sm:text-4xl lg:text-5xl"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               This is what ClearForge builds.
             </h2>
-            <p className="mt-4 text-lg text-text-secondary max-w-2xl mx-auto">
-              Not slide decks. Not proofs of concept. Working intelligence systems that generate
-              pipeline, enable sales teams, and compound over time. One conversation to find out what
-              this looks like for your business.
+            <p className="mt-6 text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed">
+              Not slide decks. Not proofs of concept. Working intelligence systems
+              that generate pipeline, enable sales teams, and compound over time.
+              One conversation to find out what this looks like for your business.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
               <Button size="lg" asChild>
                 <Link href="/contact">Request a Proposal</Link>
               </Button>
