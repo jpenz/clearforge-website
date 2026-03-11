@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { journeyStages, getSolutionsByStage } from "@/data/solutions";
@@ -13,8 +14,11 @@ const stageSubhead: Record<(typeof journeyStages)[number], string> = {
 export function SolutionsPage() {
   return (
     <>
-      <section className="bg-white py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="relative bg-white py-20 lg:py-28 overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.06]">
+          <Image src="/images/solutions-journey.png" alt="" fill className="object-cover" />
+        </div>
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <span className="section-label">Solutions</span>
           <h1 className="mt-4 text-4xl font-bold text-text sm:text-5xl">AI solutions organized by your journey stage.</h1>
           <p className="mt-6 max-w-3xl text-lg text-text-secondary">

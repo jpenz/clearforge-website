@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { createMetadata } from "@/lib/metadata";
@@ -231,8 +232,9 @@ export default function Home() {
       {/* ═══ RESULTS — Case study proof ═══ */}
       {featured && (
         <GSAPSectionReveal animation="scale-up">
-          <section className="bg-bg-deep py-20 lg:py-32 relative noise-texture">
-            <div className="absolute inset-0 bg-bg-deep/90 pointer-events-none" />
+          <section className="bg-bg-deep py-20 lg:py-32 relative noise-texture overflow-hidden">
+            <Image src="/images/abstract-network.png" alt="" fill className="object-cover opacity-15" />
+            <div className="absolute inset-0 bg-bg-deep/85 pointer-events-none" />
             <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
               <p className="section-label">Results</p>
               <h2 className="mt-4 max-w-3xl text-[clamp(2rem,4vw,3rem)] text-text-primary">

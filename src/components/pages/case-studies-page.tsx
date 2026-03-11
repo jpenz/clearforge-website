@@ -1,10 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { caseStudies } from "@/data/case-studies";
 import { ArrowRight } from "lucide-react";
+
+const caseStudyImages: Record<string, string> = {
+  "industrial-manufacturer": "/images/case-study-industrial.png",
+  "metro-detroit-services-company": "/images/case-study-services.png",
+  "pe-portfolio-diagnostic-plan": "/images/case-study-pe-diagnostic.png",
+};
 
 export function CaseStudiesPage() {
   return (
@@ -47,8 +54,14 @@ export function CaseStudiesPage() {
               >
                 <Link
                   href={`/case-studies/${cs.slug}`}
-                  className="group grid bg-bg-light transition-colors hover:bg-bg-light-alt md:grid-cols-4"
+                  className="group grid bg-bg-light transition-colors hover:bg-bg-light-alt md:grid-cols-4 overflow-hidden"
                 >
+                  {caseStudyImages[cs.slug] && (
+                    <div className="relative h-48 md:hidden">
+                      <Image src={caseStudyImages[cs.slug]} alt="" fill className="object-cover" />
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-bg-light" />
+                    </div>
+                  )}
                   <div className="p-8 md:col-span-3 lg:p-10">
                     <div className="flex items-center gap-3 mb-4">
                       <span className="text-xs font-semibold uppercase tracking-widest text-accent-dark">
@@ -87,8 +100,9 @@ export function CaseStudiesPage() {
       </section>
 
       {/* CTA — Dark */}
-      <section className="bg-bg-deep py-20 lg:py-28 hero-glow">
-        <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
+      <section className="relative bg-bg-deep py-20 lg:py-28 hero-glow overflow-hidden">
+        <Image src="/images/cta-background.png" alt="" fill className="object-cover opacity-30" />
+        <div className="relative mx-auto max-w-3xl px-6 text-center lg:px-8">
           <h2
             className="text-3xl text-text-primary sm:text-4xl"
             style={{ fontFamily: "var(--font-heading)" }}

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -68,8 +69,10 @@ export function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-bg-deep pt-32 pb-20 lg:pt-40 lg:pb-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="relative bg-bg-deep pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+        <Image src="/images/about-forge-concept.png" alt="" fill className="object-cover opacity-20" priority />
+        <div className="absolute inset-0 bg-gradient-to-r from-bg-deep via-bg-deep/80 to-transparent" />
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -194,8 +197,9 @@ export function AboutPage() {
       </section>
 
       {/* CTA — Dark */}
-      <section className="bg-bg-deep py-20 lg:py-28 hero-glow">
-        <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
+      <section className="relative bg-bg-deep py-20 lg:py-28 hero-glow overflow-hidden">
+        <Image src="/images/cta-background.png" alt="" fill className="object-cover opacity-30" />
+        <div className="relative mx-auto max-w-3xl px-6 text-center lg:px-8">
           <h2
             className="text-3xl text-text-primary sm:text-4xl"
             style={{ fontFamily: "var(--font-heading)" }}

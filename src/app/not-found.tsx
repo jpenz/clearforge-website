@@ -1,9 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
-    <section className="relative min-h-[70vh] flex items-center justify-center bg-bg-deep">
+    <section className="relative min-h-[70vh] flex items-center justify-center bg-bg-deep overflow-hidden">
+      <Image src="/images/404-lost-node.png" alt="" fill className="object-cover opacity-40" priority />
       <div className="noise-texture absolute inset-0" />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8 text-center">
         <span className="metric text-[8rem] leading-none font-bold opacity-20">404</span>

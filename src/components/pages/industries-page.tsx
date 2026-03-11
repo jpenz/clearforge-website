@@ -1,8 +1,17 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { broadIndustries, deepIndustries } from "@/data/industries";
 import { industryIcons } from "@/lib/icons";
+
+const industryImages: Record<string, string> = {
+  "industrial-manufacturing": "/images/industry-manufacturing.png",
+  "private-equity": "/images/industry-private-equity.png",
+  "professional-services": "/images/industry-professional-services.png",
+  "home-commercial-services": "/images/industry-home-services.png",
+  "distribution": "/images/industry-distribution.png",
+};
 
 export function IndustriesPage() {
   return (
@@ -24,15 +33,23 @@ export function IndustriesPage() {
             {deepIndustries.map((industry) => {
               const Icon = industryIcons[industry.icon];
               return (
-                <article key={industry.slug} className="rounded-xl border border-border bg-white p-6">
-                  <Icon className="mb-3 h-8 w-8 text-teal" aria-hidden />
-                  <h3 className="text-xl font-bold text-text">{industry.name}</h3>
-                  <p className="mt-3 text-base text-text-secondary">{industry.hero}</p>
-                  <Button variant="link" className="mt-4 px-0" asChild>
-                    <Link href={`/industries/${industry.slug}`}>
-                      Explore industry playbook <ArrowRight className="ml-1 h-4 w-4" />
-                    </Link>
-                  </Button>
+                <article key={industry.slug} className="group relative rounded-xl border border-border overflow-hidden">
+                  {industryImages[industry.slug] && (
+                    <div className="relative h-44 overflow-hidden">
+                      <Image src={industryImages[industry.slug]} alt="" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white" />
+                    </div>
+                  )}
+                  <div className="relative bg-white p-6">
+                    <Icon className="mb-3 h-8 w-8 text-teal" aria-hidden />
+                    <h3 className="text-xl font-bold text-text">{industry.name}</h3>
+                    <p className="mt-3 text-base text-text-secondary">{industry.hero}</p>
+                    <Button variant="link" className="mt-4 px-0" asChild>
+                      <Link href={`/industries/${industry.slug}`}>
+                        Explore industry playbook <ArrowRight className="ml-1 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </div>
                 </article>
               );
             })}

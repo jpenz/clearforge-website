@@ -35,8 +35,13 @@ export const metadata: Metadata = {
   description:
     "ClearForge builds AI systems that drive real operational results. Strategy through execution — one team, no handoffs.",
   keywords: coreKeywords,
-  openGraph: { type: "website", locale: "en_US", siteName: "ClearForge" },
-  twitter: { card: "summary_large_image" },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "ClearForge",
+    images: [{ url: "/images/og-image.png", width: 1200, height: 630, alt: "ClearForge — AI Systems for Revenue Growth" }],
+  },
+  twitter: { card: "summary_large_image", images: ["/images/og-image.png"] },
   robots: { index: true, follow: true },
 };
 
