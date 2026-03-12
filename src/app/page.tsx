@@ -193,24 +193,7 @@ export default function Home() {
         </section>
       </GSAPSectionReveal>
 
-      {/* ═══ HOW WE WORK — Section header ═══ */}
-      <GSAPSectionReveal animation="fade-up">
-        <section className="bg-bg-deep pt-20 pb-10 lg:pt-32 lg:pb-14">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <p className="section-label">How We Work</p>
-            <h2 className="mt-4 max-w-3xl text-[clamp(2rem,5vw,3.5rem)] text-text-primary">
-              Strategy through production.{" "}
-              <span className="text-text-muted">One partner, no handoffs.</span>
-            </h2>
-            <p className="mt-4 text-lg text-text-secondary max-w-2xl">
-              Every engagement follows three phases — each with clear owners,
-              measurable outcomes, and the same team from start to finish.
-            </p>
-          </div>
-        </section>
-      </GSAPSectionReveal>
-
-      {/* ═══ METHODOLOGY — Scroll-driven assembly (Understand → Build → Operate) ═══ */}
+      {/* ═══ METHODOLOGY — Scroll-driven assembly (header + animation + phases combined) ═══ */}
       <TransformationAssembly phases={methodologyPhases} />
 
       {/* ═══ PEOPLE CAPABILITY — Accent callout ═══ */}
