@@ -7,6 +7,7 @@ on:
     branches: [main]
 
 jobs:
+  # ── 1. TypeScript ────────────────────────────────────────────────────────────
   typecheck:
     name: TypeScript
     runs-on: ubuntu-latest
@@ -19,6 +20,7 @@ jobs:
       - run: npm ci
       - run: npx tsc --noEmit
 
+  # ── 2. Biome Lint ────────────────────────────────────────────────────────────
   lint:
     name: Biome
     runs-on: ubuntu-latest
@@ -31,6 +33,57 @@ jobs:
       - run: npm ci
       - run: npx biome check .
 
+  # ── 3. Dependency Vulnerability Scan ────────────────────────────────────────
+  audit:
+    name: npm audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      # Fail the build on high or critical CVEs in production dependencies
+      # --omit=dev excludes devDependencies (e.g. @vitest/ui) that never ship to production
+      - run: npm audit --audit-level=high --omit=dev
+
+  # ── 4. SAST — Semgrep ───────────────────────────────────────────────────────
+  semgrep:
+    name: Semgrep SAST
+    runs-on: ubuntu-latest
+    # Only run on push/PR (skip forks to avoid exposing token)
+    if: github.actor != 'dependabot[bot]'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: semgrep/semgrep-action@v1
+        with:
+          config: >-
+            p/typescript
+            p/react
+            p/nextjs
+            p/owasp-top-ten
+            p/secrets
+        env:
+          # Optional: set SEMGREP_APP_TOKEN to upload results to semgrep.dev dashboard
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+
+  # ── 5. Secret Scanning — TruffleHog ────────────────────────────────────────
+  secret-scan:
+    name: TruffleHog Secret Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for secret scanning
+      - uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --only-verified
+
+  # ── 6. Unit Tests ────────────────────────────────────────────────────────────
   unit-tests:
     name: Vitest
     runs-on: ubuntu-latest
@@ -42,7 +95,8 @@ jobs:
           node-version: '20'
           cache: 'npm'
       - run: npm ci
-      - run: npm run test
+      # Run with coverage — vitest.config.ts enforces 70% threshold
+      - run: npm run test:coverage
       - name: Upload coverage
         uses: actions/upload-artifact@v4
         if: always()
@@ -51,6 +105,7 @@ jobs:
           path: coverage/
           retention-days: 7
 
+  # ── 7. Build ─────────────────────────────────────────────────────────────────
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -66,13 +121,19 @@ jobs:
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      # Upload .next build artifact for E2E and Lighthouse jobs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: next-build
+          path: .next/
+          retention-days: 1
 
-  # E2E runs only on push to main (not PRs) to save CI minutes
+  # ── 8. Playwright E2E ────────────────────────────────────────────────────────
   e2e:
     name: Playwright E2E
     runs-on: ubuntu-latest
     needs: [build]
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    # Run on push to main AND on PRs (use build artifact)
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -80,6 +141,10 @@ jobs:
           node-version: '20'
           cache: 'npm'
       - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: next-build
+          path: .next/
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
         env:
@@ -93,3 +158,78 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 7
+
+  # ── 9. Lighthouse CI ─────────────────────────────────────────────────────────
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    needs: [build]
+    # Only on push to main — saves CI minutes, still catches prod regressions
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: next-build
+          path: .next/
+      - run: npm install -g @lhci/cli
+      - name: Run Lighthouse CI
+        run: lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+
+  # ── 10. Bundle Size ──────────────────────────────────────────────────────────
+  bundle-size:
+    name: Bundle Size
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: next-build
+          path: .next/
+      - name: Analyze bundle size
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const buildManifest = JSON.parse(
+              fs.readFileSync('.next/build-manifest.json', 'utf8')
+            );
+            // Count total JS chunks
+            const allChunks = Object.values(buildManifest.pages || {}).flat();
+            const uniqueChunks = [...new Set(allChunks)];
+            console.log(`Total unique JS chunks: ${uniqueChunks.length}`);
+
+            // Check for page-level size (approximate)
+            let totalSize = 0;
+            for (const chunk of uniqueChunks) {
+              const chunkPath = path.join('.next', chunk);
+              if (fs.existsSync(chunkPath)) {
+                totalSize += fs.statSync(chunkPath).size;
+              }
+            }
+            const totalKB = (totalSize / 1024).toFixed(1);
+            console.log(`Approximate total JS bundle: ${totalKB} KB`);
+
+            // Warn if over 500KB (adjust threshold as needed)
+            const THRESHOLD_KB = 500;
+            if (totalSize / 1024 > THRESHOLD_KB) {
+              core.warning(`Bundle size ${totalKB}KB exceeds ${THRESHOLD_KB}KB threshold`);
+            } else {
+              console.log(`✅ Bundle size ${totalKB}KB is within ${THRESHOLD_KB}KB threshold`);
+            }

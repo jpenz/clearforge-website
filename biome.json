@@ -1,6 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "organizeImports": { "enabled": true },
+  "$schema": "https://biomejs.dev/schemas/2.4.8/schema.json",
   "linter": {
     "enabled": true,
     "rules": {
@@ -10,8 +9,8 @@
         "noUnusedImports": "warn"
       },
       "suspicious": {
-        "noExplicitAny": "warn",
-        "noConsoleLog": "off"
+        "noExplicitAny": "error",
+        "noConsole": "warn"
       },
       "style": {
         "noNonNullAssertion": "off",
@@ -33,13 +32,11 @@
     }
   },
   "files": {
-    "ignore": [
-      "node_modules",
-      ".next",
-      "dist",
-      "build",
-      "*.config.mjs",
-      "*.config.ts"
+    "includes": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "src/**/*.js",
+      "src/**/*.jsx"
     ]
   }
 }
