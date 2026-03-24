@@ -286,6 +286,6 @@ describe('calculateResults() — edge cases', () => {
     const r1 = calculateResults(answers);
     const r2 = calculateResults(answers);
     expect(r1.compositeScore).toBe(r2.compositeScore);
-    expect(r1.tier).toBe(r2.tier);
+    expect(r1.maturityLevel).toBe(r2.maturityLevel);
   });
 });
