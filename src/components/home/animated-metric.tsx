@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { useRef, useEffect, useState } from "react";
-import { useInView } from "framer-motion";
+import { useInView } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 
 export function AnimatedMetric({
   value,
-  className = "metric text-3xl font-bold sm:text-4xl",
+  className = 'metric text-3xl font-bold sm:text-4xl',
 }: {
   value: string;
   className?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-40px" });
+  const isInView = useInView(ref, { once: true, margin: '-40px' });
   const [display, setDisplay] = useState(value);
 
   useEffect(() => {
@@ -24,11 +24,11 @@ export function AnimatedMetric({
       return;
     }
 
-    const numStr = match[1].replace(/,/g, "");
+    const numStr = match[1].replace(/,/g, '');
     const suffix = match[2];
     const target = parseFloat(numStr);
-    const hasCommas = match[1].includes(",");
-    const decimals = numStr.includes(".") ? numStr.split(".")[1].length : 0;
+    const hasCommas = match[1].includes(',');
+    const decimals = numStr.includes('.') ? numStr.split('.')[1].length : 0;
     const duration = 1200;
     const startTime = performance.now();
 
@@ -36,7 +36,7 @@ export function AnimatedMetric({
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
       // Ease out cubic
-      const eased = 1 - Math.pow(1 - progress, 3);
+      const eased = 1 - (1 - progress) ** 3;
       const current = target * eased;
 
       let formatted: string;

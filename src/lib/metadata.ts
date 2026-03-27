@@ -1,23 +1,23 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
-const siteUrl = "https://clearforge.ai";
-const siteName = "ClearForge.ai";
+const siteUrl = 'https://clearforge.ai';
+const siteName = 'ClearForge.ai';
 
 export const coreKeywords = [
-  "AI consulting",
-  "AI strategy consulting",
-  "AI agent design and build",
-  "managed AI operations",
-  "legacy system modernization",
-  "AI marketing and revenue operations",
-  "industry AI transformation",
-  "AI value gap",
+  'AI consulting',
+  'AI strategy consulting',
+  'AI agent design and build',
+  'managed AI operations',
+  'legacy system modernization',
+  'AI marketing and revenue operations',
+  'industry AI transformation',
+  'AI value gap',
 ];
 
 export function createMetadata({
   title,
   description,
-  path = "",
+  path = '',
   noIndex = false,
   keywords = [],
 }: {
@@ -43,11 +43,11 @@ export function createMetadata({
       description,
       url,
       siteName,
-      locale: "en_US",
-      type: "website",
+      locale: 'en_US',
+      type: 'website',
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title,
       description,
     },
@@ -55,17 +55,17 @@ export function createMetadata({
 }
 
 export const organizationJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "ClearForge",
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'ClearForge',
   url: siteUrl,
   logo: `${siteUrl}/logo.png`,
   description:
-    "ClearForge is a strategy and AI consulting firm that diagnoses where businesses should win, builds the AI systems to execute, and operates them continuously.",
+    'ClearForge is a strategy and AI consulting firm that diagnoses where businesses should win, builds the AI systems to execute, and operates them continuously.',
   contactPoint: {
-    "@type": "ContactPoint",
-    email: "hello@clearforge.ai",
-    contactType: "sales",
+    '@type': 'ContactPoint',
+    email: 'hello@clearforge.ai',
+    contactType: 'sales',
   },
   sameAs: [],
 };
@@ -76,16 +76,16 @@ export function serviceJsonLd(service: {
   slug?: string;
   path?: string;
 }) {
-  const servicePath = service.path ?? (service.slug ? `/services/${service.slug}` : "/services");
+  const servicePath = service.path ?? (service.slug ? `/services/${service.slug}` : '/services');
 
   return {
-    "@context": "https://schema.org",
-    "@type": "Service",
+    '@context': 'https://schema.org',
+    '@type': 'Service',
     name: service.title,
     description: service.description,
     provider: {
-      "@type": "Organization",
-      name: "ClearForge",
+      '@type': 'Organization',
+      name: 'ClearForge',
       url: siteUrl,
     },
     url: `${siteUrl}${servicePath}`,
@@ -94,27 +94,25 @@ export function serviceJsonLd(service: {
 
 export function faqJsonLd(faqs: { question: string; answer: string }[]) {
   return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
     mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
+      '@type': 'Question',
       name: faq.question,
       acceptedAnswer: {
-        "@type": "Answer",
+        '@type': 'Answer',
         text: faq.answer,
       },
     })),
   };
 }
 
-export function breadcrumbJsonLd(
-  items: { name: string; path: string }[],
-) {
+export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
     itemListElement: items.map((item, index) => ({
-      "@type": "ListItem",
+      '@type': 'ListItem',
       position: index + 1,
       name: item.name,
       item: `${siteUrl}${item.path}`,
@@ -130,19 +128,19 @@ export function articleJsonLd(article: {
   author: string;
 }) {
   return {
-    "@context": "https://schema.org",
-    "@type": "Article",
+    '@context': 'https://schema.org',
+    '@type': 'Article',
     headline: article.title,
     description: article.description,
     url: `${siteUrl}/insights/${article.slug}`,
     datePublished: article.date,
     author: {
-      "@type": "Person",
+      '@type': 'Person',
       name: article.author,
     },
     publisher: {
-      "@type": "Organization",
-      name: "ClearForge",
+      '@type': 'Organization',
+      name: 'ClearForge',
       url: siteUrl,
     },
   };

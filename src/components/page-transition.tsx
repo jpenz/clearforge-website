@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
-import { usePathname } from "next/navigation";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { usePathname } from 'next/navigation';
+import { useRef } from 'react';
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -16,14 +16,10 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       gsap.fromTo(
         containerRef.current,
         { opacity: 0, y: 12 },
-        { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
+        { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' },
       );
     }
   }, [pathname]);
 
-  return (
-    <div ref={containerRef}>
-      {children}
-    </div>
-  );
+  return <div ref={containerRef}>{children}</div>;
 }

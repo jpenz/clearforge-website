@@ -1,28 +1,31 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
-import { motion, useInView, type TargetAndTransition } from "framer-motion";
+import { motion, type TargetAndTransition, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
-type AnimationType = "fade-up" | "slide-left" | "slide-right" | "scale-up" | "clip-reveal";
+type AnimationType = 'fade-up' | 'slide-left' | 'slide-right' | 'scale-up' | 'clip-reveal';
 
-const variants: Record<AnimationType, { hidden: TargetAndTransition; visible: TargetAndTransition }> = {
-  "fade-up": {
+const variants: Record<
+  AnimationType,
+  { hidden: TargetAndTransition; visible: TargetAndTransition }
+> = {
+  'fade-up': {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0 },
   },
-  "slide-left": {
+  'slide-left': {
     hidden: { opacity: 0, x: -60 },
     visible: { opacity: 1, x: 0 },
   },
-  "slide-right": {
+  'slide-right': {
     hidden: { opacity: 0, x: 60 },
     visible: { opacity: 1, x: 0 },
   },
-  "scale-up": {
+  'scale-up': {
     hidden: { opacity: 0, scale: 0.92 },
     visible: { opacity: 1, scale: 1 },
   },
-  "clip-reveal": {
+  'clip-reveal': {
     hidden: { opacity: 0, y: 24 },
     visible: { opacity: 1, y: 0 },
   },
@@ -30,7 +33,7 @@ const variants: Record<AnimationType, { hidden: TargetAndTransition; visible: Ta
 
 export function SectionReveal({
   children,
-  animation = "fade-up",
+  animation = 'fade-up',
   delay = 0,
 }: {
   children: React.ReactNode;
@@ -38,7 +41,7 @@ export function SectionReveal({
   delay?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const isInView = useInView(ref, { once: true, margin: '-60px' });
   const v = variants[animation];
 
   return (
@@ -67,14 +70,14 @@ export function StaggerReveal({
   stagger?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const isInView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
     <motion.div
       ref={ref}
       className={className}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      animate={isInView ? 'visible' : 'hidden'}
       variants={{
         visible: { transition: { staggerChildren: stagger } },
         hidden: {},

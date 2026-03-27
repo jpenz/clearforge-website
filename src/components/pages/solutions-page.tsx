@@ -1,14 +1,14 @@
-import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { journeyStages, getSolutionsByStage } from "@/data/solutions";
-import { solutionIcons } from "@/lib/icons";
+import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { getSolutionsByStage, journeyStages } from '@/data/solutions';
+import { solutionIcons } from '@/lib/icons';
 
 const stageSubhead: Record<(typeof journeyStages)[number], string> = {
-  UNDERSTAND: "Know where to win before you spend.",
-  BUILD: "Deploy AI systems that work in real operations.",
-  OPERATE: "Run and improve AI workflows as a managed capability.",
+  UNDERSTAND: 'Know where to win before you spend.',
+  BUILD: 'Deploy AI systems that work in real operations.',
+  OPERATE: 'Run and improve AI workflows as a managed capability.',
 };
 
 export function SolutionsPage() {
@@ -20,10 +20,14 @@ export function SolutionsPage() {
         </div>
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <span className="section-label">Solutions</span>
-          <h1 className="mt-4 text-4xl font-bold text-text sm:text-5xl">AI solutions organized by your journey stage.</h1>
+          <h1 className="mt-4 text-4xl font-bold text-text sm:text-5xl">
+            AI solutions organized by your journey stage.
+          </h1>
           <p className="mt-6 max-w-3xl text-lg text-text-secondary">
-            ClearForge follows a practical transformation path: <strong>UNDERSTAND</strong> where value is,
-            <strong> BUILD</strong> production systems, then <strong>OPERATE</strong> and optimize for compounding returns.
+            ClearForge follows a practical transformation path: <strong>UNDERSTAND</strong> where
+            value is,
+            <strong> BUILD</strong> production systems, then <strong>OPERATE</strong> and optimize
+            for compounding returns.
           </p>
         </div>
       </section>
@@ -31,7 +35,8 @@ export function SolutionsPage() {
       <section className="bg-surface py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mb-8 rounded-2xl border border-border bg-white p-7 text-center text-xl font-semibold text-text sm:text-2xl">
-            UNDERSTAND <span className="text-text-tertiary">→</span> BUILD <span className="text-text-tertiary">→</span> OPERATE
+            UNDERSTAND <span className="text-text-tertiary">→</span> BUILD{' '}
+            <span className="text-text-tertiary">→</span> OPERATE
           </div>
 
           <div className="space-y-10">
@@ -49,7 +54,10 @@ export function SolutionsPage() {
                     {items.map((solution) => {
                       const Icon = solutionIcons[solution.icon];
                       return (
-                        <article key={solution.slug} className="rounded-xl border border-border border-l-4 border-l-teal bg-surface p-6">
+                        <article
+                          key={solution.slug}
+                          className="rounded-xl border border-border border-l-4 border-l-teal bg-surface p-6"
+                        >
                           <Icon className="mb-3 h-8 w-8 text-teal" aria-hidden />
                           <h3 className="text-xl font-bold text-text">{solution.title}</h3>
                           <p className="mt-2 text-base text-teal">{solution.tagline}</p>
@@ -74,13 +82,19 @@ export function SolutionsPage() {
         <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">
           <h2 className="text-3xl font-bold text-white">Not sure where to start in the journey?</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
-            Use the AI Assessment to score readiness, benchmark your industry, and get a tailored recommendation.
+            Use the AI Assessment to score readiness, benchmark your industry, and get a tailored
+            recommendation.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
               <Link href="/assessment">Start AI Assessment</Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white hover:text-text" asChild>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-white/20 text-white hover:bg-white hover:text-text"
+              asChild
+            >
               <Link href="/contact">Book a Discovery Call</Link>
             </Button>
           </div>

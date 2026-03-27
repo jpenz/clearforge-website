@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from 'next/server';
 
 interface AdvisorInput {
   industry?: string;
@@ -12,7 +12,7 @@ interface AdvisorInput {
 }
 
 function normalize(value?: string): string {
-  return value?.trim() ?? "";
+  return value?.trim() ?? '';
 }
 
 function validateEmail(email: string): boolean {
@@ -26,35 +26,41 @@ function isHttpUrl(url: string): boolean {
 function suggestSolutions(challenge: string, industry: string): string[] {
   const lowerChallenge = challenge.toLowerCase();
   const lowerIndustry = industry.toLowerCase();
-  const picks = new Set<string>(["AI Strategy & Growth Diagnosis"]);
+  const picks = new Set<string>(['AI Strategy & Growth Diagnosis']);
 
   if (/(sales|pipeline|lead|marketing|revenue|growth)/.test(lowerChallenge)) {
-    picks.add("AI Marketing & Revenue Operations");
+    picks.add('AI Marketing & Revenue Operations');
   }
 
-  if (/(manual|workflow|operations|service|support|crm|data|prospect|throughput|planning)/.test(lowerChallenge)) {
-    picks.add("AI Agent Design & Build");
+  if (
+    /(manual|workflow|operations|service|support|crm|data|prospect|throughput|planning)/.test(
+      lowerChallenge,
+    )
+  ) {
+    picks.add('AI Agent Design & Build');
   }
 
   if (/(legacy|outdated|erp|migration|spreadsheet|fragmented|integration)/.test(lowerChallenge)) {
-    picks.add("Legacy System Modernization");
+    picks.add('Legacy System Modernization');
   }
 
-  if (/(governance|scale|security|compliance|maintenance|monitoring|adoption)/.test(lowerChallenge)) {
-    picks.add("Managed AI Operations");
+  if (
+    /(governance|scale|security|compliance|maintenance|monitoring|adoption)/.test(lowerChallenge)
+  ) {
+    picks.add('Managed AI Operations');
   }
 
-  if (lowerIndustry.includes("manufacturing") || lowerIndustry.includes("distribution")) {
-    picks.add("AI Agent Design & Build");
-    picks.add("Legacy System Modernization");
+  if (lowerIndustry.includes('manufacturing') || lowerIndustry.includes('distribution')) {
+    picks.add('AI Agent Design & Build');
+    picks.add('Legacy System Modernization');
   }
 
-  if (lowerIndustry.includes("financial") || lowerIndustry.includes("healthcare")) {
-    picks.add("Managed AI Operations");
+  if (lowerIndustry.includes('financial') || lowerIndustry.includes('healthcare')) {
+    picks.add('Managed AI Operations');
   }
 
   if (picks.size < 2) {
-    picks.add("AI Agent Design & Build");
+    picks.add('AI Agent Design & Build');
   }
 
   return Array.from(picks).slice(0, 3);
@@ -64,19 +70,25 @@ function suggestEngagement(challenge: string, role: string, suggestedSolutions: 
   const lowerChallenge = challenge.toLowerCase();
   const lowerRole = role.toLowerCase();
 
-  if (suggestedSolutions.includes("Legacy System Modernization") || /(legacy|outdated|integration)/.test(lowerChallenge)) {
-    return "Legacy modernization roadmap and AI pilot program (10 to 14 weeks)";
+  if (
+    suggestedSolutions.includes('Legacy System Modernization') ||
+    /(legacy|outdated|integration)/.test(lowerChallenge)
+  ) {
+    return 'Legacy modernization roadmap and AI pilot program (10 to 14 weeks)';
   }
 
-  if (suggestedSolutions.includes("AI Marketing & Revenue Operations") || /(revenue|pipeline|lead|growth)/.test(lowerChallenge)) {
-    return "Revenue operations acceleration engagement with AI strategy and execution (8 to 12 weeks)";
+  if (
+    suggestedSolutions.includes('AI Marketing & Revenue Operations') ||
+    /(revenue|pipeline|lead|growth)/.test(lowerChallenge)
+  ) {
+    return 'Revenue operations acceleration engagement with AI strategy and execution (8 to 12 weeks)';
   }
 
-  if (lowerRole.includes("ceo") || lowerRole.includes("owner") || lowerRole.includes("coo")) {
-    return "Executive AI strategy sprint followed by phased implementation planning (6 to 8 weeks)";
+  if (lowerRole.includes('ceo') || lowerRole.includes('owner') || lowerRole.includes('coo')) {
+    return 'Executive AI strategy sprint followed by phased implementation planning (6 to 8 weeks)';
   }
 
-  return "AI Strategy & Growth Diagnosis with one production AI workflow launch (8 to 10 weeks)";
+  return 'AI Strategy & Growth Diagnosis with one production AI workflow launch (8 to 10 weeks)';
 }
 
 function buildFallbackRecommendation(params: {
@@ -108,24 +120,24 @@ The best next move is a ${params.suggestedEngagement}. We should align on scope,
 async function fetchCompanyResearch(companyUrl: string): Promise<string> {
   const perplexityApiKey = process.env.PERPLEXITY_API_KEY;
   if (!perplexityApiKey) {
-    throw new Error("PERPLEXITY_API_KEY is not configured");
+    throw new Error('PERPLEXITY_API_KEY is not configured');
   }
 
-  const response = await fetch("https://api.perplexity.ai/chat/completions", {
-    method: "POST",
+  const response = await fetch('https://api.perplexity.ai/chat/completions', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${perplexityApiKey}`,
     },
     body: JSON.stringify({
-      model: "sonar",
+      model: 'sonar',
       messages: [
         {
-          role: "system",
-          content: "You are a business research analyst. Provide concise, factual research.",
+          role: 'system',
+          content: 'You are a business research analyst. Provide concise, factual research.',
         },
         {
-          role: "user",
+          role: 'user',
           content: `Research ${companyUrl}. In 300 words or less, summarize: 1) What the company does 2) Their industry and competitive position 3) Key challenges companies like them typically face with AI adoption 4) Recent news or developments if available 5) Market trends affecting their industry`,
         },
       ],
@@ -141,7 +153,7 @@ async function fetchCompanyResearch(companyUrl: string): Promise<string> {
   const content = result.choices?.[0]?.message?.content?.trim();
 
   if (!content) {
-    throw new Error("Perplexity returned an empty response");
+    throw new Error('Perplexity returned an empty response');
   }
 
   return content;
@@ -157,7 +169,7 @@ async function generateGroqRecommendation(params: {
 }): Promise<string> {
   const groqApiKey = process.env.GROQ_API_KEY;
   if (!groqApiKey) {
-    throw new Error("GROQ_API_KEY is not configured");
+    throw new Error('GROQ_API_KEY is not configured');
   }
 
   const systemPrompt = `You are a senior AI strategy consultant at ClearForge.ai writing a personalized strategic recommendation for a prospective client.
@@ -205,21 +217,21 @@ ${params.companyResearch}
 
 Write the strategic recommendation following the structure in your instructions.`;
 
-  const models = ["llama-3.3-70b-versatile", "llama-3.1-70b-versatile"];
+  const models = ['llama-3.3-70b-versatile', 'llama-3.1-70b-versatile'];
 
   for (const model of models) {
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${groqApiKey}`,
       },
       body: JSON.stringify({
         model,
         temperature: 0.4,
         messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userPrompt },
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt },
         ],
       }),
     });
@@ -234,13 +246,13 @@ Write the strategic recommendation following the structure in your instructions.
     const recommendation = result.choices?.[0]?.message?.content?.trim();
 
     if (recommendation) {
-      return recommendation.replace(/\u2014/g, "-");
+      return recommendation.replace(/\u2014/g, '-');
     }
 
     console.error(`Groq advisor response was empty for model ${model}`);
   }
 
-  throw new Error("Groq failed to produce a recommendation");
+  throw new Error('Groq failed to produce a recommendation');
 }
 
 export async function POST(req: NextRequest) {
@@ -256,25 +268,31 @@ export async function POST(req: NextRequest) {
     const company = normalize(body.company);
 
     if (!industry || !challenge || !role || !name || !email || !company) {
-      return NextResponse.json({ error: "Please complete all required fields." }, { status: 400 });
+      return NextResponse.json({ error: 'Please complete all required fields.' }, { status: 400 });
     }
 
     if (challenge.length < 20) {
-      return NextResponse.json({ error: "Please share at least 20 characters about your challenge." }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Please share at least 20 characters about your challenge.' },
+        { status: 400 },
+      );
     }
 
     if (!validateEmail(email)) {
-      return NextResponse.json({ error: "Please provide a valid work email." }, { status: 400 });
+      return NextResponse.json({ error: 'Please provide a valid work email.' }, { status: 400 });
     }
 
     if (companyUrl && !isHttpUrl(companyUrl)) {
-      return NextResponse.json({ error: "Company website must start with http:// or https://." }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Company website must start with http:// or https://.' },
+        { status: 400 },
+      );
     }
 
     const suggestedSolutions = suggestSolutions(challenge, industry);
     const suggestedEngagement = suggestEngagement(challenge, role, suggestedSolutions);
 
-    let companyResearch = "No company URL provided.";
+    let companyResearch = 'No company URL provided.';
     let hasResearch = false;
 
     if (companyUrl) {
@@ -282,7 +300,7 @@ export async function POST(req: NextRequest) {
         companyResearch = await fetchCompanyResearch(companyUrl);
         hasResearch = true;
       } catch (error) {
-        console.error("Perplexity company research failed", error);
+        console.error('Perplexity company research failed', error);
         companyResearch = `We could not retrieve live research for ${companyUrl}. This recommendation is based on your description and industry context.`;
       }
     }
@@ -299,7 +317,7 @@ export async function POST(req: NextRequest) {
         companyResearch,
       });
     } catch (error) {
-      console.error("Groq recommendation generation failed", error);
+      console.error('Groq recommendation generation failed', error);
       recommendation = buildFallbackRecommendation({
         company,
         industry,
@@ -315,7 +333,7 @@ export async function POST(req: NextRequest) {
       suggestedEngagement,
     });
   } catch (error) {
-    console.error("Advisor API error", error);
-    return NextResponse.json({ error: "Failed to process advisor request." }, { status: 500 });
+    console.error('Advisor API error', error);
+    return NextResponse.json({ error: 'Failed to process advisor request.' }, { status: 500 });
   }
 }

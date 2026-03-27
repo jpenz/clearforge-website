@@ -14,13 +14,13 @@
  *  - Edge cases — all 1s, all 5s, missing answers
  */
 
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
+  type Answers,
   calculateResults,
   getQuestionsForPillar,
   pillars,
   questions,
-  type Answers,
 } from '@/lib/scorecard';
 
 // ── Helpers ────────────────────────────────────────────────────────────────
@@ -80,7 +80,9 @@ describe('questions', () => {
   it('all questions reference a valid pillar key', () => {
     const validKeys = new Set(pillars.map((p) => p.key));
     for (const q of questions) {
-      expect(validKeys.has(q.pillar), `Question ${q.id} has invalid pillar: ${q.pillar}`).toBe(true);
+      expect(validKeys.has(q.pillar), `Question ${q.id} has invalid pillar: ${q.pillar}`).toBe(
+        true,
+      );
     }
   });
 
@@ -141,8 +143,10 @@ describe('calculateResults() — maturity level classification', () => {
   it('maturityLevel is always one of the 5 valid levels', () => {
     for (const score of [1, 2, 3, 4, 5]) {
       const result = calculateResults(uniformAnswers(score));
-      expect(VALID_MATURITY_LEVELS, `Score ${score} produced unexpected level: ${result.maturityLevel}`)
-        .toContain(result.maturityLevel);
+      expect(
+        VALID_MATURITY_LEVELS,
+        `Score ${score} produced unexpected level: ${result.maturityLevel}`,
+      ).toContain(result.maturityLevel);
     }
   });
 
@@ -150,7 +154,9 @@ describe('calculateResults() — maturity level classification', () => {
     const validSegments = ['A+', 'A', 'B', 'C', 'D'];
     for (const score of [1, 2, 3, 4, 5]) {
       const result = calculateResults(uniformAnswers(score));
-      expect(validSegments, `Unexpected segment "${result.segment}" for score ${score}`).toContain(result.segment);
+      expect(validSegments, `Unexpected segment "${result.segment}" for score ${score}`).toContain(
+        result.segment,
+      );
     }
   });
 

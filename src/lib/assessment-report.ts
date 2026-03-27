@@ -1,6 +1,6 @@
-import type { ScorecardResult } from "@/lib/scorecard";
+import type { ScorecardResult } from '@/lib/scorecard';
 
-export const ASSESSMENT_REPORT_STORAGE_KEY = "clearforge:assessment-report:v1";
+export const ASSESSMENT_REPORT_STORAGE_KEY = 'clearforge:assessment-report:v1';
 
 export interface AssessmentReportPayload {
   generatedAt: string;

@@ -1,12 +1,12 @@
-import { createMetadata, breadcrumbJsonLd } from "@/lib/metadata";
-import { AboutPage } from "@/components/pages/about-page";
+import { AboutPage } from '@/components/pages/about-page';
+import { breadcrumbJsonLd, createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: "About ClearForge | Strategy + AI Consulting and Engineering Team",
+  title: 'About ClearForge | Strategy + AI Consulting and Engineering Team',
   description:
-    "Meet ClearForge, a strategy + AI consulting firm that combines consulting rigor with engineering and managed AI operations.",
-  path: "/about",
-  keywords: ["AI strategy consulting firm", "consulting and engineering team"],
+    'Meet ClearForge, a strategy + AI consulting firm that combines consulting rigor with engineering and managed AI operations.',
+  path: '/about',
+  keywords: ['AI strategy consulting firm', 'consulting and engineering team'],
 });
 
 export default function Page() {
@@ -17,8 +17,8 @@ export default function Page() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbJsonLd([
-              { name: "Home", path: "/" },
-              { name: "About", path: "/about" },
+              { name: 'Home', path: '/' },
+              { name: 'About', path: '/about' },
             ]),
           ),
         }}

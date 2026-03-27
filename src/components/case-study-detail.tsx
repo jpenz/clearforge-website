@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { type CaseStudy } from "@/data/case-studies";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { motion } from 'framer-motion';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import type { CaseStudy } from '@/data/case-studies';
 
 interface Props {
   caseStudy: CaseStudy;
@@ -36,7 +36,7 @@ export function CaseStudyDetailClient({ caseStudy: cs }: Props) {
             </div>
             <h1
               className="text-3xl text-text-primary sm:text-4xl lg:text-5xl max-w-4xl"
-              style={{ fontFamily: "var(--font-heading)" }}
+              style={{ fontFamily: 'var(--font-heading)' }}
             >
               {cs.title}
             </h1>
@@ -65,9 +65,7 @@ export function CaseStudyDetailClient({ caseStudy: cs }: Props) {
       <section className="bg-bg-deep py-20 lg:py-28">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <p className="section-label">The Challenge</p>
-          <p className="mt-4 text-lg leading-relaxed text-text-secondary">
-            {cs.challenge}
-          </p>
+          <p className="mt-4 text-lg leading-relaxed text-text-secondary">{cs.challenge}</p>
         </div>
       </section>
 
@@ -86,11 +84,9 @@ export function CaseStudyDetailClient({ caseStudy: cs }: Props) {
                 className="flex items-start gap-4 border border-border-light p-6"
               >
                 <span className="metric text-xs mt-1 shrink-0 text-accent-dark">
-                  {String(i + 1).padStart(2, "0")}
+                  {String(i + 1).padStart(2, '0')}
                 </span>
-                <p className="text-base leading-relaxed text-text-on-light-sub">
-                  {item}
-                </p>
+                <p className="text-base leading-relaxed text-text-on-light-sub">{item}</p>
               </motion.div>
             ))}
           </div>
@@ -118,9 +114,7 @@ export function CaseStudyDetailClient({ caseStudy: cs }: Props) {
       <section className="bg-bg-primary py-20 lg:py-28">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <p className="section-label">The Scale</p>
-          <p className="mt-4 text-lg leading-relaxed text-text-secondary">
-            {cs.scale}
-          </p>
+          <p className="mt-4 text-lg leading-relaxed text-text-secondary">{cs.scale}</p>
         </div>
       </section>
 
@@ -129,7 +123,7 @@ export function CaseStudyDetailClient({ caseStudy: cs }: Props) {
         <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
           <h2
             className="text-3xl text-text-primary sm:text-4xl"
-            style={{ fontFamily: "var(--font-heading)" }}
+            style={{ fontFamily: 'var(--font-heading)' }}
           >
             Ready for results like these?
           </h2>

@@ -1,7 +1,7 @@
-import { notFound, redirect } from "next/navigation";
-import { createMetadata, breadcrumbJsonLd } from "@/lib/metadata";
-import { getCaseStudy, caseStudies } from "@/data/case-studies";
-import { CaseStudyDetailClient } from "@/components/case-study-detail";
+import { notFound, redirect } from 'next/navigation';
+import { CaseStudyDetailClient } from '@/components/case-study-detail';
+import { caseStudies, getCaseStudy } from '@/data/case-studies';
+import { breadcrumbJsonLd, createMetadata } from '@/lib/metadata';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -25,8 +25,8 @@ export async function generateMetadata({ params }: Props) {
 export default async function Page({ params }: Props) {
   const { slug } = await params;
   // industrial-manufacturer has its own dedicated page
-  if (slug === "industrial-manufacturer") {
-    redirect("/case-studies/industrial-manufacturer");
+  if (slug === 'industrial-manufacturer') {
+    redirect('/case-studies/industrial-manufacturer');
   }
   const cs = getCaseStudy(slug);
   if (!cs) notFound();
@@ -37,8 +37,8 @@ export default async function Page({ params }: Props) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbJsonLd([
-              { name: "Home", path: "/" },
-              { name: "Case Studies", path: "/case-studies" },
+              { name: 'Home', path: '/' },
+              { name: 'Case Studies', path: '/case-studies' },
               { name: cs.title, path: `/case-studies/${slug}` },
             ]),
           ),

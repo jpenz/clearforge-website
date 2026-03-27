@@ -1,40 +1,40 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { MobileNav } from "@/components/layout/mobile-nav";
-import { cn } from "@/lib/utils";
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { MobileNav } from '@/components/layout/mobile-nav';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 const navLinks = [
-  { href: "/services", label: "Services" },
-  { href: "/case-studies", label: "Case Studies" },
-  { href: "/assessment", label: "Assessment" },
-  { href: "/about", label: "About" },
+  { href: '/services', label: 'Services' },
+  { href: '/case-studies', label: 'Case Studies' },
+  { href: '/assessment', label: 'Assessment' },
+  { href: '/about', label: 'About' },
 ];
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", h, { passive: true });
-    return () => window.removeEventListener("scroll", h);
+    window.addEventListener('scroll', h, { passive: true });
+    return () => window.removeEventListener('scroll', h);
   }, []);
 
   return (
     <header
       className={cn(
-        "fixed left-0 right-0 top-0 z-50 transition-all duration-300",
+        'fixed left-0 right-0 top-0 z-50 transition-all duration-300',
         scrolled
-          ? "border-b border-border-subtle bg-bg-deep/95 backdrop-blur-xl"
-          : "bg-transparent"
+          ? 'border-b border-border-subtle bg-bg-deep/95 backdrop-blur-xl'
+          : 'bg-transparent',
       )}
     >
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-1">
           <span
             className="text-2xl tracking-tight text-text-primary"
-            style={{ fontFamily: "var(--font-heading)" }}
+            style={{ fontFamily: 'var(--font-heading)' }}
           >
             ClearForge
           </span>

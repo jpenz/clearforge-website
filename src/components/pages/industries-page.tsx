@@ -1,16 +1,16 @@
-import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { broadIndustries, deepIndustries } from "@/data/industries";
-import { industryIcons } from "@/lib/icons";
+import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { broadIndustries, deepIndustries } from '@/data/industries';
+import { industryIcons } from '@/lib/icons';
 
 const industryImages: Record<string, string> = {
-  "industrial-manufacturing": "/images/industry-manufacturing.png",
-  "private-equity": "/images/industry-private-equity.png",
-  "professional-services": "/images/industry-professional-services.png",
-  "home-commercial-services": "/images/industry-home-services.png",
-  "distribution": "/images/industry-distribution.png",
+  'industrial-manufacturing': '/images/industry-manufacturing.png',
+  'private-equity': '/images/industry-private-equity.png',
+  'professional-services': '/images/industry-professional-services.png',
+  'home-commercial-services': '/images/industry-home-services.png',
+  distribution: '/images/industry-distribution.png',
 };
 
 export function IndustriesPage() {
@@ -19,9 +19,12 @@ export function IndustriesPage() {
       <section className="bg-white py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <span className="section-label">Industries</span>
-          <h1 className="mt-4 text-4xl font-bold text-text sm:text-5xl">AI operating frameworks that travel across industries.</h1>
+          <h1 className="mt-4 text-4xl font-bold text-text sm:text-5xl">
+            AI operating frameworks that travel across industries.
+          </h1>
           <p className="mt-6 max-w-3xl text-lg text-text-secondary">
-            We apply the same strategy-to-operations model across sectors, with deepest execution experience in four verticals.
+            We apply the same strategy-to-operations model across sectors, with deepest execution
+            experience in four verticals.
           </p>
         </div>
       </section>
@@ -33,10 +36,18 @@ export function IndustriesPage() {
             {deepIndustries.map((industry) => {
               const Icon = industryIcons[industry.icon];
               return (
-                <article key={industry.slug} className="group relative rounded-xl border border-border overflow-hidden">
+                <article
+                  key={industry.slug}
+                  className="group relative rounded-xl border border-border overflow-hidden"
+                >
                   {industryImages[industry.slug] && (
                     <div className="relative h-44 overflow-hidden">
-                      <Image src={industryImages[industry.slug]} alt="" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                      <Image
+                        src={industryImages[industry.slug]}
+                        alt=""
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
                       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white" />
                     </div>
                   )}
@@ -59,7 +70,10 @@ export function IndustriesPage() {
             <h3 className="text-xl font-bold text-text">We also serve</h3>
             <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-4">
               {broadIndustries.map((industry) => (
-                <div key={industry} className="rounded-xl border border-border bg-surface p-6 text-sm font-medium text-text-secondary">
+                <div
+                  key={industry}
+                  className="rounded-xl border border-border bg-surface p-6 text-sm font-medium text-text-secondary"
+                >
                   {industry}
                 </div>
               ))}
@@ -70,8 +84,13 @@ export function IndustriesPage() {
 
       <section className="bg-navy py-20 lg:py-28">
         <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
-          <h2 className="text-3xl font-bold text-white">Want a recommendation mapped to your industry context?</h2>
-          <p className="mt-4 text-lg text-white/80">Use the assessment to get a tailored path across solutions, engagement model, and likely time-to-impact.</p>
+          <h2 className="text-3xl font-bold text-white">
+            Want a recommendation mapped to your industry context?
+          </h2>
+          <p className="mt-4 text-lg text-white/80">
+            Use the assessment to get a tailored path across solutions, engagement model, and likely
+            time-to-impact.
+          </p>
           <Button className="mt-8" size="lg" asChild>
             <Link href="/assessment">Start AI Assessment</Link>
           </Button>

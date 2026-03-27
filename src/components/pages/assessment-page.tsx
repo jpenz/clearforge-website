@@ -1,30 +1,46 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, BarChart3, Building2, Globe, Mail, User2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { MarkdownContent } from "@/components/markdown-content";
-import { ProgressBar } from "@/components/scorecard/progress-bar";
-import { QuestionCard } from "@/components/scorecard/question-card";
-import { getQuestionsForPillar, pillars, type Answers, type PillarKey, type ScorecardResult } from "@/lib/scorecard";
-import { ASSESSMENT_REPORT_STORAGE_KEY, type AssessmentReportPayload } from "@/lib/assessment-report";
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowLeft, ArrowRight, BarChart3, Building2, Globe, Mail, User2 } from 'lucide-react';
+import Link from 'next/link';
+import { useMemo, useState } from 'react';
+import { MarkdownContent } from '@/components/markdown-content';
+import { ProgressBar } from '@/components/scorecard/progress-bar';
+import { QuestionCard } from '@/components/scorecard/question-card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  ASSESSMENT_REPORT_STORAGE_KEY,
+  type AssessmentReportPayload,
+} from '@/lib/assessment-report';
+import {
+  type Answers,
+  getQuestionsForPillar,
+  type PillarKey,
+  pillars,
+  type ScorecardResult,
+} from '@/lib/scorecard';
 
 const industries = [
-  "Manufacturing",
-  "Professional Services",
-  "Financial Services",
-  "Healthcare",
-  "Distribution",
-  "Technology",
-  "PE Portfolio Company",
-  "Other",
+  'Manufacturing',
+  'Professional Services',
+  'Financial Services',
+  'Healthcare',
+  'Distribution',
+  'Technology',
+  'PE Portfolio Company',
+  'Other',
 ];
 
-const roles = ["CEO/Owner", "COO/Operations", "CTO/IT", "CMO/Marketing", "PE Operating Partner", "Other"];
+const roles = [
+  'CEO/Owner',
+  'COO/Operations',
+  'CTO/IT',
+  'CMO/Marketing',
+  'PE Operating Partner',
+  'Other',
+];
 
 interface AssessmentResult {
   generatedAt: string;
@@ -56,20 +72,20 @@ function isHttpUrl(url: string): boolean {
 }
 
 export function AssessmentPage() {
-  const [phase, setPhase] = useState<"questions" | "details" | "loading" | "results">("questions");
+  const [phase, setPhase] = useState<'questions' | 'details' | 'loading' | 'results'>('questions');
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [result, setResult] = useState<AssessmentResult | null>(null);
 
-  const [industry, setIndustry] = useState("");
-  const [challenge, setChallenge] = useState("");
-  const [companyUrl, setCompanyUrl] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [company, setCompany] = useState("");
-  const [role, setRole] = useState("");
-  const [phone, setPhone] = useState("");
+  const [industry, setIndustry] = useState('');
+  const [challenge, setChallenge] = useState('');
+  const [companyUrl, setCompanyUrl] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [company, setCompany] = useState('');
+  const [role, setRole] = useState('');
+  const [phone, setPhone] = useState('');
 
   const [processingIndex, setProcessingIndex] = useState(0);
 
@@ -83,7 +99,9 @@ export function AssessmentPage() {
       })
       .map((pillar) => pillar.key),
   );
-  const isCurrentStepComplete = currentQuestions.every((question) => answers[question.id] !== undefined);
+  const isCurrentStepComplete = currentQuestions.every(
+    (question) => answers[question.id] !== undefined,
+  );
 
   const challengeLength = challenge.trim().length;
   const challengeValid = challengeLength >= 20;
@@ -91,15 +109,21 @@ export function AssessmentPage() {
   const companyUrlTrimmed = companyUrl.trim();
   const companyUrlValid = !companyUrlTrimmed || isHttpUrl(companyUrlTrimmed);
   const detailsValid =
-    !!industry.trim() && challengeValid && !!name.trim() && !!company.trim() && !!role.trim() && emailValid && companyUrlValid;
+    !!industry.trim() &&
+    challengeValid &&
+    !!name.trim() &&
+    !!company.trim() &&
+    !!role.trim() &&
+    emailValid &&
+    companyUrlValid;
 
   const processingSteps = useMemo(
     () => [
-      "Scoring AI readiness across your operating pillars...",
-      "Researching your company and market context...",
-      "Mapping best-in-class patterns for your industry...",
-      "Building your leadership strategy report...",
-      "Preparing branded deliverables and email copy...",
+      'Scoring AI readiness across your operating pillars...',
+      'Researching your company and market context...',
+      'Mapping best-in-class patterns for your industry...',
+      'Building your leadership strategy report...',
+      'Preparing branded deliverables and email copy...',
     ],
     [],
   );
@@ -114,7 +138,7 @@ export function AssessmentPage() {
       return;
     }
 
-    setPhase("details");
+    setPhase('details');
   }
 
   function goPreviousQuestionStep() {
@@ -128,8 +152,8 @@ export function AssessmentPage() {
       return;
     }
 
-    setPhase("loading");
-    setError("");
+    setPhase('loading');
+    setError('');
     setProcessingIndex(0);
 
     const timer = window.setInterval(() => {
@@ -137,9 +161,9 @@ export function AssessmentPage() {
     }, 2000);
 
     try {
-      const response = await fetch("/api/assessment", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/assessment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           answers,
           industry: industry.trim(),
@@ -155,16 +179,16 @@ export function AssessmentPage() {
 
       const data = (await response.json()) as AssessmentResult & { error?: string };
       if (!response.ok) {
-        setError(data.error || "Failed to generate your assessment.");
-        setPhase("details");
+        setError(data.error || 'Failed to generate your assessment.');
+        setPhase('details');
         return;
       }
 
       setResult(data);
-      setPhase("results");
+      setPhase('results');
     } catch {
-      setError("Unable to process your assessment right now.");
-      setPhase("details");
+      setError('Unable to process your assessment right now.');
+      setPhase('details');
     } finally {
       window.clearInterval(timer);
     }
@@ -195,9 +219,9 @@ export function AssessmentPage() {
 
     window.localStorage.setItem(ASSESSMENT_REPORT_STORAGE_KEY, JSON.stringify(payload));
 
-    const reportWindow = window.open("/assessment/report", "_blank", "noopener,noreferrer");
+    const reportWindow = window.open('/assessment/report', '_blank', 'noopener,noreferrer');
     if (!reportWindow) {
-      window.location.href = "/assessment/report";
+      window.location.href = '/assessment/report';
     }
   }
 
@@ -209,14 +233,15 @@ export function AssessmentPage() {
           One assessment. One strategy. One execution path.
         </h1>
         <p className="mt-4 max-w-3xl text-lg text-text-secondary">
-          We combine readiness scoring, company research, industry best-practice benchmarking, and a sales-ready strategy report in a
-          single workflow.
+          We combine readiness scoring, company research, industry best-practice benchmarking, and a
+          sales-ready strategy report in a single workflow.
         </p>
         <p className="mt-3 max-w-3xl text-base text-text-muted">
-          We start with your real bottleneck in your own words, then translate it into an execution plan leadership can act on.
+          We start with your real bottleneck in your own words, then translate it into an execution
+          plan leadership can act on.
         </p>
 
-        {phase === "questions" && (
+        {phase === 'questions' && (
           <div className="mt-10 rounded-xl border border-border-subtle bg-bg-surface p-6 sm:p-8">
             <div className="mb-6 flex items-center gap-4 text-sm text-text-muted">
               <span className="inline-flex items-center gap-1.5">
@@ -240,32 +265,49 @@ export function AssessmentPage() {
                 transition={{ duration: 0.25 }}
               >
                 {currentQuestions.map((question, index) => (
-                  <QuestionCard key={question.id} question={question} value={answers[question.id]} onChange={handleAnswer} index={index} />
+                  <QuestionCard
+                    key={question.id}
+                    question={question}
+                    value={answers[question.id]}
+                    onChange={handleAnswer}
+                    index={index}
+                  />
                 ))}
               </motion.div>
             </AnimatePresence>
 
             <div className="mt-8 flex items-center justify-between">
-              <Button variant="ghost" onClick={goPreviousQuestionStep} disabled={currentStep === 0} className="gap-2">
+              <Button
+                variant="ghost"
+                onClick={goPreviousQuestionStep}
+                disabled={currentStep === 0}
+                className="gap-2"
+              >
                 <ArrowLeft className="h-4 w-4" />
                 Previous
               </Button>
-              <Button onClick={goNextQuestionStep} disabled={!isCurrentStepComplete} className="gap-2">
-                {currentStep === pillars.length - 1 ? "Continue to business context" : "Next"}
+              <Button
+                onClick={goNextQuestionStep}
+                disabled={!isCurrentStepComplete}
+                className="gap-2"
+              >
+                {currentStep === pillars.length - 1 ? 'Continue to business context' : 'Next'}
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
           </div>
         )}
 
-        {phase === "details" && (
+        {phase === 'details' && (
           <div className="mt-10 rounded-xl border border-border-subtle bg-bg-surface p-6 sm:p-8">
             <h2 className="text-2xl font-bold text-text-primary">Add your business context</h2>
             <p className="mt-2 text-text-secondary">
-              We use this to personalize the report and benchmark to your exact operating environment.
+              We use this to personalize the report and benchmark to your exact operating
+              environment.
             </p>
             <p className="mt-1 text-sm text-text-muted">
-              Use plain language in the pain-point field. We will mirror your words in the strategy report.
+              Use plain language in the pain-point field. We will mirror your words in the strategy
+              report.
             </p>
 
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -302,26 +344,42 @@ export function AssessmentPage() {
               </div>
 
               <div className="sm:col-span-2">
-                <label className="text-sm font-medium text-text-secondary">Biggest pain point AI should solve *</label>
+                <label className="text-sm font-medium text-text-secondary">
+                  Biggest pain point AI should solve *
+                </label>
                 <Textarea
                   value={challenge}
                   onChange={(event) => setChallenge(event.target.value)}
                   placeholder="Use your own words. Example: We keep running pilots, but nothing gets adopted by operations."
                   className="mt-2 min-h-[140px]"
                 />
-                <p className={`mt-2 text-sm ${challengeValid ? "text-text-muted" : "text-accent-dark"}`}>
+                <p
+                  className={`mt-2 text-sm ${challengeValid ? 'text-text-muted' : 'text-accent-dark'}`}
+                >
                   {challengeLength}/20 minimum characters
                 </p>
               </div>
 
               <div>
                 <label className="text-sm font-medium text-text-secondary">Name *</label>
-                <Input value={name} onChange={(event) => setName(event.target.value)} placeholder="Jane Smith" className="mt-2" />
+                <Input
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                  placeholder="Jane Smith"
+                  className="mt-2"
+                />
               </div>
               <div>
                 <label className="text-sm font-medium text-text-secondary">Work email *</label>
-                <Input value={email} onChange={(event) => setEmail(event.target.value)} placeholder="jane@company.com" className="mt-2" />
-                {!!email.trim() && !emailValid && <p className="mt-2 text-sm text-error">Please enter a valid email address.</p>}
+                <Input
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder="jane@company.com"
+                  className="mt-2"
+                />
+                {!!email.trim() && !emailValid && (
+                  <p className="mt-2 text-sm text-error">Please enter a valid email address.</p>
+                )}
               </div>
 
               <div>
@@ -335,25 +393,36 @@ export function AssessmentPage() {
               </div>
               <div>
                 <label className="text-sm font-medium text-text-secondary">Phone (optional)</label>
-                <Input value={phone} onChange={(event) => setPhone(event.target.value)} placeholder="(555) 123-4567" className="mt-2" />
+                <Input
+                  value={phone}
+                  onChange={(event) => setPhone(event.target.value)}
+                  placeholder="(555) 123-4567"
+                  className="mt-2"
+                />
               </div>
 
               <div className="sm:col-span-2">
-                <label className="text-sm font-medium text-text-secondary">Company website (recommended)</label>
+                <label className="text-sm font-medium text-text-secondary">
+                  Company website (recommended)
+                </label>
                 <Input
                   value={companyUrl}
                   onChange={(event) => setCompanyUrl(event.target.value)}
                   placeholder="https://yourcompany.com"
                   className="mt-2"
                 />
-                {!companyUrlValid && <p className="mt-2 text-sm text-error">Use a full URL starting with http:// or https://.</p>}
+                {!companyUrlValid && (
+                  <p className="mt-2 text-sm text-error">
+                    Use a full URL starting with http:// or https://.
+                  </p>
+                )}
               </div>
             </div>
 
             {error && <p className="mt-4 text-sm text-error">{error}</p>}
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Button variant="ghost" onClick={() => setPhase("questions")} className="gap-2">
+              <Button variant="ghost" onClick={() => setPhase('questions')} className="gap-2">
                 <ArrowLeft className="h-4 w-4" />
                 Back to questions
               </Button>
@@ -365,10 +434,15 @@ export function AssessmentPage() {
           </div>
         )}
 
-        {phase === "loading" && (
+        {phase === 'loading' && (
           <div className="mt-10 rounded-xl border border-border-subtle bg-bg-surface p-6 sm:p-8">
-            <h2 className="text-2xl font-bold text-text-primary">Building your full assessment...</h2>
-            <p className="mt-2 text-text-secondary">This includes scoring, company research, industry benchmarks, and your strategy report.</p>
+            <h2 className="text-2xl font-bold text-text-primary">
+              Building your full assessment...
+            </h2>
+            <p className="mt-2 text-text-secondary">
+              This includes scoring, company research, industry benchmarks, and your strategy
+              report.
+            </p>
 
             <div className="mt-6 space-y-3">
               {processingSteps.map((step, index) => {
@@ -381,19 +455,23 @@ export function AssessmentPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.08, duration: 0.35 }}
                     className={`flex items-center gap-3 rounded-lg border px-4 py-3 transition-all duration-500 ${
-                      isDone || isActive ? "border-accent/30 bg-accent/10" : "border-border-subtle bg-bg-primary"
+                      isDone || isActive
+                        ? 'border-accent/30 bg-accent/10'
+                        : 'border-border-subtle bg-bg-primary'
                     }`}
                   >
                     <span
                       className={`h-2.5 w-2.5 rounded-full transition-colors duration-500 ${
                         isDone
-                          ? "bg-accent"
+                          ? 'bg-accent'
                           : isActive
-                            ? "bg-accent animate-[pulse-glow_1.8s_ease-in-out_infinite]"
-                            : "bg-border-default"
+                            ? 'bg-accent animate-[pulse-glow_1.8s_ease-in-out_infinite]'
+                            : 'bg-border-default'
                       }`}
                     />
-                    <p className={`text-sm transition-colors duration-500 ${isDone || isActive ? "text-text-primary" : "text-text-muted"}`}>
+                    <p
+                      className={`text-sm transition-colors duration-500 ${isDone || isActive ? 'text-text-primary' : 'text-text-muted'}`}
+                    >
                       {step}
                     </p>
                     {isActive && (
@@ -421,7 +499,7 @@ export function AssessmentPage() {
           </div>
         )}
 
-        {phase === "results" && result && (
+        {phase === 'results' && result && (
           <div className="mt-10 space-y-6">
             <div className="rounded-xl border border-border-subtle bg-bg-primary p-6 sm:p-8">
               <h2 className="text-2xl font-bold text-text-primary">Your readiness score</h2>
@@ -432,8 +510,12 @@ export function AssessmentPage() {
                 </article>
                 <article className="rounded-lg border border-border-subtle bg-bg-surface p-4 sm:col-span-3">
                   <p className="text-sm text-text-muted">Maturity level</p>
-                  <p className="mt-2 text-lg font-semibold text-text-primary">{result.scorecard.maturityLevel}</p>
-                  <p className="mt-1 text-sm text-text-secondary">{result.scorecard.maturityDescription}</p>
+                  <p className="mt-2 text-lg font-semibold text-text-primary">
+                    {result.scorecard.maturityLevel}
+                  </p>
+                  <p className="mt-1 text-sm text-text-secondary">
+                    {result.scorecard.maturityDescription}
+                  </p>
                 </article>
               </div>
             </div>
@@ -448,11 +530,17 @@ export function AssessmentPage() {
             <div className="grid gap-6 lg:grid-cols-2">
               <div className="rounded-xl border border-border-subtle bg-bg-primary p-6">
                 <h3 className="text-xl font-bold text-text-primary">Company research snapshot</h3>
-                <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-text-secondary">{result.companyResearch}</p>
+                <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-text-secondary">
+                  {result.companyResearch}
+                </p>
               </div>
               <div className="rounded-xl border border-border-subtle bg-bg-primary p-6">
-                <h3 className="text-xl font-bold text-text-primary">Best-in-class in your industry</h3>
-                <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-text-secondary">{result.industryBestInClass}</p>
+                <h3 className="text-xl font-bold text-text-primary">
+                  Best-in-class in your industry
+                </h3>
+                <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-text-secondary">
+                  {result.industryBestInClass}
+                </p>
               </div>
             </div>
 
@@ -470,8 +558,8 @@ export function AssessmentPage() {
               <div className="mt-6 rounded-lg border border-accent/30 bg-accent/5 p-4">
                 <p className="text-sm text-text-secondary">
                   {result.emailSent
-                    ? "We emailed this report to your inbox with ClearForge branding and contact details."
-                    : "Email delivery is not configured in this environment. You can still download the report below."}
+                    ? 'We emailed this report to your inbox with ClearForge branding and contact details.'
+                    : 'Email delivery is not configured in this environment. You can still download the report below.'}
                 </p>
               </div>
 

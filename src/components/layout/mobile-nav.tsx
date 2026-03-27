@@ -1,11 +1,13 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, X } from 'lucide-react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
 
-interface MobileNavProps { links: { href: string; label: string }[] }
+interface MobileNavProps {
+  links: { href: string; label: string }[];
+}
 
 export function MobileNav({ links }: MobileNavProps) {
   const [open, setOpen] = useState(false);
@@ -13,19 +15,22 @@ export function MobileNav({ links }: MobileNavProps) {
   // Prevent body scroll when menu is open
   useEffect(() => {
     if (open) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     }
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [open]);
 
   return (
     <>
       <button
+        type="button"
         onClick={() => setOpen(!open)}
         className="inline-flex h-11 w-11 items-center justify-center rounded-md text-text-muted hover:text-text-primary active:bg-white/5"
-        aria-label={open ? "Close menu" : "Open menu"}
+        aria-label={open ? 'Close menu' : 'Open menu'}
         aria-expanded={open}
       >
         {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}

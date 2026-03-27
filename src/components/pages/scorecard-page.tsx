@@ -1,11 +1,17 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { pillars, questions, scaleLabels, type Answers, getQuestionsForPillar } from "@/lib/scorecard";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import {
+  type Answers,
+  getQuestionsForPillar,
+  pillars,
+  questions,
+  scaleLabels,
+} from '@/lib/scorecard';
 
 export function ScorecardPage() {
   const router = useRouter();
@@ -26,8 +32,8 @@ export function ScorecardPage() {
 
   function handleNext() {
     if (isLast) {
-      sessionStorage.setItem("scorecard-answers", JSON.stringify(answers));
-      router.push("/scorecard/results");
+      sessionStorage.setItem('scorecard-answers', JSON.stringify(answers));
+      router.push('/scorecard/results');
     } else {
       setCurrentPillar((prev) => prev + 1);
     }
@@ -49,13 +55,13 @@ export function ScorecardPage() {
             <span className="section-label">AI Maturity Scorecard</span>
             <h1
               className="mt-4 text-3xl text-text-primary sm:text-4xl"
-              style={{ fontFamily: "var(--font-heading)" }}
+              style={{ fontFamily: 'var(--font-heading)' }}
             >
               How ready is your business for AI agents?
             </h1>
             <p className="mt-4 text-lg text-text-secondary">
-              20 questions across 5 pillars. Takes about 5 minutes.
-              Get your AI maturity score, pillar breakdown, and a personalized roadmap.
+              20 questions across 5 pillars. Takes about 5 minutes. Get your AI maturity score,
+              pillar breakdown, and a personalized roadmap.
             </p>
           </motion.div>
 
@@ -63,7 +69,9 @@ export function ScorecardPage() {
           <div className="mt-10">
             <div className="flex items-center justify-between mb-2">
               <span className="text-base font-medium text-text-secondary">{pillar.name}</span>
-              <span className="metric text-sm">{answeredCount}/{totalQuestions}</span>
+              <span className="metric text-sm">
+                {answeredCount}/{totalQuestions}
+              </span>
             </div>
             <div className="h-1 bg-border-subtle overflow-hidden">
               <div
@@ -77,7 +85,11 @@ export function ScorecardPage() {
                   key={p.key}
                   onClick={() => setCurrentPillar(i)}
                   className={`flex-1 h-1.5 transition-colors ${
-                    i === currentPillar ? "bg-accent" : i < currentPillar ? "bg-accent/40" : "bg-border-subtle"
+                    i === currentPillar
+                      ? 'bg-accent'
+                      : i < currentPillar
+                        ? 'bg-accent/40'
+                        : 'bg-border-subtle'
                   }`}
                 />
               ))}
@@ -95,7 +107,12 @@ export function ScorecardPage() {
               className="mt-10 space-y-6"
             >
               <div className="border border-border-subtle bg-bg-surface p-4">
-                <h3 className="text-sm font-bold text-text-primary" style={{ fontFamily: "var(--font-heading)" }}>{pillar.name}</h3>
+                <h3
+                  className="text-sm font-bold text-text-primary"
+                  style={{ fontFamily: 'var(--font-heading)' }}
+                >
+                  {pillar.name}
+                </h3>
                 <p className="text-base text-text-muted mt-1">{pillar.description}</p>
               </div>
 
@@ -112,8 +129,8 @@ export function ScorecardPage() {
                           onClick={() => handleAnswer(q.id, value)}
                           className={`flex-1 border px-2 py-2.5 text-xs font-medium transition-all ${
                             isSelected
-                              ? "border-accent bg-accent text-white"
-                              : "border-border-subtle text-text-muted hover:border-accent hover:text-accent"
+                              ? 'border-accent bg-accent text-white'
+                              : 'border-border-subtle text-text-muted hover:border-accent hover:text-accent'
                           }`}
                         >
                           <span className="hidden sm:inline">{label}</span>
@@ -129,18 +146,11 @@ export function ScorecardPage() {
 
           {/* Navigation */}
           <div className="mt-10 flex items-center justify-between">
-            <Button
-              variant="ghost"
-              onClick={handleBack}
-              disabled={currentPillar === 0}
-            >
+            <Button variant="ghost" onClick={handleBack} disabled={currentPillar === 0}>
               <ArrowLeft className="mr-2 h-4 w-4" /> Previous
             </Button>
-            <Button
-              onClick={handleNext}
-              disabled={!canAdvance}
-            >
-              {isLast ? "See My Results" : "Next Pillar"} <ArrowRight className="ml-2 h-4 w-4" />
+            <Button onClick={handleNext} disabled={!canAdvance}>
+              {isLast ? 'See My Results' : 'Next Pillar'} <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </div>

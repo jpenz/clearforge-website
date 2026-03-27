@@ -1,19 +1,19 @@
-import type { Metadata } from "next";
-import { getServiceBySlug } from "@/data/services";
-import { ServiceDetail } from "@/components/service-detail";
-import { serviceJsonLd } from "@/lib/metadata";
-import { notFound } from "next/navigation";
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { ServiceDetail } from '@/components/service-detail';
+import { getServiceBySlug } from '@/data/services';
+import { serviceJsonLd } from '@/lib/metadata';
 
-const service = getServiceBySlug("performance-improvement")!;
+const service = getServiceBySlug('performance-improvement')!;
 
 export const metadata: Metadata = {
-  title: "Performance Improvement",
+  title: 'Performance Improvement',
   description:
-    "Process mining, operational diagnostics, and custom automation to cut waste and drive measurable savings.",
+    'Process mining, operational diagnostics, and custom automation to cut waste and drive measurable savings.',
   openGraph: {
-    title: "Performance Improvement — ClearForge.ai",
+    title: 'Performance Improvement — ClearForge.ai',
     description:
-      "Process mining, operational diagnostics, and custom automation to cut waste and drive measurable savings.",
+      'Process mining, operational diagnostics, and custom automation to cut waste and drive measurable savings.',
   },
 };
 

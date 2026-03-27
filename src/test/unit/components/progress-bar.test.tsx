@@ -6,10 +6,10 @@
  * correct step highlighting and ARIA attributes matter for accessibility.
  */
 
-import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
 import { ProgressBar } from '@/components/scorecard/progress-bar';
-import { pillars, type PillarKey } from '@/lib/scorecard';
+import { type PillarKey, pillars } from '@/lib/scorecard';
 
 describe('ProgressBar', () => {
   it('renders without crashing', () => {
@@ -30,7 +30,9 @@ describe('ProgressBar', () => {
   });
 
   it('has a progressbar role with correct aria values', () => {
-    render(<ProgressBar currentStep={2} completedSteps={new Set<PillarKey>(['data', 'workforce'])} />);
+    render(
+      <ProgressBar currentStep={2} completedSteps={new Set<PillarKey>(['data', 'workforce'])} />,
+    );
     const progressbar = screen.getByRole('progressbar');
     expect(progressbar).toBeInTheDocument();
     expect(progressbar).toHaveAttribute('aria-valuemin', '0');
@@ -43,7 +45,12 @@ describe('ProgressBar', () => {
     );
     const step0Value = Number(screen.getByRole('progressbar').getAttribute('aria-valuenow'));
 
-    rerender(<ProgressBar currentStep={3} completedSteps={new Set<PillarKey>(['data', 'workforce', 'process'])} />);
+    rerender(
+      <ProgressBar
+        currentStep={3}
+        completedSteps={new Set<PillarKey>(['data', 'workforce', 'process'])}
+      />,
+    );
     const step3Value = Number(screen.getByRole('progressbar').getAttribute('aria-valuenow'));
 
     expect(step3Value).toBeGreaterThan(step0Value);

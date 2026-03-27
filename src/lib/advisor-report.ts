@@ -1,4 +1,4 @@
-export const ADVISOR_REPORT_STORAGE_KEY = "clearforge:advisor-report:v1";
+export const ADVISOR_REPORT_STORAGE_KEY = 'clearforge:advisor-report:v1';
 
 export interface AdvisorReportPayload {
   generatedAt: string;

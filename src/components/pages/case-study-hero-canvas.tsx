@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useRef, useEffect, useCallback } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useCallback, useEffect, useRef } from 'react';
 
-if (typeof window !== "undefined") {
+if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
@@ -138,7 +138,7 @@ export function CaseStudyHeroCanvas() {
 
         const isHotspot = n === 0; // first node in each cluster is a hotspot
         // Hotspot activates based on cluster angle (simulating scan sweep)
-        const hotspotDelay = (c / numClusters);
+        const hotspotDelay = c / numClusters;
 
         nodes.push({
           x: sc.x + Math.cos(siloAngle) * siloDist,
@@ -166,7 +166,8 @@ export function CaseStudyHeroCanvas() {
     const agentCount = isMobile ? 6 : NUM_AGENTS;
     for (let a = 0; a < agentCount; a++) {
       const fromCluster = Math.floor(Math.random() * numClusters);
-      const toCluster = (fromCluster + 1 + Math.floor(Math.random() * (numClusters - 1))) % numClusters;
+      const toCluster =
+        (fromCluster + 1 + Math.floor(Math.random() * (numClusters - 1))) % numClusters;
       agents.push({
         fromIdx: fromCluster * nodesPerCluster,
         toIdx: toCluster * nodesPerCluster,
@@ -195,7 +196,7 @@ export function CaseStudyHeroCanvas() {
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     sizeRef.current = { width, height };
@@ -211,7 +212,7 @@ export function CaseStudyHeroCanvas() {
 
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     const { width, height } = sizeRef.current;
@@ -253,8 +254,13 @@ export function CaseStudyHeroCanvas() {
 
       // Ambient drift (subtle)
       const driftScale = lerp(1.0, 0.3, networkBlend);
-      const driftX = Math.sin(time * node.driftSpeed + node.driftPhase) * node.driftAmp * driftScale;
-      const driftY = Math.cos(time * node.driftSpeed * 0.7 + node.driftPhase + 1.5) * node.driftAmp * 0.6 * driftScale;
+      const driftX =
+        Math.sin(time * node.driftSpeed + node.driftPhase) * node.driftAmp * driftScale;
+      const driftY =
+        Math.cos(time * node.driftSpeed * 0.7 + node.driftPhase + 1.5) *
+        node.driftAmp *
+        0.6 *
+        driftScale;
 
       // Blend between silo and network positions
       const t = easeInOut(networkBlend);
@@ -266,7 +272,10 @@ export function CaseStudyHeroCanvas() {
     }
 
     // ── Draw intra-cluster connections (always visible, dim in silo state) ──
-    const nodesPerCluster = nodes.length > 0 ? Math.round(nodes.length / (new Set(nodes.map(n => n.cluster))).size) : NODES_PER_CLUSTER;
+    const nodesPerCluster =
+      nodes.length > 0
+        ? Math.round(nodes.length / new Set(nodes.map((n) => n.cluster)).size)
+        : NODES_PER_CLUSTER;
 
     for (let i = 0; i < nodes.length; i++) {
       for (let j = i + 1; j < nodes.length; j++) {
@@ -308,12 +317,12 @@ export function CaseStudyHeroCanvas() {
     // ── Draw hub-to-cluster connections (build phase+) ──
     if (buildPhase > 0) {
       const hubAlpha = easeInOut(buildPhase);
-      const uniqueClusters = [...new Set(nodes.map(n => n.cluster))];
+      const uniqueClusters = [...new Set(nodes.map((n) => n.cluster))];
 
       for (const c of uniqueClusters) {
-        const clusterNodes = nodes.filter(n => n.cluster === c);
+        const clusterNodes = nodes.filter((n) => n.cluster === c);
         if (clusterNodes.length === 0) continue;
-        const hotspot = clusterNodes.find(n => n.isHotspot) || clusterNodes[0];
+        const hotspot = clusterNodes.find((n) => n.isHotspot) || clusterNodes[0];
 
         // Line from hub to cluster hotspot
         const d = dist(hub.x, hub.y, hotspot.x, hotspot.y);
@@ -382,7 +391,11 @@ export function CaseStudyHeroCanvas() {
       } else if (buildPhase > 0) {
         // All nodes brighten during build phase
         nodeOpacity = lerp(node.opacity, node.opacity + 0.3, buildPhase);
-        color = { r: lerp(TEAL_DIM.r, TEAL.r, buildPhase * 0.5), g: lerp(TEAL_DIM.g, TEAL.g, buildPhase * 0.5), b: lerp(TEAL_DIM.b, TEAL.b, buildPhase * 0.5) };
+        color = {
+          r: lerp(TEAL_DIM.r, TEAL.r, buildPhase * 0.5),
+          g: lerp(TEAL_DIM.g, TEAL.g, buildPhase * 0.5),
+          b: lerp(TEAL_DIM.b, TEAL.b, buildPhase * 0.5),
+        };
       }
 
       // Growth phase: everything gets brighter
@@ -464,7 +477,7 @@ export function CaseStudyHeroCanvas() {
         if (agent.progress >= 1) {
           agent.progress = 0;
           // Reassign random route
-          const numClusters = new Set(nodes.map(n => n.cluster)).size;
+          const numClusters = new Set(nodes.map((n) => n.cluster)).size;
           const nodesPerC = Math.round(nodes.length / numClusters);
           if (agent.isHubAgent) {
             // Hub to random cluster
@@ -473,7 +486,8 @@ export function CaseStudyHeroCanvas() {
             agent.toIdx = targetCluster * nodesPerC;
           } else {
             const fromCluster = Math.floor(Math.random() * numClusters);
-            const toCluster = (fromCluster + 1 + Math.floor(Math.random() * (numClusters - 1))) % numClusters;
+            const toCluster =
+              (fromCluster + 1 + Math.floor(Math.random() * (numClusters - 1))) % numClusters;
             agent.fromIdx = fromCluster * nodesPerC;
             agent.toIdx = toCluster * nodesPerC;
           }
@@ -543,11 +557,11 @@ export function CaseStudyHeroCanvas() {
       const isMobile = width < 768;
 
       // Floating metrics near hotspots
-      const metrics = ["1,181", "99.8%", "32x", "631+"];
-      const hotspots = nodes.filter(n => n.isHotspot).slice(0, 4);
+      const metrics = ['1,181', '99.8%', '32x', '631+'];
+      const hotspots = nodes.filter((n) => n.isHotspot).slice(0, 4);
 
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
 
       for (let m = 0; m < Math.min(metrics.length, hotspots.length); m++) {
         const hs = hotspots[m];
@@ -562,11 +576,15 @@ export function CaseStudyHeroCanvas() {
 
     // ── Radial vignette ──
     const gradient = ctx.createRadialGradient(
-      width / 2, height / 2, Math.min(width, height) * 0.15,
-      width / 2, height / 2, Math.max(width, height) * 0.65
+      width / 2,
+      height / 2,
+      Math.min(width, height) * 0.15,
+      width / 2,
+      height / 2,
+      Math.max(width, height) * 0.65,
     );
-    gradient.addColorStop(0, "rgba(6, 11, 20, 0)");
-    gradient.addColorStop(1, "rgba(6, 11, 20, 0.5)");
+    gradient.addColorStop(0, 'rgba(6, 11, 20, 0)');
+    gradient.addColorStop(1, 'rgba(6, 11, 20, 0.5)');
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, height);
 
@@ -576,27 +594,27 @@ export function CaseStudyHeroCanvas() {
   // ── ScrollTrigger ──
   useGSAP(
     () => {
-      if (typeof window === "undefined") return;
+      if (typeof window === 'undefined') return;
       const container = containerRef.current;
       if (!container) return;
 
       gsap.to(progressRef.current, {
         value: 1,
-        ease: "none",
+        ease: 'none',
         scrollTrigger: {
           trigger: container,
-          start: "top top",
-          end: "bottom top",
+          start: 'top top',
+          end: 'bottom top',
           scrub: 0.5,
         },
       });
     },
-    { scope: containerRef, dependencies: [] }
+    { scope: containerRef, dependencies: [] },
   );
 
   // ── Lifecycle ──
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
 
     handleResize();
     lastTimeRef.current = performance.now();
@@ -607,18 +625,18 @@ export function CaseStudyHeroCanvas() {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(handleResize, 150);
     };
-    window.addEventListener("resize", onResize);
+    window.addEventListener('resize', onResize);
 
     const onVisibility = () => {
       isVisibleRef.current = !document.hidden;
       if (!document.hidden) lastTimeRef.current = performance.now();
     };
-    document.addEventListener("visibilitychange", onVisibility);
+    document.addEventListener('visibilitychange', onVisibility);
 
     return () => {
       cancelAnimationFrame(animFrameRef.current);
-      window.removeEventListener("resize", onResize);
-      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener('resize', onResize);
+      document.removeEventListener('visibilitychange', onVisibility);
       clearTimeout(resizeTimer);
     };
   }, [handleResize, render]);
@@ -629,10 +647,7 @@ export function CaseStudyHeroCanvas() {
       className="absolute inset-0 overflow-hidden pointer-events-none"
       aria-hidden="true"
     >
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full"
-      />
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
     </div>
   );
 }

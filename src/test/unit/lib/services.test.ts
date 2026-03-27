@@ -6,8 +6,8 @@
  * If pricing is missing, the contact form sends incomplete context.
  */
 
-import { describe, it, expect } from 'vitest';
-import { services, type Service } from '@/data/services';
+import { describe, expect, it } from 'vitest';
+import { type Service, services } from '@/data/services';
 
 describe('services data', () => {
   it('exports exactly 4 services (the Clearforge product suite)', () => {
@@ -54,13 +54,19 @@ describe('services data', () => {
 
   it('every service has at least 3 deliverables', () => {
     for (const service of services) {
-      expect(service.deliverables.length, `"${service.slug}" has too few deliverables`).toBeGreaterThanOrEqual(3);
+      expect(
+        service.deliverables.length,
+        `"${service.slug}" has too few deliverables`,
+      ).toBeGreaterThanOrEqual(3);
     }
   });
 
   it('every service has at least 2 outcomes with metric + description', () => {
     for (const service of services) {
-      expect(service.outcomes.length, `"${service.slug}" has too few outcomes`).toBeGreaterThanOrEqual(2);
+      expect(
+        service.outcomes.length,
+        `"${service.slug}" has too few outcomes`,
+      ).toBeGreaterThanOrEqual(2);
       for (const outcome of service.outcomes) {
         expect(outcome.metric.length).toBeGreaterThan(0);
         expect(outcome.description.length).toBeGreaterThan(0);
@@ -70,7 +76,10 @@ describe('services data', () => {
 
   it('every service workflow has at least 3 phases', () => {
     for (const service of services) {
-      expect(service.workflow.length, `"${service.slug}" workflow has too few phases`).toBeGreaterThanOrEqual(3);
+      expect(
+        service.workflow.length,
+        `"${service.slug}" workflow has too few phases`,
+      ).toBeGreaterThanOrEqual(3);
     }
   });
 

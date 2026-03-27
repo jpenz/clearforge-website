@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
-import { saveContactLead } from "@/lib/supabase";
+import { type NextRequest, NextResponse } from 'next/server';
+import { Resend } from 'resend';
+import { saveContactLead } from '@/lib/supabase';
 
 function getResendClient(): Resend | null {
   const apiKey = process.env.RESEND_API_KEY;
@@ -26,11 +26,11 @@ function isRateLimited(ip: string): boolean {
 
 function sanitize(str: string): string {
   return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#x27;")
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
     .trim();
 }
 
@@ -40,11 +40,14 @@ function isValidEmail(email: string): boolean {
 
 export async function POST(req: NextRequest) {
   try {
-    const ip = req.headers.get("x-forwarded-for")?.split(",")[0] || req.headers.get("x-real-ip") || "unknown";
+    const ip =
+      req.headers.get('x-forwarded-for')?.split(',')[0] ||
+      req.headers.get('x-real-ip') ||
+      'unknown';
     if (isRateLimited(ip)) {
       return NextResponse.json(
-        { error: "Too many submissions. Please try again later." },
-        { status: 429 }
+        { error: 'Too many submissions. Please try again later.' },
+        { status: 429 },
       );
     }
 
@@ -57,23 +60,23 @@ export async function POST(req: NextRequest) {
     }
 
     if (!name || !email || !company || !revenue || !message) {
-      return NextResponse.json(
-        { error: "All fields are required." },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'All fields are required.' }, { status: 400 });
     }
 
     if (!isValidEmail(email)) {
-      return NextResponse.json(
-        { error: "Please enter a valid email address." },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 });
     }
 
-    if (name.length > 200 || email.length > 200 || company.length > 200 || revenue.length > 100 || message.length > 5000) {
+    if (
+      name.length > 200 ||
+      email.length > 200 ||
+      company.length > 200 ||
+      revenue.length > 100 ||
+      message.length > 5000
+    ) {
       return NextResponse.json(
-        { error: "One or more fields exceed the maximum length." },
-        { status: 400 }
+        { error: 'One or more fields exceed the maximum length.' },
+        { status: 400 },
       );
     }
 
@@ -121,16 +124,16 @@ export async function POST(req: NextRequest) {
 
     const resend = getResendClient();
     if (!resend) {
-      console.error("RESEND_API_KEY is missing; skipping contact email send.");
+      console.error('RESEND_API_KEY is missing; skipping contact email send.');
       return NextResponse.json(
-        { error: "Contact service is temporarily unavailable." },
-        { status: 503 }
+        { error: 'Contact service is temporarily unavailable.' },
+        { status: 503 },
       );
     }
 
     await resend.emails.send({
-      from: "ClearForge <website@clearforge.ai>",
-      to: ["james@clearforge.ai"],
+      from: 'ClearForge <website@clearforge.ai>',
+      to: ['james@clearforge.ai'],
       replyTo: email,
       subject: `ClearForge Inquiry: ${safeName} — ${safeCompany}`,
       html: emailHtml,
@@ -143,15 +146,15 @@ export async function POST(req: NextRequest) {
       company: safeCompany,
       revenue: safeRevenue,
       message: safeMessage,
-      source: "contact_form",
+      source: 'contact_form',
     });
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("Contact form error:", err);
+    console.error('Contact form error:', err);
     return NextResponse.json(
-      { error: "Something went wrong. Please email us directly." },
-      { status: 500 }
+      { error: 'Something went wrong. Please email us directly.' },
+      { status: 500 },
     );
   }
 }

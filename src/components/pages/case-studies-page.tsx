@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { caseStudies } from "@/data/case-studies";
-import { ArrowRight } from "lucide-react";
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { caseStudies } from '@/data/case-studies';
 
 const caseStudyImages: Record<string, string> = {
-  "industrial-manufacturer": "/images/case-study-industrial.png",
-  "metro-detroit-services-company": "/images/case-study-services.png",
-  "pe-portfolio-diagnostic-plan": "/images/case-study-pe-diagnostic.png",
+  'industrial-manufacturer': '/images/case-study-industrial.png',
+  'metro-detroit-services-company': '/images/case-study-services.png',
+  'pe-portfolio-diagnostic-plan': '/images/case-study-pe-diagnostic.png',
 };
 
 export function CaseStudiesPage() {
@@ -28,13 +28,13 @@ export function CaseStudiesPage() {
             <p className="section-label">Case Studies</p>
             <h1
               className="mt-4 text-4xl text-text-primary sm:text-5xl lg:text-6xl"
-              style={{ fontFamily: "var(--font-heading)" }}
+              style={{ fontFamily: 'var(--font-heading)' }}
             >
               Strategy into operating results.
             </h1>
             <p className="mt-6 text-lg text-text-secondary">
-              Anonymized engagements showing how we turn AI ambition into
-              measurable business outcomes.
+              Anonymized engagements showing how we turn AI ambition into measurable business
+              outcomes.
             </p>
           </motion.div>
         </div>
@@ -72,7 +72,7 @@ export function CaseStudiesPage() {
                     </div>
                     <h2
                       className="text-2xl text-text-on-light group-hover:text-accent transition-colors sm:text-3xl"
-                      style={{ fontFamily: "var(--font-heading)" }}
+                      style={{ fontFamily: 'var(--font-heading)' }}
                     >
                       {cs.title}
                     </h2>
@@ -105,13 +105,12 @@ export function CaseStudiesPage() {
         <div className="relative mx-auto max-w-3xl px-6 text-center lg:px-8">
           <h2
             className="text-3xl text-text-primary sm:text-4xl"
-            style={{ fontFamily: "var(--font-heading)" }}
+            style={{ fontFamily: 'var(--font-heading)' }}
           >
             Want outcomes like these?
           </h2>
           <p className="mt-4 text-lg text-text-secondary">
-            We start every engagement with your operating priorities and growth
-            targets.
+            We start every engagement with your operating priorities and growth targets.
           </p>
           <div className="mt-8">
             <Button size="lg" asChild>

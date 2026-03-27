@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
 
-if (typeof window !== "undefined") {
+if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
@@ -14,13 +14,13 @@ interface GSAPMarqueeProps {
   className?: string;
 }
 
-export function GSAPMarquee({ text, className = "" }: GSAPMarqueeProps) {
+export function GSAPMarquee({ text, className = '' }: GSAPMarqueeProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
 
   useGSAP(
     () => {
-      if (typeof window === "undefined") return;
+      if (typeof window === 'undefined') return;
       const section = sectionRef.current;
       const textEl = textRef.current;
       if (!section || !textEl) return;
@@ -30,17 +30,17 @@ export function GSAPMarquee({ text, className = "" }: GSAPMarqueeProps) {
         { xPercent: 5 },
         {
           xPercent: -25,
-          ease: "none",
+          ease: 'none',
           scrollTrigger: {
             trigger: section,
-            start: "top bottom",
-            end: "bottom top",
+            start: 'top bottom',
+            end: 'bottom top',
             scrub: true,
           },
-        }
+        },
       );
     },
-    { scope: sectionRef }
+    { scope: sectionRef },
   );
 
   return (

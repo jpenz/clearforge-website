@@ -5,7 +5,7 @@
  * cn() is used in virtually every component — if it breaks, the whole UI breaks.
  */
 
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { cn } from '@/lib/utils';
 
 describe('cn() — className merger', () => {

@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
-import { calculateResults, questions, type Answers, type ScorecardResult } from "@/lib/scorecard";
-import { saveAssessmentLead } from "@/lib/supabase";
+import { type NextRequest, NextResponse } from 'next/server';
+import { Resend } from 'resend';
+import { type Answers, calculateResults, questions, type ScorecardResult } from '@/lib/scorecard';
+import { saveAssessmentLead } from '@/lib/supabase';
 
 interface AssessmentInput {
   answers?: Record<string, unknown>;
@@ -16,7 +16,7 @@ interface AssessmentInput {
 }
 
 function normalize(value?: string): string {
-  return value?.trim() ?? "";
+  return value?.trim() ?? '';
 }
 
 function validateEmail(email: string): boolean {
@@ -28,7 +28,7 @@ function isHttpUrl(url: string): boolean {
 }
 
 function normalizeAnswers(value: unknown): Answers | null {
-  if (!value || typeof value !== "object" || Array.isArray(value)) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
     return null;
   }
 
@@ -37,7 +37,7 @@ function normalizeAnswers(value: unknown): Answers | null {
 
   for (const question of questions) {
     const candidate = raw[String(question.id)];
-    if (typeof candidate !== "number" || !Number.isFinite(candidate)) {
+    if (typeof candidate !== 'number' || !Number.isFinite(candidate)) {
       return null;
     }
 
@@ -52,92 +52,113 @@ function normalizeAnswers(value: unknown): Answers | null {
   return answers;
 }
 
-function suggestSolutions(challenge: string, industry: string, scorecard: ScorecardResult): string[] {
+function suggestSolutions(
+  challenge: string,
+  industry: string,
+  scorecard: ScorecardResult,
+): string[] {
   const lowerChallenge = challenge.toLowerCase();
   const lowerIndustry = industry.toLowerCase();
-  const picks = new Set<string>(["AI Strategy & Growth Diagnosis"]);
+  const picks = new Set<string>(['AI Strategy & Growth Diagnosis']);
 
   if (/(sales|pipeline|lead|marketing|revenue|growth)/.test(lowerChallenge)) {
-    picks.add("AI Marketing & Revenue Operations");
+    picks.add('AI Marketing & Revenue Operations');
   }
 
-  if (/(manual|workflow|operations|service|support|crm|data|prospect|throughput|planning)/.test(lowerChallenge)) {
-    picks.add("AI Agent Design & Build");
+  if (
+    /(manual|workflow|operations|service|support|crm|data|prospect|throughput|planning)/.test(
+      lowerChallenge,
+    )
+  ) {
+    picks.add('AI Agent Design & Build');
   }
 
   if (/(legacy|outdated|erp|migration|spreadsheet|fragmented|integration)/.test(lowerChallenge)) {
-    picks.add("Legacy System Modernization");
+    picks.add('Legacy System Modernization');
   }
 
-  if (/(governance|scale|security|compliance|maintenance|monitoring|adoption)/.test(lowerChallenge)) {
-    picks.add("Managed AI Operations");
+  if (
+    /(governance|scale|security|compliance|maintenance|monitoring|adoption)/.test(lowerChallenge)
+  ) {
+    picks.add('Managed AI Operations');
   }
 
-  if (lowerIndustry.includes("manufacturing") || lowerIndustry.includes("distribution")) {
-    picks.add("AI Agent Design & Build");
-    picks.add("Legacy System Modernization");
+  if (lowerIndustry.includes('manufacturing') || lowerIndustry.includes('distribution')) {
+    picks.add('AI Agent Design & Build');
+    picks.add('Legacy System Modernization');
   }
 
-  if (lowerIndustry.includes("financial") || lowerIndustry.includes("healthcare")) {
-    picks.add("Managed AI Operations");
+  if (lowerIndustry.includes('financial') || lowerIndustry.includes('healthcare')) {
+    picks.add('Managed AI Operations');
   }
 
   if (scorecard.compositeScore <= 55) {
-    picks.add("AI Strategy & Growth Diagnosis");
+    picks.add('AI Strategy & Growth Diagnosis');
   }
 
   if (picks.size < 2) {
-    picks.add("AI Agent Design & Build");
+    picks.add('AI Agent Design & Build');
   }
 
   return Array.from(picks).slice(0, 4);
 }
 
-function suggestEngagement(challenge: string, role: string, suggestedSolutions: string[], scorecard: ScorecardResult): string {
+function suggestEngagement(
+  challenge: string,
+  role: string,
+  suggestedSolutions: string[],
+  scorecard: ScorecardResult,
+): string {
   const lowerChallenge = challenge.toLowerCase();
   const lowerRole = role.toLowerCase();
 
   if (scorecard.compositeScore <= 55) {
-    return "AI Strategy & Growth Diagnosis with a 90-day readiness roadmap (4 to 6 weeks)";
+    return 'AI Strategy & Growth Diagnosis with a 90-day readiness roadmap (4 to 6 weeks)';
   }
 
-  if (suggestedSolutions.includes("Legacy System Modernization") || /(legacy|outdated|integration)/.test(lowerChallenge)) {
-    return "Legacy modernization roadmap and AI pilot program (10 to 14 weeks)";
+  if (
+    suggestedSolutions.includes('Legacy System Modernization') ||
+    /(legacy|outdated|integration)/.test(lowerChallenge)
+  ) {
+    return 'Legacy modernization roadmap and AI pilot program (10 to 14 weeks)';
   }
 
-  if (suggestedSolutions.includes("AI Marketing & Revenue Operations") || /(revenue|pipeline|lead|growth)/.test(lowerChallenge)) {
-    return "Revenue operations acceleration engagement with AI strategy and execution (8 to 12 weeks)";
+  if (
+    suggestedSolutions.includes('AI Marketing & Revenue Operations') ||
+    /(revenue|pipeline|lead|growth)/.test(lowerChallenge)
+  ) {
+    return 'Revenue operations acceleration engagement with AI strategy and execution (8 to 12 weeks)';
   }
 
-  if (lowerRole.includes("ceo") || lowerRole.includes("owner") || lowerRole.includes("coo")) {
-    return "Executive AI strategy sprint followed by phased implementation planning (6 to 8 weeks)";
+  if (lowerRole.includes('ceo') || lowerRole.includes('owner') || lowerRole.includes('coo')) {
+    return 'Executive AI strategy sprint followed by phased implementation planning (6 to 8 weeks)';
   }
 
-  return "AI readiness and opportunity program with one production workflow launch (8 to 10 weeks)";
+  return 'AI readiness and opportunity program with one production workflow launch (8 to 10 weeks)';
 }
 
 async function queryPerplexity(prompt: string): Promise<string> {
   const perplexityApiKey = process.env.PERPLEXITY_API_KEY;
   if (!perplexityApiKey) {
-    throw new Error("PERPLEXITY_API_KEY is not configured");
+    throw new Error('PERPLEXITY_API_KEY is not configured');
   }
 
-  const response = await fetch("https://api.perplexity.ai/chat/completions", {
-    method: "POST",
+  const response = await fetch('https://api.perplexity.ai/chat/completions', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${perplexityApiKey}`,
     },
     body: JSON.stringify({
-      model: "sonar",
+      model: 'sonar',
       messages: [
         {
-          role: "system",
+          role: 'system',
           content:
-            "You are a precise business analyst. Be concise, concrete, and avoid hype. Use plain language for operators.",
+            'You are a precise business analyst. Be concise, concrete, and avoid hype. Use plain language for operators.',
         },
         {
-          role: "user",
+          role: 'user',
           content: prompt,
         },
       ],
@@ -152,12 +173,16 @@ async function queryPerplexity(prompt: string): Promise<string> {
   const result = await response.json();
   const content = result.choices?.[0]?.message?.content?.trim();
   if (!content) {
-    throw new Error("Perplexity returned an empty response");
+    throw new Error('Perplexity returned an empty response');
   }
   return content;
 }
 
-async function fetchCompanyResearch(companyUrl: string, industry: string, challenge: string): Promise<string> {
+async function fetchCompanyResearch(
+  companyUrl: string,
+  industry: string,
+  challenge: string,
+): Promise<string> {
   const prompt = `Research ${companyUrl}. In 400 words or less, provide:
 
 1) BUSINESS OVERVIEW: What the company sells (services, products, buyers), their market positioning, and business model.
@@ -197,14 +222,17 @@ Keep it under 400 words. Be specific with numbers and examples. Write for operat
 function buildPillarSummary(scorecard: ScorecardResult): string {
   return scorecard.pillarScores
     .map((pillar) => `${pillar.name}: ${Math.round(pillar.percentage)}%`)
-    .join(" | ");
+    .join(' | ');
 }
 
 function buildPastAttemptInference(scorecard: ScorecardResult): string {
   const ordered = [...scorecard.pillarScores].sort((a, b) => a.percentage - b.percentage);
   const weak = ordered.slice(0, 2).map((item) => item.name);
-  const strong = [...ordered].reverse().slice(0, 1).map((item) => item.name);
-  return `Likely friction areas: ${weak.join(" and ")}. Existing strength to build on: ${strong.join(", ")}.`;
+  const strong = [...ordered]
+    .reverse()
+    .slice(0, 1)
+    .map((item) => item.name);
+  return `Likely friction areas: ${weak.join(' and ')}. Existing strength to build on: ${strong.join(', ')}.`;
 }
 
 function buildFallbackCloser(params: {
@@ -216,7 +244,7 @@ function buildFallbackCloser(params: {
   companyResearch: string;
   industryBestInClass: string;
 }): string {
-  const hasResearch = params.companyResearch !== "No company URL provided.";
+  const hasResearch = params.companyResearch !== 'No company URL provided.';
   const researchSentence = hasResearch
     ? `${params.company} appears to operate with real pressure to move faster while staying reliable in ${params.industry}.`
     : `This guidance is based on your assessment responses and common ${params.industry} patterns because no website research was provided.`;
@@ -301,25 +329,25 @@ async function generateWithClaude(userPrompt: string): Promise<string | null> {
   const anthropicKey = process.env.ANTHROPIC_API_KEY;
   if (!anthropicKey) return null;
 
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
+  const response = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      "x-api-key": anthropicKey,
-      "anthropic-version": "2023-06-01",
+      'Content-Type': 'application/json',
+      'x-api-key': anthropicKey,
+      'anthropic-version': '2023-06-01',
     },
     body: JSON.stringify({
-      model: "claude-sonnet-4-6",
+      model: 'claude-sonnet-4-6',
       max_tokens: 2048,
       temperature: 0.3,
       system: CLOSER_SYSTEM_PROMPT,
-      messages: [{ role: "user", content: userPrompt }],
+      messages: [{ role: 'user', content: userPrompt }],
     }),
   });
 
   if (!response.ok) {
     const details = await response.text();
-    console.error("Claude CLOSER report request failed:", details);
+    console.error('Claude CLOSER report request failed:', details);
     return null;
   }
 
@@ -332,21 +360,21 @@ async function generateWithGroq(userPrompt: string): Promise<string | null> {
   const groqApiKey = process.env.GROQ_API_KEY;
   if (!groqApiKey) return null;
 
-  const models = ["llama-3.3-70b-versatile", "llama-3.1-70b-versatile"];
+  const models = ['llama-3.3-70b-versatile', 'llama-3.1-70b-versatile'];
 
   for (const model of models) {
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${groqApiKey}`,
       },
       body: JSON.stringify({
         model,
         temperature: 0.35,
         messages: [
-          { role: "system", content: CLOSER_SYSTEM_PROMPT },
-          { role: "user", content: userPrompt },
+          { role: 'system', content: CLOSER_SYSTEM_PROMPT },
+          { role: 'user', content: userPrompt },
         ],
       }),
     });
@@ -381,18 +409,18 @@ async function generateCloserReport(params: {
   // Primary: Claude Sonnet 4.6
   const claudeReport = await generateWithClaude(userPrompt);
   if (claudeReport) {
-    console.log("CLOSER report generated via Claude Sonnet 4.6");
-    return claudeReport.replace(/\u2014/g, "-");
+    console.log('CLOSER report generated via Claude Sonnet 4.6');
+    return claudeReport.replace(/\u2014/g, '-');
   }
 
   // Fallback: Groq Llama
   const groqReport = await generateWithGroq(userPrompt);
   if (groqReport) {
-    console.log("CLOSER report generated via Groq (fallback)");
-    return groqReport.replace(/\u2014/g, "-");
+    console.log('CLOSER report generated via Groq (fallback)');
+    return groqReport.replace(/\u2014/g, '-');
   }
 
-  throw new Error("All AI providers failed to produce a CLOSER report");
+  throw new Error('All AI providers failed to produce a CLOSER report');
 }
 
 function getResendClient(): Resend | null {
@@ -403,11 +431,11 @@ function getResendClient(): Resend | null {
 
 function escapeHtml(value: string): string {
   return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#x27;");
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
 }
 
 function markdownToSimpleHtml(markdown: string): string {
@@ -419,22 +447,22 @@ function markdownToSimpleHtml(markdown: string): string {
 
   return blocks
     .map((block) => {
-      if (block.startsWith("## ")) {
+      if (block.startsWith('## ')) {
         return `<h2 style="font-size:18px;line-height:1.3;margin:24px 0 10px;color:#0f172a;">${block.slice(3)}</h2>`;
       }
 
-      if (block.startsWith("- ")) {
+      if (block.startsWith('- ')) {
         const items = block
-          .split("\n")
-          .filter((line) => line.startsWith("- "))
+          .split('\n')
+          .filter((line) => line.startsWith('- '))
           .map((line) => `<li style="margin:4px 0;">${line.slice(2)}</li>`)
-          .join("");
+          .join('');
         return `<ul style="padding-left:20px;color:#334155;line-height:1.65;">${items}</ul>`;
       }
 
-      return `<p style="margin:10px 0;color:#334155;line-height:1.75;">${block.replace(/\n/g, "<br/>")}</p>`;
+      return `<p style="margin:10px 0;color:#334155;line-height:1.75;">${block.replace(/\n/g, '<br/>')}</p>`;
     })
-    .join("");
+    .join('');
 }
 
 async function sendAssessmentEmails(params: {
@@ -452,7 +480,7 @@ async function sendAssessmentEmails(params: {
 }): Promise<boolean> {
   const resend = getResendClient();
   if (!resend) {
-    console.error("RESEND_API_KEY is missing; skipping assessment email send.");
+    console.error('RESEND_API_KEY is missing; skipping assessment email send.');
     return false;
   }
 
@@ -463,7 +491,7 @@ async function sendAssessmentEmails(params: {
   const safeName = escapeHtml(params.name);
   const safeRole = escapeHtml(params.role);
   const safeEngagement = escapeHtml(params.suggestedEngagement);
-  const safeCompanyUrl = escapeHtml(params.companyUrl ?? "");
+  const safeCompanyUrl = escapeHtml(params.companyUrl ?? '');
 
   const commonFooter = `
     <hr style="border:none;border-top:1px solid #e2e8f0;margin:28px 0;" />
@@ -485,11 +513,11 @@ async function sendAssessmentEmails(params: {
           <p style="margin:0;color:#334155;">Score: <strong>${params.scorecard.compositeScore}/100</strong> · Maturity: <strong>${escapeHtml(params.scorecard.maturityLevel)}</strong></p>
           <p style="margin:10px 0 0;color:#334155;">Industry: ${safeIndustry} · Role: ${safeRole}</p>
           <p style="margin:10px 0 0;color:#334155;">Pain point: "${safeChallenge}"</p>
-          ${safeCompanyUrl ? `<p style="margin:10px 0 0;color:#334155;">Website: ${safeCompanyUrl}</p>` : ""}
+          ${safeCompanyUrl ? `<p style="margin:10px 0 0;color:#334155;">Website: ${safeCompanyUrl}</p>` : ''}
           <div style="margin-top:22px;">${reportHtml}</div>
           <div style="margin-top:18px;padding:14px;border:1px solid #cbd5e1;border-radius:10px;background:#f8fafc;">
             <p style="margin:0;color:#334155;"><strong>Recommended engagement:</strong> ${safeEngagement}</p>
-            <p style="margin:8px 0 0;color:#334155;"><strong>Suggested solutions:</strong> ${escapeHtml(params.suggestedSolutions.join(", "))}</p>
+            <p style="margin:8px 0 0;color:#334155;"><strong>Suggested solutions:</strong> ${escapeHtml(params.suggestedSolutions.join(', '))}</p>
           </div>
           ${commonFooter}
         </div>
@@ -512,16 +540,16 @@ async function sendAssessmentEmails(params: {
 
   try {
     await resend.emails.send({
-      from: "ClearForge <website@clearforge.ai>",
+      from: 'ClearForge <website@clearforge.ai>',
       to: [params.email],
-      replyTo: "james@clearforge.ai",
-      subject: "Your ClearForge AI Readiness & Opportunity Report",
+      replyTo: 'james@clearforge.ai',
+      subject: 'Your ClearForge AI Readiness & Opportunity Report',
       html: userEmailHtml,
     });
 
     await resend.emails.send({
-      from: "ClearForge <website@clearforge.ai>",
-      to: ["james@clearforge.ai"],
+      from: 'ClearForge <website@clearforge.ai>',
+      to: ['james@clearforge.ai'],
       replyTo: params.email,
       subject: `New Assessment Lead: ${params.name} — ${params.company}`,
       html: internalEmailHtml,
@@ -529,7 +557,7 @@ async function sendAssessmentEmails(params: {
 
     return true;
   } catch (error) {
-    console.error("Assessment email send failed", error);
+    console.error('Assessment email send failed', error);
     return false;
   }
 }
@@ -548,44 +576,54 @@ export async function POST(req: NextRequest) {
     const phone = normalize(body.phone);
 
     if (!answers) {
-      return NextResponse.json({ error: "Please complete all assessment questions." }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Please complete all assessment questions.' },
+        { status: 400 },
+      );
     }
 
     if (!industry || !challenge || !role || !name || !email || !company) {
-      return NextResponse.json({ error: "Please complete all required fields." }, { status: 400 });
+      return NextResponse.json({ error: 'Please complete all required fields.' }, { status: 400 });
     }
 
     if (challenge.length < 20) {
-      return NextResponse.json({ error: "Please share at least 20 characters about your pain point." }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Please share at least 20 characters about your pain point.' },
+        { status: 400 },
+      );
     }
 
     if (!validateEmail(email)) {
-      return NextResponse.json({ error: "Please provide a valid work email." }, { status: 400 });
+      return NextResponse.json({ error: 'Please provide a valid work email.' }, { status: 400 });
     }
 
     if (companyUrl && !isHttpUrl(companyUrl)) {
-      return NextResponse.json({ error: "Company website must start with http:// or https://." }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Company website must start with http:// or https://.' },
+        { status: 400 },
+      );
     }
 
     const scorecard = calculateResults(answers);
     const suggestedSolutions = suggestSolutions(challenge, industry, scorecard);
     const suggestedEngagement = suggestEngagement(challenge, role, suggestedSolutions, scorecard);
 
-    let companyResearch = "No company URL provided.";
+    let companyResearch = 'No company URL provided.';
     if (companyUrl) {
       try {
         companyResearch = await fetchCompanyResearch(companyUrl, industry, challenge);
       } catch (error) {
-        console.error("Assessment company research failed", error);
+        console.error('Assessment company research failed', error);
         companyResearch = `We could not retrieve live research for ${companyUrl}. Recommendations are based on your assessment responses and industry context.`;
       }
     }
 
-    let industryBestInClass = "Industry benchmark unavailable right now. We will provide benchmark detail during the discovery call.";
+    let industryBestInClass =
+      'Industry benchmark unavailable right now. We will provide benchmark detail during the discovery call.';
     try {
       industryBestInClass = await fetchIndustryBestInClass(industry, challenge);
     } catch (error) {
-      console.error("Assessment industry benchmark research failed", error);
+      console.error('Assessment industry benchmark research failed', error);
     }
 
     let closerReport: string;
@@ -602,7 +640,7 @@ export async function POST(req: NextRequest) {
         suggestedEngagement,
       });
     } catch (error) {
-      console.error("Assessment report generation failed", error);
+      console.error('Assessment report generation failed', error);
       closerReport = buildFallbackCloser({
         challenge,
         company,
@@ -651,7 +689,7 @@ export async function POST(req: NextRequest) {
       closer_report: closerReport,
       company_research: companyResearch,
       industry_best_in_class: industryBestInClass,
-      source: "assessment",
+      source: 'assessment',
     });
 
     if (leadId) {
@@ -680,7 +718,7 @@ export async function POST(req: NextRequest) {
       },
     });
   } catch (error) {
-    console.error("Assessment API error", error);
-    return NextResponse.json({ error: "Failed to process assessment request." }, { status: 500 });
+    console.error('Assessment API error', error);
+    return NextResponse.json({ error: 'Failed to process assessment request.' }, { status: 500 });
   }
 }

@@ -1,26 +1,26 @@
 import {
-  LineChart,
-  Cog,
-  Rocket,
+  BarChart3,
   Bot,
-  Compass,
-  Gauge,
-  Layers,
-  TrendingUp,
-  Factory,
   Briefcase,
   Building2,
-  Target,
-  Zap,
-  PenTool,
-  Wrench,
-  BarChart3,
+  Cog,
+  Compass,
+  Factory,
+  Gauge,
+  Layers,
+  LineChart,
   type LucideIcon,
-} from "lucide-react";
-import type { ServiceIcon } from "@/data/services";
-import type { SolutionIcon } from "@/data/solutions";
-import type { IndustryIcon } from "@/data/industries";
-import type { EngagementIcon } from "@/data/how-we-work";
+  PenTool,
+  Rocket,
+  Target,
+  TrendingUp,
+  Wrench,
+  Zap,
+} from 'lucide-react';
+import type { EngagementIcon } from '@/data/how-we-work';
+import type { IndustryIcon } from '@/data/industries';
+import type { ServiceIcon } from '@/data/services';
+import type { SolutionIcon } from '@/data/solutions';
 
 export const serviceIcons: Record<ServiceIcon, LucideIcon> = {
   LineChart,

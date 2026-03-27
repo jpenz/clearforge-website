@@ -1,10 +1,10 @@
 export type InsightCategory =
-  | "AI Strategy"
-  | "Performance Improvement"
-  | "PE Value Creation"
-  | "AI Agents"
-  | "Legacy Modernization"
-  | "Workforce Transformation";
+  | 'AI Strategy'
+  | 'Performance Improvement'
+  | 'PE Value Creation'
+  | 'AI Agents'
+  | 'Legacy Modernization'
+  | 'Workforce Transformation';
 
 export interface Insight {
   slug: string;
@@ -32,18 +32,18 @@ export interface Insight {
 }
 
 const author = {
-  name: "ClearForge Team",
-  role: "AI Strategy and Operations",
+  name: 'ClearForge Team',
+  role: 'AI Strategy and Operations',
 };
 
 export const insights: Insight[] = [
   {
-    slug: "widening-ai-value-gap",
-    title: "The Widening AI Value Gap: Why Most Companies Are Falling Behind",
+    slug: 'widening-ai-value-gap',
+    title: 'The Widening AI Value Gap: Why Most Companies Are Falling Behind',
     excerpt:
-      "AI leaders are compounding advantages while most companies remain trapped in pilot loops. This guide explains why the gap is widening and how to close it with practical execution discipline.",
-    category: "AI Strategy",
-    date: "2026-02-21",
+      'AI leaders are compounding advantages while most companies remain trapped in pilot loops. This guide explains why the gap is widening and how to close it with practical execution discipline.',
+    category: 'AI Strategy',
+    date: '2026-02-21',
     readingTime: 14,
     author,
     body: `## TL;DR
@@ -112,38 +112,42 @@ Closing the AI value gap is less about visionary declarations and more about dis
 
 ## Recommended Next Move
 Run an AI value-gap diagnostic across your top workflows and assign clear ownership for one high-value launch. If you need a structured path, start with an AI Strategy and Growth Diagnosis, then move directly into a build and managed operations cycle.`,
-    relatedSlugs: ["why-ai-pilots-fail-5-things-work", "ai-agents-new-workforce"],
+    relatedSlugs: ['why-ai-pilots-fail-5-things-work', 'ai-agents-new-workforce'],
     seo: {
-      title: "The Widening AI Value Gap: Why Companies Fall Behind",
-      description: "Learn why the AI value gap is widening and how to close it with practical strategy, implementation, and managed operations.",
-      keywords: ["AI value gap", "AI ROI", "enterprise AI adoption failure"],
+      title: 'The Widening AI Value Gap: Why Companies Fall Behind',
+      description:
+        'Learn why the AI value gap is widening and how to close it with practical strategy, implementation, and managed operations.',
+      keywords: ['AI value gap', 'AI ROI', 'enterprise AI adoption failure'],
     },
     tags: {
-      solutions: ["ai-strategy", "managed-operations"],
-      industries: ["manufacturing", "professional-services", "pe-portfolio"],
+      solutions: ['ai-strategy', 'managed-operations'],
+      industries: ['manufacturing', 'professional-services', 'pe-portfolio'],
     },
     faqs: [
       {
-        question: "What is the AI value gap?",
-        answer: "It is the distance between organizations creating measurable AI-driven outcomes and organizations generating AI activity without business impact.",
+        question: 'What is the AI value gap?',
+        answer:
+          'It is the distance between organizations creating measurable AI-driven outcomes and organizations generating AI activity without business impact.',
       },
       {
-        question: "Why are AI leaders pulling ahead?",
-        answer: "They run continuous optimization loops, redesign workflows, and maintain clear business ownership for outcomes.",
+        question: 'Why are AI leaders pulling ahead?',
+        answer:
+          'They run continuous optimization loops, redesign workflows, and maintain clear business ownership for outcomes.',
       },
       {
-        question: "How can we start closing the gap quickly?",
-        answer: "Pick one high-impact workflow, define clear KPIs, launch narrowly, and run a managed 90-day optimization cycle.",
+        question: 'How can we start closing the gap quickly?',
+        answer:
+          'Pick one high-impact workflow, define clear KPIs, launch narrowly, and run a managed 90-day optimization cycle.',
       },
     ],
   },
   {
-    slug: "ai-agents-new-workforce",
-    title: "AI Agents Are the New Workforce: What Every CEO Needs to Know",
+    slug: 'ai-agents-new-workforce',
+    title: 'AI Agents Are the New Workforce: What Every CEO Needs to Know',
     excerpt:
-      "AI agents are not just tools. They are becoming a new operating layer in modern companies. This article explains where agents create value, where they fail, and what CEOs must do now.",
-    category: "AI Agents",
-    date: "2026-02-20",
+      'AI agents are not just tools. They are becoming a new operating layer in modern companies. This article explains where agents create value, where they fail, and what CEOs must do now.',
+    category: 'AI Agents',
+    date: '2026-02-20',
     readingTime: 14,
     author,
     body: `## TL;DR
@@ -233,38 +237,42 @@ The companies that move now will gather process intelligence, role fluency, and 
 Pick one revenue or operations workflow that is currently manual, high-volume, and measurable. Design an agent-enabled version with explicit controls and a 90-day optimization plan. Then evaluate whether your leadership model, performance systems, and team roles are ready for expansion.
 
 If they are not, address that gap before scaling. Agent technology can be purchased quickly. Hybrid workforce capability must be built deliberately.`,
-    relatedSlugs: ["hybrid-workforce-playbook", "widening-ai-value-gap"],
+    relatedSlugs: ['hybrid-workforce-playbook', 'widening-ai-value-gap'],
     seo: {
-      title: "AI Agents Are the New Workforce: CEO Guide",
-      description: "A practical CEO guide to using AI agents in a hybrid workforce operating model.",
-      keywords: ["AI agents workforce", "agentic AI business", "hybrid workforce AI"],
+      title: 'AI Agents Are the New Workforce: CEO Guide',
+      description:
+        'A practical CEO guide to using AI agents in a hybrid workforce operating model.',
+      keywords: ['AI agents workforce', 'agentic AI business', 'hybrid workforce AI'],
     },
     tags: {
-      solutions: ["ai-agents", "managed-operations", "revenue-operations"],
-      industries: ["professional-services", "financial-services", "pe-portfolio"],
+      solutions: ['ai-agents', 'managed-operations', 'revenue-operations'],
+      industries: ['professional-services', 'financial-services', 'pe-portfolio'],
     },
     faqs: [
       {
-        question: "What is an AI agent in business operations?",
-        answer: "An AI agent is a system that can execute multi-step tasks with defined goals, system access, and escalation boundaries.",
+        question: 'What is an AI agent in business operations?',
+        answer:
+          'An AI agent is a system that can execute multi-step tasks with defined goals, system access, and escalation boundaries.',
       },
       {
-        question: "What work should agents handle first?",
-        answer: "Start with high-volume, repeatable workflows where outcomes are measurable and exception paths are clear.",
+        question: 'What work should agents handle first?',
+        answer:
+          'Start with high-volume, repeatable workflows where outcomes are measurable and exception paths are clear.',
       },
       {
-        question: "Do AI agents replace human leadership decisions?",
-        answer: "No. Agents accelerate execution while humans retain judgment authority for complex tradeoffs and high-risk decisions.",
+        question: 'Do AI agents replace human leadership decisions?',
+        answer:
+          'No. Agents accelerate execution while humans retain judgment authority for complex tradeoffs and high-risk decisions.',
       },
     ],
   },
   {
-    slug: "legacy-systems-ai-bridge",
-    title: "Your Legacy Systems Do Not Have to Die: How AI Bridges the Gap",
+    slug: 'legacy-systems-ai-bridge',
+    title: 'Your Legacy Systems Do Not Have to Die: How AI Bridges the Gap',
     excerpt:
-      "Most organizations cannot rip and replace core systems. They do not need to. This guide shows how to bridge legacy environments into AI-enabled workflows with less risk.",
-    category: "Legacy Modernization",
-    date: "2026-02-19",
+      'Most organizations cannot rip and replace core systems. They do not need to. This guide shows how to bridge legacy environments into AI-enabled workflows with less risk.',
+    category: 'Legacy Modernization',
+    date: '2026-02-19',
     readingTime: 13,
     author,
     body: `## TL;DR
@@ -379,38 +387,42 @@ Bridging lets organizations modernize without pausing the business. For most com
 
 ## Next Step
 Choose one legacy-constrained workflow with clear economic importance. Build a bridge plan for that workflow, launch in a bounded scope, and run a measured optimization cycle before expanding.`,
-    relatedSlugs: ["widening-ai-value-gap", "why-ai-pilots-fail-5-things-work"],
+    relatedSlugs: ['widening-ai-value-gap', 'why-ai-pilots-fail-5-things-work'],
     seo: {
-      title: "Legacy System Modernization with AI: Bridge Strategy",
-      description: "A practical guide to bridging legacy systems to AI without high-risk rip-and-replace programs.",
-      keywords: ["legacy system modernization AI", "COBOL AI", "mainframe modernization"],
+      title: 'Legacy System Modernization with AI: Bridge Strategy',
+      description:
+        'A practical guide to bridging legacy systems to AI without high-risk rip-and-replace programs.',
+      keywords: ['legacy system modernization AI', 'COBOL AI', 'mainframe modernization'],
     },
     tags: {
-      solutions: ["legacy-modernization", "ai-agents"],
-      industries: ["manufacturing", "financial-services"],
+      solutions: ['legacy-modernization', 'ai-agents'],
+      industries: ['manufacturing', 'financial-services'],
     },
     faqs: [
       {
-        question: "Do we need to replace legacy systems before using AI?",
-        answer: "No. Most organizations can use integration and orchestration bridges to modernize high-value workflows first.",
+        question: 'Do we need to replace legacy systems before using AI?',
+        answer:
+          'No. Most organizations can use integration and orchestration bridges to modernize high-value workflows first.',
       },
       {
-        question: "What is a bridge architecture in modernization?",
-        answer: "It is an integration layer that connects legacy systems to modern data and automation workflows with controlled risk.",
+        question: 'What is a bridge architecture in modernization?',
+        answer:
+          'It is an integration layer that connects legacy systems to modern data and automation workflows with controlled risk.',
       },
       {
-        question: "How long does first-phase legacy modernization take?",
-        answer: "Many first-phase workflows can launch in 8-16 weeks depending on complexity and data readiness.",
+        question: 'How long does first-phase legacy modernization take?',
+        answer:
+          'Many first-phase workflows can launch in 8-16 weeks depending on complexity and data readiness.',
       },
     ],
   },
   {
-    slug: "why-ai-pilots-fail-5-things-work",
-    title: "Why 95% of AI Pilots Fail (And the 5 Things That Actually Work)",
+    slug: 'why-ai-pilots-fail-5-things-work',
+    title: 'Why 95% of AI Pilots Fail (And the 5 Things That Actually Work)',
     excerpt:
-      "Most AI pilots fail because they optimize for technical novelty instead of operating outcomes. This article breaks down failure patterns and the five moves that consistently work.",
-    category: "AI Strategy",
-    date: "2026-02-18",
+      'Most AI pilots fail because they optimize for technical novelty instead of operating outcomes. This article breaks down failure patterns and the five moves that consistently work.',
+    category: 'AI Strategy',
+    date: '2026-02-18',
     readingTime: 13,
     author,
     body: `## TL;DR
@@ -510,38 +522,42 @@ Pilots are not inherently broken. They become broken when treated as innovation 
 
 ## Recommended Next Step
 Select one pilot candidate and stress-test it against the five success practices above. If it passes, launch with a 90-day conversion plan. If it does not, redesign before spending more budget.`,
-    relatedSlugs: ["widening-ai-value-gap", "legacy-systems-ai-bridge"],
+    relatedSlugs: ['widening-ai-value-gap', 'legacy-systems-ai-bridge'],
     seo: {
-      title: "Why AI Pilots Fail and 5 Practices That Work",
-      description: "Learn the top reasons AI pilots fail and the five practical methods that improve pilot-to-production success.",
-      keywords: ["AI pilot failure rate", "AI implementation strategy", "scaling AI"],
+      title: 'Why AI Pilots Fail and 5 Practices That Work',
+      description:
+        'Learn the top reasons AI pilots fail and the five practical methods that improve pilot-to-production success.',
+      keywords: ['AI pilot failure rate', 'AI implementation strategy', 'scaling AI'],
     },
     tags: {
-      solutions: ["ai-strategy", "ai-agents", "managed-operations"],
-      industries: ["manufacturing", "financial-services", "pe-portfolio"],
+      solutions: ['ai-strategy', 'ai-agents', 'managed-operations'],
+      industries: ['manufacturing', 'financial-services', 'pe-portfolio'],
     },
     faqs: [
       {
-        question: "Why do most AI pilots fail?",
-        answer: "Most fail due to weak business scoping, unclear ownership, and lack of workflow adoption planning.",
+        question: 'Why do most AI pilots fail?',
+        answer:
+          'Most fail due to weak business scoping, unclear ownership, and lack of workflow adoption planning.',
       },
       {
-        question: "How long should an AI pilot run?",
-        answer: "A focused 90-day pilot is typically enough to establish feasibility and decide whether to scale.",
+        question: 'How long should an AI pilot run?',
+        answer:
+          'A focused 90-day pilot is typically enough to establish feasibility and decide whether to scale.',
       },
       {
-        question: "What is the best first AI pilot scope?",
-        answer: "Choose one high-volume workflow with clear KPIs, manageable complexity, and a committed business owner.",
+        question: 'What is the best first AI pilot scope?',
+        answer:
+          'Choose one high-volume workflow with clear KPIs, manageable complexity, and a committed business owner.',
       },
     ],
   },
   {
-    slug: "hybrid-workforce-playbook",
-    title: "The Hybrid Workforce Playbook: Getting Humans and AI Agents to Work Together",
+    slug: 'hybrid-workforce-playbook',
+    title: 'The Hybrid Workforce Playbook: Getting Humans and AI Agents to Work Together',
     excerpt:
-      "Hybrid workforce transformation is now an operating necessity. This playbook shows how to redesign roles, governance, and metrics so humans and AI agents perform as one system.",
-    category: "Workforce Transformation",
-    date: "2026-02-17",
+      'Hybrid workforce transformation is now an operating necessity. This playbook shows how to redesign roles, governance, and metrics so humans and AI agents perform as one system.',
+    category: 'Workforce Transformation',
+    date: '2026-02-17',
     readingTime: 15,
     author,
     body: `## TL;DR
@@ -677,38 +693,43 @@ The hybrid workforce is not a one-time rollout. It is a management discipline. T
 
 ## Next Step
 Select one workflow and run a hybrid workforce design sprint with explicit role maps, decision rights, and success metrics. Launch small, optimize continuously, and scale only after trust and performance stabilize.`,
-    relatedSlugs: ["ai-agents-new-workforce", "widening-ai-value-gap"],
+    relatedSlugs: ['ai-agents-new-workforce', 'widening-ai-value-gap'],
     seo: {
-      title: "Hybrid Workforce Playbook: Human and AI Collaboration",
-      description: "Learn how to design hybrid workforce operating models where humans and AI agents work together effectively.",
-      keywords: ["hybrid workforce AI", "human AI collaboration", "workforce AI readiness"],
+      title: 'Hybrid Workforce Playbook: Human and AI Collaboration',
+      description:
+        'Learn how to design hybrid workforce operating models where humans and AI agents work together effectively.',
+      keywords: ['hybrid workforce AI', 'human AI collaboration', 'workforce AI readiness'],
     },
     tags: {
-      solutions: ["ai-agents", "managed-operations", "ai-strategy"],
-      industries: ["professional-services", "manufacturing", "pe-portfolio"],
+      solutions: ['ai-agents', 'managed-operations', 'ai-strategy'],
+      industries: ['professional-services', 'manufacturing', 'pe-portfolio'],
     },
     faqs: [
       {
-        question: "What is a hybrid workforce model?",
-        answer: "It is an operating model where humans and AI agents share workflows based on defined decision rights and responsibilities.",
+        question: 'What is a hybrid workforce model?',
+        answer:
+          'It is an operating model where humans and AI agents share workflows based on defined decision rights and responsibilities.',
       },
       {
-        question: "How do we measure hybrid workforce success?",
-        answer: "Measure end-to-end workflow outcomes like cycle time, quality, exception resolution, and economic impact.",
+        question: 'How do we measure hybrid workforce success?',
+        answer:
+          'Measure end-to-end workflow outcomes like cycle time, quality, exception resolution, and economic impact.',
       },
       {
-        question: "What is the first step to building a hybrid workforce?",
-        answer: "Map one high-value workflow, define task ownership by execution type, and launch a controlled pilot with role-specific enablement.",
+        question: 'What is the first step to building a hybrid workforce?',
+        answer:
+          'Map one high-value workflow, define task ownership by execution type, and launch a controlled pilot with role-specific enablement.',
       },
     ],
   },
 
   {
-    slug: "continuous-ai-agents",
-    title: "Why AI Agents That Learn Beat One-Time Implementations",
-    excerpt: "Most AI consulting engagements fail because they stop at launch. Continuous optimization is where value compounds.",
-    category: "AI Agents",
-    date: "2025-02-10",
+    slug: 'continuous-ai-agents',
+    title: 'Why AI Agents That Learn Beat One-Time Implementations',
+    excerpt:
+      'Most AI consulting engagements fail because they stop at launch. Continuous optimization is where value compounds.',
+    category: 'AI Agents',
+    date: '2025-02-10',
     readingTime: 6,
     author,
     body: `AI systems are living infrastructure, not static deliverables. That is why build-and-abandon consulting models struggle to sustain value.
@@ -721,24 +742,34 @@ A managed operations cadence retrains and tunes workflows based on live outcomes
 
 ## Why This Matters
 The key question for any AI partner is what happens after launch. If optimization is not part of the model, value usually decays.`,
-    relatedSlugs: ["ai-agents-new-workforce", "why-ai-pilots-fail-5-things-work"],
+    relatedSlugs: ['ai-agents-new-workforce', 'why-ai-pilots-fail-5-things-work'],
     seo: {
-      title: "Continuous AI Agents vs One-Time AI Projects",
-      description: "Why continuous AI optimization beats one-time implementation projects.",
-      keywords: ["continuous AI agents", "managed AI operations"],
+      title: 'Continuous AI Agents vs One-Time AI Projects',
+      description: 'Why continuous AI optimization beats one-time implementation projects.',
+      keywords: ['continuous AI agents', 'managed AI operations'],
     },
-    tags: { solutions: ["managed-operations", "ai-agents"], industries: ["manufacturing", "pe-portfolio"] },
+    tags: {
+      solutions: ['managed-operations', 'ai-agents'],
+      industries: ['manufacturing', 'pe-portfolio'],
+    },
     faqs: [
-      { question: "Why do static AI systems degrade?", answer: "Because data and operating context shift over time, reducing model relevance." },
-      { question: "What sustains AI performance?", answer: "Continuous measurement, tuning, and governance as part of managed operations." },
+      {
+        question: 'Why do static AI systems degrade?',
+        answer: 'Because data and operating context shift over time, reducing model relevance.',
+      },
+      {
+        question: 'What sustains AI performance?',
+        answer: 'Continuous measurement, tuning, and governance as part of managed operations.',
+      },
     ],
   },
   {
-    slug: "ai-readiness-ceo-guide",
+    slug: 'ai-readiness-ceo-guide',
     title: "The CEO's Guide to AI Readiness: What Actually Matters",
-    excerpt: "A practical readiness model covering data, team capability, process clarity, infrastructure, and budget discipline.",
-    category: "AI Strategy",
-    date: "2025-01-15",
+    excerpt:
+      'A practical readiness model covering data, team capability, process clarity, infrastructure, and budget discipline.',
+    category: 'AI Strategy',
+    date: '2025-01-15',
     readingTime: 8,
     author,
     body: `AI readiness is not a checklist exercise. It is a test of operating capability in five areas: data, team, process, infrastructure, and investment discipline.
@@ -752,24 +783,35 @@ The key question for any AI partner is what happens after launch. If optimizatio
 
 ## Practical Next Step
 Score your current state honestly, then focus on the bottleneck blocking your first measurable AI outcome.`,
-    relatedSlugs: ["widening-ai-value-gap", "why-ai-pilots-fail-5-things-work"],
+    relatedSlugs: ['widening-ai-value-gap', 'why-ai-pilots-fail-5-things-work'],
     seo: {
-      title: "CEO AI Readiness Guide",
-      description: "What actually matters for AI readiness at the leadership level.",
-      keywords: ["AI readiness", "CEO AI strategy"],
+      title: 'CEO AI Readiness Guide',
+      description: 'What actually matters for AI readiness at the leadership level.',
+      keywords: ['AI readiness', 'CEO AI strategy'],
     },
-    tags: { solutions: ["ai-strategy"], industries: ["professional-services", "financial-services"] },
+    tags: {
+      solutions: ['ai-strategy'],
+      industries: ['professional-services', 'financial-services'],
+    },
     faqs: [
-      { question: "What is the top AI readiness predictor?", answer: "Data readiness in the specific workflow you plan to modernize first." },
-      { question: "Should we wait for perfect readiness?", answer: "No. Start where readiness is sufficient for one focused workflow and improve from there." },
+      {
+        question: 'What is the top AI readiness predictor?',
+        answer: 'Data readiness in the specific workflow you plan to modernize first.',
+      },
+      {
+        question: 'Should we wait for perfect readiness?',
+        answer:
+          'No. Start where readiness is sufficient for one focused workflow and improve from there.',
+      },
     ],
   },
   {
-    slug: "pe-value-creation-with-ai",
-    title: "PE Value Creation with AI: A Practical Playbook",
-    excerpt: "How operating partners can deploy repeatable AI value creation across portfolio companies.",
-    category: "PE Value Creation",
-    date: "2024-12-18",
+    slug: 'pe-value-creation-with-ai',
+    title: 'PE Value Creation with AI: A Practical Playbook',
+    excerpt:
+      'How operating partners can deploy repeatable AI value creation across portfolio companies.',
+    category: 'PE Value Creation',
+    date: '2024-12-18',
     readingTime: 9,
     author,
     body: `PE firms can create outsize value from AI when initiatives are repeatable, KPI-linked, and managed at portfolio level.
@@ -784,24 +826,31 @@ Assess opportunities across companies with one framework, prioritize by expected
 
 ## Why It Matters
 Repeatability is the unlock. Portfolio companies should not reinvent execution from scratch every time.`,
-    relatedSlugs: ["widening-ai-value-gap", "hybrid-workforce-playbook"],
+    relatedSlugs: ['widening-ai-value-gap', 'hybrid-workforce-playbook'],
     seo: {
-      title: "PE AI Value Creation Playbook",
-      description: "A practical private equity playbook for portfolio AI value creation.",
-      keywords: ["PE AI value creation", "portfolio AI strategy"],
+      title: 'PE AI Value Creation Playbook',
+      description: 'A practical private equity playbook for portfolio AI value creation.',
+      keywords: ['PE AI value creation', 'portfolio AI strategy'],
     },
-    tags: { solutions: ["ai-strategy", "managed-operations"], industries: ["pe-portfolio"] },
+    tags: { solutions: ['ai-strategy', 'managed-operations'], industries: ['pe-portfolio'] },
     faqs: [
-      { question: "How should PE firms start with AI?", answer: "Start with cross-portfolio diagnostics and one high-ROI execution sprint." },
-      { question: "What metric matters most?", answer: "The KPI that most directly maps to EBITDA or strategic growth targets." },
+      {
+        question: 'How should PE firms start with AI?',
+        answer: 'Start with cross-portfolio diagnostics and one high-ROI execution sprint.',
+      },
+      {
+        question: 'What metric matters most?',
+        answer: 'The KPI that most directly maps to EBITDA or strategic growth targets.',
+      },
     ],
   },
   {
-    slug: "hidden-cost-manual-processes",
-    title: "The Hidden Cost of Manual Processes: What Your P&L Is Not Showing You",
-    excerpt: "Manual work creates labor drag, error costs, and missed growth opportunity. Most companies under-measure all three.",
-    category: "Performance Improvement",
-    date: "2024-12-04",
+    slug: 'hidden-cost-manual-processes',
+    title: 'The Hidden Cost of Manual Processes: What Your P&L Is Not Showing You',
+    excerpt:
+      'Manual work creates labor drag, error costs, and missed growth opportunity. Most companies under-measure all three.',
+    category: 'Performance Improvement',
+    date: '2024-12-04',
     readingTime: 6,
     author,
     body: `Manual processes do not appear as a single line item, but they quietly erode margin and execution speed.
@@ -813,24 +862,33 @@ Repeatability is the unlock. Portfolio companies should not reinvent execution f
 
 ## What To Do
 Map one critical workflow end-to-end, quantify time and errors, then prioritize automation opportunities by impact and feasibility.`,
-    relatedSlugs: ["why-ai-pilots-fail-5-things-work", "legacy-systems-ai-bridge"],
+    relatedSlugs: ['why-ai-pilots-fail-5-things-work', 'legacy-systems-ai-bridge'],
     seo: {
-      title: "Hidden Cost of Manual Processes",
-      description: "How to quantify and reduce the hidden operational cost of manual workflows.",
-      keywords: ["manual process cost", "workflow automation ROI"],
+      title: 'Hidden Cost of Manual Processes',
+      description: 'How to quantify and reduce the hidden operational cost of manual workflows.',
+      keywords: ['manual process cost', 'workflow automation ROI'],
     },
-    tags: { solutions: ["ai-strategy", "legacy-modernization"], industries: ["professional-services", "manufacturing"] },
+    tags: {
+      solutions: ['ai-strategy', 'legacy-modernization'],
+      industries: ['professional-services', 'manufacturing'],
+    },
     faqs: [
-      { question: "Where should we automate first?", answer: "Start with high-volume workflows with measurable error and cycle-time impact." },
-      { question: "Do all manual workflows need AI?", answer: "No. Some can be improved with simpler automation and process redesign." },
+      {
+        question: 'Where should we automate first?',
+        answer: 'Start with high-volume workflows with measurable error and cycle-time impact.',
+      },
+      {
+        question: 'Do all manual workflows need AI?',
+        answer: 'No. Some can be improved with simpler automation and process redesign.',
+      },
     ],
   },
   {
-    slug: "ai-agents-explained",
-    title: "AI Agents Explained: What They Are, What They Are Not, and When You Need One",
-    excerpt: "A practical guide to evaluating AI agents for business workflows.",
-    category: "AI Agents",
-    date: "2024-11-20",
+    slug: 'ai-agents-explained',
+    title: 'AI Agents Explained: What They Are, What They Are Not, and When You Need One',
+    excerpt: 'A practical guide to evaluating AI agents for business workflows.',
+    category: 'AI Agents',
+    date: '2024-11-20',
     readingTime: 7,
     author,
     body: `AI agents are autonomous workflow systems, not magic automation.
@@ -843,27 +901,37 @@ High-volume repeatable workflows with measurable outcomes and clear boundaries.
 
 ## Where They Fail
 Low-volume, high-ambiguity work without clear data context or governance.`,
-    relatedSlugs: ["ai-agents-new-workforce", "hybrid-workforce-playbook"],
+    relatedSlugs: ['ai-agents-new-workforce', 'hybrid-workforce-playbook'],
     seo: {
-      title: "AI Agents Explained for Business Leaders",
-      description: "When AI agents make sense, when they do not, and how to evaluate options.",
-      keywords: ["AI agents explained", "agentic AI"],
+      title: 'AI Agents Explained for Business Leaders',
+      description: 'When AI agents make sense, when they do not, and how to evaluate options.',
+      keywords: ['AI agents explained', 'agentic AI'],
     },
-    tags: { solutions: ["ai-agents", "managed-operations"], industries: ["professional-services", "financial-services"] },
+    tags: {
+      solutions: ['ai-agents', 'managed-operations'],
+      industries: ['professional-services', 'financial-services'],
+    },
     faqs: [
-      { question: "What is the difference between an agent and a chatbot?", answer: "Agents execute multi-step tasks, while chatbots mainly answer prompts." },
-      { question: "Should we build or buy agents?", answer: "Use off-the-shelf for generic workflows and custom builds for differentiated workflows." },
+      {
+        question: 'What is the difference between an agent and a chatbot?',
+        answer: 'Agents execute multi-step tasks, while chatbots mainly answer prompts.',
+      },
+      {
+        question: 'Should we build or buy agents?',
+        answer:
+          'Use off-the-shelf for generic workflows and custom builds for differentiated workflows.',
+      },
     ],
   },
 ];
 
 export const insightCategories: InsightCategory[] = [
-  "AI Strategy",
-  "Performance Improvement",
-  "PE Value Creation",
-  "AI Agents",
-  "Legacy Modernization",
-  "Workforce Transformation",
+  'AI Strategy',
+  'Performance Improvement',
+  'PE Value Creation',
+  'AI Agents',
+  'Legacy Modernization',
+  'Workforce Transformation',
 ];
 
 export function getInsight(slug: string): Insight | undefined {
@@ -881,9 +949,9 @@ export function getInsightsByTag(slug: string): Insight[] {
 }
 
 export function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   });
 }

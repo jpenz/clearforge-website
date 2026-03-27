@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Mail, ArrowRight } from "lucide-react";
+import { motion } from 'framer-motion';
+import { ArrowRight, Mail } from 'lucide-react';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 export function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -15,21 +15,21 @@ export function ContactPage() {
     const form = e.currentTarget;
     const data = new FormData(form);
     try {
-      await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(Object.fromEntries(data)),
       });
       setSubmitted(true);
     } catch {
-      alert("Something went wrong. Please try again.");
+      alert('Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }
   }
 
   const inputClasses =
-    "w-full border-0 border-b border-border-default bg-transparent px-0 py-3 text-base text-text-primary placeholder:text-text-muted focus:border-accent focus:outline-none focus:ring-0 transition-colors";
+    'w-full border-0 border-b border-border-default bg-transparent px-0 py-3 text-base text-text-primary placeholder:text-text-muted focus:border-accent focus:outline-none focus:ring-0 transition-colors';
 
   return (
     <section className="min-h-screen bg-bg-deep pt-32 pb-24 lg:pb-32">
@@ -44,14 +44,14 @@ export function ContactPage() {
             <p className="section-label">Request a Proposal</p>
             <h1
               className="mt-4 text-4xl text-text-primary sm:text-5xl lg:text-6xl"
-              style={{ fontFamily: "var(--font-heading)" }}
+              style={{ fontFamily: 'var(--font-heading)' }}
             >
               Let&apos;s talk about your business.
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-text-secondary">
-              Tell us about your company and what you&apos;re trying to
-              accomplish. We&apos;ll respond within 24 hours with an honest
-              assessment of whether we can help — and if so, how.
+              Tell us about your company and what you&apos;re trying to accomplish. We&apos;ll
+              respond within 24 hours with an honest assessment of whether we can help — and if so,
+              how.
             </p>
 
             <div className="mt-12 space-y-6 border-t border-border-subtle pt-8">
@@ -67,9 +67,7 @@ export function ContactPage() {
             </div>
 
             <div className="mt-12 border border-border-subtle p-6">
-              <p className="text-sm font-semibold text-text-primary">
-                What to expect
-              </p>
+              <p className="text-sm font-semibold text-text-primary">What to expect</p>
               <ul className="mt-4 space-y-3 text-sm text-text-secondary">
                 <li className="flex gap-3">
                   <span className="metric text-xs mt-0.5">01</span>
@@ -98,7 +96,7 @@ export function ContactPage() {
                 <div className="text-center">
                   <h3
                     className="text-2xl text-text-primary"
-                    style={{ fontFamily: "var(--font-heading)" }}
+                    style={{ fontFamily: 'var(--font-heading)' }}
                   >
                     Thank you.
                   </h3>
@@ -110,7 +108,10 @@ export function ContactPage() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div>
-                  <label htmlFor="name" className="block text-xs font-semibold uppercase tracking-widest text-text-muted mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-xs font-semibold uppercase tracking-widest text-text-muted mb-2"
+                  >
                     Name *
                   </label>
                   <input
@@ -124,7 +125,10 @@ export function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-xs font-semibold uppercase tracking-widest text-text-muted mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-xs font-semibold uppercase tracking-widest text-text-muted mb-2"
+                  >
                     Work Email *
                   </label>
                   <input
@@ -138,7 +142,10 @@ export function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="company" className="block text-xs font-semibold uppercase tracking-widest text-text-muted mb-2">
+                  <label
+                    htmlFor="company"
+                    className="block text-xs font-semibold uppercase tracking-widest text-text-muted mb-2"
+                  >
                     Company
                   </label>
                   <input
@@ -151,14 +158,13 @@ export function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="revenue" className="block text-xs font-semibold uppercase tracking-widest text-text-muted mb-2">
+                  <label
+                    htmlFor="revenue"
+                    className="block text-xs font-semibold uppercase tracking-widest text-text-muted mb-2"
+                  >
                     Annual Revenue
                   </label>
-                  <select
-                    id="revenue"
-                    name="revenue"
-                    className={`${inputClasses} cursor-pointer`}
-                  >
+                  <select id="revenue" name="revenue" className={`${inputClasses} cursor-pointer`}>
                     <option value="">Select range</option>
                     <option value="<5M">&lt;$5M</option>
                     <option value="5M-25M">$5M – $25M</option>
@@ -169,7 +175,10 @@ export function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-xs font-semibold uppercase tracking-widest text-text-muted mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-xs font-semibold uppercase tracking-widest text-text-muted mb-2"
+                  >
                     How can we help? *
                   </label>
                   <textarea
@@ -183,7 +192,9 @@ export function ContactPage() {
                 </div>
 
                 <Button type="submit" className="w-full" size="lg" disabled={loading}>
-                  {loading ? "Sending..." : (
+                  {loading ? (
+                    'Sending...'
+                  ) : (
                     <>
                       Submit Request <ArrowRight className="ml-2 h-4 w-4" />
                     </>

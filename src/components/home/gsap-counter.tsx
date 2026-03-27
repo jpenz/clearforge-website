@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
 
-if (typeof window !== "undefined") {
+if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
@@ -25,14 +25,14 @@ interface GSAPCounterProps {
  */
 export function GSAPCounter({
   value,
-  className = "metric text-3xl font-bold sm:text-4xl",
+  className = 'metric text-3xl font-bold sm:text-4xl',
   duration = 2,
 }: GSAPCounterProps) {
   const spanRef = useRef<HTMLSpanElement>(null);
 
   useGSAP(
     () => {
-      if (typeof window === "undefined") return;
+      if (typeof window === 'undefined') return;
       const el = spanRef.current;
       if (!el) return;
 
@@ -44,30 +44,30 @@ export function GSAPCounter({
         return;
       }
 
-      const prefix = match[1] || "";
+      const prefix = match[1] || '';
       const numStr = match[2];
-      const suffix = match[3] || "";
+      const suffix = match[3] || '';
 
-      const cleanNum = numStr.replace(/,/g, "");
+      const cleanNum = numStr.replace(/,/g, '');
       const target = parseFloat(cleanNum);
-      const hasCommas = numStr.includes(",");
-      const decimalPlaces = cleanNum.includes(".") ? cleanNum.split(".")[1].length : 0;
+      const hasCommas = numStr.includes(',');
+      const decimalPlaces = cleanNum.includes('.') ? cleanNum.split('.')[1].length : 0;
 
       // Proxy object for GSAP to tween
       const proxy = { val: 0 };
 
       // Set initial display
-      el.textContent = prefix + "0" + suffix;
+      el.textContent = prefix + '0' + suffix;
 
       gsap.to(proxy, {
         val: target,
         duration,
-        ease: "power2.out",
-        snap: { val: decimalPlaces > 0 ? 1 / Math.pow(10, decimalPlaces) : 1 },
+        ease: 'power2.out',
+        snap: { val: decimalPlaces > 0 ? 1 / 10 ** decimalPlaces : 1 },
         scrollTrigger: {
           trigger: el,
-          start: "top 90%",
-          toggleActions: "play none none none",
+          start: 'top 90%',
+          toggleActions: 'play none none none',
         },
         onUpdate() {
           let formatted: string;
@@ -81,7 +81,7 @@ export function GSAPCounter({
         },
       });
     },
-    { scope: spanRef, dependencies: [value, duration] }
+    { scope: spanRef, dependencies: [value, duration] },
   );
 
   return (

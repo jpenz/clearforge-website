@@ -1,4 +1,4 @@
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -33,18 +33,18 @@ export interface AssessmentLead {
 
 export async function saveAssessmentLead(lead: AssessmentLead): Promise<string | null> {
   if (!supabaseAdmin) {
-    console.warn("Supabase not configured; skipping lead save.");
+    console.warn('Supabase not configured; skipping lead save.');
     return null;
   }
 
   const { data, error } = await supabaseAdmin
-    .from("assessment_leads")
+    .from('assessment_leads')
     .insert(lead)
-    .select("id")
+    .select('id')
     .single();
 
   if (error) {
-    console.error("Failed to save assessment lead:", error);
+    console.error('Failed to save assessment lead:', error);
     return null;
   }
 
@@ -60,34 +60,34 @@ export async function saveContactLead(lead: {
   source: string;
 }): Promise<string | null> {
   if (!supabaseAdmin) {
-    console.warn("Supabase not configured; skipping contact lead save.");
+    console.warn('Supabase not configured; skipping contact lead save.');
     return null;
   }
 
   const { data, error } = await supabaseAdmin
-    .from("assessment_leads")
+    .from('assessment_leads')
     .insert({
       name: lead.name,
       email: lead.email,
       company: lead.company,
-      role: "",
-      industry: "",
+      role: '',
+      industry: '',
       challenge: lead.message,
       composite_score: 0,
-      maturity_level: "",
+      maturity_level: '',
       pillar_scores: {},
       suggested_solutions: [],
-      suggested_engagement: lead.revenue || "",
-      closer_report: "",
-      company_research: "",
-      industry_best_in_class: "",
+      suggested_engagement: lead.revenue || '',
+      closer_report: '',
+      company_research: '',
+      industry_best_in_class: '',
       source: lead.source,
     })
-    .select("id")
+    .select('id')
     .single();
 
   if (error) {
-    console.error("Failed to save contact lead:", error);
+    console.error('Failed to save contact lead:', error);
     return null;
   }
 

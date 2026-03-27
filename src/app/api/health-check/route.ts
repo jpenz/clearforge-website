@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
 /**
  * GET /api/health-check
@@ -18,8 +18,8 @@ export async function GET(): Promise<NextResponse> {
     {
       timestamp: new Date().toISOString(),
       nodeVersion: process.version,
-      environment: process.env.NODE_ENV ?? "development",
+      environment: process.env.NODE_ENV ?? 'development',
     },
-    { status: 200 }
+    { status: 200 },
   );
 }

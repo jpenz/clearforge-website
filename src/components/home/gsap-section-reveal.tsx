@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { useRef, type ReactNode } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { type ReactNode, useRef } from 'react';
 
-if (typeof window !== "undefined") {
+if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 type AnimationType =
-  | "fade-up"
-  | "slide-left"
-  | "slide-right"
-  | "scale-up"
-  | "clip-reveal"
-  | "parallax"
-  | "pin";
+  | 'fade-up'
+  | 'slide-left'
+  | 'slide-right'
+  | 'scale-up'
+  | 'clip-reveal'
+  | 'parallax'
+  | 'pin';
 
 interface GSAPSectionRevealProps {
   children: ReactNode;
@@ -26,34 +26,34 @@ interface GSAPSectionRevealProps {
 }
 
 const animationConfigs: Record<
-  Exclude<AnimationType, "parallax" | "pin">,
+  Exclude<AnimationType, 'parallax' | 'pin'>,
   { from: gsap.TweenVars; to: gsap.TweenVars }
 > = {
-  "fade-up": {
+  'fade-up': {
     from: { opacity: 0, y: 40 },
     to: { opacity: 1, y: 0 },
   },
-  "slide-left": {
+  'slide-left': {
     from: { opacity: 0, x: -60 },
     to: { opacity: 1, x: 0 },
   },
-  "slide-right": {
+  'slide-right': {
     from: { opacity: 0, x: 60 },
     to: { opacity: 1, x: 0 },
   },
-  "scale-up": {
+  'scale-up': {
     from: { opacity: 0, scale: 0.92 },
     to: { opacity: 1, scale: 1 },
   },
-  "clip-reveal": {
-    from: { opacity: 0, y: 24, clipPath: "inset(100% 0% 0% 0%)" },
-    to: { opacity: 1, y: 0, clipPath: "inset(0% 0% 0% 0%)" },
+  'clip-reveal': {
+    from: { opacity: 0, y: 24, clipPath: 'inset(100% 0% 0% 0%)' },
+    to: { opacity: 1, y: 0, clipPath: 'inset(0% 0% 0% 0%)' },
   },
 };
 
 export function GSAPSectionReveal({
   children,
-  animation = "fade-up",
+  animation = 'fade-up',
   delay = 0,
   className,
 }: GSAPSectionRevealProps) {
@@ -61,29 +61,29 @@ export function GSAPSectionReveal({
 
   useGSAP(
     () => {
-      if (typeof window === "undefined") return;
+      if (typeof window === 'undefined') return;
       const el = containerRef.current;
       if (!el) return;
 
-      if (animation === "parallax") {
+      if (animation === 'parallax') {
         gsap.to(el, {
           y: -80,
-          ease: "none",
+          ease: 'none',
           scrollTrigger: {
             trigger: el,
-            start: "top bottom",
-            end: "bottom top",
+            start: 'top bottom',
+            end: 'bottom top',
             scrub: true,
           },
         });
         return;
       }
 
-      if (animation === "pin") {
+      if (animation === 'pin') {
         ScrollTrigger.create({
           trigger: el,
-          start: "top top",
-          end: "+=100%",
+          start: 'top top',
+          end: '+=100%',
           pin: true,
           pinSpacing: true,
         });
@@ -96,15 +96,15 @@ export function GSAPSectionReveal({
         ...config.to,
         duration: 0.9,
         delay,
-        ease: "power3.out",
+        ease: 'power3.out',
         scrollTrigger: {
           trigger: el,
-          start: "top 85%",
-          toggleActions: "play none none none",
+          start: 'top 85%',
+          toggleActions: 'play none none none',
         },
       });
     },
-    { scope: containerRef, dependencies: [animation, delay] }
+    { scope: containerRef, dependencies: [animation, delay] },
   );
 
   return (
@@ -127,13 +127,13 @@ export function StaggerRevealGSAP({
   children,
   className,
   stagger = 0.15,
-  childSelector = ":scope > *",
+  childSelector = ':scope > *',
 }: StaggerRevealGSAPProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      if (typeof window === "undefined") return;
+      if (typeof window === 'undefined') return;
       const el = containerRef.current;
       if (!el) return;
 
@@ -147,17 +147,17 @@ export function StaggerRevealGSAP({
           opacity: 1,
           y: 0,
           duration: 0.6,
-          ease: "power3.out",
+          ease: 'power3.out',
           stagger,
           scrollTrigger: {
             trigger: el,
-            start: "top 85%",
-            toggleActions: "play none none none",
+            start: 'top 85%',
+            toggleActions: 'play none none none',
           },
-        }
+        },
       );
     },
-    { scope: containerRef, dependencies: [stagger, childSelector] }
+    { scope: containerRef, dependencies: [stagger, childSelector] },
   );
 
   return (

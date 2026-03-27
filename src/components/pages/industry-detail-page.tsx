@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { type Industry } from "@/data/industries";
-import { industryIcons } from "@/lib/icons";
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import type { Industry } from '@/data/industries';
+import { industryIcons } from '@/lib/icons';
 
 interface Props {
   industry: Industry;
@@ -15,11 +15,16 @@ export function IndustryDetailPage({ industry }: Props) {
     <>
       <section className="bg-white py-20 lg:py-28 border-b border-border">
         <div className="mx-auto max-w-5xl px-6 lg:px-8">
-          <Link href="/industries" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-teal">
+          <Link
+            href="/industries"
+            className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-teal"
+          >
             <ArrowLeft className="h-4 w-4" /> Back to industries
           </Link>
           <IndustryIcon className="mt-6 h-8 w-8 text-teal" aria-hidden />
-          <h1 className="mt-3 text-4xl font-bold text-text sm:text-5xl">AI strategy for {industry.name}</h1>
+          <h1 className="mt-3 text-4xl font-bold text-text sm:text-5xl">
+            AI strategy for {industry.name}
+          </h1>
           <p className="mt-4 max-w-3xl text-lg text-text-secondary">{industry.hero}</p>
         </div>
       </section>
@@ -29,7 +34,9 @@ export function IndustryDetailPage({ industry }: Props) {
           <article className="rounded-xl border border-border bg-white p-6">
             <h2 className="text-2xl font-bold text-text">Industry context</h2>
             {industry.overview.map((paragraph) => (
-              <p key={paragraph} className="mt-4 text-base leading-relaxed text-text-secondary">{paragraph}</p>
+              <p key={paragraph} className="mt-4 text-base leading-relaxed text-text-secondary">
+                {paragraph}
+              </p>
             ))}
           </article>
           <article className="rounded-xl border border-border bg-white p-6">
@@ -51,7 +58,12 @@ export function IndustryDetailPage({ industry }: Props) {
           <h2 className="text-2xl font-bold text-text">Use cases we prioritize</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {industry.useCases.map((useCase) => (
-              <div key={useCase} className="rounded-xl border border-border bg-surface p-5 text-base text-text-secondary">{useCase}</div>
+              <div
+                key={useCase}
+                className="rounded-xl border border-border bg-surface p-5 text-base text-text-secondary"
+              >
+                {useCase}
+              </div>
             ))}
           </div>
         </div>
@@ -73,7 +85,12 @@ export function IndustryDetailPage({ industry }: Props) {
             <ul className="mt-4 space-y-2">
               {industry.relatedInsights.map((slug) => (
                 <li key={slug}>
-                  <Link href={`/insights/${slug}`} className="text-base text-teal hover:text-teal-light">/{slug}</Link>
+                  <Link
+                    href={`/insights/${slug}`}
+                    className="text-base text-teal hover:text-teal-light"
+                  >
+                    /{slug}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -84,7 +101,10 @@ export function IndustryDetailPage({ industry }: Props) {
       <section className="bg-navy py-20 lg:py-28">
         <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
           <h2 className="text-3xl font-bold text-white">Discuss AI for {industry.shortName}</h2>
-          <p className="mt-4 text-lg text-white/80">We can map your top opportunities and a practical implementation path in one working session.</p>
+          <p className="mt-4 text-lg text-white/80">
+            We can map your top opportunities and a practical implementation path in one working
+            session.
+          </p>
           <Button className="mt-8" size="lg" asChild>
             <Link href="/contact">Book a Discovery Call</Link>
           </Button>

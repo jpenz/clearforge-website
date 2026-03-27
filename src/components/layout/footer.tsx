@@ -1,24 +1,24 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 const footerLinks = {
   Services: [
-    { href: "/services#strategy", label: "Growth Strategy & Diagnosis" },
-    { href: "/services#build", label: "AI Design & Build" },
-    { href: "/services#operations", label: "Managed AI Operations" },
-    { href: "/services#modernization", label: "Legacy Modernization" },
+    { href: '/services#strategy', label: 'Growth Strategy & Diagnosis' },
+    { href: '/services#build', label: 'AI Design & Build' },
+    { href: '/services#operations', label: 'Managed AI Operations' },
+    { href: '/services#modernization', label: 'Legacy Modernization' },
   ],
   Company: [
-    { href: "/case-studies", label: "Case Studies" },
-    { href: "/assessment", label: "AI Readiness Assessment" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    { href: '/case-studies', label: 'Case Studies' },
+    { href: '/assessment', label: 'AI Readiness Assessment' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
   ],
   Industries: [
-    { href: "/case-studies/industrial-manufacturer", label: "Industrial Manufacturing" },
-    { href: "/case-studies/metro-detroit-services-company", label: "Home & Commercial Services" },
-    { href: "/case-studies/pe-portfolio-diagnostic-plan", label: "Private Equity" },
+    { href: '/case-studies/industrial-manufacturer', label: 'Industrial Manufacturing' },
+    { href: '/case-studies/metro-detroit-services-company', label: 'Home & Commercial Services' },
+    { href: '/case-studies/pe-portfolio-diagnostic-plan', label: 'Private Equity' },
   ],
 };
 
@@ -32,13 +32,13 @@ export function Footer() {
             <div className="max-w-xl">
               <p
                 className="text-2xl lg:text-3xl text-text-primary tracking-tight"
-                style={{ fontFamily: "var(--font-heading)" }}
+                style={{ fontFamily: 'var(--font-heading)' }}
               >
                 Ready to turn AI into a growth engine?
               </p>
               <p className="mt-3 text-base text-text-secondary">
-                One conversation to find out if we&apos;re the right partner.
-                No pitch decks. No pressure.
+                One conversation to find out if we&apos;re the right partner. No pitch decks. No
+                pressure.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -66,15 +66,14 @@ export function Footer() {
             <Link href="/" className="inline-block">
               <span
                 className="text-2xl tracking-tight text-text-primary"
-                style={{ fontFamily: "var(--font-heading)" }}
+                style={{ fontFamily: 'var(--font-heading)' }}
               >
                 ClearForge
               </span>
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-text-muted">
-              AI strategy and execution for mid-market companies.
-              One team from diagnosis to production — no handoffs,
-              no slide decks that sit on a shelf.
+              AI strategy and execution for mid-market companies. One team from diagnosis to
+              production — no handoffs, no slide decks that sit on a shelf.
             </p>
 
             {/* Contact info */}
@@ -121,10 +120,16 @@ export function Footer() {
             &copy; {new Date().getFullYear()} ClearForge AI. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="text-xs text-text-muted hover:text-text-secondary transition-colors">
+            <Link
+              href="/privacy"
+              className="text-xs text-text-muted hover:text-text-secondary transition-colors"
+            >
               Privacy
             </Link>
-            <Link href="/terms" className="text-xs text-text-muted hover:text-text-secondary transition-colors">
+            <Link
+              href="/terms"
+              className="text-xs text-text-muted hover:text-text-secondary transition-colors"
+            >
               Terms
             </Link>
           </div>

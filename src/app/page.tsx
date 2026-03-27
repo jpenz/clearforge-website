@@ -1,86 +1,119 @@
-import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { createMetadata } from "@/lib/metadata";
-import { caseStudies } from "@/data/case-studies";
-import { GSAPCounter } from "@/components/home/gsap-counter";
-import { GSAPSectionReveal, StaggerRevealGSAP } from "@/components/home/gsap-section-reveal";
-import { GSAPStatStrip } from "@/components/home/gsap-stat-strip";
-import { HeroCanvas } from "@/components/home/hero-canvas";
-import { TransformationAssembly } from "@/components/home/transformation-assembly";
+import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { GSAPCounter } from '@/components/home/gsap-counter';
+import { GSAPSectionReveal, StaggerRevealGSAP } from '@/components/home/gsap-section-reveal';
+import { GSAPStatStrip } from '@/components/home/gsap-stat-strip';
+import { HeroCanvas } from '@/components/home/hero-canvas';
+import { TransformationAssembly } from '@/components/home/transformation-assembly';
+import { Button } from '@/components/ui/button';
+import { caseStudies } from '@/data/case-studies';
+import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: "ClearForge — AI Strategy & Execution for Mid-Market Companies",
+  title: 'ClearForge — AI Strategy & Execution for Mid-Market Companies',
   description:
-    "We find where AI should drive growth, build the systems that get you there, and get your people to actually use them. Strategy through production — one partner, no handoffs.",
-  path: "",
-  keywords: ["AI strategy", "AI execution", "mid-market AI consulting", "AI agents", "PE value creation"],
+    'We find where AI should drive growth, build the systems that get you there, and get your people to actually use them. Strategy through production — one partner, no handoffs.',
+  path: '',
+  keywords: [
+    'AI strategy',
+    'AI execution',
+    'mid-market AI consulting',
+    'AI agents',
+    'PE value creation',
+  ],
 });
 
 /* ── Data ── */
 
 const stallReasons = [
-  { title: "Pilots that never scale", description: "Teams run isolated experiments disconnected from operations. Value stays trapped in demos." },
-  { title: "Strategy-execution gap", description: "One partner writes the plan, another attempts delivery. Value is lost in the handoff." },
-  { title: "Tech without workforce change", description: "Systems launch but teams aren't prepared. Adoption stalls because people were an afterthought." },
+  {
+    title: 'Pilots that never scale',
+    description:
+      'Teams run isolated experiments disconnected from operations. Value stays trapped in demos.',
+  },
+  {
+    title: 'Strategy-execution gap',
+    description:
+      'One partner writes the plan, another attempts delivery. Value is lost in the handoff.',
+  },
+  {
+    title: 'Tech without workforce change',
+    description:
+      "Systems launch but teams aren't prepared. Adoption stalls because people were an afterthought.",
+  },
 ];
 
 const pastAttempts = [
-  "You hired a consultancy. They left you with slides.",
-  "You tried building internally. Your best engineers are still figuring out infrastructure.",
-  "You bought a platform. Adoption peaked at 15%.",
+  'You hired a consultancy. They left you with slides.',
+  'You tried building internally. Your best engineers are still figuring out infrastructure.',
+  'You bought a platform. Adoption peaked at 15%.',
   "Or you haven't started — because nobody could tell you where to begin.",
 ];
 
 const methodologyPhases = [
   {
-    num: "01",
-    title: "Find the growth and name the real bottleneck",
-    subtitle: "Understand",
-    description: "We define growth goals, map your value chain, and quantify where value is leaking — so every decision starts with evidence, not assumptions.",
+    num: '01',
+    title: 'Find the growth and name the real bottleneck',
+    subtitle: 'Understand',
+    description:
+      'We define growth goals, map your value chain, and quantify where value is leaking — so every decision starts with evidence, not assumptions.',
     details: [
-      "Map revenue, operations, and support workflows end to end",
-      "Identify AI opportunities tied to clear business metrics",
-      "Benchmark readiness across data, technology, and people",
-      "Deliver a prioritized action plan with owners and timelines",
+      'Map revenue, operations, and support workflows end to end',
+      'Identify AI opportunities tied to clear business metrics',
+      'Benchmark readiness across data, technology, and people',
+      'Deliver a prioritized action plan with owners and timelines',
     ],
   },
   {
-    num: "02",
-    title: "Redesign workflows and deploy controlled AI systems",
-    subtitle: "Build",
-    description: "We build practical AI agents with your operators — working systems with owners, governance, and KPI baselines. Not proofs of concept. Production systems.",
+    num: '02',
+    title: 'Redesign workflows and deploy controlled AI systems',
+    subtitle: 'Build',
+    description:
+      'We build practical AI agents with your operators — working systems with owners, governance, and KPI baselines. Not proofs of concept. Production systems.',
     details: [
-      "Redesign workflows before layering AI on top",
-      "Deploy AI agents with human-in-the-loop controls",
-      "Build dashboards and execution platforms your team uses daily",
-      "Establish KPI baselines and feedback loops from day one",
+      'Redesign workflows before layering AI on top',
+      'Deploy AI agents with human-in-the-loop controls',
+      'Build dashboards and execution platforms your team uses daily',
+      'Establish KPI baselines and feedback loops from day one',
     ],
   },
   {
-    num: "03",
-    title: "Run, optimize, and reinforce adoption",
-    subtitle: "Operate",
-    description: "We turn early wins into operating rhythm, train teams on human-plus-agent workflows, and expand what works. Compounding gains, not one-off projects.",
+    num: '03',
+    title: 'Run, optimize, and reinforce adoption',
+    subtitle: 'Operate',
+    description:
+      'We turn early wins into operating rhythm, train teams on human-plus-agent workflows, and expand what works. Compounding gains, not one-off projects.',
     details: [
-      "Managed operations with continuous optimization",
-      "Role-based AI training for leadership and frontline teams",
-      "Expand proven systems to new divisions and use cases",
-      "The system gets smarter every month — compounding precision",
+      'Managed operations with continuous optimization',
+      'Role-based AI training for leadership and frontline teams',
+      'Expand proven systems to new divisions and use cases',
+      'The system gets smarter every month — compounding precision',
     ],
   },
 ];
 
 const objections = [
-  { q: "We're not big enough for this.", a: "We work with $5M-$500M companies. AI advantage matters more at your scale — you don't have a 50-person data science team. That's exactly why we exist." },
-  { q: "We tried AI and it didn't work.", a: "It probably wasn't tied to a business metric. Every system we deploy is measured against revenue, cost, or throughput." },
-  { q: "This sounds expensive.", a: "A strategy engagement starts in the low five figures. The real question is what it costs to wait 12 more months." },
-  { q: "We don't have the right data.", a: "Almost nobody does at first. That's literally step one. If you had perfect data infrastructure, you wouldn't need us." },
+  {
+    q: "We're not big enough for this.",
+    a: "We work with $5M-$500M companies. AI advantage matters more at your scale — you don't have a 50-person data science team. That's exactly why we exist.",
+  },
+  {
+    q: "We tried AI and it didn't work.",
+    a: "It probably wasn't tied to a business metric. Every system we deploy is measured against revenue, cost, or throughput.",
+  },
+  {
+    q: 'This sounds expensive.',
+    a: 'A strategy engagement starts in the low five figures. The real question is what it costs to wait 12 more months.',
+  },
+  {
+    q: "We don't have the right data.",
+    a: "Almost nobody does at first. That's literally step one. If you had perfect data infrastructure, you wouldn't need us.",
+  },
 ];
 
 export default function Home() {
-  const featured = caseStudies.find((cs) => cs.slug === "industrial-manufacturer");
+  const featured = caseStudies.find((cs) => cs.slug === 'industrial-manufacturer');
 
   return (
     <>
@@ -96,14 +129,13 @@ export default function Home() {
           <p className="section-label opacity-0 animate-fade-in-up">AI Strategy & Execution</p>
 
           <h1 className="mt-6 max-w-4xl text-[clamp(2.8rem,9vw,7rem)] leading-[0.92] tracking-tighter text-text-primary opacity-0 animate-fade-in-up delay-1">
-            Find the growth.{" "}
-            <em className="accent-gradient-text not-italic">Build the machine.</em>
+            Find the growth. <em className="accent-gradient-text not-italic">Build the machine.</em>
           </h1>
 
           <div className="mt-10 max-w-lg opacity-0 animate-fade-in-up delay-2">
             <p className="text-lg leading-relaxed text-text-secondary">
-              We find where AI drives growth, build the systems,
-              and get your people to actually use them.
+              We find where AI drives growth, build the systems, and get your people to actually use
+              them.
             </p>
           </div>
 
@@ -124,10 +156,10 @@ export default function Home() {
       <GSAPStatStrip
         className="bg-bg-primary"
         stats={[
-          { value: "$4.4T", label: "AI market by 2030" },
-          { value: "72%", label: "Stall at pilot stage" },
-          { value: "3.2x", label: "Early mover margin advantage" },
-          { value: "<10%", label: "Reach production" },
+          { value: '$4.4T', label: 'AI market by 2030' },
+          { value: '72%', label: 'Stall at pilot stage' },
+          { value: '3.2x', label: 'Early mover margin advantage' },
+          { value: '<10%', label: 'Reach production' },
         ]}
       />
 
@@ -146,17 +178,25 @@ export default function Home() {
               <StaggerRevealGSAP className="lg:col-span-7 mt-14 lg:mt-0 space-y-10" stagger={0.12}>
                 {stallReasons.map((r, i) => (
                   <div key={r.title} className="flex items-baseline gap-6">
-                    <span className="metric text-sm text-accent-dark shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="metric text-sm text-accent-dark shrink-0">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
                     <div>
-                      <h3 className="text-xl font-bold text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
+                      <h3
+                        className="text-xl font-bold text-text-on-light"
+                        style={{ fontFamily: 'var(--font-heading)' }}
+                      >
                         {r.title}
                       </h3>
-                      <p className="mt-2 text-base leading-relaxed text-text-on-light-sub font-medium">{r.description}</p>
+                      <p className="mt-2 text-base leading-relaxed text-text-on-light-sub font-medium">
+                        {r.description}
+                      </p>
                     </div>
                   </div>
                 ))}
                 <p className="text-lg font-semibold text-accent-dark mt-6 border-l-2 border-accent pl-6">
-                  Disconnected execution turns promising pilots into expensive programs that never ship.
+                  Disconnected execution turns promising pilots into expensive programs that never
+                  ship.
                 </p>
               </StaggerRevealGSAP>
             </div>
@@ -175,19 +215,22 @@ export default function Home() {
                 <p
                   key={attempt}
                   className="text-xl leading-snug text-text-secondary"
-                  style={{ fontFamily: "var(--font-heading)", opacity: 1 - i * 0.12 }}
+                  style={{ fontFamily: 'var(--font-heading)', opacity: 1 - i * 0.12 }}
                 >
                   {attempt}
                 </p>
               ))}
             </div>
             <div className="mt-14 gradient-divider" />
-            <p className="mt-10 text-[clamp(1.5rem,4vw,2.25rem)] text-text-primary leading-tight tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
+            <p
+              className="mt-10 text-[clamp(1.5rem,4vw,2.25rem)] text-text-primary leading-tight tracking-tight"
+              style={{ fontFamily: 'var(--font-heading)' }}
+            >
               The problem was never the technology.
             </p>
             <p className="mt-3 text-base text-text-muted">
-              It was the gap between strategy and execution — and forgetting
-              that people have to actually change how they work.
+              It was the gap between strategy and execution — and forgetting that people have to
+              actually change how they work.
             </p>
           </div>
         </section>
@@ -204,9 +247,9 @@ export default function Home() {
               People Capability — Every Phase
             </p>
             <p className="text-base text-text-secondary leading-relaxed">
-              Role-based AI training for leadership and frontline teams.
-              Human-plus-agent operating playbooks so adoption sticks.
-              Manager coaching and governance rhythm to reinforce behavior change.
+              Role-based AI training for leadership and frontline teams. Human-plus-agent operating
+              playbooks so adoption sticks. Manager coaching and governance rhythm to reinforce
+              behavior change.
             </p>
           </div>
         </div>
@@ -216,7 +259,12 @@ export default function Home() {
       {featured && (
         <GSAPSectionReveal animation="scale-up">
           <section className="bg-bg-deep py-20 lg:py-32 relative noise-texture overflow-hidden">
-            <Image src="/images/abstract-network.png" alt="" fill className="object-cover opacity-15" />
+            <Image
+              src="/images/abstract-network.png"
+              alt=""
+              fill
+              className="object-cover opacity-15"
+            />
             <div className="absolute inset-0 bg-bg-deep/85 pointer-events-none" />
             <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
               <p className="section-label">Results</p>
@@ -228,7 +276,10 @@ export default function Home() {
               <div className="mt-14 grid grid-cols-2 gap-10 lg:grid-cols-4">
                 {featured.outcomes.slice(0, 4).map((o) => (
                   <div key={o.description}>
-                    <GSAPCounter value={o.metric} className="metric text-[clamp(2.5rem,5vw,4rem)] font-bold" />
+                    <GSAPCounter
+                      value={o.metric}
+                      className="metric text-[clamp(2.5rem,5vw,4rem)] font-bold"
+                    />
                     <p className="mt-2 text-sm text-text-muted">{o.description}</p>
                   </div>
                 ))}
@@ -249,10 +300,30 @@ export default function Home() {
       {/* ═══ ASSESSMENT CTA ═══ */}
       <GSAPSectionReveal animation="fade-up">
         <section className="bg-bg-light py-20 lg:py-32 relative overflow-hidden">
-          <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1440 800" preserveAspectRatio="none" aria-hidden>
-            <path d="M -72,680 Q 288,600 576,640 Q 864,680 1152,624 Q 1440,560 1512,600" fill="none" stroke="rgba(5,158,135,0.06)" strokeWidth="1" />
-            <path d="M -72,560 Q 360,480 648,544 Q 936,600 1224,520 Q 1440,440 1512,480" fill="none" stroke="rgba(5,158,135,0.05)" strokeWidth="1" />
-            <path d="M -72,440 Q 432,360 720,416 Q 1008,480 1296,384 Q 1512,304 1584,336" fill="none" stroke="rgba(5,158,135,0.04)" strokeWidth="1" />
+          <svg
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            viewBox="0 0 1440 800"
+            preserveAspectRatio="none"
+            aria-hidden
+          >
+            <path
+              d="M -72,680 Q 288,600 576,640 Q 864,680 1152,624 Q 1440,560 1512,600"
+              fill="none"
+              stroke="rgba(5,158,135,0.06)"
+              strokeWidth="1"
+            />
+            <path
+              d="M -72,560 Q 360,480 648,544 Q 936,600 1224,520 Q 1440,440 1512,480"
+              fill="none"
+              stroke="rgba(5,158,135,0.05)"
+              strokeWidth="1"
+            />
+            <path
+              d="M -72,440 Q 432,360 720,416 Q 1008,480 1296,384 Q 1512,304 1584,336"
+              fill="none"
+              stroke="rgba(5,158,135,0.04)"
+              strokeWidth="1"
+            />
           </svg>
           <div className="relative z-10 mx-auto max-w-3xl px-6 lg:px-8">
             <div className="text-center">
@@ -261,22 +332,39 @@ export default function Home() {
                 Find out where you stand — and where to focus first.
               </h2>
               <p className="mt-6 text-lg text-text-on-light-sub font-medium">
-                20 questions. 5 minutes. Get a customized AI readiness report
-                with a prioritized action plan for your business.
+                20 questions. 5 minutes. Get a customized AI readiness report with a prioritized
+                action plan for your business.
               </p>
             </div>
 
             <div className="mt-10 grid gap-6 sm:grid-cols-3">
               {[
-                { title: "Benchmark your readiness", description: "See how your AI maturity compares across strategy, data, technology, and people." },
-                { title: "Get a prioritized plan", description: "We score each dimension and show you exactly where to focus for maximum impact." },
-                { title: "No commitment required", description: "It's free. No sales call needed. Just clarity on where you are and where to go." },
+                {
+                  title: 'Benchmark your readiness',
+                  description:
+                    'See how your AI maturity compares across strategy, data, technology, and people.',
+                },
+                {
+                  title: 'Get a prioritized plan',
+                  description:
+                    'We score each dimension and show you exactly where to focus for maximum impact.',
+                },
+                {
+                  title: 'No commitment required',
+                  description:
+                    "It's free. No sales call needed. Just clarity on where you are and where to go.",
+                },
               ].map((item) => (
                 <div key={item.title}>
-                  <h3 className="text-base font-bold text-text-on-light" style={{ fontFamily: "var(--font-heading)" }}>
+                  <h3
+                    className="text-base font-bold text-text-on-light"
+                    style={{ fontFamily: 'var(--font-heading)' }}
+                  >
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-sm text-text-on-light-sub font-medium leading-relaxed">{item.description}</p>
+                  <p className="mt-2 text-sm text-text-on-light-sub font-medium leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
               ))}
             </div>
@@ -308,7 +396,10 @@ export default function Home() {
                 {objections.map((o, i) => (
                   <div key={o.q}>
                     <div className="py-8">
-                      <p className="text-xl text-text-primary leading-snug" style={{ fontFamily: "var(--font-heading)" }}>
+                      <p
+                        className="text-xl text-text-primary leading-snug"
+                        style={{ fontFamily: 'var(--font-heading)' }}
+                      >
                         &ldquo;{o.q}&rdquo;
                       </p>
                       <p className="mt-3 text-base leading-relaxed text-text-secondary">{o.a}</p>
@@ -324,7 +415,12 @@ export default function Home() {
 
       {/* ═══ FINAL CTA — Recommended Next Decision ═══ */}
       <section className="bg-bg-light py-20 lg:py-32 relative overflow-hidden">
-        <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1440 800" preserveAspectRatio="none" aria-hidden>
+        <svg
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          viewBox="0 0 1440 800"
+          preserveAspectRatio="none"
+          aria-hidden
+        >
           <defs>
             <linearGradient id="ctaBeam" x1="1" y1="0" x2="0.3" y2="1">
               <stop offset="0%" stopColor="#059E87" stopOpacity="0.08" />
@@ -338,21 +434,32 @@ export default function Home() {
             One conversation to find&nbsp;out.
           </h2>
           <p className="mt-6 text-base text-text-on-light-sub font-medium">
-            Tell us about your business. We&apos;ll be honest about whether we
-            can help — and if so, how.
+            Tell us about your business. We&apos;ll be honest about whether we can help — and if so,
+            how.
           </p>
 
           <div className="mt-5 flex flex-wrap items-center justify-center gap-8 text-sm text-text-on-light-muted">
-            <span><strong className="text-accent-dark">01</strong> — We listen</span>
-            <span><strong className="text-accent-dark">02</strong> — We&apos;re honest about fit</span>
-            <span><strong className="text-accent-dark">03</strong> — We scope it</span>
+            <span>
+              <strong className="text-accent-dark">01</strong> — We listen
+            </span>
+            <span>
+              <strong className="text-accent-dark">02</strong> — We&apos;re honest about fit
+            </span>
+            <span>
+              <strong className="text-accent-dark">03</strong> — We scope it
+            </span>
           </div>
 
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
               <Link href="/contact">Request a Proposal</Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-border-light text-text-on-light hover:bg-bg-light-alt hover:text-text-on-light" asChild>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-border-light text-text-on-light hover:bg-bg-light-alt hover:text-text-on-light"
+              asChild
+            >
               <Link href="mailto:james@clearforge.ai">Email Us Directly</Link>
             </Button>
           </div>

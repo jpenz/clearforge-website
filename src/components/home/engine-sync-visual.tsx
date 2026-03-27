@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useRef, useEffect, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef, useState } from 'react';
 
-if (typeof window !== "undefined") {
+if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
@@ -29,7 +29,7 @@ function gearPath(cx: number, cy: number, innerR: number, outerR: number, teeth:
   const step = (Math.PI * 2) / teeth;
   const halfStep = step / 2;
   const toothWidth = step * 0.35;
-  let d = "";
+  let d = '';
 
   for (let i = 0; i < teeth; i++) {
     const angle = i * step;
@@ -58,7 +58,7 @@ function gearPath(cx: number, cy: number, innerR: number, outerR: number, teeth:
     const niy = cy + innerR * Math.sin(nextAngle - halfStep + toothWidth);
     d += `A ${innerR} ${innerR} 0 0 1 ${nix.toFixed(2)} ${niy.toFixed(2)} `;
   }
-  d += "Z";
+  d += 'Z';
   return d;
 }
 
@@ -71,33 +71,33 @@ export function EngineSyncVisual() {
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
   }, []);
 
   useGSAP(
     () => {
-      if (typeof window === "undefined") return;
+      if (typeof window === 'undefined') return;
       const svg = svgRef.current;
       if (!svg) return;
 
       // ── Element references ──
-      const leftCore = svg.querySelector(".es-left-core");
-      const leftRings = svg.querySelectorAll(".es-left-ring");
-      const leftSweep = svg.querySelector(".es-left-sweep");
-      const leftLabel = svg.querySelector(".es-left-label");
+      const leftCore = svg.querySelector('.es-left-core');
+      const leftRings = svg.querySelectorAll('.es-left-ring');
+      const leftSweep = svg.querySelector('.es-left-sweep');
+      const leftLabel = svg.querySelector('.es-left-label');
 
-      const rightCore = svg.querySelector(".es-right-core");
-      const rightGears = svg.querySelectorAll(".es-right-gear");
-      const rightCircuitDots = svg.querySelectorAll(".es-right-circuit-dot");
-      const rightLabel = svg.querySelector(".es-right-label");
+      const rightCore = svg.querySelector('.es-right-core');
+      const rightGears = svg.querySelectorAll('.es-right-gear');
+      const rightCircuitDots = svg.querySelectorAll('.es-right-circuit-dot');
+      const rightLabel = svg.querySelector('.es-right-label');
 
-      const bridge = svg.querySelector(".es-bridge");
-      const bridgeGlow = svg.querySelector(".es-bridge-glow");
-      const particleDots = svg.querySelectorAll(".es-particle");
+      const bridge = svg.querySelector('.es-bridge');
+      const bridgeGlow = svg.querySelector('.es-bridge-glow');
+      const particleDots = svg.querySelectorAll('.es-particle');
 
-      const leftGlow = svg.querySelector(".es-left-glow");
-      const rightGlow = svg.querySelector(".es-right-glow");
+      const leftGlow = svg.querySelector('.es-left-glow');
+      const rightGlow = svg.querySelector('.es-right-glow');
 
       // ── Mobile: static synchronized state ──
       if (isMobile) {
@@ -120,10 +120,10 @@ export function EngineSyncVisual() {
         syncTl.to([leftCore, rightCore], {
           scale: 1.08,
           duration: 1.5,
-          ease: "sine.inOut",
-          transformOrigin: "center center",
+          ease: 'sine.inOut',
+          transformOrigin: 'center center',
         });
-        syncTl.to(bridge, { opacity: 1, duration: 1.5, ease: "sine.inOut" }, 0);
+        syncTl.to(bridge, { opacity: 1, duration: 1.5, ease: 'sine.inOut' }, 0);
         return;
       }
 
@@ -145,22 +145,38 @@ export function EngineSyncVisual() {
       const entranceTl = gsap.timeline({
         scrollTrigger: {
           trigger: svg,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
+          start: 'top 85%',
+          toggleActions: 'play none none reverse',
         },
       });
 
       entranceTl
         // Cores appear
-        .to(leftCore, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(2)" })
-        .to(rightCore, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(2)" }, 0.15)
+        .to(leftCore, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(2)' })
+        .to(rightCore, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(2)' }, 0.15)
         // Rings / gears appear
-        .to(leftRings, { opacity: 0.6, scale: 1, duration: 0.5, stagger: 0.08, ease: "power2.out" }, 0.3)
+        .to(
+          leftRings,
+          { opacity: 0.6, scale: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' },
+          0.3,
+        )
         .to(leftSweep, { opacity: 0.4, duration: 0.5 }, 0.5)
-        .to(rightGears, { opacity: 0.7, scale: 1, duration: 0.5, stagger: 0.1, ease: "power2.out" }, 0.35)
-        .to(rightCircuitDots, { opacity: 0.6, scale: 1, duration: 0.3, stagger: 0.04, ease: "back.out(2)" }, 0.5)
+        .to(
+          rightGears,
+          { opacity: 0.7, scale: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out' },
+          0.35,
+        )
+        .to(
+          rightCircuitDots,
+          { opacity: 0.6, scale: 1, duration: 0.3, stagger: 0.04, ease: 'back.out(2)' },
+          0.5,
+        )
         // Labels
-        .to([leftLabel, rightLabel], { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, ease: "power2.out" }, 0.6)
+        .to(
+          [leftLabel, rightLabel],
+          { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, ease: 'power2.out' },
+          0.6,
+        )
         // Glows
         .to([leftGlow, rightGlow], { opacity: 0.15, duration: 0.8 }, 0.5)
         // Bridge fades in dim
@@ -171,48 +187,66 @@ export function EngineSyncVisual() {
       // Left engine: slower pulse (2.2s cycle)
       const leftPulse = gsap.timeline({ repeat: -1, yoyo: true, paused: true });
       leftPulse
-        .to(leftCore, { scale: 1.12, duration: 1.1, ease: "sine.inOut", transformOrigin: "center center" })
-        .to(leftRings, { scale: 1.06, opacity: 0.8, duration: 1.1, ease: "sine.inOut", stagger: 0.05 }, 0)
-        .to(leftGlow, { opacity: 0.35, duration: 1.1, ease: "sine.inOut" }, 0);
+        .to(leftCore, {
+          scale: 1.12,
+          duration: 1.1,
+          ease: 'sine.inOut',
+          transformOrigin: 'center center',
+        })
+        .to(
+          leftRings,
+          { scale: 1.06, opacity: 0.8, duration: 1.1, ease: 'sine.inOut', stagger: 0.05 },
+          0,
+        )
+        .to(leftGlow, { opacity: 0.35, duration: 1.1, ease: 'sine.inOut' }, 0);
 
       // Right engine: faster pulse (1.4s cycle)
       const rightPulse = gsap.timeline({ repeat: -1, yoyo: true, paused: true });
       rightPulse
-        .to(rightCore, { scale: 1.15, duration: 0.7, ease: "sine.inOut", transformOrigin: "center center" })
-        .to(rightGears, { scale: 1.04, opacity: 0.9, duration: 0.7, ease: "sine.inOut", stagger: 0.03 }, 0)
-        .to(rightGlow, { opacity: 0.4, duration: 0.7, ease: "sine.inOut" }, 0);
+        .to(rightCore, {
+          scale: 1.15,
+          duration: 0.7,
+          ease: 'sine.inOut',
+          transformOrigin: 'center center',
+        })
+        .to(
+          rightGears,
+          { scale: 1.04, opacity: 0.9, duration: 0.7, ease: 'sine.inOut', stagger: 0.03 },
+          0,
+        )
+        .to(rightGlow, { opacity: 0.4, duration: 0.7, ease: 'sine.inOut' }, 0);
 
       // Left sweep rotation
       const sweepRotation = gsap.to(leftSweep, {
         rotation: 360,
         duration: 4,
         repeat: -1,
-        ease: "none",
-        transformOrigin: "200px 175px",
+        ease: 'none',
+        transformOrigin: '200px 175px',
         paused: true,
       });
 
       // Right gear rotation
-      const gearRotation = gsap.to(".es-right-gear-outer", {
+      const gearRotation = gsap.to('.es-right-gear-outer', {
         rotation: 360,
         duration: 8,
         repeat: -1,
-        ease: "none",
-        transformOrigin: "600px 175px",
+        ease: 'none',
+        transformOrigin: '600px 175px',
         paused: true,
       });
 
-      const gearRotationInner = gsap.to(".es-right-gear-inner", {
+      const gearRotationInner = gsap.to('.es-right-gear-inner', {
         rotation: -360,
         duration: 6,
         repeat: -1,
-        ease: "none",
-        transformOrigin: "600px 175px",
+        ease: 'none',
+        transformOrigin: '600px 175px',
         paused: true,
       });
 
       // Start pulses after entrance
-      entranceTl.eventCallback("onComplete", () => {
+      entranceTl.eventCallback('onComplete', () => {
         leftPulse.play();
         rightPulse.play();
         sweepRotation.play();
@@ -225,25 +259,25 @@ export function EngineSyncVisual() {
       const syncTl = gsap.timeline({
         scrollTrigger: {
           trigger: svg,
-          start: "top 60%",
-          end: "bottom 40%",
+          start: 'top 60%',
+          end: 'bottom 40%',
           scrub: 1.5,
         },
       });
 
       // As sync increases:
       // 1. Right pulse slows to match left (via timeScale)
-      syncTl.to(rightPulse, { timeScale: 0.64, duration: 1, ease: "power2.inOut" }, 0);
+      syncTl.to(rightPulse, { timeScale: 0.64, duration: 1, ease: 'power2.inOut' }, 0);
       // 2. Bridge brightens
-      syncTl.to(bridge, { opacity: 0.8, duration: 1, ease: "power2.inOut" }, 0);
-      syncTl.to(bridgeGlow, { opacity: 0.5, duration: 1, ease: "power2.inOut" }, 0.3);
+      syncTl.to(bridge, { opacity: 0.8, duration: 1, ease: 'power2.inOut' }, 0);
+      syncTl.to(bridgeGlow, { opacity: 0.5, duration: 1, ease: 'power2.inOut' }, 0.3);
       // 3. Particles become visible and bright
       syncTl.to(particleDots, { opacity: 0.9, duration: 0.8 }, 0.2);
       // 4. Glows intensify
       syncTl.to(leftGlow, { opacity: 0.45, duration: 1 }, 0.2);
       syncTl.to(rightGlow, { opacity: 0.45, duration: 1 }, 0.2);
     },
-    { scope: containerRef, dependencies: [isMobile] }
+    { scope: containerRef, dependencies: [isMobile] },
   );
 
   // Gear paths
@@ -252,25 +286,31 @@ export function EngineSyncVisual() {
 
   // Circuit trace points around right engine
   const circuitDots = [
-    { cx: 545, cy: 125 }, { cx: 560, cy: 110 }, { cx: 580, cy: 100 },
-    { cx: 620, cy: 100 }, { cx: 640, cy: 110 }, { cx: 655, cy: 125 },
-    { cx: 660, cy: 150 }, { cx: 660, cy: 200 }, { cx: 655, cy: 225 },
-    { cx: 640, cy: 240 }, { cx: 620, cy: 250 }, { cx: 580, cy: 250 },
-    { cx: 560, cy: 240 }, { cx: 545, cy: 225 }, { cx: 540, cy: 200 },
+    { cx: 545, cy: 125 },
+    { cx: 560, cy: 110 },
+    { cx: 580, cy: 100 },
+    { cx: 620, cy: 100 },
+    { cx: 640, cy: 110 },
+    { cx: 655, cy: 125 },
+    { cx: 660, cy: 150 },
+    { cx: 660, cy: 200 },
+    { cx: 655, cy: 225 },
+    { cx: 640, cy: 240 },
+    { cx: 620, cy: 250 },
+    { cx: 580, cy: 250 },
+    { cx: 560, cy: 240 },
+    { cx: 545, cy: 225 },
+    { cx: 540, cy: 200 },
     { cx: 540, cy: 150 },
   ];
 
   // Particle positions along the bridge
-  const bridgePath = "M 280,175 C 340,175 360,155 400,155 C 440,155 460,195 500,195 C 540,195 520,175 520,175";
+  const bridgePath =
+    'M 280,175 C 340,175 360,155 400,155 C 440,155 460,195 500,195 C 540,195 520,175 520,175';
 
   return (
     <div ref={containerRef} className="w-full">
-      <svg
-        ref={svgRef}
-        viewBox="0 0 800 350"
-        className="w-full h-auto"
-        aria-hidden
-      >
+      <svg ref={svgRef} viewBox="0 0 800 350" className="w-full h-auto" aria-hidden>
         <defs>
           {/* Glow filter for engine cores */}
           <filter id="engineGlow" x="-50%" y="-50%" width="200%" height="200%">
@@ -378,8 +418,24 @@ export function EngineSyncVisual() {
         />
 
         {/* Crosshair lines */}
-        <line x1="200" y1="90" x2="200" y2="260" stroke="#059E87" strokeWidth="0.5" strokeOpacity="0.15" />
-        <line x1="115" y1="175" x2="285" y2="175" stroke="#059E87" strokeWidth="0.5" strokeOpacity="0.15" />
+        <line
+          x1="200"
+          y1="90"
+          x2="200"
+          y2="260"
+          stroke="#059E87"
+          strokeWidth="0.5"
+          strokeOpacity="0.15"
+        />
+        <line
+          x1="115"
+          y1="175"
+          x2="285"
+          y2="175"
+          stroke="#059E87"
+          strokeWidth="0.5"
+          strokeOpacity="0.15"
+        />
 
         {/* Radar sweep wedge */}
         <path
@@ -489,7 +545,7 @@ export function EngineSyncVisual() {
             cx={dot.cx}
             cy={dot.cy}
             r={i % 3 === 0 ? 3 : 2}
-            fill={i % 3 === 0 ? "#00E5C3" : "#059E87"}
+            fill={i % 3 === 0 ? '#00E5C3' : '#059E87'}
             opacity="0"
           />
         ))}
@@ -569,43 +625,19 @@ export function EngineSyncVisual() {
 
         {/* Flowing particle dots along the bridge */}
         <circle className="es-particle" r="3" fill="#00E5C3" opacity="0">
-          <animateMotion
-            dur="3s"
-            repeatCount="indefinite"
-            path={bridgePath}
-          />
+          <animateMotion dur="3s" repeatCount="indefinite" path={bridgePath} />
         </circle>
         <circle className="es-particle" r="2.5" fill="#00E5C3" opacity="0">
-          <animateMotion
-            dur="3s"
-            repeatCount="indefinite"
-            path={bridgePath}
-            begin="0.6s"
-          />
+          <animateMotion dur="3s" repeatCount="indefinite" path={bridgePath} begin="0.6s" />
         </circle>
         <circle className="es-particle" r="2" fill="#00E5C3" opacity="0">
-          <animateMotion
-            dur="3s"
-            repeatCount="indefinite"
-            path={bridgePath}
-            begin="1.2s"
-          />
+          <animateMotion dur="3s" repeatCount="indefinite" path={bridgePath} begin="1.2s" />
         </circle>
         <circle className="es-particle" r="2.5" fill="#00E5C3" opacity="0">
-          <animateMotion
-            dur="3s"
-            repeatCount="indefinite"
-            path={bridgePath}
-            begin="1.8s"
-          />
+          <animateMotion dur="3s" repeatCount="indefinite" path={bridgePath} begin="1.8s" />
         </circle>
         <circle className="es-particle" r="2" fill="#00E5C3" opacity="0">
-          <animateMotion
-            dur="3s"
-            repeatCount="indefinite"
-            path={bridgePath}
-            begin="2.4s"
-          />
+          <animateMotion dur="3s" repeatCount="indefinite" path={bridgePath} begin="2.4s" />
         </circle>
 
         {/* Reverse-flowing particles */}

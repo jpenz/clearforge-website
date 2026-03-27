@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { useState, useCallback } from "react";
-import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useCallback, useState } from 'react';
+import { Button } from '@/components/ui/button';
 import {
-  pillars,
-  getQuestionsForPillar,
-  calculateResults,
   type Answers,
+  calculateResults,
+  getQuestionsForPillar,
   type PillarKey,
-} from "@/lib/scorecard";
-import { ProgressBar } from "./progress-bar";
-import { QuestionCard } from "./question-card";
+  pillars,
+} from '@/lib/scorecard';
+import { ProgressBar } from './progress-bar';
+import { QuestionCard } from './question-card';
 
 export function ScorecardForm() {
   const router = useRouter();
@@ -30,12 +30,10 @@ export function ScorecardForm() {
         const pillarQs = getQuestionsForPillar(pillar.key);
         return pillarQs.every((q) => answers[q.id] !== undefined);
       })
-      .map((p) => p.key)
+      .map((p) => p.key),
   );
 
-  const isCurrentStepComplete = currentQuestions.every(
-    (q) => answers[q.id] !== undefined
-  );
+  const isCurrentStepComplete = currentQuestions.every((q) => answers[q.id] !== undefined);
 
   const handleAnswer = useCallback((questionId: number, value: number) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
@@ -58,32 +56,26 @@ export function ScorecardForm() {
     const results = calculateResults(answers);
 
     try {
-      await fetch("/api/scorecard", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ answers, results, source: "scorecard-form" }),
+      await fetch('/api/scorecard', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ answers, results, source: 'scorecard-form' }),
       });
     } catch {
       // Non-blocking - results still show even if API fails
     }
 
     // Store results in sessionStorage for the results page
-    sessionStorage.setItem(
-      "scorecardResults",
-      JSON.stringify(results)
-    );
+    sessionStorage.setItem('scorecardResults', JSON.stringify(results));
 
-    router.push("/scorecard/results");
+    router.push('/scorecard/results');
   };
 
   const isLastStep = currentStep === pillars.length - 1;
 
   return (
     <div>
-      <ProgressBar
-        currentStep={currentStep}
-        completedSteps={completedSteps}
-      />
+      <ProgressBar currentStep={currentStep} completedSteps={completedSteps} />
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -108,12 +100,7 @@ export function ScorecardForm() {
 
       {/* Navigation */}
       <div className="mt-8 flex items-center justify-between">
-        <Button
-          variant="ghost"
-          onClick={goPrev}
-          disabled={currentStep === 0}
-          className="gap-2"
-        >
+        <Button variant="ghost" onClick={goPrev} disabled={currentStep === 0} className="gap-2">
           <ArrowLeft className="h-4 w-4" />
           Previous
         </Button>
@@ -125,15 +112,11 @@ export function ScorecardForm() {
             className="gap-2"
             size="lg"
           >
-            {isSubmitting ? "Calculating..." : "See My Results"}
+            {isSubmitting ? 'Calculating...' : 'See My Results'}
             <ArrowRight className="h-4 w-4" />
           </Button>
         ) : (
-          <Button
-            onClick={goNext}
-            disabled={!isCurrentStepComplete}
-            className="gap-2"
-          >
+          <Button onClick={goNext} disabled={!isCurrentStepComplete} className="gap-2">
             Next
             <ArrowRight className="h-4 w-4" />
           </Button>
