@@ -37,7 +37,7 @@ const securityHeaders = [
       // Allow scripts from self + Next.js inline scripts (required for hydration)
       "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
       // API connections: Supabase, Resend webhook, self
-      "connect-src 'self' https://*.supabase.co https://api.resend.com",
+      "connect-src 'self' https://*.supabase.co https://api.resend.com https://api.anthropic.com https://api.perplexity.ai",
       // Images: self + data URIs + Supabase storage
       "img-src 'self' data: blob: https://*.supabase.co",
       "frame-ancestors 'self'",

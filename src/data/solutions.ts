@@ -117,7 +117,7 @@ export const solutions: Solution[] = [
       { phase: 'Phase 4', detail: '30-day stabilization and optimization sprint.' },
     ],
     scope: {
-      timeline: '6-12 weeks',
+      timeline: '10-14 weeks',
       team: 'AI engineer, integration engineer, workflow strategist, delivery lead',
       deliverables: [
         'Production agents and orchestration layer',

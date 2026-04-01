@@ -21,7 +21,7 @@ export const services: Service[] = [
       'We build AI-driven revenue engines that automate prospecting, surface intent signals, orchestrate personalized outreach, and give your team real-time pipeline analytics — so you close more, faster.',
     icon: 'LineChart',
     idealClient:
-      'B2B companies with $5M-$500M revenue looking to scale sales without linearly scaling headcount.',
+      'Mid-market and growth-stage B2B companies looking to scale sales without linearly scaling headcount.',
     deliverables: [
       'AI-powered prospect identification and scoring',
       'Intent signal monitoring and alert system',
@@ -134,7 +134,7 @@ export const services: Service[] = [
       'We partner with PE firms and their portfolio companies to identify and execute AI-driven value creation levers — from 90-day sprints to portfolio-wide AI playbooks that drive EBITDA improvement from due diligence through exit prep.',
     icon: 'Rocket',
     idealClient:
-      'PE firms and their portfolio companies ($10M-$500M revenue) looking to accelerate value creation with AI.',
+      'PE firms and their portfolio companies looking to accelerate value creation with AI.',
     deliverables: [
       'AI opportunity assessment and business case',
       '90-day value creation sprints',

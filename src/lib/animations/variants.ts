@@ -1,100 +1,63 @@
 import type { Variants } from 'framer-motion';
 
-/** Fade in + slide up — primary entrance animation */
+const smooth = [0.16, 1, 0.3, 1] as const;
+
+/** Fade in + slide up — primary entrance */
 export const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] },
-  },
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [...smooth] } },
 };
 
 /** Simple opacity fade */
 export const fadeIn: Variants = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { duration: 0.5, ease: 'easeOut' },
-  },
+  visible: { opacity: 1, transition: { duration: 0.5, ease: 'easeOut' } },
 };
 
-/** Slide in from the left */
+/** Slide from left */
 export const slideLeft: Variants = {
-  hidden: { opacity: 0, x: -40 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] },
-  },
+  hidden: { opacity: 0, x: -32 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [...smooth] } },
 };
 
-/** Slide in from the right */
+/** Slide from right */
 export const slideRight: Variants = {
-  hidden: { opacity: 0, x: 40 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] },
-  },
+  hidden: { opacity: 0, x: 32 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: [...smooth] } },
 };
 
-/** Scale up from slightly smaller */
+/** Scale up */
 export const scaleUp: Variants = {
-  hidden: { opacity: 0, scale: 0.94 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
-  },
+  hidden: { opacity: 0, scale: 0.96 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: [...smooth] } },
 };
 
-/** Stagger container — wraps children with staggered entrance */
+/** Stagger container */
 export const staggerContainer: Variants = {
   hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.05,
-    },
-  },
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
 };
 
-/** Stagger container with slower cadence */
-export const staggerContainerSlow: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-/** Card hover micro-interaction */
+/** Card hover — subtle lift with brass border */
 export const cardHover = {
-  rest: { scale: 1, boxShadow: '0 0 0 rgba(0, 229, 195, 0)' },
-  hover: {
-    scale: 1.02,
-    boxShadow: '0 8px 40px rgba(0, 229, 195, 0.12)',
-    transition: { duration: 0.25, ease: 'easeOut' },
-  },
+  rest: { y: 0, transition: { duration: 0.25, ease: 'easeOut' } },
+  hover: { y: -4, transition: { duration: 0.25, ease: 'easeOut' } },
 };
 
-/** Button press micro-interaction */
+/** Button press */
 export const buttonPress = {
   rest: { scale: 1 },
-  hover: { scale: 1.03, transition: { duration: 0.2, ease: 'easeOut' } },
-  tap: { scale: 0.97, transition: { duration: 0.1 } },
+  hover: { scale: 1.02, transition: { duration: 0.15 } },
+  tap: { scale: 0.98, transition: { duration: 0.1 } },
 };
 
-/** Reduced-motion safe variants (no transforms, only opacity) */
+/** Reduced motion fallback */
 export const reducedFadeIn: Variants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.4 } },
+  visible: { opacity: 1, transition: { duration: 0.3 } },
 };
 
-/** No-op variants for when motion should be skipped entirely */
+/** No-op */
 export const noMotion: Variants = {
   hidden: {},
   visible: {},

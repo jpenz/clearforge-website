@@ -1,78 +1,147 @@
+import Link from 'next/link';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'Privacy Policy',
-  description: 'ClearForge.ai privacy policy. How we collect, use, and protect your data.',
+  title: 'Privacy Policy — ClearForge',
+  description: 'How ClearForge collects, uses, and protects your information.',
   path: '/privacy',
 });
 
 export default function PrivacyPage() {
   return (
-    <section className="bg-white py-20 lg:py-28">
-      <div className="mx-auto max-w-4xl px-6 lg:px-8 prose-content">
-        <h1
-          className="text-3xl font-bold text-text sm:text-4xl"
-          style={{ fontFamily: 'var(--font-heading)' }}
-        >
-          Privacy Policy
-        </h1>
-        <p className="mt-2 text-sm text-text-tertiary">Last updated: February 2025</p>
+    <>
+      {/* ── Hero ── */}
+      <section className="dark-section py-32 lg:py-48">
+        <div className="mx-auto max-w-3xl px-6 lg:px-10">
+          <p className="overline">Legal</p>
+          <h1 className="mt-6 text-display text-bone">Privacy Policy</h1>
+          <p className="mt-6 text-body-lg text-stone">
+            Last updated: March 2026
+          </p>
+        </div>
+      </section>
 
-        <h2>Information We Collect</h2>
-        <p>
-          When you interact with ClearForge.ai, we may collect information you provide directly,
-          such as your name, email address, company name, and message content when you submit our
-          contact form or take the AI Readiness Scorecard.
-        </p>
+      {/* ── Content ── */}
+      <section className="bg-parchment py-24 lg:py-40">
+        <div className="mx-auto max-w-3xl px-6 lg:px-10 space-y-16">
+          <div>
+            <h2 className="text-h2">Information We Collect</h2>
+            <p className="mt-4 text-body text-warm-gray">
+              We collect information you provide directly to us, such as when you
+              fill out a contact form, take the AI Readiness Scorecard, or
+              communicate with us via email. This may include your name, email
+              address, company name, job title, and any other information you
+              choose to provide.
+            </p>
+            <p className="mt-4 text-body text-warm-gray">
+              We automatically collect certain information when you visit our
+              website, including your IP address, browser type, operating system,
+              referring URLs, and information about how you interact with our
+              site.
+            </p>
+          </div>
 
-        <h2>How We Use Your Information</h2>
-        <p>
-          We use the information we collect to respond to your inquiries, provide our services,
-          improve our website, and communicate with you about our services. We do not sell your
-          personal information to third parties.
-        </p>
+          <div>
+            <h2 className="text-h2">How We Use Your Information</h2>
+            <ul className="mt-4 space-y-3">
+              {[
+                'To respond to your inquiries and provide requested services',
+                'To send you information about our services that may interest you',
+                'To improve and optimize our website and services',
+                'To comply with legal obligations',
+                'To protect our rights, privacy, safety, or property',
+              ].map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-3 text-body text-warm-gray"
+                >
+                  <span className="mt-2 block h-1.5 w-1.5 shrink-0 rounded-full bg-brass" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        <h2>Data Security</h2>
-        <p>
-          We implement appropriate technical and organizational security measures to protect your
-          personal data against unauthorized access, alteration, disclosure, or destruction.
-        </p>
+          <div>
+            <h2 className="text-h2">Information Sharing</h2>
+            <p className="mt-4 text-body text-warm-gray">
+              We do not sell, trade, or rent your personal information to third
+              parties. We may share your information with trusted service
+              providers who assist us in operating our website, conducting our
+              business, or serving you, so long as those parties agree to keep
+              this information confidential.
+            </p>
+          </div>
 
-        <h2>Cookies</h2>
-        <p>
-          We use essential cookies to ensure our website functions properly. We may also use
-          analytics cookies to understand how visitors interact with our website. You can control
-          cookie settings through your browser preferences.
-        </p>
+          <div>
+            <h2 className="text-h2">Data Security</h2>
+            <p className="mt-4 text-body text-warm-gray">
+              We implement appropriate technical and organizational measures to
+              protect your personal information against unauthorized access,
+              alteration, disclosure, or destruction. However, no method of
+              transmission over the Internet or electronic storage is 100%
+              secure.
+            </p>
+          </div>
 
-        <h2>Third-Party Services</h2>
-        <p>
-          We may use third-party services for analytics and communication. These services have their
-          own privacy policies governing the use of your information.
-        </p>
+          <div>
+            <h2 className="text-h2">Cookies</h2>
+            <p className="mt-4 text-body text-warm-gray">
+              We use cookies and similar tracking technologies to track activity
+              on our website and hold certain information. You can instruct your
+              browser to refuse all cookies or to indicate when a cookie is being
+              sent.
+            </p>
+          </div>
 
-        <h2>Your Rights</h2>
-        <p>
-          You have the right to access, correct, or delete your personal data. You may also opt out
-          of communications at any time. Contact us at hello@clearforge.ai for any privacy-related
-          requests.
-        </p>
+          <div>
+            <h2 className="text-h2">Your Rights</h2>
+            <p className="mt-4 text-body text-warm-gray">
+              You have the right to access, correct, or delete your personal
+              information. You may also opt out of receiving marketing
+              communications from us at any time. To exercise these rights,
+              contact us at{' '}
+              <a
+                href="mailto:james@clearforge.ai"
+                className="text-brass underline underline-offset-4"
+              >
+                james@clearforge.ai
+              </a>
+              .
+            </p>
+          </div>
 
-        <h2>Changes to This Policy</h2>
-        <p>
-          We may update this privacy policy from time to time. We will notify you of any changes by
-          posting the new policy on this page with an updated revision date.
-        </p>
+          <div>
+            <h2 className="text-h2">Changes to This Policy</h2>
+            <p className="mt-4 text-body text-warm-gray">
+              We may update this privacy policy from time to time. We will notify
+              you of any changes by posting the new policy on this page and
+              updating the &quot;last updated&quot; date.
+            </p>
+          </div>
 
-        <h2>Contact Us</h2>
-        <p>
-          If you have questions about this privacy policy, please contact us at{' '}
-          <a href="mailto:hello@clearforge.ai" className="text-teal hover:text-teal-light">
-            hello@clearforge.ai
-          </a>
-          .
-        </p>
-      </div>
-    </section>
+          <div className="border-t border-divider pt-12">
+            <p className="text-body text-warm-gray">
+              Questions about this policy? Contact us at{' '}
+              <a
+                href="mailto:james@clearforge.ai"
+                className="text-brass underline underline-offset-4"
+              >
+                james@clearforge.ai
+              </a>
+              .
+            </p>
+            <p className="mt-4">
+              <Link
+                href="/terms"
+                className="text-body text-brass underline underline-offset-4"
+              >
+                View Terms of Service
+              </Link>
+            </p>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

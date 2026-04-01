@@ -81,7 +81,7 @@ function suggestEngagement(challenge: string, role: string, suggestedSolutions: 
     suggestedSolutions.includes('AI Marketing & Revenue Operations') ||
     /(revenue|pipeline|lead|growth)/.test(lowerChallenge)
   ) {
-    return 'Revenue operations acceleration engagement with AI strategy and execution (8 to 12 weeks)';
+    return 'Revenue operations acceleration engagement with AI strategy and execution (10 to 14 weeks)';
   }
 
   if (lowerRole.includes('ceo') || lowerRole.includes('owner') || lowerRole.includes('coo')) {

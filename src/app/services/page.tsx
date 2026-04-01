@@ -1,168 +1,320 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Factory, Landmark, HeartPulse, Code2, Briefcase, Shield } from 'lucide-react';
 import Link from 'next/link';
-import { SectionReveal } from '@/components/home/section-reveal';
 import { Button } from '@/components/ui/button';
 import { services } from '@/data/services';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'Services | ClearForge',
+  title: 'The Forge Method — How We Build | ClearForge',
   description:
-    'AI strategy, design & build, managed operations, and legacy modernization. Choose your point on the AI journey.',
+    'Three named products with transparent pricing. Forge Diagnostic, Forge Sprint, and Forge Scale — built for mid-market and growth-stage companies.',
   path: '/services',
-  keywords: ['AI consulting services', 'AI strategy', 'AI agents', 'managed AI operations'],
 });
+
+const forgeProducts = [
+  {
+    name: 'Forge Diagnostic™',
+    price: '$15K',
+    period: 'one-time',
+    timeline: '4 weeks',
+    description:
+      'A senior-led assessment that maps your highest-value AI opportunities, scores data readiness, and delivers an execution-ready roadmap — not a strategy deck.',
+    included: [
+      'Stakeholder interviews across leadership and operations',
+      'Process mapping with AI opportunity scoring',
+      'Data readiness and infrastructure audit',
+      'Prioritized roadmap with ROI projections',
+    ],
+    cta: 'Get My Free AI Readiness Score',
+    href: '/discover',
+    featured: false,
+  },
+  {
+    name: 'Forge Sprint™',
+    price: '$75K–$200K',
+    period: 'one-time',
+    timeline: '10–14 weeks',
+    description:
+      'An intensive build engagement. We diagnose the problem, engineer the solution, deploy it into production, and train your team to run it — all in one sprint.',
+    included: [
+      'Working production system (not a prototype)',
+      'Integration with your existing tech stack',
+      'Team training and knowledge transfer',
+      'Measurable KPIs tracked from day one',
+    ],
+    cta: 'Get My Free AI Readiness Score',
+    href: '/discover',
+    featured: true,
+  },
+  {
+    name: 'Forge Scale™',
+    price: '$5K–$15K',
+    period: '/month',
+    timeline: 'Ongoing',
+    description:
+      'Continuous AI operations embedded in your business. New agents built monthly, existing systems optimized, and senior strategy on demand.',
+    included: [
+      'New AI agents built and deployed monthly',
+      'Continuous optimization of live systems',
+      'Weekly strategy sessions with leadership',
+      'Quarterly business impact reviews',
+    ],
+    cta: 'Get My Free AI Readiness Score',
+    href: '/discover',
+    featured: false,
+  },
+];
+
+const industries = [
+  {
+    icon: Factory,
+    name: 'Manufacturing',
+    problem: 'Manual quoting, siloed sales data, and blind spots across divisions',
+    outcome: '1,181 qualified opportunities identified in 6 months',
+    href: '/industries/manufacturing',
+  },
+  {
+    icon: Landmark,
+    name: 'Financial Services',
+    problem: 'Compliance bottlenecks and manual document processing drain margin',
+    outcome: '95% reduction in processing errors with automated workflows',
+    href: '/industries/financial-services',
+  },
+  {
+    icon: HeartPulse,
+    name: 'Healthcare',
+    problem: 'Revenue cycle leakage and administrative burden on clinical staff',
+    outcome: '40% reduction in claim processing time',
+    href: '/industries/healthcare',
+  },
+  {
+    icon: Code2,
+    name: 'SaaS',
+    problem: 'Scaling customer success and support without scaling headcount',
+    outcome: '80% of workflow steps automated with custom AI agents',
+    href: '/industries/saas',
+  },
+  {
+    icon: Briefcase,
+    name: 'PE Portfolio',
+    problem: 'No shared framework to identify AI value levers across portfolio companies',
+    outcome: '10% average EBITDA lift within 90-day sprint cycles',
+    href: '/industries/private-equity',
+  },
+];
 
 export default function ServicesPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-bg-deep pt-32 pb-20 lg:pt-40 lg:pb-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <p className="section-label">Services</p>
+      {/* — Hero — */}
+      <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+          <p className="overline">How We Work</p>
           <h1
-            className="mt-4 max-w-3xl text-4xl text-text-primary sm:text-5xl lg:text-6xl"
-            style={{ fontFamily: 'var(--font-heading)' }}
+            className="mt-6 text-display max-w-3xl text-bone"
+            style={{ fontFamily: 'var(--font-instrument-serif)' }}
           >
-            Choose your point on the journey
+            The Forge Method™
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-text-secondary">
-            Whether you need clarity on where to focus, production AI systems, or ongoing operations
-            — we meet you where you are and build from there.
+          <p className="mt-6 max-w-xl text-body-lg text-stone">
+            Three named products. Transparent pricing. Built for mid-market
+            and growth-stage companies who need AI that works in production
+            — not a strategy deck that sits in a drawer.
+          </p>
+          <p className="mt-4 max-w-xl text-body text-stone">
+            We build, we ship, we deploy.
           </p>
         </div>
       </section>
 
-      {/* Services */}
-      {services.map((service, i) => {
-        const isDark = i % 2 === 1;
-        return (
-          <SectionReveal key={service.slug}>
-            <section
-              id={
-                service.slug === 'growth-strategy-diagnosis'
-                  ? 'strategy'
-                  : service.slug === 'ai-design-build'
-                    ? 'build'
-                    : service.slug === 'managed-ai-operations'
-                      ? 'operations'
-                      : service.slug === 'legacy-system-modernization'
-                        ? 'modernization'
-                        : service.slug
-              }
-              className={isDark ? 'bg-bg-deep py-20 lg:py-28' : 'bg-bg-light py-20 lg:py-28'}
-            >
-              <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-                  {/* Left: Info */}
-                  <div>
-                    <span className={`metric text-sm ${!isDark ? 'text-accent-dark' : ''}`}>
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <h2
-                      className={`mt-3 text-3xl sm:text-4xl ${isDark ? 'text-text-primary' : 'text-text-on-light'}`}
-                      style={{ fontFamily: 'var(--font-heading)' }}
-                    >
-                      {service.title}
-                    </h2>
-                    <p className={`mt-2 text-lg ${isDark ? 'text-accent' : 'text-accent-dark'}`}>
-                      {service.tagline}
-                    </p>
-                    <p
-                      className={`mt-4 text-base leading-relaxed ${isDark ? 'text-text-secondary' : 'text-text-on-light-sub'}`}
-                    >
-                      {service.description}
-                    </p>
+      {/* — Three Forge Products — */}
+      <section className="bg-parchment py-24 lg:py-40">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+          <p className="overline">Named Products</p>
+          <h2 className="mt-6 text-display max-w-2xl">
+            Three engagements. One accountable team.
+          </h2>
 
-                    <div
-                      className={`mt-8 border-t pt-6 ${isDark ? 'border-border-subtle' : 'border-border-light'}`}
+          <div className="mt-16 grid gap-8 lg:grid-cols-3">
+            {forgeProducts.map((product) => (
+              <div
+                key={product.name}
+                className={`relative border ${
+                  product.featured
+                    ? 'border-brass bg-surface shadow-lg'
+                    : 'border-divider bg-parchment'
+                } p-8 flex flex-col`}
+              >
+                {product.featured && (
+                  <span className="absolute -top-3 left-8 bg-brass text-white px-3 py-1 text-xs font-semibold tracking-wider uppercase">
+                    Most Popular
+                  </span>
+                )}
+                <h3 className="text-h3">{product.name}</h3>
+                <div className="mt-4 flex items-baseline gap-1">
+                  <span className="metric-lg text-anthracite">
+                    {product.price}
+                  </span>
+                  <span className="text-body-sm text-warm-gray">
+                    {product.period}
+                  </span>
+                </div>
+                <p className="mt-2 text-body-sm text-warm-gray">
+                  {product.timeline}
+                </p>
+                <p className="mt-4 text-body text-warm-gray flex-grow">
+                  {product.description}
+                </p>
+                <ul className="mt-8 space-y-3">
+                  {product.included.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 text-body-sm text-anthracite"
                     >
-                      <p
-                        className={`text-xs font-semibold uppercase tracking-widest mb-2 ${isDark ? 'text-text-muted' : 'text-text-on-light-muted'}`}
-                      >
-                        Ideal Client
-                      </p>
-                      <p
-                        className={`text-sm ${isDark ? 'text-text-secondary' : 'text-text-on-light-sub'}`}
-                      >
-                        {service.idealClient}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Right: Outcomes + Deliverables */}
-                  <div>
-                    <div
-                      className={`grid grid-cols-2 gap-px ${isDark ? 'bg-border-subtle' : 'bg-border-light'}`}
-                    >
-                      {service.outcomes.map((o) => (
-                        <div
-                          key={o.description}
-                          className={`p-6 ${isDark ? 'bg-bg-deep' : 'bg-bg-light'}`}
-                        >
-                          <p
-                            className={`metric text-xl font-bold ${!isDark ? 'text-accent-dark' : ''}`}
-                          >
-                            {o.metric}
-                          </p>
-                          <p
-                            className={`mt-1 text-sm ${isDark ? 'text-text-muted' : 'text-text-on-light-muted'}`}
-                          >
-                            {o.description}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="mt-8">
-                      <p
-                        className={`text-xs font-semibold uppercase tracking-widest mb-4 ${isDark ? 'text-text-muted' : 'text-text-on-light-muted'}`}
-                      >
-                        Deliverables
-                      </p>
-                      <ul className="space-y-2">
-                        {service.deliverables.map((d) => (
-                          <li
-                            key={d}
-                            className={`flex items-start gap-3 text-sm ${isDark ? 'text-text-secondary' : 'text-text-on-light-sub'}`}
-                          >
-                            <span
-                              className={`mt-1.5 h-1 w-1 shrink-0 rounded-full ${isDark ? 'bg-accent' : 'bg-accent-dark'}`}
-                            />
-                            {d}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
+                      <span className="mt-1 block h-1.5 w-1.5 shrink-0 rounded-full bg-brass" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-8">
+                  <Button
+                    variant={product.featured ? 'default' : 'secondary'}
+                    className="w-full"
+                    asChild
+                  >
+                    <Link href={product.href}>
+                      {product.cta} <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
                 </div>
               </div>
-            </section>
-          </SectionReveal>
-        );
-      })}
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* CTA */}
-      <section className="bg-bg-deep py-20 lg:py-28">
-        <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
-          <h2
-            className="text-3xl text-text-primary sm:text-4xl"
-            style={{ fontFamily: 'var(--font-heading)' }}
-          >
-            Not sure which service fits?
+      {/* — Industry Focus — */}
+      <section className="border-t border-divider bg-recessed py-24 lg:py-40">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+          <p className="overline">Industry Focus</p>
+          <h2 className="mt-6 text-display max-w-2xl">
+            We solve specific problems in specific industries.
           </h2>
-          <p className="mt-4 text-lg text-text-secondary">
-            Tell us about your situation. We&apos;ll recommend the right starting point — or tell
-            you honestly if we&apos;re not the right fit.
+
+          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {industries.map((ind) => (
+              <Link
+                key={ind.name}
+                href={ind.href}
+                className="group border border-divider bg-surface p-8 transition-all hover:border-brass hover:shadow-md hover:-translate-y-1"
+              >
+                <ind.icon className="h-6 w-6 text-brass" />
+                <h3 className="mt-4 text-h4 group-hover:text-brass transition-colors">
+                  {ind.name}
+                </h3>
+                <p className="mt-3 text-body-sm text-warm-gray">
+                  {ind.problem}
+                </p>
+                <p className="mt-4 text-body-sm font-medium text-anthracite">
+                  {ind.outcome}
+                </p>
+                <span className="mt-4 inline-flex items-center text-sm font-medium text-brass opacity-0 group-hover:opacity-100 transition-opacity">
+                  Learn more <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* — All Services — */}
+      <section className="border-t border-divider bg-parchment py-24 lg:py-40">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+          <p className="overline">What We Build</p>
+          <h2 className="mt-6 text-display max-w-2xl">
+            Four capabilities. One team.
+          </h2>
+
+          <div className="mt-16 grid gap-0 lg:grid-cols-2">
+            {services.map((svc, i) => (
+              <Link
+                key={svc.slug}
+                href={`/services/${svc.slug}`}
+                className="group border-t border-divider py-10 pr-8 transition-colors hover:bg-surface"
+              >
+                <span className="metric text-sm text-brass">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="mt-3 text-h3 group-hover:text-brass transition-colors">
+                  {svc.title}
+                </h3>
+                <p className="mt-3 text-body text-warm-gray max-w-md">
+                  {svc.tagline}
+                </p>
+                <span className="mt-4 inline-flex items-center text-sm font-medium text-brass opacity-0 group-hover:opacity-100 transition-opacity">
+                  Learn more <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* — Platform vs. Partner — */}
+      <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+          <p className="overline">Platform vs. Partner</p>
+          <h2 className="mt-6 text-display text-bone max-w-2xl">
+            Why not just buy a platform?
+          </h2>
+          <p className="mt-6 max-w-2xl text-body-lg text-stone">
+            Platforms like DataRobot and Dataiku are powerful tools — but they
+            require your team to build, validate, deploy, and maintain every
+            model. If you have a mature data science team, they make sense. If
+            you need production AI and the capability to run it, you need a
+            partner.
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
+
+          <div className="mt-14 border-t border-divider-dark pt-8">
+            <p className="text-body-lg text-bone max-w-2xl">
+              We build production AI AND train your team to run it. When we
+              leave, the system works and your people own it.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* — Guarantee — */}
+      <section className="bg-parchment py-24 lg:py-40">
+        <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
+          <Shield className="h-8 w-8 text-brass mx-auto mb-6" />
+          <h2 className="text-display">The ClearForge Guarantee</h2>
+          <p className="mt-6 text-body-lg text-warm-gray">
+            If our Forge Diagnostic doesn&apos;t identify at least 3 actionable
+            AI opportunities with clear ROI projections, we refund your
+            investment. No questions asked.
+          </p>
+        </div>
+      </section>
+
+      {/* — CTA — */}
+      <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
+        <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
+          <h2 className="text-display text-bone">
+            Ready to see what AI can do for your business?
+          </h2>
+          <p className="mt-6 text-body-lg text-stone">
+            The Forge Diagnostic gives you a clear picture of your
+            highest-value opportunities in four weeks. No commitment beyond that.
+          </p>
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
-              <Link href="/contact">
-                Request a Proposal <ArrowRight className="ml-2 h-4 w-4" />
+              <Link href="/discover">
+                Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="secondary" asChild>
-              <Link href="/assessment">Take the Assessment</Link>
+            <Button size="lg" variant="outline-light" asChild>
+              <Link href="/contact">Schedule a Discussion</Link>
             </Button>
           </div>
         </div>

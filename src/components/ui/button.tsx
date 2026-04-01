@@ -4,17 +4,15 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex cursor-pointer items-center justify-center whitespace-nowrap text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-deep disabled:pointer-events-none disabled:opacity-50 rounded-none',
+  'inline-flex cursor-pointer items-center justify-center whitespace-nowrap text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        default: 'bg-accent text-bg-deep hover:bg-accent-hover',
-        secondary:
-          'border border-border-default bg-transparent text-text-primary hover:border-text-muted hover:bg-bg-surface',
-        outline:
-          'border border-border-default bg-transparent text-text-secondary hover:text-text-primary hover:border-text-muted',
-        ghost: 'text-text-muted hover:text-text-primary hover:bg-bg-surface',
-        link: 'text-accent underline-offset-4 hover:underline',
+        default: 'bg-brass text-white hover:bg-brass-hover shadow-sm',
+        secondary: 'border border-divider bg-transparent text-anthracite hover:border-brass hover:text-brass',
+        'outline-light': 'border border-bone/30 bg-transparent text-bone hover:border-bone hover:text-white',
+        ghost: 'text-warm-gray hover:text-anthracite hover:bg-recessed',
+        link: 'text-brass underline-offset-4 hover:underline',
       },
       size: {
         default: 'h-11 px-6 py-2',
@@ -37,9 +35,7 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
-    return (
-      <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
-    );
+    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
   },
 );
 Button.displayName = 'Button';

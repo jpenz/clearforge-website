@@ -1,28 +1,30 @@
 import type { Metadata } from 'next';
-import { Fraunces, IBM_Plex_Mono, Outfit } from 'next/font/google';
-import { Footer } from '@/components/layout/footer';
+import { Instrument_Serif, Inter, JetBrains_Mono } from 'next/font/google';
 import { Header } from '@/components/layout/header';
-import { PageTransition } from '@/components/page-transition';
-import { SmoothScrollProvider } from '@/components/smooth-scroll-provider';
+import { Footer } from '@/components/layout/footer';
+import { ForgeBar } from '@/components/layout/forge-bar';
+import { LenisProvider } from '@/components/layout/lenis-provider';
 import { coreKeywords, organizationJsonLd } from '@/lib/metadata';
 import './globals.css';
 
-const fraunces = Fraunces({
+const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
-  variable: '--font-heading',
+  weight: '400',
+  style: ['normal', 'italic'],
+  variable: '--font-instrument-serif',
   display: 'swap',
 });
 
-const outfit = Outfit({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-body',
+  variable: '--font-inter',
   display: 'swap',
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-mono',
+  weight: ['400', '500'],
+  variable: '--font-jetbrains-mono',
   display: 'swap',
 });
 
@@ -33,20 +35,13 @@ export const metadata: Metadata = {
     template: '%s | ClearForge',
   },
   description:
-    'ClearForge builds AI systems that drive real operational results. Strategy through execution — one team, no handoffs.',
+    'We find where AI drives growth, build the systems, and get your people to actually use them. Strategy through production — one partner, no handoffs.',
   keywords: coreKeywords,
   openGraph: {
     type: 'website',
     locale: 'en_US',
     siteName: 'ClearForge',
-    images: [
-      {
-        url: '/images/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'ClearForge — AI Systems for Revenue Growth',
-      },
-    ],
+    images: [{ url: '/images/og-image.png', width: 1200, height: 630, alt: 'ClearForge — AI Strategy & Execution' }],
   },
   twitter: { card: 'summary_large_image', images: ['/images/og-image.png'] },
   robots: { index: true, follow: true },
@@ -55,20 +50,17 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${fraunces.variable} ${outfit.variable} ${ibmPlexMono.variable} font-sans antialiased`}
-      >
+      <body className={`${instrumentSerif.variable} ${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        <SmoothScrollProvider>
+        <LenisProvider>
           <Header />
-          <main id="main-content">
-            <PageTransition>{children}</PageTransition>
-          </main>
+          <main id="main-content">{children}</main>
           <Footer />
-        </SmoothScrollProvider>
+          <ForgeBar />
+        </LenisProvider>
       </body>
     </html>
   );

@@ -27,7 +27,7 @@ export const engagementModels: EngagementModel[] = [
     title: 'Transformation Design',
     icon: 'PenTool',
     scope: 'Deep-dive strategy and implementation architecture',
-    timeline: '6-8 weeks',
+    timeline: '10-14 weeks',
     bestFor: 'Companies ready to invest in AI',
     includes: [
       'Target operating model for AI-enabled workflows',

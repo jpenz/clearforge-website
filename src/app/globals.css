@@ -1,179 +1,213 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* ── Dark backgrounds — Midnight Navy ── */
-  --color-bg-deep: #060B14;
-  --color-bg-primary: #0A0F1A;
-  --color-bg-surface: #111827;
+  /* ── Backgrounds ── */
+  --color-parchment: #F8F8F6;
+  --color-warm-white: #FFFFFF;
+  --color-forge-black: #0A0F1E;
+  --color-surface: #FFFFFF;
+  --color-recessed: #F0F0ED;
 
-  /* ── Light backgrounds — Cool slate ── */
-  --color-bg-light: #F0F4F8;
-  --color-bg-light-alt: #E2E8F0;
+  /* ── Text ── */
+  --color-anthracite: #141428;
+  --color-warm-gray: #4A4A62;
+  --color-bone: #EAEAF2;
+  --color-stone: #9090A8;
 
-  /* ── Accent: Electric Teal — dominant, sharp ── */
-  --color-accent: #00E5C3;
-  --color-accent-hover: #34FFDB;
-  --color-accent-dark: #059E87;
-  --color-accent-muted: #065F50;
-  --color-accent-glow: rgba(0, 229, 195, 0.12);
+  /* ── Accents — Emerald (darkened for AA contrast on light bg) ── */
+  --color-brass: #047857;
+  --color-brass-hover: #065F46;
+  --color-brass-light: #34D399;
+  --color-teal: #047857;
+  --color-teal-hover: #065F46;
 
-  /* ── Text on dark ── */
-  --color-text-primary: #F1F5F9;
-  --color-text-secondary: #94A3B8;
-  --color-text-muted: #475569;
-
-  /* ── Text on light ── */
-  --color-text-on-light: #0F172A;
-  --color-text-on-light-sub: #1E293B;
-  --color-text-on-light-muted: #475569;
-
-  /* ── Borders ── */
-  --color-border-subtle: #1E293B;
-  --color-border-default: #334155;
-  --color-border-light: #CBD5E1;
+  /* ── Borders (visible but not heavy) ── */
+  --color-divider: #C8C8D2;
+  --color-divider-dark: #232940;
 
   /* ── Semantic ── */
-  --color-success: #10B981;
-  --color-error: #EF4444;
+  --color-success: #047857;
+  --color-error: #B91C1C;
 
-  /* ── Font ── */
-  --font-sans: var(--font-body);
-  --font-heading: var(--font-heading);
+  /* ── Fonts ── */
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-instrument-serif);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html {
-  /* scroll-behavior handled by Lenis smooth scroll */
   text-rendering: optimizeLegibility;
 }
 
 body {
-  font-family: var(--font-body), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   font-size: 1rem;
-  line-height: 1.6;
-  color: var(--color-text-secondary);
-  background: var(--color-bg-deep);
+  line-height: 1.625;
+  color: var(--color-anthracite);
+  background: var(--color-parchment);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4 {
-  font-family: var(--font-heading), Georgia, serif;
-  line-height: 1.0;
-  letter-spacing: -0.03em;
-  font-weight: 700;
+/* ── Heading defaults ── */
+h1, h2 {
+  font-family: var(--font-instrument-serif), Georgia, 'Times New Roman', serif;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  font-weight: 400;
+  color: var(--color-anthracite);
 }
 
-/* ── Section label ── */
-.section-label {
-  font-family: var(--font-body), system-ui, sans-serif;
-  font-size: 0.7rem;
+h3, h4, h5, h6 {
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--color-accent);
+  line-height: 1.28;
+  letter-spacing: -0.015em;
+  color: var(--color-anthracite);
 }
 
-/* ── Metric display ── */
-.metric {
-  font-family: var(--font-mono), monospace;
-  font-variant-numeric: tabular-nums;
-  color: var(--color-accent);
+/* ── Display type scale ── */
+.text-display-xl {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  font-weight: 400;
 }
+.text-display {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  font-weight: 400;
+}
+.text-h1 {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+.text-h2 {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  font-weight: 400;
+}
+.text-h3 { font-size: 1.75rem; line-height: 1.25; font-weight: 600; }
+.text-h4 { font-size: 1.375rem; line-height: 1.32; font-weight: 600; }
+.text-body-lg { font-size: 1.125rem; line-height: 1.6; }
+.text-body { font-size: 1rem; line-height: 1.65; }
+.text-body-sm { font-size: 0.875rem; line-height: 1.6; }
+
+/* ── Overline (section labels) ── */
+.overline {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-brass);
+}
+
+/* ── Metric displays ── */
+.metric {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-variant-numeric: tabular-nums;
+}
+.metric-xl {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: clamp(3rem, 8vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.metric-lg {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Dark section ── */
+.dark-section {
+  background: var(--color-forge-black);
+  color: var(--color-bone);
+}
+.dark-section h1, .dark-section h2, .dark-section h3,
+.dark-section h4, .dark-section h5, .dark-section h6 {
+  color: var(--color-bone);
+}
+.dark-section .overline { color: var(--color-brass-light); }
 
 /* ── Noise texture overlay ── */
+.noise-texture { position: relative; }
 .noise-texture::after {
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   pointer-events: none;
+  mix-blend-mode: overlay;
 }
 
-/* ── Gradient divider ── */
-.gradient-divider {
+/* ── Dividers ── */
+.divider-accent {
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--color-accent) 30%,
-    var(--color-accent) 70%,
-    transparent
-  );
-  opacity: 0.2;
-}
-
-/* ── Accent gradient text ── */
-.accent-gradient-text {
-  background: linear-gradient(135deg, #00FFD9 0%, #00E5C3 50%, #059E87 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ── Teal glow effect ── */
-.teal-glow {
-  box-shadow: 0 0 40px rgba(0, 229, 195, 0.15), 0 0 80px rgba(0, 229, 195, 0.05);
+  background: linear-gradient(90deg, transparent, var(--color-brass) 30%, var(--color-brass) 70%, transparent);
+  opacity: 0.3;
 }
 
 /* ── Animations ── */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(28px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-@keyframes revealLine {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
-}
-
 .animate-fade-in-up {
-  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-
 .animate-fade-in {
-  animation: fadeIn 0.6s ease forwards;
+  animation: fadeIn 0.45s ease both;
 }
-
-.animate-reveal-line {
-  animation: revealLine 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  transform-origin: left;
-}
-
-.delay-1 { animation-delay: 0.12s; }
-.delay-2 { animation-delay: 0.24s; }
-.delay-3 { animation-delay: 0.36s; }
-.delay-4 { animation-delay: 0.48s; }
-.delay-5 { animation-delay: 0.60s; }
+.delay-1 { animation-delay: 0.08s; }
+.delay-2 { animation-delay: 0.16s; }
+.delay-3 { animation-delay: 0.24s; }
+.delay-4 { animation-delay: 0.32s; }
+.delay-5 { animation-delay: 0.40s; }
 
 /* ── Focus ── */
 *:focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-brass);
   outline-offset: 2px;
 }
 
 /* ── Selection ── */
 ::selection {
-  background: rgba(0, 229, 195, 0.25);
-  color: var(--color-text-primary);
+  background: rgba(4, 120, 87, 0.15);
+  color: var(--color-anthracite);
 }
 
 /* ── Scrollbar ── */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--color-bg-deep); }
-::-webkit-scrollbar-thumb { background: var(--color-border-default); }
-::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-parchment); }
+::-webkit-scrollbar-thumb { background: var(--color-divider); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-warm-gray); }
+
+/* ── Smooth scroll (CSS fallback when Lenis not loaded) ── */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}

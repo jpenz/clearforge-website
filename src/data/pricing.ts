@@ -16,10 +16,10 @@ export interface FAQ {
 
 export const pricingTiers: PricingTier[] = [
   {
-    name: 'AI Readiness Audit',
+    name: 'Forge Diagnostic™',
     price: '$15K',
     period: 'one-time',
-    timeline: '2 weeks',
+    timeline: '4 weeks',
     description:
       'A rapid diagnostic to assess your AI readiness and identify the highest-impact opportunities.',
     features: [
@@ -30,13 +30,13 @@ export const pricingTiers: PricingTier[] = [
       'Executive-ready roadmap with ROI projections',
       'Recommended quick wins for immediate impact',
     ],
-    cta: 'Book an Audit',
+    cta: 'Get My Free AI Readiness Score',
   },
   {
-    name: 'Performance Sprint',
-    price: '$50K–$100K',
+    name: 'Forge Sprint™',
+    price: '$75K–$200K',
     period: 'one-time',
-    timeline: '6–8 weeks',
+    timeline: '10–14 weeks',
     description:
       'An intensive engagement to diagnose, build, and deploy AI solutions that drive measurable results.',
     features: [
@@ -48,12 +48,12 @@ export const pricingTiers: PricingTier[] = [
       '30-day post-launch support included',
       'Measurable KPIs tracked from day one',
     ],
-    cta: 'Start a Sprint',
+    cta: 'Get My Free AI Readiness Score',
     popular: true,
   },
   {
-    name: 'AI Agent Retainer',
-    price: '$15K',
+    name: 'Forge Scale™',
+    price: '$5K–$15K',
     period: '/month',
     timeline: 'Ongoing',
     description:
@@ -67,7 +67,7 @@ export const pricingTiers: PricingTier[] = [
       'Quarterly business impact reviews',
       'Access to ClearForge agent library',
     ],
-    cta: 'Start Retainer',
+    cta: 'Get My Free AI Readiness Score',
   },
 ];
 
@@ -75,7 +75,7 @@ export const faqs: FAQ[] = [
   {
     question: 'How do I know which package is right for my business?',
     answer:
-      "Start with the AI Readiness Audit if you're unsure where to begin. It gives you a clear picture of your current state and a prioritized roadmap. If you already know your highest-impact opportunity, a Performance Sprint gets you to a working solution in 6–8 weeks. The Retainer is for companies ready for continuous AI development.",
+      "Start with the Forge Diagnostic if you're unsure where to begin. It gives you a clear picture of your current state and a prioritized roadmap in 4 weeks. If you already know your highest-impact opportunity, a Forge Sprint gets you to a working solution in 10–14 weeks. Forge Scale is for companies ready for continuous AI development.",
   },
   {
     question: "What's included in the discovery call?",
@@ -85,7 +85,7 @@ export const faqs: FAQ[] = [
   {
     question: 'Do you work with companies of any size?',
     answer:
-      'We focus on mid-market companies ($5M–$500M revenue) and PE portfolio companies. Our approach is designed for organizations large enough to benefit from AI but agile enough to move quickly.',
+      'We focus on mid-market and growth-stage companies and PE portfolio companies. Our approach is designed for organizations large enough to benefit from AI but agile enough to move quickly.',
   },
   {
     question: 'What industries do you serve?',
@@ -95,7 +95,7 @@ export const faqs: FAQ[] = [
   {
     question: 'How quickly can we see results?',
     answer:
-      'Most clients see measurable results within 90 days. The AI Readiness Audit delivers a roadmap in 2 weeks. Performance Sprints produce working solutions in 6–8 weeks. Quick wins identified during the Audit can often be implemented immediately.',
+      'Most clients see measurable results within 90 days. The Forge Diagnostic delivers a roadmap in 4 weeks. Forge Sprints produce working solutions in 10–14 weeks. Quick wins identified during the Diagnostic can often be implemented immediately.',
   },
   {
     question: 'Do you replace our existing tech stack?',

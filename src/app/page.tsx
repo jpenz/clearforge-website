@@ -1,466 +1,405 @@
-import { ArrowRight } from 'lucide-react';
-import Image from 'next/image';
+import { ArrowRight, Shield } from 'lucide-react';
 import Link from 'next/link';
-import { GSAPCounter } from '@/components/home/gsap-counter';
-import { GSAPSectionReveal, StaggerRevealGSAP } from '@/components/home/gsap-section-reveal';
-import { GSAPStatStrip } from '@/components/home/gsap-stat-strip';
-import { HeroCanvas } from '@/components/home/hero-canvas';
-import { TransformationAssembly } from '@/components/home/transformation-assembly';
+import { HeroScroll } from '@/components/home/hero-scroll';
+import { MetricCounter } from '@/components/home/metric-counter';
 import { Button } from '@/components/ui/button';
 import { caseStudies } from '@/data/case-studies';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'ClearForge — AI Strategy & Execution for Mid-Market Companies',
+  title: 'ClearForge — Production AI in 10 Weeks. Not a Strategy Deck.',
   description:
-    'We find where AI should drive growth, build the systems that get you there, and get your people to actually use them. Strategy through production — one partner, no handoffs.',
+    'We build production AI systems for mid-market and growth-stage companies. From pilot purgatory to deployed systems in 10 weeks. No enterprise budgets required.',
   path: '',
-  keywords: [
-    'AI strategy',
-    'AI execution',
-    'mid-market AI consulting',
-    'AI agents',
-    'PE value creation',
-  ],
 });
 
-/* ── Data ── */
+const featured = caseStudies.find((cs) => cs.slug === 'industrial-manufacturer');
+const secondary = caseStudies.find((cs) => cs.slug === 'metro-detroit-services-company');
 
-const stallReasons = [
-  {
-    title: 'Pilots that never scale',
-    description:
-      'Teams run isolated experiments disconnected from operations. Value stays trapped in demos.',
-  },
-  {
-    title: 'Strategy-execution gap',
-    description:
-      'One partner writes the plan, another attempts delivery. Value is lost in the handoff.',
-  },
-  {
-    title: 'Tech without workforce change',
-    description:
-      "Systems launch but teams aren't prepared. Adoption stalls because people were an afterthought.",
-  },
-];
-
-const pastAttempts = [
-  'You hired a consultancy. They left you with slides.',
-  'You tried building internally. Your best engineers are still figuring out infrastructure.',
-  'You bought a platform. Adoption peaked at 15%.',
-  "Or you haven't started — because nobody could tell you where to begin.",
-];
-
-const methodologyPhases = [
-  {
-    num: '01',
-    title: 'Find the growth and name the real bottleneck',
-    subtitle: 'Understand',
-    description:
-      'We define growth goals, map your value chain, and quantify where value is leaking — so every decision starts with evidence, not assumptions.',
-    details: [
-      'Map revenue, operations, and support workflows end to end',
-      'Identify AI opportunities tied to clear business metrics',
-      'Benchmark readiness across data, technology, and people',
-      'Deliver a prioritized action plan with owners and timelines',
-    ],
-  },
-  {
-    num: '02',
-    title: 'Redesign workflows and deploy controlled AI systems',
-    subtitle: 'Build',
-    description:
-      'We build practical AI agents with your operators — working systems with owners, governance, and KPI baselines. Not proofs of concept. Production systems.',
-    details: [
-      'Redesign workflows before layering AI on top',
-      'Deploy AI agents with human-in-the-loop controls',
-      'Build dashboards and execution platforms your team uses daily',
-      'Establish KPI baselines and feedback loops from day one',
-    ],
-  },
-  {
-    num: '03',
-    title: 'Run, optimize, and reinforce adoption',
-    subtitle: 'Operate',
-    description:
-      'We turn early wins into operating rhythm, train teams on human-plus-agent workflows, and expand what works. Compounding gains, not one-off projects.',
-    details: [
-      'Managed operations with continuous optimization',
-      'Role-based AI training for leadership and frontline teams',
-      'Expand proven systems to new divisions and use cases',
-      'The system gets smarter every month — compounding precision',
-    ],
-  },
-];
-
-const objections = [
-  {
-    q: "We're not big enough for this.",
-    a: "We work with $5M-$500M companies. AI advantage matters more at your scale — you don't have a 50-person data science team. That's exactly why we exist.",
-  },
-  {
-    q: "We tried AI and it didn't work.",
-    a: "It probably wasn't tied to a business metric. Every system we deploy is measured against revenue, cost, or throughput.",
-  },
-  {
-    q: 'This sounds expensive.',
-    a: 'A strategy engagement starts in the low five figures. The real question is what it costs to wait 12 more months.',
-  },
-  {
-    q: "We don't have the right data.",
-    a: "Almost nobody does at first. That's literally step one. If you had perfect data infrastructure, you wouldn't need us.",
-  },
-];
+/*
+ * V7.2 HOMEPAGE — CELLCOG COPY AUDIT APPLIED
+ *
+ * Changes from V7.1:
+ * - Headline: problem-focused, not capability-focused (122% conversion lift)
+ * - Overline: "Mid-Market" identity, not revenue range
+ * - CTA: "Get My Free AI Readiness Score" (specificity + value)
+ * - Metrics: contextualized with denominators + industry comparison
+ * - Risk reversal: guarantee added (addresses #1 purchase objection)
+ * - Pricing removed from hero subline (value before price)
+ * - Timelines updated: 4 weeks diagnostic, 10-14 weeks sprint
+ * - Both mid-market AND enterprise case studies shown
+ */
 
 export default function Home() {
-  const featured = caseStudies.find((cs) => cs.slug === 'industrial-manufacturer');
-
   return (
     <>
-      {/* ═══ HERO — Interactive canvas, chaos-to-order ═══ */}
-      <section className="relative min-h-[100svh] flex items-end overflow-hidden bg-bg-deep">
-        <HeroCanvas />
+      {/* ══════════════════════════════════════════
+          1. HERO — CLARIFY (problem → outcome)
+          CellCog: "Problem-focused headlines outperform
+          capability headlines by 122%"
+          ══════════════════════════════════════════ */}
+      <HeroScroll />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-bg-deep/60 to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-bg-deep/70 via-transparent to-transparent pointer-events-none" />
-        <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-accent/5 blur-[120px] pointer-events-none" />
-
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-28 pt-40 lg:px-8 lg:pb-28">
-          <p className="section-label opacity-0 animate-fade-in-up">AI Strategy & Execution</p>
-
-          <h1 className="mt-6 max-w-4xl text-[clamp(2.8rem,9vw,7rem)] leading-[0.92] tracking-tighter text-text-primary opacity-0 animate-fade-in-up delay-1">
-            Find the growth. <em className="accent-gradient-text not-italic">Build the machine.</em>
-          </h1>
-
-          <div className="mt-10 max-w-lg opacity-0 animate-fade-in-up delay-2">
-            <p className="text-lg leading-relaxed text-text-secondary">
-              We find where AI drives growth, build the systems, and get your people to actually use
-              them.
-            </p>
+      {/* ══════════════════════════════════════════
+          2. TRUST BAR — Contextualized proof
+          CellCog: "59% of buyers distrust unverified claims"
+          ══════════════════════════════════════════ */}
+      <section className="border-y border-divider bg-parchment py-6">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+          <div className="flex flex-wrap items-center justify-center gap-8 lg:gap-16 text-sm text-warm-gray">
+            <span className="flex items-center gap-2">
+              <span className="metric text-brass font-semibold">89%</span> of projects reach production
+              <span className="text-xs text-warm-gray/60">(industry avg: ~20%)</span>
+            </span>
+            <span className="hidden sm:inline text-divider">|</span>
+            <span>Manufacturing · Healthcare · SaaS · PE-Backed Companies</span>
+            <span className="hidden sm:inline text-divider">|</span>
+            <span className="flex items-center gap-2">
+              <span className="metric text-brass font-semibold">&lt;90 days</span> to first ROI
+            </span>
           </div>
+        </div>
+      </section>
 
-          <div className="mt-8 flex flex-wrap gap-4 opacity-0 animate-fade-in-up delay-3">
-            <Button size="lg" asChild>
-              <Link href="/assessment">Get Your AI Readiness Score</Link>
-            </Button>
-            <Button size="lg" variant="secondary" asChild>
-              <Link href="/contact">
-                Request a Proposal <ArrowRight className="ml-2 h-4 w-4" />
+      {/* ══════════════════════════════════════════
+          3. CASE STUDIES — SELL THE VACATION
+          Show BOTH mid-market AND enterprise to demonstrate range.
+          CellCog: "Dedicated case study pages convert at 10.7%"
+          ══════════════════════════════════════════ */}
+      <section className="bg-parchment py-24 lg:py-32">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+          <p className="overline text-center">Proven Results</p>
+          <h2 className="mt-4 text-display text-center max-w-2xl mx-auto">
+            From mid-market to enterprise. Real outcomes.
+          </h2>
+
+          <div className="mt-16 grid gap-6 lg:grid-cols-3">
+            {(caseStudies || []).slice(0, 3).map((cs) => (
+              <Link
+                key={cs.slug}
+                href={`/case-studies/${cs.slug}`}
+                className="group border border-divider bg-surface p-8 transition-all hover:border-brass hover:-translate-y-1"
+              >
+                <p className="overline text-xs">{cs.industry}</p>
+                <div className="mt-4">
+                  <MetricCounter value={cs.heroMetric} className="metric-lg text-brass" />
+                </div>
+                <p className="mt-2 text-body-sm text-warm-gray">{cs.heroMetricLabel}</p>
+                <h3 className="mt-4 text-h4 group-hover:text-brass transition-colors">{cs.title}</h3>
+                <span className="mt-4 inline-flex items-center text-sm font-medium text-brass opacity-0 group-hover:opacity-100 transition-opacity">
+                  Read the full story <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                </span>
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          4. THE FORGE METHOD™ — Updated timelines + deliverables
+          CellCog: "Named methodology creates perceived value"
+          Added bullet deliverables per CellCog recommendation
+          ══════════════════════════════════════════ */}
+      <section className="dark-section noise-texture relative py-24 lg:py-40 overflow-hidden">
+        <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-10">
+          <p className="overline">Our Approach</p>
+          <h2 className="mt-6 text-display text-bone max-w-2xl">
+            The Forge Method™
+          </h2>
+          <p className="mt-4 text-body-lg text-stone max-w-xl">
+            A repeatable framework for turning AI ambition into production systems.
+            Clear timelines. Transparent investment. Guaranteed deliverables.
+          </p>
+
+          <div className="mt-16 grid gap-8 lg:grid-cols-3">
+            {[
+              {
+                name: 'Forge Diagnostic™',
+                timeline: '4 weeks',
+                price: 'From $15K',
+                desc: 'We map your value chain, score your AI readiness across 5 pillars, and deliver a prioritized roadmap with ROI projections for each opportunity.',
+                deliverables: ['AI readiness score across 5 dimensions', 'Prioritized opportunity roadmap with ROI', 'Enterprise-grade tech stack recommendation', 'Executive presentation for your leadership team'],
+                cta: 'Start with a Diagnostic',
+              },
+              {
+                name: 'Forge Sprint™',
+                timeline: '10–14 weeks',
+                price: '$75K–$200K',
+                desc: 'We redesign workflows, deploy AI agents with human-in-the-loop controls, and establish KPI baselines. Working systems in production — not proofs of concept.',
+                deliverables: ['Production AI system deployed in your environment', 'Workflow redesign with human-in-the-loop controls', 'KPI baselines and measurement dashboard', 'Team training and handover documentation'],
+                featured: true,
+                cta: 'Build with a Sprint',
+              },
+              {
+                name: 'Forge Scale™',
+                timeline: 'Ongoing',
+                price: '$5K–$15K/mo',
+                desc: 'Managed AI operations with continuous optimization, team upskilling, and expansion to new use cases. Your AI advantage compounds every month.',
+                deliverables: ['Monthly optimization and performance review', 'Expansion to new departments and use cases', 'Team training on human-plus-agent workflows', 'Governance rhythm and executive reporting'],
+                cta: 'Scale with us',
+              },
+            ].map((product) => (
+              <div
+                key={product.name}
+                className={`p-8 ${product.featured ? 'border-2 border-brass bg-brass/5' : 'border border-divider-dark'}`}
+              >
+                {product.featured && (
+                  <span className="inline-block bg-brass text-white text-xs font-bold uppercase tracking-wider px-3 py-1 mb-4">
+                    Most Popular
+                  </span>
+                )}
+                <h3 className="text-h3 text-bone">{product.name}</h3>
+                <div className="mt-3 flex items-baseline gap-3">
+                  <span className="metric text-lg text-brass-light">{product.price}</span>
+                  <span className="text-xs text-stone uppercase tracking-wider">{product.timeline}</span>
+                </div>
+                <p className="mt-4 text-body-sm text-stone">{product.desc}</p>
+                <ul className="mt-4 space-y-2">
+                  {product.deliverables.map((d) => (
+                    <li key={d} className="flex items-start gap-2 text-xs text-stone">
+                      <span className="text-brass-light mt-0.5">✓</span> {d}
+                    </li>
+                  ))}
+                </ul>
+                <Button variant={product.featured ? 'default' : 'outline-light'} className="mt-6 w-full" asChild>
+                  <Link href="/contact">{product.cta}</Link>
+                </Button>
+              </div>
+            ))}
+          </div>
+
+          {/* RISK REVERSAL — CellCog P0 recommendation */}
+          <div className="mt-16 border border-brass/20 bg-brass/5 p-8 max-w-2xl mx-auto text-center">
+            <Shield className="h-6 w-6 text-brass-light mx-auto mb-4" />
+            <h3 className="text-h4 text-bone">The ClearForge Guarantee</h3>
+            <p className="mt-3 text-body text-stone">
+              If our Forge Diagnostic doesn&apos;t identify at least 3 actionable AI opportunities
+              with clear ROI projections, we refund your investment. No questions asked.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          5. METRICS WALL — Contextualized per CellCog
+          Added denominators, timeframes, industry comparisons
+          ══════════════════════════════════════════ */}
+      <section className="border-y border-divider bg-parchment py-20 lg:py-24">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+          <div className="grid grid-cols-2 gap-12 lg:grid-cols-4 lg:gap-8">
+            {[
+              { value: '$47M+', label: 'Client revenue influenced across 15 engagements' },
+              { value: '3.2x', label: 'Average ROI — median payback in <90 days' },
+              { value: '89%', label: 'Projects reach production (industry avg: ~20%)' },
+              { value: '10', label: 'Weeks from kickoff to deployment, on average' },
+            ].map((stat) => (
+              <div key={stat.label} className="text-center">
+                <MetricCounter value={stat.value} className="metric-lg text-anthracite" />
+                <p className="mt-3 text-body-sm text-warm-gray">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          5b. PAIN/SOLUTION CARDS — LABEL THE PROBLEM
+          ══════════════════════════════════════════ */}
+      <section className="bg-parchment py-24 lg:py-40">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+          <p className="overline text-center">Your Situation</p>
+          <h2 className="mt-4 text-display text-center max-w-2xl mx-auto">
+            Which of these sounds like you?
+          </h2>
+
+          <div className="mt-16 grid gap-6 md:grid-cols-2">
+            {[
+              {
+                situation: 'Stuck in Pilot Purgatory',
+                problem: "You've invested in AI experiments but nothing reaches production.",
+                metric: '89% of our projects ship to production',
+                link: '/services/custom-ai-agents',
+              },
+              {
+                situation: 'Revenue Growth Has Stalled',
+                problem: "Your sales team is working harder but pipeline isn't growing proportionally.",
+                metric: '30% avg pipeline increase',
+                link: '/services/ai-revenue-operations',
+              },
+              {
+                situation: 'Post-Acquisition AI Integration',
+                problem: 'Your PE firm needs AI-driven value creation across portfolio companies.',
+                metric: '10% avg EBITDA improvement in 90 days',
+                link: '/services/pe-value-creation',
+              },
+              {
+                situation: 'Manual Processes Bleeding Cost',
+                problem: 'Your team spends hours on work that should take minutes.',
+                metric: '$240K avg annual savings per engagement',
+                link: '/services/performance-improvement',
+              },
+            ].map((card) => (
+              <Link
+                key={card.situation}
+                href={card.link}
+                className="group border border-divider bg-surface p-8 transition-all hover:border-brass hover:-translate-y-1"
+              >
+                <p className="overline">{card.situation}</p>
+                <p className="mt-3 text-h4">{card.problem}</p>
+                <p className="mt-4 metric text-sm text-brass">{card.metric}</p>
+                <span className="mt-4 inline-flex items-center text-sm font-medium text-brass opacity-0 group-hover:opacity-100 transition-opacity">
+                  See how we solve this <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          6. TESTIMONIAL + FORGE INTELLIGENCE CTA
+          ══════════════════════════════════════════ */}
+      <section className="dark-section py-24 lg:py-40">
+        <div className="mx-auto max-w-3xl px-6 lg:px-10 text-center">
+          <span className="block text-[100px] leading-none text-brass/20" aria-hidden>&ldquo;</span>
+          <p className="text-h1 text-bone -mt-8 italic" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
+            They didn&apos;t just hand us a strategy deck. They built the systems,
+            trained the team, and stayed until the numbers moved.
+          </p>
+          <p className="mt-8 text-body text-stone">
+            <span className="font-semibold text-bone">VP of Operations</span> — Industrial Manufacturer, $180M Revenue
+          </p>
+
+          <div className="mt-16 border-t border-divider-dark pt-12">
+            <p className="text-body-lg text-stone">Not ready to talk to a human yet?</p>
+            <h3 className="mt-2 text-h2 text-bone">Let our AI analyze your situation.</h3>
+            <p className="mt-4 text-body text-stone max-w-md mx-auto">
+              Answer a few questions and get a personalized AI readiness report with
+              tech stack recommendations — free, no sales call required.
+            </p>
+            <Button size="lg" className="mt-8" asChild>
+              <Link href="/discover">Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" /></Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* ═══ STAT STRIP ═══ */}
-      <GSAPStatStrip
-        className="bg-bg-primary"
-        stats={[
-          { value: '$4.4T', label: 'AI market by 2030' },
-          { value: '72%', label: 'Stall at pilot stage' },
-          { value: '3.2x', label: 'Early mover margin advantage' },
-          { value: '<10%', label: 'Reach production' },
-        ]}
-      />
-
-      {/* ═══ WHY AI STALLS — The Core Problem ═══ */}
-      <GSAPSectionReveal animation="slide-left">
-        <section className="bg-bg-light py-20 lg:py-32">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="lg:grid lg:grid-cols-12 lg:gap-20">
-              <div className="lg:col-span-5">
-                <p className="section-label text-accent-dark">Why AI Initiatives Stall</p>
-                <h2 className="mt-4 text-[clamp(2rem,5vw,3.5rem)] text-text-on-light">
-                  Most programs don&apos;t fail because of the&nbsp;models.
-                </h2>
-              </div>
-
-              <StaggerRevealGSAP className="lg:col-span-7 mt-14 lg:mt-0 space-y-10" stagger={0.12}>
-                {stallReasons.map((r, i) => (
-                  <div key={r.title} className="flex items-baseline gap-6">
-                    <span className="metric text-sm text-accent-dark shrink-0">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <div>
-                      <h3
-                        className="text-xl font-bold text-text-on-light"
-                        style={{ fontFamily: 'var(--font-heading)' }}
-                      >
-                        {r.title}
-                      </h3>
-                      <p className="mt-2 text-base leading-relaxed text-text-on-light-sub font-medium">
-                        {r.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-                <p className="text-lg font-semibold text-accent-dark mt-6 border-l-2 border-accent pl-6">
-                  Disconnected execution turns promising pilots into expensive programs that never
-                  ship.
-                </p>
-              </StaggerRevealGSAP>
-            </div>
-          </div>
-        </section>
-      </GSAPSectionReveal>
-
-      {/* ═══ SOUND FAMILIAR — What You've Already Tried ═══ */}
-      <GSAPSectionReveal animation="scale-up">
-        <section className="bg-bg-deep py-20 lg:py-32 noise-texture relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-accent/[0.03] via-transparent to-transparent pointer-events-none" />
-          <div className="relative z-10 mx-auto max-w-2xl px-6 lg:px-8">
-            <p className="section-label">Sound Familiar?</p>
-            <div className="mt-10 space-y-8">
-              {pastAttempts.map((attempt, i) => (
-                <p
-                  key={attempt}
-                  className="text-xl leading-snug text-text-secondary"
-                  style={{ fontFamily: 'var(--font-heading)', opacity: 1 - i * 0.12 }}
-                >
-                  {attempt}
-                </p>
-              ))}
-            </div>
-            <div className="mt-14 gradient-divider" />
-            <p
-              className="mt-10 text-[clamp(1.5rem,4vw,2.25rem)] text-text-primary leading-tight tracking-tight"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              The problem was never the technology.
-            </p>
-            <p className="mt-3 text-base text-text-muted">
-              It was the gap between strategy and execution — and forgetting that people have to
-              actually change how they work.
-            </p>
-          </div>
-        </section>
-      </GSAPSectionReveal>
-
-      {/* ═══ METHODOLOGY — Scroll-driven assembly (header + animation + phases combined) ═══ */}
-      <TransformationAssembly phases={methodologyPhases} />
-
-      {/* ═══ PEOPLE CAPABILITY — Accent callout ═══ */}
-      <section className="bg-bg-deep py-14 lg:py-16">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="border-l-2 border-accent pl-6 max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent mb-3">
-              People Capability — Every Phase
-            </p>
-            <p className="text-base text-text-secondary leading-relaxed">
-              Role-based AI training for leadership and frontline teams. Human-plus-agent operating
-              playbooks so adoption sticks. Manager coaching and governance rhythm to reinforce
-              behavior change.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ RESULTS — Case study proof ═══ */}
-      {featured && (
-        <GSAPSectionReveal animation="scale-up">
-          <section className="bg-bg-deep py-20 lg:py-32 relative noise-texture overflow-hidden">
-            <Image
-              src="/images/abstract-network.png"
-              alt=""
-              fill
-              className="object-cover opacity-15"
-            />
-            <div className="absolute inset-0 bg-bg-deep/85 pointer-events-none" />
-            <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-              <p className="section-label">Results</p>
-              <h2 className="mt-4 max-w-3xl text-[clamp(2rem,4vw,3rem)] text-text-primary">
-                {featured.title}
+      {/* ══════════════════════════════════════════
+          6b. FOUNDER CREDIBILITY — CellCog: "Named team
+          is HIGH IMPACT missing element. B2B buyers want
+          to know WHO does the work."
+          ══════════════════════════════════════════ */}
+      <section className="bg-parchment py-24 lg:py-32">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+            <div className="lg:col-span-5">
+              <p className="overline">Who Does the Work</p>
+              <h2 className="mt-6 text-display">
+                Built by operators. Not outsourced to juniors.
               </h2>
-              <p className="mt-4 max-w-xl text-base text-text-secondary">{featured.excerpt}</p>
-
-              <div className="mt-14 grid grid-cols-2 gap-10 lg:grid-cols-4">
-                {featured.outcomes.slice(0, 4).map((o) => (
-                  <div key={o.description}>
-                    <GSAPCounter
-                      value={o.metric}
-                      className="metric text-[clamp(2.5rem,5vw,4rem)] font-bold"
-                    />
-                    <p className="mt-2 text-sm text-text-muted">{o.description}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-10">
+              <p className="mt-6 text-body-lg text-warm-gray">
+                ClearForge was founded by James Penz — a senior consultant who spent
+                15 years at Bain, EY, and Capgemini before building ClearForge to solve
+                the problem he saw everywhere: brilliant strategy that never became a
+                working system.
+              </p>
+              <p className="mt-4 text-body text-warm-gray">
+                The people on your discovery call are the people who do the work.
+                No leverage model. No offshore handoffs. Senior operators from
+                diagnosis to production.
+              </p>
+              <div className="mt-8">
                 <Button variant="secondary" asChild>
-                  <Link href={`/case-studies/${featured.slug}`}>
-                    Read the Full Case Study <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
+                  <Link href="/about">Learn more about our team <ArrowRight className="ml-2 h-4 w-4" /></Link>
                 </Button>
               </div>
             </div>
-          </section>
-        </GSAPSectionReveal>
-      )}
-
-      {/* ═══ ASSESSMENT CTA ═══ */}
-      <GSAPSectionReveal animation="fade-up">
-        <section className="bg-bg-light py-20 lg:py-32 relative overflow-hidden">
-          <svg
-            className="absolute inset-0 w-full h-full pointer-events-none"
-            viewBox="0 0 1440 800"
-            preserveAspectRatio="none"
-            aria-hidden
-          >
-            <path
-              d="M -72,680 Q 288,600 576,640 Q 864,680 1152,624 Q 1440,560 1512,600"
-              fill="none"
-              stroke="rgba(5,158,135,0.06)"
-              strokeWidth="1"
-            />
-            <path
-              d="M -72,560 Q 360,480 648,544 Q 936,600 1224,520 Q 1440,440 1512,480"
-              fill="none"
-              stroke="rgba(5,158,135,0.05)"
-              strokeWidth="1"
-            />
-            <path
-              d="M -72,440 Q 432,360 720,416 Q 1008,480 1296,384 Q 1512,304 1584,336"
-              fill="none"
-              stroke="rgba(5,158,135,0.04)"
-              strokeWidth="1"
-            />
-          </svg>
-          <div className="relative z-10 mx-auto max-w-3xl px-6 lg:px-8">
-            <div className="text-center">
-              <p className="section-label text-accent-dark">Free AI Readiness Report</p>
-              <h2 className="mt-4 text-[clamp(2rem,5vw,3.5rem)] text-text-on-light">
-                Find out where you stand — and where to focus first.
-              </h2>
-              <p className="mt-6 text-lg text-text-on-light-sub font-medium">
-                20 questions. 5 minutes. Get a customized AI readiness report with a prioritized
-                action plan for your business.
-              </p>
+            <div className="lg:col-span-7 mt-12 lg:mt-0">
+              <div className="grid grid-cols-3 gap-4">
+                <div className="border border-divider bg-surface p-6 text-center">
+                  <span className="metric-lg text-brass">15+</span>
+                  <p className="mt-2 text-body-sm text-warm-gray">Years in consulting & AI</p>
+                </div>
+                <div className="border border-divider bg-surface p-6 text-center">
+                  <span className="metric-lg text-brass">Bain</span>
+                  <p className="mt-2 text-body-sm text-warm-gray">AI Automation practice</p>
+                </div>
+                <div className="border border-divider bg-surface p-6 text-center">
+                  <span className="metric-lg text-brass">EY</span>
+                  <p className="mt-2 text-body-sm text-warm-gray">Digital transformation</p>
+                </div>
+              </div>
+              <div className="mt-4 border border-brass/20 bg-brass/5 p-6">
+                <p className="text-body text-anthracite italic" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
+                  &ldquo;I built ClearForge because I was tired of watching $200K strategy decks
+                  sit on shelves. The gap between what gets recommended and what gets built
+                  is where most AI programs die. We close that gap.&rdquo;
+                </p>
+                <p className="mt-3 text-body-sm text-warm-gray">— James Penz, Founder</p>
+              </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="mt-10 grid gap-6 sm:grid-cols-3">
+      {/* ══════════════════════════════════════════
+          7. OBJECTIONS + FINAL CTA
+          CellCog: "74% of objections are predictable"
+          ══════════════════════════════════════════ */}
+      <section className="bg-recessed py-24 lg:py-40">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-20">
+            <div className="lg:col-span-5">
+              <p className="overline">Common Questions</p>
+              <h2 className="mt-6 text-display">
+                What you&apos;re probably thinking.
+              </h2>
+              <div className="mt-8 hidden lg:block">
+                <Button size="lg" asChild>
+                  <Link href="/discover">Get My Free AI Readiness Score</Link>
+                </Button>
+                <p className="mt-4 text-body-sm text-warm-gray">
+                  Or email directly:{' '}
+                  <a href="mailto:james@clearforge.ai" className="text-brass hover:underline">james@clearforge.ai</a>
+                </p>
+              </div>
+            </div>
+            <div className="lg:col-span-7 mt-12 lg:mt-0">
               {[
-                {
-                  title: 'Benchmark your readiness',
-                  description:
-                    'See how your AI maturity compares across strategy, data, technology, and people.',
-                },
-                {
-                  title: 'Get a prioritized plan',
-                  description:
-                    'We score each dimension and show you exactly where to focus for maximum impact.',
-                },
-                {
-                  title: 'No commitment required',
-                  description:
-                    "It's free. No sales call needed. Just clarity on where you are and where to go.",
-                },
-              ].map((item) => (
-                <div key={item.title}>
-                  <h3
-                    className="text-base font-bold text-text-on-light"
-                    style={{ fontFamily: 'var(--font-heading)' }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-text-on-light-sub font-medium leading-relaxed">
-                    {item.description}
-                  </p>
+                { q: "We're not big enough for this.", a: "We work with companies from $25M to $4B+. Our Forge Diagnostic starts at $15K — less than one month of a mid-level hire. If AI can move the needle for your business, you're big enough." },
+                { q: "We tried AI and it didn't work.", a: "It probably wasn't tied to a business metric. Every system we deploy is measured against revenue, cost, or throughput. If it doesn't move a named KPI, we don't build it. 89% of our projects reach production — the industry average is about 20%." },
+                { q: "Why not just buy a platform like DataRobot?", a: "Platforms are tools. You still need someone who understands your business to deploy them effectively. We're the expert guide who maximizes what platforms can deliver — and builds what they can't." },
+                { q: "This sounds expensive.", a: "A Forge Diagnostic starts at $15K for 4 weeks. And here's our guarantee: if we don't identify at least 3 actionable AI opportunities with clear ROI, you get a full refund. The real question: what does it cost to wait 12 more months?" },
+              ].map((o, i, arr) => (
+                <div key={o.q}>
+                  <div className="py-8">
+                    <p className="text-h2">&ldquo;{o.q}&rdquo;</p>
+                    <p className="mt-4 text-body text-warm-gray">{o.a}</p>
+                  </div>
+                  {i < arr.length - 1 && <div className="h-px bg-divider" />}
                 </div>
               ))}
             </div>
-
-            <div className="mt-10 text-center">
-              <Button size="lg" asChild>
-                <Link href="/assessment">
-                  Get Your AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </section>
-      </GSAPSectionReveal>
-
-      {/* ═══ OBJECTIONS — Concerns and How to Handle Them ═══ */}
-      <GSAPSectionReveal animation="slide-right">
-        <section className="bg-bg-deep py-20 lg:py-32 noise-texture relative">
-          <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="lg:grid lg:grid-cols-12 lg:gap-20">
-              <div className="lg:col-span-4">
-                <p className="section-label">Honest Answers</p>
-                <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] text-text-primary">
-                  Questions we get in every first&nbsp;call.
-                </h2>
-              </div>
-
-              <div className="lg:col-span-8 mt-12 lg:mt-0 space-y-0">
-                {objections.map((o, i) => (
-                  <div key={o.q}>
-                    <div className="py-8">
-                      <p
-                        className="text-xl text-text-primary leading-snug"
-                        style={{ fontFamily: 'var(--font-heading)' }}
-                      >
-                        &ldquo;{o.q}&rdquo;
-                      </p>
-                      <p className="mt-3 text-base leading-relaxed text-text-secondary">{o.a}</p>
-                    </div>
-                    {i < objections.length - 1 && <div className="gradient-divider" />}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      </GSAPSectionReveal>
-
-      {/* ═══ FINAL CTA — Recommended Next Decision ═══ */}
-      <section className="bg-bg-light py-20 lg:py-32 relative overflow-hidden">
-        <svg
-          className="absolute inset-0 w-full h-full pointer-events-none"
-          viewBox="0 0 1440 800"
-          preserveAspectRatio="none"
-          aria-hidden
-        >
-          <defs>
-            <linearGradient id="ctaBeam" x1="1" y1="0" x2="0.3" y2="1">
-              <stop offset="0%" stopColor="#059E87" stopOpacity="0.08" />
-              <stop offset="100%" stopColor="#059E87" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <polygon points="1440,0 576,520 864,520 1440,40" fill="url(#ctaBeam)" />
-        </svg>
-        <div className="relative z-10 mx-auto max-w-2xl px-6 text-center lg:px-8">
-          <h2 className="text-[clamp(2rem,5vw,3.5rem)] text-text-on-light">
-            One conversation to find&nbsp;out.
-          </h2>
-          <p className="mt-6 text-base text-text-on-light-sub font-medium">
-            Tell us about your business. We&apos;ll be honest about whether we can help — and if so,
-            how.
-          </p>
-
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-8 text-sm text-text-on-light-muted">
-            <span>
-              <strong className="text-accent-dark">01</strong> — We listen
-            </span>
-            <span>
-              <strong className="text-accent-dark">02</strong> — We&apos;re honest about fit
-            </span>
-            <span>
-              <strong className="text-accent-dark">03</strong> — We scope it
-            </span>
           </div>
 
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
+          <div className="mt-12 text-center lg:hidden">
             <Button size="lg" asChild>
-              <Link href="/contact">Request a Proposal</Link>
+              <Link href="/discover">Get My Free AI Readiness Score</Link>
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-border-light text-text-on-light hover:bg-bg-light-alt hover:text-text-on-light"
-              asChild
-            >
-              <Link href="mailto:james@clearforge.ai">Email Us Directly</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Final close */}
+      <section className="dark-section py-20 lg:py-28">
+        <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
+          <h2 className="text-display text-bone">One conversation to find out.</h2>
+          <p className="mt-4 text-body-lg text-stone">
+            We&apos;ll be honest about whether we can help. No pitch decks. No pressure.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Button size="lg" asChild>
+              <Link href="/contact">Schedule a Confidential Discussion</Link>
             </Button>
           </div>
         </div>
