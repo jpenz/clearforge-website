@@ -39,7 +39,7 @@ export function Footer() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Button size="lg" asChild>
+              <Button size="lg" className="shadow-lg hover:shadow-xl" asChild>
                 <Link href="/contact">Schedule a Discussion <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
               <Button size="lg" variant="outline-light" asChild>
@@ -69,7 +69,7 @@ export function Footer() {
                 <ul className="space-y-1">
                   {links.map((link) => (
                     <li key={link.href}>
-                      <Link href={link.href} className="inline-flex items-center min-h-[44px] text-sm text-bone/50 hover:text-brass transition-colors">
+                      <Link href={link.href} className="inline-flex items-center min-h-[44px] text-sm text-bone/50 hover:text-brass transition-colors link-underline">
                         {link.label}
                       </Link>
                     </li>

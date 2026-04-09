@@ -44,6 +44,22 @@ export function MetricCounter({ value, className = 'metric-lg', duration = 2 }: 
 
       el.textContent = prefix + '0' + suffix;
 
+      // Container scale entrance
+      gsap.fromTo(
+        el,
+        { scale: 0.85 },
+        {
+          scale: 1,
+          duration: 0.8,
+          ease: 'back.out(1.7)',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 90%',
+            toggleActions: 'play none none none',
+          },
+        },
+      );
+
       gsap.to(proxy, {
         val: target,
         duration,
@@ -63,6 +79,14 @@ export function MetricCounter({ value, className = 'metric-lg', duration = 2 }: 
             formatted = hasCommas ? rounded.toLocaleString() : String(rounded);
           }
           el.textContent = prefix + formatted + suffix;
+        },
+        onComplete() {
+          // Emerald text-shadow glow that fades out
+          gsap.fromTo(
+            el,
+            { textShadow: '0 0 30px rgba(4,120,87,0.3)' },
+            { textShadow: '0 0 0px rgba(4,120,87,0)', duration: 1, ease: 'power2.out' },
+          );
         },
       });
     },

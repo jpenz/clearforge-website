@@ -108,7 +108,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-4 py-2 text-[13px] font-medium text-bone/60 hover:text-bone transition-colors"
+                className="px-4 py-2 text-[13px] font-medium text-bone/60 hover:text-bone transition-colors link-underline"
               >
                 {link.label}
               </Link>
@@ -117,7 +117,7 @@ export function Header() {
 
           {/* Right: CTA + search */}
           <div className="flex items-center gap-3">
-            <Button variant="default" size="sm" className="hidden sm:inline-flex text-xs" asChild>
+            <Button variant="default" size="sm" className="hidden sm:inline-flex text-xs shadow-sm hover:shadow-md" asChild>
               <Link href="/discover">Get My AI Score</Link>
             </Button>
           </div>
@@ -165,7 +165,7 @@ export function Header() {
                         <Link
                           href={link.href}
                           onClick={() => setSidebarOpen(false)}
-                          className="group flex items-center justify-between min-h-[44px] py-2.5 text-[15px] text-bone/80 hover:text-bone transition-colors"
+                          className="group flex items-center justify-between min-h-[44px] py-2.5 text-[15px] text-bone/80 hover:text-bone hover:pl-2 transition-all duration-200"
                         >
                           {link.label}
                           <ChevronRight className="h-4 w-4 text-stone opacity-0 group-hover:opacity-100 transition-opacity" />

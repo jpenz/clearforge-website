@@ -1,8 +1,10 @@
 import { ArrowRight, Shield } from 'lucide-react';
 import Link from 'next/link';
+import { ForgeMethodCards, MetricWall, ScrollReveal } from '@/components/home/gsap-sections';
 import { HeroScroll } from '@/components/home/hero-scroll';
 import { MetricCounter } from '@/components/home/metric-counter';
 import { Button } from '@/components/ui/button';
+import { GsapTextReveal } from '@/components/ui/gsap-text-reveal';
 import { caseStudies } from '@/data/case-studies';
 import { createMetadata } from '@/lib/metadata';
 
@@ -78,7 +80,7 @@ export default function Home() {
               <Link
                 key={cs.slug}
                 href={`/case-studies/${cs.slug}`}
-                className="group border border-divider bg-surface p-5 sm:p-8 transition-all hover:border-brass hover:-translate-y-1"
+                className="group border border-divider bg-surface p-5 sm:p-8 card-hover hover:border-brass"
               >
                 <p className="overline text-xs">{cs.industry}</p>
                 <div className="mt-4">
@@ -111,7 +113,7 @@ export default function Home() {
             Clear timelines. Transparent investment. Guaranteed deliverables.
           </p>
 
-          <div className="mt-16 grid gap-8 lg:grid-cols-3">
+          <ForgeMethodCards className="mt-16 grid gap-8 lg:grid-cols-3">
             {[
               {
                 name: 'Forge Diagnostic™',
@@ -141,7 +143,7 @@ export default function Home() {
             ].map((product) => (
               <div
                 key={product.name}
-                className={`p-5 sm:p-8 ${product.featured ? 'border-2 border-brass bg-brass/5' : 'border border-divider-dark'}`}
+                className={`forge-card will-change-transform p-5 sm:p-8 ${product.featured ? 'border-2 border-brass bg-brass/5 glow-pulse' : 'border border-divider-dark'}`}
               >
                 {product.featured && (
                   <span className="inline-block bg-brass text-white text-xs font-bold uppercase tracking-wider px-3 py-1 mb-4">
@@ -166,7 +168,7 @@ export default function Home() {
                 </Button>
               </div>
             ))}
-          </div>
+          </ForgeMethodCards>
 
           {/* RISK REVERSAL — CellCog P0 recommendation */}
           <div className="mt-12 sm:mt-16 border border-brass/20 bg-brass/5 p-5 sm:p-8 max-w-2xl mx-auto text-center">
@@ -186,19 +188,19 @@ export default function Home() {
           ══════════════════════════════════════════ */}
       <section className="border-y border-divider bg-parchment py-16 lg:py-24">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
-          <div className="grid grid-cols-2 gap-6 sm:gap-12 lg:grid-cols-4 lg:gap-8">
+          <MetricWall className="grid grid-cols-2 gap-6 sm:gap-12 lg:grid-cols-4 lg:gap-8">
             {[
               { value: '$47M+', label: 'Client revenue influenced across 15 engagements' },
               { value: '3.2x', label: 'Average ROI — median payback in <90 days' },
               { value: '89%', label: 'Projects reach production (industry avg: ~20%)' },
               { value: '10', label: 'Weeks from kickoff to deployment, on average' },
             ].map((stat) => (
-              <div key={stat.label} className="text-center">
+              <div key={stat.label} className="metric-item text-center will-change-transform">
                 <MetricCounter value={stat.value} className="metric-lg text-anthracite" />
                 <p className="mt-3 text-body-sm text-warm-gray">{stat.label}</p>
               </div>
             ))}
-          </div>
+          </MetricWall>
         </div>
       </section>
 
@@ -242,7 +244,7 @@ export default function Home() {
               <Link
                 key={card.situation}
                 href={card.link}
-                className="group border border-divider bg-surface p-5 sm:p-8 transition-all hover:border-brass hover:-translate-y-1"
+                className="group border border-divider bg-surface p-5 sm:p-8 card-hover hover:border-brass border-l-0 hover:border-l-4 hover:border-l-brass transition-all duration-300"
               >
                 <p className="overline">{card.situation}</p>
                 <p className="mt-3 text-h4">{card.problem}</p>
@@ -261,11 +263,14 @@ export default function Home() {
           ══════════════════════════════════════════ */}
       <section className="dark-section py-16 sm:py-24 lg:py-40">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10 text-center">
-          <span className="block text-[60px] sm:text-[100px] leading-none text-brass/20" aria-hidden>&ldquo;</span>
-          <p className="text-h1 text-bone -mt-8 italic" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
-            They didn&apos;t just hand us a strategy deck. They built the systems,
-            trained the team, and stayed until the numbers moved.
-          </p>
+          <span className="block text-[80px] sm:text-[120px] lg:text-[160px] leading-none text-brass/20" aria-hidden>&ldquo;</span>
+          <GsapTextReveal
+            text="They didn't just hand us a strategy deck. They built the systems, trained the team, and stayed until the numbers moved."
+            tag="p"
+            scrub
+            className="text-h1 text-bone -mt-8 italic"
+            style={{ fontFamily: 'var(--font-instrument-serif)' }}
+          />
           <p className="mt-8 text-body text-stone">
             <span className="font-semibold text-bone">VP of Operations</span> — Industrial Manufacturer, $180M Revenue
           </p>

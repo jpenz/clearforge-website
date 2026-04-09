@@ -223,3 +223,49 @@ h3, h4, h5, h6 {
   .print-report h1, .print-report h2, .print-report h3 { color: black; }
   .print-report p, .print-report li { color: #333; }
 }
+
+/* ── Premium interactions ── */
+
+/* Card hover with depth shadow */
+.card-hover {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 60px -12px rgba(4, 120, 87, 0.12), 0 8px 24px -8px rgba(0, 0, 0, 0.08);
+}
+
+/* Image zoom inside cards */
+.img-zoom { overflow: hidden; }
+.img-zoom img, .img-zoom > div { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+.group:hover .img-zoom img, .group:hover .img-zoom > div { transform: scale(1.06); }
+
+/* Smooth underline reveal */
+.link-underline { position: relative; display: inline-block; }
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--color-brass);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover::after { width: 100%; }
+
+/* Featured card glow pulse */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(4, 120, 87, 0.3); }
+  50% { box-shadow: 0 0 20px 1px rgba(4, 120, 87, 0.15), 0 0 0 1px rgba(4, 120, 87, 0.4); }
+}
+.glow-pulse { animation: glowPulse 3s ease-in-out infinite; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .card-hover, .card-hover:hover { transform: none; transition: none; }
+  .img-zoom img, .img-zoom > div, .group:hover .img-zoom img { transform: none; transition: none; }
+  .link-underline::after { transition: none; }
+  .glow-pulse { animation: none; }
+  .animate-fade-in-up, .animate-fade-in { animation: none; opacity: 1; }
+}
