@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
@@ -53,17 +54,21 @@ export default function AboutPage() {
       {/* — Hero — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-          <p className="overline">About ClearForge</p>
-          <h1
-            className="mt-6 text-display max-w-3xl text-bone"
-            style={{ fontFamily: 'var(--font-instrument-serif)' }}
-          >
-            We build production AI. Not strategy decks.
-          </h1>
-          <p className="mt-6 max-w-xl text-body-lg text-stone">
-            We build, we ship, we deploy. The same team that diagnoses the
-            problem engineers the solution and trains your people to run it.
-          </p>
+          <FadeIn>
+            <p className="overline">About ClearForge</p>
+            <h1
+              className="mt-6 text-display max-w-3xl text-bone"
+              style={{ fontFamily: 'var(--font-instrument-serif)' }}
+            >
+              We build production AI. Not strategy decks.
+            </h1>
+          </FadeIn>
+          <FadeIn delay={0.15}>
+            <p className="mt-6 max-w-xl text-body-lg text-stone">
+              We build, we ship, we deploy. The same team that diagnoses the
+              problem engineers the solution and trains your people to run it.
+            </p>
+          </FadeIn>
         </div>
       </section>
 
@@ -98,6 +103,7 @@ export default function AboutPage() {
       {/* — Founder — */}
       <section className="border-t border-divider bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
+          <FadeIn>
           <div className="lg:grid lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-5">
               <p className="overline">Leadership</p>
@@ -141,6 +147,7 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
+          </FadeIn>
         </div>
       </section>
 
@@ -152,14 +159,14 @@ export default function AboutPage() {
             What we believe shapes every engagement.
           </h2>
 
-          <div className="mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+          <Stagger className="mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
             {values.map((v) => (
-              <div key={v.title} className="border-t border-divider pt-6">
+              <StaggerItem key={v.title} className="border-t border-divider pt-6">
                 <h3 className="text-h4">{v.title}</h3>
                 <p className="mt-2 text-body-sm text-warm-gray">{v.desc}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 

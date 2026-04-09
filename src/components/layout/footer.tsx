@@ -27,7 +27,7 @@ export function Footer() {
     <footer role="contentinfo" className="dark-section">
       {/* CTA band */}
       <div className="border-b border-divider-dark">
-        <div className="mx-auto max-w-[1200px] px-6 py-20 lg:px-10 lg:py-28">
+        <div className="mx-auto max-w-[1200px] px-4 sm:px-6 py-16 lg:px-10 lg:py-28">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
             <div className="max-w-xl">
               <p className="overline">Ready?</p>
@@ -51,7 +51,7 @@ export function Footer() {
       </div>
 
       {/* Links */}
-      <div className="mx-auto max-w-[1200px] px-6 py-16 lg:px-10 lg:py-20">
+      <div className="mx-auto max-w-[1200px] px-4 sm:px-6 py-12 lg:px-10 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4 space-y-6">
             <span className="text-[13px] font-bold uppercase tracking-[0.18em] text-bone">ClearForge</span>
@@ -66,10 +66,10 @@ export function Footer() {
             {Object.entries(footerLinks).map(([title, links]) => (
               <div key={title}>
                 <h3 className="mb-5 overline">{title}</h3>
-                <ul className="space-y-3">
+                <ul className="space-y-1">
                   {links.map((link) => (
                     <li key={link.href}>
-                      <Link href={link.href} className="text-sm text-bone/50 hover:text-brass transition-colors">
+                      <Link href={link.href} className="inline-flex items-center min-h-[44px] text-sm text-bone/50 hover:text-brass transition-colors">
                         {link.label}
                       </Link>
                     </li>

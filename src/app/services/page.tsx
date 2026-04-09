@@ -1,6 +1,7 @@
 import { ArrowRight, Factory, Landmark, HeartPulse, Code2, Briefcase, Shield } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
 import { services } from '@/data/services';
 import { createMetadata } from '@/lib/metadata';
 
@@ -109,21 +110,25 @@ export default function ServicesPage() {
       {/* — Hero — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <p className="overline">How We Work</p>
-          <h1
-            className="mt-6 text-display max-w-3xl text-bone"
-            style={{ fontFamily: 'var(--font-instrument-serif)' }}
-          >
-            The Forge Method™
-          </h1>
-          <p className="mt-6 max-w-xl text-body-lg text-stone">
-            Three named products. Transparent pricing. Built for mid-market
-            and growth-stage companies who need AI that works in production
-            — not a strategy deck that sits in a drawer.
-          </p>
-          <p className="mt-4 max-w-xl text-body text-stone">
-            We build, we ship, we deploy.
-          </p>
+          <FadeIn>
+            <p className="overline">How We Work</p>
+            <h1
+              className="mt-6 text-display max-w-3xl text-bone"
+              style={{ fontFamily: 'var(--font-instrument-serif)' }}
+            >
+              The Forge Method™
+            </h1>
+          </FadeIn>
+          <FadeIn delay={0.15}>
+            <p className="mt-6 max-w-xl text-body-lg text-stone">
+              Three named products. Transparent pricing. Built for mid-market
+              and growth-stage companies who need AI that works in production
+              — not a strategy deck that sits in a drawer.
+            </p>
+            <p className="mt-4 max-w-xl text-body text-stone">
+              We build, we ship, we deploy.
+            </p>
+          </FadeIn>
         </div>
       </section>
 
@@ -135,9 +140,9 @@ export default function ServicesPage() {
             Three engagements. One accountable team.
           </h2>
 
-          <div className="mt-16 grid gap-8 lg:grid-cols-3">
+          <Stagger className="mt-16 grid gap-8 lg:grid-cols-3" stagger={0.12}>
             {forgeProducts.map((product) => (
-              <div
+              <StaggerItem
                 key={product.name}
                 className={`relative border ${
                   product.featured
@@ -187,9 +192,9 @@ export default function ServicesPage() {
                     </Link>
                   </Button>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
@@ -201,29 +206,33 @@ export default function ServicesPage() {
             We solve specific problems in specific industries.
           </h2>
 
-          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {industries.map((ind) => (
-              <Link
-                key={ind.name}
-                href={ind.href}
-                className="group border border-divider bg-surface p-8 transition-all hover:border-brass hover:shadow-md hover:-translate-y-1"
-              >
-                <ind.icon className="h-6 w-6 text-brass" />
-                <h3 className="mt-4 text-h4 group-hover:text-brass transition-colors">
-                  {ind.name}
-                </h3>
-                <p className="mt-3 text-body-sm text-warm-gray">
-                  {ind.problem}
-                </p>
-                <p className="mt-4 text-body-sm font-medium text-anthracite">
-                  {ind.outcome}
-                </p>
-                <span className="mt-4 inline-flex items-center text-sm font-medium text-brass opacity-0 group-hover:opacity-100 transition-opacity">
-                  Learn more <ArrowRight className="ml-1 h-3.5 w-3.5" />
-                </span>
-              </Link>
-            ))}
-          </div>
+          <Stagger className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
+            {industries.map((ind) => {
+              const Icon = ind.icon;
+              return (
+              <StaggerItem key={ind.name}>
+                <Link
+                  href={ind.href}
+                  className="group block border border-divider bg-surface p-8 transition-all hover:border-brass hover:shadow-md hover:-translate-y-1"
+                >
+                  <Icon className="h-6 w-6 text-brass" />
+                  <h3 className="mt-4 text-h4 group-hover:text-brass transition-colors">
+                    {ind.name}
+                  </h3>
+                  <p className="mt-3 text-body-sm text-warm-gray">
+                    {ind.problem}
+                  </p>
+                  <p className="mt-4 text-body-sm font-medium text-anthracite">
+                    {ind.outcome}
+                  </p>
+                  <span className="mt-4 inline-flex items-center text-sm font-medium text-brass opacity-0 group-hover:opacity-100 transition-opacity">
+                    Learn more <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                  </span>
+                </Link>
+              </StaggerItem>
+              );
+            })}
+          </Stagger>
         </div>
       </section>
 

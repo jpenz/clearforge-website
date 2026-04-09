@@ -135,7 +135,7 @@ export function CaseStudyStory({
     <>
       {/* ═══ ACT 1: THE PROBLEM ═══ */}
       <section ref={act1Ref} className="dark-section noise-texture relative min-h-screen overflow-hidden">
-        <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-10 py-32 lg:py-0 lg:min-h-screen lg:flex lg:items-center">
+        <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 py-20 sm:py-32 lg:py-0 lg:min-h-screen lg:flex lg:items-center">
           <div className="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
             {/* Left: The challenge */}
             <div ref={act1TextRef} className="lg:col-span-7">
@@ -159,8 +159,9 @@ export function CaseStudyStory({
         </div>
       </section>
 
-      {/* ═══ ACT 2: THE INTERVENTION — Horizontal scroll timeline ═══ */}
-      <section ref={act2Ref} className="bg-parchment overflow-hidden" style={{ height: '100vh' }}>
+      {/* ═══ ACT 2: THE INTERVENTION — Horizontal scroll (desktop) / Vertical stack (mobile) ═══ */}
+      {/* Desktop: horizontal scroll with GSAP */}
+      <section ref={act2Ref} className="bg-parchment overflow-hidden hidden md:block" style={{ height: '100vh' }}>
         <div className="h-full flex flex-col justify-center">
           {/* Section header */}
           <div className="mx-auto max-w-[1400px] px-6 lg:px-10 mb-12">
@@ -200,15 +201,40 @@ export function CaseStudyStory({
         </div>
       </section>
 
+      {/* Mobile: vertical stack fallback */}
+      <section className="bg-parchment py-16 md:hidden">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
+          <p className="overline">The Forge Method™ Applied</p>
+          <h2 className="mt-4 text-display">How we solved it</h2>
+
+          <div className="mt-10 space-y-4">
+            {phases.map((phase, i) => (
+              <div key={phase.title} className="border border-divider bg-surface p-5">
+                <span className="metric text-sm text-brass">Phase {String(i + 1).padStart(2, '0')}</span>
+                <span className="text-xs text-warm-gray ml-3 uppercase tracking-wider">{phase.duration}</span>
+                <h3 className="mt-3 text-h3">{phase.title}</h3>
+                <p className="mt-3 text-body text-warm-gray">{phase.description}</p>
+              </div>
+            ))}
+
+            <div className="border-2 border-brass bg-brass/5 p-5">
+              <span className="metric text-sm text-brass">Results</span>
+              <h3 className="mt-3 text-h3">Keep scrolling to see what happened.</h3>
+              <p className="mt-2 text-body text-warm-gray">The numbers speak for themselves.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ═══ ACT 3: THE RESULTS ═══ */}
-      <section className="dark-section py-24 lg:py-40">
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+      <section className="dark-section py-16 sm:py-24 lg:py-40">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <p className="overline text-center">The Results</p>
           <h2 className="mt-4 text-display text-bone text-center">
             The numbers speak for themselves.
           </h2>
 
-          <div className="mt-16 grid grid-cols-2 gap-8 lg:grid-cols-4 lg:gap-12">
+          <div className="mt-12 sm:mt-16 grid grid-cols-2 gap-4 sm:gap-8 lg:grid-cols-4 lg:gap-12">
             {outcomes.map((outcome, i) => (
               <div key={outcome.description} className="text-center"
                 style={{ animationDelay: `${i * 0.15}s` }}
@@ -226,9 +252,9 @@ export function CaseStudyStory({
       </section>
 
       {/* ═══ ACT 4: THE IMPACT — Quote reveal ═══ */}
-      <section ref={act4Ref} className="bg-parchment py-24 lg:py-40">
-        <div className="mx-auto max-w-3xl px-6 lg:px-10 text-center">
-          <span className="block text-[80px] leading-none text-brass/20" aria-hidden>&ldquo;</span>
+      <section ref={act4Ref} className="bg-parchment py-16 sm:py-24 lg:py-40">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10 text-center">
+          <span className="block text-[50px] sm:text-[80px] leading-none text-brass/20" aria-hidden>&ldquo;</span>
 
           <div ref={quoteWordsRef} className="mt-4">
             <p className="text-h1 text-anthracite leading-snug" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
@@ -252,8 +278,8 @@ export function CaseStudyStory({
       </section>
 
       {/* ═══ CTA ═══ */}
-      <section className="dark-section py-20 lg:py-28">
-        <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
+      <section className="dark-section py-16 sm:py-20 lg:py-28">
+        <div className="mx-auto max-w-2xl px-4 sm:px-6 text-center lg:px-10">
           <h2 className="text-display text-bone">Want results like these?</h2>
           <p className="mt-4 text-body-lg text-stone">
             Every engagement starts with understanding your business. Not a pitch.

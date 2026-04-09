@@ -1,6 +1,7 @@
 import { ArrowRight, Stethoscope, Clock, DollarSign, FileCheck } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
@@ -104,33 +105,37 @@ export default function HealthcarePage() {
       {/* — Hero — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <p className="overline">Healthcare &amp; Life Sciences</p>
-          <h1
-            className="mt-6 text-display max-w-4xl text-bone"
-            style={{ fontFamily: 'var(--font-instrument-serif)' }}
-          >
-            AI for Healthcare &amp; Life Sciences
-          </h1>
-          <p className="mt-6 max-w-2xl text-body-lg text-stone">
-            Healthcare organizations are caught between rising patient volumes,
-            shrinking margins, and an administrative burden that pulls
-            clinicians away from care. AI has the potential to address all three
-            — but only if it is deployed in a way that meets the regulatory,
-            privacy, and interoperability demands of clinical environments.
-          </p>
-          <p className="mt-4 max-w-2xl text-body text-stone">
-            ClearForge builds production AI for healthcare that improves
-            clinical operations, accelerates revenue cycles, and reduces
-            compliance burden — all within HIPAA-compliant frameworks designed
-            for real clinical workflows.
-          </p>
-          <div className="mt-10">
-            <Button size="lg" asChild>
-              <Link href="/discover">
-                Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
+          <FadeIn>
+            <p className="overline">Healthcare &amp; Life Sciences</p>
+            <h1
+              className="mt-6 text-display max-w-4xl text-bone"
+              style={{ fontFamily: 'var(--font-instrument-serif)' }}
+            >
+              AI for Healthcare &amp; Life Sciences
+            </h1>
+          </FadeIn>
+          <FadeIn delay={0.15}>
+            <p className="mt-6 max-w-2xl text-body-lg text-stone">
+              Healthcare organizations are caught between rising patient volumes,
+              shrinking margins, and an administrative burden that pulls
+              clinicians away from care. AI has the potential to address all three
+              — but only if it is deployed in a way that meets the regulatory,
+              privacy, and interoperability demands of clinical environments.
+            </p>
+            <p className="mt-4 max-w-2xl text-body text-stone">
+              ClearForge builds production AI for healthcare that improves
+              clinical operations, accelerates revenue cycles, and reduces
+              compliance burden — all within HIPAA-compliant frameworks designed
+              for real clinical workflows.
+            </p>
+            <div className="mt-10">
+              <Button size="lg" asChild>
+                <Link href="/discover">
+                  Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
@@ -148,13 +153,15 @@ export default function HealthcarePage() {
             the capacity of their existing workforce — not replace it.
           </p>
 
-          <div className="mt-16 grid gap-8 sm:grid-cols-2">
-            {challenges.map((challenge) => (
-              <div
+          <Stagger className="mt-16 grid gap-8 sm:grid-cols-2" stagger={0.1}>
+            {challenges.map((challenge) => {
+              const Icon = challenge.icon;
+              return (
+              <StaggerItem
                 key={challenge.title}
                 className="border border-divider bg-surface p-8"
               >
-                <challenge.icon className="h-6 w-6 text-brass" />
+                <Icon className="h-6 w-6 text-brass" />
                 <h3 className="mt-4 text-h3">{challenge.title}</h3>
                 <p className="mt-3 text-body text-warm-gray">
                   {challenge.description}
@@ -172,9 +179,10 @@ export default function HealthcarePage() {
                     {challenge.metricLabel}
                   </p>
                 </div>
-              </div>
-            ))}
-          </div>
+              </StaggerItem>
+              );
+            })}
+          </Stagger>
         </div>
       </section>
 
@@ -192,9 +200,9 @@ export default function HealthcarePage() {
             first conversation.
           </p>
 
-          <div className="mt-16 space-y-12">
+          <Stagger className="mt-16 space-y-12" stagger={0.15}>
             {forgeSteps.map((step, i) => (
-              <div
+              <StaggerItem
                 key={step.phase}
                 className="border-t border-divider-dark pt-10"
               >
@@ -221,9 +229,9 @@ export default function HealthcarePage() {
                     ))}
                   </ul>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 

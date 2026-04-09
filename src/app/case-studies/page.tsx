@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { Stagger, StaggerItem } from '@/components/ui/animate';
 import { caseStudies } from '@/data/case-studies';
 import { createMetadata } from '@/lib/metadata';
 
@@ -34,34 +35,35 @@ export default function CaseStudiesPage() {
       {/* — Case Study Cards — */}
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3" stagger={0.1}>
             {caseStudies.map((cs) => (
-              <Link
-                key={cs.slug}
-                href={`/case-studies/${cs.slug}`}
-                className="group flex flex-col border border-divider bg-surface p-8 transition-all hover:border-brass hover:shadow-md hover:-translate-y-1"
-              >
-                <span className="text-body-sm font-medium text-brass">
-                  {cs.industry}
-                </span>
-                <p
-                  className="mt-4 metric-lg text-anthracite"
-                  style={{ fontFamily: 'var(--font-jetbrains-mono, monospace)' }}
+              <StaggerItem key={cs.slug}>
+                <Link
+                  href={`/case-studies/${cs.slug}`}
+                  className="group flex flex-col border border-divider bg-surface p-8 transition-all hover:border-brass hover:shadow-md hover:-translate-y-1 h-full"
                 >
-                  {cs.heroMetric}
-                </p>
-                <h3 className="mt-3 text-h4 group-hover:text-brass transition-colors flex-grow">
-                  {cs.title}
-                </h3>
-                <p className="mt-2 text-body-sm text-warm-gray">
-                  {cs.heroMetricLabel}
-                </p>
-                <span className="mt-6 inline-flex items-center text-sm font-medium text-brass opacity-0 group-hover:opacity-100 transition-opacity">
-                  Read case study <ArrowRight className="ml-1 h-3.5 w-3.5" />
-                </span>
-              </Link>
+                  <span className="text-body-sm font-medium text-brass">
+                    {cs.industry}
+                  </span>
+                  <p
+                    className="mt-4 metric-lg text-anthracite"
+                    style={{ fontFamily: 'var(--font-jetbrains-mono, monospace)' }}
+                  >
+                    {cs.heroMetric}
+                  </p>
+                  <h3 className="mt-3 text-h4 group-hover:text-brass transition-colors flex-grow">
+                    {cs.title}
+                  </h3>
+                  <p className="mt-2 text-body-sm text-warm-gray">
+                    {cs.heroMetricLabel}
+                  </p>
+                  <span className="mt-6 inline-flex items-center text-sm font-medium text-brass opacity-0 group-hover:opacity-100 transition-opacity">
+                    Read case study <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                  </span>
+                </Link>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 

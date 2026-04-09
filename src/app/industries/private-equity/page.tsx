@@ -1,6 +1,7 @@
 import { ArrowRight, Search, Layers, TrendingUp, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
@@ -104,32 +105,36 @@ export default function PrivateEquityPage() {
       {/* — Hero — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <p className="overline">Private Equity</p>
-          <h1
-            className="mt-6 text-display max-w-4xl text-bone"
-            style={{ fontFamily: 'var(--font-instrument-serif)' }}
-          >
-            AI for Private Equity Value Creation
-          </h1>
-          <p className="mt-6 max-w-2xl text-body-lg text-stone">
-            Private equity firms are sitting on an enormous, untapped value
-            creation lever. AI can accelerate EBITDA improvement across
-            portfolio companies — but only if it is deployed with the speed,
-            rigor, and measurability that PE operating models demand.
-          </p>
-          <p className="mt-4 max-w-2xl text-body text-stone">
-            ClearForge works with PE firms and their portfolio companies to
-            diagnose AI opportunities, deploy production systems in 90-day
-            sprint cycles, and build the operational AI capabilities that
-            command premium exit multiples.
-          </p>
-          <div className="mt-10">
-            <Button size="lg" asChild>
-              <Link href="/discover">
-                Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
+          <FadeIn>
+            <p className="overline">Private Equity</p>
+            <h1
+              className="mt-6 text-display max-w-4xl text-bone"
+              style={{ fontFamily: 'var(--font-instrument-serif)' }}
+            >
+              AI for Private Equity Value Creation
+            </h1>
+          </FadeIn>
+          <FadeIn delay={0.15}>
+            <p className="mt-6 max-w-2xl text-body-lg text-stone">
+              Private equity firms are sitting on an enormous, untapped value
+              creation lever. AI can accelerate EBITDA improvement across
+              portfolio companies — but only if it is deployed with the speed,
+              rigor, and measurability that PE operating models demand.
+            </p>
+            <p className="mt-4 max-w-2xl text-body text-stone">
+              ClearForge works with PE firms and their portfolio companies to
+              diagnose AI opportunities, deploy production systems in 90-day
+              sprint cycles, and build the operational AI capabilities that
+              command premium exit multiples.
+            </p>
+            <div className="mt-10">
+              <Button size="lg" asChild>
+                <Link href="/discover">
+                  Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
@@ -147,13 +152,15 @@ export default function PrivateEquityPage() {
             management capabilities.
           </p>
 
-          <div className="mt-16 grid gap-8 sm:grid-cols-2">
-            {challenges.map((challenge) => (
-              <div
+          <Stagger className="mt-16 grid gap-8 sm:grid-cols-2" stagger={0.1}>
+            {challenges.map((challenge) => {
+              const Icon = challenge.icon;
+              return (
+              <StaggerItem
                 key={challenge.title}
                 className="border border-divider bg-surface p-8"
               >
-                <challenge.icon className="h-6 w-6 text-brass" />
+                <Icon className="h-6 w-6 text-brass" />
                 <h3 className="mt-4 text-h3">{challenge.title}</h3>
                 <p className="mt-3 text-body text-warm-gray">
                   {challenge.description}
@@ -171,9 +178,10 @@ export default function PrivateEquityPage() {
                     {challenge.metricLabel}
                   </p>
                 </div>
-              </div>
-            ))}
-          </div>
+              </StaggerItem>
+              );
+            })}
+          </Stagger>
         </div>
       </section>
 
@@ -191,9 +199,9 @@ export default function PrivateEquityPage() {
             impact and board-ready reporting.
           </p>
 
-          <div className="mt-16 space-y-12">
+          <Stagger className="mt-16 space-y-12" stagger={0.15}>
             {forgeSteps.map((step, i) => (
-              <div
+              <StaggerItem
                 key={step.phase}
                 className="border-t border-divider-dark pt-10"
               >
@@ -220,9 +228,9 @@ export default function PrivateEquityPage() {
                     ))}
                   </ul>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 

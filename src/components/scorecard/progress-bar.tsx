@@ -19,12 +19,12 @@ export function ProgressBar({ currentStep, completedSteps }: ProgressBarProps) {
           <div
             key={pillar.key}
             className={cn(
-              'flex items-center gap-1.5 text-xs font-medium transition-colors',
+              'flex items-center gap-1 sm:gap-1.5 text-xs font-medium transition-colors',
               i === currentStep ? 'text-brass' : completedSteps.has(pillar.key) ? 'text-anthracite' : 'text-warm-gray',
             )}
           >
             <div className={cn(
-              'flex h-7 w-7 items-center justify-center text-xs font-bold transition-all',
+              'flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center text-[10px] sm:text-xs font-bold transition-all shrink-0',
               i === currentStep ? 'bg-brass text-white' : completedSteps.has(pillar.key) ? 'bg-anthracite text-white' : 'bg-divider text-warm-gray',
             )}>
               {completedSteps.has(pillar.key) ? '✓' : i + 1}

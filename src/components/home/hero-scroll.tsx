@@ -23,6 +23,7 @@ export function HeroScroll() {
           src="/images/hero-bg.jpg"
           alt=""
           fill
+          sizes="100vw"
           className="object-cover opacity-30"
           priority
         />
@@ -30,7 +31,7 @@ export function HeroScroll() {
         <div className="absolute inset-0 bg-gradient-to-t from-forge-black via-transparent to-forge-black/60" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-10 pt-28 pb-16 lg:pt-32 lg:pb-20">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 pt-24 pb-12 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-20">
         {/* Asymmetric grid: headline left, featured card right */}
         <div className="lg:grid lg:grid-cols-12 lg:gap-8 lg:items-start">
 
@@ -42,7 +43,7 @@ export function HeroScroll() {
 
             <h1 className="mt-6 text-bone animate-fade-in-up delay-1" style={{
               fontFamily: 'var(--font-instrument-serif)',
-              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+              fontSize: 'clamp(2rem, 5vw, 4rem)',
               lineHeight: 1.08,
               letterSpacing: '-0.02em',
               fontWeight: 400,
@@ -83,6 +84,7 @@ export function HeroScroll() {
                     src="/images/featured-case-study.jpg"
                     alt=""
                     fill
+                    sizes="(max-width: 1024px) 100vw, 42vw"
                     className="object-cover opacity-70 group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-forge-black to-transparent" />
@@ -92,8 +94,8 @@ export function HeroScroll() {
                 </div>
 
                 {/* Card content */}
-                <div className="p-6">
-                  <h3 className="text-xl text-bone font-medium leading-snug group-hover:text-brass-light transition-colors" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
+                <div className="p-4 sm:p-6">
+                  <h3 className="text-lg sm:text-xl text-bone font-medium leading-snug group-hover:text-brass-light transition-colors" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
                     How a $4B industrial conglomerate identified 1,181 qualified opportunities in 6 months
                   </h3>
                   <div className="mt-4 flex items-center gap-2 text-sm text-stone">
@@ -110,7 +112,7 @@ export function HeroScroll() {
           {/* Card 1: Report */}
           <Link href="/insights" className="group relative overflow-hidden h-52 md:h-48">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 to-indigo-900/80" />
-            <Image src="/images/card-finance.jpg" alt="" fill className="object-cover opacity-30" />
+            <Image src="/images/card-finance.jpg" alt="" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover opacity-30" />
             <div className="relative h-full p-5 flex flex-col justify-end">
               <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-brass-light">Research</span>
               <h4 className="mt-2 text-bone text-sm font-medium leading-snug group-hover:text-brass-light transition-colors">
@@ -125,7 +127,7 @@ export function HeroScroll() {
           {/* Card 2: Assessment */}
           <Link href="/discover" className="group relative overflow-hidden h-52 md:h-48">
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/60 to-teal-900/60" />
-            <Image src="/images/card-healthcare.jpg" alt="" fill className="object-cover opacity-20" />
+            <Image src="/images/card-healthcare.jpg" alt="" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover opacity-20" />
             <div className="relative h-full p-5 flex flex-col justify-end">
               <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-brass-light">Interactive Tool</span>
               <h4 className="mt-2 text-bone text-sm font-medium leading-snug group-hover:text-brass-light transition-colors">
@@ -140,7 +142,7 @@ export function HeroScroll() {
           {/* Card 3: Forge Method */}
           <Link href="/services" className="group relative overflow-hidden h-52 md:h-48">
             <div className="absolute inset-0 bg-gradient-to-br from-slate-800/80 to-gray-900/80" />
-            <Image src="/images/card-manufacturing.jpg" alt="" fill className="object-cover opacity-20" />
+            <Image src="/images/card-manufacturing.jpg" alt="" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover opacity-20" />
             <div className="relative h-full p-5 flex flex-col justify-end">
               <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-brass-light">The Forge Method</span>
               <h4 className="mt-2 text-bone text-sm font-medium leading-snug group-hover:text-brass-light transition-colors">

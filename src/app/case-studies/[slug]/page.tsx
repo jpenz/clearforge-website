@@ -1,6 +1,11 @@
+import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
-import { CaseStudyStory } from '@/components/case-study-story';
 import { caseStudies, getCaseStudy } from '@/data/case-studies';
+
+const CaseStudyStory = dynamic(
+  () => import('@/components/case-study-story').then((m) => ({ default: m.CaseStudyStory })),
+  { loading: () => <div className="min-h-screen" /> }
+);
 import { createMetadata } from '@/lib/metadata';
 
 export function generateStaticParams() {

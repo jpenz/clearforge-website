@@ -1,6 +1,7 @@
 import { ArrowRight, AlertTriangle, Eye, Wrench, Users, BarChart3, Zap, Settings } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
@@ -104,32 +105,36 @@ export default function ManufacturingPage() {
       {/* — Hero — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <p className="overline">Manufacturing &amp; Industrial</p>
-          <h1
-            className="mt-6 text-display max-w-4xl text-bone"
-            style={{ fontFamily: 'var(--font-instrument-serif)' }}
-          >
-            AI for Manufacturing &amp; Industrial Operations
-          </h1>
-          <p className="mt-6 max-w-2xl text-body-lg text-stone">
-            Most manufacturers are generating more data than ever — from IoT
-            sensors and SCADA systems to ERP transactions and quality logs. The
-            problem is not data. The problem is that none of it is working
-            together to drive decisions.
-          </p>
-          <p className="mt-4 max-w-2xl text-body text-stone">
-            ClearForge helps industrial manufacturers deploy AI that connects
-            supply chain, maintenance, quality, and workforce systems into a
-            single intelligence layer — built for production, not for pilots
-            that never ship.
-          </p>
-          <div className="mt-10">
-            <Button size="lg" asChild>
-              <Link href="/discover">
-                Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
+          <FadeIn>
+            <p className="overline">Manufacturing &amp; Industrial</p>
+            <h1
+              className="mt-6 text-display max-w-4xl text-bone"
+              style={{ fontFamily: 'var(--font-instrument-serif)' }}
+            >
+              AI for Manufacturing &amp; Industrial Operations
+            </h1>
+          </FadeIn>
+          <FadeIn delay={0.15}>
+            <p className="mt-6 max-w-2xl text-body-lg text-stone">
+              Most manufacturers are generating more data than ever — from IoT
+              sensors and SCADA systems to ERP transactions and quality logs. The
+              problem is not data. The problem is that none of it is working
+              together to drive decisions.
+            </p>
+            <p className="mt-4 max-w-2xl text-body text-stone">
+              ClearForge helps industrial manufacturers deploy AI that connects
+              supply chain, maintenance, quality, and workforce systems into a
+              single intelligence layer — built for production, not for pilots
+              that never ship.
+            </p>
+            <div className="mt-10">
+              <Button size="lg" asChild>
+                <Link href="/discover">
+                  Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
@@ -147,13 +152,15 @@ export default function ManufacturingPage() {
             deliver.
           </p>
 
-          <div className="mt-16 grid gap-8 sm:grid-cols-2">
-            {challenges.map((challenge) => (
-              <div
+          <Stagger className="mt-16 grid gap-8 sm:grid-cols-2" stagger={0.1}>
+            {challenges.map((challenge) => {
+              const Icon = challenge.icon;
+              return (
+              <StaggerItem
                 key={challenge.title}
                 className="border border-divider bg-surface p-8"
               >
-                <challenge.icon className="h-6 w-6 text-brass" />
+                <Icon className="h-6 w-6 text-brass" />
                 <h3 className="mt-4 text-h3">{challenge.title}</h3>
                 <p className="mt-3 text-body text-warm-gray">
                   {challenge.description}
@@ -171,9 +178,10 @@ export default function ManufacturingPage() {
                     {challenge.metricLabel}
                   </p>
                 </div>
-              </div>
-            ))}
-          </div>
+              </StaggerItem>
+              );
+            })}
+          </Stagger>
         </div>
       </section>
 
@@ -190,9 +198,9 @@ export default function ManufacturingPage() {
             starts with your data, your processes, and your constraints.
           </p>
 
-          <div className="mt-16 space-y-12">
+          <Stagger className="mt-16 space-y-12" stagger={0.15}>
             {forgeSteps.map((step, i) => (
-              <div
+              <StaggerItem
                 key={step.phase}
                 className="border-t border-divider-dark pt-10"
               >
@@ -219,9 +227,9 @@ export default function ManufacturingPage() {
                     ))}
                   </ul>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 

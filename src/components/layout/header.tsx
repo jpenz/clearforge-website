@@ -138,7 +138,7 @@ export function Header() {
             style={{ animation: 'slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1)' }}
           >
             {/* Sidebar header */}
-            <div className="flex items-center justify-between px-8 py-5 border-b border-divider-dark">
+            <div className="flex items-center justify-between px-5 sm:px-8 py-5 border-b border-divider-dark">
               <Link href="/" onClick={() => setSidebarOpen(false)} className="text-lg font-semibold text-bone tracking-tight">
                 ClearForge
               </Link>
@@ -153,7 +153,7 @@ export function Header() {
             </div>
 
             {/* Navigation sections */}
-            <div className="px-8 py-6 space-y-8">
+            <div className="px-5 sm:px-8 py-6 space-y-8">
               {NAV_SECTIONS.map((section) => (
                 <div key={section.title}>
                   <h3 className="text-xs font-semibold uppercase tracking-[0.1em] text-stone mb-4">
@@ -165,7 +165,7 @@ export function Header() {
                         <Link
                           href={link.href}
                           onClick={() => setSidebarOpen(false)}
-                          className="group flex items-center justify-between py-2.5 text-[15px] text-bone/80 hover:text-bone transition-colors"
+                          className="group flex items-center justify-between min-h-[44px] py-2.5 text-[15px] text-bone/80 hover:text-bone transition-colors"
                         >
                           {link.label}
                           <ChevronRight className="h-4 w-4 text-stone opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -178,7 +178,7 @@ export function Header() {
             </div>
 
             {/* Sidebar CTA */}
-            <div className="px-8 py-6 border-t border-divider-dark">
+            <div className="px-5 sm:px-8 py-6 border-t border-divider-dark">
               <Button className="w-full" size="lg" asChild>
                 <Link href="/discover" onClick={() => setSidebarOpen(false)}>
                   Get My AI Score <ArrowRight className="ml-2 h-4 w-4" />
@@ -190,7 +190,7 @@ export function Header() {
             </div>
 
             {/* Sidebar footer */}
-            <div className="px-8 py-6 border-t border-divider-dark">
+            <div className="px-5 sm:px-8 py-6 border-t border-divider-dark">
               <div className="space-y-3">
                 <a href="mailto:james@clearforge.ai" className="block text-sm text-stone hover:text-bone transition-colors">
                   james@clearforge.ai

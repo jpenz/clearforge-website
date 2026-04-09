@@ -45,14 +45,14 @@ export default function Home() {
           CellCog: "59% of buyers distrust unverified claims"
           ══════════════════════════════════════════ */}
       <section className="border-y border-divider bg-parchment py-6">
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <div className="flex flex-wrap items-center justify-center gap-8 lg:gap-16 text-sm text-warm-gray">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-8 lg:gap-16 text-sm text-warm-gray text-center">
             <span className="flex items-center gap-2">
               <span className="metric text-brass font-semibold">89%</span> of projects reach production
               <span className="text-xs text-warm-gray/60">(industry avg: ~20%)</span>
             </span>
             <span className="hidden sm:inline text-divider">|</span>
-            <span>Manufacturing · Healthcare · SaaS · PE-Backed Companies</span>
+            <span>Manufacturing · Healthcare · SaaS · PE-Backed</span>
             <span className="hidden sm:inline text-divider">|</span>
             <span className="flex items-center gap-2">
               <span className="metric text-brass font-semibold">&lt;90 days</span> to first ROI
@@ -66,8 +66,8 @@ export default function Home() {
           Show BOTH mid-market AND enterprise to demonstrate range.
           CellCog: "Dedicated case study pages convert at 10.7%"
           ══════════════════════════════════════════ */}
-      <section className="bg-parchment py-24 lg:py-32">
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+      <section className="bg-parchment py-16 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <p className="overline text-center">Proven Results</p>
           <h2 className="mt-4 text-display text-center max-w-2xl mx-auto">
             From mid-market to enterprise. Real outcomes.
@@ -78,7 +78,7 @@ export default function Home() {
               <Link
                 key={cs.slug}
                 href={`/case-studies/${cs.slug}`}
-                className="group border border-divider bg-surface p-8 transition-all hover:border-brass hover:-translate-y-1"
+                className="group border border-divider bg-surface p-5 sm:p-8 transition-all hover:border-brass hover:-translate-y-1"
               >
                 <p className="overline text-xs">{cs.industry}</p>
                 <div className="mt-4">
@@ -100,8 +100,8 @@ export default function Home() {
           CellCog: "Named methodology creates perceived value"
           Added bullet deliverables per CellCog recommendation
           ══════════════════════════════════════════ */}
-      <section className="dark-section noise-texture relative py-24 lg:py-40 overflow-hidden">
-        <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-10">
+      <section className="dark-section noise-texture relative py-16 sm:py-24 lg:py-40 overflow-hidden">
+        <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <p className="overline">Our Approach</p>
           <h2 className="mt-6 text-display text-bone max-w-2xl">
             The Forge Method™
@@ -141,7 +141,7 @@ export default function Home() {
             ].map((product) => (
               <div
                 key={product.name}
-                className={`p-8 ${product.featured ? 'border-2 border-brass bg-brass/5' : 'border border-divider-dark'}`}
+                className={`p-5 sm:p-8 ${product.featured ? 'border-2 border-brass bg-brass/5' : 'border border-divider-dark'}`}
               >
                 {product.featured && (
                   <span className="inline-block bg-brass text-white text-xs font-bold uppercase tracking-wider px-3 py-1 mb-4">
@@ -169,7 +169,7 @@ export default function Home() {
           </div>
 
           {/* RISK REVERSAL — CellCog P0 recommendation */}
-          <div className="mt-16 border border-brass/20 bg-brass/5 p-8 max-w-2xl mx-auto text-center">
+          <div className="mt-12 sm:mt-16 border border-brass/20 bg-brass/5 p-5 sm:p-8 max-w-2xl mx-auto text-center">
             <Shield className="h-6 w-6 text-brass-light mx-auto mb-4" />
             <h3 className="text-h4 text-bone">The ClearForge Guarantee</h3>
             <p className="mt-3 text-body text-stone">
@@ -184,9 +184,9 @@ export default function Home() {
           5. METRICS WALL — Contextualized per CellCog
           Added denominators, timeframes, industry comparisons
           ══════════════════════════════════════════ */}
-      <section className="border-y border-divider bg-parchment py-20 lg:py-24">
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <div className="grid grid-cols-2 gap-12 lg:grid-cols-4 lg:gap-8">
+      <section className="border-y border-divider bg-parchment py-16 lg:py-24">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
+          <div className="grid grid-cols-2 gap-6 sm:gap-12 lg:grid-cols-4 lg:gap-8">
             {[
               { value: '$47M+', label: 'Client revenue influenced across 15 engagements' },
               { value: '3.2x', label: 'Average ROI — median payback in <90 days' },
@@ -205,8 +205,8 @@ export default function Home() {
       {/* ══════════════════════════════════════════
           5b. PAIN/SOLUTION CARDS — LABEL THE PROBLEM
           ══════════════════════════════════════════ */}
-      <section className="bg-parchment py-24 lg:py-40">
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+      <section className="bg-parchment py-16 sm:py-24 lg:py-40">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <p className="overline text-center">Your Situation</p>
           <h2 className="mt-4 text-display text-center max-w-2xl mx-auto">
             Which of these sounds like you?
@@ -242,7 +242,7 @@ export default function Home() {
               <Link
                 key={card.situation}
                 href={card.link}
-                className="group border border-divider bg-surface p-8 transition-all hover:border-brass hover:-translate-y-1"
+                className="group border border-divider bg-surface p-5 sm:p-8 transition-all hover:border-brass hover:-translate-y-1"
               >
                 <p className="overline">{card.situation}</p>
                 <p className="mt-3 text-h4">{card.problem}</p>
@@ -259,9 +259,9 @@ export default function Home() {
       {/* ══════════════════════════════════════════
           6. TESTIMONIAL + FORGE INTELLIGENCE CTA
           ══════════════════════════════════════════ */}
-      <section className="dark-section py-24 lg:py-40">
-        <div className="mx-auto max-w-3xl px-6 lg:px-10 text-center">
-          <span className="block text-[100px] leading-none text-brass/20" aria-hidden>&ldquo;</span>
+      <section className="dark-section py-16 sm:py-24 lg:py-40">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10 text-center">
+          <span className="block text-[60px] sm:text-[100px] leading-none text-brass/20" aria-hidden>&ldquo;</span>
           <p className="text-h1 text-bone -mt-8 italic" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
             They didn&apos;t just hand us a strategy deck. They built the systems,
             trained the team, and stayed until the numbers moved.
@@ -289,8 +289,8 @@ export default function Home() {
           is HIGH IMPACT missing element. B2B buyers want
           to know WHO does the work."
           ══════════════════════════════════════════ */}
-      <section className="bg-parchment py-24 lg:py-32">
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+      <section className="bg-parchment py-16 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
             <div className="lg:col-span-5">
               <p className="overline">Who Does the Work</p>
@@ -315,16 +315,16 @@ export default function Home() {
               </div>
             </div>
             <div className="lg:col-span-7 mt-12 lg:mt-0">
-              <div className="grid grid-cols-3 gap-4">
-                <div className="border border-divider bg-surface p-6 text-center">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4">
+                <div className="border border-divider bg-surface p-3 sm:p-6 text-center">
                   <span className="metric-lg text-brass">15+</span>
                   <p className="mt-2 text-body-sm text-warm-gray">Years in consulting & AI</p>
                 </div>
-                <div className="border border-divider bg-surface p-6 text-center">
+                <div className="border border-divider bg-surface p-3 sm:p-6 text-center">
                   <span className="metric-lg text-brass">Bain</span>
                   <p className="mt-2 text-body-sm text-warm-gray">AI Automation practice</p>
                 </div>
-                <div className="border border-divider bg-surface p-6 text-center">
+                <div className="border border-divider bg-surface p-3 sm:p-6 text-center">
                   <span className="metric-lg text-brass">EY</span>
                   <p className="mt-2 text-body-sm text-warm-gray">Digital transformation</p>
                 </div>
@@ -346,8 +346,8 @@ export default function Home() {
           7. OBJECTIONS + FINAL CTA
           CellCog: "74% of objections are predictable"
           ══════════════════════════════════════════ */}
-      <section className="bg-recessed py-24 lg:py-40">
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+      <section className="bg-recessed py-16 sm:py-24 lg:py-40">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-5">
               <p className="overline">Common Questions</p>
@@ -391,8 +391,8 @@ export default function Home() {
       </section>
 
       {/* Final close */}
-      <section className="dark-section py-20 lg:py-28">
-        <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
+      <section className="dark-section py-16 sm:py-20 lg:py-28">
+        <div className="mx-auto max-w-2xl px-4 sm:px-6 text-center lg:px-10">
           <h2 className="text-display text-bone">One conversation to find out.</h2>
           <p className="mt-4 text-body-lg text-stone">
             We&apos;ll be honest about whether we can help. No pitch decks. No pressure.

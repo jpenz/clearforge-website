@@ -1,6 +1,7 @@
 import { ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
@@ -142,9 +143,9 @@ export default function PricingPage() {
       {/* — Tiers — */}
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-          <div className="grid gap-8 lg:grid-cols-3">
+          <Stagger className="grid gap-8 lg:grid-cols-3" stagger={0.12}>
             {products.map((product) => (
-              <div
+              <StaggerItem
                 key={product.name}
                 className={`relative border ${
                   product.featured
@@ -206,9 +207,9 @@ export default function PricingPage() {
                     </Link>
                   </Button>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
@@ -262,9 +263,9 @@ export default function PricingPage() {
               <p className="overline">FAQ</p>
               <h2 className="mt-6 text-display">Common questions.</h2>
             </div>
-            <div className="mt-12 lg:col-span-8 lg:mt-0">
+            <Stagger className="mt-12 lg:col-span-8 lg:mt-0" stagger={0.06}>
               {faqs.map((faq, i) => (
-                <div key={faq.question}>
+                <StaggerItem key={faq.question}>
                   <div className="py-8">
                     <h3 className="text-h4">{faq.question}</h3>
                     <p className="mt-3 text-body text-warm-gray">
@@ -272,9 +273,9 @@ export default function PricingPage() {
                     </p>
                   </div>
                   {i < faqs.length - 1 && <div className="h-px bg-divider" />}
-                </div>
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
           </div>
         </div>
       </section>

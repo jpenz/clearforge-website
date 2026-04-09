@@ -14,7 +14,7 @@ interface QuestionCardProps {
 export function QuestionCard({ question, value, onChange, index }: QuestionCardProps) {
   return (
     <motion.div
-      className="border border-divider bg-surface p-6 lg:p-8"
+      className="border border-divider bg-surface p-4 sm:p-6 lg:p-8"
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.05 }}
@@ -25,7 +25,7 @@ export function QuestionCard({ question, value, onChange, index }: QuestionCardP
       </p>
 
       {/* Card-style radio buttons */}
-      <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:gap-3">
+      <div className="mt-5 grid grid-cols-5 gap-2 sm:flex sm:gap-3">
         {scaleLabels.map((label, idx) => {
           const score = idx + 1;
           const isSelected = value === score;
@@ -35,15 +35,15 @@ export function QuestionCard({ question, value, onChange, index }: QuestionCardP
               type="button"
               onClick={() => onChange(question.id, score)}
               className={cn(
-                'flex-1 border px-3 py-3 text-center transition-all duration-200',
+                'border min-h-[44px] px-2 sm:px-3 py-2 sm:py-3 text-center transition-all duration-200 sm:flex-1',
                 isSelected
-                  ? 'border-brass bg-forge-black text-bone border-l-4 border-l-brass'
+                  ? 'border-brass bg-forge-black text-bone ring-2 ring-brass sm:ring-0 sm:border-l-4 sm:border-l-brass'
                   : 'border-divider text-warm-gray hover:border-brass/50 hover:text-anthracite',
               )}
               aria-label={`${label} — ${score} out of 5`}
             >
-              <span className="metric text-lg font-bold block">{score}</span>
-              <span className="text-xs hidden sm:block mt-1">{label}</span>
+              <span className="metric text-base sm:text-lg font-bold block">{score}</span>
+              <span className="text-[10px] sm:text-xs hidden sm:block mt-1">{label}</span>
             </button>
           );
         })}

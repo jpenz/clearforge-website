@@ -2,11 +2,16 @@
 
 import { motion } from 'framer-motion';
 import { ArrowRight, Building2, CheckCircle, Mail, User } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { ScoreRing } from '@/components/scorecard/score-ring';
 import { Button } from '@/components/ui/button';
 import { type Answers, calculateResults, type ScorecardResult } from '@/lib/scorecard';
+
+const ScoreRing = dynamic(
+  () => import('@/components/scorecard/score-ring').then((m) => ({ default: m.ScoreRing })),
+  { ssr: false }
+);
 
 export default function ScorecardResultsPage() {
   const [result, setResult] = useState<ScorecardResult | null>(null);
@@ -59,7 +64,7 @@ export default function ScorecardResultsPage() {
   if (gated && !submitted) {
     return (
       <section className="bg-parchment min-h-[80vh] flex items-center pt-32 pb-20">
-        <div className="mx-auto max-w-lg px-6 lg:px-10 w-full">
+        <div className="mx-auto max-w-lg px-4 sm:px-6 lg:px-10 w-full">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <div className="text-center mb-10">
               <p className="overline">Assessment Complete</p>
@@ -93,8 +98,8 @@ export default function ScorecardResultsPage() {
 
   return (
     <>
-      <section className="dark-section pt-32 pb-20 lg:pt-40 lg:pb-28">
-        <div className="mx-auto max-w-3xl px-6 lg:px-10 text-center">
+      <section className="dark-section pt-24 sm:pt-32 pb-16 sm:pb-20 lg:pt-40 lg:pb-28">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10 text-center">
           {submitted && (
             <div className="mb-6 inline-flex items-center gap-2 border border-brass/20 bg-brass/10 px-4 py-2 text-sm text-brass-light">
               <CheckCircle className="h-4 w-4" /> Results sent to {email}
@@ -102,20 +107,20 @@ export default function ScorecardResultsPage() {
           )}
           <p className="overline">Your AI Maturity Score</p>
           <div className="mt-8 flex justify-center">
-            <ScoreRing score={result.compositeScore} size={240} strokeWidth={10} />
+            <ScoreRing score={result.compositeScore} size={180} strokeWidth={8} />
           </div>
           <p className="mt-6 text-h2 text-bone">{result.maturityLevel}</p>
           <p className="mt-4 text-body-lg text-stone max-w-xl mx-auto">{result.maturityDescription}</p>
         </div>
       </section>
 
-      <section className="bg-parchment py-24 lg:py-32">
-        <div className="mx-auto max-w-3xl px-6 lg:px-10">
+      <section className="bg-parchment py-16 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10">
           <p className="overline">Pillar Breakdown</p>
           <h2 className="mt-6 text-display text-anthracite">How you scored.</h2>
           <div className="mt-10 space-y-4">
             {result.pillarScores.map((ps) => (
-              <div key={ps.key} className={`border p-6 ${ps.key === result.weakestPillar ? 'border-error/30 bg-error/5' : ps.key === result.strongestPillar ? 'border-success/30 bg-success/5' : 'border-divider bg-surface'}`}>
+              <div key={ps.key} className={`border p-4 sm:p-6 ${ps.key === result.weakestPillar ? 'border-error/30 bg-error/5' : ps.key === result.strongestPillar ? 'border-success/30 bg-success/5' : 'border-divider bg-surface'}`}>
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-sm font-bold text-anthracite">{ps.name}</h3>
                   <span className="metric text-lg text-brass">{Math.round(ps.percentage)}%</span>
@@ -129,13 +134,13 @@ export default function ScorecardResultsPage() {
         </div>
       </section>
 
-      <section className="dark-section py-24 lg:py-32">
-        <div className="mx-auto max-w-3xl px-6 lg:px-10">
+      <section className="dark-section py-16 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10">
           <p className="overline">Roadmap</p>
           <h2 className="mt-6 text-display text-bone">How we&apos;d close the gap.</h2>
           <div className="mt-10 space-y-4">
             {result.roadmap.map((step, i) => (
-              <div key={step.phase} className="border border-divider-dark p-6">
+              <div key={step.phase} className="border border-divider-dark p-4 sm:p-6">
                 <span className="metric text-xs text-brass">{String(i + 1).padStart(2, '0')}</span>
                 <span className="overline ml-3">{step.phase} · {step.timeline}</span>
                 <h3 className="mt-2 text-h4 text-bone">{step.title}</h3>
@@ -146,8 +151,8 @@ export default function ScorecardResultsPage() {
         </div>
       </section>
 
-      <section className="bg-parchment py-24 lg:py-32">
-        <div className="mx-auto max-w-3xl px-6 lg:px-10 text-center">
+      <section className="bg-parchment py-16 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10 text-center">
           <h2 className="text-display text-anthracite">Ready to close the gap?</h2>
           <div className="mt-8 flex gap-4 flex-wrap justify-center">
             <Button size="lg" asChild><Link href="/contact">Schedule a Discussion <ArrowRight className="ml-2 h-4 w-4" /></Link></Button>
