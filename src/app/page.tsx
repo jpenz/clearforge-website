@@ -1,6 +1,7 @@
 import { ArrowRight, Shield } from 'lucide-react';
 import Link from 'next/link';
 import { HeroScroll } from '@/components/home/hero-scroll';
+import { PinnedSection, ScrubMarquee, SectionReveal, StaggerReveal } from '@/components/home/homepage-animations';
 import { MetricCounter } from '@/components/home/metric-counter';
 import { Button } from '@/components/ui/button';
 import { GsapTextReveal } from '@/components/ui/gsap-text-reveal';
@@ -45,13 +46,15 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ═══ RESULTS — Editorial ruled-line list, NOT cards ═══ */}
+      {/* ═══ RESULTS — Editorial ruled-line list, slide-left entrance ═══ */}
       <section className="bg-parchment py-20 sm:py-32 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
-          <p className="overline">Proven Results</p>
-          <h2 className="mt-6 text-display max-w-2xl">
-            Real outcomes. Not promises.
-          </h2>
+          <SectionReveal animation="slide-left">
+            <p className="overline">Proven Results</p>
+            <h2 className="mt-6 text-display max-w-2xl">
+              Real outcomes. Not promises.
+            </h2>
+          </SectionReveal>
 
           {/* Editorial list — ruled lines, no cards */}
           <div className="mt-16">
@@ -83,20 +86,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ HORIZONTAL MARQUEE — oversized text per skill requirement ═══ */}
-      <div className="dark-section overflow-hidden py-6 sm:py-8" aria-hidden>
-        <div className="animate-marquee whitespace-nowrap flex">
-          {[...Array(2)].map((_, i) => (
-            <span key={i} className="shrink-0 flex items-center gap-8 sm:gap-16 mr-8 sm:mr-16">
-              {['AI THAT SHIPS', 'FORGE DIAGNOSTIC', 'FORGE SPRINT', 'FORGE SCALE', 'PRODUCTION IN 10 WEEKS', '<90 DAYS TO ROI'].map((t) => (
-                <span key={t} className="text-[8vw] sm:text-[6vw] lg:text-[4vw] font-bold uppercase tracking-tight text-bone/[0.06]" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
-                  {t}
-                </span>
-              ))}
-            </span>
-          ))}
-        </div>
-      </div>
+      {/* ═══ SCROLL-SCRUBBED MARQUEE — moves with scroll, not time ═══ */}
+      <ScrubMarquee
+        text="AI THAT SHIPS  ·  FORGE DIAGNOSTIC  ·  FORGE SPRINT  ·  FORGE SCALE  ·  PRODUCTION IN 10 WEEKS  ·  <90 DAYS TO ROI  ·  "
+        className="dark-section py-8 sm:py-12"
+      />
 
       {/* ═══ METRICS — Large typography as design, no containers ═══ */}
       <section className="dark-section py-20 sm:py-32 lg:py-40">
@@ -117,16 +111,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ THE FORGE METHOD — Editorial layout, ruled lines ═══ */}
+      {/* ═══ THE FORGE METHOD — scale-up entrance, pinned on desktop ═══ */}
       <section className="bg-parchment py-20 sm:py-32 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-5">
-              <p className="overline">Our Approach</p>
-              <h2 className="mt-6 text-display">The Forge Method™</h2>
+              <SectionReveal animation="scale-up">
+                <p className="overline">Our Approach</p>
+                <h2 className="mt-6 text-display">The Forge Method™</h2>
               <p className="mt-6 text-body-lg text-warm-gray">
                 Clear timelines. Transparent investment. Guaranteed deliverables.
               </p>
+              </SectionReveal>
             </div>
             <div className="lg:col-span-7 mt-12 lg:mt-0">
               {[
@@ -167,11 +163,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ SITUATIONS — Editorial list with left accent, NOT cards ═══ */}
+      {/* ═══ SITUATIONS — slide-right entrance ═══ */}
       <section className="bg-recessed py-20 sm:py-32 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
-          <p className="overline">Your Situation</p>
-          <h2 className="mt-6 text-display max-w-xl">Which of these sounds like you?</h2>
+          <SectionReveal animation="slide-right">
+            <p className="overline">Your Situation</p>
+            <h2 className="mt-6 text-display max-w-xl">Which of these sounds like you?</h2>
+          </SectionReveal>
 
           <div className="mt-16 lg:grid lg:grid-cols-2 lg:gap-x-20">
             {[
@@ -217,14 +215,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ FOUNDER — Editorial split, not a card ═══ */}
+      {/* ═══ FOUNDER — clip-reveal entrance ═══ */}
       <section className="bg-parchment py-20 sm:py-32 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-20 items-start">
-            <div className="lg:col-span-5">
+            <SectionReveal animation="clip-reveal" className="lg:col-span-5">
               <p className="overline">Who Does the Work</p>
               <h2 className="mt-6 text-display">Built by operators. Not outsourced.</h2>
-            </div>
+            </SectionReveal>
             <div className="lg:col-span-7 mt-10 lg:mt-0">
               <p className="text-body-lg text-warm-gray">
                 ClearForge was founded by James Penz — 15 years at Bain, EY, and Capgemini
