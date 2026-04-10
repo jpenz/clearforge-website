@@ -83,6 +83,21 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ═══ HORIZONTAL MARQUEE — oversized text per skill requirement ═══ */}
+      <div className="dark-section overflow-hidden py-6 sm:py-8" aria-hidden>
+        <div className="animate-marquee whitespace-nowrap flex">
+          {[...Array(2)].map((_, i) => (
+            <span key={i} className="shrink-0 flex items-center gap-8 sm:gap-16 mr-8 sm:mr-16">
+              {['AI THAT SHIPS', 'FORGE DIAGNOSTIC', 'FORGE SPRINT', 'FORGE SCALE', 'PRODUCTION IN 10 WEEKS', '<90 DAYS TO ROI'].map((t) => (
+                <span key={t} className="text-[8vw] sm:text-[6vw] lg:text-[4vw] font-bold uppercase tracking-tight text-bone/[0.06]" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
+                  {t}
+                </span>
+              ))}
+            </span>
+          ))}
+        </div>
+      </div>
+
       {/* ═══ METRICS — Large typography as design, no containers ═══ */}
       <section className="dark-section py-20 sm:py-32 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">

@@ -56,7 +56,7 @@ export function HeroScroll() {
           alt=""
           fill
           sizes="100vw"
-          className="object-cover opacity-25"
+          className="object-cover opacity-25 animate-ken-burns"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-forge-black via-forge-black/50 to-forge-black/70" />
@@ -73,7 +73,7 @@ export function HeroScroll() {
           className="mt-8 max-w-[900px] text-bone animate-fade-in-up delay-1"
           style={{
             fontFamily: 'var(--font-instrument-serif)',
-            fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+            fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
             lineHeight: 1.04,
             letterSpacing: '-0.03em',
             fontWeight: 400,
@@ -85,7 +85,7 @@ export function HeroScroll() {
           className="mt-2 max-w-[900px] text-brass-light animate-fade-in-up delay-2"
           style={{
             fontFamily: 'var(--font-instrument-serif)',
-            fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+            fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
             lineHeight: 1.04,
             letterSpacing: '-0.03em',
             fontWeight: 400,
