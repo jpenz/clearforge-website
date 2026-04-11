@@ -49,14 +49,24 @@ export function HeroScroll() {
       ref={sectionRef}
       className="dark-section relative min-h-[100svh] flex items-end overflow-hidden"
     >
-      {/* Background */}
+      {/* Background — video on desktop, static image fallback */}
       <div ref={bgRef} className="absolute inset-0 pointer-events-none will-change-transform">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover opacity-30 hidden md:block"
+        >
+          <source src="/videos/hero-ambient.mp4" type="video/mp4" />
+        </video>
         <Image
           src="/images/hero-bg.jpg"
           alt=""
           fill
           sizes="100vw"
-          className="object-cover opacity-25 animate-ken-burns"
+          className="object-cover opacity-25 animate-ken-burns md:hidden"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-forge-black via-forge-black/50 to-forge-black/70" />
