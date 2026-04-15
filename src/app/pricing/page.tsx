@@ -1,7 +1,8 @@
 import { ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
+import { Stagger, StaggerItem } from '@/components/ui/animate';
+import { forgeProducts } from '@/data/forge-products';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
@@ -10,72 +11,6 @@ export const metadata = createMetadata({
     'Transparent pricing for the Forge Method. Forge Diagnostic ($15K), Forge Sprint ($75K-$200K), Forge Scale ($5K-$15K/mo). No surprises.',
   path: '/pricing',
 });
-
-const products = [
-  {
-    name: 'Forge Diagnostic™',
-    price: '$15K',
-    period: 'one-time',
-    timeline: '4 weeks',
-    description:
-      'A senior-led assessment that maps your highest-value AI opportunities and delivers an execution-ready roadmap.',
-    whatsIncluded: [
-      'Stakeholder interviews across leadership and operations',
-      'Process mapping with AI opportunity scoring',
-      'Data readiness and infrastructure audit',
-      'Prioritized roadmap with ROI projections',
-      'Quick-win identification for immediate impact',
-      'Executive presentation with go/no-go recommendations',
-    ],
-    idealFor: 'Companies exploring AI for the first time or needing a clear starting point.',
-    cta: 'Get My Free AI Readiness Score',
-    href: '/discover',
-    featured: false,
-  },
-  {
-    name: 'Forge Sprint™',
-    price: '$75K–$200K',
-    period: 'one-time',
-    timeline: '10–14 weeks',
-    description:
-      'An intensive build engagement. Diagnose, build, deploy into production, and train your team to run it.',
-    whatsIncluded: [
-      'Everything in Forge Diagnostic',
-      'Working production system (not a prototype)',
-      'Integration with your existing tech stack',
-      'Team training and knowledge transfer',
-      'Change management and adoption support',
-      'Measurable KPIs tracked from day one',
-      '30-day post-launch support',
-      'Documentation and runbooks for your team',
-    ],
-    idealFor: 'Companies ready to build and deploy AI into production with measurable ROI targets.',
-    cta: 'Get My Free AI Readiness Score',
-    href: '/discover',
-    featured: true,
-  },
-  {
-    name: 'Forge Scale™',
-    price: '$5K–$15K',
-    period: '/month',
-    timeline: 'Ongoing',
-    description:
-      'Continuous AI operations embedded in your business. New agents built monthly, existing systems optimized.',
-    whatsIncluded: [
-      'Senior AI expertise on demand',
-      'New AI agents built and deployed monthly',
-      'Continuous optimization of live systems',
-      'Weekly strategy sessions with leadership',
-      'Priority support and rapid iteration',
-      'Quarterly business impact reviews',
-      'Access to ClearForge agent library',
-    ],
-    idealFor: 'Companies with production AI that want continuous improvement and expansion.',
-    cta: 'Get My Free AI Readiness Score',
-    href: '/discover',
-    featured: false,
-  },
-];
 
 const faqs = [
   {
@@ -144,7 +79,7 @@ export default function PricingPage() {
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <Stagger className="" stagger={0.12}>
-            {products.map((product, i) => (
+            {forgeProducts.map((product, i) => (
               <StaggerItem key={product.name}>
                 <div
                   className={`relative border-t border-divider py-12 lg:py-16 ${

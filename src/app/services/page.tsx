@@ -2,6 +2,7 @@ import { ArrowRight, Factory, Landmark, HeartPulse, Code2, Briefcase, Shield } f
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
+import { forgeProducts } from '@/data/forge-products';
 import { services } from '@/data/services';
 import { createMetadata } from '@/lib/metadata';
 
@@ -11,60 +12,6 @@ export const metadata = createMetadata({
     'Three named products with transparent pricing. Forge Diagnostic, Forge Sprint, and Forge Scale — built for mid-market and growth-stage companies.',
   path: '/services',
 });
-
-const forgeProducts = [
-  {
-    name: 'Forge Diagnostic™',
-    price: '$15K',
-    period: 'one-time',
-    timeline: '4 weeks',
-    description:
-      'A senior-led assessment that maps your highest-value AI opportunities, scores data readiness, and delivers an execution-ready roadmap — not a strategy deck.',
-    included: [
-      'Stakeholder interviews across leadership and operations',
-      'Process mapping with AI opportunity scoring',
-      'Data readiness and infrastructure audit',
-      'Prioritized roadmap with ROI projections',
-    ],
-    cta: 'Get My Free AI Readiness Score',
-    href: '/discover',
-    featured: false,
-  },
-  {
-    name: 'Forge Sprint™',
-    price: '$75K–$200K',
-    period: 'one-time',
-    timeline: '10–14 weeks',
-    description:
-      'An intensive build engagement. We diagnose the problem, engineer the solution, deploy it into production, and train your team to run it — all in one sprint.',
-    included: [
-      'Working production system (not a prototype)',
-      'Integration with your existing tech stack',
-      'Team training and knowledge transfer',
-      'Measurable KPIs tracked from day one',
-    ],
-    cta: 'Get My Free AI Readiness Score',
-    href: '/discover',
-    featured: true,
-  },
-  {
-    name: 'Forge Scale™',
-    price: '$5K–$15K',
-    period: '/month',
-    timeline: 'Ongoing',
-    description:
-      'Continuous AI operations embedded in your business. New agents built monthly, existing systems optimized, and senior strategy on demand.',
-    included: [
-      'New AI agents built and deployed monthly',
-      'Continuous optimization of live systems',
-      'Weekly strategy sessions with leadership',
-      'Quarterly business impact reviews',
-    ],
-    cta: 'Get My Free AI Readiness Score',
-    href: '/discover',
-    featured: false,
-  },
-];
 
 const industries = [
   {
@@ -195,7 +142,7 @@ export default function ServicesPage() {
                         {product.description}
                       </p>
                       <ul className="mt-8 space-y-3">
-                        {product.included.map((item) => (
+                        {product.whatsIncluded.slice(0, 5).map((item) => (
                           <li
                             key={item}
                             className="flex items-start gap-3 text-body-sm text-anthracite"

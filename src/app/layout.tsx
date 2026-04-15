@@ -4,7 +4,6 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { ForgeBar } from '@/components/layout/forge-bar';
 import { LenisProvider } from '@/components/layout/lenis-provider';
-import { PageTransition } from '@/components/layout/page-transition';
 import { coreKeywords, organizationJsonLd } from '@/lib/metadata';
 import './globals.css';
 
@@ -63,9 +62,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
         <LenisProvider>
           <Header />
-          <main id="main-content">
-            <PageTransition>{children}</PageTransition>
-          </main>
+          <main id="main-content">{children}</main>
           <Footer />
           <ForgeBar />
         </LenisProvider>

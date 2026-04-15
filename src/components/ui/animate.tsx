@@ -1,38 +1,41 @@
 'use client';
 
-import { motion, type Variants } from 'framer-motion';
-import type { ReactNode } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { type ReactNode, useRef } from 'react';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+/**
+ * GSAP-backed scroll reveal helpers (replaces Framer Motion as of V8.8).
+ *
+ * Same exports as before so existing page code doesn't need to change,
+ * but now uses GSAP ScrollTrigger which shares the Lenis scroll loop with
+ * the homepage's SectionReveal components. One animation runtime, one
+ * scroll observer per element, measurably smoother than running both
+ * Framer Motion's IntersectionObservers and GSAP in parallel.
+ */
+
+const EASE = 'power3.out';
+const TRIGGER_START = 'top 88%';
 
 /* ------------------------------------------------------------------ */
-/*  Shared easing & variants                                          */
-/* ------------------------------------------------------------------ */
-
-const ease = [0.16, 1, 0.3, 1] as const;
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const fadeIn: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-};
-
-/* ------------------------------------------------------------------ */
-/*  FadeIn — single element fade-in (optionally with y translate)     */
+/*  FadeIn — single element reveal                                    */
 /* ------------------------------------------------------------------ */
 
 interface FadeInProps {
   children: ReactNode;
   className?: string;
-  /** Delay in seconds before the animation starts */
+  /** Delay in seconds before animation starts */
   delay?: number;
-  /** Duration in seconds (default 0.5) */
+  /** Duration in seconds */
   duration?: number;
   /** Whether to include a y-axis translate (default true) */
   translate?: boolean;
-  /** Element tag rendered by motion (default 'div') */
+  /** Element tag (default 'div') */
   as?: 'div' | 'section' | 'p' | 'span';
 }
 
@@ -40,27 +43,47 @@ export function FadeIn({
   children,
   className,
   delay = 0,
-  duration = 0.5,
+  duration = 0.6,
   translate = true,
   as = 'div',
 }: FadeInProps) {
-  const Tag = motion[as];
+  const ref = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const el = ref.current;
+      if (!el) return;
+
+      gsap.fromTo(
+        el,
+        { opacity: 0, y: translate ? 20 : 0 },
+        {
+          opacity: 1,
+          y: 0,
+          duration,
+          delay,
+          ease: EASE,
+          scrollTrigger: {
+            trigger: el,
+            start: TRIGGER_START,
+            toggleActions: 'play none none none',
+          },
+        },
+      );
+    },
+    { scope: ref },
+  );
+
+  const Component = as as 'div';
   return (
-    <Tag
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-40px' }}
-      variants={translate ? fadeUp : fadeIn}
-      transition={{ duration, delay, ease: [...ease] }}
-      className={className}
-    >
+    <Component ref={ref as React.RefObject<HTMLDivElement>} className={className}>
       {children}
-    </Tag>
+    </Component>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/*  Stagger — container that staggers its children                     */
+/*  Stagger — container that staggers its <StaggerItem> children      */
 /* ------------------------------------------------------------------ */
 
 interface StaggerProps {
@@ -68,9 +91,9 @@ interface StaggerProps {
   className?: string;
   /** Delay between each child (default 0.1) */
   stagger?: number;
-  /** Duration of each child animation (default 0.5) */
+  /** Duration of each child's animation */
   duration?: number;
-  /** Delay before the stagger begins (default 0) */
+  /** Delay before the whole stagger begins */
   delay?: number;
 }
 
@@ -78,52 +101,62 @@ export function Stagger({
   children,
   className,
   stagger = 0.1,
-  duration = 0.5,
+  duration = 0.6,
   delay = 0,
 }: StaggerProps) {
-  return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-40px' }}
-      variants={{
-        visible: {
-          transition: { staggerChildren: stagger, delayChildren: delay },
+  const ref = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const el = ref.current;
+      if (!el) return;
+      const items = el.querySelectorAll(':scope > [data-stagger-item]');
+      if (!items.length) return;
+
+      gsap.fromTo(
+        items,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration,
+          delay,
+          stagger,
+          ease: EASE,
+          scrollTrigger: {
+            trigger: el,
+            start: TRIGGER_START,
+            toggleActions: 'play none none none',
+          },
         },
-      }}
-      className={className}
-    >
+      );
+    },
+    { scope: ref },
+  );
+
+  return (
+    <div ref={ref} className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/*  StaggerItem — child inside a <Stagger>                            */
+/*  StaggerItem — marker for Stagger children                         */
 /* ------------------------------------------------------------------ */
 
 interface StaggerItemProps {
   children: ReactNode;
   className?: string;
-  /** Duration of this item's animation (default 0.5) */
+  /** Kept for API compatibility; parent Stagger controls timing */
   duration?: number;
-  /** Whether to include a y-axis translate (default true) */
   translate?: boolean;
 }
 
-export function StaggerItem({
-  children,
-  className,
-  duration = 0.5,
-  translate = true,
-}: StaggerItemProps) {
+export function StaggerItem({ children, className }: StaggerItemProps) {
   return (
-    <motion.div
-      variants={translate ? fadeUp : fadeIn}
-      transition={{ duration, ease: [...ease] }}
-      className={className}
-    >
+    <div data-stagger-item className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 }

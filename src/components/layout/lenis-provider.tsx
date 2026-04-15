@@ -19,12 +19,17 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
       gsap.registerPlugin(ScrollTrigger);
 
       const lenis = new Lenis({
-        duration: 1.2,
+        // Shorter duration = snappier catch-up (was 1.2 — felt floaty)
+        duration: 1.0,
+        // Expo-out easing — natural deceleration
         easing: (t: number) => Math.min(1, 1.001 - 2 ** (-10 * t)),
+        // Manually ticked by gsap.ticker to stay in sync with ScrollTrigger
         autoRaf: false,
         smoothWheel: true,
-        wheelMultiplier: 0.8,
-        touchMultiplier: 1.6,
+        // 1.0 = 1:1 wheel-to-scroll (was 0.8 — felt heavy/laggy)
+        wheelMultiplier: 1.0,
+        // Touch stays responsive on iPad
+        touchMultiplier: 1.8,
       });
       lenisRef.current = lenis;
 
