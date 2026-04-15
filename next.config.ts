@@ -68,6 +68,15 @@ const nextConfig: NextConfig = {
 
   // Strict mode for React — catches double-render bugs in dev
   reactStrictMode: true,
+
+  // Allow dev resources (HMR, /_next/image proxy, etc.) to be requested from
+  // these hosts. Without this Next.js 16 blocks them as cross-origin and the
+  // page partially loads on iPad / LAN devices.
+  allowedDevOrigins: [
+    "100.120.34.122", // tailscale (iPad)
+    "192.168.68.71",  // local LAN
+    "localhost",
+  ],
 };
 
 export default nextConfig;
