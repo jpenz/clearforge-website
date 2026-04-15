@@ -74,9 +74,16 @@ const nextConfig: NextConfig = {
   // page partially loads on iPad / LAN devices.
   allowedDevOrigins: [
     "100.120.34.122", // tailscale (iPad)
-    "192.168.68.71",  // local LAN
+    "192.168.68.65",  // local LAN
+    "192.168.68.71",  // local LAN (alt)
     "localhost",
   ],
+
+  // Next.js 16 requires all non-default quality values to be whitelisted.
+  // 65 is used for decorative atmospheric bg images on industry hero sections.
+  images: {
+    qualities: [65, 75],
+  },
 };
 
 export default nextConfig;
