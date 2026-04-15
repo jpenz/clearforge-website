@@ -9,6 +9,10 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 /**
  * Premium animation wrappers for the homepage.
  * Per frontend-design + video-to-website skills:
@@ -16,6 +20,7 @@ if (typeof window !== 'undefined') {
  * - Staggered reveals: label → heading → body → CTA
  * - At least 1 pinned section
  * - Direction variety
+ * All wrappers respect prefers-reduced-motion (no animation runs).
  */
 
 type AnimType = 'fade-up' | 'slide-left' | 'slide-right' | 'scale-up' | 'clip-reveal';
@@ -32,6 +37,7 @@ export function SectionReveal({ children, animation, className }: SectionRevealP
 
   useGSAP(() => {
     if (typeof window === 'undefined') return;
+    if (prefersReducedMotion()) return;
     const el = ref.current;
     if (!el) return;
 
@@ -70,6 +76,7 @@ export function StaggerReveal({ children, className }: { children: ReactNode; cl
 
   useGSAP(() => {
     if (typeof window === 'undefined') return;
+    if (prefersReducedMotion()) return;
     const el = ref.current;
     if (!el) return;
 
@@ -101,6 +108,7 @@ export function PinnedSection({ children, className }: { children: ReactNode; cl
 
   useGSAP(() => {
     if (typeof window === 'undefined' || window.innerWidth < 768) return;
+    if (prefersReducedMotion()) return;
     const section = ref.current;
     const content = contentRef.current;
     if (!section || !content) return;
@@ -142,6 +150,7 @@ export function ScrubMarquee({ text, className }: { text: string; className?: st
 
   useGSAP(() => {
     if (typeof window === 'undefined') return;
+    if (prefersReducedMotion()) return;
     const track = trackRef.current;
     const container = ref.current;
     if (!track || !container) return;

@@ -26,6 +26,7 @@ export function HeroScroll() {
   useGSAP(
     () => {
       if (typeof window === 'undefined' || window.innerWidth < 768) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       const bg = bgRef.current;
       const section = sectionRef.current;
       if (!bg || !section) return;

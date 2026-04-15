@@ -22,6 +22,10 @@ if (typeof window !== 'undefined') {
 const EASE = 'power3.out';
 const TRIGGER_START = 'top 88%';
 
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 /* ------------------------------------------------------------------ */
 /*  FadeIn — single element reveal                                    */
 /* ------------------------------------------------------------------ */
@@ -51,6 +55,7 @@ export function FadeIn({
 
   useGSAP(
     () => {
+      if (prefersReducedMotion()) return;
       const el = ref.current;
       if (!el) return;
 
@@ -108,6 +113,7 @@ export function Stagger({
 
   useGSAP(
     () => {
+      if (prefersReducedMotion()) return;
       const el = ref.current;
       if (!el) return;
       const items = el.querySelectorAll(':scope > [data-stagger-item]');

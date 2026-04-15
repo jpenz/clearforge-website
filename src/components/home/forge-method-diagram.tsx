@@ -81,6 +81,7 @@ export function ForgeMethodDiagram() {
   useGSAP(
     () => {
       if (typeof window === 'undefined') return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       const el = ref.current;
       if (!el) return;
 
