@@ -107,7 +107,7 @@ export default function PrivateEquityPage() {
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <div className="absolute inset-0 pointer-events-none">
           <Image
-            src="/images/abstract-value-creation.png"
+            src="/images/abstract-value-creation.jpg"
             alt=""
             fill
             sizes="100vw"

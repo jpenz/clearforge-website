@@ -99,7 +99,7 @@ export default function Home() {
         {/* Atmospheric particle field — dim, behind everything */}
         <div className="absolute inset-0 pointer-events-none">
           <Image
-            src="/images/abstract-dataflow.png"
+            src="/images/abstract-dataflow.jpg"
             alt=""
             fill
             sizes="100vw"

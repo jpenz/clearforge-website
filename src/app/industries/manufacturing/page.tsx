@@ -107,7 +107,7 @@ export default function ManufacturingPage() {
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <div className="absolute inset-0 pointer-events-none">
           <Image
-            src="/images/abstract-assessment.png"
+            src="/images/abstract-assessment.jpg"
             alt=""
             fill
             sizes="100vw"

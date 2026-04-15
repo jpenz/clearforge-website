@@ -107,7 +107,7 @@ export default function HealthcarePage() {
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <div className="absolute inset-0 pointer-events-none">
           <Image
-            src="/images/abstract-network.png"
+            src="/images/abstract-network.jpg"
             alt=""
             fill
             sizes="100vw"
