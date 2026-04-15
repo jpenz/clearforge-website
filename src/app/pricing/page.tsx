@@ -140,76 +140,98 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* — Tiers — */}
+      {/* — Tiers — editorial ruled-line — */}
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-          <Stagger className="grid gap-8 lg:grid-cols-3" stagger={0.12}>
-            {products.map((product) => (
-              <StaggerItem
-                key={product.name}
-                className={`relative border ${
-                  product.featured
-                    ? 'border-brass bg-surface shadow-lg'
-                    : 'border-divider bg-parchment'
-                } p-8 flex flex-col`}
-              >
-                {product.featured && (
-                  <span className="absolute -top-3 left-8 bg-brass text-white px-3 py-1 text-xs font-semibold tracking-wider uppercase">
-                    Most Popular
-                  </span>
-                )}
-                <h3 className="text-h3">{product.name}</h3>
-                <div className="mt-4 flex items-baseline gap-1">
-                  <span className="metric-lg text-anthracite">
-                    {product.price}
-                  </span>
-                  <span className="text-body-sm text-warm-gray">
-                    {product.period}
-                  </span>
-                </div>
-                <p className="mt-2 text-body-sm text-warm-gray">
-                  {product.timeline}
-                </p>
-                <p className="mt-4 text-body text-warm-gray">
-                  {product.description}
-                </p>
-
-                {/* What's Included */}
-                <div className="mt-8 border-t border-divider pt-6">
-                  <p className="text-body-sm font-semibold text-anthracite uppercase tracking-wider">
-                    What&apos;s Included
-                  </p>
-                  <ul className="mt-4 space-y-3 flex-grow">
-                    {product.whatsIncluded.map((item) => (
-                      <li
-                        key={item}
-                        className="flex items-start gap-3 text-body-sm text-anthracite"
+          <Stagger className="" stagger={0.12}>
+            {products.map((product, i) => (
+              <StaggerItem key={product.name}>
+                <div
+                  className={`relative border-t border-divider py-12 lg:py-16 ${
+                    product.featured
+                      ? 'bg-brass/[0.03] -mx-6 px-6 lg:-mx-10 lg:px-10'
+                      : ''
+                  }`}
+                >
+                  <div className="lg:grid lg:grid-cols-12 lg:gap-12">
+                    {/* Left: number, name, price, ideal for */}
+                    <div className="lg:col-span-5">
+                      <div className="flex items-center gap-3">
+                        <span className="metric text-sm text-brass">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        {product.featured && (
+                          <span className="overline text-[10px]">Most chosen</span>
+                        )}
+                      </div>
+                      <h3
+                        className="mt-3"
+                        style={{
+                          fontFamily: 'var(--font-instrument-serif)',
+                          fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
+                          lineHeight: 1.08,
+                          letterSpacing: '-0.02em',
+                          fontWeight: 400,
+                        }}
                       >
-                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-brass" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                        {product.name}
+                      </h3>
+                      <div className="mt-4 flex items-baseline gap-2">
+                        <span
+                          className="metric text-3xl text-anthracite"
+                          style={{ fontFamily: 'var(--font-jetbrains-mono, monospace)' }}
+                        >
+                          {product.price}
+                        </span>
+                        <span className="text-body-sm text-warm-gray">
+                          {product.period}
+                        </span>
+                      </div>
+                      <p className="mt-1 text-body-sm text-warm-gray">
+                        {product.timeline}
+                      </p>
+                      <p className="mt-6 text-body-sm text-warm-gray italic max-w-xs">
+                        {product.idealFor}
+                      </p>
+                    </div>
 
-                <p className="mt-6 text-body-sm text-warm-gray italic">
-                  {product.idealFor}
-                </p>
-
-                <div className="mt-8">
-                  <Button
-                    variant={product.featured ? 'default' : 'secondary'}
-                    className="w-full"
-                    asChild
-                  >
-                    <Link href={product.href}>
-                      {product.cta} <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
+                    {/* Right: description, what's included, CTA */}
+                    <div className="mt-8 lg:col-span-7 lg:mt-0">
+                      <p className="text-body-lg text-warm-gray">
+                        {product.description}
+                      </p>
+                      <p className="mt-8 text-xs font-semibold text-anthracite uppercase tracking-widest">
+                        What&apos;s Included
+                      </p>
+                      <ul className="mt-4 space-y-3">
+                        {product.whatsIncluded.map((item) => (
+                          <li
+                            key={item}
+                            className="flex items-start gap-3 text-body-sm text-anthracite"
+                          >
+                            <Check className="mt-0.5 h-4 w-4 shrink-0 text-brass" />
+                            <span className="flex-1 leading-relaxed">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-8">
+                        <Button
+                          variant={product.featured ? 'default' : 'secondary'}
+                          size="lg"
+                          asChild
+                        >
+                          <Link href={product.href}>
+                            {product.cta} <ArrowRight className="ml-2 h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </StaggerItem>
             ))}
           </Stagger>
+          <div className="border-t border-divider" />
         </div>
       </section>
 
