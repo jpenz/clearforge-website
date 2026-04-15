@@ -32,38 +32,46 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      {/* — Case Study Cards — */}
+      {/* — Case Study List — Editorial ruled-line, matches homepage Results ═ */}
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-          <Stagger className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3" stagger={0.1}>
+          <Stagger className="mt-0" stagger={0.08}>
             {caseStudies.map((cs) => (
               <StaggerItem key={cs.slug}>
                 <Link
                   href={`/case-studies/${cs.slug}`}
-                  className="group flex flex-col border border-divider bg-surface p-8 transition-all hover:border-brass hover:shadow-md hover:-translate-y-1 h-full"
+                  className="group block border-t border-divider"
                 >
-                  <span className="text-body-sm font-medium text-brass">
-                    {cs.industry}
-                  </span>
-                  <p
-                    className="mt-4 metric-lg text-anthracite"
-                    style={{ fontFamily: 'var(--font-jetbrains-mono, monospace)' }}
-                  >
-                    {cs.heroMetric}
-                  </p>
-                  <h3 className="mt-3 text-h4 group-hover:text-brass transition-colors flex-grow">
-                    {cs.title}
-                  </h3>
-                  <p className="mt-2 text-body-sm text-warm-gray">
-                    {cs.heroMetricLabel}
-                  </p>
-                  <span className="mt-6 inline-flex items-center text-sm font-medium text-brass opacity-0 group-hover:opacity-100 transition-opacity">
-                    Read case study <ArrowRight className="ml-1 h-3.5 w-3.5" />
-                  </span>
+                  <div className="py-10 sm:py-12 lg:py-14 flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-6">
+                    <div className="flex-1 min-w-0">
+                      <span className="overline text-[10px]">{cs.industry}</span>
+                      <h3
+                        className="mt-3 text-h2 group-hover:text-brass transition-colors duration-300"
+                        style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                      >
+                        {cs.title}
+                      </h3>
+                      <p className="mt-3 text-body-sm text-warm-gray max-w-xl">
+                        {cs.heroMetricLabel}
+                      </p>
+                    </div>
+                    <div className="flex items-baseline gap-8 lg:gap-12 shrink-0">
+                      <div>
+                        <span
+                          className="metric text-3xl sm:text-4xl text-brass"
+                          style={{ fontFamily: 'var(--font-jetbrains-mono, monospace)' }}
+                        >
+                          {cs.heroMetric}
+                        </span>
+                      </div>
+                      <ArrowRight className="h-5 w-5 text-warm-gray group-hover:text-brass group-hover:translate-x-2 transition-all duration-300" />
+                    </div>
+                  </div>
                 </Link>
               </StaggerItem>
             ))}
           </Stagger>
+          <div className="border-t border-divider" />
         </div>
       </section>
 

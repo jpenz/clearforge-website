@@ -1,6 +1,7 @@
 import { ArrowRight, Shield } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ForgeMethodDiagram } from '@/components/home/forge-method-diagram';
 import { HeroScroll } from '@/components/home/hero-scroll';
 import { PinnedSection, ScrubMarquee, SectionReveal, StaggerReveal } from '@/components/home/homepage-animations';
 import { MetricCounter } from '@/components/home/metric-counter';
@@ -123,10 +124,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ THE FORGE METHOD — diagram overview + scale-up text ═══ */}
+      {/* ═══ THE FORGE METHOD — native diagram component ═══ */}
       <section className="bg-parchment py-20 sm:py-32 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
-          {/* Section intro — sits above the diagram */}
+          {/* Section intro */}
           <SectionReveal animation="scale-up">
             <p className="overline">Our Approach</p>
             <h2 className="mt-6 text-display max-w-3xl">The Forge Method™</h2>
@@ -136,58 +137,11 @@ export default function Home() {
             </p>
           </SectionReveal>
 
-          {/* Hand-drawn Excalidraw overview — dark, sketchy, distinctive */}
-          <SectionReveal animation="fade-up">
-            <figure className="mt-16 mx-auto max-w-[1100px]">
-              <div className="relative rounded-sm overflow-hidden bg-forge-black border border-divider">
-                <Image
-                  src="/images/forge-method-diagram.png"
-                  alt="The Forge Method — three phases: Diagnostic, Sprint, and Scale"
-                  width={1200}
-                  height={600}
-                  className="w-full h-auto"
-                  sizes="(max-width: 1100px) 100vw, 1100px"
-                />
-              </div>
-              <figcaption className="mt-4 text-xs text-warm-gray text-center uppercase tracking-widest">
-                Diagnostic → Sprint → Scale · 3 opportunities or full refund
-              </figcaption>
-            </figure>
-          </SectionReveal>
-
-          {/* Phase detail list — editorial, ruled lines */}
-          <div className="mt-24 lg:grid lg:grid-cols-12 lg:gap-20">
-            <div className="lg:col-span-5">
-              <p className="overline">The Phases In Detail</p>
-              <h3 className="mt-6 text-h2 max-w-md">
-                How each phase turns into a working system.
-              </h3>
-            </div>
-            <div className="lg:col-span-7 mt-10 lg:mt-0">
-              {[
-                { num: '01', name: 'Forge Diagnostic™', time: '4 weeks · From $15K', desc: 'We map your value chain, score your AI readiness, and deliver a prioritized roadmap with ROI projections.' },
-                { num: '02', name: 'Forge Sprint™', time: '10–14 weeks · $75K–$200K', desc: 'We deploy production AI systems with human-in-the-loop controls and KPI baselines. Not proofs of concept.', featured: true },
-                { num: '03', name: 'Forge Scale™', time: 'Ongoing · $5K–$15K/mo', desc: 'Managed operations, continuous optimization, team training. Your AI advantage compounds every month.' },
-              ].map((step) => (
-                <div key={step.num} className="border-t border-divider py-8 sm:py-10">
-                  <div className="flex items-baseline gap-4">
-                    <span className="metric text-sm text-brass">{step.num}</span>
-                    <div className="flex-1">
-                      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4">
-                        <h3 className="text-h3">{step.name}</h3>
-                        <span className="text-xs text-warm-gray uppercase tracking-wider shrink-0">{step.time}</span>
-                      </div>
-                      <p className="mt-3 text-body text-warm-gray max-w-lg">{step.desc}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-              <div className="border-t border-divider" />
-            </div>
-          </div>
+          {/* Native editorial diagram — giant serif numbers, thin rules, GSAP reveal */}
+          <ForgeMethodDiagram />
 
           {/* Guarantee — ruled, not boxed */}
-          <div className="mt-16 pt-10 border-t border-brass/20">
+          <div className="mt-20 pt-10 border-t border-brass/20">
             <div className="flex items-start gap-4 max-w-2xl">
               <Shield className="h-5 w-5 text-brass shrink-0 mt-1" />
               <div>

@@ -164,36 +164,39 @@ export default function SaaSPage() {
             and product teams are flying blind on what drives activation.
           </p>
 
-          <Stagger className="mt-16 grid gap-8 sm:grid-cols-2" stagger={0.1}>
+          <Stagger className="mt-16 lg:grid lg:grid-cols-2 lg:gap-x-16" stagger={0.1}>
             {challenges.map((challenge) => {
               const Icon = challenge.icon;
               return (
               <StaggerItem
                 key={challenge.title}
-                className="border border-divider bg-surface p-8"
+                className="border-t border-divider py-10 lg:py-12"
               >
-                <Icon className="h-6 w-6 text-brass" />
-                <h3 className="mt-4 text-h3">{challenge.title}</h3>
-                <p className="mt-3 text-body text-warm-gray">
-                  {challenge.description}
-                </p>
-                <div className="mt-6 border-t border-divider pt-6">
-                  <p
-                    className="metric-lg text-anthracite"
-                    style={{
-                      fontFamily: 'var(--font-jetbrains-mono, monospace)',
-                    }}
-                  >
-                    {challenge.metric}
-                  </p>
-                  <p className="mt-1 text-body-sm text-warm-gray">
-                    {challenge.metricLabel}
-                  </p>
+                <div className="flex items-start gap-5">
+                  <Icon className="h-5 w-5 text-brass shrink-0 mt-1" />
+                  <div className="flex-1">
+                    <h3 className="text-h3">{challenge.title}</h3>
+                    <p className="mt-3 text-body text-warm-gray max-w-lg">
+                      {challenge.description}
+                    </p>
+                    <div className="mt-5 flex items-baseline gap-3 flex-wrap">
+                      <span
+                        className="metric text-2xl text-anthracite"
+                        style={{ fontFamily: 'var(--font-jetbrains-mono, monospace)' }}
+                      >
+                        {challenge.metric}
+                      </span>
+                      <span className="text-xs text-warm-gray leading-snug">
+                        {challenge.metricLabel}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </StaggerItem>
               );
             })}
           </Stagger>
+          <div className="border-t border-divider" />
         </div>
       </section>
 

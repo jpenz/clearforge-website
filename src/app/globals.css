@@ -15,11 +15,11 @@
   --color-stone: #9090A8;
 
   /* ── Accents — Emerald (darkened for AA contrast on light bg) ── */
+  /* NOTE: Variables are named "brass" for historical reasons (V7→V8 pivot),
+     but the actual value is emerald #047857. All UI uses these. */
   --color-brass: #047857;
   --color-brass-hover: #065F46;
   --color-brass-light: #34D399;
-  --color-teal: #047857;
-  --color-teal-hover: #065F46;
 
   /* ── Borders (visible but not heavy) ── */
   --color-divider: #C8C8D2;

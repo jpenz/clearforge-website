@@ -34,24 +34,29 @@ Showcases services, case studies, pricing, the Forge Intelligence™ AI agent, a
 
 The site is an **editorial typographic layout** in the tradition of McKinsey, Bain, and print-first magazines — **not** a dark SaaS site. There are no card containers; ruled lines and whitespace do the structural work.
 
-### Colors
+### Colors (actual values — see `src/app/globals.css`)
 
 ```css
-/* Core palette — warm, archival, not "tech" */
---forge-black: #0A0F1E;      /* deepest dark */
---forge-navy:  #0A0F1E;      /* dark-section bg */
---parchment:   #F8F8F6;      /* light-section bg */
---bone:        #F5F3EE;      /* dark-section text */
---stone:       #B8B2A4;      /* dark-section secondary text */
---warm-gray:   #6B6459;      /* light-section secondary */
---anthracite:  #2A2A2A;      /* primary light-section text */
+/* Core palette */
+--color-forge-black: #0A0F1E;   /* dark-section bg */
+--color-parchment:   #F8F8F6;   /* light-section bg */
+--color-surface:     #FFFFFF;   /* raised surfaces */
+--color-recessed:    #F0F0ED;   /* recessed sections */
+--color-anthracite:  #141428;   /* primary text on light */
+--color-warm-gray:   #4A4A62;   /* secondary text on light */
+--color-bone:        #EAEAF2;   /* text on dark */
+--color-stone:       #9090A8;   /* secondary text on dark */
 
-/* Accent — brass/emerald, not blue */
---brass:       #B08D57;      /* primary accent, WCAG AA on parchment */
---brass-light: #C9A978;      /* on dark-section */
---emerald:     #047857;      /* CTA secondary, WCAG AA */
---divider:     rgba(0,0,0,0.08);
---divider-dark: rgba(255,255,255,0.08);
+/* Accent — emerald #047857 (the variable is named "brass" for
+   historical reasons from a V7→V8 pivot; the value is emerald,
+   not actual brass #B08D57). Use `text-brass` / `bg-brass`. */
+--color-brass:       #047857;   /* primary accent, WCAG AA */
+--color-brass-hover: #065F46;   /* hover state */
+--color-brass-light: #34D399;   /* on dark sections */
+
+/* Borders */
+--color-divider:      #C8C8D2;  /* on light */
+--color-divider-dark: #232940;  /* on dark */
 ```
 
 ### Typography
