@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { type ScorecardQuestion, scaleLabels } from '@/lib/scorecard';
 import { cn } from '@/lib/utils';
 
@@ -13,11 +12,9 @@ interface QuestionCardProps {
 
 export function QuestionCard({ question, value, onChange, index }: QuestionCardProps) {
   return (
-    <motion.div
-      className="border border-divider bg-surface p-4 sm:p-6 lg:p-8"
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, delay: index * 0.05 }}
+    <div
+      className="border border-divider bg-surface p-4 sm:p-6 lg:p-8 animate-fade-in-up"
+      style={{ animationDelay: `${index * 0.05}s`, animationFillMode: 'both' }}
     >
       <p className="text-body font-medium text-anthracite leading-relaxed">
         <span className="metric text-xs text-brass mr-2">Q{question.id}</span>
@@ -54,6 +51,6 @@ export function QuestionCard({ question, value, onChange, index }: QuestionCardP
         <span>{scaleLabels[0]}</span>
         <span>{scaleLabels[4]}</span>
       </div>
-    </motion.div>
+    </div>
   );
 }

@@ -1,6 +1,5 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
@@ -71,32 +70,25 @@ export function ScorecardForm() {
     <div>
       <ProgressBar currentStep={currentStep} completedSteps={completedSteps} />
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentPillar.key}
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -30 }}
-          transition={{ duration: 0.3 }}
-          className="space-y-4"
-        >
-          {/* Pillar header */}
-          <div className="border border-divider bg-warm-white p-5">
-            <h3 className="text-h4 text-anthracite">{currentPillar.name}</h3>
-            <p className="text-body-sm text-warm-gray mt-1">{currentPillar.description}</p>
-          </div>
+      {/* key={currentPillar.key} re-mounts this div on step change,
+          which re-fires the CSS fade-in animation defined in globals.css */}
+      <div key={currentPillar.key} className="space-y-4 animate-fade-in-up">
+        {/* Pillar header */}
+        <div className="border border-divider bg-warm-white p-5">
+          <h3 className="text-h4 text-anthracite">{currentPillar.name}</h3>
+          <p className="text-body-sm text-warm-gray mt-1">{currentPillar.description}</p>
+        </div>
 
-          {currentQuestions.map((question, i) => (
-            <QuestionCard
-              key={question.id}
-              question={question}
-              value={answers[question.id]}
-              onChange={handleAnswer}
-              index={i}
-            />
-          ))}
-        </motion.div>
-      </AnimatePresence>
+        {currentQuestions.map((question, i) => (
+          <QuestionCard
+            key={question.id}
+            question={question}
+            value={answers[question.id]}
+            onChange={handleAnswer}
+            index={i}
+          />
+        ))}
+      </div>
 
       {/* Navigation */}
       <div className="mt-8 sm:mt-10 flex items-center justify-between gap-4">

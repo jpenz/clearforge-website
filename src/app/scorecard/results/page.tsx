@@ -1,12 +1,35 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { ArrowRight, Building2, CheckCircle, Mail, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { type Answers, calculateResults, type ScorecardResult } from '@/lib/scorecard';
+
+/** Animated pillar progress bar — native CSS transition, no framer-motion. */
+function PillarBar({ percentage, color }: { percentage: number; color: string }) {
+  const [width, setWidth] = useState(0);
+  useEffect(() => {
+    const reduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) {
+      setWidth(percentage);
+      return;
+    }
+    const t = setTimeout(() => setWidth(percentage), 100);
+    return () => clearTimeout(t);
+  }, [percentage]);
+  return (
+    <div className="h-1 bg-divider overflow-hidden">
+      <div
+        className={`h-full transition-[width] duration-700 ease-out ${color}`}
+        style={{ width: `${width}%` }}
+      />
+    </div>
+  );
+}
 
 const ScoreRing = dynamic(
   () => import('@/components/scorecard/score-ring').then((m) => ({ default: m.ScoreRing })),
@@ -65,7 +88,7 @@ export default function ScorecardResultsPage() {
     return (
       <section className="bg-parchment min-h-[80vh] flex items-center pt-32 pb-20">
         <div className="mx-auto max-w-lg px-4 sm:px-6 lg:px-10 w-full">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+          <div className="animate-fade-in-up">
             <div className="text-center mb-10">
               <p className="overline">Assessment Complete</p>
               <h1 className="mt-6 text-display text-anthracite">Your results are ready.</h1>
@@ -90,7 +113,7 @@ export default function ScorecardResultsPage() {
                 {submitting ? 'Loading...' : <>See Full Results <ArrowRight className="ml-2 h-4 w-4" /></>}
               </Button>
             </form>
-          </motion.div>
+          </div>
         </div>
       </section>
     );
@@ -125,9 +148,10 @@ export default function ScorecardResultsPage() {
                   <h3 className="text-sm font-bold text-anthracite">{ps.name}</h3>
                   <span className="metric text-lg text-brass">{Math.round(ps.percentage)}%</span>
                 </div>
-                <div className="h-1 bg-divider overflow-hidden">
-                  <motion.div initial={{ width: 0 }} whileInView={{ width: `${ps.percentage}%` }} viewport={{ once: true }} transition={{ duration: 0.8 }} className={`h-full ${ps.key === result.weakestPillar ? 'bg-error' : 'bg-brass'}`} />
-                </div>
+                <PillarBar
+                  percentage={ps.percentage}
+                  color={ps.key === result.weakestPillar ? 'bg-error' : 'bg-brass'}
+                />
               </div>
             ))}
           </div>

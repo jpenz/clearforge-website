@@ -45,31 +45,8 @@ vi.mock('next/link', () => ({
   },
 }));
 
-// ── Animation mocks (Framer Motion, GSAP) ────────────────────────────────────
-
-vi.mock('framer-motion', () => {
-  const React = require('react');
-  // Create a passthrough component for any motion.* element
-  const createMotionComponent = (tag: string) =>
-    React.forwardRef(({ children, ...rest }: Record<string, unknown>, ref: unknown) =>
-      React.createElement(tag, { ...rest, ref }, children),
-    );
-
-  const motion = new Proxy({}, { get: (_t, prop) => createMotionComponent(String(prop)) });
-
-  return {
-    motion,
-    AnimatePresence: ({ children }: { children: React.ReactNode }) => children,
-    useAnimation: () => ({ start: vi.fn(), stop: vi.fn(), set: vi.fn() }),
-    useInView: () => true,
-    useScroll: () => ({ scrollY: { get: () => 0 }, scrollYProgress: { get: () => 0 } }),
-    useTransform: () => 0,
-    useSpring: () => 0,
-    useMotionValue: () => ({ get: () => 0, set: vi.fn() }),
-    useReducedMotion: () => false,
-    m: new Proxy({}, { get: (_t, prop) => createMotionComponent(String(prop)) }),
-  };
-});
+// ── Animation mocks (GSAP) ────────────────────────────────────
+// Framer Motion removed in V8.12 — scorecard ported to CSS transitions.
 
 vi.mock('@gsap/react', () => ({
   useGSAP: vi.fn((fn: () => void) => fn()),
