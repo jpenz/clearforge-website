@@ -1,4 +1,5 @@
 import { ArrowRight, Search, Layers, TrendingUp, LogOut } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
@@ -104,7 +105,18 @@ export default function PrivateEquityPage() {
     <>
       {/* — Hero — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+        <div className="absolute inset-0 pointer-events-none">
+          <Image
+            src="/images/abstract-value-creation.png"
+            alt=""
+            fill
+            sizes="100vw"
+            quality={65}
+            className="object-cover opacity-[0.18]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-forge-black via-forge-black/40 to-forge-black/60" />
+        </div>
+        <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
           <FadeIn>
             <p className="overline">Private Equity</p>
             <h1

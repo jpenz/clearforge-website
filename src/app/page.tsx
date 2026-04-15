@@ -1,4 +1,5 @@
 import { ArrowRight, Shield } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { HeroScroll } from '@/components/home/hero-scroll';
 import { PinnedSection, ScrubMarquee, SectionReveal, StaggerReveal } from '@/components/home/homepage-animations';
@@ -92,9 +93,20 @@ export default function Home() {
         className="dark-section py-8 sm:py-12"
       />
 
-      {/* ═══ METRICS — Large typography as design, no containers ═══ */}
-      <section className="dark-section py-20 sm:py-32 lg:py-40">
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
+      {/* ═══ METRICS — Large typography as design, atmospheric abstract bg ═══ */}
+      <section className="dark-section relative py-20 sm:py-32 lg:py-40 overflow-hidden">
+        {/* Atmospheric particle field — dim, behind everything */}
+        <div className="absolute inset-0 pointer-events-none">
+          <Image
+            src="/images/abstract-dataflow.png"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-[0.15]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-forge-black/60 via-transparent to-forge-black/80" />
+        </div>
+        <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8 lg:gap-x-16">
             {[
               { value: '$47M+', label: 'Client revenue influenced across 15 engagements' },
@@ -111,20 +123,47 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ THE FORGE METHOD — scale-up entrance, pinned on desktop ═══ */}
+      {/* ═══ THE FORGE METHOD — diagram overview + scale-up text ═══ */}
       <section className="bg-parchment py-20 sm:py-32 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-20">
+          {/* Section intro — sits above the diagram */}
+          <SectionReveal animation="scale-up">
+            <p className="overline">Our Approach</p>
+            <h2 className="mt-6 text-display max-w-3xl">The Forge Method™</h2>
+            <p className="mt-6 text-body-lg text-warm-gray max-w-2xl">
+              Clear timelines. Transparent investment. Guaranteed deliverables.
+              Three phases from opportunity to production, and onward.
+            </p>
+          </SectionReveal>
+
+          {/* Hand-drawn Excalidraw overview — dark, sketchy, distinctive */}
+          <SectionReveal animation="fade-up">
+            <figure className="mt-16 mx-auto max-w-[1100px]">
+              <div className="relative rounded-sm overflow-hidden bg-forge-black border border-divider">
+                <Image
+                  src="/images/forge-method-diagram.png"
+                  alt="The Forge Method — three phases: Diagnostic, Sprint, and Scale"
+                  width={1200}
+                  height={600}
+                  className="w-full h-auto"
+                  sizes="(max-width: 1100px) 100vw, 1100px"
+                />
+              </div>
+              <figcaption className="mt-4 text-xs text-warm-gray text-center uppercase tracking-widest">
+                Diagnostic → Sprint → Scale · 3 opportunities or full refund
+              </figcaption>
+            </figure>
+          </SectionReveal>
+
+          {/* Phase detail list — editorial, ruled lines */}
+          <div className="mt-24 lg:grid lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-5">
-              <SectionReveal animation="scale-up">
-                <p className="overline">Our Approach</p>
-                <h2 className="mt-6 text-display">The Forge Method™</h2>
-              <p className="mt-6 text-body-lg text-warm-gray">
-                Clear timelines. Transparent investment. Guaranteed deliverables.
-              </p>
-              </SectionReveal>
+              <p className="overline">The Phases In Detail</p>
+              <h3 className="mt-6 text-h2 max-w-md">
+                How each phase turns into a working system.
+              </h3>
             </div>
-            <div className="lg:col-span-7 mt-12 lg:mt-0">
+            <div className="lg:col-span-7 mt-10 lg:mt-0">
               {[
                 { num: '01', name: 'Forge Diagnostic™', time: '4 weeks · From $15K', desc: 'We map your value chain, score your AI readiness, and deliver a prioritized roadmap with ROI projections.' },
                 { num: '02', name: 'Forge Sprint™', time: '10–14 weeks · $75K–$200K', desc: 'We deploy production AI systems with human-in-the-loop controls and KPI baselines. Not proofs of concept.', featured: true },

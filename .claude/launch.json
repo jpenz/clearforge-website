@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "clearforge-dev",
+      "name": "clearforge-verify",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "port": 3000,
+      "runtimeArgs": ["run", "start", "--", "--port", "3003"],
+      "port": 3003,
       "cwd": "/Users/agentmac/agentforge/repos/clearforge-website"
     }
   ]

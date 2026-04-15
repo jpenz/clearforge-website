@@ -49,7 +49,7 @@ export function HeroScroll() {
       ref={sectionRef}
       className="dark-section relative min-h-[100svh] flex items-end overflow-hidden"
     >
-      {/* Background — video on desktop, static image fallback */}
+      {/* Background — Veo 3 ambient loop on desktop, static fallback on mobile */}
       <div ref={bgRef} className="absolute inset-0 pointer-events-none will-change-transform">
         <video
           autoPlay
@@ -57,7 +57,8 @@ export function HeroScroll() {
           loop
           playsInline
           preload="auto"
-          className="absolute inset-0 w-full h-full object-cover opacity-30 hidden md:block"
+          poster="/images/hero-bg.jpg"
+          className="absolute inset-0 w-full h-full object-cover opacity-55 hidden md:block"
         >
           <source src="/videos/hero-ambient.mp4" type="video/mp4" />
         </video>
@@ -66,10 +67,11 @@ export function HeroScroll() {
           alt=""
           fill
           sizes="100vw"
-          className="object-cover opacity-25 animate-ken-burns md:hidden"
+          className="object-cover opacity-40 animate-ken-burns md:hidden"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-forge-black via-forge-black/50 to-forge-black/70" />
+        {/* Reduced gradient — keeps text legible without burying the video */}
+        <div className="absolute inset-0 bg-gradient-to-t from-forge-black via-forge-black/35 to-forge-black/45" />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-10 pb-16 sm:pb-20 lg:pb-28 pt-32 sm:pt-40">
