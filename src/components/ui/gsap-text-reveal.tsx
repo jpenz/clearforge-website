@@ -40,6 +40,7 @@ export function GsapTextReveal({
   useGSAP(
     () => {
       if (typeof window === 'undefined') return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       const container = containerRef.current;
       if (!container) return;
 

@@ -60,6 +60,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-brass focus:text-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold"
+        >
+          Skip to main content
+        </a>
         <LenisProvider>
           <Header />
           <main id="main-content">{children}</main>
