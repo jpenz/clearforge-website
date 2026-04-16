@@ -58,18 +58,19 @@ export function HeroScroll() {
           loop
           playsInline
           preload="auto"
-          poster="/images/hero-bg.jpg"
+          poster="/images/hero-bg.webp"
           className="absolute inset-0 w-full h-full object-cover opacity-55 hidden md:block"
         >
           <source src="/videos/hero-ambient.mp4" type="video/mp4" />
         </video>
         <Image
-          src="/images/hero-bg.jpg"
+          src="/images/hero-bg.webp"
           alt=""
           fill
           sizes="100vw"
           className="object-cover opacity-40 animate-ken-burns md:hidden"
           priority
+          fetchPriority="high"
         />
         {/* Reduced gradient — keeps text legible without burying the video */}
         <div className="absolute inset-0 bg-gradient-to-t from-forge-black via-forge-black/35 to-forge-black/45" />

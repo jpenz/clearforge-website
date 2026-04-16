@@ -107,7 +107,7 @@ export default function SaaSPage() {
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <div className="absolute inset-0 pointer-events-none">
           <Image
-            src="/images/abstract-forge-progression.jpg"
+            src="/images/abstract-forge-progression.webp"
             alt=""
             fill
             sizes="100vw"

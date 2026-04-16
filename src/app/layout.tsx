@@ -41,9 +41,9 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     siteName: 'ClearForge',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'ClearForge — AI Strategy & Execution' }],
+    images: [{ url: '/images/og-image.webp', width: 1200, height: 630, alt: 'ClearForge — AI Strategy & Execution' }],
   },
-  twitter: { card: 'summary_large_image', images: ['/images/og-image.jpg'] },
+  twitter: { card: 'summary_large_image', images: ['/images/og-image.webp'] },
   robots: { index: true, follow: true },
 };
 
