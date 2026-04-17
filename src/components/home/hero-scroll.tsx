@@ -48,7 +48,7 @@ export function HeroScroll() {
   return (
     <section
       ref={sectionRef}
-      className="dark-section relative min-h-[100svh] flex items-end overflow-hidden"
+      className="dark-section relative min-h-screen flex items-end overflow-hidden"
     >
       {/* Background — Veo 3 ambient loop on desktop, static fallback on mobile */}
       <div ref={bgRef} className="absolute inset-0 pointer-events-none will-change-transform">
