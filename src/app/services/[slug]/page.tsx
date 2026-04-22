@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -29,40 +30,104 @@ export default async function ServiceDetailPage({
   const service = getServiceBySlug(slug);
   if (!service) notFound();
 
+  // Headline outcome — displayed in the hero as a visual anchor
+  const heroStat = service.outcomes[0];
+
   return (
     <>
-      {/* ── Hero ── */}
-      <section className="dark-section py-32 lg:py-48">
-        <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-          <p className="overline">{service.title}</p>
-          <h1 className="mt-6 text-display max-w-3xl text-bone">
-            {service.tagline}
-          </h1>
-          <p className="mt-6 max-w-xl text-body-lg text-stone">
-            {service.description}
-          </p>
-          <div className="mt-10">
-            <Button size="lg" asChild>
-              <Link href="/contact">
-                Start a Conversation <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+      {/* ── Hero — atmospheric bg + two-column with headline outcome ── */}
+      <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
+        <div className="absolute inset-0 pointer-events-none">
+          <Image
+            src={service.heroBg}
+            alt=""
+            fill
+            sizes="100vw"
+            quality={65}
+            className="object-cover opacity-[0.22]"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-forge-black via-forge-black/40 to-forge-black/60" />
+        </div>
+
+        <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-16 lg:items-end">
+            {/* Left: headline copy + CTA */}
+            <div className="lg:col-span-7">
+              <p className="overline">{service.title}</p>
+              <h1
+                className="mt-6 text-display max-w-3xl text-bone"
+                style={{ fontFamily: 'var(--font-instrument-serif)' }}
+              >
+                {service.tagline}
+              </h1>
+              <p className="mt-6 max-w-xl text-body-lg text-stone">
+                {service.description}
+              </p>
+              <div className="mt-10">
+                <Button size="lg" asChild>
+                  <Link href="/contact">
+                    Start a Conversation <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+
+            {/* Right: headline stat — visual anchor, magazine-style pull-quote */}
+            <div className="mt-16 lg:col-span-5 lg:mt-0">
+              <div className="border-l border-brass/40 pl-8 lg:pl-10">
+                <p className="overline text-brass-light text-[10px]">
+                  Typical Outcome
+                </p>
+                <p
+                  className="mt-4 text-brass-light"
+                  style={{
+                    fontFamily: 'var(--font-instrument-serif)',
+                    fontSize: 'clamp(4rem, 8vw, 7rem)',
+                    lineHeight: 0.92,
+                    letterSpacing: '-0.04em',
+                    fontWeight: 400,
+                  }}
+                >
+                  {heroStat.value}
+                </p>
+                <p className="mt-4 text-h3 text-bone">{heroStat.label}</p>
+                <p className="mt-3 text-body-sm text-stone max-w-xs">
+                  {heroStat.description}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Outcomes ── */}
+      {/* ── Outcomes — 4 up with value / label / description ── */}
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <p className="overline">Expected Outcomes</p>
           <h2 className="mt-6 text-display max-w-2xl">
             What this looks like in practice.
           </h2>
-          <div className="mt-16 grid grid-cols-2 gap-12 lg:grid-cols-4">
+          <div className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4">
             {service.outcomes.map((o) => (
-              <div key={o.metric}>
-                <p className="metric-lg text-brass">{o.metric}</p>
-                <p className="mt-2 text-body-sm text-warm-gray">
+              <div key={o.label} className="border-t border-divider pt-6">
+                <p
+                  className="text-brass"
+                  style={{
+                    fontFamily: 'var(--font-jetbrains-mono, monospace)',
+                    fontSize: 'clamp(2rem, 3.5vw, 2.75rem)',
+                    lineHeight: 1,
+                    letterSpacing: '-0.02em',
+                    fontWeight: 500,
+                    fontVariantNumeric: 'tabular-nums',
+                  }}
+                >
+                  {o.value}
+                </p>
+                <p className="mt-3 text-body font-semibold text-anthracite">
+                  {o.label}
+                </p>
+                <p className="mt-2 text-body-sm text-warm-gray leading-relaxed">
                   {o.description}
                 </p>
               </div>
@@ -78,63 +143,122 @@ export default async function ServiceDetailPage({
             <div className="lg:col-span-4">
               <p className="overline">Deliverables</p>
               <h2 className="mt-6 text-display">What you get.</h2>
+              <p className="mt-6 text-body text-warm-gray max-w-sm">
+                Every engagement ends with a working system in production —
+                not a strategy deck on a shelf.
+              </p>
             </div>
             <div className="mt-12 lg:col-span-8 lg:mt-0">
-              <ul className="space-y-6">
+              <ul className="space-y-0">
                 {service.deliverables.map((d, i) => (
                   <li
                     key={d}
-                    className="flex items-start gap-4 border-t border-divider pt-6"
+                    className="flex items-start gap-5 border-t border-divider py-6"
                   >
-                    <span className="metric text-sm text-brass">
+                    <span
+                      className="text-brass shrink-0"
+                      style={{
+                        fontFamily: 'var(--font-jetbrains-mono, monospace)',
+                        fontSize: '0.875rem',
+                        fontVariantNumeric: 'tabular-nums',
+                        lineHeight: 1.6,
+                      }}
+                    >
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <p className="text-body text-anthracite">{d}</p>
+                    <p className="text-body text-anthracite leading-relaxed">
+                      {d}
+                    </p>
                   </li>
                 ))}
+                <li className="border-t border-divider" />
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Workflow ── */}
-      <section className="bg-warm-white py-24 lg:py-40">
-        <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
+      {/* ── Workflow — editorial numbered flow with connecting rule ── */}
+      <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <p className="overline">How It Works</p>
-          <h2 className="mt-6 text-display max-w-2xl">
+          <h2
+            className="mt-6 text-display max-w-3xl text-bone"
+            style={{ fontFamily: 'var(--font-instrument-serif)' }}
+          >
             From kickoff to results.
           </h2>
-          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {service.workflow.map((w) => (
-              <div key={w.phase} className="border-t border-divider pt-8">
-                <p className="text-body-sm font-medium text-brass">
-                  {w.phase}
-                </p>
-                <h3 className="mt-2 text-h3">{w.title}</h3>
-                <p className="mt-3 text-body text-warm-gray">
-                  {w.description}
-                </p>
-              </div>
-            ))}
+
+          {/* Horizontal rule connecting the 4 phases on desktop */}
+          <div className="mt-16 relative">
+            <div className="hidden lg:block absolute top-10 left-0 right-0 h-px bg-brass/30" />
+
+            <div className="grid gap-12 lg:gap-0 sm:grid-cols-2 lg:grid-cols-4">
+              {service.workflow.map((w, i) => (
+                <div key={w.phase} className="relative lg:pr-8">
+                  {/* Node marker on the rule */}
+                  <div className="hidden lg:flex absolute top-[2rem] left-0 w-5 h-5 items-center justify-center">
+                    <div className="w-3 h-3 rounded-full bg-brass ring-4 ring-forge-black" />
+                  </div>
+
+                  <div className="lg:pl-10">
+                    <p
+                      className="text-brass-light"
+                      style={{
+                        fontFamily: 'var(--font-jetbrains-mono, monospace)',
+                        fontSize: '0.75rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.1em',
+                      }}
+                    >
+                      {String(i + 1).padStart(2, '0')} · {w.phase}
+                    </p>
+                    <h3
+                      className="mt-4 text-bone"
+                      style={{
+                        fontFamily: 'var(--font-instrument-serif)',
+                        fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
+                        lineHeight: 1.1,
+                        letterSpacing: '-0.02em',
+                        fontWeight: 400,
+                      }}
+                    >
+                      {w.title}
+                    </h3>
+                    <p className="mt-3 text-body-sm text-stone leading-relaxed">
+                      {w.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Ideal Client ── */}
-      <section className="border-t border-divider bg-parchment py-24 lg:py-40">
-        <div className="mx-auto max-w-3xl px-6 lg:px-10">
-          <p className="overline">Ideal Client</p>
-          <h2 className="mt-6 text-display">Is this right for you?</h2>
-          <p className="mt-6 text-body-lg text-warm-gray">
-            {service.idealClient}
-          </p>
-          <div className="mt-10">
-            <Button size="lg" asChild>
-              <Link href="/contact">
-                Schedule a Discussion <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+      {/* ── Ideal Client + final CTA ── */}
+      <section className="bg-parchment py-24 lg:py-40">
+        <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-20">
+            <div className="lg:col-span-5">
+              <p className="overline">Ideal Client</p>
+              <h2 className="mt-6 text-display">Is this right for you?</h2>
+            </div>
+            <div className="mt-10 lg:col-span-7 lg:mt-0">
+              <p className="text-body-lg text-warm-gray">
+                {service.idealClient}
+              </p>
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Button size="lg" asChild>
+                  <Link href="/contact">
+                    Schedule a Discussion <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="secondary" asChild>
+                  <Link href="/discover">Take the AI Assessment</Link>
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </section>

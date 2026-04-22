@@ -8,8 +8,19 @@ export interface Service {
   icon: ServiceIcon;
   idealClient: string;
   deliverables: string[];
-  outcomes: { metric: string; description: string }[];
+  /**
+   * Outcomes render as three lines in a 4-column grid:
+   *   value  (big, mono, brass)    e.g. "30%"
+   *   label  (semibold, anthracite) e.g. "Pipeline Increase"
+   *   description (body-sm, muted)   e.g. "Average increase in qualified pipeline within 90 days"
+   *
+   * Splitting value/label prevents the entire metric string from wrapping
+   * awkwardly inside one narrow grid cell at desktop widths.
+   */
+  outcomes: { value: string; label: string; description: string }[];
   workflow: { phase: string; title: string; description: string }[];
+  /** Atmospheric hero bg image (webp). Matches the pattern used on industry pages. */
+  heroBg: string;
 }
 
 export const services: Service[] = [
@@ -20,6 +31,7 @@ export const services: Service[] = [
     description:
       'We build AI-driven revenue engines that automate prospecting, surface intent signals, orchestrate personalized outreach, and give your team real-time pipeline analytics — so you close more, faster.',
     icon: 'LineChart',
+    heroBg: '/images/abstract-value-creation.webp',
     idealClient:
       'Mid-market and growth-stage B2B companies looking to scale sales without linearly scaling headcount.',
     deliverables: [
@@ -32,19 +44,23 @@ export const services: Service[] = [
     ],
     outcomes: [
       {
-        metric: '30% Pipeline Increase',
+        value: '30%',
+        label: 'Pipeline Increase',
         description: 'Average increase in qualified pipeline within 90 days',
       },
       {
-        metric: '3.5x Conversion Lift',
+        value: '3.5x',
+        label: 'Conversion Lift',
         description: 'Improvement in lead-to-opportunity conversion rates',
       },
       {
-        metric: '15 hrs/week Saved',
+        value: '15 hrs',
+        label: 'Per Rep / Week Saved',
         description: 'Time saved per rep on manual prospecting tasks',
       },
       {
-        metric: '60% Faster Response',
+        value: '60%',
+        label: 'Faster Response',
         description: 'Reduction in lead response time with AI routing',
       },
     ],
@@ -78,6 +94,7 @@ export const services: Service[] = [
     description:
       'We use process mining, operational diagnostics, and custom automation to find inefficiencies hiding in your workflows — then build solutions that eliminate them and deliver measurable cost savings.',
     icon: 'Cog',
+    heroBg: '/images/abstract-dataflow.webp',
     idealClient:
       'Operations-heavy companies spending too much on manual processes, data entry, or coordination overhead.',
     deliverables: [
@@ -90,16 +107,23 @@ export const services: Service[] = [
     ],
     outcomes: [
       {
-        metric: '$240K Savings',
+        value: '$240K',
+        label: 'Annual Savings',
         description: 'Average annual cost savings from process automation',
       },
-      { metric: '40% Time Reduction', description: 'Decrease in manual process completion time' },
       {
-        metric: '95% Error Reduction',
+        value: '40%',
+        label: 'Time Reduction',
+        description: 'Decrease in manual process completion time',
+      },
+      {
+        value: '95%',
+        label: 'Error Reduction',
         description: 'Improvement in accuracy for automated workflows',
       },
       {
-        metric: '2x Throughput',
+        value: '2x',
+        label: 'Throughput',
         description: 'Increase in processing capacity without additional headcount',
       },
     ],
@@ -133,6 +157,7 @@ export const services: Service[] = [
     description:
       'We partner with PE firms and their portfolio companies to identify and execute AI-driven value creation levers — from 90-day sprints to portfolio-wide AI playbooks that drive EBITDA improvement from due diligence through exit prep.',
     icon: 'Rocket',
+    heroBg: '/images/abstract-forge-progression.webp',
     idealClient:
       'PE firms and their portfolio companies looking to accelerate value creation with AI.',
     deliverables: [
@@ -145,18 +170,25 @@ export const services: Service[] = [
     ],
     outcomes: [
       {
-        metric: '10% EBITDA Lift',
+        value: '10%',
+        label: 'EBITDA Lift',
         description: 'Average EBITDA improvement across portfolio engagements',
       },
       {
-        metric: '90-Day ROI',
+        value: '90 days',
+        label: 'To First ROI',
         description: 'Time from engagement start to measurable value delivery',
       },
       {
-        metric: '3x Multiple Impact',
+        value: '3x',
+        label: 'Multiple Impact',
         description: 'Contribution to valuation improvement at exit',
       },
-      { metric: '5+ Use Cases', description: 'AI applications identified per portfolio company' },
+      {
+        value: '5+',
+        label: 'Use Cases Identified',
+        description: 'AI applications identified per portfolio company',
+      },
     ],
     workflow: [
       {
@@ -188,6 +220,7 @@ export const services: Service[] = [
     description:
       'We design and build custom AI agents that handle complex, multi-step workflows across sales, operations, and finance. Not chatbots — intelligent agents that take action, make decisions, and integrate with your existing systems.',
     icon: 'Bot',
+    heroBg: '/images/abstract-network.webp',
     idealClient:
       'Companies with complex, repetitive workflows that require judgment and cross-system coordination.',
     deliverables: [
@@ -199,13 +232,26 @@ export const services: Service[] = [
       'Documentation and team onboarding',
     ],
     outcomes: [
-      { metric: '80% Automation', description: 'Percentage of targeted workflow steps automated' },
       {
-        metric: '24/7 Operation',
+        value: '80%',
+        label: 'Automation',
+        description: 'Percentage of targeted workflow steps automated',
+      },
+      {
+        value: '24/7',
+        label: 'Operation',
         description: 'Agents work around the clock without fatigue or errors',
       },
-      { metric: '10x Speed', description: 'Improvement in workflow completion time vs. manual' },
-      { metric: '99% Accuracy', description: 'Decision accuracy with built-in quality checks' },
+      {
+        value: '10x',
+        label: 'Speed',
+        description: 'Improvement in workflow completion time vs. manual',
+      },
+      {
+        value: '99%',
+        label: 'Accuracy',
+        description: 'Decision accuracy with built-in quality checks',
+      },
     ],
     workflow: [
       {
