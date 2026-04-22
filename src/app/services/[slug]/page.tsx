@@ -1,5 +1,4 @@
 import { ArrowRight } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -38,15 +37,17 @@ export default async function ServiceDetailPage({
       {/* ── Hero — atmospheric bg + two-column with headline outcome ── */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <div className="absolute inset-0 pointer-events-none">
-          <Image
-            src={service.heroBg}
-            alt=""
-            fill
-            sizes="100vw"
-            quality={65}
-            className="object-cover opacity-[0.22]"
-            priority
-          />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={service.heroBg}
+            className="absolute inset-0 w-full h-full object-cover opacity-55"
+          >
+            <source src={`/videos/${slug}.mp4`} type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-gradient-to-t from-forge-black via-forge-black/40 to-forge-black/60" />
         </div>
 

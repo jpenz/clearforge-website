@@ -1,81 +1,34 @@
 'use client';
 
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { useRef } from 'react';
 import { Button } from '@/components/ui/button';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { ScrollVideo } from '@/components/ui/scroll-video';
 
 /**
- * V8 Editorial Hero — No cards. Typography IS the design.
+ * V8.17 Editorial Hero with scroll-driven video background.
  *
- * Large serif headline, asymmetric layout, ruled lines.
- * Content visible immediately. GSAP adds parallax only.
+ * The ScrollVideo pins the section for ~120% of viewport while the user
+ * scrolls, and the video's currentTime tracks their progress through
+ * that pin range. On mobile and with prefers-reduced-motion, the video
+ * auto-plays as a loop instead.
+ *
+ * Typography content sits as a z-indexed overlay on top of the video —
+ * headline stays visible throughout the scroll-scrub.
  */
 export function HeroScroll() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      if (typeof window === 'undefined' || window.innerWidth < 768) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const bg = bgRef.current;
-      const section = sectionRef.current;
-      if (!bg || !section) return;
-
-      gsap.to(bg, {
-        y: -80,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    },
-    { scope: sectionRef },
-  );
-
   return (
-    <section
-      ref={sectionRef}
-      className="dark-section relative min-h-screen flex items-end overflow-hidden"
+    <ScrollVideo
+      src="/videos/hero.mp4"
+      poster="/images/hero-bg.webp"
+      pinLength={120}
+      className="dark-section min-h-screen flex items-end"
+      videoClassName="opacity-60"
     >
-      {/* Background — Veo 3 ambient loop on desktop, static fallback on mobile */}
-      <div ref={bgRef} className="absolute inset-0 pointer-events-none will-change-transform">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster="/images/hero-bg.webp"
-          className="absolute inset-0 w-full h-full object-cover opacity-55 hidden md:block"
-        >
-          <source src="/videos/hero-ambient.mp4" type="video/mp4" />
-        </video>
-        <Image
-          src="/images/hero-bg.webp"
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover opacity-40 animate-ken-burns md:hidden"
-          priority
-          fetchPriority="high"
-        />
-        {/* Reduced gradient — keeps text legible without burying the video */}
-        <div className="absolute inset-0 bg-gradient-to-t from-forge-black via-forge-black/35 to-forge-black/45" />
-      </div>
+      {/* Gradient overlay — keeps headline legible without burying the video */}
+      <div className="absolute inset-0 bg-gradient-to-t from-forge-black via-forge-black/35 to-forge-black/25 pointer-events-none" />
 
+      {/* Content overlay */}
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-10 pb-16 sm:pb-20 lg:pb-28 pt-32 sm:pt-40">
         {/* Overline */}
         <p className="overline text-xs animate-fade-in">
@@ -146,6 +99,6 @@ export function HeroScroll() {
           ))}
         </div>
       </div>
-    </section>
+    </ScrollVideo>
   );
 }

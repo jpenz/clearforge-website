@@ -106,15 +106,17 @@ export default function ManufacturingPage() {
       {/* — Hero — atmospheric bg + two-column with headline stat — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <div className="absolute inset-0 pointer-events-none">
-          <Image
-            src="/images/abstract-assessment.webp"
-            alt=""
-            fill
-            sizes="100vw"
-            quality={65}
-            className="object-cover opacity-[0.22]"
-            priority
-          />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/images/abstract-assessment.webp"
+            className="absolute inset-0 w-full h-full object-cover opacity-55"
+          >
+            <source src="/videos/manufacturing.mp4" type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-gradient-to-t from-forge-black via-forge-black/40 to-forge-black/60" />
         </div>
         <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
