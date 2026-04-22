@@ -103,7 +103,7 @@ const results = [
 export default function FinancialServicesPage() {
   return (
     <>
-      {/* — Hero — */}
+      {/* — Hero — atmospheric bg + two-column with headline stat — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <div className="absolute inset-0 pointer-events-none">
           <Image
@@ -112,42 +112,75 @@ export default function FinancialServicesPage() {
             fill
             sizes="100vw"
             quality={65}
-            className="object-cover opacity-[0.18]"
+            className="object-cover opacity-[0.22]"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-forge-black via-forge-black/40 to-forge-black/60" />
         </div>
         <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
-          <FadeIn>
-            <p className="overline">Financial Services</p>
-            <h1
-              className="mt-6 text-display max-w-4xl text-bone"
-              style={{ fontFamily: 'var(--font-instrument-serif)' }}
-            >
-              AI for Financial Services
-            </h1>
-          </FadeIn>
-          <FadeIn delay={0.15}>
-            <p className="mt-6 max-w-2xl text-body-lg text-stone">
-              Financial institutions face a paradox: the industry generates more
-              structured data than almost any other sector, yet most AI
-              initiatives stall in pilot because they cannot meet the
-              explainability, auditability, and governance requirements that
-              regulators demand.
-            </p>
-            <p className="mt-4 max-w-2xl text-body text-stone">
-              ClearForge builds production AI for regulated environments --
-              systems that accelerate risk assessment, automate compliance
-              workflows, and surface customer insights while maintaining the
-              audit trails and governance frameworks your regulators expect.
-            </p>
-            <div className="mt-10">
-              <Button size="lg" asChild>
-                <Link href="/discover">
-                  Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+          <div className="lg:grid lg:grid-cols-12 lg:gap-16 lg:items-end">
+            <div className="lg:col-span-7">
+              <FadeIn>
+                <p className="overline">Financial Services</p>
+                <h1
+                  className="mt-6 text-display max-w-3xl text-bone"
+                  style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                >
+                  AI for Financial Services
+                </h1>
+              </FadeIn>
+              <FadeIn delay={0.15}>
+                <p className="mt-6 max-w-xl text-body-lg text-stone">
+                  Financial institutions face a paradox: the industry generates
+                  more structured data than almost any other sector, yet most AI
+                  initiatives stall in pilot because they cannot meet the
+                  explainability, auditability, and governance requirements that
+                  regulators demand.
+                </p>
+                <p className="mt-4 max-w-xl text-body text-stone">
+                  ClearForge builds production AI for regulated environments —
+                  systems that accelerate risk assessment, automate compliance
+                  workflows, and surface customer insights while maintaining the
+                  audit trails and governance frameworks your regulators expect.
+                </p>
+                <div className="mt-10">
+                  <Button size="lg" asChild>
+                    <Link href="/discover">
+                      Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </FadeIn>
             </div>
-          </FadeIn>
+
+            {/* Right: headline result pull-quote */}
+            <div className="mt-16 lg:col-span-5 lg:mt-0">
+              <FadeIn delay={0.25}>
+                <div className="border-l border-brass/40 pl-8 lg:pl-10">
+                  <p className="overline text-brass-light text-[10px]">
+                    Client Outcome
+                  </p>
+                  <p
+                    className="mt-4 text-brass-light"
+                    style={{
+                      fontFamily: 'var(--font-instrument-serif)',
+                      fontSize: 'clamp(4rem, 8vw, 7rem)',
+                      lineHeight: 0.92,
+                      letterSpacing: '-0.04em',
+                      fontWeight: 400,
+                    }}
+                  >
+                    {results[0].metric}
+                  </p>
+                  <p className="mt-4 text-h3 text-bone">{results[0].label}</p>
+                  <p className="mt-3 text-body-sm text-stone max-w-xs">
+                    Delivered for a regional bank modernizing credit risk models
+                    across five lines of business.
+                  </p>
+                </div>
+              </FadeIn>
+            </div>
+          </div>
         </div>
       </section>
 

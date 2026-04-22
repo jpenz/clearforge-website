@@ -103,7 +103,7 @@ const results = [
 export default function SaaSPage() {
   return (
     <>
-      {/* — Hero — */}
+      {/* — Hero — atmospheric bg + two-column with headline stat — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <div className="absolute inset-0 pointer-events-none">
           <Image
@@ -112,41 +112,73 @@ export default function SaaSPage() {
             fill
             sizes="100vw"
             quality={65}
-            className="object-cover opacity-[0.18]"
+            className="object-cover opacity-[0.22]"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-forge-black via-forge-black/40 to-forge-black/60" />
         </div>
         <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
-          <FadeIn>
-            <p className="overline">SaaS &amp; Technology</p>
-            <h1
-              className="mt-6 text-display max-w-4xl text-bone"
-              style={{ fontFamily: 'var(--font-instrument-serif)' }}
-            >
-              AI for SaaS &amp; Technology Companies
-            </h1>
-          </FadeIn>
-          <FadeIn delay={0.15}>
-            <p className="mt-6 max-w-2xl text-body-lg text-stone">
-              SaaS companies are uniquely positioned to benefit from AI — they
-              already have the data infrastructure, the product telemetry, and the
-              digital-first customer relationships. What most lack is the
-              intelligence layer that turns this data into decisions across sales,
-              product, and customer success.
-            </p>
-            <p className="mt-4 max-w-2xl text-body text-stone">
-              ClearForge helps technology companies deploy AI that accelerates
-              pipeline, reduces churn, optimizes product-led growth, and scales
-              support — without adding headcount proportional to growth.
-            </p>
-            <div className="mt-10">
-              <Button size="lg" asChild>
-                <Link href="/discover">
-                  Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+          <div className="lg:grid lg:grid-cols-12 lg:gap-16 lg:items-end">
+            <div className="lg:col-span-7">
+              <FadeIn>
+                <p className="overline">SaaS &amp; Technology</p>
+                <h1
+                  className="mt-6 text-display max-w-3xl text-bone"
+                  style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                >
+                  AI for SaaS &amp; Technology Companies
+                </h1>
+              </FadeIn>
+              <FadeIn delay={0.15}>
+                <p className="mt-6 max-w-xl text-body-lg text-stone">
+                  SaaS companies are uniquely positioned to benefit from AI —
+                  they already have the data infrastructure, the product
+                  telemetry, and the digital-first customer relationships. What
+                  most lack is the intelligence layer that turns this data into
+                  decisions across sales, product, and customer success.
+                </p>
+                <p className="mt-4 max-w-xl text-body text-stone">
+                  ClearForge deploys AI that accelerates pipeline, reduces
+                  churn, optimizes product-led growth, and scales support —
+                  without adding headcount proportional to growth.
+                </p>
+                <div className="mt-10">
+                  <Button size="lg" asChild>
+                    <Link href="/discover">
+                      Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </FadeIn>
             </div>
-          </FadeIn>
+
+            <div className="mt-16 lg:col-span-5 lg:mt-0">
+              <FadeIn delay={0.25}>
+                <div className="border-l border-brass/40 pl-8 lg:pl-10">
+                  <p className="overline text-brass-light text-[10px]">
+                    Client Outcome
+                  </p>
+                  <p
+                    className="mt-4 text-brass-light"
+                    style={{
+                      fontFamily: 'var(--font-instrument-serif)',
+                      fontSize: 'clamp(4rem, 8vw, 7rem)',
+                      lineHeight: 0.92,
+                      letterSpacing: '-0.04em',
+                      fontWeight: 400,
+                    }}
+                  >
+                    {results[0].metric}
+                  </p>
+                  <p className="mt-4 text-h3 text-bone">{results[0].label}</p>
+                  <p className="mt-3 text-body-sm text-stone max-w-xs">
+                    Built for a $40M ARR SaaS platform scaling from Series B to
+                    Series C.
+                  </p>
+                </div>
+              </FadeIn>
+            </div>
+          </div>
         </div>
       </section>
 
