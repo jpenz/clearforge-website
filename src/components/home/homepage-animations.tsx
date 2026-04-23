@@ -59,10 +59,12 @@ export function SectionReveal({ children, animation, className }: SectionRevealP
       clipPath: 'inset(0% 0% 0% 0%)',
       duration: 0.8,
       ease: 'power3.out',
+      immediateRender: false,
       scrollTrigger: {
         trigger: el,
         start: 'top 85%',
         toggleActions: 'play none none none',
+        once: true,
       },
     });
   }, { scope: ref });
@@ -89,10 +91,12 @@ export function StaggerReveal({ children, className }: { children: ReactNode; cl
         duration: 0.6,
         stagger: 0.12,
         ease: 'power3.out',
+        immediateRender: false,
         scrollTrigger: {
           trigger: el,
           start: 'top 85%',
           toggleActions: 'play none none none',
+          once: true,
         },
       }
     );
@@ -126,11 +130,12 @@ export function PinnedSection({ children, className }: { children: ReactNode; cl
       },
     });
 
-    // Stagger reveal each pin-item
+    // Stagger reveal each pin-item.
+    // immediateRender: false keeps items visible until timeline reaches them.
     items.forEach((item, i) => {
       tl.fromTo(item,
         { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 0.3, ease: 'power3.out' },
+        { opacity: 1, y: 0, duration: 0.3, ease: 'power3.out', immediateRender: false },
         i * 0.2
       );
     });

@@ -1,4 +1,5 @@
 import { ArrowRight, Check } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Stagger, StaggerItem } from '@/components/ui/animate';
@@ -58,9 +59,18 @@ const faqs = [
 export default function PricingPage() {
   return (
     <>
-      {/* — Hero — */}
+      {/* — Hero with atmospheric bg — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
-        <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
+        <Image
+          src="/images/abstract-value-creation.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          priority
+          className="object-cover opacity-[0.22] pointer-events-none"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-forge-black via-forge-black/80 to-forge-black/40 pointer-events-none" />
+        <div className="relative mx-auto max-w-[1200px] px-6 lg:px-10">
           <p className="overline">Pricing</p>
           <h1
             className="mt-6 text-display max-w-3xl text-bone"

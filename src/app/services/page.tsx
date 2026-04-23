@@ -1,4 +1,5 @@
 import { ArrowRight, Factory, Landmark, HeartPulse, Code2, Briefcase, Shield } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
@@ -54,9 +55,18 @@ const industries = [
 export default function ServicesPage() {
   return (
     <>
-      {/* — Hero — */}
+      {/* — Hero with atmospheric bg — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+        <Image
+          src="/images/abstract-forge-progression.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          priority
+          className="object-cover opacity-[0.22] pointer-events-none"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-forge-black via-forge-black/80 to-forge-black/40 pointer-events-none" />
+        <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
           <FadeIn>
             <p className="overline">How We Work</p>
             <h1

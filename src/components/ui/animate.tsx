@@ -68,10 +68,12 @@ export function FadeIn({
           duration,
           delay,
           ease: EASE,
+          immediateRender: false,
           scrollTrigger: {
             trigger: el,
             start: TRIGGER_START,
             toggleActions: 'play none none none',
+            once: true,
           },
         },
       );
@@ -129,10 +131,12 @@ export function Stagger({
           delay,
           stagger,
           ease: EASE,
+          immediateRender: false,
           scrollTrigger: {
             trigger: el,
             start: TRIGGER_START,
             toggleActions: 'play none none none',
+            once: true,
           },
         },
       );

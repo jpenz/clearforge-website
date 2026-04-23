@@ -41,6 +41,7 @@
 
 html {
   text-rendering: optimizeLegibility;
+  overflow-x: hidden; /* Prevent horizontal scroll on mobile from hero marquee / wide headings */
 }
 
 body {
@@ -51,6 +52,7 @@ body {
   background: var(--color-parchment);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 /* ── Heading defaults ── */

@@ -91,41 +91,44 @@ export function ForgeMethodDiagram() {
       const content = el.querySelectorAll('.fm-content');
       const items = el.querySelectorAll('.fm-deliverable');
 
+      // immediateRender: false so each step is only applied when the timeline
+      // reaches it. Prevents stuck opacity:0 if ScrollTrigger never fires.
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: el,
-          start: 'top 75%',
+          start: 'top 85%',
           toggleActions: 'play none none none',
+          once: true,
         },
       });
 
       tl.fromTo(
         rules,
         { scaleX: 0, transformOrigin: 'left center' },
-        { scaleX: 1, duration: 1, ease: 'power3.out' },
+        { scaleX: 1, duration: 1, ease: 'power3.out', immediateRender: false },
       )
         .fromTo(
           dividers,
           { scaleY: 0, transformOrigin: 'top center' },
-          { scaleY: 1, duration: 0.8, ease: 'power3.out', stagger: 0.08 },
+          { scaleY: 1, duration: 0.8, ease: 'power3.out', stagger: 0.08, immediateRender: false },
           '-=0.7',
         )
         .fromTo(
           nums,
           { opacity: 0, y: 40 },
-          { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.12 },
+          { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.12, immediateRender: false },
           '-=0.5',
         )
         .fromTo(
           content,
           { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.08 },
+          { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.08, immediateRender: false },
           '-=0.4',
         )
         .fromTo(
           items,
           { opacity: 0, x: -10 },
-          { opacity: 1, x: 0, duration: 0.4, ease: 'power3.out', stagger: 0.04 },
+          { opacity: 1, x: 0, duration: 0.4, ease: 'power3.out', stagger: 0.04, immediateRender: false },
           '-=0.3',
         );
     },

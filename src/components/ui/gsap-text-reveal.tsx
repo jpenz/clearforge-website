@@ -47,18 +47,25 @@ export function GsapTextReveal({
       const isMobile = window.innerWidth < 768;
 
       if (isMobile) {
-        // Simple fade-in on mobile — no word splitting
-        gsap.from(container, {
-          opacity: 0,
-          y: 24,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: container,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
+        // Simple fade-in on mobile — no word splitting.
+        // immediateRender: false keeps content visible if ScrollTrigger never fires.
+        gsap.fromTo(
+          container,
+          { opacity: 0, y: 24 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: container,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+              once: true,
+            },
           },
-        });
+        );
         return;
       }
 
@@ -66,34 +73,45 @@ export function GsapTextReveal({
       if (!words.length) return;
 
       if (scrub) {
-        // Apple-style: each word fades from 0.15 → 1.0 as user scrolls
-        gsap.set(words, { opacity: 0.15 });
-        gsap.to(words, {
-          opacity: 1,
-          stagger: 0.1,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: container,
-            start: 'top 75%',
-            end: 'bottom 40%',
-            scrub: 0.5,
+        // Apple-style: each word fades from 0.15 → 1.0 as user scrolls.
+        // fromTo (not set+to) so initial 0.15 is only applied when ScrollTrigger fires.
+        gsap.fromTo(
+          words,
+          { opacity: 0.15 },
+          {
+            opacity: 1,
+            stagger: 0.1,
+            ease: 'none',
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: container,
+              start: 'top 75%',
+              end: 'bottom 40%',
+              scrub: 0.5,
+            },
           },
-        });
+        );
       } else {
-        // Translate-up reveal with stagger, fires once
-        gsap.set(words, { y: '100%', opacity: 0 });
-        gsap.to(words, {
-          y: '0%',
-          opacity: 1,
-          duration: 0.8,
-          ease: 'power3.out',
-          stagger,
-          scrollTrigger: {
-            trigger: container,
-            start: 'top 80%',
-            toggleActions: 'play none none none',
+        // Translate-up reveal with stagger, fires once.
+        // fromTo with immediateRender: false so words stay visible until trigger fires.
+        gsap.fromTo(
+          words,
+          { y: '100%', opacity: 0 },
+          {
+            y: '0%',
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power3.out',
+            stagger,
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: container,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+              once: true,
+            },
           },
-        });
+        );
       }
     },
     { scope: containerRef, dependencies: [text, scrub, stagger] },

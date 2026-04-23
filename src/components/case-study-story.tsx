@@ -57,24 +57,26 @@ export function CaseStudyStory({
 
   useGSAP(() => {
     if (typeof window === 'undefined' || window.innerWidth < 768) return;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // ACT 1: Pin and reveal text lines
-    const act1 = act1Ref.current;
+    // ACT 1: Soft stagger reveal on page load (no pinning — pinning felt wrong
+    // for B2B consulting, same reason we reverted the home hero in V8.18).
+    // immediateRender: false so content stays visible if animation never fires.
     const act1Text = act1TextRef.current;
-    if (act1 && act1Text) {
+    if (act1Text && !prefersReduced) {
       const lines = act1Text.querySelectorAll('.reveal-line');
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: act1,
-          start: 'top top',
-          end: '+=150%',
-          pin: true,
-          scrub: 0.5,
+      gsap.fromTo(
+        lines,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power3.out',
+          stagger: 0.08,
+          immediateRender: false,
         },
-      });
-      lines.forEach((line, i) => {
-        tl.fromTo(line, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3 }, i * 0.15);
-      });
+      );
     }
 
     // ACT 2: Horizontal scroll timeline
@@ -107,16 +109,19 @@ export function CaseStudyStory({
       });
     }
 
-    // ACT 4: Quote word-by-word reveal
+    // ACT 4: Quote word-by-word reveal.
+    // immediateRender: false keeps words visible until ScrollTrigger fires.
     const act4 = act4Ref.current;
     const quoteEl = quoteWordsRef.current;
-    if (act4 && quoteEl) {
+    if (act4 && quoteEl && !prefersReduced) {
       const words = quoteEl.querySelectorAll('.quote-word');
-      gsap.fromTo(words,
+      gsap.fromTo(
+        words,
         { opacity: 0.15 },
         {
           opacity: 1,
           stagger: 0.05,
+          immediateRender: false,
           scrollTrigger: {
             trigger: act4,
             start: 'top 60%',
