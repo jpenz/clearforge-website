@@ -63,6 +63,18 @@ const nextConfig: NextConfig = {
     ];
   },
 
+  // Permanent redirects preserve SEO on renamed content.
+  async redirects() {
+    return [
+      {
+        // V8.19 anonymized the case-study slug
+        source: "/case-studies/metro-detroit-services-company",
+        destination: "/case-studies/home-services-turnaround",
+        permanent: true,
+      },
+    ];
+  },
+
   // Harden: prevent exposing Next.js version in response headers
   poweredByHeader: false,
 

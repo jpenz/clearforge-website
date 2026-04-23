@@ -53,7 +53,7 @@ export function HeroScroll() {
         </p>
 
         <h1
-          className="mt-8 max-w-[900px] text-bone animate-fade-in-up delay-1"
+          className="mt-8 max-w-[1050px] text-bone animate-fade-in-up delay-1"
           style={{
             fontFamily: 'var(--font-instrument-serif)',
             fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
@@ -62,10 +62,10 @@ export function HeroScroll() {
             fontWeight: 400,
           }}
         >
-          Stuck in AI pilot purgatory?
+          AI strategy that ends in a working system.
         </h1>
         <p
-          className="mt-2 max-w-[900px] text-brass-light animate-fade-in-up delay-2"
+          className="mt-2 max-w-[1050px] text-brass-light animate-fade-in-up delay-2"
           style={{
             fontFamily: 'var(--font-instrument-serif)',
             fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
@@ -75,12 +75,14 @@ export function HeroScroll() {
             fontStyle: 'italic',
           }}
         >
-          We build production systems in 10 weeks.
+          Not a deck on a shelf.
         </p>
 
-        <p className="mt-8 text-body-lg text-stone max-w-lg animate-fade-in-up delay-3">
-          No enterprise budgets. No strategy decks collecting dust.
-          Your AI system, live in your business, in 10 weeks flat.
+        <p className="mt-8 text-body-lg text-stone max-w-xl animate-fade-in-up delay-3">
+          We diagnose, build, and deploy AI systems for mid-market
+          operators — in ten weeks, measured against revenue, cost, or
+          throughput. The same senior team stays from first brief to
+          production.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-6 animate-fade-in-up delay-4">
@@ -91,26 +93,12 @@ export function HeroScroll() {
             href="#results"
             className="inline-flex items-center gap-2 text-sm text-stone hover:text-bone transition-colors link-underline"
           >
-            See our work <ArrowRight className="h-4 w-4" />
+            See the work <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
         <p className="mt-3 text-xs text-stone/50 animate-fade-in delay-5">
-          Free · 5 minutes · No sales call required
+          Five minutes. No sales call. AI-powered readiness report.
         </p>
-
-        <div className="mt-14 pt-8 border-t border-bone/10 flex flex-wrap gap-10 animate-fade-in-up delay-5">
-          {[
-            { value: '89%', label: 'Production rate' },
-            { value: '3.2x', label: 'Avg ROI' },
-            { value: '<90d', label: 'To first ROI' },
-            { value: '47', label: 'Engagements' },
-          ].map((m) => (
-            <div key={m.label}>
-              <span className="metric text-xl text-brass-light">{m.value}</span>
-              <p className="text-[11px] text-stone/60 mt-0.5">{m.label}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

@@ -13,7 +13,7 @@ import { createMetadata } from '@/lib/metadata';
 export const metadata = createMetadata({
   title: 'ClearForge — Production AI in 10 Weeks. Not a Strategy Deck.',
   description:
-    'We build production AI systems for mid-market and growth-stage companies. From pilot purgatory to deployed systems in 10 weeks. No enterprise budgets required.',
+    'ClearForge builds production AI systems for mid-market and growth-stage operators. One senior team diagnoses, builds, and deploys — in ten weeks, measured against revenue, cost, or throughput.',
   path: '',
 });
 
@@ -166,10 +166,10 @@ export default function Home() {
 
           <div className="mt-16 lg:grid lg:grid-cols-2 lg:gap-x-20">
             {[
-              { situation: 'Stuck in Pilot Purgatory', problem: "You've invested in AI experiments but nothing reaches production.", metric: '89% of our projects ship', link: '/services/custom-ai-agents' },
-              { situation: 'Revenue Growth Has Stalled', problem: "Sales team working harder but pipeline isn't growing proportionally.", metric: '30% avg pipeline increase', link: '/services/ai-revenue-operations' },
-              { situation: 'Post-Acquisition Integration', problem: 'PE firm needs AI-driven value creation across portfolio.', metric: '10% avg EBITDA improvement', link: '/services/pe-value-creation' },
-              { situation: 'Manual Processes Bleeding Cost', problem: 'Your team spends hours on work that should take minutes.', metric: '$240K avg annual savings', link: '/services/performance-improvement' },
+              { situation: 'AI Pilots That Never Ship', problem: 'You have invested in AI experiments but nothing reaches production.', metric: '89% of our projects ship', link: '/services/custom-ai-agents' },
+              { situation: 'Revenue Growth Has Stalled', problem: 'Sales teams work harder while pipeline stays flat. The commercial model has not evolved with the market.', metric: '1,181 qualified opps surfaced', link: '/services/ai-revenue-operations' },
+              { situation: 'Portfolio Value Creation', problem: 'PE operating teams need repeatable AI plays tied to EBITDA — not innovation theater.', metric: 'Portfolio playbook in 90 days', link: '/services/pe-value-creation' },
+              { situation: 'Manual Work Bleeding Margin', problem: 'Skilled teams spend hours on work that should take minutes. The cost compounds monthly.', metric: '$240K avg annual savings', link: '/services/performance-improvement' },
             ].map((item) => (
               <Link
                 key={item.situation}

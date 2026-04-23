@@ -1,6 +1,7 @@
 'use client';
 
-import { ArrowRight, Phone, Mail, Clock } from 'lucide-react';
+import { ArrowRight, MapPin, Mail, Clock } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -82,70 +83,93 @@ export default function ContactPage() {
   }
 
   return (
-    <section className="bg-parchment py-32 lg:py-48">
-      <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-20">
-          {/* Left — Info */}
-          <div className="lg:col-span-5">
-            <p className="overline">Get in Touch</p>
-            <h1 className="mt-6 text-display">
-              Schedule a Confidential Discussion
-            </h1>
-            <p className="mt-6 text-body-lg text-warm-gray">
-              No pitch decks. No pressure. A straightforward conversation about
-              where AI can drive measurable results for your company.
-            </p>
+    <>
+      {/* — Hero with atmospheric bg — */}
+      <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
+        <Image
+          src="/images/abstract-network.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          priority
+          className="object-cover opacity-[0.22] pointer-events-none"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-forge-black via-forge-black/80 to-forge-black/40 pointer-events-none" />
+        <div className="relative mx-auto max-w-[1200px] px-6 lg:px-10">
+          <p className="overline">Get in Touch</p>
+          <h1 className="mt-6 text-display max-w-3xl text-bone">
+            Schedule a Confidential Discussion
+          </h1>
+          <p className="mt-6 max-w-xl text-body-lg text-stone">
+            No pitch decks. No pressure. A straightforward conversation about
+            where AI can drive measurable results for your company.
+          </p>
+        </div>
+      </section>
 
-            <div className="mt-12 space-y-8">
-              <div className="flex items-start gap-4 border-t border-divider pt-6">
-                <Mail className="mt-0.5 h-5 w-5 text-brass shrink-0" />
-                <div>
-                  <h3 className="text-h4">Email</h3>
-                  <a
-                    href="mailto:james@clearforge.ai"
-                    className="mt-1 block text-body text-brass hover:text-brass-hover transition-colors"
-                  >
-                    james@clearforge.ai
-                  </a>
+      <section className="bg-parchment py-24 lg:py-40">
+        <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-20">
+            {/* Left — Info */}
+            <div className="lg:col-span-5">
+              <p className="overline">How We Engage</p>
+              <h2 className="mt-6 text-display">
+                Direct access. Senior team. One business-day response.
+              </h2>
+
+              <div className="mt-12 space-y-8">
+                <div className="flex items-start gap-4 border-t border-divider pt-6">
+                  <Mail className="mt-0.5 h-5 w-5 text-brass shrink-0" />
+                  <div>
+                    <h3 className="text-h4">Direct Email</h3>
+                    <a
+                      href="mailto:james@clearforge.ai"
+                      className="mt-1 block text-body text-brass hover:text-brass-hover transition-colors"
+                    >
+                      james@clearforge.ai
+                    </a>
+                    <p className="mt-1 text-body-sm text-warm-gray">
+                      Replies from the founder, not a gatekeeper.
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-start gap-4 border-t border-divider pt-6">
-                <Phone className="mt-0.5 h-5 w-5 text-brass shrink-0" />
-                <div>
-                  <h3 className="text-h4">Phone Ready</h3>
-                  <p className="mt-1 text-body text-warm-gray">
-                    Executives want to know they can reach you. We pick up the
-                    phone.
-                  </p>
+                <div className="flex items-start gap-4 border-t border-divider pt-6">
+                  <MapPin className="mt-0.5 h-5 w-5 text-brass shrink-0" />
+                  <div>
+                    <h3 className="text-h4">Based in Southeast Michigan</h3>
+                    <p className="mt-1 text-body text-warm-gray">
+                      Serving clients nationally. On-site engagements available
+                      for Forge Sprint and Forge Scale relationships.
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-start gap-4 border-t border-divider pt-6">
-                <Clock className="mt-0.5 h-5 w-5 text-brass shrink-0" />
-                <div>
-                  <h3 className="text-h4">What to Expect</h3>
-                  <ol className="mt-3 space-y-3">
-                    {expectations.map((item, i) => (
-                      <li
-                        key={i}
-                        className="flex items-start gap-3 text-body-sm text-warm-gray"
-                      >
-                        <span className="metric text-sm text-brass shrink-0">
-                          {i + 1}.
-                        </span>
-                        {item}
-                      </li>
-                    ))}
-                  </ol>
+                <div className="flex items-start gap-4 border-t border-divider pt-6">
+                  <Clock className="mt-0.5 h-5 w-5 text-brass shrink-0" />
+                  <div>
+                    <h3 className="text-h4">What to Expect</h3>
+                    <ol className="mt-3 space-y-3">
+                      {expectations.map((item, i) => (
+                        <li
+                          key={i}
+                          className="flex items-start gap-3 text-body-sm text-warm-gray"
+                        >
+                          <span className="metric text-sm text-brass shrink-0">
+                            {i + 1}.
+                          </span>
+                          {item}
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Right — Form */}
-          <div className="mt-16 lg:col-span-7 lg:mt-0">
-            <form onSubmit={handleSubmit} className="space-y-8">
+            {/* Right — Form */}
+            <div className="mt-16 lg:col-span-7 lg:mt-0">
+              <form onSubmit={handleSubmit} className="space-y-8">
               <div>
                 <label
                   htmlFor="name"
@@ -244,13 +268,14 @@ export default function ContactPage() {
                 />
               </div>
 
-              <Button type="submit" size="lg">
-                Send My Request <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </form>
+                <Button type="submit" size="lg">
+                  Send My Request <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

@@ -38,7 +38,7 @@ export const deepIndustries: Industry[] = [
       'Planning assistant workflows for sourcing and inventory decisions',
     ],
     caseStudySlug: 'industrial-manufacturer',
-    caseStudyTitle: 'Fortune 1000 Industrial Manufacturer',
+    caseStudyTitle: '$4B Industrial Conglomerate Deploys AI Sales Intelligence',
     relatedInsights: ['widening-ai-value-gap', 'legacy-systems-ai-bridge'],
   },
   {
@@ -63,8 +63,8 @@ export const deepIndustries: Industry[] = [
       'Automated project status and risk reporting',
       'Client onboarding and service handoff orchestration',
     ],
-    caseStudySlug: 'metro-detroit-services-company',
-    caseStudyTitle: 'Metro Detroit Services Company',
+    caseStudySlug: 'home-services-turnaround',
+    caseStudyTitle: 'Home & Commercial Services Turnaround',
     relatedInsights: ['ai-agents-new-workforce', 'hybrid-workforce-playbook'],
   },
   {
@@ -90,7 +90,7 @@ export const deepIndustries: Industry[] = [
       'Portfolio analytics automation and insight generation',
     ],
     caseStudySlug: 'industrial-manufacturer',
-    caseStudyTitle: 'Fortune 1000 Industrial Manufacturer',
+    caseStudyTitle: '$4B Industrial Conglomerate Deploys AI Sales Intelligence',
     relatedInsights: ['why-ai-pilots-fail-5-things-work', 'widening-ai-value-gap'],
   },
   {

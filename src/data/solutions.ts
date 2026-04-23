@@ -180,8 +180,8 @@ export const solutions: Solution[] = [
         'Quarterly scale plan',
       ],
     },
-    relatedCaseStudySlug: 'metro-detroit-services-company',
-    relatedCaseStudyTitle: 'Metro Detroit Services Company',
+    relatedCaseStudySlug: 'home-services-turnaround',
+    relatedCaseStudyTitle: 'Home & Commercial Services Turnaround',
     faqs: [
       {
         question: 'Do you replace our internal team?',
@@ -285,8 +285,8 @@ export const solutions: Solution[] = [
         'Monthly optimization plan',
       ],
     },
-    relatedCaseStudySlug: 'metro-detroit-services-company',
-    relatedCaseStudyTitle: 'Metro Detroit Services Company',
+    relatedCaseStudySlug: 'home-services-turnaround',
+    relatedCaseStudyTitle: 'Home & Commercial Services Turnaround',
     faqs: [
       {
         question: 'Is this only for large teams?',

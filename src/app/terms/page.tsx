@@ -16,7 +16,7 @@ export default function TermsPage() {
           <p className="overline">Legal</p>
           <h1 className="mt-6 text-display text-bone">Terms of Service</h1>
           <p className="mt-6 text-body-lg text-stone">
-            Last updated: March 2026
+            Last updated: April 2026
           </p>
         </div>
       </section>

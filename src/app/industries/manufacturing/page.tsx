@@ -94,10 +94,10 @@ const forgeSteps = [
 ];
 
 const results = [
-  { metric: '30%', label: 'Reduction in operational costs' },
-  { metric: '1,181', label: 'Qualified opportunities identified' },
-  { metric: '$4B', label: 'Client conglomerate revenue' },
-  { metric: '6 mo', label: 'Time to measurable impact' },
+  { metric: '1,181', label: 'Qualified opportunities identified in 6 months' },
+  { metric: '99.8%', label: "Match rate to client's actual product lines" },
+  { metric: '$20B+', label: 'Combined investment value in top 10 opportunities' },
+  { metric: '631+', label: 'AI-generated sales playbooks delivered' },
 ];
 
 export default function ManufacturingPage() {
@@ -174,8 +174,8 @@ export default function ManufacturingPage() {
                   </p>
                   <p className="mt-4 text-h3 text-bone">{results[0].label}</p>
                   <p className="mt-3 text-body-sm text-stone max-w-xs">
-                    Delivered for a $4B industrial conglomerate across six
-                    divisions in six months.
+                    Delivered for a $4B industrial conglomerate deploying AI
+                    across three business divisions in six months.
                   </p>
                 </div>
               </FadeIn>
@@ -290,10 +290,12 @@ export default function ManufacturingPage() {
             What ClearForge delivered for a $4B industrial conglomerate
           </h2>
           <p className="mt-6 max-w-2xl text-body-lg text-warm-gray">
-            A Fortune 500 industrial manufacturer engaged ClearForge to
-            unify fragmented sales operations across six divisions. Manual
-            quoting, siloed CRM data, and zero cross-sell visibility were
-            leaving revenue on the table.
+            A $4B industrial conglomerate with 16 divisions and 70+ facilities
+            engaged ClearForge to unify fragmented sales operations across
+            three pilot business units. Manual prospecting, siloed territory
+            data, and zero cross-sell visibility were leaving revenue on the
+            table. ClearForge built an AI intelligence platform that
+            surfaced 1,181 qualified opportunities in six months.
           </p>
 
           <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">

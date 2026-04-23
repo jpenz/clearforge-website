@@ -16,9 +16,11 @@ const footerLinks = {
     { href: '/contact', label: 'Contact' },
   ],
   Industries: [
-    { href: '/case-studies/industrial-manufacturer', label: 'Industrial Manufacturing' },
-    { href: '/case-studies/metro-detroit-services-company', label: 'Home & Commercial Services' },
-    { href: '/case-studies/pe-portfolio-diagnostic-plan', label: 'Private Equity' },
+    { href: '/industries/manufacturing', label: 'Manufacturing & Industrial' },
+    { href: '/industries/financial-services', label: 'Financial Services' },
+    { href: '/industries/healthcare', label: 'Healthcare' },
+    { href: '/industries/saas', label: 'SaaS & Technology' },
+    { href: '/industries/private-equity', label: 'Private Equity' },
   ],
 };
 

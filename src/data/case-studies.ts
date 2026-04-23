@@ -21,15 +21,15 @@ export interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: 'metro-detroit-services-company',
-    title: 'Metro Detroit Services Company Rebuilds Pipeline from Zero',
+    slug: 'home-services-turnaround',
+    title: 'Home & Commercial Services Firm Rebuilds Commercial Pipeline from Zero',
     industry: 'Home & Commercial Services',
     service: 'AI Marketing Agent',
-    heroMetric: 'Growth Mode',
-    heroMetricLabel: 'From Decline to Repeatable Pipeline',
+    heroMetric: '0 → Recurring',
+    heroMetricLabel: 'From Customer Attrition to Repeatable Pipeline',
     featured: true,
     excerpt:
-      'A legacy services business with no formal marketing system moved from customer attrition and declining revenue to active growth with recurring commercial contracts.',
+      'A two-decade-old services business with no formal marketing motion moved from customer attrition and declining revenue to active growth with recurring commercial maintenance contracts — and became acquisition-ready in the process.',
     challenge:
       'The company had operated for more than two decades on referrals and reputation. It had no website, no search presence, no paid campaigns, and no structured outreach motion. As legacy customers churned, revenue steadily eroded and there was no predictable pipeline to replace it.',
     solution: [
