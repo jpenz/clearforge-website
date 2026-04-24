@@ -31,6 +31,45 @@ function PillarBar({ percentage, color }: { percentage: number; color: string })
   );
 }
 
+/** Branded report header bar */
+function ReportHeader() {
+  const [dateLabel, setDateLabel] = useState('');
+  useEffect(() => {
+    const d = new Date();
+    setDateLabel(d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }));
+  }, []);
+  return (
+    <div className="w-full bg-[#111111] border-b border-[#2a2a2a] py-3 px-4 sm:px-6 lg:px-10 flex items-center justify-between">
+      <div className="flex items-center gap-3">
+        <span className="text-[10px] tracking-[0.2em] uppercase font-semibold text-brass">
+          Clearforge
+        </span>
+        <span className="text-[#3a3a3a]">·</span>
+        <span className="text-[10px] tracking-[0.2em] uppercase font-medium text-stone">
+          Research
+        </span>
+      </div>
+      {dateLabel && (
+        <span className="text-[10px] tracking-[0.15em] uppercase text-stone/60">{dateLabel}</span>
+      )}
+    </div>
+  );
+}
+
+/** Branded report footer bar */
+function ReportFooter() {
+  return (
+    <div className="w-full bg-[#111111] border-t border-[#2a2a2a] py-3 px-4 sm:px-6 lg:px-10 flex items-center justify-between">
+      <span className="text-[10px] tracking-[0.15em] uppercase text-stone/60">
+        © Clearforge AI · Confidential
+      </span>
+      <span className="text-[10px] tracking-[0.15em] uppercase text-brass/70">
+        clearforge.ai
+      </span>
+    </div>
+  );
+}
+
 const ScoreRing = dynamic(
   () => import('@/components/scorecard/score-ring').then((m) => ({ default: m.ScoreRing })),
   { ssr: false }
@@ -121,6 +160,9 @@ export default function ScorecardResultsPage() {
 
   return (
     <>
+      {/* ── Clearforge Research branded header ── */}
+      <ReportHeader />
+
       <section className="dark-section pt-24 sm:pt-32 pb-16 sm:pb-20 lg:pt-40 lg:pb-28">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10 text-center">
           {submitted && (
@@ -128,7 +170,12 @@ export default function ScorecardResultsPage() {
               <CheckCircle className="h-4 w-4" /> Results sent to {email}
             </div>
           )}
-          <p className="overline">Your AI Maturity Score</p>
+          <p className="overline">Clearforge Research · AI Maturity Report</p>
+          {company && (
+            <p className="mt-3 text-sm tracking-wide text-stone/70">
+              Prepared exclusively for <span className="text-brass">{company}</span>
+            </p>
+          )}
           <div className="mt-8 flex justify-center">
             <ScoreRing score={result.compositeScore} size={180} strokeWidth={8} />
           </div>
@@ -139,7 +186,7 @@ export default function ScorecardResultsPage() {
 
       <section className="bg-parchment py-16 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10">
-          <p className="overline">Pillar Breakdown</p>
+          <p className="overline">Clearforge Research · Pillar Analysis</p>
           <h2 className="mt-6 text-display text-anthracite">How you scored.</h2>
           <div className="mt-10 space-y-4">
             {result.pillarScores.map((ps) => (
@@ -160,7 +207,7 @@ export default function ScorecardResultsPage() {
 
       <section className="dark-section py-16 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10">
-          <p className="overline">Roadmap</p>
+          <p className="overline">Clearforge Research · Recommended Roadmap</p>
           <h2 className="mt-6 text-display text-bone">How we&apos;d close the gap.</h2>
           <div className="mt-10 space-y-4">
             {result.roadmap.map((step, i) => (
@@ -184,6 +231,9 @@ export default function ScorecardResultsPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Clearforge Research branded footer ── */}
+      <ReportFooter />
     </>
   );
 }
