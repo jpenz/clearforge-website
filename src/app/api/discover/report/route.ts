@@ -12,17 +12,40 @@ import { NextResponse } from 'next/server';
  */
 export async function POST(request: Request) {
   try {
-    const { messages, intelligence, name, email, company } = await request.json();
+    const { messages, intelligence, valueChain, annotations, name, email, company } = await request.json();
 
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) {
       return NextResponse.json({ error: 'Report generation unavailable' }, { status: 500 });
     }
 
+    // Build value chain context if available
+    let valueChainContext = '';
+    if (valueChain && valueChain.functions) {
+      valueChainContext = `\n\n## Custom AI Value Chain Generated for ${valueChain.companyName}\n`;
+      valueChain.functions.forEach((fn: { function: string; activities: { name: string; aiImpact: string; impact: string }[] }) => {
+        valueChainContext += `\n### ${fn.function}\n${fn.activities.map((a) => `- ${a.name}: ${a.aiImpact} (${a.impact})`).join('\n')}`;
+      });
+
+      if (annotations) {
+        const must = Object.entries(annotations).filter(([_, a]) => (a as { priority?: string }).priority === 'must');
+        const curious = Object.entries(annotations).filter(([_, a]) => (a as { priority?: string }).priority === 'curious');
+        if (must.length || curious.length) {
+          valueChainContext += `\n\n## Client's Annotated Priorities\n`;
+          if (must.length) {
+            valueChainContext += `\n**Must-have:**\n${must.map(([k, a]) => `- ${k}${(a as { notes?: string }).notes ? ` — ${(a as { notes: string }).notes}` : ''}`).join('\n')}`;
+          }
+          if (curious.length) {
+            valueChainContext += `\n\n**Curious:**\n${curious.map(([k, a]) => `- ${k}${(a as { notes?: string }).notes ? ` — ${(a as { notes: string }).notes}` : ''}`).join('\n')}`;
+          }
+        }
+      }
+    }
+
     // Use Claude to synthesize conversation into a structured report
     const reportPrompt = `Based on this discovery conversation, generate a structured AI readiness report for ${company || 'the client'}.
 
-${intelligence ? `Company Research:\n${JSON.stringify(intelligence)}\n\n` : ''}
+${intelligence ? `Company Research:\n${JSON.stringify(intelligence)}\n\n` : ''}${valueChainContext}
 
 Conversation:
 ${messages.map((m: { role: string; content: string }) => `${m.role}: ${m.content}`).join('\n\n')}

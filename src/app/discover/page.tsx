@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, FileText, Globe, Loader2, Mail, Printer, Send, Sparkles, User, Building2, X } from 'lucide-react';
+import { ArrowRight, FileText, Globe, Loader2, Mail, Printer, Send, Sparkles, User, Building2, X, Star, MessageSquare } from 'lucide-react';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -18,6 +18,34 @@ interface CompanyIntelligence {
   useCases: string;
 }
 
+type ActivityType = 'agent' | 'automation' | 'model' | 'copilot';
+type Priority = 'must' | 'curious' | 'skip';
+
+interface ValueChainActivity {
+  name: string;
+  aiImpact: string;
+  type: ActivityType;
+  impact: string;
+}
+
+interface ValueChainFunction {
+  function: string;
+  description: string;
+  activities: ValueChainActivity[];
+}
+
+interface CustomValueChain {
+  companyName: string;
+  industry: string;
+  functions: ValueChainFunction[];
+  topPriorities: string[];
+}
+
+interface ActivityAnnotation {
+  priority?: Priority;
+  notes?: string;
+}
+
 const SITUATION_CARDS = [
   { label: 'Revenue stall', detail: "Our sales team is working harder but pipeline isn't growing proportionally" },
   { label: 'AI pilots stuck', detail: "We've invested in AI experiments but nothing has reached production" },
@@ -26,9 +54,12 @@ const SITUATION_CARDS = [
 ];
 
 export default function DiscoverPage() {
-  const [phase, setPhase] = useState<'url' | 'researching' | 'chat'>('url');
+  const [phase, setPhase] = useState<'url' | 'researching' | 'value-chain' | 'chat'>('url');
   const [websiteUrl, setWebsiteUrl] = useState('');
   const [intelligence, setIntelligence] = useState<CompanyIntelligence | null>(null);
+  const [valueChain, setValueChain] = useState<CustomValueChain | null>(null);
+  const [annotations, setAnnotations] = useState<Record<string, ActivityAnnotation>>({});
+  const [expandedActivity, setExpandedActivity] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isStreaming, setIsStreaming] = useState(false);
@@ -46,7 +77,7 @@ export default function DiscoverPage() {
     setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
   };
 
-  // Phase 1: Research the company
+  // Phase 1: Research the company → generate custom value chain
   const handleUrlSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!websiteUrl.trim()) return;
@@ -54,6 +85,7 @@ export default function DiscoverPage() {
     setPhase('researching');
 
     try {
+      // Step 1: Perplexity research
       const res = await fetch('/api/discover/research', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -74,8 +106,26 @@ export default function DiscoverPage() {
 
       setIntelligence(data);
 
-      const openingMessage = `I've done some research on **${data.domain}** to give you a head start.\n\nBased on what I've found, I can see several areas where AI could drive significant impact for your business — from automating key workflows to scaling your revenue operations.\n\n**What's the single biggest operational challenge you're facing right now?**`;
+      // Step 2: Custom value chain (Claude Sonnet 4.5)
+      try {
+        const vcRes = await fetch('/api/discover/value-chain', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const vcData = await vcRes.json();
 
+        if (!vcData.fallback && !vcData.error && vcData.functions) {
+          setValueChain(vcData);
+          setPhase('value-chain');
+          return;
+        }
+      } catch {
+        // value-chain generation failed — fall through to chat
+      }
+
+      // Fallback: skip value chain, go straight to chat
+      const openingMessage = `I've done some research on **${data.domain}** to give you a head start.\n\nBased on what I've found, I can see several areas where AI could drive significant impact for your business.\n\n**What's the single biggest operational challenge you're facing right now?**`;
       setMessages([{ role: 'assistant', content: openingMessage }]);
       setPhase('chat');
     } catch {
@@ -86,6 +136,40 @@ export default function DiscoverPage() {
       }]);
       setPhase('chat');
     }
+  };
+
+  const handleValueChainContinue = () => {
+    if (!valueChain) {
+      setPhase('chat');
+      return;
+    }
+
+    // Build a context summary of user priorities
+    const must = Object.entries(annotations)
+      .filter(([_, a]) => a.priority === 'must')
+      .map(([key, a]) => ({ key, notes: a.notes }));
+    const curious = Object.entries(annotations)
+      .filter(([_, a]) => a.priority === 'curious')
+      .map(([key, a]) => ({ key, notes: a.notes }));
+
+    const summary =
+      must.length === 0 && curious.length === 0
+        ? `I've drafted a custom value chain for **${valueChain.companyName}**. Take a look at it — those are the activities ClearForge typically automates first for ${valueChain.industry.toLowerCase()} operators.\n\nLet's talk through your priorities. **What's the single biggest operational challenge you're facing right now?**`
+        : `Got it. You flagged ${must.length} priority${must.length === 1 ? '' : ' activities'} as must-have${curious.length ? ` and ${curious.length} as curious` : ''}.\n\n${
+            must.length
+              ? `**Top priorities:**\n${must.map((m) => `- ${m.key}${m.notes ? `: ${m.notes}` : ''}`).join('\n')}\n\n`
+              : ''
+          }Let's dig in. **What's making the top priority hard to crack today?**`;
+
+    setMessages([{ role: 'assistant', content: summary }]);
+    setPhase('chat');
+  };
+
+  const updateAnnotation = (key: string, patch: Partial<ActivityAnnotation>) => {
+    setAnnotations((prev) => ({
+      ...prev,
+      [key]: { ...prev[key], ...patch },
+    }));
   };
 
   // Phase 2: Chat with company intelligence context
@@ -104,9 +188,33 @@ export default function DiscoverPage() {
       const contextMessages = [...updatedMessages];
 
       if (intelligence) {
+        // Build value chain context if user annotated activities
+        let vcContext = '';
+        if (valueChain) {
+          const must = Object.entries(annotations)
+            .filter(([_, a]) => a.priority === 'must')
+            .map(([k, a]) => `- ${k}${a.notes ? ` (notes: ${a.notes})` : ''}`);
+          const curious = Object.entries(annotations)
+            .filter(([_, a]) => a.priority === 'curious')
+            .map(([k, a]) => `- ${k}${a.notes ? ` (notes: ${a.notes})` : ''}`);
+          const skip = Object.entries(annotations)
+            .filter(([_, a]) => a.priority === 'skip')
+            .map(([k]) => `- ${k}`);
+
+          vcContext = `\n\n## Custom Value Chain Generated for ${valueChain.companyName} (${valueChain.industry})\n\nClearForge generated a custom AI value chain for this company:\n${valueChain.functions.map((fn) => `\n### ${fn.function}\n${fn.activities.map((a) => `- ${a.name}: ${a.aiImpact} (${a.impact})`).join('\n')}`).join('')}`;
+
+          if (must.length || curious.length || skip.length) {
+            vcContext += `\n\n## User's Priorities (annotations from value chain)\n`;
+            if (must.length) vcContext += `\n**Must-have activities:**\n${must.join('\n')}\n`;
+            if (curious.length) vcContext += `\n**Curious about:**\n${curious.join('\n')}\n`;
+            if (skip.length) vcContext += `\n**Marked not relevant:**\n${skip.join('\n')}\n`;
+            vcContext += `\nPRIORITIZE the user's must-have activities in your responses. Reference these specific activities by name.`;
+          }
+        }
+
         contextMessages.unshift({
           role: 'system',
-          content: `COMPANY RESEARCH CONTEXT (from live research on ${intelligence.domain}):\n\n## Company Overview:\n${intelligence.company}\n\n## Current Job Postings (roles we can automate):\n${intelligence.jobs}\n\n## AI Use Cases for This Company:\n${intelligence.useCases}\n\nINSTRUCTIONS: Use this context to give highly specific, personalized recommendations. Reference their actual business, products, and operations by name. When discussing job postings, explain how AI agents could handle those roles more efficiently. Be specific to THEIR company, not generic.`,
+          content: `COMPANY RESEARCH CONTEXT (from live research on ${intelligence.domain}):\n\n## Company Overview:\n${intelligence.company}\n\n## Current Job Postings (roles we can automate):\n${intelligence.jobs}\n\n## AI Use Cases for This Company:\n${intelligence.useCases}${vcContext}\n\nINSTRUCTIONS: Use this context to give highly specific, personalized recommendations. Reference their actual business, products, and operations by name. When discussing job postings, explain how AI agents could handle those roles more efficiently. Be specific to THEIR company, not generic.`,
         });
       }
 
@@ -156,6 +264,8 @@ export default function DiscoverPage() {
             content: m.content,
           })),
           intelligence,
+          valueChain,
+          annotations,
           name: reportName.trim(),
           email: reportEmail.trim(),
           company: reportCompany.trim(),
@@ -278,13 +388,166 @@ export default function DiscoverPage() {
                 'Analyzing your business model and value chain',
                 'Identifying industry-specific AI use cases',
                 'Scanning for job postings and roles to automate',
-                'Preparing personalized recommendations',
+                'Generating a custom AI value chain for your business',
               ].map((step, i) => (
                 <div key={step} className="flex items-center gap-3 text-sm text-stone animate-fade-in" style={{ animationDelay: `${i * 0.5}s` }}>
                   <div className="w-1.5 h-1.5 bg-brass rounded-full animate-pulse" style={{ animationDelay: `${i * 0.3}s` }} />
                   {step}
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ═══ PHASE 2.5: CUSTOM VALUE CHAIN ═══ */}
+      {phase === 'value-chain' && valueChain && (
+        <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 sm:py-10 lg:px-10">
+          <div className="mx-auto max-w-5xl">
+            {/* Intro */}
+            <div className="mb-8 sm:mb-10">
+              <p className="overline text-brass-light">Your Custom Value Chain</p>
+              <h2
+                className="mt-3 text-display text-bone max-w-3xl"
+                style={{ fontFamily: 'var(--font-instrument-serif)' }}
+              >
+                {valueChain.companyName}: where AI fits.
+              </h2>
+              <p className="mt-4 text-body text-stone max-w-2xl">
+                Click any activity to mark priority and add notes. Your annotations carry into the
+                conversation and the final report.
+              </p>
+
+              {/* ClearForge top priorities — anchor for visitor */}
+              {valueChain.topPriorities && valueChain.topPriorities.length > 0 && (
+                <div className="mt-8 border-l-2 border-brass-light pl-5">
+                  <p className="text-[10px] uppercase tracking-widest text-brass-light font-semibold">
+                    ClearForge would start here
+                  </p>
+                  <ul className="mt-3 space-y-2">
+                    {valueChain.topPriorities.map((p, i) => (
+                      <li key={i} className="text-body-sm text-bone">
+                        <span className="metric text-xs text-brass mr-2">{String(i + 1).padStart(2, '0')}</span>
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            {/* Functions × activities */}
+            <div className="space-y-10">
+              {valueChain.functions.map((fn, fi) => (
+                <div key={fn.function} className="border-t border-divider-dark pt-6">
+                  <div className="flex items-baseline gap-3">
+                    <span className="metric text-xs text-brass">{String(fi + 1).padStart(2, '0')}</span>
+                    <h3
+                      className="text-h3 text-bone"
+                      style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                    >
+                      {fn.function}
+                    </h3>
+                  </div>
+                  <p className="mt-1 ml-7 text-body-sm text-stone max-w-2xl">{fn.description}</p>
+
+                  <ul className="mt-5 space-y-2">
+                    {fn.activities.map((act) => {
+                      const key = `${fn.function}::${act.name}`;
+                      const ann = annotations[key] || {};
+                      const isExpanded = expandedActivity === key;
+                      return (
+                        <li key={key} className="border border-divider-dark hover:border-brass/40 transition-colors">
+                          <button
+                            type="button"
+                            onClick={() => setExpandedActivity(isExpanded ? null : key)}
+                            className="w-full text-left p-4 sm:p-5"
+                          >
+                            <div className="flex items-start gap-3 sm:gap-4">
+                              {/* Priority indicator */}
+                              <div className="shrink-0 mt-1">
+                                {ann.priority === 'must' ? (
+                                  <Star className="h-4 w-4 text-brass-light fill-brass-light" />
+                                ) : ann.priority === 'curious' ? (
+                                  <Star className="h-4 w-4 text-brass-light" />
+                                ) : ann.priority === 'skip' ? (
+                                  <X className="h-4 w-4 text-stone/40" />
+                                ) : (
+                                  <span className="block h-4 w-4 border border-stone/40 rounded-full" />
+                                )}
+                              </div>
+
+                              <div className="flex-1 min-w-0">
+                                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4">
+                                  <p className="text-body text-bone font-medium">{act.name}</p>
+                                  <span className="shrink-0 text-[10px] uppercase tracking-widest text-stone border border-stone/30 px-2 py-0.5">
+                                    {act.type === 'agent' ? 'AI agent' : act.type === 'automation' ? 'Workflow auto' : act.type === 'model' ? 'Predictive model' : 'Copilot'}
+                                  </span>
+                                </div>
+                                <p className="mt-1.5 text-body-sm text-stone">{act.aiImpact}</p>
+                                <p className="mt-1 text-[11px] text-brass-light font-medium">{act.impact}</p>
+                                {ann.notes && !isExpanded && (
+                                  <p className="mt-2 flex items-start gap-1.5 text-[11px] text-stone italic">
+                                    <MessageSquare className="h-3 w-3 mt-0.5 shrink-0" />
+                                    <span className="line-clamp-1">{ann.notes}</span>
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                          </button>
+
+                          {isExpanded && (
+                            <div className="border-t border-divider-dark p-4 sm:p-5 bg-divider-dark/30">
+                              <p className="text-[11px] uppercase tracking-widest text-stone font-semibold">
+                                Mark priority
+                              </p>
+                              <div className="mt-2 flex gap-2 flex-wrap">
+                                {[
+                                  { v: 'must' as Priority, label: 'Must-have', cls: 'border-brass-light bg-brass/10 text-brass-light' },
+                                  { v: 'curious' as Priority, label: 'Curious', cls: 'border-brass/40 text-brass' },
+                                  { v: 'skip' as Priority, label: 'Not relevant', cls: 'border-stone/30 text-stone' },
+                                ].map((opt) => (
+                                  <button
+                                    key={opt.v}
+                                    type="button"
+                                    onClick={() => updateAnnotation(key, { priority: ann.priority === opt.v ? undefined : opt.v })}
+                                    className={`text-xs px-3 py-1.5 border transition-colors ${ann.priority === opt.v ? opt.cls : 'border-stone/30 text-stone hover:border-bone/50'}`}
+                                  >
+                                    {opt.label}
+                                  </button>
+                                ))}
+                              </div>
+
+                              <p className="mt-5 text-[11px] uppercase tracking-widest text-stone font-semibold">
+                                Notes (optional)
+                              </p>
+                              <textarea
+                                value={ann.notes || ''}
+                                onChange={(e) => updateAnnotation(key, { notes: e.target.value })}
+                                placeholder="Why this is interesting? Constraints? Existing work? Anything to flag for ClearForge."
+                                className="mt-2 w-full bg-forge-black border border-divider-dark text-bone placeholder:text-stone/50 px-3 py-2 text-sm focus:border-brass focus:outline-none transition-colors resize-none"
+                                rows={3}
+                              />
+                            </div>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            {/* Continue + summary */}
+            <div className="mt-10 sm:mt-14 border-t border-divider-dark pt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div className="text-sm text-stone">
+                {Object.values(annotations).filter((a) => a.priority === 'must').length} must-have ·{' '}
+                {Object.values(annotations).filter((a) => a.priority === 'curious').length} curious ·{' '}
+                {Object.values(annotations).filter((a) => a.priority === 'skip').length} skipped
+              </div>
+              <Button size="lg" onClick={handleValueChainContinue}>
+                Continue to Conversation <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
             </div>
           </div>
         </div>
