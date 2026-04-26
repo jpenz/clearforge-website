@@ -220,8 +220,23 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
         </div>
       </section>
 
+      {/* ── Jump-link strip — Slalom pattern, premium consulting standard ── */}
+      <div className="bg-warm-white border-b border-divider sticky top-14 z-30 backdrop-blur-sm">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 py-3 overflow-x-auto">
+          <nav className="flex items-center gap-x-6 sm:gap-x-8 text-[11px] uppercase tracking-widest text-warm-gray whitespace-nowrap">
+            <span className="text-anthracite font-semibold">Jump to:</span>
+            <a href="#overview" className="hover:text-brass transition-colors">Overview</a>
+            <a href="#value-chain" className="hover:text-brass transition-colors">Value Chain</a>
+            <a href="#challenges" className="hover:text-brass transition-colors">Challenges</a>
+            <a href="#forge-method" className="hover:text-brass transition-colors">How We Engage</a>
+            {caseStudy && <a href="#case" className="hover:text-brass transition-colors">Case Study</a>}
+            <a href="#discuss" className="hover:text-brass transition-colors">Talk</a>
+          </nav>
+        </div>
+      </div>
+
       {/* ── Overview ── */}
-      <section className="bg-parchment py-24 lg:py-40">
+      <section id="overview" className="bg-parchment py-24 lg:py-40 scroll-mt-24">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-5">
@@ -238,7 +253,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       </section>
 
       {/* ── VALUE CHAIN ── the editorial centerpiece ── */}
-      <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
+      <section id="value-chain" className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40 scroll-mt-24">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-16 lg:items-end">
             <div className="lg:col-span-7">
@@ -324,7 +339,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       </section>
 
       {/* ── Industry Challenges ── */}
-      <section className="bg-parchment py-24 lg:py-40">
+      <section id="challenges" className="bg-parchment py-24 lg:py-40 scroll-mt-24">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <p className="overline">Industry Challenges</p>
           <h2 className="mt-6 text-display max-w-3xl">Where {industry.shortName.toLowerCase()} operators are losing margin today</h2>
@@ -349,7 +364,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       </section>
 
       {/* ── Forge Method application ── */}
-      <section className="bg-recessed py-24 lg:py-40">
+      <section id="forge-method" className="bg-recessed py-24 lg:py-40 scroll-mt-24">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-5">
@@ -387,7 +402,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
 
       {/* ── Linked case study (if present) ── */}
       {caseStudy && (
-        <section className="border-t border-divider bg-parchment py-24 lg:py-40">
+        <section id="case" className="border-t border-divider bg-parchment py-24 lg:py-40 scroll-mt-24">
           <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
             <p className="overline">Related Case Study</p>
             <Link
@@ -420,7 +435,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       )}
 
       {/* ── CTA ── */}
-      <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
+      <section id="discuss" className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40 scroll-mt-24">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
           <h2 className="text-display text-bone" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
             Get a custom value chain for your business.
