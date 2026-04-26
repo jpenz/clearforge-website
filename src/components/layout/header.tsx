@@ -10,11 +10,26 @@ const NAV_SECTIONS = [
   {
     title: 'Industries',
     links: [
+      { href: '/industries', label: 'All Industries' },
       { href: '/industries/manufacturing', label: 'Manufacturing & Industrial' },
       { href: '/industries/financial-services', label: 'Financial Services' },
-      { href: '/industries/healthcare', label: 'Healthcare & Life Sciences' },
+      { href: '/industries/healthcare', label: 'Healthcare' },
+      { href: '/industries/life-sciences', label: 'Life Sciences & Pharma' },
       { href: '/industries/saas', label: 'SaaS & Technology' },
+      { href: '/industries/insurance', label: 'Insurance' },
       { href: '/industries/private-equity', label: 'Private Equity' },
+      { href: '/industries/retail', label: 'Retail & E-commerce' },
+      { href: '/industries/wholesale-distribution', label: 'Wholesale & Distribution' },
+      { href: '/industries/logistics-transportation', label: 'Logistics & Transportation' },
+      { href: '/industries/professional-services', label: 'Professional Services' },
+      { href: '/industries/real-estate', label: 'Real Estate' },
+      { href: '/industries/construction-engineering', label: 'Construction & Engineering' },
+      { href: '/industries/consumer-products', label: 'Consumer Products' },
+      { href: '/industries/energy-utilities', label: 'Energy & Utilities' },
+      { href: '/industries/travel-hospitality', label: 'Travel & Hospitality' },
+      { href: '/industries/telecommunications', label: 'Telecommunications' },
+      { href: '/industries/automotive', label: 'Automotive & Mobility' },
+      { href: '/industries/education', label: 'Education' },
     ],
   },
   {
@@ -46,7 +61,7 @@ const NAV_SECTIONS = [
 ];
 
 const TOP_NAV = [
-  { href: '/industries/manufacturing', label: 'Industries', hasDropdown: true },
+  { href: '/industries', label: 'Industries', hasDropdown: true },
   { href: '/services', label: 'Capabilities', hasDropdown: true },
   { href: '/case-studies', label: 'Case Studies' },
   { href: '/insights', label: 'Insights' },

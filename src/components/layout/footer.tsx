@@ -21,6 +21,7 @@ const footerLinks = {
     { href: '/industries/healthcare', label: 'Healthcare' },
     { href: '/industries/saas', label: 'SaaS & Technology' },
     { href: '/industries/private-equity', label: 'Private Equity' },
+    { href: '/industries', label: 'View all 17 →' },
   ],
 };
 
