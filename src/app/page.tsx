@@ -38,10 +38,16 @@ export default function Home() {
       {/* ═══ HERO ═══ */}
       <HeroScroll />
 
-      {/* ═══ TRUST LINE — research-backed stats with single ruled line ═══ */}
-      <div className="border-b border-divider">
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-warm-gray">
-          <span>89% of our projects reach production <span className="text-warm-gray/50">(industry: 16%)</span></span>
+      {/* ═══ TRUST LINE — credentials + research-backed proof ═══ */}
+      <div className="border-b border-divider bg-warm-white">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 py-4 sm:py-5 flex flex-col lg:flex-row items-center justify-between gap-3 text-xs text-warm-gray">
+          <span className="flex items-center gap-2">
+            <span className="font-semibold text-anthracite">Founded by ex-Bain · EY · Capgemini</span>
+            <span className="hidden sm:inline text-divider">·</span>
+            <span className="hidden sm:inline">AI Automation practice</span>
+          </span>
+          <span className="hidden lg:inline text-divider">·</span>
+          <span>89% reach production <span className="text-warm-gray/50">(industry: 16%)</span></span>
           <span className="hidden sm:inline text-divider">·</span>
           <span>Built for the 80% stuck in pilot</span>
           <span className="hidden sm:inline text-divider">·</span>

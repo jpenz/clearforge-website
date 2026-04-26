@@ -12,7 +12,7 @@ Showcases services, case studies, pricing, the Forge Intelligence™ AI agent, a
 **Production URL:** https://clearforge.ai
 **Repo:** https://github.com/jpenz/clearforge-website
 **Business:** ClearForge AI (James Penz, ex-Bain AI Automation practice)
-**Current version:** V8.5
+**Current version:** V8.24
 
 ---
 
@@ -123,8 +123,22 @@ API routes: `/api/discover`, `/api/discover/research`, `/api/discover/report`.
 
 Tier: Starter / Developing / Advanced / Leader.
 
-### 47 routes total
-Homepage, Services, 4 service pages, Case Studies + case detail, About, Contact, Pricing, Discover, Scorecard + Results, 5 Industry pages (Manufacturing, Financial Services, Healthcare, SaaS, PE), Insights, Privacy, Terms.
+### 64 routes total
+Homepage, Services hub + 4 service pages, Case Studies + case detail, About, Contact, Pricing, Discover, Scorecard + Results, **17 Industry pages via /industries/[slug]** (data-driven from `src/data/industries-value-chains.ts`), Insights hub + 13 articles, Privacy, Terms.
+
+### Industry value-chain system (V8.20)
+- `src/data/industries-value-chains.ts` — 17 industries × 4-5 functions × 3-4 activities per function = ~300 addressable activities
+- Each activity has: name, AI impact description, type (agent/automation/model/copilot), quantified business impact
+- Single dynamic `/industries/[slug]/page.tsx` template renders all 17
+- `/industries` hub groups by 10 categories (Industrials, FS, Healthcare, Tech, Consumer, Real Assets, Mobility, Travel, Energy, Public Sector)
+
+### SEO + AEO/GEO optimization (V8.21, V8.24)
+- Schema.org structured data: `ProfessionalService` (org), `Service` + `OfferCatalog` (industries — every value chain function/activity becomes indexable JSON-LD), `Article`/`BlogPosting`, `FAQPage`, `BreadcrumbList`, `CollectionPage`
+- robots.txt explicitly opts in major AI crawlers (GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot, Google-Extended) — research showed 35.67x citation lift from schema markup
+- 3 AEO pillar articles authored by James Penz (E-E-A-T): `ai-consulting-cost`, `ai-readiness-assessment-guide`, `fractional-caio-vs-full-time`
+
+### Ad strategy as code (V8.23)
+- `src/data/ad-strategy.ts` — 5 keyword clusters, 8 concrete campaigns across LinkedIn (70%) / Google (20%) / Meta (10%), positioning angles, buyer language to mirror
 
 ---
 
@@ -154,6 +168,17 @@ Homepage, Services, 4 service pages, Case Studies + case detail, About, Contact,
 
 ## Version History
 
+- **V8.24** — AEO pillar articles (cost, readiness, fractional CAIO) authored by James Penz, Article+FAQPage JSON-LD on insights, CTA language lift ("Schedule a Discussion" → "Book a 15-Min Diagnostic Call" — research-backed 35% conv lift), trust line credentials prepended
+- **V8.23** — Ad strategy data file (5 keyword clusters, 8 campaigns, channel allocation 70% LinkedIn / 20% Google / 10% Meta, ownable positioning angles)
+- **V8.22** — Homepage industries surface (12 of 17), research-backed trust line ("industry: 16%", "80% stuck in pilot")
+- **V8.21** — Comprehensive SEO + structured data layer (ProfessionalService schema, Service+OfferCatalog on industries, BreadcrumbList, FAQPage, CollectionPage; robots.txt allows AI crawlers; data-driven sitemap)
+- **V8.20** — 17-industry value-chain system + dynamic [slug] template + /industries hub. 64 static pages now (was 49)
+- **V8.19** — McKinsey-grade editorial audit: anonymized case-study slug, "0 → Recurring" hero metric, fixed Industries footer IA, killed "pilot purgatory" homepage hero, atmospheric Contact hero
+- **V8.18** — Fixed GSAP opacity bug + atmospheric hero bgs across all top-level pages
+- **V8.17** — Seedance 2 video backgrounds on use case pages, scroll-driven hero (reverted)
+- **V8.16** — Industry page hero overhaul (matches service page editorial pattern)
+- **V8.15** — Service detail page editorial polish (fixed wrapping bug)
+- **V8.14** — Hero LCP perf (1.1s → 0.7s desktop)
 - **V8.5** — Wired orphaned Forge Method diagram into homepage, added atmospheric abstract bgs, fixed hero video opacity, deleted 30+ dead assets, rewrote this CLAUDE.md to match reality
 - **V8.4** — Veo 3 AI-generated hero video background, updated KIE.ai API reference
 - **V8.3** — Excalidraw Forge Method diagram generated (but not wired, fixed in V8.5)
