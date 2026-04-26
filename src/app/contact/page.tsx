@@ -98,7 +98,7 @@ export default function ContactPage() {
         <div className="relative mx-auto max-w-[1200px] px-6 lg:px-10">
           <p className="overline">Get in Touch</p>
           <h1 className="mt-6 text-display max-w-3xl text-bone">
-            Schedule a Confidential Discussion
+            Book a 15-Min Diagnostic Call
           </h1>
           <p className="mt-6 max-w-xl text-body-lg text-stone">
             No pitch decks. No pressure. A straightforward conversation about

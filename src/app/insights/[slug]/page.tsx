@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { insights } from '@/data/insights';
-import { createMetadata } from '@/lib/metadata';
+import { articleJsonLd, breadcrumbJsonLd, createMetadata, faqJsonLd } from '@/lib/metadata';
 
 function getInsight(slug: string) {
   return insights.find((i) => i.slug === slug);
@@ -41,8 +41,28 @@ export default async function InsightDetailPage({
   /* Split the markdown body into sections by ## headings */
   const sections = insight.body.split(/^## /m).filter(Boolean);
 
+  /* Schema.org structured data for AEO/GEO citation lift */
+  const articleLd = articleJsonLd({
+    title: insight.title,
+    description: insight.excerpt,
+    slug: insight.slug,
+    date: insight.date,
+    author: insight.author.name,
+  });
+  const breadcrumbLd = breadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Insights', path: '/insights' },
+    { name: insight.title, path: `/insights/${insight.slug}` },
+  ]);
+  const faqLd = insight.faqs.length > 0 ? faqJsonLd(insight.faqs) : null;
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      {faqLd && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+      )}
       {/* ── Hero ── */}
       <section className="dark-section py-32 lg:py-48">
         <div className="mx-auto max-w-3xl px-6 lg:px-10">
@@ -170,7 +190,7 @@ export default async function InsightDetailPage({
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
               <Link href="/contact">
-                Schedule a Discussion <ArrowRight className="ml-2 h-4 w-4" />
+                Book a 15-Min Diagnostic Call <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>

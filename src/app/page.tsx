@@ -366,7 +366,7 @@ export default function Home() {
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4">
             <Button size="lg" asChild>
-              <Link href="/contact">Schedule a Confidential Discussion</Link>
+              <Link href="/contact">Book a 15-Min Diagnostic Call</Link>
             </Button>
             <Link href="mailto:james@clearforge.ai" className="inline-flex items-center text-sm text-stone hover:text-bone transition-colors h-12 px-4">
               Or email directly <ArrowRight className="ml-2 h-4 w-4" />

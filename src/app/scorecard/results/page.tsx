@@ -226,7 +226,7 @@ export default function ScorecardResultsPage() {
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10 text-center">
           <h2 className="text-display text-anthracite">Ready to close the gap?</h2>
           <div className="mt-8 flex gap-4 flex-wrap justify-center">
-            <Button size="lg" asChild><Link href="/contact">Schedule a Discussion <ArrowRight className="ml-2 h-4 w-4" /></Link></Button>
+            <Button size="lg" asChild><Link href="/contact">Book a 15-Min Diagnostic Call <ArrowRight className="ml-2 h-4 w-4" /></Link></Button>
             <Button variant="secondary" size="lg" asChild><Link href="/services">Explore Services</Link></Button>
           </div>
         </div>

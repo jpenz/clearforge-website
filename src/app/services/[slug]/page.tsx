@@ -252,7 +252,7 @@ export default async function ServiceDetailPage({
               <div className="mt-10 flex flex-wrap gap-4">
                 <Button size="lg" asChild>
                   <Link href="/contact">
-                    Schedule a Discussion <ArrowRight className="ml-2 h-4 w-4" />
+                    Book a 15-Min Diagnostic Call <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
                 <Button size="lg" variant="secondary" asChild>

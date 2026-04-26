@@ -139,7 +139,7 @@ export default function InsightsPage() {
           <div className="mt-10">
             <Button size="lg" asChild>
               <Link href="/contact">
-                Schedule a Discussion <ArrowRight className="ml-2 h-4 w-4" />
+                Book a 15-Min Diagnostic Call <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>

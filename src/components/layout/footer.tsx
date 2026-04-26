@@ -43,7 +43,7 @@ export function Footer() {
             </div>
             <div className="flex flex-wrap gap-3">
               <Button size="lg" className="shadow-lg hover:shadow-xl" asChild>
-                <Link href="/contact">Schedule a Discussion <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                <Link href="/contact">Book a 15-Min Diagnostic Call <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
               <Button size="lg" variant="outline-light" asChild>
                 <Link href="/scorecard">Take AI Assessment</Link>

@@ -272,7 +272,7 @@ export default function PricingPage() {
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>
-              <Link href="/contact">Schedule a Confidential Discussion</Link>
+              <Link href="/contact">Book a 15-Min Diagnostic Call</Link>
             </Button>
           </div>
         </div>
