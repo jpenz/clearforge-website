@@ -8,7 +8,28 @@ import {
   industryCategories,
   getIndustriesByCategory,
 } from '@/data/industries-value-chains';
-import { createMetadata } from '@/lib/metadata';
+import { breadcrumbJsonLd, createMetadata } from '@/lib/metadata';
+
+const collectionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'AI Agents & Automation by Industry',
+  url: 'https://clearforge.ai/industries',
+  description:
+    'AI agents and automation for every industry. Full operating value chains across 17 sectors.',
+  hasPart: industries.map((ind) => ({
+    '@type': 'Service',
+    name: `AI Agents & Automation for ${ind.name}`,
+    url: `https://clearforge.ai/industries/${ind.slug}`,
+    description: ind.oneLiner,
+    category: ind.category,
+  })),
+};
+
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: 'Home', path: '/' },
+  { name: 'Industries', path: '/industries' },
+]);
 
 export const metadata = createMetadata({
   title: 'Industries — AI Agents & Automation | ClearForge',
@@ -32,6 +53,9 @@ export default function IndustriesIndexPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+
       {/* — Hero — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <Image

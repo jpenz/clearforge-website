@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Stagger, StaggerItem } from '@/components/ui/animate';
 import { forgeProducts } from '@/data/forge-products';
-import { createMetadata } from '@/lib/metadata';
+import { breadcrumbJsonLd, createMetadata, faqJsonLd } from '@/lib/metadata';
 
 export const metadata = createMetadata({
   title: 'Pricing — Transparent Investment | ClearForge',
@@ -56,9 +56,17 @@ const faqs = [
   },
 ];
 
+const faqLd = faqJsonLd(faqs);
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: 'Home', path: '/' },
+  { name: 'Pricing', path: '/pricing' },
+]);
+
 export default function PricingPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       {/* — Hero with atmospheric bg — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <Image

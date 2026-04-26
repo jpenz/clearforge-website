@@ -56,19 +56,111 @@ export function createMetadata({
 
 export const organizationJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': 'ProfessionalService',
+  '@id': `${siteUrl}/#organization`,
   name: 'ClearForge',
+  alternateName: 'ClearForge AI',
   url: siteUrl,
-  logo: `${siteUrl}/logo.png`,
+  logo: {
+    '@type': 'ImageObject',
+    url: `${siteUrl}/logo.png`,
+    width: 600,
+    height: 200,
+  },
+  image: `${siteUrl}/og-default.png`,
   description:
-    'ClearForge is a strategy and AI consulting firm that diagnoses where businesses should win, builds the AI systems to execute, and operates them continuously.',
+    'ClearForge is an AI consulting firm that diagnoses where mid-market and growth-stage companies should win with AI, builds the production systems to execute, and operates them continuously. Forge Diagnostic, Sprint, and Scale offerings from $15K to ongoing engagements.',
+  priceRange: '$15,000 - $200,000',
+  founder: {
+    '@type': 'Person',
+    name: 'James Penz',
+    jobTitle: 'Founder & Managing Partner',
+    sameAs: ['https://www.linkedin.com/in/jamesrpenz/'],
+  },
   contactPoint: {
     '@type': 'ContactPoint',
-    email: 'hello@clearforge.ai',
+    email: 'james@clearforge.ai',
     contactType: 'sales',
+    areaServed: 'US',
+    availableLanguage: ['en'],
   },
-  sameAs: [],
+  address: {
+    '@type': 'PostalAddress',
+    addressRegion: 'MI',
+    addressCountry: 'US',
+    addressLocality: 'Sterling Heights',
+  },
+  areaServed: {
+    '@type': 'Country',
+    name: 'United States',
+  },
+  serviceType: [
+    'AI Strategy Consulting',
+    'AI Agent Development',
+    'Custom AI Automation',
+    'AI Revenue Operations',
+    'PE Portfolio Value Creation',
+    'Performance Improvement',
+  ],
+  knowsAbout: [
+    'AI agents',
+    'AI automation',
+    'AI strategy',
+    'production AI systems',
+    'AI value creation',
+    'AI implementation',
+    'mid-market AI consulting',
+  ],
+  sameAs: [
+    'https://www.linkedin.com/company/clearforge-ai/',
+  ],
 };
+
+export function industryServiceJsonLd(industry: {
+  name: string;
+  shortName: string;
+  slug: string;
+  oneLiner: string;
+  hero: string;
+  category: string;
+  valueChain: { function: string; activities: { name: string }[] }[];
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `AI Agents & Automation for ${industry.name}`,
+    serviceType: `AI consulting for ${industry.name}`,
+    description: industry.hero,
+    category: industry.category,
+    provider: {
+      '@type': 'ProfessionalService',
+      '@id': `${siteUrl}/#organization`,
+      name: 'ClearForge',
+    },
+    areaServed: { '@type': 'Country', name: 'United States' },
+    audience: {
+      '@type': 'BusinessAudience',
+      name: `${industry.shortName} operators (mid-market and growth-stage)`,
+    },
+    url: `${siteUrl}/industries/${industry.slug}`,
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: `${industry.name} AI value chain`,
+      itemListElement: industry.valueChain.map((fn, i) => ({
+        '@type': 'OfferCatalog',
+        position: i + 1,
+        name: fn.function,
+        numberOfItems: fn.activities.length,
+        itemListElement: fn.activities.map((act, j) => ({
+          '@type': 'Offer',
+          position: j + 1,
+          name: act.name,
+          category: fn.function,
+        })),
+      })),
+    },
+  };
+}
 
 export function serviceJsonLd(service: {
   title: string;

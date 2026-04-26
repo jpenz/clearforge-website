@@ -53,7 +53,7 @@ import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
 import { caseStudies } from '@/data/case-studies';
 import { getIndustry, industries } from '@/data/industries-value-chains';
 import type { ActivityType } from '@/data/industries-value-chains';
-import { createMetadata } from '@/lib/metadata';
+import { breadcrumbJsonLd, createMetadata, industryServiceJsonLd } from '@/lib/metadata';
 
 // ─────────────────────────────────────────────────────────────────────────
 // Static generation
@@ -123,8 +123,17 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
   // For "view all activities" total
   const totalActivities = industry.valueChain.reduce((acc, fn) => acc + fn.activities.length, 0);
 
+  const serviceLd = industryServiceJsonLd(industry);
+  const crumbsLd = breadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Industries', path: '/industries' },
+    { name: industry.name, path: `/industries/${industry.slug}` },
+  ]);
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbsLd) }} />
       {/* ── Hero ── editorial two-column with optional video bg ── */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         {industry.videoBackground ? (
