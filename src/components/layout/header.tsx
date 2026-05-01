@@ -36,10 +36,25 @@ const NAV_SECTIONS = [
   {
     title: 'Capabilities',
     links: [
+      { href: '/use-cases', label: 'AI Use Cases' },
       { href: '/services/ai-revenue-operations', label: 'AI Revenue Operations' },
       { href: '/services/performance-improvement', label: 'Performance Improvement' },
       { href: '/services/pe-value-creation', label: 'PE Value Creation' },
       { href: '/services/custom-ai-agents', label: 'Custom AI Agents' },
+    ],
+  },
+  {
+    title: 'Use Cases',
+    links: [
+      { href: '/use-cases/ai-sales-pipeline-acceleration', label: 'AI Sales Pipeline' },
+      { href: '/use-cases/ai-customer-service-excellence', label: 'Customer Service AI' },
+      { href: '/use-cases/ai-operations-efficiency-machine', label: 'Operations Efficiency' },
+      { href: '/use-cases/ai-knowledge-work-automation', label: 'Knowledge Work Automation' },
+      {
+        href: '/use-cases/ai-quality-control-exception-management',
+        label: 'Quality Exceptions',
+      },
+      { href: '/use-cases/pe-portfolio-ai-value-creation', label: 'PE Portfolio AI' },
     ],
   },
   {
@@ -65,6 +80,7 @@ const NAV_SECTIONS = [
 const TOP_NAV = [
   { href: '/industries', label: 'Industries', hasDropdown: true },
   { href: '/services', label: 'Capabilities', hasDropdown: true },
+  { href: '/use-cases', label: 'Use Cases' },
   { href: '/case-studies', label: 'Case Studies' },
   { href: '/insights', label: 'Insights' },
   { href: '/about', label: 'About Us' },

@@ -2,13 +2,21 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { industries } from '@/data/industries-value-chains';
+import { useCases } from '@/data/use-cases';
 
 const footerLinks = {
   Services: [
+    { href: '/use-cases', label: 'AI Use Cases' },
     { href: '/services/ai-revenue-operations', label: 'AI Revenue Operations' },
     { href: '/services/performance-improvement', label: 'Performance Improvement' },
     { href: '/services/pe-value-creation', label: 'PE Value Creation' },
     { href: '/services/custom-ai-agents', label: 'Custom AI Agents' },
+  ],
+  'Use Cases': [
+    { href: '/use-cases/ai-sales-pipeline-acceleration', label: 'AI Sales Pipeline' },
+    { href: '/use-cases/ai-customer-service-excellence', label: 'Customer Service AI' },
+    { href: '/use-cases/ai-operations-efficiency-machine', label: 'Operations Efficiency' },
+    { href: '/use-cases', label: `View all ${useCases.length} →` },
   ],
   Company: [
     { href: '/case-studies', label: 'Case Studies' },
@@ -70,7 +78,7 @@ export function Footer() {
               james@clearforge.ai
             </a>
           </div>
-          <div className="lg:col-span-8 grid gap-10 sm:grid-cols-3">
+          <div className="lg:col-span-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {Object.entries(footerLinks).map(([title, links]) => (
               <div key={title}>
                 <h3 className="mb-5 overline">{title}</h3>

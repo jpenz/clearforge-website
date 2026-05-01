@@ -9,6 +9,23 @@ const budgets = [
   { file: 'public/images/hero-bg.webp', maxKb: 180 },
 ];
 
+const useCaseSlugs = [
+  'ai-sales-pipeline-acceleration',
+  'ai-customer-service-excellence',
+  'ai-operations-efficiency-machine',
+  'ai-knowledge-work-automation',
+  'ai-quality-control-exception-management',
+  'pe-portfolio-ai-value-creation',
+];
+
+for (const slug of useCaseSlugs) {
+  budgets.push(
+    { file: `public/videos/use-cases/${slug}.mp4`, maxKb: 1200 },
+    { file: `public/videos/use-cases/${slug}.webm`, maxKb: 1200, optional: true },
+    { file: `public/images/use-cases/${slug}.webp`, maxKb: 180 },
+  );
+}
+
 let failed = false;
 
 for (const budget of budgets) {

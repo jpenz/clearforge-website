@@ -18,6 +18,7 @@ import { Button } from '@/components/ui/button';
 import { GsapTextReveal } from '@/components/ui/gsap-text-reveal';
 import { caseStudies } from '@/data/case-studies';
 import { industries } from '@/data/industries-value-chains';
+import { useCases } from '@/data/use-cases';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
@@ -230,6 +231,68 @@ export default function Home() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-divider bg-parchment py-20 sm:py-32 lg:py-40">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
+          <SectionReveal animation="fade-up">
+            <div className="lg:grid lg:grid-cols-12 lg:items-end lg:gap-12">
+              <div className="lg:col-span-7">
+                <p className="overline">Use Cases</p>
+                <h2 className="mt-6 max-w-3xl text-display">
+                  The first AI machines worth building for growth and margin.
+                </h2>
+              </div>
+              <div className="mt-8 lg:col-span-5 lg:mt-0">
+                <p className="text-body-lg text-warm-gray">
+                  ClearForge starts where AI becomes operational leverage: sales, service,
+                  operations, knowledge work, quality, and portfolio value creation.
+                </p>
+              </div>
+            </div>
+          </SectionReveal>
+
+          <StaggerReveal className="mt-16 grid gap-6 lg:grid-cols-3">
+            {useCases.slice(0, 6).map((useCase) => (
+              <Link
+                key={useCase.slug}
+                href={`/use-cases/${useCase.slug}`}
+                className="group overflow-hidden border border-divider bg-warm-white transition-colors hover:bg-white"
+              >
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  <Image
+                    src={useCase.visual.poster}
+                    alt={useCase.visual.alt}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-forge-black/65 via-transparent to-transparent" />
+                  <p className="absolute left-5 bottom-5 overline text-brass-light">
+                    {useCase.eyebrow}
+                  </p>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-h3 transition-colors group-hover:text-brass">
+                    {useCase.shortTitle}
+                  </h3>
+                  <p className="mt-3 text-body-sm leading-relaxed text-warm-gray">
+                    {useCase.summary}
+                  </p>
+                  <span className="mt-5 inline-flex items-center text-sm font-semibold text-brass">
+                    See the use case <ArrowRight className="ml-2 h-4 w-4" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </StaggerReveal>
+
+          <div className="mt-12">
+            <Button variant="secondary" asChild>
+              <Link href="/use-cases">View All AI Use Cases</Link>
+            </Button>
           </div>
         </div>
       </section>

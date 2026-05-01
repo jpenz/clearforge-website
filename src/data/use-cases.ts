@@ -1,0 +1,924 @@
+export interface UseCase {
+  slug: string;
+  title: string;
+  shortTitle: string;
+  eyebrow: string;
+  seoTitle: string;
+  metaDescription: string;
+  keywords: string[];
+  summary: string;
+  heroStatement: string;
+  outcome: string;
+  bestFor: string;
+  visual: {
+    poster: string;
+    mp4: string;
+    webm: string;
+    alt: string;
+  };
+  symptoms: string[];
+  machine: {
+    label: string;
+    description: string;
+  }[];
+  plays: {
+    title: string;
+    description: string;
+  }[];
+  metrics: {
+    value: string;
+    label: string;
+    description: string;
+  }[];
+  process: {
+    phase: string;
+    title: string;
+    description: string;
+  }[];
+  relatedLinks: {
+    label: string;
+    href: string;
+  }[];
+  faqs: {
+    question: string;
+    answer: string;
+  }[];
+}
+
+export const useCases: UseCase[] = [
+  {
+    slug: 'ai-sales-pipeline-acceleration',
+    title: 'AI Sales Pipeline Acceleration',
+    shortTitle: 'Sales Pipeline',
+    eyebrow: 'Revenue growth',
+    seoTitle: 'AI Sales Pipeline Acceleration for B2B Growth',
+    metaDescription:
+      'Build an AI sales pipeline machine that finds growth spots, prioritizes accounts, automates follow-up, and gives sales leaders cleaner forecast visibility.',
+    keywords: [
+      'AI sales pipeline',
+      'AI sales automation',
+      'AI revenue operations',
+      'B2B sales AI agents',
+      'sales pipeline acceleration',
+    ],
+    summary:
+      'Turn scattered CRM data, intent signals, and seller activity into a disciplined growth machine.',
+    heroStatement:
+      'Find the accounts most likely to move. Give your team the AI machine to reach them first.',
+    outcome:
+      'More qualified pipeline, faster follow-up, cleaner data, and a sales team focused on judgment instead of manual research.',
+    bestFor:
+      'B2B companies with long sales cycles, uneven CRM hygiene, slow lead response, or too many high-fit accounts going untouched.',
+    visual: {
+      poster: '/images/use-cases/ai-sales-pipeline-acceleration.webp',
+      mp4: '/videos/use-cases/ai-sales-pipeline-acceleration.mp4',
+      webm: '/videos/use-cases/ai-sales-pipeline-acceleration.webm',
+      alt: 'Abstract revenue operating system with connected prospect and opportunity signals',
+    },
+    symptoms: [
+      'Sales leaders cannot see which accounts deserve attention this week.',
+      'Reps lose hours to research, list building, CRM cleanup, and hand-written follow-up.',
+      'Marketing signals, web activity, and account context never become timely seller action.',
+      'Forecast reviews become storytelling because pipeline quality is inconsistent.',
+    ],
+    machine: [
+      {
+        label: 'Signal layer',
+        description:
+          'Connect CRM, website, enrichment, intent, customer, and market signals into one opportunity view.',
+      },
+      {
+        label: 'Prioritization layer',
+        description:
+          'Score accounts by fit, urgency, relationship context, white space, and next-best action.',
+      },
+      {
+        label: 'Execution layer',
+        description:
+          'Trigger research briefs, account plans, outreach drafts, follow-up reminders, and manager alerts.',
+      },
+      {
+        label: 'Operating layer',
+        description:
+          'Create weekly review routines so leaders inspect conversion quality, not just activity volume.',
+      },
+    ],
+    plays: [
+      {
+        title: 'Account priority engine',
+        description:
+          'Ranks accounts and contacts by growth potential, trigger events, engagement, fit, and relationship history.',
+      },
+      {
+        title: 'Rep research agent',
+        description:
+          'Builds concise account briefs, stakeholder maps, call prep, and tailored outreach angles from approved sources.',
+      },
+      {
+        title: 'Follow-up and handoff orchestration',
+        description:
+          'Routes inbound leads, reminds owners, drafts next steps, and escalates stalled high-value opportunities.',
+      },
+      {
+        title: 'Pipeline quality dashboard',
+        description:
+          'Shows conversion leaks, stale opportunities, incomplete fields, next actions, and manager coaching moments.',
+      },
+    ],
+    metrics: [
+      {
+        value: 'Days',
+        label: 'To first shipped workflow',
+        description: 'Start with one sales motion before expanding across the revenue team.',
+      },
+      {
+        value: 'Hours',
+        label: 'Back to sellers weekly',
+        description: 'Reduce research, CRM cleanup, and repetitive follow-up work.',
+      },
+      {
+        value: 'Lift',
+        label: 'In qualified meetings',
+        description: 'Prioritize higher-fit accounts and speed up response to real buying signals.',
+      },
+    ],
+    process: [
+      {
+        phase: 'Week 1',
+        title: 'Map the revenue path',
+        description:
+          'Audit CRM data, lead sources, funnel conversion, seller workflow, and high-value account segments.',
+      },
+      {
+        phase: 'Weeks 2-3',
+        title: 'Build the signal machine',
+        description:
+          'Connect data sources, design the scoring model, and ship the first account intelligence workflow.',
+      },
+      {
+        phase: 'Weeks 4-6',
+        title: 'Install seller actions',
+        description:
+          'Add outreach, research, handoff, routing, and management routines with human review checkpoints.',
+      },
+      {
+        phase: 'Ongoing',
+        title: 'Tune the growth loop',
+        description:
+          'Review conversion quality, improve prompts and signals, and expand into adjacent sales motions.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'AI Revenue Operations', href: '/services/ai-revenue-operations' },
+      { label: 'SaaS & Technology', href: '/industries/saas' },
+      { label: 'Professional Services', href: '/industries/professional-services' },
+    ],
+    faqs: [
+      {
+        question: 'Is this just automated outbound?',
+        answer:
+          'No. Outbound is one possible workflow, but the larger system is account prioritization, seller intelligence, CRM hygiene, follow-up discipline, and management visibility.',
+      },
+      {
+        question: 'Will reps trust the recommendations?',
+        answer:
+          'Only if the system is built around their actual territory, data, and sales process. We install human review, feedback loops, and manager routines so adoption improves over time.',
+      },
+      {
+        question: 'What systems can this connect to?',
+        answer:
+          'The most common starting points are CRM, marketing automation, enrichment, website analytics, email, calendar, and customer data sources.',
+      },
+    ],
+  },
+  {
+    slug: 'ai-customer-service-excellence',
+    title: 'AI Customer Service Excellence',
+    shortTitle: 'Customer Service',
+    eyebrow: 'Service quality',
+    seoTitle: 'AI Customer Service Automation for Better Support Operations',
+    metaDescription:
+      'Use AI agents and service workflows to improve response time, quality, routing, escalation, and customer experience without losing human oversight.',
+    keywords: [
+      'AI customer service automation',
+      'AI service operations',
+      'customer support AI agents',
+      'AI ticket triage',
+      'AI customer experience',
+    ],
+    summary:
+      'Give service teams an AI operating layer that triages, drafts, routes, escalates, and quality-checks customer work.',
+    heroStatement:
+      'Make service faster and more consistent without turning the customer experience into a chatbot maze.',
+    outcome:
+      'Shorter queues, better first responses, cleaner escalation paths, and a service team that protects trust while moving faster.',
+    bestFor:
+      'Companies with growing service volume, uneven response quality, manual ticket routing, or too much tribal knowledge trapped in senior staff.',
+    visual: {
+      poster: '/images/use-cases/ai-customer-service-excellence.webp',
+      mp4: '/videos/use-cases/ai-customer-service-excellence.mp4',
+      webm: '/videos/use-cases/ai-customer-service-excellence.webm',
+      alt: 'Abstract customer service operations network with routed support signals',
+    },
+    symptoms: [
+      'Customers wait because every request is treated like a blank page.',
+      'Escalations depend on who is working, not on a consistent operating model.',
+      'Quality varies across agents, locations, products, or customer segments.',
+      'Managers lack a clear view of backlog risk, customer sentiment, and preventable rework.',
+    ],
+    machine: [
+      {
+        label: 'Intake layer',
+        description:
+          'Classify requests by urgency, product, customer value, risk, required knowledge, and next action.',
+      },
+      {
+        label: 'Resolution layer',
+        description:
+          'Draft responses, summarize account history, recommend fixes, and surface relevant knowledge.',
+      },
+      {
+        label: 'Escalation layer',
+        description:
+          'Route sensitive, high-value, or ambiguous cases to the right human with context already prepared.',
+      },
+      {
+        label: 'Quality layer',
+        description:
+          'Monitor response quality, tone, policy adherence, repeat issues, and coaching opportunities.',
+      },
+    ],
+    plays: [
+      {
+        title: 'Ticket triage and routing',
+        description:
+          'Classifies inbound requests and routes them based on urgency, customer tier, topic, and required expertise.',
+      },
+      {
+        title: 'Agent assist workspace',
+        description:
+          'Summarizes history, drafts responses, suggests fixes, and flags risks before a human sends anything.',
+      },
+      {
+        title: 'Service quality review',
+        description:
+          'Scores resolution quality, sentiment, policy adherence, and preventable rework for manager review.',
+      },
+      {
+        title: 'Knowledge gap loop',
+        description:
+          'Identifies repeated questions and missing documentation so the service machine gets smarter every week.',
+      },
+    ],
+    metrics: [
+      {
+        value: 'Fast',
+        label: 'First response',
+        description:
+          'Give agents prepared context and response drafts instead of starting from scratch.',
+      },
+      {
+        value: 'Consistent',
+        label: 'Resolution quality',
+        description: 'Use quality checks and routing rules to reduce variation across the team.',
+      },
+      {
+        value: 'Visible',
+        label: 'Backlog risk',
+        description:
+          'Help leaders see queues, escalations, repeat issues, and service failure patterns.',
+      },
+    ],
+    process: [
+      {
+        phase: 'Week 1',
+        title: 'Map service demand',
+        description:
+          'Review support volume, categories, escalation paths, quality standards, knowledge sources, and risk rules.',
+      },
+      {
+        phase: 'Weeks 2-3',
+        title: 'Build triage and assist',
+        description:
+          'Ship ticket classification, history summaries, response drafting, and routing workflows.',
+      },
+      {
+        phase: 'Weeks 4-6',
+        title: 'Install quality controls',
+        description:
+          'Add review queues, escalation rules, coaching dashboards, and customer-risk alerts.',
+      },
+      {
+        phase: 'Ongoing',
+        title: 'Improve the service loop',
+        description:
+          'Use real cases to improve knowledge, prompts, routing, and service leadership cadence.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Custom AI Agents', href: '/services/custom-ai-agents' },
+      { label: 'Healthcare', href: '/industries/healthcare' },
+      { label: 'Insurance', href: '/industries/insurance' },
+    ],
+    faqs: [
+      {
+        question: 'Does this replace service reps?',
+        answer:
+          'The stronger pattern is augmentation: AI handles triage, summaries, drafts, checks, and routing while humans own judgment, relationship moments, and exceptions.',
+      },
+      {
+        question: 'How do you prevent bad AI replies?',
+        answer:
+          'We design approval gates, restricted knowledge sources, escalation rules, audit logs, and quality reviews before customer-facing automation expands.',
+      },
+      {
+        question: 'Can this work with our existing helpdesk?',
+        answer:
+          'Yes. The usual approach is to integrate with the current ticketing and knowledge systems rather than force a platform replacement first.',
+      },
+    ],
+  },
+  {
+    slug: 'ai-operations-efficiency-machine',
+    title: 'AI Operations Efficiency Machine',
+    shortTitle: 'Operations Efficiency',
+    eyebrow: 'Margin expansion',
+    seoTitle: 'AI Operations Automation for Efficiency and Margin',
+    metaDescription:
+      'Find operational bottlenecks and build AI workflows for order intake, scheduling, approvals, reporting, and handoffs that improve speed and margin.',
+    keywords: [
+      'AI operations automation',
+      'AI process automation',
+      'operations efficiency AI',
+      'back office AI automation',
+      'AI workflow automation',
+    ],
+    summary:
+      'Find the places where work slows down, then build the AI workflows that remove drag without breaking the operating model.',
+    heroStatement:
+      'Turn manual handoffs and hidden bottlenecks into an operating machine that moves faster every week.',
+    outcome:
+      'Less rework, fewer delays, cleaner handoffs, faster cycle times, and a clearer path to margin expansion.',
+    bestFor:
+      'Operations-heavy businesses with manual coordination, order-to-cash friction, approval delays, spreadsheet reporting, or too many status meetings.',
+    visual: {
+      poster: '/images/use-cases/ai-operations-efficiency-machine.webp',
+      mp4: '/videos/use-cases/ai-operations-efficiency-machine.mp4',
+      webm: '/videos/use-cases/ai-operations-efficiency-machine.webm',
+      alt: 'Abstract operating value chain with bottlenecks being rerouted into smoother workflows',
+    },
+    symptoms: [
+      'Managers spend too much time chasing status instead of improving throughput.',
+      'Work moves through email, spreadsheets, shared drives, and tribal knowledge.',
+      'Approval queues and exceptions create expensive delays.',
+      'Leadership sees lagging KPIs but not the workflow causes behind them.',
+    ],
+    machine: [
+      {
+        label: 'Workflow map',
+        description:
+          'Identify the handoffs, decisions, documents, systems, and people that define the real process.',
+      },
+      {
+        label: 'Automation layer',
+        description:
+          'Use AI agents and rules to draft, validate, route, summarize, and trigger work across systems.',
+      },
+      {
+        label: 'Exception layer',
+        description:
+          'Separate standard work from edge cases, then route exceptions with context and ownership.',
+      },
+      {
+        label: 'Cadence layer',
+        description:
+          'Install dashboards and routines so leaders manage flow, quality, and margin instead of noise.',
+      },
+    ],
+    plays: [
+      {
+        title: 'Order and request intake',
+        description:
+          'Extracts requirements, checks completeness, flags missing information, and starts the right workflow.',
+      },
+      {
+        title: 'Approval and exception routing',
+        description:
+          'Moves decisions to the right owner with summaries, policy checks, and recommended actions.',
+      },
+      {
+        title: 'Operational reporting agent',
+        description:
+          'Turns system data and team updates into daily summaries, KPI variance notes, and risk alerts.',
+      },
+      {
+        title: 'Handoff quality controls',
+        description:
+          'Checks whether work is ready for the next team before it creates downstream rework.',
+      },
+    ],
+    metrics: [
+      {
+        value: 'Cycle',
+        label: 'Time reduction',
+        description: 'Shorten the path from request to completed work by removing avoidable waits.',
+      },
+      {
+        value: 'Rework',
+        label: 'Reduction',
+        description: 'Catch missing information and quality issues before they move downstream.',
+      },
+      {
+        value: 'Margin',
+        label: 'Visibility',
+        description: 'Tie workflow drag to cost, capacity, service level, and management action.',
+      },
+    ],
+    process: [
+      {
+        phase: 'Week 1',
+        title: 'Find the drag',
+        description:
+          'Map the workflow, quantify wait time, identify rework, and choose the highest-value flow to fix first.',
+      },
+      {
+        phase: 'Weeks 2-3',
+        title: 'Build the work machine',
+        description:
+          'Create intake, routing, validation, summary, and reporting workflows around the real process.',
+      },
+      {
+        phase: 'Weeks 4-6',
+        title: 'Install accountability',
+        description:
+          'Deploy dashboards, ownership rules, escalation paths, and weekly operating reviews.',
+      },
+      {
+        phase: 'Ongoing',
+        title: 'Expand by value',
+        description:
+          'Move from one workflow to adjacent bottlenecks once the first system is stable and measured.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Performance Improvement', href: '/services/performance-improvement' },
+      { label: 'Manufacturing & Industrial', href: '/industries/manufacturing' },
+      { label: 'Wholesale & Distribution', href: '/industries/wholesale-distribution' },
+    ],
+    faqs: [
+      {
+        question: 'Where should operations automation start?',
+        answer:
+          'Start where there is high volume, repeatable decision logic, measurable cycle time, and clear business value. The best first workflow is rarely the flashiest one.',
+      },
+      {
+        question: 'Do we need perfect data first?',
+        answer:
+          'No, but you need to know where data is reliable, where humans must review, and which decisions can be safely automated versus assisted.',
+      },
+      {
+        question: 'How do you avoid disrupting daily operations?',
+        answer:
+          'We ship around one workflow at a time, keep human checkpoints, and install escalation paths before widening automation.',
+      },
+    ],
+  },
+  {
+    slug: 'ai-knowledge-work-automation',
+    title: 'AI Knowledge Work Automation',
+    shortTitle: 'Knowledge Work',
+    eyebrow: 'Speed to insight',
+    seoTitle: 'AI Knowledge Work Automation for Research, Reporting, and Decisions',
+    metaDescription:
+      'Build AI knowledge workflows for research, reporting, document review, synthesis, decision support, and expert handoffs with human judgment built in.',
+    keywords: [
+      'AI knowledge work automation',
+      'AI document automation',
+      'AI research automation',
+      'AI reporting automation',
+      'AI decision support',
+    ],
+    summary:
+      'Give analysts, managers, and experts an AI layer that finds, reads, compares, summarizes, and prepares decisions.',
+    heroStatement:
+      'Stop making your best people hunt for context. Put the knowledge machine around them.',
+    outcome:
+      'Faster research, cleaner reporting, more consistent analysis, and better use of scarce expert judgment.',
+    bestFor:
+      'Teams buried in reports, documents, research, approvals, client prep, compliance reviews, or knowledge trapped across systems.',
+    visual: {
+      poster: '/images/use-cases/ai-knowledge-work-automation.webp',
+      mp4: '/videos/use-cases/ai-knowledge-work-automation.mp4',
+      webm: '/videos/use-cases/ai-knowledge-work-automation.webm',
+      alt: 'Abstract knowledge system transforming document and research signals into decision paths',
+    },
+    symptoms: [
+      'Experts spend valuable hours gathering context before they can make a decision.',
+      'Reports are manually assembled from systems, documents, meetings, and spreadsheets.',
+      'Teams duplicate research because prior work is hard to find or trust.',
+      'Quality depends on who prepared the memo, not on a repeatable review standard.',
+    ],
+    machine: [
+      {
+        label: 'Source layer',
+        description:
+          'Connect trusted documents, systems, policies, prior work, meeting notes, and approved external sources.',
+      },
+      {
+        label: 'Synthesis layer',
+        description:
+          'Summarize, compare, extract, classify, and structure information for the next human decision.',
+      },
+      {
+        label: 'Decision layer',
+        description:
+          'Prepare recommendations, open questions, risks, and evidence trails for review.',
+      },
+      {
+        label: 'Memory layer',
+        description:
+          'Capture decisions and reusable knowledge so the system improves instead of resetting every week.',
+      },
+    ],
+    plays: [
+      {
+        title: 'Research and synthesis agent',
+        description:
+          'Collects approved context, summarizes findings, compares options, and highlights evidence gaps.',
+      },
+      {
+        title: 'Document intake and extraction',
+        description:
+          'Reads PDFs, contracts, forms, reports, and emails to pull structured fields and review flags.',
+      },
+      {
+        title: 'Management reporting workflow',
+        description:
+          'Assembles KPI commentary, variance analysis, meeting briefs, and follow-up actions.',
+      },
+      {
+        title: 'Expert handoff packet',
+        description:
+          'Prepares the context, evidence, and recommended next step before a specialist spends time.',
+      },
+    ],
+    metrics: [
+      {
+        value: 'Speed',
+        label: 'To first draft',
+        description: 'Move from blank page to review-ready analysis faster.',
+      },
+      {
+        value: 'Trace',
+        label: 'Evidence trail',
+        description: 'Keep citations, sources, and decision context attached to the work.',
+      },
+      {
+        value: 'Reuse',
+        label: 'Institutional memory',
+        description: 'Turn repeated analysis into reusable knowledge assets.',
+      },
+    ],
+    process: [
+      {
+        phase: 'Week 1',
+        title: 'Choose the knowledge loop',
+        description:
+          'Find the recurring decision, report, review, or research workflow with high expert time cost.',
+      },
+      {
+        phase: 'Weeks 2-3',
+        title: 'Connect trusted context',
+        description:
+          'Define source rules, document handling, extraction fields, and review standards.',
+      },
+      {
+        phase: 'Weeks 4-6',
+        title: 'Ship decision support',
+        description:
+          'Deploy synthesis, draft, review, and approval workflows with evidence trails and human checks.',
+      },
+      {
+        phase: 'Ongoing',
+        title: 'Build memory',
+        description:
+          'Capture reusable answers, improve source quality, and expand to adjacent knowledge workflows.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Custom AI Agents', href: '/services/custom-ai-agents' },
+      { label: 'Financial Services', href: '/industries/financial-services' },
+      { label: 'Professional Services', href: '/industries/professional-services' },
+    ],
+    faqs: [
+      {
+        question: 'How do you prevent hallucinations in knowledge work?',
+        answer:
+          'We constrain sources, require evidence trails, add review checkpoints, and design outputs around decision support rather than unsupervised final authority.',
+      },
+      {
+        question: 'Can this use internal documents securely?',
+        answer:
+          'Yes, but the architecture depends on access controls, data sensitivity, retention requirements, and which systems hold the knowledge.',
+      },
+      {
+        question: 'What is a good first workflow?',
+        answer:
+          'Good first workflows repeat often, consume expert time, have clear source material, and produce a consistent output such as a report, brief, review, or recommendation.',
+      },
+    ],
+  },
+  {
+    slug: 'ai-quality-control-exception-management',
+    title: 'AI Quality Control & Exception Management',
+    shortTitle: 'Quality Exceptions',
+    eyebrow: 'Quality and risk',
+    seoTitle: 'AI Quality Control and Exception Management Workflows',
+    metaDescription:
+      'Use AI to detect, classify, route, and resolve operational exceptions before they damage quality, service, cost, or customer trust.',
+    keywords: [
+      'AI quality control',
+      'AI exception management',
+      'AI defect detection workflow',
+      'quality assurance automation',
+      'AI risk triage',
+    ],
+    summary:
+      'Create an AI-assisted exception system that detects problems earlier and routes them with context.',
+    heroStatement: 'Catch the misses before they become margin leakage, rework, or customer pain.',
+    outcome:
+      'Earlier detection, faster triage, clearer ownership, better root-cause visibility, and fewer repeated quality failures.',
+    bestFor:
+      'Manufacturers, service operators, insurers, distributors, and complex workflow teams where exceptions are costly and quality variation compounds.',
+    visual: {
+      poster: '/images/use-cases/ai-quality-control-exception-management.webp',
+      mp4: '/videos/use-cases/ai-quality-control-exception-management.mp4',
+      webm: '/videos/use-cases/ai-quality-control-exception-management.webm',
+      alt: 'Abstract quality system detecting and routing operational exception signals',
+    },
+    symptoms: [
+      'Exceptions are found late, after cost, customer impact, or rework has already grown.',
+      'Teams classify and route issues inconsistently.',
+      'Root-cause patterns are buried in notes, tickets, inspections, and spreadsheets.',
+      'Managers see quality metrics but cannot quickly connect them to specific process failures.',
+    ],
+    machine: [
+      {
+        label: 'Detection layer',
+        description:
+          'Monitor signals from tickets, inspections, documents, transactions, sensors, and workflow events.',
+      },
+      {
+        label: 'Classification layer',
+        description:
+          'Group exceptions by severity, source, customer risk, likely cause, and required next action.',
+      },
+      {
+        label: 'Resolution layer',
+        description:
+          'Route ownership, prepare context, suggest remediation, and escalate high-risk cases.',
+      },
+      {
+        label: 'Learning layer',
+        description:
+          'Identify repeated patterns so teams remove causes instead of only resolving symptoms.',
+      },
+    ],
+    plays: [
+      {
+        title: 'Exception triage queue',
+        description:
+          'Prioritizes issues by business impact, urgency, severity, and downstream risk.',
+      },
+      {
+        title: 'Quality review assistant',
+        description:
+          'Summarizes evidence, compares against standards, and prepares the next review action.',
+      },
+      {
+        title: 'Root-cause pattern mining',
+        description:
+          'Finds recurring issue types, locations, teams, products, vendors, or process steps.',
+      },
+      {
+        title: 'Corrective action workflow',
+        description:
+          'Tracks owners, due dates, evidence, completion, and management review cadence.',
+      },
+    ],
+    metrics: [
+      {
+        value: 'Earlier',
+        label: 'Detection',
+        description: 'Move exception discovery closer to the source of the problem.',
+      },
+      {
+        value: 'Faster',
+        label: 'Triage',
+        description: 'Reduce ambiguity about owner, severity, and next action.',
+      },
+      {
+        value: 'Lower',
+        label: 'Repeat failure',
+        description: 'Use pattern visibility to remove causes, not just close tickets.',
+      },
+    ],
+    process: [
+      {
+        phase: 'Week 1',
+        title: 'Define quality signals',
+        description:
+          'Map exception types, sources, severity rules, ownership, and downstream business impact.',
+      },
+      {
+        phase: 'Weeks 2-3',
+        title: 'Build detection and routing',
+        description:
+          'Ship classification, prioritization, owner routing, and context packet workflows.',
+      },
+      {
+        phase: 'Weeks 4-6',
+        title: 'Install corrective action',
+        description:
+          'Add root-cause views, action tracking, escalation rules, and management review routines.',
+      },
+      {
+        phase: 'Ongoing',
+        title: 'Reduce repeats',
+        description:
+          'Tune signals, improve standards, and expand from one exception class to the next.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Performance Improvement', href: '/services/performance-improvement' },
+      { label: 'Manufacturing & Industrial', href: '/industries/manufacturing' },
+      { label: 'Insurance', href: '/industries/insurance' },
+    ],
+    faqs: [
+      {
+        question: 'Is this computer vision?',
+        answer:
+          'Sometimes, but not always. Many high-value quality systems start with tickets, documents, inspections, transactions, or workflow metadata before adding vision.',
+      },
+      {
+        question: 'Can AI make quality decisions by itself?',
+        answer:
+          'For high-risk workflows, AI should assist detection, classification, context, and routing while humans own final judgment until reliability is proven.',
+      },
+      {
+        question: 'What makes this different from a dashboard?',
+        answer:
+          'Dashboards show what happened. An exception machine routes the issue, prepares context, tracks action, and helps leaders prevent the repeat.',
+      },
+    ],
+  },
+  {
+    slug: 'pe-portfolio-ai-value-creation',
+    title: 'PE Portfolio AI Value Creation',
+    shortTitle: 'PE Value Creation',
+    eyebrow: 'Portfolio growth',
+    seoTitle: 'AI Value Creation for Private Equity Portfolio Companies',
+    metaDescription:
+      'Identify repeatable AI value creation plays across PE portfolio companies, then build production systems tied to revenue, margin, speed, and exit narrative.',
+    keywords: [
+      'AI value creation private equity',
+      'PE portfolio AI',
+      'AI portfolio company value creation',
+      'AI EBITDA improvement',
+      'private equity AI consulting',
+    ],
+    summary:
+      'Turn AI from scattered portfolio experiments into a repeatable operating playbook tied to value creation.',
+    heroStatement:
+      'Find the AI plays that repeat across the portfolio. Build them into measurable operating advantage.',
+    outcome:
+      'Clearer prioritization, faster execution, reusable playbooks, stronger operating cadence, and a better story for value creation.',
+    bestFor:
+      'PE firms, operating partners, and portfolio leadership teams that need practical AI initiatives tied to hold-period economics.',
+    visual: {
+      poster: '/images/use-cases/pe-portfolio-ai-value-creation.webp',
+      mp4: '/videos/use-cases/pe-portfolio-ai-value-creation.mp4',
+      webm: '/videos/use-cases/pe-portfolio-ai-value-creation.webm',
+      alt: 'Abstract portfolio value creation map with connected operating company systems',
+    },
+    symptoms: [
+      'Portfolio companies are experimenting with AI but not scaling measurable systems.',
+      'Operating teams lack a common way to prioritize AI by value, risk, and time-to-impact.',
+      'Similar revenue, service, and operations problems repeat across companies without reusable playbooks.',
+      'AI progress is hard to translate into board updates, KPI movement, or exit narrative.',
+    ],
+    machine: [
+      {
+        label: 'Portfolio map',
+        description:
+          'Assess companies by data readiness, workflow maturity, operating pain, and value creation levers.',
+      },
+      {
+        label: 'Playbook layer',
+        description:
+          'Define repeatable AI systems for revenue, service, operations, reporting, and quality.',
+      },
+      {
+        label: 'Sprint layer',
+        description:
+          'Ship the highest-value plays inside selected companies with practical governance and measurement.',
+      },
+      {
+        label: 'Board layer',
+        description:
+          'Track adoption, KPI impact, risk, and next actions in a cadence operating partners can manage.',
+      },
+    ],
+    plays: [
+      {
+        title: 'Portfolio AI opportunity screen',
+        description:
+          'Ranks companies and workflows by potential value, implementation complexity, data readiness, and sponsorship.',
+      },
+      {
+        title: 'Revenue and service playbooks',
+        description:
+          'Reusable systems for pipeline acceleration, service triage, customer risk, and follow-up discipline.',
+      },
+      {
+        title: 'Operations and margin playbooks',
+        description:
+          'Workflow automation for order handling, approvals, reporting, exception management, and rework reduction.',
+      },
+      {
+        title: 'Board-ready value tracking',
+        description:
+          'Translates AI initiatives into adoption, cycle time, quality, revenue, cost, and margin measures.',
+      },
+    ],
+    metrics: [
+      {
+        value: 'Rank',
+        label: 'By value and readiness',
+        description: 'Prioritize the right company and workflow before spending build effort.',
+      },
+      {
+        value: 'Reuse',
+        label: 'Across companies',
+        description: 'Turn one successful sprint into a portfolio playbook.',
+      },
+      {
+        value: 'Measure',
+        label: 'Operating impact',
+        description: 'Tie AI adoption to practical KPIs that matter in the hold period.',
+      },
+    ],
+    process: [
+      {
+        phase: 'Weeks 1-2',
+        title: 'Screen the portfolio',
+        description:
+          'Assess AI opportunities by value creation lever, workflow maturity, data readiness, and leadership pull.',
+      },
+      {
+        phase: 'Weeks 3-6',
+        title: 'Run the first sprint',
+        description:
+          'Build and deploy the highest-return system inside one portfolio company with measurable targets.',
+      },
+      {
+        phase: 'Weeks 7-10',
+        title: 'Codify the playbook',
+        description:
+          'Package what worked into templates, governance, integrations, and operating routines.',
+      },
+      {
+        phase: 'Ongoing',
+        title: 'Scale by pattern',
+        description:
+          'Apply the playbook to similar portfolio companies and track impact in operating reviews.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'PE Value Creation', href: '/services/pe-value-creation' },
+      { label: 'Private Equity', href: '/industries/private-equity' },
+      { label: 'Case Studies', href: '/case-studies' },
+    ],
+    faqs: [
+      {
+        question: 'How do you prioritize across portfolio companies?',
+        answer:
+          'We rank opportunities by business value, workflow maturity, data availability, integration complexity, leadership sponsorship, and how reusable the play may be across the portfolio.',
+      },
+      {
+        question: 'Does each company need a custom AI strategy?',
+        answer:
+          'Each company needs local workflow fit, but the best PE approach is pattern-based: build reusable plays and adapt them to the operating context.',
+      },
+      {
+        question: 'How does this support exit prep?',
+        answer:
+          'The output is not an AI story alone. It is evidence of better operating cadence, speed, quality, customer responsiveness, margin visibility, and adoption.',
+      },
+    ],
+  },
+];
+
+export function getUseCaseBySlug(slug: string) {
+  return useCases.find((useCase) => useCase.slug === slug);
+}
