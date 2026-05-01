@@ -79,7 +79,7 @@ export default function UseCasesPage() {
           <p className="mt-7 max-w-2xl text-body-lg text-stone">
             These are the use cases where AI most often turns into real buyer urgency: growth,
             customer service, operations speed, knowledge work, quality, and PE value creation. Each
-            page shows the story, the machine, and the first build path.
+            page shows the trigger pattern, the machine, and the first build path.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Button size="lg" asChild>
@@ -173,16 +173,16 @@ export default function UseCasesPage() {
             <div className="mt-10 space-y-8 lg:col-span-7 lg:mt-0">
               {[
                 [
-                  'They start with pressure leaders can name',
-                  'Faster response, cleaner pipeline, less rework, and stronger portfolio value are business problems before they are AI problems.',
+                  'They start with business triggers',
+                  'The best AI systems know what event creates urgency: a capital project, delayed handoff, quality issue, service risk, or portfolio value lever.',
                 ],
                 [
                   'They make the machine concrete',
-                  'The work becomes specific: what gets built, who uses it, what decisions change, and where human judgment stays in the loop.',
+                  'The work becomes specific: what gets built, who uses it, what decisions change, what cadence runs, and where human judgment stays in the loop.',
                 ],
                 [
-                  'They create a practical first move',
-                  'Every path points back to a value map so the team can see where the same pattern applies inside the company.',
+                  'They compound through feedback',
+                  'Every workflow needs a review loop so the system learns from rep feedback, service outcomes, exception patterns, and management decisions.',
                 ],
               ].map(([title, description]) => (
                 <div key={title} className="border-t border-divider pt-6">

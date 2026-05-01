@@ -10,6 +10,11 @@ export interface UseCase {
   heroStatement: string;
   outcome: string;
   bestFor: string;
+  fieldProof: {
+    headline: string;
+    body: string;
+    bullets: string[];
+  };
   visual: {
     poster: string;
     mp4: string;
@@ -62,13 +67,22 @@ export const useCases: UseCase[] = [
       'sales pipeline acceleration',
     ],
     summary:
-      'Turn scattered CRM data, intent signals, and seller activity into a disciplined growth machine.',
+      'Turn scattered CRM data, market triggers, intent signals, and seller activity into a disciplined growth machine.',
     heroStatement:
       'Find the accounts most likely to move. Give your team the AI machine to reach them first.',
     outcome:
       'More qualified pipeline, faster follow-up, cleaner data, and a sales team focused on judgment instead of manual research.',
     bestFor:
       'B2B companies with long sales cycles, uneven CRM hygiene, slow lead response, or too many high-fit accounts going untouched.',
+    fieldProof: {
+      headline: 'The strongest pattern is a trigger-driven sales intelligence engine.',
+      body: 'In a live industrial GTM deployment, the breakthrough was not a bigger prospect list. It was a territory-by-territory operating system that watched for capital projects, EPC awards, facility expansions, leadership changes, technical requirements, and customer ecosystem movement before buyers entered a standard procurement motion.',
+      bullets: [
+        'Build an 8-12 category trigger taxonomy around the real buying events in the market.',
+        'Turn each trigger into scored accounts, decision-maker maps, sales plays, and rep-ready next actions.',
+        'Close the loop weekly so sales feedback improves targeting, scoring, and message quality.',
+      ],
+    },
     visual: {
       poster: '/images/use-cases/ai-sales-pipeline-acceleration.webp',
       mp4: '/videos/use-cases/ai-sales-pipeline-acceleration.mp4',
@@ -83,9 +97,9 @@ export const useCases: UseCase[] = [
     ],
     machine: [
       {
-        label: 'Signal layer',
+        label: 'Trigger layer',
         description:
-          'Connect CRM, website, enrichment, intent, customer, and market signals into one opportunity view.',
+          'Define the market events that create urgency: funding, expansion, regulation, leadership change, product launch, competitor movement, or operational pain.',
       },
       {
         label: 'Prioritization layer',
@@ -108,6 +122,11 @@ export const useCases: UseCase[] = [
         title: 'Account priority engine',
         description:
           'Ranks accounts and contacts by growth potential, trigger events, engagement, fit, and relationship history.',
+      },
+      {
+        title: 'Territory intelligence report',
+        description:
+          'Packages scored opportunities, market context, intelligence gaps, and a 30-day sales action plan for each region or segment.',
       },
       {
         title: 'Rep research agent',
@@ -138,8 +157,9 @@ export const useCases: UseCase[] = [
       },
       {
         value: 'Lift',
-        label: 'In qualified meetings',
-        description: 'Prioritize higher-fit accounts and speed up response to real buying signals.',
+        label: 'In qualified pursuit',
+        description:
+          'Prioritize accounts with real business triggers instead of generic firmographic fit.',
       },
     ],
     process: [
@@ -147,13 +167,13 @@ export const useCases: UseCase[] = [
         phase: 'Week 1',
         title: 'Map the revenue path',
         description:
-          'Audit CRM data, lead sources, funnel conversion, seller workflow, and high-value account segments.',
+          'Audit CRM data, lead sources, funnel conversion, seller workflow, territory rules, and high-value account segments.',
       },
       {
         phase: 'Weeks 2-3',
-        title: 'Build the signal machine',
+        title: 'Build the trigger machine',
         description:
-          'Connect data sources, design the scoring model, and ship the first account intelligence workflow.',
+          'Connect data sources, design the trigger taxonomy, create scoring logic, and ship the first account intelligence workflow.',
       },
       {
         phase: 'Weeks 4-6',
@@ -177,7 +197,7 @@ export const useCases: UseCase[] = [
       {
         question: 'Is this just automated outbound?',
         answer:
-          'No. Outbound is one possible workflow, but the larger system is account prioritization, seller intelligence, CRM hygiene, follow-up discipline, and management visibility.',
+          'No. Outbound is one possible workflow, but the larger system is trigger detection, account prioritization, seller intelligence, CRM hygiene, follow-up discipline, and management visibility.',
       },
       {
         question: 'Will reps trust the recommendations?',
@@ -214,6 +234,15 @@ export const useCases: UseCase[] = [
       'Shorter queues, better first responses, cleaner escalation paths, and a service team that protects trust while moving faster.',
     bestFor:
       'Companies with growing service volume, uneven response quality, manual ticket routing, or too much tribal knowledge trapped in senior staff.',
+    fieldProof: {
+      headline: 'Service automation works when autonomy is explicit.',
+      body: 'The field model uses a practical autonomy ladder: some work can be fully automatic, some should be AI-drafted, and some must stay human-led. That same model is the right foundation for service operations because speed only helps if customers still feel judgment, context, and ownership.',
+      bullets: [
+        'Auto: classify, summarize, enrich, and route routine requests.',
+        'AI Draft: prepare responses, knowledge suggestions, and escalation packets for human review.',
+        'Human Led: own sensitive customers, ambiguous exceptions, negotiation, and relationship moments.',
+      ],
+    },
     visual: {
       poster: '/images/use-cases/ai-customer-service-excellence.webp',
       mp4: '/videos/use-cases/ai-customer-service-excellence.mp4',
@@ -228,9 +257,9 @@ export const useCases: UseCase[] = [
     ],
     machine: [
       {
-        label: 'Intake layer',
+        label: 'Autonomy layer',
         description:
-          'Classify requests by urgency, product, customer value, risk, required knowledge, and next action.',
+          'Separate work into auto, AI-drafted, and human-led paths so the team knows exactly where judgment belongs.',
       },
       {
         label: 'Resolution layer',
@@ -253,6 +282,11 @@ export const useCases: UseCase[] = [
         title: 'Ticket triage and routing',
         description:
           'Classifies inbound requests and routes them based on urgency, customer tier, topic, and required expertise.',
+      },
+      {
+        title: 'Autonomy badge rules',
+        description:
+          'Marks each workflow as auto, AI draft, or human led so leaders can expand automation without losing control.',
       },
       {
         title: 'Agent assist workspace',
@@ -300,7 +334,7 @@ export const useCases: UseCase[] = [
         phase: 'Weeks 2-3',
         title: 'Build triage and assist',
         description:
-          'Ship ticket classification, history summaries, response drafting, and routing workflows.',
+          'Ship autonomy rules, ticket classification, history summaries, response drafting, and routing workflows.',
       },
       {
         phase: 'Weeks 4-6',
@@ -361,6 +395,15 @@ export const useCases: UseCase[] = [
       'Less rework, fewer delays, cleaner handoffs, faster cycle times, and a clearer path to margin expansion.',
     bestFor:
       'Operations-heavy businesses with manual coordination, order-to-cash friction, approval delays, spreadsheet reporting, or too many status meetings.',
+    fieldProof: {
+      headline: 'Operations AI should look like a stage-gate system, not a loose tool shelf.',
+      body: 'The best operating systems define the real gates in the workflow: what enters, what must be validated, who owns the decision, what evidence is required, and what moves the work forward. AI then does the heavy lifting around each gate while people keep control of exceptions and tradeoffs.',
+      bullets: [
+        'Map the as-is workflow into named stages, owners, entry criteria, and exit criteria.',
+        'Use AI to gather evidence, check completeness, draft handoffs, and surface blockers.',
+        'Review flow weekly by cycle time, rework, stuck items, and margin impact.',
+      ],
+    },
     visual: {
       poster: '/images/use-cases/ai-operations-efficiency-machine.webp',
       mp4: '/videos/use-cases/ai-operations-efficiency-machine.mp4',
@@ -375,9 +418,9 @@ export const useCases: UseCase[] = [
     ],
     machine: [
       {
-        label: 'Workflow map',
+        label: 'Stage-gate map',
         description:
-          'Identify the handoffs, decisions, documents, systems, and people that define the real process.',
+          'Identify the stages, gates, entry rules, exit rules, evidence, systems, and owners that define the real process.',
       },
       {
         label: 'Automation layer',
@@ -397,9 +440,9 @@ export const useCases: UseCase[] = [
     ],
     plays: [
       {
-        title: 'Order and request intake',
+        title: 'Stage-gate intake',
         description:
-          'Extracts requirements, checks completeness, flags missing information, and starts the right workflow.',
+          'Extracts requirements, checks completeness, flags missing information, and advances work only when the gate is ready.',
       },
       {
         title: 'Approval and exception routing',
@@ -445,7 +488,7 @@ export const useCases: UseCase[] = [
         phase: 'Weeks 2-3',
         title: 'Build the work machine',
         description:
-          'Create intake, routing, validation, summary, and reporting workflows around the real process.',
+          'Create stage gates, routing, validation, summaries, and reporting workflows around the real process.',
       },
       {
         phase: 'Weeks 4-6',
@@ -506,6 +549,15 @@ export const useCases: UseCase[] = [
       'Faster research, cleaner reporting, more consistent analysis, and better use of scarce expert judgment.',
     bestFor:
       'Teams buried in reports, documents, research, approvals, client prep, compliance reviews, or knowledge trapped across systems.',
+    fieldProof: {
+      headline: 'The reporting agent should produce decisions, not just documents.',
+      body: 'The strongest industrial intelligence outputs combined sourced research, opportunity scoring, intelligence gaps, a 30-day action plan, playbooks, and source bibliographies. That is the better pattern for knowledge work: the AI system prepares a decision packet with evidence, gaps, and next actions attached.',
+      bullets: [
+        'Require source trails and confidence notes so leaders can inspect the reasoning.',
+        'Separate facts, gaps, recommendations, and human decisions into distinct sections.',
+        'Turn each finished report into reusable memory for the next market, customer, or workflow.',
+      ],
+    },
     visual: {
       poster: '/images/use-cases/ai-knowledge-work-automation.webp',
       mp4: '/videos/use-cases/ai-knowledge-work-automation.mp4',
@@ -525,9 +577,9 @@ export const useCases: UseCase[] = [
           'Connect trusted documents, systems, policies, prior work, meeting notes, and approved external sources.',
       },
       {
-        label: 'Synthesis layer',
+        label: 'Evidence layer',
         description:
-          'Summarize, compare, extract, classify, and structure information for the next human decision.',
+          'Summarize, compare, extract, classify, and keep source trails attached to the next human decision.',
       },
       {
         label: 'Decision layer',
@@ -552,9 +604,9 @@ export const useCases: UseCase[] = [
           'Reads PDFs, contracts, forms, reports, and emails to pull structured fields and review flags.',
       },
       {
-        title: 'Management reporting workflow',
+        title: 'Decision packet workflow',
         description:
-          'Assembles KPI commentary, variance analysis, meeting briefs, and follow-up actions.',
+          'Assembles executive summary, evidence, gaps, recommendations, action plan, and follow-up owners.',
       },
       {
         title: 'Expert handoff packet',
@@ -596,7 +648,7 @@ export const useCases: UseCase[] = [
         phase: 'Weeks 4-6',
         title: 'Ship decision support',
         description:
-          'Deploy synthesis, draft, review, and approval workflows with evidence trails and human checks.',
+          'Deploy synthesis, draft, review, action-plan, and approval workflows with evidence trails and human checks.',
       },
       {
         phase: 'Ongoing',
@@ -650,6 +702,15 @@ export const useCases: UseCase[] = [
       'Earlier detection, faster triage, clearer ownership, better root-cause visibility, and fewer repeated quality failures.',
     bestFor:
       'Manufacturers, service operators, insurers, distributors, and complex workflow teams where exceptions are costly and quality variation compounds.',
+    fieldProof: {
+      headline: 'The best quality use cases begin with event triggers.',
+      body: 'In the industrial GTM work, quality-control crises and recall remediation became high-intent buying signals because they were urgent, funded, and tied to executive risk. Inside an operating company, the same logic applies: detect the quality event early, classify severity, assign ownership, and learn from the repeat pattern.',
+      bullets: [
+        'Monitor recalls, complaints, inspection failures, returns, warranty claims, and operational disruptions.',
+        'Route exceptions by severity, customer impact, regulatory risk, and likely root cause.',
+        'Use repeat-pattern mining to turn closed issues into prevention work.',
+      ],
+    },
     visual: {
       poster: '/images/use-cases/ai-quality-control-exception-management.webp',
       mp4: '/videos/use-cases/ai-quality-control-exception-management.mp4',
@@ -664,9 +725,9 @@ export const useCases: UseCase[] = [
     ],
     machine: [
       {
-        label: 'Detection layer',
+        label: 'Trigger layer',
         description:
-          'Monitor signals from tickets, inspections, documents, transactions, sensors, and workflow events.',
+          'Monitor signals from tickets, recalls, inspections, documents, transactions, sensors, and workflow events.',
       },
       {
         label: 'Classification layer',
@@ -686,9 +747,9 @@ export const useCases: UseCase[] = [
     ],
     plays: [
       {
-        title: 'Exception triage queue',
+        title: 'Quality event triage',
         description:
-          'Prioritizes issues by business impact, urgency, severity, and downstream risk.',
+          'Prioritizes issues by business impact, urgency, severity, customer exposure, and downstream risk.',
       },
       {
         title: 'Quality review assistant',
@@ -728,7 +789,7 @@ export const useCases: UseCase[] = [
         phase: 'Week 1',
         title: 'Define quality signals',
         description:
-          'Map exception types, sources, severity rules, ownership, and downstream business impact.',
+          'Map event triggers, exception types, sources, severity rules, ownership, and downstream business impact.',
       },
       {
         phase: 'Weeks 2-3',
@@ -795,6 +856,15 @@ export const useCases: UseCase[] = [
       'Clearer prioritization, faster execution, reusable playbooks, stronger operating cadence, and a better story for value creation.',
     bestFor:
       'PE firms, operating partners, and portfolio leadership teams that need practical AI initiatives tied to hold-period economics.',
+    fieldProof: {
+      headline: 'Reusable value creation comes from retuning the same machine.',
+      body: 'The same operating pattern can support different business lines: one trigger taxonomy for industrial projects, another for automation demand, another for data-center infrastructure, another for specialty materials. That is the portfolio lesson: build the architecture once, retune it for each company and value lever.',
+      bullets: [
+        'Screen companies for repeatable revenue, service, operations, reporting, and quality plays.',
+        'Build a first implementation that creates templates, taxonomies, prompts, scorecards, and cadence.',
+        "Scale by pattern while preserving each company's local workflow, market, and data reality.",
+      ],
+    },
     visual: {
       poster: '/images/use-cases/pe-portfolio-ai-value-creation.webp',
       mp4: '/videos/use-cases/pe-portfolio-ai-value-creation.mp4',
@@ -814,9 +884,9 @@ export const useCases: UseCase[] = [
           'Assess companies by data readiness, workflow maturity, operating pain, and value creation levers.',
       },
       {
-        label: 'Playbook layer',
+        label: 'Pattern layer',
         description:
-          'Define repeatable AI systems for revenue, service, operations, reporting, and quality.',
+          'Define reusable taxonomies, workflows, prompts, scorecards, and operating cadences for revenue, service, operations, reporting, and quality.',
       },
       {
         label: 'Sprint layer',
@@ -831,9 +901,9 @@ export const useCases: UseCase[] = [
     ],
     plays: [
       {
-        title: 'Portfolio AI opportunity screen',
+        title: 'Portfolio pattern screen',
         description:
-          'Ranks companies and workflows by potential value, implementation complexity, data readiness, and sponsorship.',
+          'Ranks companies and workflows by value, repeatability, implementation complexity, data readiness, and sponsorship.',
       },
       {
         title: 'Revenue and service playbooks',

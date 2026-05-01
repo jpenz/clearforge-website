@@ -242,13 +242,15 @@ export default function Home() {
               <div className="lg:col-span-7">
                 <p className="overline">Use Cases</p>
                 <h2 className="mt-6 max-w-3xl text-display">
-                  The first AI machines worth building for growth and margin.
+                  The first AI machines worth building have a trigger, a workflow, and a feedback
+                  loop.
                 </h2>
               </div>
               <div className="mt-8 lg:col-span-5 lg:mt-0">
                 <p className="text-body-lg text-warm-gray">
                   ClearForge starts where AI becomes operational leverage: sales, service,
-                  operations, knowledge work, quality, and portfolio value creation.
+                  operations, knowledge work, quality, and portfolio value creation. Each one is
+                  built to become an operating cadence, not a one-off tool.
                 </p>
               </div>
             </div>

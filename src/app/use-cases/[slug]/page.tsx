@@ -100,6 +100,30 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
+      <section className="border-t border-divider bg-recessed py-20 lg:py-32">
+        <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5">
+              <p className="overline">Field Pattern</p>
+              <h2 className="mt-6 text-display">{useCase.fieldProof.headline}</h2>
+            </div>
+            <div className="mt-10 lg:col-span-7 lg:mt-0">
+              <p className="text-body-lg text-warm-gray">{useCase.fieldProof.body}</p>
+              <div className="mt-8 border-t border-divider">
+                {useCase.fieldProof.bullets.map((bullet, index) => (
+                  <div key={bullet} className="flex gap-5 border-b border-divider py-5">
+                    <span className="metric shrink-0 text-sm text-brass">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <p className="text-body text-anthracite">{bullet}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-parchment py-24 lg:py-36">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-16">
