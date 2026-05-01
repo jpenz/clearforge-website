@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { HeroVideoBackground } from './hero-video-background';
 
 /**
  * V8.18 Editorial Hero with ambient video background.
@@ -11,35 +11,13 @@ import { Button } from '@/components/ui/button';
  * quickly, not wait through a forced animation. Reverted to a plain
  * autoplay loop: the video adds motion without interrupting scroll.
  *
- * Mobile gets the same video (now only 271KB, down from 4.8MB in V8.4),
- * so we no longer need a separate static image fallback for mobile.
+ * The background media is now isolated in HeroVideoBackground so accessibility,
+ * reduced-motion behavior, and future generated video assets stay in one place.
  */
 export function HeroScroll() {
   return (
     <section className="dark-section relative min-h-[86svh] overflow-hidden">
-      {/* Ambient video background */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster="/images/hero-bg.webp"
-        className="absolute inset-0 h-full w-full object-cover opacity-52 motion-reduce:hidden"
-      >
-        <source src="/videos/hero.mp4" type="video/mp4" />
-      </video>
-
-      {/* Mobile-only static fallback for reduced-motion users */}
-      <Image
-        src="/images/hero-bg.webp"
-        alt=""
-        fill
-        sizes="100vw"
-        priority
-        fetchPriority="high"
-        className="object-cover opacity-50 motion-reduce:block hidden pointer-events-none"
-      />
+      <HeroVideoBackground />
 
       {/* Gradient — keeps headline legible */}
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,15,30,0.92)_0%,rgba(10,15,30,0.74)_46%,rgba(10,15,30,0.38)_100%)] pointer-events-none" />

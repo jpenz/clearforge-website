@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "defaults": {
+    "aspectRatio": "16:9",
+    "duration": 5,
+    "quality": "1080p",
+    "veoModel": "veo3",
+    "runwayModel": "runway-duration-5-generate",
+    "watermark": ""
+  },
+  "variants": [
+    {
+      "id": "value-chain-scan",
+      "title": "Value Chain Scan",
+      "prompt": "A premium abstract cinematic hero video for an AI operations consulting company. A dark industrial value-chain map appears across the frame like a living operating system. Subtle brass and cool blue signals move through sales, service, production, finance, and leadership nodes. Small growth opportunities light up in sequence, then connect into one precise AI machine with human operator nodes still visible. The feeling is executive, practical, high-trust, fast, efficient, and premium. No text, no letters, no logos, no people, no faces, no UI screenshots, no charts with readable labels. Smooth camera drift, shallow depth, clean dark background, seamless loop, website hero background, 16:9.",
+      "providerOverrides": {
+        "veo": {
+          "generationType": "TEXT_2_VIDEO",
+          "enableFallback": false,
+          "enableTranslation": false
+        },
+        "runway": {
+          "duration": 5,
+          "quality": "1080p"
+        }
+      }
+    },
+    {
+      "id": "operator-ai-loop",
+      "title": "Operator AI Loop",
+      "prompt": "A refined cinematic abstract animation showing humans and AI working as one operating machine. Dark background with precise brass, white, and cool-blue signal lines. Human decision nodes pulse gently, AI agent nodes process signals, and outputs flow toward faster service, higher quality, better margin, and growth. The composition should leave the left side slightly darker for website headline readability. No readable text, no logos, no faces, no hands, no humanoid robots, no clutter. Premium consulting brand, elegant, calm, loopable, 16:9 hero background.",
+      "providerOverrides": {
+        "veo": {
+          "generationType": "TEXT_2_VIDEO",
+          "enableFallback": false,
+          "enableTranslation": false
+        },
+        "runway": {
+          "duration": 5,
+          "quality": "1080p"
+        }
+      }
+    },
+    {
+      "id": "market-advantage-machine",
+      "title": "Market Advantage Machine",
+      "prompt": "An executive-level abstract film loop about finding growth spots and building an AI advantage machine. A field of faint industry signals becomes organized into a disciplined operating system. Bright opportunity points appear, connect to workflow paths, then accelerate into a clean flywheel. The mood is premium, strategic, trustworthy, and grounded, like a high-end AI transformation website for mid-market companies. Keep motion slow and elegant. Dark left-side negative space for headline copy. No text, no numbers, no logos, no people, no city skyline, no generic sci-fi robot. Seamless loop, 16:9.",
+      "providerOverrides": {
+        "veo": {
+          "generationType": "TEXT_2_VIDEO",
+          "enableFallback": false,
+          "enableTranslation": false
+        },
+        "runway": {
+          "duration": 5,
+          "quality": "1080p"
+        }
+      }
+    }
+  ]
+}

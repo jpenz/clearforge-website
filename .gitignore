@@ -20,6 +20,7 @@ coverage
 # build
 build
 dist
+artifacts/generated-video
 
 # misc
 .DS_Store
