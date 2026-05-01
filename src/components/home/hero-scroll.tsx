@@ -49,10 +49,10 @@ export function HeroScroll() {
       <div className="absolute bottom-0 left-0 right-0 hidden border-t border-bone/10 lg:block">
         <div className="mx-auto grid max-w-[1400px] grid-cols-4 px-10">
           {[
-            ['01', 'Find the value'],
-            ['02', 'Build the system'],
-            ['03', 'Deploy with operators'],
-            ['04', 'Measure and improve'],
+            ['01', 'Find growth spots'],
+            ['02', 'Build the AI machine'],
+            ['03', 'Train the people'],
+            ['04', 'Win the market'],
           ].map(([step, label]) => (
             <div key={step} className="border-l border-bone/10 px-6 py-5 last:border-r">
               <p className="metric text-xs text-brass-light">{step}</p>
@@ -64,20 +64,28 @@ export function HeroScroll() {
 
       {/* Content overlay */}
       <div className="relative z-10 mx-auto flex min-h-[86svh] w-full max-w-[1400px] flex-col justify-center px-4 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-10 lg:pb-40">
-        <p className="overline text-xs animate-fade-in">Production AI for operators</p>
+        <p className="overline text-xs animate-fade-in">AI growth systems for operators</p>
 
-        <h1 className="mt-7 max-w-[980px] text-[3rem] leading-[1.02] text-bone sm:text-[4.5rem] lg:text-[5.8rem]">
-          AI strategy that becomes operating capacity.
+        <h1 className="mt-7 max-w-[980px] text-[2.7rem] leading-[1.02] text-bone sm:text-[4rem] lg:text-[5.2rem]">
+          Find the growth spots. Build the AI machine to win them.
         </h1>
-        <p className="mt-3 max-w-[900px] font-display text-[2.4rem] italic leading-[1.05] text-brass-light sm:text-[3.8rem] lg:text-[4.8rem]">
-          Not another deck.
+        <p className="mt-3 max-w-[900px] font-display text-[2.25rem] italic leading-[1.05] text-brass-light sm:text-[3.4rem] lg:text-[4.2rem]">
+          With your people in the loop.
         </p>
 
         <p className="mt-8 max-w-2xl text-body-lg text-stone animate-fade-in-up delay-3">
-          ClearForge maps where AI can move revenue, cost, or throughput, then builds the production
-          systems and trains your team to run them. One senior team from first brief to measurable
-          value.
+          ClearForge maps where AI can unlock growth, speed, quality, customer service, efficiency,
+          and margin, then builds the agents, workflows, and operating routines your team uses to
+          become the best-run company in the market.
         </p>
+
+        <div className="mt-7 grid max-w-3xl grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-5 animate-fade-in-up delay-3">
+          {['Growth', 'Speed', 'Quality', 'Service', 'Margin'].map((advantage) => (
+            <div key={advantage} className="border-t border-bone/15 pt-3">
+              <p className="text-xs font-semibold text-bone/80">{advantage}</p>
+            </div>
+          ))}
+        </div>
 
         <div className="mt-10 flex flex-wrap items-center gap-6 animate-fade-in-up delay-4">
           <Button size="lg" asChild>

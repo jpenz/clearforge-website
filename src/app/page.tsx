@@ -1,4 +1,13 @@
-import { ArrowRight, CheckCircle2, Gauge, Route, Shield, Sparkles, Workflow } from 'lucide-react';
+import {
+  ArrowRight,
+  CheckCircle2,
+  Crown,
+  Gauge,
+  Route,
+  Shield,
+  Sparkles,
+  Workflow,
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ForgeMethodDiagram } from '@/components/home/forge-method-diagram';
@@ -12,9 +21,9 @@ import { industries } from '@/data/industries-value-chains';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'ClearForge — Production AI Systems for Mid-Market Operators',
+  title: 'ClearForge — AI Growth Systems for Mid-Market Operators',
   description:
-    'ClearForge maps where AI can move revenue, cost, or throughput, then builds the production systems and trains your team to run them.',
+    'ClearForge finds the growth, service, speed, quality, efficiency, and margin opportunities in your operating model, then builds the AI systems and team routines to win them.',
   path: '',
 });
 
@@ -27,41 +36,69 @@ const activityCount = industries.reduce(
 
 const operatingGaps = [
   {
-    signal: 'Pilots without ownership',
-    symptom: 'AI experiments live in side channels while operators keep using the old workflow.',
-    response:
-      'We assign each system to an operating metric, a workflow owner, and a launch cadence.',
-  },
-  {
-    signal: 'Manual work hiding in margin',
-    symptom: 'High-skill teams spend hours reconciling, quoting, routing, reviewing, or reporting.',
-    response:
-      'We turn repeatable judgment into agents, copilots, automations, and measurable controls.',
-  },
-  {
-    signal: 'Strategy trapped in translation',
+    signal: 'Growth is trapped in the value chain',
     symptom:
-      'A roadmap exists, but engineering, data, and adoption never converge into one build plan.',
+      'Every industry has places where leads are missed, customers wait, quality slips, and margin leaks.',
     response:
-      'The same senior team diagnoses, scopes, builds, deploys, and stays through adoption.',
+      'We map the operating model and identify the specific workflows where AI can create market advantage.',
+  },
+  {
+    signal: 'AI pilots do not change the company',
+    symptom:
+      'A demo can look impressive while the people, data, controls, and daily operating rhythm stay the same.',
+    response:
+      'We build the agents and workflows into the way your team actually sells, serves, produces, and manages.',
+  },
+  {
+    signal: 'Best-in-market requires a machine',
+    symptom:
+      'Speed, quality, service, efficiency, and margin cannot depend on heroic manual effort.',
+    response:
+      'We install the AI-plus-people operating system that makes better performance repeatable.',
   },
 ];
 
 const valueMapSteps = [
   {
     icon: Route,
-    label: 'Map the operating model',
-    detail: 'Forge Intelligence reads your website and drafts a company-specific value chain.',
+    label: 'Find the growth spots',
+    detail:
+      'Forge Intelligence reads your website and maps where your industry, customers, and workflows create leverage.',
   },
   {
     icon: Gauge,
-    label: 'Score AI leverage',
-    detail: 'Activities are ranked by revenue, cost, throughput, feasibility, and urgency.',
+    label: 'Score the market advantage',
+    detail:
+      'Opportunities are ranked by growth, speed, quality, service, margin, feasibility, and urgency.',
   },
   {
     icon: Workflow,
-    label: 'Choose the first build',
-    detail: 'You leave with a prioritized path into diagnostic, sprint, or managed operations.',
+    label: 'Build the first machine',
+    detail:
+      'You leave with the first AI system to scope: agents, workflow, data path, controls, and team adoption.',
+  },
+];
+
+const advantageLoop = [
+  {
+    label: 'Growth',
+    detail: 'Surface better leads, expansion signals, pricing opportunities, and account actions.',
+  },
+  {
+    label: 'Speed',
+    detail: 'Compress quoting, triage, scheduling, reporting, review, and handoff cycles.',
+  },
+  {
+    label: 'Quality',
+    detail: 'Add repeatable checks, recommendations, and operating controls around critical work.',
+  },
+  {
+    label: 'Service',
+    detail: 'Give customers faster answers, cleaner follow-through, and fewer avoidable misses.',
+  },
+  {
+    label: 'Margin',
+    detail: 'Remove manual coordination, rework, leakage, and low-value administrative load.',
   },
 ];
 
@@ -128,7 +165,7 @@ export default function Home() {
           <span className="hidden text-divider lg:inline">/</span>
           <span>Production AI systems for operators, PE teams, and growth companies</span>
           <span className="hidden text-divider lg:inline">/</span>
-          <span>Diagnose, build, deploy, and operate with one accountable team</span>
+          <span>Find growth spots, build the AI machine, train the team into it</span>
         </div>
       </div>
 
@@ -138,8 +175,8 @@ export default function Home() {
             <div className="max-w-4xl">
               <p className="overline">The Gap We Close</p>
               <h2 className="mt-6 text-display">
-                AI does not become valuable when it impresses people. It becomes valuable when it
-                changes the operating rhythm.
+                The winners will not be the companies with the most AI demos. They will be the
+                companies that turn AI into a better operating machine.
               </h2>
             </div>
           </SectionReveal>
@@ -158,6 +195,41 @@ export default function Home() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-warm-white py-20 sm:py-28 lg:py-36">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-16">
+            <SectionReveal animation="slide-left" className="lg:col-span-5">
+              <p className="overline">The Advantage Loop</p>
+              <h2 className="mt-6 text-display">
+                Build the machine that makes you faster, sharper, and harder to compete with.
+              </h2>
+              <p className="mt-6 text-body-lg text-warm-gray">
+                ClearForge does not separate technology from people. We design the operating loop:
+                what AI handles, what your people decide, how work moves, and how performance
+                improves every week.
+              </p>
+            </SectionReveal>
+
+            <div className="mt-14 lg:col-span-7 lg:mt-0">
+              <div className="border-t border-divider">
+                {advantageLoop.map((item) => (
+                  <div
+                    key={item.label}
+                    className="grid gap-3 border-b border-divider py-6 sm:grid-cols-[9rem_1fr] sm:gap-8"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Crown className="h-4 w-4 text-brass" />
+                      <p className="metric text-sm text-brass">{item.label}</p>
+                    </div>
+                    <p className="text-body text-warm-gray">{item.detail}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -241,11 +313,12 @@ export default function Home() {
           <SectionReveal animation="scale-up">
             <p className="overline">Start Here</p>
             <h2 className="mt-6 max-w-3xl text-display">
-              Generate an AI Value Map before you buy anything.
+              Find the growth spots before you build anything.
             </h2>
             <p className="mt-6 max-w-2xl text-body-lg text-warm-gray">
               Enter your website and Forge Intelligence drafts the first version of your operating
-              value chain, then helps you mark which activities are urgent, curious, or irrelevant.
+              value chain, then highlights where AI can make you faster, higher quality, more
+              responsive, more efficient, and more profitable.
             </p>
           </SectionReveal>
 
