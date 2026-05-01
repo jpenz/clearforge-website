@@ -1,12 +1,13 @@
+/* biome-ignore-all lint/security/noDangerouslySetInnerHtml: JSON-LD scripts are generated from static site data. */
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
+import { Button } from '@/components/ui/button';
 import {
+  getIndustriesByCategory,
   industries,
   industryCategories,
-  getIndustriesByCategory,
 } from '@/data/industries-value-chains';
 import { breadcrumbJsonLd, createMetadata } from '@/lib/metadata';
 
@@ -15,8 +16,7 @@ const collectionLd = {
   '@type': 'CollectionPage',
   name: 'AI Agents & Automation by Industry',
   url: 'https://clearforge.ai/industries',
-  description:
-    'AI agents and automation for every industry. Full operating value chains across 17 sectors.',
+  description: `AI agents and automation for every industry. Full operating value chains across ${industries.length} sectors.`,
   hasPart: industries.map((ind) => ({
     '@type': 'Service',
     name: `AI Agents & Automation for ${ind.name}`,
@@ -53,8 +53,14 @@ export default function IndustriesIndexPage() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
 
       {/* — Hero — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
@@ -80,9 +86,9 @@ export default function IndustriesIndexPage() {
           </FadeIn>
           <FadeIn delay={0.15}>
             <p className="mt-6 max-w-xl text-body-lg text-stone">
-              {industries.length} industries. {totalActivities}+ addressable activities. Each one mapped
-              to a specific AI agent, predictive model, copilot, or workflow automation we ship in
-              production.
+              {industries.length} industries. {totalActivities}+ addressable activities. Each one
+              mapped to a specific AI agent, predictive model, copilot, or workflow automation we
+              ship in production.
             </p>
           </FadeIn>
         </div>
@@ -97,7 +103,9 @@ export default function IndustriesIndexPage() {
               <div key={category} className={ci === 0 ? '' : 'mt-24 lg:mt-32'}>
                 <div className="lg:grid lg:grid-cols-12 lg:gap-12 lg:items-baseline border-t border-divider pt-10">
                   <div className="lg:col-span-4">
-                    <p className="overline">{String(ci + 1).padStart(2, '0')} · {category}</p>
+                    <p className="overline">
+                      {String(ci + 1).padStart(2, '0')} · {category}
+                    </p>
                     <h2
                       className="mt-4 text-h1"
                       style={{ fontFamily: 'var(--font-instrument-serif)' }}
@@ -108,7 +116,10 @@ export default function IndustriesIndexPage() {
 
                   <Stagger className="lg:col-span-8 mt-8 lg:mt-0" stagger={0.06}>
                     {grouped[category].map((ind) => {
-                      const totalCount = ind.valueChain.reduce((a, fn) => a + fn.activities.length, 0);
+                      const totalCount = ind.valueChain.reduce(
+                        (a, fn) => a + fn.activities.length,
+                        0,
+                      );
                       return (
                         <StaggerItem key={ind.slug}>
                           <Link
@@ -123,7 +134,9 @@ export default function IndustriesIndexPage() {
                                 >
                                   {ind.name}
                                 </h3>
-                                <p className="mt-2 text-body text-warm-gray max-w-xl">{ind.oneLiner}</p>
+                                <p className="mt-2 text-body text-warm-gray max-w-xl">
+                                  {ind.oneLiner}
+                                </p>
                               </div>
                               <div className="mt-3 lg:mt-0 flex items-baseline gap-6 shrink-0">
                                 <div className="text-right">
@@ -133,7 +146,7 @@ export default function IndustriesIndexPage() {
                                   >
                                     {totalCount} activities
                                   </span>
-                                  <p className="text-[10px] text-warm-gray uppercase tracking-widest mt-0.5">
+                                  <p className="text-[10px] text-warm-gray uppercase mt-0.5">
                                     {ind.valueChain.length} functions
                                   </p>
                                 </div>
@@ -158,15 +171,13 @@ export default function IndustriesIndexPage() {
           <div className="lg:grid lg:grid-cols-12 lg:gap-20 lg:items-baseline">
             <div className="lg:col-span-5">
               <p className="overline">Custom Value Chain</p>
-              <h2 className="mt-6 text-display">
-                Don&apos;t see your industry? Get a custom one.
-              </h2>
+              <h2 className="mt-6 text-display">Don&apos;t see your industry? Get a custom one.</h2>
             </div>
             <div className="mt-10 lg:col-span-7 lg:mt-0">
               <p className="text-body-lg text-warm-gray">
-                Forge Intelligence™ generates a personalized AI value chain from your company website —
-                every function, every activity in your operating model, with the specific AI agents
-                and automations ClearForge would ship first.
+                Forge Intelligence™ generates a personalized AI value chain from your company
+                website — every function, every activity in your operating model, with the specific
+                AI agents and automations ClearForge would ship first.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Button size="lg" asChild>
@@ -186,7 +197,10 @@ export default function IndustriesIndexPage() {
       {/* — Final CTA — */}
       <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
+          <h2
+            className="text-display text-bone"
+            style={{ fontFamily: 'var(--font-instrument-serif)' }}
+          >
             Where would AI move your P&amp;L first?
           </h2>
           <p className="mt-6 text-body-lg text-stone">
@@ -196,7 +210,7 @@ export default function IndustriesIndexPage() {
           <div className="mt-10">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
+                Generate My AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>

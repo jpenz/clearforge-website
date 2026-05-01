@@ -30,7 +30,7 @@ export const pricingTiers: PricingTier[] = [
       'Executive-ready roadmap with ROI projections',
       'Recommended quick wins for immediate impact',
     ],
-    cta: 'Get My Free AI Readiness Score',
+    cta: 'Generate AI Value Map',
   },
   {
     name: 'Forge Sprint™',
@@ -48,7 +48,7 @@ export const pricingTiers: PricingTier[] = [
       '30-day post-launch support included',
       'Measurable KPIs tracked from day one',
     ],
-    cta: 'Get My Free AI Readiness Score',
+    cta: 'Generate AI Value Map',
     popular: true,
   },
   {
@@ -67,7 +67,7 @@ export const pricingTiers: PricingTier[] = [
       'Quarterly business impact reviews',
       'Access to ClearForge agent library',
     ],
-    cta: 'Get My Free AI Readiness Score',
+    cta: 'Generate AI Value Map',
   },
 ];
 

@@ -1,10 +1,24 @@
 'use client';
 
-import { ArrowRight, FileText, Globe, Loader2, Mail, Printer, Send, Sparkles, User, Building2, X, Star, MessageSquare } from 'lucide-react';
+import {
+  ArrowRight,
+  Building2,
+  FileText,
+  Globe,
+  Loader2,
+  Mail,
+  MessageSquare,
+  Printer,
+  Send,
+  Sparkles,
+  Star,
+  User,
+  X,
+} from 'lucide-react';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
-import { Button } from '@/components/ui/button';
 import { ChatMessage } from '@/components/discover/chat-message';
+import { Button } from '@/components/ui/button';
 
 interface Message {
   role: 'assistant' | 'user' | 'system';
@@ -47,10 +61,22 @@ interface ActivityAnnotation {
 }
 
 const SITUATION_CARDS = [
-  { label: 'Revenue stall', detail: "Our sales team is working harder but pipeline isn't growing proportionally" },
-  { label: 'AI pilots stuck', detail: "We've invested in AI experiments but nothing has reached production" },
-  { label: 'Cost reduction needed', detail: 'We have manual processes that are bleeding time and money' },
-  { label: 'Post-acquisition AI', detail: 'Our PE firm needs AI-driven value creation across portfolio companies' },
+  {
+    label: 'Revenue stall',
+    detail: "Our sales team is working harder but pipeline isn't growing proportionally",
+  },
+  {
+    label: 'AI pilots stuck',
+    detail: "We've invested in AI experiments but nothing has reached production",
+  },
+  {
+    label: 'Cost reduction needed',
+    detail: 'We have manual processes that are bleeding time and money',
+  },
+  {
+    label: 'Post-acquisition AI',
+    detail: 'Our PE firm needs AI-driven value creation across portfolio companies',
+  },
 ];
 
 export default function DiscoverPage() {
@@ -96,10 +122,13 @@ export default function DiscoverPage() {
 
       if (data.fallback || data.error) {
         setIntelligence(null);
-        setMessages([{
-          role: 'assistant',
-          content: "Welcome to Forge Intelligence. I'd love to learn about your business.\n\nWhat's the biggest challenge you're facing with AI or automation right now?",
-        }]);
+        setMessages([
+          {
+            role: 'assistant',
+            content:
+              "Welcome to Forge Intelligence. I'd love to learn about your business.\n\nWhat's the biggest challenge you're facing with AI or automation right now?",
+          },
+        ]);
         setPhase('chat');
         return;
       }
@@ -130,10 +159,13 @@ export default function DiscoverPage() {
       setPhase('chat');
     } catch {
       setIntelligence(null);
-      setMessages([{
-        role: 'assistant',
-        content: "Welcome to Forge Intelligence. Tell me about your business — what's the biggest challenge you're facing?",
-      }]);
+      setMessages([
+        {
+          role: 'assistant',
+          content:
+            "Welcome to Forge Intelligence. Tell me about your business — what's the biggest challenge you're facing?",
+        },
+      ]);
       setPhase('chat');
     }
   };
@@ -224,7 +256,10 @@ export default function DiscoverPage() {
         body: JSON.stringify({
           messages: contextMessages.map((m) => ({
             role: m.role === 'system' ? 'user' : m.role,
-            content: m.role === 'system' ? `[Research Context — use to inform responses, do not repeat verbatim]\n\n${m.content}` : m.content,
+            content:
+              m.role === 'system'
+                ? `[Research Context — use to inform responses, do not repeat verbatim]\n\n${m.content}`
+                : m.content,
           })),
         }),
       });
@@ -236,7 +271,11 @@ export default function DiscoverPage() {
     } catch {
       setMessages((prev) => [
         ...prev,
-        { role: 'assistant', content: "I'm having trouble connecting. Please try again, or reach out at james@clearforge.ai." },
+        {
+          role: 'assistant',
+          content:
+            "I'm having trouble connecting. Please try again, or reach out at james@clearforge.ai.",
+        },
       ]);
     } finally {
       setIsStreaming(false);
@@ -259,10 +298,12 @@ export default function DiscoverPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          messages: messages.filter((m) => m.role !== 'system').map((m) => ({
-            role: m.role,
-            content: m.content,
-          })),
+          messages: messages
+            .filter((m) => m.role !== 'system')
+            .map((m) => ({
+              role: m.role,
+              content: m.content,
+            })),
           intelligence,
           valueChain,
           annotations,
@@ -277,22 +318,69 @@ export default function DiscoverPage() {
       setReportContent(data.report || data.content || JSON.stringify(data, null, 2));
       setShowReportForm(false);
     } catch {
-      setReportContent('Report generation failed. Please try again or contact james@clearforge.ai for a personalized assessment.');
+      setReportContent(
+        'Report generation failed. Please try again or contact james@clearforge.ai for a personalized assessment.',
+      );
     } finally {
       setReportLoading(false);
     }
   };
 
   const renderReportMarkdown = (text: string) => {
-    return text.split('\n').map((line, i) => {
-      if (line.startsWith('# ')) return <h1 key={i} className="text-2xl font-bold text-bone mt-6 mb-3" style={{ fontFamily: 'var(--font-instrument-serif)' }}>{line.replace('# ', '')}</h1>;
-      if (line.startsWith('## ')) return <h2 key={i} className="text-xl font-bold text-bone mt-5 mb-2" style={{ fontFamily: 'var(--font-instrument-serif)' }}>{line.replace('## ', '')}</h2>;
-      if (line.startsWith('### ')) return <h3 key={i} className="text-lg font-semibold text-bone mt-4 mb-2">{line.replace('### ', '')}</h3>;
-      if (line.match(/^[-•]\s/)) return <li key={i} className="ml-4 list-disc text-sm text-stone">{line.replace(/^[-•]\s/, '')}</li>;
-      if (line.match(/^\d+\.\s/)) return <li key={i} className="ml-4 list-decimal text-sm text-stone">{line.replace(/^\d+\.\s/, '')}</li>;
-      if (line.startsWith('**') && line.endsWith('**')) return <p key={i} className="text-sm font-semibold text-bone mt-2">{line.replace(/\*\*/g, '')}</p>;
-      if (line.trim() === '') return <br key={i} />;
-      return <p key={i} className="text-sm text-stone">{line}</p>;
+    let offset = 0;
+    return text.split('\n').map((line) => {
+      const key = `${offset}-${line}`;
+      offset += line.length + 1;
+      if (line.startsWith('# '))
+        return (
+          <h1
+            key={key}
+            className="text-2xl font-bold text-bone mt-6 mb-3"
+            style={{ fontFamily: 'var(--font-instrument-serif)' }}
+          >
+            {line.replace('# ', '')}
+          </h1>
+        );
+      if (line.startsWith('## '))
+        return (
+          <h2
+            key={key}
+            className="text-xl font-bold text-bone mt-5 mb-2"
+            style={{ fontFamily: 'var(--font-instrument-serif)' }}
+          >
+            {line.replace('## ', '')}
+          </h2>
+        );
+      if (line.startsWith('### '))
+        return (
+          <h3 key={key} className="text-lg font-semibold text-bone mt-4 mb-2">
+            {line.replace('### ', '')}
+          </h3>
+        );
+      if (line.match(/^[-•]\s/))
+        return (
+          <li key={key} className="ml-4 list-disc text-sm text-stone">
+            {line.replace(/^[-•]\s/, '')}
+          </li>
+        );
+      if (line.match(/^\d+\.\s/))
+        return (
+          <li key={key} className="ml-4 list-decimal text-sm text-stone">
+            {line.replace(/^\d+\.\s/, '')}
+          </li>
+        );
+      if (line.startsWith('**') && line.endsWith('**'))
+        return (
+          <p key={key} className="text-sm font-semibold text-bone mt-2">
+            {line.replace(/\*\*/g, '')}
+          </p>
+        );
+      if (line.trim() === '') return <br key={key} />;
+      return (
+        <p key={key} className="text-sm text-stone">
+          {line}
+        </p>
+      );
     });
   };
 
@@ -302,10 +390,13 @@ export default function DiscoverPage() {
   };
 
   const handleSkip = () => {
-    setMessages([{
-      role: 'assistant',
-      content: "Welcome to Forge Intelligence. I'm here to understand your business and identify where AI can drive the most impact.\n\nWhat brings you to ClearForge today?",
-    }]);
+    setMessages([
+      {
+        role: 'assistant',
+        content:
+          "Welcome to Forge Intelligence. I'm here to understand your business and identify where AI can drive the most impact.\n\nWhat brings you to ClearForge today?",
+      },
+    ]);
     setPhase('chat');
   };
 
@@ -334,8 +425,8 @@ export default function DiscoverPage() {
             <Sparkles className="h-10 w-10 text-brass mx-auto mb-6" />
             <h2 className="text-display text-bone">Let&apos;s analyze your business.</h2>
             <p className="mt-4 text-body-lg text-stone max-w-md mx-auto">
-              Enter your company website and our AI will research your value chain,
-              identify automation opportunities, and find roles we can help automate.
+              Enter your company website and our AI will research your value chain, identify
+              automation opportunities, and find roles we can help automate.
             </p>
 
             <form onSubmit={handleUrlSubmit} className="mt-10">
@@ -348,16 +439,24 @@ export default function DiscoverPage() {
                     onChange={(e) => setWebsiteUrl(e.target.value)}
                     placeholder="yourcompany.com"
                     className="w-full bg-divider-dark border border-divider-dark text-bone placeholder:text-stone pl-11 pr-4 py-4 text-sm focus:border-brass focus:outline-none transition-colors"
-                    autoFocus
                   />
                 </div>
-                <Button type="submit" size="lg" disabled={!websiteUrl.trim()} className="w-full sm:w-auto">
+                <Button
+                  type="submit"
+                  size="lg"
+                  disabled={!websiteUrl.trim()}
+                  className="w-full sm:w-auto"
+                >
                   Analyze <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
             </form>
 
-            <button type="button" onClick={handleSkip} className="mt-6 text-sm text-stone hover:text-bone transition-colors min-h-[44px]">
+            <button
+              type="button"
+              onClick={handleSkip}
+              className="mt-6 text-sm text-stone hover:text-bone transition-colors min-h-[44px]"
+            >
               Skip — I&apos;ll describe my business instead
             </button>
 
@@ -382,7 +481,9 @@ export default function DiscoverPage() {
         <div className="flex-1 flex items-center justify-center px-6">
           <div className="text-center">
             <Loader2 className="h-10 w-10 text-brass mx-auto animate-spin" />
-            <h2 className="mt-6 text-h2 text-bone">Researching {websiteUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')}...</h2>
+            <h2 className="mt-6 text-h2 text-bone">
+              Researching {websiteUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')}...
+            </h2>
             <div className="mt-8 space-y-3 text-left max-w-sm mx-auto">
               {[
                 'Analyzing your business model and value chain',
@@ -390,8 +491,15 @@ export default function DiscoverPage() {
                 'Scanning for job postings and roles to automate',
                 'Generating a custom AI value chain for your business',
               ].map((step, i) => (
-                <div key={step} className="flex items-center gap-3 text-sm text-stone animate-fade-in" style={{ animationDelay: `${i * 0.5}s` }}>
-                  <div className="w-1.5 h-1.5 bg-brass rounded-full animate-pulse" style={{ animationDelay: `${i * 0.3}s` }} />
+                <div
+                  key={step}
+                  className="flex items-center gap-3 text-sm text-stone animate-fade-in"
+                  style={{ animationDelay: `${i * 0.5}s` }}
+                >
+                  <div
+                    className="w-1.5 h-1.5 bg-brass rounded-full animate-pulse"
+                    style={{ animationDelay: `${i * 0.3}s` }}
+                  />
                   {step}
                 </div>
               ))}
@@ -421,13 +529,15 @@ export default function DiscoverPage() {
               {/* ClearForge top priorities — anchor for visitor */}
               {valueChain.topPriorities && valueChain.topPriorities.length > 0 && (
                 <div className="mt-8 border-l-2 border-brass-light pl-5">
-                  <p className="text-[10px] uppercase tracking-widest text-brass-light font-semibold">
+                  <p className="text-[10px] uppercase text-brass-light font-semibold">
                     ClearForge would start here
                   </p>
                   <ul className="mt-3 space-y-2">
                     {valueChain.topPriorities.map((p, i) => (
-                      <li key={i} className="text-body-sm text-bone">
-                        <span className="metric text-xs text-brass mr-2">{String(i + 1).padStart(2, '0')}</span>
+                      <li key={p} className="text-body-sm text-bone">
+                        <span className="metric text-xs text-brass mr-2">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
                         {p}
                       </li>
                     ))}
@@ -441,7 +551,9 @@ export default function DiscoverPage() {
               {valueChain.functions.map((fn, fi) => (
                 <div key={fn.function} className="border-t border-divider-dark pt-6">
                   <div className="flex items-baseline gap-3">
-                    <span className="metric text-xs text-brass">{String(fi + 1).padStart(2, '0')}</span>
+                    <span className="metric text-xs text-brass">
+                      {String(fi + 1).padStart(2, '0')}
+                    </span>
                     <h3
                       className="text-h3 text-bone"
                       style={{ fontFamily: 'var(--font-instrument-serif)' }}
@@ -457,7 +569,10 @@ export default function DiscoverPage() {
                       const ann = annotations[key] || {};
                       const isExpanded = expandedActivity === key;
                       return (
-                        <li key={key} className="border border-divider-dark hover:border-brass/40 transition-colors">
+                        <li
+                          key={key}
+                          className="border border-divider-dark hover:border-brass/40 transition-colors"
+                        >
                           <button
                             type="button"
                             onClick={() => setExpandedActivity(isExpanded ? null : key)}
@@ -480,12 +595,20 @@ export default function DiscoverPage() {
                               <div className="flex-1 min-w-0">
                                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4">
                                   <p className="text-body text-bone font-medium">{act.name}</p>
-                                  <span className="shrink-0 text-[10px] uppercase tracking-widest text-stone border border-stone/30 px-2 py-0.5">
-                                    {act.type === 'agent' ? 'AI agent' : act.type === 'automation' ? 'Workflow auto' : act.type === 'model' ? 'Predictive model' : 'Copilot'}
+                                  <span className="shrink-0 text-[10px] uppercase text-stone border border-stone/30 px-2 py-0.5">
+                                    {act.type === 'agent'
+                                      ? 'AI agent'
+                                      : act.type === 'automation'
+                                        ? 'Workflow auto'
+                                        : act.type === 'model'
+                                          ? 'Predictive model'
+                                          : 'Copilot'}
                                   </span>
                                 </div>
                                 <p className="mt-1.5 text-body-sm text-stone">{act.aiImpact}</p>
-                                <p className="mt-1 text-[11px] text-brass-light font-medium">{act.impact}</p>
+                                <p className="mt-1 text-[11px] text-brass-light font-medium">
+                                  {act.impact}
+                                </p>
                                 {ann.notes && !isExpanded && (
                                   <p className="mt-2 flex items-start gap-1.5 text-[11px] text-stone italic">
                                     <MessageSquare className="h-3 w-3 mt-0.5 shrink-0" />
@@ -498,19 +621,35 @@ export default function DiscoverPage() {
 
                           {isExpanded && (
                             <div className="border-t border-divider-dark p-4 sm:p-5 bg-divider-dark/30">
-                              <p className="text-[11px] uppercase tracking-widest text-stone font-semibold">
+                              <p className="text-[11px] uppercase text-stone font-semibold">
                                 Mark priority
                               </p>
                               <div className="mt-2 flex gap-2 flex-wrap">
                                 {[
-                                  { v: 'must' as Priority, label: 'Must-have', cls: 'border-brass-light bg-brass/10 text-brass-light' },
-                                  { v: 'curious' as Priority, label: 'Curious', cls: 'border-brass/40 text-brass' },
-                                  { v: 'skip' as Priority, label: 'Not relevant', cls: 'border-stone/30 text-stone' },
+                                  {
+                                    v: 'must' as Priority,
+                                    label: 'Must-have',
+                                    cls: 'border-brass-light bg-brass/10 text-brass-light',
+                                  },
+                                  {
+                                    v: 'curious' as Priority,
+                                    label: 'Curious',
+                                    cls: 'border-brass/40 text-brass',
+                                  },
+                                  {
+                                    v: 'skip' as Priority,
+                                    label: 'Not relevant',
+                                    cls: 'border-stone/30 text-stone',
+                                  },
                                 ].map((opt) => (
                                   <button
                                     key={opt.v}
                                     type="button"
-                                    onClick={() => updateAnnotation(key, { priority: ann.priority === opt.v ? undefined : opt.v })}
+                                    onClick={() =>
+                                      updateAnnotation(key, {
+                                        priority: ann.priority === opt.v ? undefined : opt.v,
+                                      })
+                                    }
                                     className={`text-xs px-3 py-1.5 border transition-colors ${ann.priority === opt.v ? opt.cls : 'border-stone/30 text-stone hover:border-bone/50'}`}
                                   >
                                     {opt.label}
@@ -518,7 +657,7 @@ export default function DiscoverPage() {
                                 ))}
                               </div>
 
-                              <p className="mt-5 text-[11px] uppercase tracking-widest text-stone font-semibold">
+                              <p className="mt-5 text-[11px] uppercase text-stone font-semibold">
                                 Notes (optional)
                               </p>
                               <textarea
@@ -542,8 +681,8 @@ export default function DiscoverPage() {
             <div className="mt-10 sm:mt-14 border-t border-divider-dark pt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="text-sm text-stone">
                 {Object.values(annotations).filter((a) => a.priority === 'must').length} must-have ·{' '}
-                {Object.values(annotations).filter((a) => a.priority === 'curious').length} curious ·{' '}
-                {Object.values(annotations).filter((a) => a.priority === 'skip').length} skipped
+                {Object.values(annotations).filter((a) => a.priority === 'curious').length} curious
+                · {Object.values(annotations).filter((a) => a.priority === 'skip').length} skipped
               </div>
               <Button size="lg" onClick={handleValueChainContinue}>
                 Continue to Conversation <ArrowRight className="ml-2 h-4 w-4" />
@@ -561,7 +700,8 @@ export default function DiscoverPage() {
               <div className="mx-auto max-w-3xl flex items-center gap-2 sm:gap-3">
                 <Globe className="h-4 w-4 text-brass shrink-0" />
                 <p className="text-xs text-bone">
-                  Researched <span className="font-semibold text-brass">{intelligence.domain}</span> — responses personalized to your business
+                  Researched <span className="font-semibold text-brass">{intelligence.domain}</span>{' '}
+                  — responses personalized to your business
                 </p>
               </div>
             </div>
@@ -569,15 +709,28 @@ export default function DiscoverPage() {
 
           <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 sm:py-8 lg:px-10">
             <div className="mx-auto max-w-3xl space-y-6">
-              {messages.filter((m) => m.role !== 'system').map((msg, i) => (
-                <ChatMessage key={i} content={msg.content} role={msg.role as 'user' | 'assistant'} />
-              ))}
+              {messages
+                .filter((m) => m.role !== 'system')
+                .map((msg) => (
+                  <ChatMessage
+                    key={`${msg.role}-${msg.content.slice(0, 120)}`}
+                    content={msg.content}
+                    role={msg.role as 'user' | 'assistant'}
+                  />
+                ))}
 
               {showSituations && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
                   {SITUATION_CARDS.map((card) => (
-                    <button key={card.label} onClick={() => sendMessage(card.detail)} className="border border-divider-dark p-4 text-left hover:border-brass transition-colors group">
-                      <p className="text-sm font-semibold text-bone group-hover:text-brass transition-colors">{card.label}</p>
+                    <button
+                      type="button"
+                      key={card.label}
+                      onClick={() => sendMessage(card.detail)}
+                      className="border border-divider-dark p-4 text-left hover:border-brass transition-colors group"
+                    >
+                      <p className="text-sm font-semibold text-bone group-hover:text-brass transition-colors">
+                        {card.label}
+                      </p>
                       <p className="text-xs text-stone mt-1">{card.detail}</p>
                     </button>
                   ))}
@@ -589,8 +742,14 @@ export default function DiscoverPage() {
                   <div className="bg-divider-dark border border-divider-dark p-5 max-w-[85%]">
                     <div className="flex gap-1">
                       <div className="w-2 h-2 bg-brass/60 rounded-full animate-pulse" />
-                      <div className="w-2 h-2 bg-brass/60 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
-                      <div className="w-2 h-2 bg-brass/60 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
+                      <div
+                        className="w-2 h-2 bg-brass/60 rounded-full animate-pulse"
+                        style={{ animationDelay: '0.2s' }}
+                      />
+                      <div
+                        className="w-2 h-2 bg-brass/60 rounded-full animate-pulse"
+                        style={{ animationDelay: '0.4s' }}
+                      />
                     </div>
                   </div>
                 </div>
@@ -602,9 +761,12 @@ export default function DiscoverPage() {
                   <div className="flex items-start gap-3 sm:gap-4">
                     <FileText className="h-6 w-6 text-brass shrink-0 mt-0.5 hidden sm:block" />
                     <div className="flex-1">
-                      <h3 className="text-sm font-bold text-bone">Ready for your personalized AI readiness report?</h3>
+                      <h3 className="text-sm font-bold text-bone">
+                        Ready for your personalized AI value map?
+                      </h3>
                       <p className="text-xs text-stone mt-1">
-                        Based on our conversation, we&apos;ll generate a detailed report with specific recommendations for your business.
+                        Based on our conversation, we&apos;ll generate a detailed report with
+                        specific recommendations for your business.
                       </p>
 
                       {!showReportForm ? (
@@ -652,9 +814,13 @@ export default function DiscoverPage() {
                           <div className="flex gap-3">
                             <Button type="submit" size="default" disabled={reportLoading}>
                               {reportLoading ? (
-                                <><Loader2 className="h-4 w-4 animate-spin mr-2" /> Generating...</>
+                                <>
+                                  <Loader2 className="h-4 w-4 animate-spin mr-2" /> Generating...
+                                </>
                               ) : (
-                                <>Generate Report <FileText className="ml-2 h-4 w-4" /></>
+                                <>
+                                  Generate Report <FileText className="ml-2 h-4 w-4" />
+                                </>
                               )}
                             </Button>
                             <button
@@ -682,12 +848,14 @@ export default function DiscoverPage() {
                     </div>
                     <div className="flex items-center gap-2">
                       <button
+                        type="button"
                         onClick={() => window.print()}
                         className="inline-flex items-center gap-2 text-xs text-stone hover:text-bone border border-divider-dark px-3 py-1.5 transition-colors"
                       >
                         <Printer className="h-3.5 w-3.5" /> Print / Save as PDF
                       </button>
                       <button
+                        type="button"
                         onClick={() => setReportContent(null)}
                         className="text-stone hover:text-bone transition-colors p-1"
                       >
@@ -715,12 +883,18 @@ export default function DiscoverPage() {
                 className="flex-1 min-w-0 bg-divider-dark border border-divider-dark text-bone placeholder:text-stone px-3 sm:px-4 py-3 text-base sm:text-sm focus:border-brass focus:outline-none transition-colors"
                 disabled={isStreaming}
               />
-              <Button type="submit" disabled={isStreaming || !input.trim()} size="default" className="shrink-0">
+              <Button
+                type="submit"
+                disabled={isStreaming || !input.trim()}
+                size="default"
+                className="shrink-0"
+              >
                 <Send className="h-4 w-4" />
               </Button>
             </form>
             <p className="mx-auto max-w-3xl mt-2 text-xs text-stone text-center hidden sm:block">
-              Forge Intelligence uses AI to analyze your business. Your conversation is confidential.
+              Forge Intelligence uses AI to analyze your business. Your conversation is
+              confidential.
             </p>
           </div>
         </>

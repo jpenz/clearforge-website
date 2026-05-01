@@ -1,8 +1,9 @@
+/* biome-ignore-all lint/security/noDangerouslySetInnerHtml: JSON-LD scripts are generated from static site data. */
 import type { Metadata } from 'next';
 import { DM_Sans, Instrument_Serif, JetBrains_Mono } from 'next/font/google';
-import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { ForgeBar } from '@/components/layout/forge-bar';
+import { Header } from '@/components/layout/header';
 import { LenisProvider } from '@/components/layout/lenis-provider';
 import { coreKeywords, organizationJsonLd } from '@/lib/metadata';
 import './globals.css';
@@ -41,7 +42,14 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     siteName: 'ClearForge',
-    images: [{ url: '/images/og-image.webp', width: 1200, height: 630, alt: 'ClearForge — AI Strategy & Execution' }],
+    images: [
+      {
+        url: '/images/og-image.webp',
+        width: 1200,
+        height: 630,
+        alt: 'ClearForge — AI Strategy & Execution',
+      },
+    ],
   },
   twitter: { card: 'summary_large_image', images: ['/images/og-image.webp'] },
   robots: { index: true, follow: true },
@@ -50,12 +58,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="dns-prefetch" href="https://api.anthropic.com" />
-        <link rel="dns-prefetch" href="https://api.perplexity.ai" />
-        <link rel="preconnect" href="https://api.anthropic.com" crossOrigin="anonymous" />
-      </head>
-      <body className={`${instrumentSerif.variable} ${dmSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <body
+        className={`${instrumentSerif.variable} ${dmSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+      >
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

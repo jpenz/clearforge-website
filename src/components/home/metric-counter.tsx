@@ -18,7 +18,11 @@ interface MetricCounterProps {
 /**
  * Scroll-triggered counter. Handles: "1,250" "98%" "$4.2M" "12x" "500+" "3.5T" "<90"
  */
-export function MetricCounter({ value, className = 'metric-lg', duration = 2 }: MetricCounterProps) {
+export function MetricCounter({
+  value,
+  className = 'metric-lg',
+  duration = 2,
+}: MetricCounterProps) {
   const spanRef = useRef<HTMLSpanElement>(null);
 
   useGSAP(
@@ -41,8 +45,45 @@ export function MetricCounter({ value, className = 'metric-lg', duration = 2 }: 
       const hasCommas = numStr.includes(',');
       const decimalPlaces = cleanNum.includes('.') ? cleanNum.split('.')[1].length : 0;
       const proxy = { val: 0 };
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      el.textContent = prefix + '0' + suffix;
+      el.textContent = value;
+
+      if (prefersReducedMotion) {
+        return;
+      }
+
+      const renderValue = () => {
+        let formatted: string;
+        if (decimalPlaces > 0) {
+          formatted = proxy.val.toFixed(decimalPlaces);
+        } else {
+          const rounded = Math.round(proxy.val);
+          formatted = hasCommas ? rounded.toLocaleString() : String(rounded);
+        }
+        el.textContent = prefix + formatted + suffix;
+      };
+
+      const animateCounter = () => {
+        proxy.val = 0;
+        renderValue();
+
+        gsap.to(proxy, {
+          val: target,
+          duration,
+          ease: 'power4.out',
+          snap: { val: decimalPlaces > 0 ? 1 / 10 ** decimalPlaces : 1 },
+          onUpdate: renderValue,
+          onComplete() {
+            // Emerald text-shadow glow that fades out
+            gsap.fromTo(
+              el,
+              { textShadow: '0 0 30px rgba(4,120,87,0.3)' },
+              { textShadow: '0 0 0px rgba(4,120,87,0)', duration: 1, ease: 'power2.out' },
+            );
+          },
+        });
+      };
 
       // Container scale entrance
       gsap.fromTo(
@@ -56,42 +97,17 @@ export function MetricCounter({ value, className = 'metric-lg', duration = 2 }: 
             trigger: el,
             start: 'top 90%',
             toggleActions: 'play none none none',
+            onEnter: animateCounter,
           },
         },
       );
-
-      gsap.to(proxy, {
-        val: target,
-        duration,
-        ease: 'power4.out',
-        snap: { val: decimalPlaces > 0 ? 1 / 10 ** decimalPlaces : 1 },
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 90%',
-          toggleActions: 'play none none none',
-        },
-        onUpdate() {
-          let formatted: string;
-          if (decimalPlaces > 0) {
-            formatted = proxy.val.toFixed(decimalPlaces);
-          } else {
-            const rounded = Math.round(proxy.val);
-            formatted = hasCommas ? rounded.toLocaleString() : String(rounded);
-          }
-          el.textContent = prefix + formatted + suffix;
-        },
-        onComplete() {
-          // Emerald text-shadow glow that fades out
-          gsap.fromTo(
-            el,
-            { textShadow: '0 0 30px rgba(4,120,87,0.3)' },
-            { textShadow: '0 0 0px rgba(4,120,87,0)', duration: 1, ease: 'power2.out' },
-          );
-        },
-      });
     },
     { scope: spanRef, dependencies: [value, duration] },
   );
 
-  return <span ref={spanRef} className={className}>{value}</span>;
+  return (
+    <span ref={spanRef} className={className}>
+      {value}
+    </span>
+  );
 }

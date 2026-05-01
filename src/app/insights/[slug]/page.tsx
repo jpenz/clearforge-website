@@ -1,3 +1,4 @@
+/* biome-ignore-all lint/security/noDangerouslySetInnerHtml: JSON-LD scripts are generated from static site data. */
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -25,18 +26,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   });
 }
 
-export default async function InsightDetailPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function InsightDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const insight = getInsight(slug);
   if (!insight) notFound();
 
-  const related = insight.relatedSlugs
-    .map((s) => getInsight(s))
-    .filter(Boolean);
+  const related = insight.relatedSlugs.map((s) => getInsight(s)).filter(Boolean);
 
   /* Split the markdown body into sections by ## headings */
   const sections = insight.body.split(/^## /m).filter(Boolean);
@@ -58,29 +53,32 @@ export default async function InsightDetailPage({
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       {faqLd && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+        />
       )}
       {/* ── Hero ── */}
       <section className="dark-section py-32 lg:py-48">
         <div className="mx-auto max-w-3xl px-6 lg:px-10">
           <div className="flex items-center gap-4">
-            <span className="text-body-sm font-medium text-brass">
-              {insight.category}
-            </span>
-            <span className="text-body-sm text-stone">
-              {insight.readingTime} min read
-            </span>
+            <span className="text-body-sm font-medium text-brass">{insight.category}</span>
+            <span className="text-body-sm text-stone">{insight.readingTime} min read</span>
           </div>
           <h1 className="mt-6 text-display text-bone">{insight.title}</h1>
           <p className="mt-6 text-body-lg text-stone">{insight.excerpt}</p>
           <div className="mt-8 flex items-center gap-4 border-t border-bone/20 pt-8">
             <div>
-              <p className="text-body-sm font-medium text-bone">
-                {insight.author.name}
-              </p>
+              <p className="text-body-sm font-medium text-bone">{insight.author.name}</p>
               <p className="text-body-sm text-stone">{insight.author.role}</p>
             </div>
           </div>
@@ -91,26 +89,24 @@ export default async function InsightDetailPage({
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-3xl px-6 lg:px-10">
           <div className="prose-forge space-y-12">
-            {sections.map((section, i) => {
+            {sections.map((section) => {
               const lines = section.split('\n');
               const heading = lines[0]?.trim();
               const body = lines.slice(1).join('\n').trim();
               return (
-                <div key={i}>
-                  {heading && (
-                    <h2 className="text-h2 mb-6">{heading}</h2>
-                  )}
-                  {body.split('\n\n').map((paragraph, j) => {
+                <div key={section.slice(0, 120)}>
+                  {heading && <h2 className="text-h2 mb-6">{heading}</h2>}
+                  {body.split('\n\n').map((paragraph) => {
                     if (paragraph.startsWith('### ')) {
                       return (
-                        <h3 key={j} className="text-h3 mt-8 mb-4">
+                        <h3 key={paragraph.slice(0, 120)} className="text-h3 mt-8 mb-4">
                           {paragraph.replace('### ', '')}
                         </h3>
                       );
                     }
                     return (
                       <p
-                        key={j}
+                        key={paragraph.slice(0, 120)}
                         className="text-body text-warm-gray mb-4 leading-relaxed"
                       >
                         {paragraph}
@@ -135,13 +131,9 @@ export default async function InsightDetailPage({
                 <div key={faq.question}>
                   <div className="py-8">
                     <h3 className="text-h4">{faq.question}</h3>
-                    <p className="mt-3 text-body text-warm-gray">
-                      {faq.answer}
-                    </p>
+                    <p className="mt-3 text-body text-warm-gray">{faq.answer}</p>
                   </div>
-                  {i < insight.faqs.length - 1 && (
-                    <div className="h-px bg-divider" />
-                  )}
+                  {i < insight.faqs.length - 1 && <div className="h-px bg-divider" />}
                 </div>
               ))}
             </div>
@@ -162,9 +154,7 @@ export default async function InsightDetailPage({
                     href={`/insights/${r.slug}`}
                     className="group block border-t border-divider py-8 transition-colors hover:bg-parchment"
                   >
-                    <span className="text-body-sm font-medium text-brass">
-                      {r.category}
-                    </span>
+                    <span className="text-body-sm font-medium text-brass">{r.category}</span>
                     <h3 className="mt-2 text-h3 group-hover:text-brass transition-colors">
                       {r.title}
                     </h3>
@@ -180,12 +170,9 @@ export default async function InsightDetailPage({
       {/* ── CTA ── */}
       <section className="dark-section py-24 lg:py-40">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">
-            Ready to put this into practice?
-          </h2>
+          <h2 className="text-display text-bone">Ready to put this into practice?</h2>
           <p className="mt-6 text-body-lg text-stone">
-            These ideas become real in the context of your business. Let us show
-            you how.
+            These ideas become real in the context of your business. Let us show you how.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>

@@ -33,7 +33,7 @@ export const forgeProducts: ForgeProduct[] = [
       'Executive presentation with go/no-go recommendations',
     ],
     idealFor: 'Companies exploring AI for the first time or needing a clear starting point.',
-    cta: 'Get My Free AI Readiness Score',
+    cta: 'Generate AI Value Map',
     href: '/discover',
   },
   {
@@ -53,7 +53,7 @@ export const forgeProducts: ForgeProduct[] = [
       'Documentation and runbooks for your team',
     ],
     idealFor: 'Companies ready to build and deploy AI into production with measurable ROI targets.',
-    cta: 'Get My Free AI Readiness Score',
+    cta: 'Generate AI Value Map',
     href: '/discover',
     featured: true,
   },
@@ -74,7 +74,7 @@ export const forgeProducts: ForgeProduct[] = [
       'Access to ClearForge agent library',
     ],
     idealFor: 'Companies with production AI that want continuous improvement and expansion.',
-    cta: 'Get My Free AI Readiness Score',
+    cta: 'Generate AI Value Map',
     href: '/discover',
   },
 ];

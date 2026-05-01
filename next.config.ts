@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const securityHeaders = [
   // Prevent clickjacking — no framing by third parties
   {
@@ -35,9 +37,11 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       // Allow scripts from self + Next.js inline scripts (required for hydration)
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-      // API connections: Supabase, Resend webhook, self
-      "connect-src 'self' https://*.supabase.co https://api.resend.com https://api.anthropic.com https://api.perplexity.ai",
+      isProduction
+        ? "script-src 'self' 'unsafe-inline'"
+        : "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      // Browser code calls ClearForge APIs; LLM and email providers stay server-side.
+      "connect-src 'self' https://*.supabase.co",
       // Images: self + data URIs + Supabase storage
       "img-src 'self' data: blob: https://*.supabase.co",
       "frame-ancestors 'self'",
@@ -70,6 +74,26 @@ const nextConfig: NextConfig = {
         // V8.19 anonymized the case-study slug
         source: "/case-studies/metro-detroit-services-company",
         destination: "/case-studies/home-services-turnaround",
+        permanent: true,
+      },
+      {
+        source: "/assessment",
+        destination: "/scorecard",
+        permanent: true,
+      },
+      {
+        source: "/industries/logistics",
+        destination: "/industries/logistics-transportation",
+        permanent: true,
+      },
+      {
+        source: "/industries/construction",
+        destination: "/industries/construction-engineering",
+        permanent: true,
+      },
+      {
+        source: "/industries/distribution",
+        destination: "/industries/wholesale-distribution",
         permanent: true,
       },
     ];

@@ -45,11 +45,14 @@ export function ForgeBar() {
         >
           <Sparkles className="h-4 w-4 text-brass shrink-0" />
           <span className="truncate">
-            <span className="hidden sm:inline">Have questions? </span><span className="font-semibold">Talk to Forge Intelligence</span><span className="hidden md:inline"> — get a free AI readiness report</span>
+            <span className="hidden sm:inline">Not ready for a call? </span>
+            <span className="font-semibold">Generate an AI value map</span>
+            <span className="hidden md:inline"> from your website</span>
           </span>
           <span className="text-brass shrink-0">→</span>
         </Link>
         <button
+          type="button"
           onClick={handleDismiss}
           className="text-stone hover:text-bone transition-colors p-2 -mr-2 shrink-0"
           aria-label="Dismiss"

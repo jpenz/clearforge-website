@@ -261,11 +261,7 @@ describe('validateBusinessContext', () => {
   });
 
   it('accepts valid email addresses', () => {
-    const emails = [
-      'james@clearforge.ai',
-      'user.name+tag@example.co.uk',
-      'test123@sub.domain.com',
-    ];
+    const emails = ['james@clearforge.ai', 'user.name+tag@example.co.uk', 'test123@sub.domain.com'];
     for (const email of emails) {
       const result = validateBusinessContext({ ...validCtx, email });
       expect(result, `email "${email}" should be valid`).not.toContain('email');

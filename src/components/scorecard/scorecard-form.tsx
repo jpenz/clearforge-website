@@ -97,7 +97,12 @@ export function ScorecardForm() {
         </Button>
 
         {isLastStep ? (
-          <Button onClick={handleSubmit} disabled={!isCurrentComplete || isSubmitting} className="gap-2" size="lg">
+          <Button
+            onClick={handleSubmit}
+            disabled={!isCurrentComplete || isSubmitting}
+            className="gap-2"
+            size="lg"
+          >
             {isSubmitting ? 'Calculating...' : 'See My Results'}
             <ArrowRight className="h-4 w-4" />
           </Button>

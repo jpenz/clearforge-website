@@ -1,8 +1,9 @@
+/* biome-ignore-all lint/security/noDangerouslySetInnerHtml: JSON-LD scripts are generated from static site data. */
 import { ArrowRight, Check } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { Stagger, StaggerItem } from '@/components/ui/animate';
+import { Button } from '@/components/ui/button';
 import { forgeProducts } from '@/data/forge-products';
 import { breadcrumbJsonLd, createMetadata, faqJsonLd } from '@/lib/metadata';
 
@@ -65,8 +66,14 @@ const breadcrumbLd = breadcrumbJsonLd([
 export default function PricingPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       {/* — Hero with atmospheric bg — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <Image
@@ -87,8 +94,8 @@ export default function PricingPage() {
             Transparent Investment. No Surprises.
           </h1>
           <p className="mt-6 max-w-xl text-body-lg text-stone">
-            Every engagement is scoped to deliver measurable results. Clients
-            typically see 3-5x return within 12 months.
+            Every engagement is scoped to deliver measurable results. Clients typically see 3-5x
+            return within 12 months.
           </p>
         </div>
       </section>
@@ -101,9 +108,7 @@ export default function PricingPage() {
               <StaggerItem key={product.name}>
                 <div
                   className={`relative border-t border-divider py-12 lg:py-16 ${
-                    product.featured
-                      ? 'bg-brass/[0.03] -mx-6 px-6 lg:-mx-10 lg:px-10'
-                      : ''
+                    product.featured ? 'bg-brass/[0.03] -mx-6 px-6 lg:-mx-10 lg:px-10' : ''
                   }`}
                 >
                   <div className="lg:grid lg:grid-cols-12 lg:gap-12">
@@ -117,16 +122,7 @@ export default function PricingPage() {
                           <span className="overline text-[10px]">Most chosen</span>
                         )}
                       </div>
-                      <h3
-                        className="mt-3"
-                        style={{
-                          fontFamily: 'var(--font-instrument-serif)',
-                          fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
-                          lineHeight: 1.08,
-                          letterSpacing: '-0.02em',
-                          fontWeight: 400,
-                        }}
-                      >
+                      <h3 className="mt-3 font-display text-[1.75rem] leading-[1.08] sm:text-[2.25rem] lg:text-[2.75rem]">
                         {product.name}
                       </h3>
                       <div className="mt-4 flex items-baseline gap-2">
@@ -136,13 +132,9 @@ export default function PricingPage() {
                         >
                           {product.price}
                         </span>
-                        <span className="text-body-sm text-warm-gray">
-                          {product.period}
-                        </span>
+                        <span className="text-body-sm text-warm-gray">{product.period}</span>
                       </div>
-                      <p className="mt-1 text-body-sm text-warm-gray">
-                        {product.timeline}
-                      </p>
+                      <p className="mt-1 text-body-sm text-warm-gray">{product.timeline}</p>
                       <p className="mt-6 text-body-sm text-warm-gray italic max-w-xs">
                         {product.idealFor}
                       </p>
@@ -150,10 +142,8 @@ export default function PricingPage() {
 
                     {/* Right: description, what's included, CTA */}
                     <div className="mt-8 lg:col-span-7 lg:mt-0">
-                      <p className="text-body-lg text-warm-gray">
-                        {product.description}
-                      </p>
-                      <p className="mt-8 text-xs font-semibold text-anthracite uppercase tracking-widest">
+                      <p className="text-body-lg text-warm-gray">{product.description}</p>
+                      <p className="mt-8 text-xs font-semibold text-anthracite uppercase">
                         What&apos;s Included
                       </p>
                       <ul className="mt-4 space-y-3">
@@ -194,35 +184,26 @@ export default function PricingPage() {
           <div className="lg:grid lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-5">
               <p className="overline">Return on Investment</p>
-              <h2 className="mt-6 text-display">
-                This is an investment, not a cost.
-              </h2>
+              <h2 className="mt-6 text-display">This is an investment, not a cost.</h2>
             </div>
             <div className="mt-12 lg:col-span-7 lg:mt-0">
               <p className="text-body-lg text-warm-gray">
-                Clients typically see 3-5x return within 12 months. A $15K
-                Diagnostic frequently uncovers $200K+ in quick wins. A $100K
-                Sprint routinely produces $300K-$500K in annual value through
-                automation, error reduction, and throughput gains.
+                Clients typically see 3-5x return within 12 months. A $15K Diagnostic frequently
+                uncovers $200K+ in quick wins. A $100K Sprint routinely produces $300K-$500K in
+                annual value through automation, error reduction, and throughput gains.
               </p>
               <div className="mt-10 grid grid-cols-3 gap-8 border-t border-divider pt-8">
                 <div>
                   <p className="metric-lg text-brass">3-5x</p>
-                  <p className="mt-2 text-body-sm text-warm-gray">
-                    Typical ROI within 12 months
-                  </p>
+                  <p className="mt-2 text-body-sm text-warm-gray">Typical ROI within 12 months</p>
                 </div>
                 <div>
                   <p className="metric-lg text-brass">90 days</p>
-                  <p className="mt-2 text-body-sm text-warm-gray">
-                    Time to measurable results
-                  </p>
+                  <p className="mt-2 text-body-sm text-warm-gray">Time to measurable results</p>
                 </div>
                 <div>
                   <p className="metric-lg text-brass">100%</p>
-                  <p className="mt-2 text-body-sm text-warm-gray">
-                    You own everything we build
-                  </p>
+                  <p className="mt-2 text-body-sm text-warm-gray">You own everything we build</p>
                 </div>
               </div>
             </div>
@@ -243,9 +224,7 @@ export default function PricingPage() {
                 <StaggerItem key={faq.question}>
                   <div className="py-8">
                     <h3 className="text-h4">{faq.question}</h3>
-                    <p className="mt-3 text-body text-warm-gray">
-                      {faq.answer}
-                    </p>
+                    <p className="mt-3 text-body text-warm-gray">{faq.answer}</p>
                   </div>
                   {i < faqs.length - 1 && <div className="h-px bg-divider" />}
                 </StaggerItem>
@@ -258,17 +237,15 @@ export default function PricingPage() {
       {/* — CTA — */}
       <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">
-            Ready to see the ROI for your business?
-          </h2>
+          <h2 className="text-display text-bone">Ready to see the ROI for your business?</h2>
           <p className="mt-6 text-body-lg text-stone">
-            The Forge Diagnostic gives you a clear picture in four weeks. If we
-            cannot show a path to 3x return, we will tell you.
+            The Forge Diagnostic gives you a clear picture in four weeks. If we cannot show a path
+            to 3x return, we will tell you.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
+                Generate My AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>

@@ -61,14 +61,15 @@ describe('services data', () => {
     }
   });
 
-  it('every service has at least 2 outcomes with metric + description', () => {
+  it('every service has at least 2 outcomes with value, label, and description', () => {
     for (const service of services) {
       expect(
         service.outcomes.length,
         `"${service.slug}" has too few outcomes`,
       ).toBeGreaterThanOrEqual(2);
       for (const outcome of service.outcomes) {
-        expect(outcome.metric.length).toBeGreaterThan(0);
+        expect(outcome.value.length).toBeGreaterThan(0);
+        expect(outcome.label.length).toBeGreaterThan(0);
         expect(outcome.description.length).toBeGreaterThan(0);
       }
     }

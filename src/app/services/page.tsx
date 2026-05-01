@@ -1,8 +1,8 @@
-import { ArrowRight, Factory, Landmark, HeartPulse, Code2, Briefcase, Shield } from 'lucide-react';
+import { ArrowRight, Briefcase, Code2, Factory, HeartPulse, Landmark, Shield } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
+import { Button } from '@/components/ui/button';
 import { forgeProducts } from '@/data/forge-products';
 import { services } from '@/data/services';
 import { createMetadata } from '@/lib/metadata';
@@ -78,13 +78,11 @@ export default function ServicesPage() {
           </FadeIn>
           <FadeIn delay={0.15}>
             <p className="mt-6 max-w-xl text-body-lg text-stone">
-              Three named products. Transparent pricing. Built for mid-market
-              and growth-stage companies who need AI that works in production
-              — not a strategy deck that sits in a drawer.
+              Three named products. Transparent pricing. Built for mid-market and growth-stage
+              companies who need AI that works in production — not a strategy deck that sits in a
+              drawer.
             </p>
-            <p className="mt-4 max-w-xl text-body text-stone">
-              We build, we ship, we deploy.
-            </p>
+            <p className="mt-4 max-w-xl text-body text-stone">We build, we ship, we deploy.</p>
           </FadeIn>
         </div>
       </section>
@@ -93,18 +91,14 @@ export default function ServicesPage() {
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <p className="overline">Named Products</p>
-          <h2 className="mt-6 text-display max-w-2xl">
-            Three engagements. One accountable team.
-          </h2>
+          <h2 className="mt-6 text-display max-w-2xl">Three engagements. One accountable team.</h2>
 
           <Stagger className="mt-16" stagger={0.12}>
             {forgeProducts.map((product, i) => (
               <StaggerItem key={product.name}>
                 <div
                   className={`relative border-t border-divider py-12 lg:py-16 ${
-                    product.featured
-                      ? 'bg-brass/[0.03] -mx-6 px-6 lg:-mx-10 lg:px-10'
-                      : ''
+                    product.featured ? 'bg-brass/[0.03] -mx-6 px-6 lg:-mx-10 lg:px-10' : ''
                   }`}
                 >
                   <div className="lg:grid lg:grid-cols-12 lg:gap-12">
@@ -118,16 +112,7 @@ export default function ServicesPage() {
                           <span className="overline text-[10px]">Most chosen</span>
                         )}
                       </div>
-                      <h3
-                        className="mt-3"
-                        style={{
-                          fontFamily: 'var(--font-instrument-serif)',
-                          fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
-                          lineHeight: 1.08,
-                          letterSpacing: '-0.02em',
-                          fontWeight: 400,
-                        }}
-                      >
+                      <h3 className="mt-3 font-display text-[1.75rem] leading-[1.08] sm:text-[2.25rem] lg:text-[2.75rem]">
                         {product.name}
                       </h3>
                       <div className="mt-4 flex items-baseline gap-2">
@@ -137,20 +122,14 @@ export default function ServicesPage() {
                         >
                           {product.price}
                         </span>
-                        <span className="text-body-sm text-warm-gray">
-                          {product.period}
-                        </span>
+                        <span className="text-body-sm text-warm-gray">{product.period}</span>
                       </div>
-                      <p className="mt-1 text-body-sm text-warm-gray">
-                        {product.timeline}
-                      </p>
+                      <p className="mt-1 text-body-sm text-warm-gray">{product.timeline}</p>
                     </div>
 
                     {/* Right: description, included list, CTA */}
                     <div className="mt-8 lg:col-span-7 lg:mt-0">
-                      <p className="text-body-lg text-warm-gray">
-                        {product.description}
-                      </p>
+                      <p className="text-body-lg text-warm-gray">{product.description}</p>
                       <ul className="mt-8 space-y-3">
                         {product.whatsIncluded.slice(0, 5).map((item) => (
                           <li
@@ -195,30 +174,28 @@ export default function ServicesPage() {
             {industries.map((ind) => {
               const Icon = ind.icon;
               return (
-              <StaggerItem key={ind.name}>
-                <Link
-                  href={ind.href}
-                  className="group block border-t border-divider py-8 sm:py-10"
-                >
-                  <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between">
-                    <div className="flex items-start gap-4 flex-1 min-w-0">
-                      <Icon className="h-5 w-5 text-brass shrink-0 mt-1" />
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-h3 group-hover:text-brass transition-colors duration-300">
-                          {ind.name}
-                        </h3>
-                        <p className="mt-2 text-body text-warm-gray max-w-md">
-                          {ind.problem}
-                        </p>
-                        <p className="mt-3 text-body-sm font-medium text-anthracite">
-                          {ind.outcome}
-                        </p>
+                <StaggerItem key={ind.name}>
+                  <Link
+                    href={ind.href}
+                    className="group block border-t border-divider py-8 sm:py-10"
+                  >
+                    <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between">
+                      <div className="flex items-start gap-4 flex-1 min-w-0">
+                        <Icon className="h-5 w-5 text-brass shrink-0 mt-1" />
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-h3 group-hover:text-brass transition-colors duration-300">
+                            {ind.name}
+                          </h3>
+                          <p className="mt-2 text-body text-warm-gray max-w-md">{ind.problem}</p>
+                          <p className="mt-3 text-body-sm font-medium text-anthracite">
+                            {ind.outcome}
+                          </p>
+                        </div>
                       </div>
+                      <ArrowRight className="h-5 w-5 text-warm-gray group-hover:text-brass group-hover:translate-x-2 transition-all duration-300 shrink-0" />
                     </div>
-                    <ArrowRight className="h-5 w-5 text-warm-gray group-hover:text-brass group-hover:translate-x-2 transition-all duration-300 shrink-0" />
-                  </div>
-                </Link>
-              </StaggerItem>
+                  </Link>
+                </StaggerItem>
               );
             })}
           </Stagger>
@@ -230,9 +207,7 @@ export default function ServicesPage() {
       <section className="border-t border-divider bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <p className="overline">What We Build</p>
-          <h2 className="mt-6 text-display max-w-2xl">
-            Four capabilities. One team.
-          </h2>
+          <h2 className="mt-6 text-display max-w-2xl">Four capabilities. One team.</h2>
 
           <div className="mt-16 grid gap-0 lg:grid-cols-2">
             {services.map((svc, i) => (
@@ -241,15 +216,11 @@ export default function ServicesPage() {
                 href={`/services/${svc.slug}`}
                 className="group border-t border-divider py-10 pr-8 transition-colors hover:bg-surface"
               >
-                <span className="metric text-sm text-brass">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
+                <span className="metric text-sm text-brass">{String(i + 1).padStart(2, '0')}</span>
                 <h3 className="mt-3 text-h3 group-hover:text-brass transition-colors">
                   {svc.title}
                 </h3>
-                <p className="mt-3 text-body text-warm-gray max-w-md">
-                  {svc.tagline}
-                </p>
+                <p className="mt-3 text-body text-warm-gray max-w-md">{svc.tagline}</p>
                 <span className="mt-4 inline-flex items-center text-sm font-medium text-brass opacity-0 group-hover:opacity-100 transition-opacity">
                   Learn more <ArrowRight className="ml-1 h-3.5 w-3.5" />
                 </span>
@@ -263,21 +234,18 @@ export default function ServicesPage() {
       <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <p className="overline">Platform vs. Partner</p>
-          <h2 className="mt-6 text-display text-bone max-w-2xl">
-            Why not just buy a platform?
-          </h2>
+          <h2 className="mt-6 text-display text-bone max-w-2xl">Why not just buy a platform?</h2>
           <p className="mt-6 max-w-2xl text-body-lg text-stone">
-            Platforms like DataRobot and Dataiku are powerful tools — but they
-            require your team to build, validate, deploy, and maintain every
-            model. If you have a mature data science team, they make sense. If
-            you need production AI and the capability to run it, you need a
-            partner.
+            Platforms like DataRobot and Dataiku are powerful tools — but they require your team to
+            build, validate, deploy, and maintain every model. If you have a mature data science
+            team, they make sense. If you need production AI and the capability to run it, you need
+            a partner.
           </p>
 
           <div className="mt-14 border-t border-divider-dark pt-8">
             <p className="text-body-lg text-bone max-w-2xl">
-              We build production AI AND train your team to run it. When we
-              leave, the system works and your people own it.
+              We build production AI AND train your team to run it. When we leave, the system works
+              and your people own it.
             </p>
           </div>
         </div>
@@ -289,9 +257,8 @@ export default function ServicesPage() {
           <Shield className="h-8 w-8 text-brass mx-auto mb-6" />
           <h2 className="text-display">The ClearForge Guarantee</h2>
           <p className="mt-6 text-body-lg text-warm-gray">
-            If our Forge Diagnostic doesn&apos;t identify at least 3 actionable
-            AI opportunities with clear ROI projections, we refund your
-            investment. No questions asked.
+            If our Forge Diagnostic doesn&apos;t identify at least 3 actionable AI opportunities
+            with clear ROI projections, we refund your investment. No questions asked.
           </p>
         </div>
       </section>
@@ -299,17 +266,15 @@ export default function ServicesPage() {
       {/* — CTA — */}
       <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">
-            Ready to see what AI can do for your business?
-          </h2>
+          <h2 className="text-display text-bone">Ready to see what AI can do for your business?</h2>
           <p className="mt-6 text-body-lg text-stone">
-            The Forge Diagnostic gives you a clear picture of your
-            highest-value opportunities in four weeks. No commitment beyond that.
+            The Forge Diagnostic gives you a clear picture of your highest-value opportunities in
+            four weeks. No commitment beyond that.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
+                Generate My AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>

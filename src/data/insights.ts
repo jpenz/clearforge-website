@@ -1028,7 +1028,11 @@ A $15K Diagnostic frequently uncovers $200K+ in identifiable quick-win opportuni
 
 ## Bottom Line
 For a mid-market company starting AI in 2026, expect to invest **$15K for a credible diagnostic and $100K-$200K for the first production system**. Total first-year all-in including managed operations: **$150K-$350K**. Expect 3-5x ROI within 12 months. Demand pricing transparency, fixed-fee phase 1, senior staffing, and outcome-tied milestones.`,
-    relatedSlugs: ['ai-readiness-assessment-guide', 'fractional-caio-vs-full-time', 'why-ai-pilots-fail-5-things-work'],
+    relatedSlugs: [
+      'ai-readiness-assessment-guide',
+      'fractional-caio-vs-full-time',
+      'why-ai-pilots-fail-5-things-work',
+    ],
     seo: {
       title: 'How Much Does AI Consulting Cost in 2026? Complete Pricing Guide',
       description:
@@ -1071,7 +1075,7 @@ For a mid-market company starting AI in 2026, expect to invest **$15K for a cred
       {
         question: 'What should a fixed-fee AI Diagnostic include?',
         answer:
-          'A credible fixed-fee Diagnostic should include: workflow opportunity mapping, prioritized roadmap with ROI projections, data readiness audit, implementation sequencing, and a quantified business case. ClearForge\'s Forge Diagnostic includes all of the above with a money-back guarantee if 3+ actionable opportunities are not identified.',
+          "A credible fixed-fee Diagnostic should include: workflow opportunity mapping, prioritized roadmap with ROI projections, data readiness audit, implementation sequencing, and a quantified business case. ClearForge's Forge Diagnostic includes all of the above with a money-back guarantee if 3+ actionable opportunities are not identified.",
       },
       {
         question: 'How long does an AI implementation Sprint take?',
@@ -1079,7 +1083,7 @@ For a mid-market company starting AI in 2026, expect to invest **$15K for a cred
           'A typical AI implementation Sprint runs 10-14 weeks from kickoff to production go-live, deploying a working AI system integrated with existing tools. Most clients see measurable ROI within 90 days of deployment.',
       },
       {
-        question: 'What\'s the difference between AI consulting and managed AI operations?',
+        question: "What's the difference between AI consulting and managed AI operations?",
         answer:
           'AI consulting builds AI systems; managed AI operations runs them. Managed AI operations covers monitoring, optimization, and expansion of deployed systems on an ongoing basis ($5K-$25K/month). Many mid-market companies use this model instead of hiring a full-time AI team.',
       },
@@ -1184,7 +1188,11 @@ ClearForge's Forge Diagnostic ($15K, 4 weeks) includes all six. If 3+ actionable
 
 ## Bottom Line
 An AI readiness assessment is the cheapest insurance against an expensive AI failure. Free scorecards are sufficient for self-education and board alignment. A paid Diagnostic ($10K-$25K) is warranted when AI investment is above $50K. The five pillars (data, workforce, process, technology, strategic alignment) are stable across frameworks; the weights vary. **Focus on workforce readiness — it's the most under-rated pillar and the highest predictor of pilot-to-production success.**`,
-    relatedSlugs: ['ai-consulting-cost', 'why-ai-pilots-fail-5-things-work', 'fractional-caio-vs-full-time'],
+    relatedSlugs: [
+      'ai-consulting-cost',
+      'why-ai-pilots-fail-5-things-work',
+      'fractional-caio-vs-full-time',
+    ],
     seo: {
       title: 'AI Readiness Assessment 2026: What It Is, How to Do One, What It Costs',
       description:
@@ -1212,7 +1220,7 @@ An AI readiness assessment is the cheapest insurance against an expensive AI fai
       {
         question: 'How much does an AI readiness assessment cost?',
         answer:
-          'Free online scorecards take 10 minutes. Paid Diagnostics cost $10K-$25K and run 4-6 weeks, producing a prioritized roadmap with ROI sizing. ClearForge\'s Forge Diagnostic is $15K with a money-back guarantee if 3+ actionable opportunities are not identified.',
+          "Free online scorecards take 10 minutes. Paid Diagnostics cost $10K-$25K and run 4-6 weeks, producing a prioritized roadmap with ROI sizing. ClearForge's Forge Diagnostic is $15K with a money-back guarantee if 3+ actionable opportunities are not identified.",
       },
       {
         question: 'What are the 5 pillars of AI readiness?',
@@ -1235,7 +1243,7 @@ An AI readiness assessment is the cheapest insurance against an expensive AI fai
           'At minimum annually. AI readiness is dynamic — your data, workforce, and technology change. Most leaders re-assess annually as part of strategic planning.',
       },
       {
-        question: 'What\'s the most common mistake in AI readiness assessments?',
+        question: "What's the most common mistake in AI readiness assessments?",
         answer:
           'Optimism bias. Internal teams consistently rate their data and process maturity higher than external benchmarks would. Use external benchmarks or paid diagnostics to calibrate.',
       },
@@ -1385,7 +1393,7 @@ Fractional CAIO is the right choice for **mid-market companies with $25M-$500M r
       {
         question: 'When should I hire a Fractional CAIO vs full-time?',
         answer:
-          'Hire fractional when company size is $25M-$500M revenue, AI program scope is under $2M annually, you\'re 0-18 months into formal AI program, and you need external network and credibility. Hire full-time when company is $500M+ with $2M+ AI scope and 12+ months of clear roadmap.',
+          "Hire fractional when company size is $25M-$500M revenue, AI program scope is under $2M annually, you're 0-18 months into formal AI program, and you need external network and credibility. Hire full-time when company is $500M+ with $2M+ AI scope and 12+ months of clear roadmap.",
       },
       {
         question: 'What does a Fractional CAIO actually do?',
@@ -1393,7 +1401,7 @@ Fractional CAIO is the right choice for **mid-market companies with $25M-$500M r
           'A Fractional CAIO defines AI thesis, identifies and sequences use cases, builds the AI investment thesis for the board, establishes governance, leads vendor decisions, runs the AI portfolio review cadence, and coaches internal AI talent. They typically do NOT do hands-on engineering or day-to-day project management.',
       },
       {
-        question: 'Fractional CAIO vs AI consulting engagement — what\'s the difference?',
+        question: "Fractional CAIO vs AI consulting engagement — what's the difference?",
         answer:
           'A Fractional CAIO is ongoing strategic + operating leadership ($5K-$25K/month, 6-18 months typical). An AI consulting engagement is project-based (4-14 weeks, fixed-fee or T&M) with specific deliverables. The two are often complementary — Fractional CAIO defines strategy, consulting firm builds systems.',
       },
@@ -1403,7 +1411,8 @@ Fractional CAIO is the right choice for **mid-market companies with $25M-$500M r
           '6-18 months is typical. Many engagements function as a bridge to a full-time hire, allowing the company to test the role before committing to $400K-$600K loaded comp.',
       },
       {
-        question: 'What\'s the difference between a Fractional CAIO and an Embedded AI Operating Partner?',
+        question:
+          "What's the difference between a Fractional CAIO and an Embedded AI Operating Partner?",
         answer:
           'An Embedded AI Operating Partner is a higher-touch version (2-3 days/week, $15K-$30K/month) commonly used in PE portfolios. The Fractional CAIO is more strategic; the Embedded Operating Partner is more execution-led.',
       },

@@ -41,17 +41,11 @@ function ReportHeader() {
   return (
     <div className="w-full bg-[#111111] border-b border-[#2a2a2a] py-3 px-4 sm:px-6 lg:px-10 flex items-center justify-between">
       <div className="flex items-center gap-3">
-        <span className="text-[10px] tracking-[0.2em] uppercase font-semibold text-brass">
-          Clearforge
-        </span>
+        <span className="text-[10px] uppercase font-semibold text-brass">Clearforge</span>
         <span className="text-[#3a3a3a]">·</span>
-        <span className="text-[10px] tracking-[0.2em] uppercase font-medium text-stone">
-          Research
-        </span>
+        <span className="text-[10px] uppercase font-medium text-stone">Research</span>
       </div>
-      {dateLabel && (
-        <span className="text-[10px] tracking-[0.15em] uppercase text-stone/60">{dateLabel}</span>
-      )}
+      {dateLabel && <span className="text-[10px] uppercase text-stone/60">{dateLabel}</span>}
     </div>
   );
 }
@@ -60,19 +54,15 @@ function ReportHeader() {
 function ReportFooter() {
   return (
     <div className="w-full bg-[#111111] border-t border-[#2a2a2a] py-3 px-4 sm:px-6 lg:px-10 flex items-center justify-between">
-      <span className="text-[10px] tracking-[0.15em] uppercase text-stone/60">
-        © Clearforge AI · Confidential
-      </span>
-      <span className="text-[10px] tracking-[0.15em] uppercase text-brass/70">
-        clearforge.ai
-      </span>
+      <span className="text-[10px] uppercase text-stone/60">© Clearforge AI · Confidential</span>
+      <span className="text-[10px] uppercase text-brass/70">clearforge.ai</span>
     </div>
   );
 }
 
 const ScoreRing = dynamic(
   () => import('@/components/scorecard/score-ring').then((m) => ({ default: m.ScoreRing })),
-  { ssr: false }
+  { ssr: false },
 );
 
 export default function ScorecardResultsPage() {
@@ -100,7 +90,9 @@ export default function ScorecardResultsPage() {
         <div className="text-center px-6">
           <h1 className="text-display text-anthracite">No Results Found</h1>
           <p className="mt-4 text-body-lg text-warm-gray">Please complete the scorecard first.</p>
-          <Button className="mt-8" asChild><Link href="/scorecard">Take the Scorecard</Link></Button>
+          <Button className="mt-8" asChild>
+            <Link href="/scorecard">Take the Scorecard</Link>
+          </Button>
         </div>
       </section>
     );
@@ -113,15 +105,25 @@ export default function ScorecardResultsPage() {
       await fetch('/api/scorecard', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, company, score: result?.compositeScore, maturityLevel: result?.maturityLevel, pillarScores: result?.pillarScores }),
+        body: JSON.stringify({
+          name,
+          email,
+          company,
+          score: result?.compositeScore,
+          maturityLevel: result?.maturityLevel,
+          pillarScores: result?.pillarScores,
+        }),
       });
-    } catch { /* non-blocking */ }
+    } catch {
+      /* non-blocking */
+    }
     setSubmitted(true);
     setGated(false);
     setSubmitting(false);
   }
 
-  const inputClasses = 'w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-base text-anthracite placeholder:text-warm-gray focus:border-brass focus:outline-none focus:ring-0 transition-colors';
+  const inputClasses =
+    'w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-base text-anthracite placeholder:text-warm-gray focus:border-brass focus:outline-none focus:ring-0 transition-colors';
 
   if (gated && !submitted) {
     return (
@@ -138,18 +140,45 @@ export default function ScorecardResultsPage() {
             <form onSubmit={handleGateSubmit} className="space-y-6">
               <div className="relative">
                 <User className="absolute left-0 top-3.5 h-4 w-4 text-warm-gray" />
-                <input type="text" required placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} className={`${inputClasses} pl-6`} />
+                <input
+                  type="text"
+                  required
+                  placeholder="Your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className={`${inputClasses} pl-6`}
+                />
               </div>
               <div className="relative">
                 <Mail className="absolute left-0 top-3.5 h-4 w-4 text-warm-gray" />
-                <input type="email" required placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} className={`${inputClasses} pl-6`} />
+                <input
+                  type="email"
+                  required
+                  placeholder="you@company.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className={`${inputClasses} pl-6`}
+                />
               </div>
               <div className="relative">
                 <Building2 className="absolute left-0 top-3.5 h-4 w-4 text-warm-gray" />
-                <input type="text" required placeholder="Company name" value={company} onChange={(e) => setCompany(e.target.value)} className={`${inputClasses} pl-6`} />
+                <input
+                  type="text"
+                  required
+                  placeholder="Company name"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  className={`${inputClasses} pl-6`}
+                />
               </div>
               <Button type="submit" size="lg" className="w-full" disabled={submitting}>
-                {submitting ? 'Loading...' : <>See Full Results <ArrowRight className="ml-2 h-4 w-4" /></>}
+                {submitting ? (
+                  'Loading...'
+                ) : (
+                  <>
+                    See Full Results <ArrowRight className="ml-2 h-4 w-4" />
+                  </>
+                )}
               </Button>
             </form>
           </div>
@@ -172,7 +201,7 @@ export default function ScorecardResultsPage() {
           )}
           <p className="overline">Clearforge Research · AI Maturity Report</p>
           {company && (
-            <p className="mt-3 text-sm tracking-wide text-stone/70">
+            <p className="mt-3 text-sm text-stone/70">
               Prepared exclusively for <span className="text-brass">{company}</span>
             </p>
           )}
@@ -180,7 +209,9 @@ export default function ScorecardResultsPage() {
             <ScoreRing score={result.compositeScore} size={180} strokeWidth={8} />
           </div>
           <p className="mt-6 text-h2 text-bone">{result.maturityLevel}</p>
-          <p className="mt-4 text-body-lg text-stone max-w-xl mx-auto">{result.maturityDescription}</p>
+          <p className="mt-4 text-body-lg text-stone max-w-xl mx-auto">
+            {result.maturityDescription}
+          </p>
         </div>
       </section>
 
@@ -190,7 +221,10 @@ export default function ScorecardResultsPage() {
           <h2 className="mt-6 text-display text-anthracite">How you scored.</h2>
           <div className="mt-10 space-y-4">
             {result.pillarScores.map((ps) => (
-              <div key={ps.key} className={`border p-4 sm:p-6 ${ps.key === result.weakestPillar ? 'border-error/30 bg-error/5' : ps.key === result.strongestPillar ? 'border-success/30 bg-success/5' : 'border-divider bg-surface'}`}>
+              <div
+                key={ps.key}
+                className={`border p-4 sm:p-6 ${ps.key === result.weakestPillar ? 'border-error/30 bg-error/5' : ps.key === result.strongestPillar ? 'border-success/30 bg-success/5' : 'border-divider bg-surface'}`}
+              >
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-sm font-bold text-anthracite">{ps.name}</h3>
                   <span className="metric text-lg text-brass">{Math.round(ps.percentage)}%</span>
@@ -213,7 +247,9 @@ export default function ScorecardResultsPage() {
             {result.roadmap.map((step, i) => (
               <div key={step.phase} className="border border-divider-dark p-4 sm:p-6">
                 <span className="metric text-xs text-brass">{String(i + 1).padStart(2, '0')}</span>
-                <span className="overline ml-3">{step.phase} · {step.timeline}</span>
+                <span className="overline ml-3">
+                  {step.phase} · {step.timeline}
+                </span>
                 <h3 className="mt-2 text-h4 text-bone">{step.title}</h3>
                 <p className="mt-2 text-body-sm text-stone">{step.description}</p>
               </div>
@@ -226,8 +262,14 @@ export default function ScorecardResultsPage() {
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10 text-center">
           <h2 className="text-display text-anthracite">Ready to close the gap?</h2>
           <div className="mt-8 flex gap-4 flex-wrap justify-center">
-            <Button size="lg" asChild><Link href="/contact">Book a 15-Min Diagnostic Call <ArrowRight className="ml-2 h-4 w-4" /></Link></Button>
-            <Button variant="secondary" size="lg" asChild><Link href="/services">Explore Services</Link></Button>
+            <Button size="lg" asChild>
+              <Link href="/contact">
+                Book a 15-Min Diagnostic Call <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button variant="secondary" size="lg" asChild>
+              <Link href="/services">Explore Services</Link>
+            </Button>
           </div>
         </div>
       </section>

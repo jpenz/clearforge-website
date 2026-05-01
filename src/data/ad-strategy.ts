@@ -83,7 +83,7 @@ export const keywordClusters: KeywordCluster[] = [
     contentNeeded: [
       'AI Readiness Scorecard pillar page (exists at /scorecard)',
       'How to Know If Your Company Is AI Ready (long-form Q&A)',
-      'Free vs Paid AI Diagnostic — Buyer\'s Guide',
+      "Free vs Paid AI Diagnostic — Buyer's Guide",
       'AI Maturity Model: 4-tier framework explained',
     ],
     primaryLandingPage: '/scorecard',
@@ -147,7 +147,7 @@ export const keywordClusters: KeywordCluster[] = [
       'AI Agents for RevOps — definitive guide',
       'AI Agents for Customer Service — top use cases ranked by ROI',
       'AI Agent Implementation Roadmap',
-      'AI Agents vs RPA vs Workflow Automation — buyer\'s guide',
+      "AI Agents vs RPA vs Workflow Automation — buyer's guide",
     ],
     primaryLandingPage: '/services/custom-ai-agents',
     primaryCTA: 'See AI Agent capabilities',
@@ -177,7 +177,7 @@ export const keywordClusters: KeywordCluster[] = [
     contentNeeded: [
       'Industry value-chain pages (✅ shipped V8.20 — 17 industries)',
       'Per-industry case study',
-      'Industry-specific buyer\'s guide',
+      "Industry-specific buyer's guide",
     ],
     primaryLandingPage: '/industries',
     primaryCTA: 'Generate Custom Value Chain',
@@ -223,7 +223,8 @@ export const adCampaigns: AdCampaign[] = [
     id: 'li-pe-operating-partner',
     channel: 'linkedin',
     name: 'PE Operating Partners — Portfolio AI Diagnostic',
-    audience: 'Job titles: Operating Partner, Portfolio Operating Executive, COO at PE-backed company. Companies: $50M-$500M revenue.',
+    audience:
+      'Job titles: Operating Partner, Portfolio Operating Executive, COO at PE-backed company. Companies: $50M-$500M revenue.',
     objective: 'conversion',
     cluster: 'ai-pe-value',
     format: 'Document Ad (PDF: PE Portfolio AI Playbook)',
@@ -247,7 +248,8 @@ export const adCampaigns: AdCampaign[] = [
     id: 'li-mfg-coo',
     channel: 'linkedin',
     name: 'Manufacturing COOs / VP Operations — AI for OEE & Supply Chain',
-    audience: 'Job titles: COO, VP Operations, Plant Manager, Supply Chain VP. Industries: industrial manufacturing, industrial goods. Companies: $50M-$500M.',
+    audience:
+      'Job titles: COO, VP Operations, Plant Manager, Supply Chain VP. Industries: industrial manufacturing, industrial goods. Companies: $50M-$500M.',
     objective: 'conversion',
     cluster: 'industry-ai',
     format: 'Single Image Ad with case study link',
@@ -259,7 +261,7 @@ export const adCampaigns: AdCampaign[] = [
         cta: 'See the case',
       },
       {
-        headline: 'Your data is generating signals you\'re not acting on.',
+        headline: "Your data is generating signals you're not acting on.",
         body: 'AI agents in supply chain, predictive maintenance, and commercial execution. Production AI in 10 weeks — not 10 quarters.',
         cta: 'Get a Forge Diagnostic',
       },
@@ -271,7 +273,8 @@ export const adCampaigns: AdCampaign[] = [
     id: 'li-thought-leader-james',
     channel: 'linkedin',
     name: 'Thought Leader Ad — James Penz / Pilot Purgatory',
-    audience: 'COO, CRO, CEO at $25M-$500M companies. Industries: Manufacturing, Financial Services, Healthcare, Distribution, SaaS, PE-backed.',
+    audience:
+      'COO, CRO, CEO at $25M-$500M companies. Industries: Manufacturing, Financial Services, Healthcare, Distribution, SaaS, PE-backed.',
     objective: 'awareness',
     cluster: 'ai-readiness',
     format: 'Thought Leader Ad (founder LinkedIn post amplification)',
@@ -290,7 +293,8 @@ export const adCampaigns: AdCampaign[] = [
     id: 'li-conversation-revops',
     channel: 'linkedin',
     name: 'Conversation Ad — RevOps & CRO',
-    audience: 'CRO, VP Sales, RevOps Director, VP Revenue Operations. Companies: $25M-$200M ARR SaaS, B2B services.',
+    audience:
+      'CRO, VP Sales, RevOps Director, VP Revenue Operations. Companies: $25M-$200M ARR SaaS, B2B services.',
     objective: 'conversion',
     cluster: 'ai-agents-functions',
     format: 'Conversation Ad with 2-step CTA',

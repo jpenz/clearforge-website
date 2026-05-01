@@ -4,12 +4,12 @@
  */
 
 export type {
-  ScorecardQuestion,
-  PillarKey,
-  Pillar,
   Answers,
+  Pillar,
+  PillarKey,
   PillarScore,
   RoadmapStep,
+  ScorecardQuestion,
   ScorecardResult,
 } from '@/lib/scorecard';
 
