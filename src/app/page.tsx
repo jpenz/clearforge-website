@@ -16,6 +16,7 @@ import { SectionReveal, StaggerReveal } from '@/components/home/homepage-animati
 import { MetricCounter } from '@/components/home/metric-counter';
 import { Button } from '@/components/ui/button';
 import { GsapTextReveal } from '@/components/ui/gsap-text-reveal';
+import { OperatorSystemPreview } from '@/components/use-cases/operator-system-preview';
 import { caseStudies } from '@/data/case-studies';
 import { industries } from '@/data/industries-value-chains';
 import { useCases } from '@/data/use-cases';
@@ -153,6 +154,9 @@ const objections = [
   },
 ];
 
+const salesPipelineUseCase =
+  useCases.find((useCase) => useCase.slug === 'ai-sales-pipeline-acceleration') ?? useCases[0];
+
 export default function Home() {
   return (
     <>
@@ -234,6 +238,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <OperatorSystemPreview useCase={salesPipelineUseCase} />
 
       <section className="border-t border-divider bg-parchment py-20 sm:py-32 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">

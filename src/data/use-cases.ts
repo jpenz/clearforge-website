@@ -15,6 +15,7 @@ export interface UseCase {
     body: string;
     bullets: string[];
   };
+  operatorView: OperatorView;
   visual: {
     poster: string;
     mp4: string;
@@ -50,6 +51,49 @@ export interface UseCase {
   }[];
 }
 
+export type OperatorTone = 'emerald' | 'blue' | 'amber' | 'red' | 'slate';
+
+export interface OperatorView {
+  eyebrow: string;
+  headline: string;
+  body: string;
+  productLabel: string;
+  rhythm: string;
+  kpis: {
+    value: string;
+    label: string;
+    detail: string;
+  }[];
+  stages: {
+    label: string;
+    count: string;
+    tone: OperatorTone;
+  }[];
+  opportunities: {
+    name: string;
+    trigger: string;
+    stage: string;
+    score: string;
+    owner: string;
+    action: string;
+    tone: OperatorTone;
+  }[];
+  intelligenceGaps: string[];
+  actionPlan: {
+    phase: string;
+    action: string;
+  }[];
+  autonomy: {
+    label: 'Auto' | 'AI Draft' | 'Human Led';
+    detail: string;
+    tone: OperatorTone;
+  }[];
+  feedbackLoop: {
+    label: string;
+    detail: string;
+  }[];
+}
+
 export const useCases: UseCase[] = [
   {
     slug: 'ai-sales-pipeline-acceleration',
@@ -81,6 +125,106 @@ export const useCases: UseCase[] = [
         'Build an 8-12 category trigger taxonomy around the real buying events in the market.',
         'Turn each trigger into scored accounts, decision-maker maps, sales plays, and rep-ready next actions.',
         'Close the loop weekly so sales feedback improves targeting, scoring, and message quality.',
+      ],
+    },
+    operatorView: {
+      eyebrow: 'Anonymized Operator View',
+      headline: 'What the growth machine looks like once it is operating.',
+      body: 'A CEO, COO, PE operator, or owner needs to see how ClearForge finds the growth spots, turns them into scored pursuits, gives people the next action, and learns from the field every week.',
+      productLabel: 'Growth Intelligence Command',
+      rhythm: 'Weekly territory growth review',
+      kpis: [
+        {
+          value: '94%',
+          label: 'Trigger coverage',
+          detail: 'Priority signals monitored across territories and segments.',
+        },
+        {
+          value: '48h',
+          label: 'First-contact target',
+          detail: 'Validated pursuits move quickly while the buying event is fresh.',
+        },
+        {
+          value: '30d',
+          label: 'Action window',
+          detail: 'Every report becomes a near-term sales operating plan.',
+        },
+      ],
+      stages: [
+        { label: 'Identified', count: '128', tone: 'slate' },
+        { label: 'Validated', count: '34', tone: 'blue' },
+        { label: 'Called', count: '19', tone: 'amber' },
+        { label: 'Qualified', count: '11', tone: 'emerald' },
+        { label: 'Won', count: '4', tone: 'emerald' },
+        { label: 'Not a Fit', count: '27', tone: 'red' },
+      ],
+      opportunities: [
+        {
+          name: 'Gulf Coast specialty chemical expansion',
+          trigger: 'EPC award + capacity expansion',
+          stage: 'Validated',
+          score: '94',
+          owner: 'Strategic AE',
+          action: 'Confirm decision map and RFP window.',
+          tone: 'emerald',
+        },
+        {
+          name: 'Southwest AI data center campus',
+          trigger: 'Cooling infrastructure demand',
+          stage: 'Called',
+          score: '90',
+          owner: 'Regional seller',
+          action: 'Validate specs with facilities lead.',
+          tone: 'blue',
+        },
+        {
+          name: 'Midwest battery materials facility',
+          trigger: 'FEED start + incentive funding',
+          stage: 'Identified',
+          score: '87',
+          owner: 'Growth lead',
+          action: 'Build stakeholder map and first outreach.',
+          tone: 'amber',
+        },
+      ],
+      intelligenceGaps: [
+        'RFP and procurement window not yet confirmed.',
+        'EPC and end-user decision map incomplete.',
+        'Technical specification package needs seller validation.',
+      ],
+      actionPlan: [
+        { phase: 'Week 1', action: 'Score and triage the territory by live buying events.' },
+        { phase: 'Week 2', action: 'Build contact maps and account-specific playbooks.' },
+        { phase: 'Week 3', action: 'Launch executive outreach with seller review.' },
+        { phase: 'Week 4', action: 'Review outcomes, overrides, and next trigger tuning.' },
+      ],
+      autonomy: [
+        {
+          label: 'Auto',
+          detail: 'Monitor triggers, enrich accounts, refresh scores, and flag stale pursuits.',
+          tone: 'emerald',
+        },
+        {
+          label: 'AI Draft',
+          detail: 'Prepare playbooks, outreach angles, call prep, and gap lists for review.',
+          tone: 'amber',
+        },
+        {
+          label: 'Human Led',
+          detail: 'Own qualification, relationships, commercial judgment, and negotiation.',
+          tone: 'blue',
+        },
+      ],
+      feedbackLoop: [
+        {
+          label: 'Market signal',
+          detail: 'Capital project, expansion, regulation, or buyer change.',
+        },
+        {
+          label: 'AI machine',
+          detail: 'Score, brief, route, draft, and recommend the next action.',
+        },
+        { label: 'Team judgment', detail: 'Validate fit, update outcome, and improve the model.' },
       ],
     },
     visual: {
@@ -241,6 +385,109 @@ export const useCases: UseCase[] = [
         'Auto: classify, summarize, enrich, and route routine requests.',
         'AI Draft: prepare responses, knowledge suggestions, and escalation packets for human review.',
         'Human Led: own sensitive customers, ambiguous exceptions, negotiation, and relationship moments.',
+      ],
+    },
+    operatorView: {
+      eyebrow: 'Anonymized Operator View',
+      headline: 'What the service machine looks like when speed has controls.',
+      body: 'The right service system gives leaders a live picture of demand, escalation risk, draft quality, customer sentiment, and where human judgment is required before trust is damaged.',
+      productLabel: 'Service Quality Command',
+      rhythm: 'Daily backlog and escalation standup',
+      kpis: [
+        {
+          value: '16m',
+          label: 'Priority triage',
+          detail: 'High-risk requests move to the right owner first.',
+        },
+        {
+          value: '92%',
+          label: 'Draft QA pass',
+          detail: 'Responses meet tone, policy, and context checks before send.',
+        },
+        {
+          value: '24',
+          label: 'At-risk accounts',
+          detail: 'Customer issues are grouped by renewal, SLA, and sentiment risk.',
+        },
+      ],
+      stages: [
+        { label: 'Intake', count: '186', tone: 'slate' },
+        { label: 'Triaged', count: '121', tone: 'blue' },
+        { label: 'Drafted', count: '78', tone: 'amber' },
+        { label: 'Escalated', count: '14', tone: 'red' },
+        { label: 'Resolved', count: '64', tone: 'emerald' },
+        { label: 'Learned', count: '9', tone: 'emerald' },
+      ],
+      opportunities: [
+        {
+          name: 'Enterprise renewal complaint cluster',
+          trigger: 'Negative sentiment + open SLA miss',
+          stage: 'Escalated',
+          score: '91',
+          owner: 'Service leader',
+          action: 'Send recovery packet for human approval.',
+          tone: 'red',
+        },
+        {
+          name: 'Multi-site onboarding delay',
+          trigger: 'Three handoff misses in seven days',
+          stage: 'Drafted',
+          score: '84',
+          owner: 'Implementation lead',
+          action: 'Confirm owner and next customer update.',
+          tone: 'amber',
+        },
+        {
+          name: 'Repeat billing exception',
+          trigger: 'Recurring ticket theme detected',
+          stage: 'Triaged',
+          score: '76',
+          owner: 'Support ops',
+          action: 'Route root-cause packet to finance ops.',
+          tone: 'blue',
+        },
+      ],
+      intelligenceGaps: [
+        'Account history is split across CRM, helpdesk, and notes.',
+        'Escalation owner is unclear for SLA-adjacent requests.',
+        'Knowledge article needs update after repeated ticket pattern.',
+      ],
+      actionPlan: [
+        { phase: 'Day 1', action: 'Classify demand and separate auto, draft, and human-led work.' },
+        {
+          phase: 'Day 2',
+          action: 'Draft customer responses and escalation packets with QA gates.',
+        },
+        { phase: 'Day 3', action: 'Review sentiment, backlog risk, and priority accounts.' },
+        { phase: 'Weekly', action: 'Convert repeated issues into knowledge and prevention work.' },
+      ],
+      autonomy: [
+        {
+          label: 'Auto',
+          detail: 'Classify, summarize, route, dedupe, and enrich routine service requests.',
+          tone: 'emerald',
+        },
+        {
+          label: 'AI Draft',
+          detail: 'Prepare replies, customer histories, escalation packets, and knowledge updates.',
+          tone: 'amber',
+        },
+        {
+          label: 'Human Led',
+          detail: 'Own sensitive customers, exceptions, concessions, and relationship recovery.',
+          tone: 'blue',
+        },
+      ],
+      feedbackLoop: [
+        {
+          label: 'Customer signal',
+          detail: 'Ticket, email, sentiment, SLA, or account-risk event.',
+        },
+        { label: 'AI machine', detail: 'Classify, draft, route, quality-check, and flag risk.' },
+        {
+          label: 'Team judgment',
+          detail: 'Approve, personalize, resolve, and improve the knowledge base.',
+        },
       ],
     },
     visual: {
@@ -404,6 +651,115 @@ export const useCases: UseCase[] = [
         'Review flow weekly by cycle time, rework, stuck items, and margin impact.',
       ],
     },
+    operatorView: {
+      eyebrow: 'Anonymized Operator View',
+      headline: 'What the operations machine shows leaders every day.',
+      body: 'Operators do not need another attractive dashboard. They need a work-control view that shows which handoffs are stuck, what evidence is missing, who owns the decision, and what gets margin back.',
+      productLabel: 'Operations Flow Command',
+      rhythm: 'Daily throughput and exception review',
+      kpis: [
+        {
+          value: '31h',
+          label: 'Waiting time found',
+          detail: 'Avoidable pauses surfaced across one priority workflow.',
+        },
+        {
+          value: '12',
+          label: 'Stuck handoffs',
+          detail: 'Items without owner, evidence, or exit criteria.',
+        },
+        {
+          value: '7',
+          label: 'Margin leaks',
+          detail: 'Rework, expedite, discount, or delay patterns to attack.',
+        },
+      ],
+      stages: [
+        { label: 'Intake', count: '64', tone: 'slate' },
+        { label: 'Validated', count: '43', tone: 'blue' },
+        { label: 'Routed', count: '31', tone: 'amber' },
+        { label: 'Approved', count: '18', tone: 'emerald' },
+        { label: 'Completed', count: '22', tone: 'emerald' },
+        { label: 'Exception', count: '8', tone: 'red' },
+      ],
+      opportunities: [
+        {
+          name: 'Quote package missing engineering inputs',
+          trigger: 'Gate failed completeness check',
+          stage: 'Exception',
+          score: '89',
+          owner: 'Ops manager',
+          action: 'Route evidence request to engineering owner.',
+          tone: 'red',
+        },
+        {
+          name: 'Field schedule change pending approval',
+          trigger: 'Customer date moved + no owner',
+          stage: 'Routed',
+          score: '82',
+          owner: 'Planning lead',
+          action: 'Draft decision packet for supervisor review.',
+          tone: 'amber',
+        },
+        {
+          name: 'Order-to-cash mismatch',
+          trigger: 'Invoice variance above tolerance',
+          stage: 'Validated',
+          score: '74',
+          owner: 'Finance ops',
+          action: 'Compare contract, PO, and delivery evidence.',
+          tone: 'blue',
+        },
+      ],
+      intelligenceGaps: [
+        'Entry criteria are not consistently captured before work moves.',
+        'Approval reason codes are missing on late-cycle exceptions.',
+        'Cost impact is visible after the delay, not while it can be prevented.',
+      ],
+      actionPlan: [
+        { phase: 'Day 1', action: 'Map the gate logic and name the required evidence.' },
+        {
+          phase: 'Day 3',
+          action: 'Automate completeness checks, handoff drafts, and owner routing.',
+        },
+        { phase: 'Week 2', action: 'Install exception views tied to cycle time and cost impact.' },
+        {
+          phase: 'Weekly',
+          action: 'Review stuck work, repeat causes, and next workflow expansion.',
+        },
+      ],
+      autonomy: [
+        {
+          label: 'Auto',
+          detail: 'Extract fields, check completeness, route standard work, and refresh status.',
+          tone: 'emerald',
+        },
+        {
+          label: 'AI Draft',
+          detail: 'Prepare handoffs, variance notes, approval packets, and risk summaries.',
+          tone: 'amber',
+        },
+        {
+          label: 'Human Led',
+          detail: 'Decide exceptions, tradeoffs, customer commitments, and operating changes.',
+          tone: 'blue',
+        },
+      ],
+      feedbackLoop: [
+        {
+          label: 'Workflow signal',
+          detail: 'Missing input, wait time, status drift, or variance event.',
+        },
+        {
+          label: 'AI machine',
+          detail: 'Validate, route, draft, summarize, and surface the blocker.',
+        },
+        {
+          label: 'Team judgment',
+          detail: 'Resolve the exception and tune the gate for next time.',
+        },
+      ],
+    },
     visual: {
       poster: '/images/use-cases/ai-operations-efficiency-machine.webp',
       mp4: '/videos/use-cases/ai-operations-efficiency-machine.mp4',
@@ -556,6 +912,113 @@ export const useCases: UseCase[] = [
         'Require source trails and confidence notes so leaders can inspect the reasoning.',
         'Separate facts, gaps, recommendations, and human decisions into distinct sections.',
         'Turn each finished report into reusable memory for the next market, customer, or workflow.',
+      ],
+    },
+    operatorView: {
+      eyebrow: 'Anonymized Operator View',
+      headline: 'What a decision packet looks like before it reaches an executive.',
+      body: 'The strongest reports combine source trails, opportunity tables, evidence gaps, recommendations, and owners. That makes the work useful to an executive who needs to decide, fund, or direct action.',
+      productLabel: 'Decision Intelligence Workspace',
+      rhythm: 'Monthly market and decision review',
+      kpis: [
+        {
+          value: '82p',
+          label: 'Market study',
+          detail: 'Deep research turned into executive-ready decisions.',
+        },
+        {
+          value: '358',
+          label: 'Companies mapped',
+          detail: 'Targets grouped by segment, fit, and strategic relevance.',
+        },
+        {
+          value: '5',
+          label: 'Priority moves',
+          detail: 'Recommendations tied to action owners and evidence gaps.',
+        },
+      ],
+      stages: [
+        { label: 'Sources', count: '214', tone: 'slate' },
+        { label: 'Extracted', count: '146', tone: 'blue' },
+        { label: 'Scored', count: '58', tone: 'amber' },
+        { label: 'Gaps', count: '11', tone: 'red' },
+        { label: 'Drafted', count: '7', tone: 'emerald' },
+        { label: 'Reviewed', count: '5', tone: 'emerald' },
+      ],
+      opportunities: [
+        {
+          name: 'Industrial market-entry thesis',
+          trigger: 'Segment growth + competitor whitespace',
+          stage: 'Drafted',
+          score: '93',
+          owner: 'Strategy lead',
+          action: 'Review investment thesis and source confidence.',
+          tone: 'emerald',
+        },
+        {
+          name: 'Customer ecosystem map',
+          trigger: 'Top account network expanded',
+          stage: 'Scored',
+          score: '88',
+          owner: 'Growth ops',
+          action: 'Validate relationships and near-term buying events.',
+          tone: 'amber',
+        },
+        {
+          name: 'Competitive capability scan',
+          trigger: 'New entrant signal in target segment',
+          stage: 'Gaps',
+          score: '79',
+          owner: 'Executive sponsor',
+          action: 'Close pricing and channel evidence gaps.',
+          tone: 'red',
+        },
+      ],
+      intelligenceGaps: [
+        'Procurement timing is inferred and needs source confirmation.',
+        'Competitor share estimate requires a higher-confidence citation set.',
+        'Internal account owner feedback has not been added to the memo.',
+      ],
+      actionPlan: [
+        { phase: 'Step 1', action: 'Gather approved sources and extract structured evidence.' },
+        {
+          phase: 'Step 2',
+          action: 'Score targets, identify gaps, and separate facts from inference.',
+        },
+        { phase: 'Step 3', action: 'Draft the decision packet with recommendations and owners.' },
+        { phase: 'Step 4', action: 'Capture executive decisions back into reusable memory.' },
+      ],
+      autonomy: [
+        {
+          label: 'Auto',
+          detail:
+            'Collect sources, extract entities, maintain trails, and refresh research queues.',
+          tone: 'emerald',
+        },
+        {
+          label: 'AI Draft',
+          detail: 'Prepare summaries, comparisons, briefs, recommendations, and gap lists.',
+          tone: 'amber',
+        },
+        {
+          label: 'Human Led',
+          detail: 'Judge confidence, make strategic decisions, and approve external use.',
+          tone: 'blue',
+        },
+      ],
+      feedbackLoop: [
+        {
+          label: 'Knowledge signal',
+          detail: 'Source, document, meeting note, report, or market event.',
+        },
+        {
+          label: 'AI machine',
+          detail: 'Extract, compare, cite, score, draft, and highlight uncertainty.',
+        },
+        {
+          label: 'Team judgment',
+          detail: 'Decide, annotate, approve, and teach the next research loop.',
+        },
       ],
     },
     visual: {
@@ -711,6 +1174,109 @@ export const useCases: UseCase[] = [
         'Use repeat-pattern mining to turn closed issues into prevention work.',
       ],
     },
+    operatorView: {
+      eyebrow: 'Anonymized Operator View',
+      headline: 'What the exception machine shows before quality slips compound.',
+      body: 'A serious quality system shows severity, ownership, customer exposure, root-cause evidence, corrective action, and repeat patterns before failures turn into rework, claims, or reputation damage.',
+      productLabel: 'Exception Control Tower',
+      rhythm: 'Daily severity and corrective-action review',
+      kpis: [
+        {
+          value: '3',
+          label: 'Severity tiers',
+          detail: 'Clear routing for operational, customer, and regulatory risk.',
+        },
+        {
+          value: '18',
+          label: 'Repeat patterns',
+          detail: 'Closed issues mined for prevention opportunities.',
+        },
+        {
+          value: '4',
+          label: 'Actions due',
+          detail: 'Corrective work tracked by owner, proof, and deadline.',
+        },
+      ],
+      stages: [
+        { label: 'Detected', count: '42', tone: 'slate' },
+        { label: 'Classified', count: '31', tone: 'blue' },
+        { label: 'Owned', count: '19', tone: 'amber' },
+        { label: 'Contained', count: '8', tone: 'emerald' },
+        { label: 'Corrected', count: '13', tone: 'emerald' },
+        { label: 'Risk', count: '5', tone: 'red' },
+      ],
+      opportunities: [
+        {
+          name: 'Warranty claim cluster',
+          trigger: 'Repeat issue across two customer segments',
+          stage: 'Risk',
+          score: '92',
+          owner: 'Quality director',
+          action: 'Confirm exposure and containment owner.',
+          tone: 'red',
+        },
+        {
+          name: 'Inspection drift in final review',
+          trigger: 'Tolerance miss above threshold',
+          stage: 'Owned',
+          score: '86',
+          owner: 'Plant lead',
+          action: 'Draft corrective action and evidence request.',
+          tone: 'amber',
+        },
+        {
+          name: 'Supplier defect pattern',
+          trigger: 'Three related nonconformance notes',
+          stage: 'Classified',
+          score: '80',
+          owner: 'Supply quality',
+          action: 'Compare supplier lots and customer impact.',
+          tone: 'blue',
+        },
+      ],
+      intelligenceGaps: [
+        'Root-cause evidence is still anecdotal in several closed issues.',
+        'Customer exposure is not tied to severity rules early enough.',
+        'Corrective-action proof is stored outside the management review.',
+      ],
+      actionPlan: [
+        { phase: 'Day 1', action: 'Define event triggers, severity rules, and ownership paths.' },
+        { phase: 'Day 3', action: 'Launch detection, classification, and context packets.' },
+        {
+          phase: 'Week 2',
+          action: 'Connect corrective actions to evidence and deadline tracking.',
+        },
+        { phase: 'Weekly', action: 'Review repeat patterns and prevention work with leaders.' },
+      ],
+      autonomy: [
+        {
+          label: 'Auto',
+          detail: 'Detect signals, classify severity, group patterns, and alert owners.',
+          tone: 'emerald',
+        },
+        {
+          label: 'AI Draft',
+          detail: 'Prepare evidence summaries, root-cause hypotheses, and action packets.',
+          tone: 'amber',
+        },
+        {
+          label: 'Human Led',
+          detail: 'Approve severity, containment, customer communication, and corrective action.',
+          tone: 'blue',
+        },
+      ],
+      feedbackLoop: [
+        {
+          label: 'Quality signal',
+          detail: 'Claim, inspection, return, complaint, recall, or nonconformance.',
+        },
+        { label: 'AI machine', detail: 'Detect, classify, group, route, and summarize evidence.' },
+        {
+          label: 'Team judgment',
+          detail: 'Contain, correct, verify, and remove the repeat cause.',
+        },
+      ],
+    },
     visual: {
       poster: '/images/use-cases/ai-quality-control-exception-management.webp',
       mp4: '/videos/use-cases/ai-quality-control-exception-management.mp4',
@@ -863,6 +1429,106 @@ export const useCases: UseCase[] = [
         'Screen companies for repeatable revenue, service, operations, reporting, and quality plays.',
         'Build a first implementation that creates templates, taxonomies, prompts, scorecards, and cadence.',
         "Scale by pattern while preserving each company's local workflow, market, and data reality.",
+      ],
+    },
+    operatorView: {
+      eyebrow: 'Anonymized Operator View',
+      headline: 'What a portfolio AI operating view makes visible.',
+      body: 'Operating partners need to see which AI plays are worth funding, where the sponsor and data are ready, how the sprint is performing, and what can be reused across the portfolio.',
+      productLabel: 'Portfolio Value Creation Map',
+      rhythm: 'Monthly operating partner review',
+      kpis: [
+        {
+          value: '5',
+          label: 'Platform plays',
+          detail: 'Revenue, service, operations, reporting, and quality patterns.',
+        },
+        {
+          value: '90d',
+          label: 'First playbook',
+          detail: 'One sprint becomes reusable templates and governance.',
+        },
+        {
+          value: 'KPI',
+          label: 'Board trace',
+          detail: 'Adoption, cycle time, quality, revenue, and margin tracked.',
+        },
+      ],
+      stages: [
+        { label: 'Screened', count: '18', tone: 'slate' },
+        { label: 'Ranked', count: '11', tone: 'blue' },
+        { label: 'Sponsored', count: '6', tone: 'amber' },
+        { label: 'Built', count: '3', tone: 'emerald' },
+        { label: 'Scaled', count: '2', tone: 'emerald' },
+        { label: 'Blocked', count: '4', tone: 'red' },
+      ],
+      opportunities: [
+        {
+          name: 'Revenue intelligence sprint',
+          trigger: 'Shared pipeline visibility gap',
+          stage: 'Built',
+          score: '95',
+          owner: 'Operating partner',
+          action: 'Package trigger taxonomy for next company.',
+          tone: 'emerald',
+        },
+        {
+          name: 'Service triage sprint',
+          trigger: 'Backlog and renewal-risk pattern',
+          stage: 'Sponsored',
+          score: '88',
+          owner: 'Portfolio COO',
+          action: 'Confirm helpdesk data access and QA rules.',
+          tone: 'amber',
+        },
+        {
+          name: 'Margin workflow sprint',
+          trigger: 'Manual approval drag across sites',
+          stage: 'Ranked',
+          score: '83',
+          owner: 'Value creation lead',
+          action: 'Set baseline cycle-time and cost metrics.',
+          tone: 'blue',
+        },
+      ],
+      intelligenceGaps: [
+        'Sponsor ownership differs by company and must be confirmed before build.',
+        'KPI baselines are inconsistent across similar workflows.',
+        'Data access risk needs to be scored before the next sprint wave.',
+      ],
+      actionPlan: [
+        { phase: 'Weeks 1-2', action: 'Screen companies by value, readiness, and repeatability.' },
+        { phase: 'Weeks 3-6', action: 'Build the highest-return sprint in one company.' },
+        { phase: 'Weeks 7-10', action: 'Codify templates, governance, integrations, and KPIs.' },
+        { phase: 'Ongoing', action: 'Scale by pattern and report impact in operating reviews.' },
+      ],
+      autonomy: [
+        {
+          label: 'Auto',
+          detail: 'Collect portfolio inputs, refresh scorecards, and flag blocked initiatives.',
+          tone: 'emerald',
+        },
+        {
+          label: 'AI Draft',
+          detail: 'Prepare playbooks, sprint briefs, board updates, and KPI variance notes.',
+          tone: 'amber',
+        },
+        {
+          label: 'Human Led',
+          detail: 'Prioritize capital, pick sponsors, resolve constraints, and scale the pattern.',
+          tone: 'blue',
+        },
+      ],
+      feedbackLoop: [
+        {
+          label: 'Portfolio signal',
+          detail: 'Repeated pain, sponsor pull, KPI gap, or exit narrative lever.',
+        },
+        {
+          label: 'AI machine',
+          detail: 'Screen, rank, brief, track, and package reusable playbooks.',
+        },
+        { label: 'Team judgment', detail: 'Fund, govern, remove blockers, and scale what works.' },
       ],
     },
     visual: {

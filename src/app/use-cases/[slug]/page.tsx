@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { MotionBackground } from '@/components/ui/motion-background';
+import { OperatorSystemPreview } from '@/components/use-cases/operator-system-preview';
 import { getUseCaseBySlug, useCases } from '@/data/use-cases';
 import { breadcrumbJsonLd, createMetadata, faqJsonLd, serviceJsonLd } from '@/lib/metadata';
 
@@ -123,6 +124,8 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
           </div>
         </div>
       </section>
+
+      <OperatorSystemPreview useCase={useCase} />
 
       <section className="bg-parchment py-24 lg:py-36">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
