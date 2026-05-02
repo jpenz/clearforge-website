@@ -1,7 +1,7 @@
-/* biome-ignore-all lint/security/noDangerouslySetInnerHtml: JSON-LD scripts are generated from static site data. */
 import { ArrowRight, Check } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Stagger, StaggerItem } from '@/components/ui/animate';
 import { Button } from '@/components/ui/button';
 import { forgeProducts } from '@/data/forge-products';
@@ -66,14 +66,8 @@ const breadcrumbLd = breadcrumbJsonLd([
 export default function PricingPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
+      <JsonLdScript data={faqLd} />
+      <JsonLdScript data={breadcrumbLd} />
       {/* — Hero with atmospheric bg — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <Image

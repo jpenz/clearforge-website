@@ -1,10 +1,10 @@
-/* biome-ignore-all lint/security/noDangerouslySetInnerHtml: JSON-LD scripts are generated from static site data. */
 import type { Metadata } from 'next';
 import { DM_Sans, Instrument_Serif, JetBrains_Mono } from 'next/font/google';
 import { Footer } from '@/components/layout/footer';
 import { ForgeBar } from '@/components/layout/forge-bar';
 import { Header } from '@/components/layout/header';
 import { LenisProvider } from '@/components/layout/lenis-provider';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { coreKeywords, organizationJsonLd } from '@/lib/metadata';
 import './globals.css';
 
@@ -61,10 +61,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body
         className={`${instrumentSerif.variable} ${dmSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-        />
+        <JsonLdScript data={organizationJsonLd} />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-brass focus:text-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold"

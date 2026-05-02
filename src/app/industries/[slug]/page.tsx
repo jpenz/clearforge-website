@@ -1,4 +1,3 @@
-/* biome-ignore-all lint/security/noDangerouslySetInnerHtml: JSON-LD scripts are generated from static site data. */
 import {
   Activity,
   AlertTriangle,
@@ -49,6 +48,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
 import { Button } from '@/components/ui/button';
 import { caseStudies } from '@/data/case-studies';
@@ -178,14 +178,8 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbsLd) }}
-      />
+      <JsonLdScript data={serviceLd} />
+      <JsonLdScript data={crumbsLd} />
       {/* ── Hero ── editorial two-column with optional video bg ── */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         {industry.videoBackground ? (

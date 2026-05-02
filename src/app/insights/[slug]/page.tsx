@@ -1,7 +1,7 @@
-/* biome-ignore-all lint/security/noDangerouslySetInnerHtml: JSON-LD scripts are generated from static site data. */
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Button } from '@/components/ui/button';
 import { insights } from '@/data/insights';
 import { articleJsonLd, breadcrumbJsonLd, createMetadata, faqJsonLd } from '@/lib/metadata';
@@ -53,20 +53,9 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
-      {faqLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
-        />
-      )}
+      <JsonLdScript data={articleLd} />
+      <JsonLdScript data={breadcrumbLd} />
+      {faqLd && <JsonLdScript data={faqLd} />}
       {/* ── Hero ── */}
       <section className="dark-section py-32 lg:py-48">
         <div className="mx-auto max-w-3xl px-6 lg:px-10">

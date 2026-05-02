@@ -1,7 +1,7 @@
-/* biome-ignore-all lint/security/noDangerouslySetInnerHtml: JSON-LD scripts are generated from static site data. */
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Stagger, StaggerItem } from '@/components/ui/animate';
 import { Button } from '@/components/ui/button';
 import { useCases } from '@/data/use-cases';
@@ -51,14 +51,8 @@ const operatingLoop = [
 export default function UseCasesPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
+      <JsonLdScript data={collectionLd} />
+      <JsonLdScript data={breadcrumbLd} />
 
       <section className="dark-section noise-texture relative min-h-[78svh] overflow-hidden py-32 lg:py-44">
         <Image

@@ -1,7 +1,7 @@
-/* biome-ignore-all lint/security/noDangerouslySetInnerHtml: JSON-LD scripts are generated from static site data. */
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Button } from '@/components/ui/button';
 import { MotionBackground } from '@/components/ui/motion-background';
 import { OperatorSystemPreview } from '@/components/use-cases/operator-system-preview';
@@ -44,18 +44,9 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(useCase.faqs)) }}
-      />
+      <JsonLdScript data={breadcrumbLd} />
+      <JsonLdScript data={serviceLd} />
+      <JsonLdScript data={faqJsonLd(useCase.faqs)} />
 
       <section className="dark-section relative min-h-[84svh] overflow-hidden py-32 lg:py-48">
         <MotionBackground
