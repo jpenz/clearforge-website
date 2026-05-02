@@ -42,6 +42,7 @@
 html {
   text-rendering: optimizeLegibility;
   overflow-x: hidden; /* Prevent horizontal scroll on mobile from hero marquee / wide headings */
+  scroll-padding-top: 5rem;
 }
 
 body {

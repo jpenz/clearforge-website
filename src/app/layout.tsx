@@ -7,6 +7,7 @@ import { Footer } from '@/components/layout/footer';
 import { ForgeBar } from '@/components/layout/forge-bar';
 import { Header } from '@/components/layout/header';
 import { LenisProvider } from '@/components/layout/lenis-provider';
+import { RouteScrollRestoration } from '@/components/layout/route-scroll-restoration';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import {
   aiTransformationOfferCatalogJsonLd,
@@ -84,6 +85,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         {ga4MeasurementId ? <GoogleAnalytics measurementId={ga4MeasurementId} /> : null}
         {plausibleDomain ? <PlausibleAnalytics domain={plausibleDomain} /> : null}
         <AnalyticsTracker />
+        <RouteScrollRestoration />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-brass focus:text-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold"

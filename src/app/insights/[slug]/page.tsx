@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import type { ReactNode } from 'react';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Button } from '@/components/ui/button';
 import { insights } from '@/data/insights';
@@ -8,6 +9,99 @@ import { articleJsonLd, breadcrumbJsonLd, createMetadata, faqJsonLd } from '@/li
 
 function getInsight(slug: string) {
   return insights.find((i) => i.slug === slug);
+}
+
+function cleanInlineText(text: string) {
+  return text.replace(/\*\*/g, '');
+}
+
+function renderMarkdownBlocks(markdown: string) {
+  const blocks: ReactNode[] = [];
+  const paragraphLines: string[] = [];
+  let listItems: string[] = [];
+  let listType: 'ordered' | 'unordered' | null = null;
+  let blockIndex = 0;
+
+  const flushParagraph = () => {
+    if (paragraphLines.length === 0) return;
+    blocks.push(
+      <p key={`p-${blockIndex}`} className="text-body text-warm-gray mb-4 leading-relaxed">
+        {cleanInlineText(paragraphLines.join(' '))}
+      </p>,
+    );
+    blockIndex += 1;
+    paragraphLines.length = 0;
+  };
+
+  const flushList = () => {
+    if (listItems.length === 0 || !listType) return;
+
+    const ListTag = listType === 'ordered' ? 'ol' : 'ul';
+    blocks.push(
+      <ListTag
+        key={`list-${blockIndex}`}
+        className="my-6 space-y-3 pl-6 text-body text-warm-gray leading-relaxed"
+      >
+        {listItems.map((item) => (
+          <li key={item}>{cleanInlineText(item)}</li>
+        ))}
+      </ListTag>,
+    );
+    blockIndex += 1;
+    listItems = [];
+    listType = null;
+  };
+
+  for (const line of markdown.split('\n')) {
+    const trimmed = line.trim();
+
+    if (!trimmed) {
+      flushParagraph();
+      flushList();
+      continue;
+    }
+
+    if (trimmed.startsWith('### ')) {
+      flushParagraph();
+      flushList();
+      blocks.push(
+        <h3 key={`h3-${blockIndex}`} className="text-h3 mt-8 mb-4">
+          {cleanInlineText(trimmed.slice(4))}
+        </h3>,
+      );
+      blockIndex += 1;
+      continue;
+    }
+
+    const orderedMatch = trimmed.match(/^\d+\.\s+(.*)$/);
+    if (orderedMatch) {
+      flushParagraph();
+      if (listType !== 'ordered') {
+        flushList();
+        listType = 'ordered';
+      }
+      listItems.push(orderedMatch[1] ?? '');
+      continue;
+    }
+
+    if (trimmed.startsWith('- ')) {
+      flushParagraph();
+      if (listType !== 'unordered') {
+        flushList();
+        listType = 'unordered';
+      }
+      listItems.push(trimmed.slice(2));
+      continue;
+    }
+
+    flushList();
+    paragraphLines.push(trimmed);
+  }
+
+  flushParagraph();
+  flushList();
+
+  return blocks;
 }
 
 export function generateStaticParams() {
@@ -85,23 +179,7 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
               return (
                 <div key={section.slice(0, 120)}>
                   {heading && <h2 className="text-h2 mb-6">{heading}</h2>}
-                  {body.split('\n\n').map((paragraph) => {
-                    if (paragraph.startsWith('### ')) {
-                      return (
-                        <h3 key={paragraph.slice(0, 120)} className="text-h3 mt-8 mb-4">
-                          {paragraph.replace('### ', '')}
-                        </h3>
-                      );
-                    }
-                    return (
-                      <p
-                        key={paragraph.slice(0, 120)}
-                        className="text-body text-warm-gray mb-4 leading-relaxed"
-                      >
-                        {paragraph}
-                      </p>
-                    );
-                  })}
+                  {renderMarkdownBlocks(body)}
                 </div>
               );
             })}
