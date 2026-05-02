@@ -10,13 +10,42 @@
   },
   "variants": [
     {
+      "id": "executive-operating-system",
+      "title": "Executive Operating System",
+      "prompt": "A premium clean cinematic hero video for ClearForge, an AI operations and growth systems company. Show a dark executive operating surface, not outer space: crisp glass-like value-chain lanes and precise brass and emerald signal paths moving through growth, service, operations, quality, knowledge, and margin nodes. Small opportunity signals appear, are scored, routed into workflows, and converge into one disciplined AI operating machine with human approval nodes represented only as simple warm control points. The left 45 percent stays darker and calmer for headline readability. Ultra clean, polished, high-end consulting, practical, grounded, expensive, sharp edges, smooth slow motion, seamless loop, 16:9 website hero background. No people, no faces, no hands, no robots, no logos, no readable text, no letters, no numbers, no dashboards, no UI screenshots, no charts, no city skyline, no sci-fi clutter, no film grain, no noise, no bokeh, no shaky camera, no heavy blur.",
+      "providerOverrides": {
+        "veo": {
+          "generationType": "TEXT_2_VIDEO",
+          "enableTranslation": false
+        },
+        "runway": {
+          "duration": 5,
+          "quality": "1080p"
+        }
+      }
+    },
+    {
+      "id": "signal-flywheel-no-text",
+      "title": "Signal Flywheel No Text",
+      "prompt": "A premium abstract cinematic website hero loop for ClearForge. Build the scene only from unmarked physical forms: dark glass plates, thin brass paths, emerald light pulses, small plain circular nodes, and clean transparent layers. Faint scattered opportunity points organize into a disciplined flywheel, then flow through simple workflow paths and return as a quiet feedback loop. The composition is crisp, minimal, executive, practical, and calm, with dark negative space across the left 45 percent for headline copy. Smooth slow camera drift, stable focus, seamless loop, 16:9. Absolutely no text, no words, no labels, no letters, no numbers, no glyphs, no icons, no dashboards, no UI panels, no charts, no maps with labels, no people, no faces, no hands, no robots, no logos, no city skyline, no film grain, no noise, no bokeh, no shaky camera, no heavy blur.",
+      "providerOverrides": {
+        "veo": {
+          "generationType": "TEXT_2_VIDEO",
+          "enableTranslation": false
+        },
+        "runway": {
+          "duration": 5,
+          "quality": "1080p"
+        }
+      }
+    },
+    {
       "id": "value-chain-scan",
       "title": "Value Chain Scan",
       "prompt": "A premium abstract cinematic hero video for an AI operations consulting company. A dark industrial value-chain map appears across the frame like a living operating system. Subtle brass and cool blue signals move through sales, service, production, finance, and leadership nodes. Small growth opportunities light up in sequence, then connect into one precise AI machine with human operator nodes still visible. The feeling is executive, practical, high-trust, fast, efficient, and premium. No text, no letters, no logos, no people, no faces, no UI screenshots, no charts with readable labels. Smooth camera drift, shallow depth, clean dark background, seamless loop, website hero background, 16:9.",
       "providerOverrides": {
         "veo": {
           "generationType": "TEXT_2_VIDEO",
-          "enableFallback": false,
           "enableTranslation": false
         },
         "runway": {
@@ -32,7 +61,6 @@
       "providerOverrides": {
         "veo": {
           "generationType": "TEXT_2_VIDEO",
-          "enableFallback": false,
           "enableTranslation": false
         },
         "runway": {
@@ -48,7 +76,6 @@
       "providerOverrides": {
         "veo": {
           "generationType": "TEXT_2_VIDEO",
-          "enableFallback": false,
           "enableTranslation": false
         },
         "runway": {

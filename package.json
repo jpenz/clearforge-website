@@ -20,6 +20,7 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "video:hero": "node scripts/generate-hero-video.mjs",
+    "video:hero:clean": "node scripts/generate-clean-hero-loop.mjs",
     "video:hero:dry-run": "node scripts/generate-hero-video.mjs generate --dry-run",
     "video:hero:status": "node scripts/generate-hero-video.mjs status",
     "media:check": "node scripts/check-media-budget.mjs"

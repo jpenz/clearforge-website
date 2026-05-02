@@ -22,11 +22,11 @@ const providerHandlers = {
       return pruneEmpty({
         prompt: variant.prompt,
         model: args.model ?? overrides.model ?? manifest.defaults?.veoModel ?? 'veo3',
-        aspectRatio: args.aspectRatio ?? manifest.defaults?.aspectRatio ?? '16:9',
+        aspect_ratio: args.aspectRatio ?? manifest.defaults?.aspectRatio ?? '16:9',
         watermark: args.watermark ?? manifest.defaults?.watermark ?? '',
         callBackUrl: args.callback,
         generationType: overrides.generationType ?? 'TEXT_2_VIDEO',
-        enableFallback: coerceBoolean(args.enableFallback ?? overrides.enableFallback),
+        enableFallback: coerceBoolean(args.enableFallback),
         enableTranslation: coerceBoolean(args.enableTranslation ?? overrides.enableTranslation),
         seeds: args.seed ? Number(args.seed) : overrides.seeds,
       });
