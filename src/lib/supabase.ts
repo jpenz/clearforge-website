@@ -31,9 +31,23 @@ export interface AssessmentLead {
   created_at?: string;
 }
 
+export interface AnalyticsEventRecord {
+  event_name: string;
+  event_id?: string;
+  session_id?: string;
+  path?: string;
+  url?: string;
+  title?: string;
+  referrer?: string;
+  landing_page?: string;
+  attribution?: Record<string, unknown>;
+  properties?: Record<string, unknown>;
+  user_agent?: string;
+  created_at?: string;
+}
+
 export async function saveAssessmentLead(lead: AssessmentLead): Promise<string | null> {
   if (!supabaseAdmin) {
-    console.warn('Supabase not configured; skipping lead save.');
     return null;
   }
 
@@ -44,11 +58,17 @@ export async function saveAssessmentLead(lead: AssessmentLead): Promise<string |
     .single();
 
   if (error) {
-    console.error('Failed to save assessment lead:', error);
     return null;
   }
 
   return data?.id ?? null;
+}
+
+export async function saveAnalyticsEvent(event: AnalyticsEventRecord): Promise<boolean> {
+  if (!supabaseAdmin) return false;
+
+  const { error } = await supabaseAdmin.from('analytics_events').insert(event);
+  return !error;
 }
 
 export async function saveContactLead(lead: {
@@ -60,7 +80,6 @@ export async function saveContactLead(lead: {
   source: string;
 }): Promise<string | null> {
   if (!supabaseAdmin) {
-    console.warn('Supabase not configured; skipping contact lead save.');
     return null;
   }
 
@@ -87,7 +106,6 @@ export async function saveContactLead(lead: {
     .single();
 
   if (error) {
-    console.error('Failed to save contact lead:', error);
     return null;
   }
 

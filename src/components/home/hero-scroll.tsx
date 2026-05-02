@@ -69,10 +69,13 @@ export function HeroScroll() {
 
         <div className="mt-10 flex flex-wrap items-center gap-6 animate-fade-in-up delay-4">
           <Button size="lg" asChild>
-            <Link href="/discover">Generate My AI Value Map</Link>
+            <Link href="/discover" data-analytics="home_hero_generate_value_map">
+              Generate My AI Value Map
+            </Link>
           </Button>
           <Link
             href="#results"
+            data-analytics="home_hero_see_proof"
             className="inline-flex items-center gap-2 text-sm text-stone hover:text-bone transition-colors link-underline"
           >
             See proof <ArrowRight className="h-4 w-4" />

@@ -15,7 +15,7 @@ export default function PrivacyPage() {
         <div className="mx-auto max-w-3xl px-6 lg:px-10">
           <p className="overline">Legal</p>
           <h1 className="mt-6 text-display text-bone">Privacy Policy</h1>
-          <p className="mt-6 text-body-lg text-stone">Last updated: April 2026</p>
+          <p className="mt-6 text-body-lg text-stone">Last updated: May 2026</p>
         </div>
       </section>
 
@@ -34,6 +34,11 @@ export default function PrivacyPage() {
               We automatically collect certain information when you visit our website, including
               your IP address, browser type, operating system, referring URLs, and information about
               how you interact with our site.
+            </p>
+            <p className="mt-4 text-body text-warm-gray">
+              We may also collect website analytics events such as page views, campaign parameters,
+              landing pages, scroll depth, button clicks, form submissions, and time-on-page signals
+              so we can understand which content is useful and improve the site experience.
             </p>
           </div>
 
@@ -81,6 +86,12 @@ export default function PrivacyPage() {
               We use cookies and similar tracking technologies to track activity on our website and
               hold certain information. You can instruct your browser to refuse all cookies or to
               indicate when a cookie is being sent.
+            </p>
+            <p className="mt-4 text-body text-warm-gray">
+              We may use privacy-conscious analytics tools, Google Analytics, first-party event
+              tracking, and local or session storage to connect visits with campaign attribution and
+              website conversion activity. These tools help us measure performance; they do not
+              change the services we provide.
             </p>
           </div>
 

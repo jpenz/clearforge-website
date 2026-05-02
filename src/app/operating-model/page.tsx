@@ -10,8 +10,9 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { AiOperatingSystemDiagram } from '@/components/operating-model/ai-operating-system-diagram';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Button } from '@/components/ui/button';
-import { createMetadata } from '@/lib/metadata';
+import { breadcrumbJsonLd, createMetadata, faqJsonLd, serviceJsonLd } from '@/lib/metadata';
 
 export const metadata = createMetadata({
   title: 'AI Operating Model - Custom AI Transformation | ClearForge',
@@ -119,9 +120,47 @@ const operatingMetrics = [
   },
 ];
 
+const operatingFaqs = [
+  {
+    question: 'What is an AI operating model?',
+    answer:
+      'An AI operating model defines how business ambition, value-chain priorities, agentic workflows, human review, governance, systems integration, adoption, and KPI measurement work together in production.',
+  },
+  {
+    question: 'How does ClearForge choose the first AI workflow to build?',
+    answer:
+      'ClearForge maps the value chain and scores opportunities by economic impact, feasibility, data readiness, adoption risk, governance requirements, and time-to-value before recommending the first production build.',
+  },
+  {
+    question: 'Is ClearForge an AI software platform?',
+    answer:
+      'ClearForge is not an off-the-shelf platform. It is a strategy-and-technology partner that builds custom AI agents, workflows, dashboards, integrations, and operating routines around each client business.',
+  },
+  {
+    question: 'How do leaders know whether the AI system is working?',
+    answer:
+      'The operating model tracks adoption, usage, quality, exception rate, cycle time, throughput, revenue movement, cost movement, and the improvement backlog so leaders can manage performance after launch.',
+  },
+];
+
 export default function OperatingModelPage() {
   return (
     <>
+      <JsonLdScript
+        data={[
+          serviceJsonLd({
+            title: 'AI Operating Model Design and Build',
+            description:
+              'ClearForge sets AI ambition, maps value chains, builds custom agentic workflows, and trains teams into a measurable operating model.',
+            path: '/operating-model',
+          }),
+          breadcrumbJsonLd([
+            { name: 'Home', path: '/' },
+            { name: 'AI Operating Model', path: '/operating-model' },
+          ]),
+          faqJsonLd(operatingFaqs),
+        ]}
+      />
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-44">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(207,163,101,0.16),transparent_28%),linear-gradient(135deg,rgba(10,12,12,0.9),rgba(10,12,12,1))]" />
         <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
@@ -319,6 +358,25 @@ export default function OperatingModelPage() {
                   and implementation methods are tailored inside the engagement.
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-divider bg-parchment py-20 sm:py-32 lg:py-40">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-4">
+              <p className="overline">Leader Questions</p>
+              <h2 className="mt-6 text-display">What executives need clear before build.</h2>
+            </div>
+            <div className="mt-10 border-t border-divider lg:col-span-8 lg:mt-0">
+              {operatingFaqs.map((faq) => (
+                <div key={faq.question} className="border-b border-divider py-7">
+                  <h3 className="text-h4">{faq.question}</h3>
+                  <p className="mt-3 text-body text-warm-gray">{faq.answer}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

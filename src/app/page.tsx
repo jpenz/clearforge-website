@@ -14,13 +14,14 @@ import { ForgeMethodDiagram } from '@/components/home/forge-method-diagram';
 import { HeroScroll } from '@/components/home/hero-scroll';
 import { SectionReveal, StaggerReveal } from '@/components/home/homepage-animations';
 import { MetricCounter } from '@/components/home/metric-counter';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Button } from '@/components/ui/button';
 import { GsapTextReveal } from '@/components/ui/gsap-text-reveal';
 import { OperatorSystemPreview } from '@/components/use-cases/operator-system-preview';
 import { caseStudies } from '@/data/case-studies';
 import { industries } from '@/data/industries-value-chains';
 import { useCases } from '@/data/use-cases';
-import { createMetadata } from '@/lib/metadata';
+import { createMetadata, faqJsonLd } from '@/lib/metadata';
 
 export const metadata = createMetadata({
   title: 'ClearForge - Custom AI Transformation Systems',
@@ -219,6 +220,9 @@ const salesPipelineUseCase =
 export default function Home() {
   return (
     <>
+      <JsonLdScript
+        data={faqJsonLd(objections.map((item) => ({ question: item.q, answer: item.a })))}
+      />
       <HeroScroll />
 
       <div className="border-b border-divider bg-warm-white">

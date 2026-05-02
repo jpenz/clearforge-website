@@ -38,12 +38,12 @@ const securityHeaders = [
       "font-src 'self' https://fonts.gstatic.com",
       // Allow scripts from self + Next.js inline scripts (required for hydration)
       isProduction
-        ? "script-src 'self' 'unsafe-inline'"
-        : "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+        ? "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://plausible.io"
+        : "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://plausible.io",
       // Browser code calls ClearForge APIs; LLM and email providers stay server-side.
-      "connect-src 'self' https://*.supabase.co",
+      "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://region1.google-analytics.com https://plausible.io",
       // Images: self + data URIs + Supabase storage
-      "img-src 'self' data: blob: https://*.supabase.co",
+      "img-src 'self' data: blob: https://*.supabase.co https://www.google-analytics.com",
       "frame-ancestors 'self'",
       "base-uri 'self'",
       "form-action 'self'",

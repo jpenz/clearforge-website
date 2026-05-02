@@ -1,12 +1,20 @@
 import type { Metadata } from 'next';
 import { DM_Sans, Instrument_Serif, JetBrains_Mono } from 'next/font/google';
 import { AnalyticsTracker } from '@/components/analytics/analytics-tracker';
+import { GoogleAnalytics } from '@/components/analytics/google-analytics';
+import { PlausibleAnalytics } from '@/components/analytics/plausible-analytics';
 import { Footer } from '@/components/layout/footer';
 import { ForgeBar } from '@/components/layout/forge-bar';
 import { Header } from '@/components/layout/header';
 import { LenisProvider } from '@/components/layout/lenis-provider';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
-import { coreKeywords, organizationJsonLd } from '@/lib/metadata';
+import {
+  aiTransformationOfferCatalogJsonLd,
+  coreKeywords,
+  organizationJsonLd,
+  siteNavigationJsonLd,
+  websiteJsonLd,
+} from '@/lib/metadata';
 import './globals.css';
 
 const instrumentSerif = Instrument_Serif({
@@ -57,12 +65,24 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const ga4MeasurementId = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID;
+  const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${instrumentSerif.variable} ${dmSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
-        <JsonLdScript data={organizationJsonLd} />
+        <JsonLdScript
+          data={[
+            organizationJsonLd,
+            websiteJsonLd,
+            siteNavigationJsonLd,
+            aiTransformationOfferCatalogJsonLd,
+          ]}
+        />
+        {ga4MeasurementId ? <GoogleAnalytics measurementId={ga4MeasurementId} /> : null}
+        {plausibleDomain ? <PlausibleAnalytics domain={plausibleDomain} /> : null}
         <AnalyticsTracker />
         <a
           href="#main-content"

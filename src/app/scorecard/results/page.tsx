@@ -137,7 +137,11 @@ export default function ScorecardResultsPage() {
             <div className="flex justify-center mb-10">
               <ScoreRing score={result.compositeScore} />
             </div>
-            <form onSubmit={handleGateSubmit} className="space-y-6">
+            <form
+              onSubmit={handleGateSubmit}
+              data-analytics="scorecard_results_gate_submit"
+              className="space-y-6"
+            >
               <div className="relative">
                 <User className="absolute left-0 top-3.5 h-4 w-4 text-warm-gray" />
                 <input

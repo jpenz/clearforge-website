@@ -161,7 +161,11 @@ export default function ContactPage() {
 
             {/* Right — Form */}
             <div className="mt-16 lg:col-span-7 lg:mt-0">
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form
+                onSubmit={handleSubmit}
+                data-analytics="contact_form_submit"
+                className="space-y-8"
+              >
                 <div>
                   <label htmlFor="name" className="block text-body-sm font-medium text-anthracite">
                     Name

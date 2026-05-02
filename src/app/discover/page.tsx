@@ -470,7 +470,11 @@ export default function DiscoverPage() {
               maturity read, and first-build recommendation for a custom AI operating system.
             </p>
 
-            <form onSubmit={handleUrlSubmit} className="mt-10 mx-auto max-w-xl">
+            <form
+              onSubmit={handleUrlSubmit}
+              data-analytics="discover_url_submit"
+              className="mt-10 mx-auto max-w-xl"
+            >
               <div className="flex flex-col sm:flex-row gap-3">
                 <div className="flex-1 relative">
                   <Globe className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-stone" />
@@ -847,7 +851,11 @@ export default function DiscoverPage() {
                           Get My Report <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
                       ) : (
-                        <form onSubmit={handleGenerateReport} className="mt-4 space-y-3">
+                        <form
+                          onSubmit={handleGenerateReport}
+                          data-analytics="discover_report_submit"
+                          className="mt-4 space-y-3"
+                        >
                           <div className="relative">
                             <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-stone" />
                             <input
@@ -943,7 +951,11 @@ export default function DiscoverPage() {
           </div>
 
           <div className="border-t border-divider-dark px-4 sm:px-6 py-3 sm:py-4 lg:px-10 pb-[env(safe-area-inset-bottom,12px)]">
-            <form onSubmit={handleChatSubmit} className="mx-auto max-w-3xl flex gap-2 sm:gap-3">
+            <form
+              onSubmit={handleChatSubmit}
+              data-analytics="discover_chat_submit"
+              className="mx-auto max-w-3xl flex gap-2 sm:gap-3"
+            >
               <input
                 type="text"
                 value={input}
