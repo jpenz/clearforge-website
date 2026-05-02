@@ -22,9 +22,10 @@ test.describe('Cybersecurity blueprint', () => {
 
     await page.waitForLoadState('domcontentloaded');
     await expect(page.getByRole('heading', { level: 1 })).toContainText(
-      /James-led AI strategy proposal/i,
+      /If hired to lead Enterprise AI at CrowdStrike/i,
     );
-    await expect(page.getByText(/Future-state value chain/i).first()).toBeVisible();
+    await expect(page.getByText(/Automation playbook preview/i).first()).toBeVisible();
+    await expect(page.getByText(/Role coverage/i).first()).toBeVisible();
     await expect(page.getByText(/Function-level value map/i).first()).toBeVisible();
     expect(errors, `JS errors: ${errors.join(', ')}`).toHaveLength(0);
   });
@@ -43,6 +44,6 @@ test.describe('Cybersecurity blueprint', () => {
 
     expect(layout.bodyWidth).toBeLessThanOrEqual(layout.viewportWidth + 5);
     expect(layout.documentWidth).toBeLessThanOrEqual(layout.viewportWidth + 5);
-    expect(layout.sectionCount).toBeGreaterThanOrEqual(8);
+    expect(layout.sectionCount).toBeGreaterThanOrEqual(11);
   });
 });

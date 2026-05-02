@@ -1,15 +1,22 @@
 import {
   ArrowRight,
   BarChart3,
+  BookOpen,
   Brain,
   CheckCircle2,
+  ClipboardCheck,
   Compass,
+  Flag,
   Gauge,
   LineChart,
+  Lock,
   type LucideIcon,
   Network,
+  Rocket,
   Route,
+  Search,
   ShieldCheck,
+  Sparkles,
   Target,
   Users,
   Workflow,
@@ -18,12 +25,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import {
+  automationAmbitionWedges,
+  automationPlaybookChapters,
+  automationPlaybookJourney,
   blueprintSummary,
   carnegieAppeal,
   cybersecurityCompanyFY2026,
   functionAnalysis,
   futureStateUseCases,
   proposalRoadmap,
+  roleBrief,
+  roleCoverage,
   strategicProposal,
   transformationMethod,
   valueChainFutureState,
@@ -32,9 +44,9 @@ import {
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'Cybersecurity Technology Company AI Strategy Proposal | ClearForge',
+  title: 'CrowdStrike Enterprise AI Transformation Blueprint | James Penz',
   description:
-    'A ClearForge AI strategy proposal for a $5B+ ARR cybersecurity technology company: value-chain future state, use-case portfolio, function-by-function automation math, and 90-day production path.',
+    'An independent Enterprise AI leadership and contractor blueprint from James Penz: roadmap, AI Center of Excellence, governance, agentic systems, value-chain use cases, and 90-day production path for CrowdStrike.',
   path: '/blueprints/cybersecurity-technology-company',
 });
 
@@ -53,6 +65,42 @@ const valueChainIcons: LucideIcon[] = [
   Gauge,
 ];
 const useCaseIcons: LucideIcon[] = [Compass, LineChart, ShieldCheck, Brain, Users, Network];
+const roleBriefIcons: LucideIcon[] = [Target, Users, ShieldCheck, Workflow];
+const beliefIcons: LucideIcon[] = [Sparkles, Rocket, Lock, Brain];
+const ambitionIcons: LucideIcon[] = [LineChart, Users, ShieldCheck, Brain, Gauge];
+const playbookIcons: LucideIcon[] = [
+  Flag,
+  Search,
+  Target,
+  Route,
+  ClipboardCheck,
+  Rocket,
+  BarChart3,
+];
+
+const blueprintNav = [
+  { href: '#role-brief', label: 'Role brief' },
+  { href: '#ambition-value', label: 'Ambition value' },
+  { href: '#automation-playbook', label: 'Playbook preview' },
+  { href: '#value-chain', label: 'Future state' },
+  { href: '#function-value-map', label: 'Value map' },
+  { href: '#role-fit', label: 'Role fit' },
+];
+
+const leadSignalTrend = [
+  { month: 'Aug', leads: 184 },
+  { month: 'Sep', leads: 231 },
+  { month: 'Oct', leads: 318 },
+  { month: 'Nov', leads: 407 },
+  { month: 'Dec', leads: 486 },
+  { month: 'Jan', leads: 612 },
+];
+
+const sellerPerformance = [
+  { team: 'Enterprise West', pipeline: '$42.8M', response: '91%', conversion: '34%' },
+  { team: 'Strategic East', pipeline: '$38.1M', response: '88%', conversion: '31%' },
+  { team: 'Global Accounts', pipeline: '$56.4M', response: '94%', conversion: '37%' },
+];
 
 export default function CybersecurityBlueprintPage() {
   return (
@@ -68,24 +116,37 @@ export default function CybersecurityBlueprintPage() {
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-forge-black via-forge-black/88 to-forge-black/45" />
         <div className="relative mx-auto max-w-[1200px] px-6 lg:px-10">
-          <p className="overline">ClearForge blueprint - cybersecurity technology</p>
+          <p className="overline">Independent candidate blueprint - Enterprise AI leadership</p>
           <h1 className="mt-6 max-w-5xl text-display text-bone">
-            A James-led AI strategy proposal for a $5B+ ARR cybersecurity technology company.
+            If hired to lead Enterprise AI at CrowdStrike, this is the operating system I would
+            build.
           </h1>
           <p className="mt-8 max-w-3xl text-body-lg text-stone">
-            Find the growth spots in the market. Build the machine around AI and the company&apos;s
-            people. Become faster, higher quality, more customer-obsessed, more efficient, and more
-            profitable than the rest of the category.
+            Prepared by James Penz to show how I would define the AI roadmap, lead the AI Center of
+            Excellence, chair the SteerCo, govern responsible adoption, and deploy agentic systems
+            that help support the path to $10B ARR with stronger OpEx leverage.
           </p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <Button size="lg" asChild>
               <Link href="/contact?ref=cybersecurity-blueprint">
-                Discuss the Blueprint <ArrowRight className="ml-2 h-4 w-4" />
+                Discuss Role Fit <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>
-              <Link href="#value-chain">See the Future State</Link>
+              <Link href="#automation-playbook">See Playbook Preview</Link>
             </Button>
+          </div>
+
+          <div className="mt-10 flex max-w-4xl flex-wrap gap-2">
+            {blueprintNav.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="border border-divider-dark bg-white/5 px-3 py-2 font-mono text-[11px] uppercase tracking-widest text-bone transition-colors hover:border-brass-light hover:text-brass-light"
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
 
           <div className="mt-16 grid max-w-4xl gap-10 border-t border-divider-dark pt-10 sm:grid-cols-3 lg:gap-16">
@@ -121,10 +182,87 @@ export default function CybersecurityBlueprintPage() {
               </p>
             </div>
           </div>
+
+          <p className="mt-10 max-w-3xl text-body-sm text-stone">
+            Independent strategy sample prepared by James Penz for role or contractor consideration.
+            Not affiliated with or endorsed by CrowdStrike.
+          </p>
         </div>
       </section>
 
-      <section className="bg-warm-white py-24 lg:py-36">
+      <section id="role-brief" className="scroll-mt-24 bg-warm-white py-24 lg:py-36">
+        <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-20">
+            <div className="lg:col-span-4">
+              <p className="overline">What the role is really asking for</p>
+              <h2 className="mt-6 text-display">
+                A strategist with the soul of a technologist, operating with executive discipline.
+              </h2>
+            </div>
+            <div className="mt-10 lg:col-span-8 lg:mt-0">
+              <div className="grid gap-10 md:grid-cols-2">
+                <div>
+                  <p className="font-mono text-xs uppercase tracking-widest text-warm-gray">
+                    What I heard in the mandate
+                  </p>
+                  <div className="mt-6 space-y-7">
+                    {roleBrief.heard.map((item, index) => {
+                      const Icon = roleBriefIcons[index] ?? Target;
+
+                      return (
+                        <div key={item.label} className="border-t border-divider pt-5">
+                          <div className="flex gap-4">
+                            <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-divider bg-parchment text-brass">
+                              <Icon className="h-5 w-5" aria-hidden="true" />
+                            </span>
+                            <div>
+                              <h3 className="text-h4 text-anthracite">{item.label}</h3>
+                              <p className="mt-2 text-body-sm text-warm-gray">{item.body}</p>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div>
+                  <p className="font-mono text-xs uppercase tracking-widest text-brass">
+                    My belief on the ambition
+                  </p>
+                  <div className="mt-6 space-y-7">
+                    {roleBrief.beliefs.map((item, index) => {
+                      const Icon = beliefIcons[index] ?? Sparkles;
+
+                      return (
+                        <div key={item.label} className="border-t border-divider pt-5">
+                          <div className="flex gap-4">
+                            <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-divider bg-anthracite text-brass-light">
+                              <Icon className="h-5 w-5" aria-hidden="true" />
+                            </span>
+                            <div>
+                              <h3 className="text-h4 text-anthracite">{item.label}</h3>
+                              <p className="mt-2 text-body-sm text-warm-gray">{item.body}</p>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              <p className="mt-10 border-l-2 border-brass pl-5 text-body text-anthracite">
+                The practical answer is a repeatable transformation engine: find the growth and
+                efficiency wedges, build the AI-plus-people machine around them, govern it with
+                CrowdStrike-level rigor, and scale only what proves business value.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-parchment py-24 lg:py-36">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-4">
@@ -165,7 +303,156 @@ export default function CybersecurityBlueprintPage() {
         </div>
       </section>
 
-      <section id="value-chain" className="dark-section py-24 lg:py-40">
+      <section id="ambition-value" className="dark-section scroll-mt-24 py-24 lg:py-40">
+        <div className="mx-auto max-w-[1300px] px-6 lg:px-10">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-20">
+            <div className="lg:col-span-4">
+              <p className="overline">Automation ambition console</p>
+              <h2 className="mt-6 text-display text-bone">
+                First find the value pockets. Then build the machine around them.
+              </h2>
+              <p className="mt-6 text-body-lg text-stone">
+                This preview mirrors how I would run ambition setting: combine interviews, in-flight
+                initiatives, system data, benchmarks, and executive judgment into a ranked portfolio
+                the SteerCo can actually govern.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-2">
+                {blueprintNav.slice(1).map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="border border-divider-dark px-3 py-2 font-mono text-[11px] uppercase tracking-widest text-bone transition-colors hover:border-brass-light hover:text-brass-light"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-12 lg:col-span-8 lg:mt-0">
+              <div className="grid gap-5">
+                {automationAmbitionWedges.map((wedge, index) => {
+                  const Icon = ambitionIcons[index] ?? Target;
+
+                  return (
+                    <div key={wedge.opportunity} className="border-t border-divider-dark py-7">
+                      <div className="grid gap-6 lg:grid-cols-[220px_1fr_160px]">
+                        <div>
+                          <div className="flex items-center gap-4">
+                            <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-divider-dark bg-white/5 text-brass-light">
+                              <Icon className="h-5 w-5" aria-hidden="true" />
+                            </span>
+                            <div>
+                              <p className="font-mono text-[10px] uppercase tracking-widest text-stone">
+                                Wedge {String(index + 1).padStart(2, '0')}
+                              </p>
+                              <h3 className="mt-2 text-h4 text-bone">{wedge.opportunity}</h3>
+                            </div>
+                          </div>
+                          <p className="mt-4 font-mono text-[10px] uppercase tracking-widest text-brass-light">
+                            {wedge.sponsor}
+                          </p>
+                        </div>
+                        <div className="grid gap-5 sm:grid-cols-2">
+                          <div>
+                            <p className="font-mono text-[10px] uppercase tracking-widest text-stone">
+                              Ambition
+                            </p>
+                            <p className="mt-2 text-body-sm text-bone">{wedge.ambition}</p>
+                          </div>
+                          <div>
+                            <p className="font-mono text-[10px] uppercase tracking-widest text-stone">
+                              Priority pain points
+                            </p>
+                            <p className="mt-2 text-body-sm text-stone">{wedge.firstPainPoints}</p>
+                          </div>
+                        </div>
+                        <div>
+                          <p className="font-mono text-[10px] uppercase tracking-widest text-stone">
+                            Value signal
+                          </p>
+                          <p className="mt-2 text-body-sm text-brass-light">{wedge.valueSignal}</p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-14 grid gap-10 border-t border-divider-dark pt-10 lg:grid-cols-2">
+                <div>
+                  <p className="font-mono text-xs uppercase tracking-widest text-brass-light">
+                    Example operating analytics
+                  </p>
+                  <h3 className="mt-4 text-h2 text-bone">Lead signals found month over month.</h3>
+                  <div className="mt-8 flex h-52 items-end gap-3 border-b border-divider-dark pb-3">
+                    {leadSignalTrend.map((item) => (
+                      <div key={item.month} className="flex flex-1 flex-col items-center gap-3">
+                        <div
+                          className="w-full bg-brass-light/80"
+                          style={{
+                            height: `${(item.leads / Math.max(...leadSignalTrend.map((point) => point.leads))) * 100}%`,
+                          }}
+                          title={`${item.leads} leads`}
+                        />
+                        <div className="text-center">
+                          <p className="font-mono text-[11px] text-bone">{item.month}</p>
+                          <p className="mt-1 font-mono text-[10px] text-stone">{item.leads}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <p className="font-mono text-xs uppercase tracking-widest text-brass-light">
+                    Sales team performance view
+                  </p>
+                  <h3 className="mt-4 text-h2 text-bone">
+                    The control tower shows action quality, not only activity.
+                  </h3>
+                  <div className="mt-8 divide-y divide-divider-dark border-y border-divider-dark">
+                    {sellerPerformance.map((team) => (
+                      <div
+                        key={team.team}
+                        className="grid grid-cols-4 gap-4 py-4 text-body-sm text-stone"
+                      >
+                        <p className="col-span-4 text-bone sm:col-span-1">{team.team}</p>
+                        <p>
+                          <span className="block font-mono text-[10px] uppercase tracking-widest text-stone">
+                            Pipeline
+                          </span>
+                          <span className="text-brass-light">{team.pipeline}</span>
+                        </p>
+                        <p>
+                          <span className="block font-mono text-[10px] uppercase tracking-widest text-stone">
+                            SLA
+                          </span>
+                          <span className="text-bone">{team.response}</span>
+                        </p>
+                        <p>
+                          <span className="block font-mono text-[10px] uppercase tracking-widest text-stone">
+                            Convert
+                          </span>
+                          <span className="text-bone">{team.conversion}</span>
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <p className="mt-8 text-body-sm text-stone">
+                This is a preview, not the full internal playbook. The working version would include
+                interview guides, artifact templates, scoring rubrics, model evaluation packs, and
+                governance checklists.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="value-chain" className="dark-section scroll-mt-24 py-24 lg:py-40">
         <div className="mx-auto max-w-[1300px] px-6 lg:px-10">
           <div className="max-w-4xl">
             <p className="overline">Future-state value chain</p>
@@ -342,7 +629,7 @@ export default function CybersecurityBlueprintPage() {
         </div>
       </section>
 
-      <section className="dark-section py-24 lg:py-40">
+      <section id="function-value-map" className="dark-section scroll-mt-24 py-24 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <p className="overline">Function-level value map</p>
           <h2 className="mt-6 max-w-4xl text-display text-bone">
@@ -514,6 +801,98 @@ export default function CybersecurityBlueprintPage() {
         </div>
       </section>
 
+      <section id="automation-playbook" className="scroll-mt-24 bg-warm-white py-24 lg:py-40">
+        <div className="mx-auto max-w-[1300px] px-6 lg:px-10">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-20">
+            <div className="lg:col-span-4">
+              <p className="overline">Automation playbook preview</p>
+              <h2 className="mt-6 text-display">
+                Intake to value realization, without exposing the whole artifact library.
+              </h2>
+              <p className="mt-6 text-body-lg text-warm-gray">
+                The playbook is how ambition becomes a managed system. It gives executives a clear
+                view of where ideas enter, where risk is reviewed, where build decisions happen, and
+                how value is measured after launch.
+              </p>
+            </div>
+
+            <div className="mt-12 lg:col-span-8 lg:mt-0">
+              <div className="grid gap-6 md:grid-cols-2">
+                {automationPlaybookChapters.map((chapter) => (
+                  <div key={chapter.title} className="border-t border-divider pt-6">
+                    <div className="flex gap-4">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-divider bg-parchment text-brass">
+                        <BookOpen className="h-5 w-5" aria-hidden="true" />
+                      </span>
+                      <div>
+                        <h3 className="text-h4 text-anthracite">{chapter.title}</h3>
+                        <p className="mt-3 text-body-sm text-warm-gray">{chapter.body}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-14 border-t border-divider pt-10">
+                <p className="font-mono text-xs uppercase tracking-widest text-brass">
+                  Journey preview
+                </p>
+                <div className="mt-8">
+                  {automationPlaybookJourney.map((stage, index) => {
+                    const Icon = playbookIcons[index] ?? Route;
+
+                    return (
+                      <div key={stage.stage} className="border-t border-divider py-8 last:border-b">
+                        <div className="grid gap-6 lg:grid-cols-[210px_1fr_260px]">
+                          <div>
+                            <div className="flex items-center gap-4">
+                              <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-divider bg-anthracite text-brass-light">
+                                <Icon className="h-5 w-5" aria-hidden="true" />
+                              </span>
+                              <div>
+                                <p className="font-mono text-[10px] uppercase tracking-widest text-warm-gray">
+                                  Gate {String(index + 1).padStart(2, '0')}
+                                </p>
+                                <h3 className="mt-2 text-h4 text-anthracite">{stage.stage}</h3>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="grid gap-5 md:grid-cols-2">
+                            <div>
+                              <p className="font-mono text-[10px] uppercase tracking-widest text-warm-gray">
+                                What happens
+                              </p>
+                              <p className="mt-2 text-body-sm text-anthracite">{stage.focus}</p>
+                            </div>
+                            <div>
+                              <p className="font-mono text-[10px] uppercase tracking-widest text-warm-gray">
+                                Governance gate
+                              </p>
+                              <p className="mt-2 text-body-sm text-anthracite">{stage.gate}</p>
+                            </div>
+                          </div>
+                          <div>
+                            <p className="font-mono text-[10px] uppercase tracking-widest text-brass">
+                              Artifact preview
+                            </p>
+                            <p className="mt-2 text-body-sm font-medium text-anthracite">
+                              {stage.artifactPreview}
+                            </p>
+                            <p className="mt-4 text-body-sm text-warm-gray">
+                              {stage.crowdstrikeApplication}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="dark-section py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <p className="overline">Execution path</p>
@@ -581,33 +960,41 @@ export default function CybersecurityBlueprintPage() {
         </div>
       </section>
 
-      <section className="bg-warm-white py-24 lg:py-40">
+      <section id="role-fit" className="scroll-mt-24 bg-warm-white py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-4">
-              <p className="overline">Why James + ClearForge</p>
-              <h2 className="mt-6 text-display">Builder, operator, and AI transformation lead.</h2>
+              <p className="overline">Role coverage</p>
+              <h2 className="mt-6 text-display">
+                The job description maps to work I have already done and systems I can build.
+              </h2>
             </div>
             <div className="lg:col-span-8">
               <p className="text-body-lg text-warm-gray">{whyJames.appreciation}</p>
               <div className="mt-12">
-                {whyJames.experienceMatches.map((match) => (
+                {roleCoverage.map((match) => (
                   <div
-                    key={match.jdRequirement}
+                    key={match.requirement}
                     className="border-t border-divider py-8 last:border-b"
                   >
                     <div className="lg:grid lg:grid-cols-12 lg:gap-12">
-                      <div className="lg:col-span-5">
+                      <div className="lg:col-span-4">
                         <p className="font-mono text-xs uppercase tracking-widest text-warm-gray">
-                          What the role needs
+                          CrowdStrike requirement
                         </p>
                         <p className="mt-2 text-body font-medium text-anthracite">
-                          {match.jdRequirement}
+                          {match.requirement}
                         </p>
                       </div>
-                      <div className="mt-4 lg:col-span-7 lg:mt-0">
+                      <div className="mt-4 lg:col-span-4 lg:mt-0">
                         <p className="font-mono text-xs uppercase tracking-widest text-brass">
-                          ClearForge proof
+                          What I would own
+                        </p>
+                        <p className="mt-2 text-body text-anthracite">{match.ownership}</p>
+                      </div>
+                      <div className="mt-4 lg:col-span-4 lg:mt-0">
+                        <p className="font-mono text-xs uppercase tracking-widest text-brass">
+                          Proof from James
                         </p>
                         <p className="mt-2 text-body text-anthracite">{match.proof}</p>
                       </div>
@@ -624,17 +1011,17 @@ export default function CybersecurityBlueprintPage() {
         <div className="mx-auto max-w-3xl px-6 text-center lg:px-10">
           <p className="overline">Next step</p>
           <h2 className="mt-6 text-display text-bone">
-            Fifteen minutes to pressure-test the blueprint and pick the first sprint.
+            Fifteen minutes to pick the first 90-day wedge.
           </h2>
           <p className="mt-6 text-body-lg text-stone">{carnegieAppeal.callToAction}</p>
           <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Button size="lg" asChild>
               <Link href="/contact?ref=cybersecurity-blueprint">
-                Schedule the Conversation <ArrowRight className="ml-2 h-4 w-4" />
+                Discuss Role Fit <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>
-              <a href="mailto:james@clearforge.ai?subject=Cybersecurity%20AI%20Strategy%20Blueprint">
+              <a href="mailto:james@clearforge.ai?subject=CrowdStrike%20Enterprise%20AI%20Blueprint">
                 james@clearforge.ai
               </a>
             </Button>
@@ -642,6 +1029,10 @@ export default function CybersecurityBlueprintPage() {
           <p className="mt-12 text-body-sm text-stone">
             James Penz / Founder, ClearForge.AI / Ex-Bain Automation Center of Excellence / builder
             of production multi-agent operating systems
+          </p>
+          <p className="mt-4 text-body-sm text-stone">
+            Independent strategy sample prepared for role or contractor consideration. Not
+            affiliated with or endorsed by CrowdStrike.
           </p>
         </div>
       </section>
