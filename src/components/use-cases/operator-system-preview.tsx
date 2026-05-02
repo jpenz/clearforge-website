@@ -1,6 +1,7 @@
 import {
   AlertTriangle,
   ArrowRight,
+  BarChart3,
   Bot,
   CalendarCheck,
   CheckCircle2,
@@ -9,7 +10,9 @@ import {
   type LucideIcon,
   Radar,
   Target,
+  TrendingUp,
   UserCheck,
+  Users,
   Zap,
 } from 'lucide-react';
 import type { OperatorTone, UseCase } from '@/data/use-cases';
@@ -159,6 +162,131 @@ function OpportunityRow({
   );
 }
 
+function LeadVolumeChart({
+  data,
+}: {
+  data: NonNullable<UseCase['operatorView']['analytics']>['leadVolume'];
+}) {
+  const maxFound = Math.max(...data.map((item) => item.found), 1);
+
+  return (
+    <div className="border border-bone/10 bg-bone/5 p-4">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          <BarChart3 className="h-4 w-4 text-brass-light" />
+          <p className="text-sm font-semibold text-bone">Lead Volume</p>
+        </div>
+        <span className="flex items-center gap-1 text-xs text-brass-light">
+          <TrendingUp className="h-3.5 w-3.5" />
+          MoM signal growth
+        </span>
+      </div>
+      <div className="mt-5 flex h-36 items-end gap-3">
+        {data.map((item) => {
+          const foundHeight = Math.max(18, Math.round((item.found / maxFound) * 100));
+          const validatedHeight = Math.max(12, Math.round((item.validated / maxFound) * 100));
+          const qualifiedHeight = Math.max(8, Math.round((item.qualified / maxFound) * 100));
+
+          return (
+            <div key={item.month} className="flex min-w-0 flex-1 flex-col items-center gap-2">
+              <div className="flex h-28 w-full items-end justify-center gap-1.5">
+                <span
+                  className="w-3 rounded-t-sm bg-stone/35"
+                  style={{ height: `${foundHeight}%` }}
+                  title={`${item.found} leads found`}
+                />
+                <span
+                  className="w-3 rounded-t-sm bg-sky-300"
+                  style={{ height: `${validatedHeight}%` }}
+                  title={`${item.validated} validated`}
+                />
+                <span
+                  className="w-3 rounded-t-sm bg-emerald-300"
+                  style={{ height: `${qualifiedHeight}%` }}
+                  title={`${item.qualified} qualified`}
+                />
+              </div>
+              <div className="text-center">
+                <p className="metric text-xs text-bone">{item.month}</p>
+                <p className="metric text-[11px] text-stone">{item.found}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div className="mt-4 flex flex-wrap gap-3 text-[11px] text-stone">
+        {[
+          ['Found', 'bg-stone/35'],
+          ['Validated', 'bg-sky-300'],
+          ['Qualified', 'bg-emerald-300'],
+        ].map(([label, swatch]) => (
+          <span key={label} className="flex items-center gap-1.5">
+            <span className={cn('h-2 w-2 rounded-full', swatch)} />
+            {label}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TeamPerformancePanel({
+  data,
+}: {
+  data: NonNullable<UseCase['operatorView']['analytics']>['teamPerformance'];
+}) {
+  return (
+    <div className="border border-bone/10 bg-forge-black/35 p-4">
+      <div className="flex items-center gap-2">
+        <Users className="h-4 w-4 text-brass-light" />
+        <p className="text-sm font-semibold text-bone">Team Performance</p>
+      </div>
+      <div className="mt-4 space-y-4">
+        {data.map((member) => (
+          <div
+            key={member.member}
+            className="border-t border-bone/10 pt-4 first:border-t-0 first:pt-0"
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-sm font-semibold text-bone">{member.member}</p>
+                <p className="text-xs text-stone">{member.territory}</p>
+              </div>
+              <span className="metric rounded-full bg-bone/10 px-2 py-1 text-xs text-brass-light">
+                {member.score}
+              </span>
+            </div>
+            <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-bone/10">
+              <div
+                className="h-full rounded-full bg-brass-light"
+                style={{ width: `${member.score}%` }}
+              />
+            </div>
+            <div className="mt-3 grid grid-cols-4 gap-2 text-[11px]">
+              <div>
+                <p className="metric text-bone">{member.opportunities}</p>
+                <p className="text-stone">Opps</p>
+              </div>
+              <div>
+                <p className="metric text-bone">{member.stageMovement}</p>
+                <p className="text-stone">Moved</p>
+              </div>
+              <div>
+                <p className="metric text-bone">{member.firstContact}</p>
+                <p className="text-stone">Contact</p>
+              </div>
+              <div>
+                <p className="metric text-bone">{member.feedback}</p>
+                <p className="text-stone">Feedback</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function OperatorSystemPreview({
   useCase,
   className,
@@ -217,6 +345,13 @@ export function OperatorSystemPreview({
                   <MiniMetric key={metric.label} {...metric} />
                 ))}
               </div>
+
+              {view.analytics ? (
+                <div className="mt-6 grid items-start gap-5 xl:grid-cols-[1.12fr_0.88fr]">
+                  <LeadVolumeChart data={view.analytics.leadVolume} />
+                  <TeamPerformancePanel data={view.analytics.teamPerformance} />
+                </div>
+              ) : null}
 
               <div className="mt-6 grid gap-5 xl:grid-cols-[1.12fr_0.88fr]">
                 <div className="min-w-0 border border-bone/10 bg-forge-black/35">

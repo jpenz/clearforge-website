@@ -64,6 +64,23 @@ export interface OperatorView {
     label: string;
     detail: string;
   }[];
+  analytics?: {
+    leadVolume: {
+      month: string;
+      found: number;
+      validated: number;
+      qualified: number;
+    }[];
+    teamPerformance: {
+      member: string;
+      territory: string;
+      opportunities: number;
+      stageMovement: string;
+      firstContact: string;
+      feedback: string;
+      score: number;
+    }[];
+  };
   stages: {
     label: string;
     count: string;
@@ -150,6 +167,43 @@ export const useCases: UseCase[] = [
           detail: 'Every report becomes a near-term sales operating plan.',
         },
       ],
+      analytics: {
+        leadVolume: [
+          { month: 'Jan', found: 42, validated: 14, qualified: 5 },
+          { month: 'Feb', found: 58, validated: 19, qualified: 7 },
+          { month: 'Mar', found: 76, validated: 26, qualified: 9 },
+          { month: 'Apr', found: 104, validated: 34, qualified: 11 },
+        ],
+        teamPerformance: [
+          {
+            member: 'AE North',
+            territory: 'Industrial accounts',
+            opportunities: 31,
+            stageMovement: '+14',
+            firstContact: '39h',
+            feedback: '92%',
+            score: 91,
+          },
+          {
+            member: 'AE Central',
+            territory: 'Growth accounts',
+            opportunities: 27,
+            stageMovement: '+11',
+            firstContact: '46h',
+            feedback: '87%',
+            score: 84,
+          },
+          {
+            member: 'Inside Growth',
+            territory: 'Emerging signals',
+            opportunities: 44,
+            stageMovement: '+18',
+            firstContact: '31h',
+            feedback: '89%',
+            score: 88,
+          },
+        ],
+      },
       stages: [
         { label: 'Identified', count: '128', tone: 'slate' },
         { label: 'Validated', count: '34', tone: 'blue' },
