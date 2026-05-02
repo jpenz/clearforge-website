@@ -1130,7 +1130,7 @@ export const whyJames = {
 
 export const carnegieAppeal = {
   genuineInterest:
-    'I have followed CrowdStrike closely as an operator, builder, and long-term believer in the cybersecurity platform shift. This is not a generic AI pitch. It is a company-specific view of where I would improve growth, speed, quality, customer experience, efficiency, and margin if hired into the Enterprise AI role or engaged as a contractor.',
+    'I have followed CrowdStrike closely as an operator, builder, and long-term believer in the cybersecurity platform shift. This is not a broad capabilities page. It is a company-specific view of where I would improve growth, speed, quality, customer experience, efficiency, and margin if hired into the Enterprise AI role or engaged as a contractor.',
   whatTheyDoAlready:
     'CrowdStrike already understands that AI is becoming the dividing line in security. The open opportunity is to take the same seriousness used for customer-facing innovation and apply it inside every function: the revenue engine, product factory, support motion, research workflow, and operating model.',
   callToAction:

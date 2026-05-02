@@ -71,7 +71,7 @@ export function ScrollVideo({
 
       // Desktop scroll-scrub path — wait for metadata so we know duration
       const armScrub = () => {
-        if (!video.duration || !isFinite(video.duration)) return;
+        if (!video.duration || !Number.isFinite(video.duration)) return;
 
         // Prevent native looping during scrub; scroll drives currentTime
         video.loop = false;

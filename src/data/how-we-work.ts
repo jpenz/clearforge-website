@@ -13,18 +13,18 @@ export const engagementModels: EngagementModel[] = [
   {
     title: 'AI Strategy Sprint',
     icon: 'Zap',
-    scope: 'Rapid assessment, opportunity prioritization, and implementation roadmap',
+    scope: 'Rapid assessment, workflow selection, and implementation plan',
     timeline: '2-4 weeks',
     bestFor: 'Companies exploring AI for the first time',
     includes: [
       'Leadership interviews and workflow diagnostics',
-      'AI opportunity map with impact/feasibility scoring',
+      'Workflow map with value, effort, and risk scoring',
       '90-day implementation plan',
       'Executive readout and governance recommendations',
     ],
   },
   {
-    title: 'Transformation Design',
+    title: 'Operating Model Design',
     icon: 'PenTool',
     scope: 'Deep-dive strategy and implementation architecture',
     timeline: '10-14 weeks',
@@ -32,7 +32,7 @@ export const engagementModels: EngagementModel[] = [
     includes: [
       'Target operating model for AI-enabled workflows',
       'Technology and integration architecture',
-      'Workforce and change management plan',
+      'Owner model, adoption plan, and review cadence',
       'Delivery sequencing with risk controls',
     ],
   },
@@ -52,11 +52,11 @@ export const engagementModels: EngagementModel[] = [
   {
     title: 'Managed AI Advisory',
     icon: 'BarChart3',
-    scope: 'Ongoing AI operations, optimization, and strategy refresh',
+    scope: 'Ongoing AI operations, workflow tuning, and roadmap review',
     timeline: 'Monthly',
     bestFor: 'Companies scaling AI across the organization',
     includes: [
-      'Monthly operations and optimization cadence',
+      'Monthly operations and workflow review cadence',
       'Executive KPI reviews',
       'Roadmap evolution and expansion planning',
       'Governance and adoption support',
@@ -67,7 +67,7 @@ export const engagementModels: EngagementModel[] = [
 export const firstWeekPlan = [
   'Kickoff with leadership and operating stakeholders',
   'Access setup for systems, workflows, and reporting baselines',
-  'Initial opportunity and risk scan across priority functions',
+  'Initial workflow and risk scan across priority functions',
   'Definition of success metrics and communication cadence',
   'Week-2 workplan with decision checkpoints',
 ];
@@ -86,7 +86,7 @@ export const howWeWorkFaqs = [
   {
     question: 'Can we combine models?',
     answer:
-      'Yes. Many clients begin with strategy or transformation design, then move into implementation and managed advisory as the operating model matures.',
+      'Yes. Many clients begin with strategy or operating model design, then move into implementation and managed advisory as the workflow ownership model matures.',
   },
   {
     question: 'Who works on the engagement?',

@@ -65,7 +65,7 @@ export const caseStudies: CaseStudy[] = [
     heroMetricLabel: 'From Customer Attrition to Repeatable Pipeline',
     featured: true,
     excerpt:
-      'A two-decade-old services business with no formal marketing motion moved from customer attrition and declining revenue to active growth with recurring commercial maintenance contracts — and became acquisition-ready in the process.',
+      'A two-decade-old services business with no formal marketing motion moved from customer attrition and declining revenue to active growth with recurring commercial maintenance contracts, giving buyers a cleaner business to diligence.',
     challenge:
       'The company had operated for more than two decades on referrals and reputation. It had no website, no search presence, no paid campaigns, and no structured outreach motion. As legacy customers churned, revenue steadily eroded and there was no predictable pipeline to replace it.',
     solution: [
@@ -88,7 +88,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         metric: 'Acquisition-Ready',
-        description: 'Documented systems improved buyer confidence for PE interest',
+        description: 'Documented workflows improved buyer confidence for PE interest',
       },
       {
         metric: 'Owner Confidence',
@@ -98,7 +98,7 @@ export const caseStudies: CaseStudy[] = [
     systemLayers: [
       {
         name: 'Local market signal layer',
-        role: 'Turned search demand, service geography, reviews, and competitor gaps into a prioritized growth map.',
+        role: 'Turned search demand, service geography, reviews, and competitor gaps into a prioritized owner worklist.',
         evidence:
           'The business moved from no formal demand capture to a measurable local pipeline.',
       },
@@ -109,7 +109,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         name: 'Owner operating cadence',
-        role: 'Installed weekly review of leads, quotes, follow-ups, reviews, and account expansion.',
+        role: 'Installed a weekly review of leads, quotes, follow-ups, reviews, and account expansion.',
         evidence:
           'The owner could see where demand was coming from and what needed attention next.',
       },
@@ -132,7 +132,7 @@ export const caseStudies: CaseStudy[] = [
         {
           label: 'Buyer confidence',
           value: 'Higher',
-          context: 'Documented systems support acquisition readiness',
+          context: 'Documented workflows support acquisition readiness',
         },
       ],
       pipelineStages: [
@@ -143,11 +143,11 @@ export const caseStudies: CaseStudy[] = [
       ],
     },
     evidenceNotes: [
-      'Positioning, website, lead capture, CRM workflow, and follow-up were built as one operating system.',
-      'The system was designed for owner usability, not a complex enterprise stack.',
+      'Positioning, website, lead capture, CRM workflow, and follow-up were built as one owner-run cadence.',
+      'The workflow was designed for owner usability, not a complex enterprise stack.',
     ],
     scale:
-      'With systems documented and running continuously, the business is no longer dependent on one-off referrals. It now has an operating model that can be scaled, handed off, and diligenced by potential acquirers. Anonymous client quote: "For the first time, marketing is a system in this business, not a guess."',
+      'With the growth cadence documented and running, the business is no longer dependent on one-off referrals. It now has an operating model that can be handed off and diligenced by potential acquirers. Anonymous client quote: "For the first time, marketing is a repeatable part of this business, not a guess."',
   },
   {
     slug: 'industrial-manufacturer',
@@ -158,21 +158,21 @@ export const caseStudies: CaseStudy[] = [
     heroMetricLabel: 'Qualified Opportunities Identified in 6 Months',
     featured: true,
     excerpt:
-      "A $4B industrial conglomerate with 16 divisions and 70+ facilities deployed ClearForge's AI intelligence platform across three business units — identifying 1,181 qualified opportunities with a 99.8% match rate and building a purpose-built sales execution platform to turn intelligence into revenue.",
+      "A $4B industrial conglomerate with 16 divisions and 70+ facilities deployed ClearForge's AI intelligence platform across three business units, identifying 1,181 qualified opportunities with a 99.8% match rate and giving sales leaders a daily execution view.",
     challenge:
       "Sales teams across 16 divisions operated in silos with no shared market intelligence. Prospecting was manual, inconsistent, and untethered from the company's actual product capabilities. Cross-sell opportunities across divisions were invisible. Leadership had no unified view of where capital projects were happening, which accounts were under-served, and where the real white space existed. The commercial model had not evolved even as the market, the tools, and buyer behavior had fundamentally changed.",
     solution: [
       "Deployed custom signal collectors and scoring workflows across capital projects, industrial demand signals, and competitive movement in 20+ states — calibrated specifically to the client's product lines",
       'Built 24 active intelligence triggers across three core business divisions — each generating scored, enriched opportunities in real time',
-      'Created 631+ rep-ready sales playbooks tailored by opportunity, vertical, and buyer persona — with entry strategies, competitive analysis, and risk assessments',
+      'Created 631+ rep-ready sales playbooks by opportunity, vertical, and buyer persona, with entry strategies, competitive analysis, and risk assessments',
       'Built and deployed a purpose-built sales intelligence platform — with visual pipeline management, playbooks, contact discovery, and performance analytics the sales team uses daily',
-      'Designed a portfolio-level expansion model prioritizing 5 additional divisions for AI deployment based on market size, AI fit scoring, and transferable trigger architecture',
+      'Designed a portfolio-level expansion model prioritizing 5 additional divisions based on market size, AI fit scoring, and transferable trigger architecture',
       'Mapped a commercial model redesign framework — diagnostic-first approach to aligning sales structure, compensation, and AI tools to margin-focused growth',
     ],
     continuousModel: [
       'Market-signal workflows monitor thousands of sources daily — every closed-won and closed-lost data point refines the scoring model',
-      'New triggers, territories, and divisions are added continuously — the intelligence architecture scales horizontally, with each deployment accelerating faster than the last',
-      'The platform captures structured feedback on every playbook (1–5 star ratings across 4 dimensions), creating a closed-loop system that improves output quality',
+      'New triggers, territories, and divisions are added continuously, with each deployment starting from more proven trigger logic than the last',
+      'The platform captures structured feedback on every playbook (1-5 star ratings across 4 dimensions), creating a review loop that improves output quality',
       'Market shifts are auto-captured within hours, not weeks — ensuring the sales team always has the freshest intelligence and first-mover advantage on capital projects',
     ],
     outcomes: [
@@ -204,9 +204,9 @@ export const caseStudies: CaseStudy[] = [
         evidence: '99.8% match rate to the client actual product capabilities.',
       },
       {
-        name: 'AI sales playbook factory',
+        name: 'Sales playbook factory',
         role: 'Generated account-entry strategy, buyer context, competitive analysis, risk notes, and recommended next action.',
-        evidence: '631+ AI-generated sales playbooks created for active opportunities.',
+        evidence: '631+ sales playbooks created for active opportunities.',
       },
       {
         name: 'Sales execution platform',
@@ -256,11 +256,11 @@ export const caseStudies: CaseStudy[] = [
       ],
     },
     evidenceNotes: [
-      'This was not a generic sales dashboard. The intelligence was calibrated to divisions, facilities, product capabilities, territory coverage, and manager review routines.',
-      'The most important design choice was closing the loop between market signal, sales action, manager coaching, and AI quality feedback.',
+      'This was not an off-the-shelf sales dashboard. The intelligence was calibrated to divisions, facilities, product capabilities, territory coverage, and manager review routines.',
+      'The most important design choice was closing the loop between market signal, sales action, manager coaching, and playbook quality feedback.',
     ],
     scale:
-      'What began as a two-division pilot expanded into a division-level intelligence system in under six months. The platform now covers three core divisions — with the largest generating over 950 opportunities alone — and five additional divisions ready for deployment. ClearForge built a custom sales intelligence dashboard that the team uses daily to manage the full pipeline, and is now designing commercial model changes to align sales structure, compensation, and coverage to the market intelligence. As field feedback accumulates, the scoring and playbooks become more accurate month by month.',
+      'What began as a two-division pilot expanded into a division-level intelligence workflow in under six months. The platform now covers three core divisions, with the largest generating over 950 opportunities alone, and five additional divisions ready for deployment. ClearForge built a custom sales intelligence dashboard that the team uses daily to manage the full pipeline, and is now designing commercial model changes to align sales structure, compensation, and coverage to market intelligence. As field feedback accumulates, the scoring and playbooks become more accurate month by month.',
   },
   {
     slug: 'pe-portfolio-diagnostic-plan',
@@ -271,7 +271,7 @@ export const caseStudies: CaseStudy[] = [
     heroMetricLabel: 'Diagnostic to Portfolio Execution Plan',
     featured: true,
     excerpt:
-      'A PE operating team needed a practical AI value creation roadmap across portfolio companies. ClearForge delivered a cross-portfolio diagnostic, prioritized value levers, and mapped a 12-month execution plan tied to EBITDA improvement.',
+      'A PE operating team needed a practical AI value creation plan across portfolio companies. ClearForge delivered a cross-portfolio diagnostic, prioritized value levers, and mapped a 12-month execution plan tied to EBITDA improvement.',
     challenge:
       'The PE team had strong hypotheses about where AI could create value, but no shared diagnostic framework to compare opportunities across portfolio companies. Initiatives were fragmented, management teams had different levels of readiness, and leadership needed a plan that could move quickly while preserving operating control.',
     solution: [
@@ -335,7 +335,7 @@ export const caseStudies: CaseStudy[] = [
       'The deliverable was built to be reused across future portfolio companies, not consumed once.',
     ],
     scale:
-      'The operating team left with a repeatable portfolio playbook, not a one-off report. The plan gave deal teams and management teams a shared language for prioritization, clear ownership by function, and a practical path to scale proven workflows across future portfolio companies.',
+      'The operating team left with a repeatable portfolio playbook, not a one-off report. The plan gave deal teams and management teams a shared language for prioritization, clear ownership by function, and a practical path to reuse proven workflows across future portfolio companies.',
   },
 ];
 

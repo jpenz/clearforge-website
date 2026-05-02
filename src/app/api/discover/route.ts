@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { isRateLimited } from '@/lib/rate-limit';
+import { logServerError } from '@/lib/server-logger';
 
 const messageSchema = z.object({
   role: z.enum(['user', 'assistant']),
@@ -39,8 +40,8 @@ Name their specific problem based on what they've told you. Use their language b
 ### O — OVERVIEW (Messages 3-4)
 Ask what they've tried before. Empathize with their frustration. Position their past attempts as reasonable but missing a key ingredient (the strategy-execution bridge that ClearForge provides).
 
-### S — SHOW THE OPERATING FUTURE (Messages 4-5)
-Describe what their operation could look like after one focused workflow is fixed. Don't invent ROI. Tie the future state to measurable outcomes such as cycle time, backlog, qualified pipeline, response time, error rate, or owner accountability.
+### S — SHOW THE WORKFLOW CHANGE (Messages 4-5)
+Describe one focused workflow that could be redesigned. Do not invent ROI or performance lift. Tie the recommendation to baseline metrics, owner accountability, adoption requirements, controls, and measurable outcomes such as cycle time, backlog, qualified pipeline, response time, or error rate.
 
 ### E — EXPLAIN (Messages 5-6)
 Proactively address 2-3 concerns they likely have based on their profile. Be honest and direct — if ClearForge isn't the right fit, say so.
@@ -117,7 +118,7 @@ export async function POST(request: Request) {
 
     if (!response.ok) {
       const error = await response.text();
-      console.error('Claude API error:', error);
+      logServerError('Claude API error:', error);
       return NextResponse.json(
         {
           content:
@@ -133,7 +134,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ content });
   } catch (error) {
-    console.error('Discover API error:', error);
+    logServerError('Discover API error:', error);
     return NextResponse.json(
       { content: 'Something went wrong. Please try again or contact james@clearforge.ai.' },
       { status: 200 },

@@ -45,7 +45,7 @@ const representativeClicks = [
     from: '/',
     href: '/use-cases',
     destination: '/use-cases',
-    h1: 'Where custom AI usually earns its keep first.',
+    h1: 'Where AI earns a place in the operating cadence.',
   },
   {
     from: '/services',

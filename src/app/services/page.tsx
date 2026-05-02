@@ -10,7 +10,7 @@ import { createMetadata } from '@/lib/metadata';
 export const metadata = createMetadata({
   title: 'Custom AI Strategy and Build Services | ClearForge',
   description:
-    'ClearForge sets AI ambition, maps value, builds custom agents and workflows, and trains teams into a measurable AI operating model.',
+    'ClearForge selects workflows, sets baselines, builds custom agents, and trains teams into a measurable AI operating model.',
   path: '/services',
 });
 
@@ -19,7 +19,7 @@ const industries = [
     icon: Factory,
     name: 'Manufacturing',
     problem: 'Manual quoting, siloed sales data, and blind spots across divisions',
-    outcome: '1,181 qualified opportunities identified in 6 months',
+    outcome: '1,181 qualified account records surfaced in 6 months',
     href: '/industries/manufacturing',
   },
   {
@@ -46,8 +46,8 @@ const industries = [
   {
     icon: Briefcase,
     name: 'PE Portfolio',
-    problem: 'No shared framework to identify AI value levers across portfolio companies',
-    outcome: 'Comparable value backlog, 90-day sprint plan, and board-ready tracking',
+    problem: 'No shared framework to compare AI workflow candidates across portfolio companies',
+    outcome: 'Comparable workflow backlog, 90-day sprint plan, and board-ready tracking',
     href: '/industries/private-equity',
   },
 ];
@@ -83,8 +83,8 @@ export default function ServicesPage() {
               new way of working.
             </p>
             <p className="mt-4 max-w-xl text-body text-stone">
-              Not a generic platform. Not a deck that stops at recommendations. Custom AI designed
-              for the business you actually run.
+              Not a generic platform. Not recommendations without ownership. Custom AI designed for
+              the business you actually run.
             </p>
           </FadeIn>
         </div>
@@ -253,8 +253,8 @@ export default function ServicesPage() {
           <div className="mt-14 border-t border-divider-dark pt-8">
             <p className="text-body-lg text-bone max-w-2xl">
               ClearForge builds the custom system and the management routine around it. When the
-              first sprint ends, the workflow works, the owners are trained, and the next value
-              lever is visible.
+              first sprint ends, the workflow works, the owners are trained, and the next review
+              decision is visible.
             </p>
           </div>
         </div>
@@ -266,8 +266,9 @@ export default function ServicesPage() {
           <Shield className="h-8 w-8 text-brass mx-auto mb-6" />
           <h2 className="text-display">The ClearForge Guarantee</h2>
           <p className="mt-6 text-body-lg text-warm-gray">
-            If our Forge Diagnostic doesn&apos;t identify at least 3 actionable AI opportunities
-            with clear ROI projections, we refund your investment. No questions asked.
+            If the Forge Diagnostic does not produce an approved workflow, baseline metrics, and a
+            build plan your leadership team can act on, we refund the investment. No questions
+            asked.
           </p>
         </div>
       </section>
@@ -279,13 +280,13 @@ export default function ServicesPage() {
             Ready to see where custom AI can move the business?
           </h2>
           <p className="mt-6 text-body-lg text-stone">
-            The Forge Diagnostic gives you a clear picture of the highest-value opportunities,
-            system architecture, adoption path, and economics before you commit to a build.
+            The Forge Diagnostic gives you a clear picture of the selected workflow, system
+            architecture, adoption path, and value assumptions before you commit to a build.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Generate My AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
+                Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>

@@ -568,14 +568,14 @@ export default function CybersecurityBlueprintPage() {
       <section id="value-chain" className="dark-section scroll-mt-24 py-24 lg:py-40">
         <div className="mx-auto max-w-[1300px] px-6 lg:px-10">
           <div className="max-w-4xl">
-            <p className="overline">Future-state value chain</p>
+            <p className="overline">Target operating value chain</p>
             <h2 className="mt-6 text-display text-bone">
               The whole company becomes a learning system.
             </h2>
             <p className="mt-6 text-body-lg text-stone">
-              The value is not trapped in one function. The future state connects market signal,
+              The value is not trapped in one function. The target model connects market signal,
               product insight, threat intelligence, engineering delivery, sales execution, customer
-              experience, and enterprise operations into one compounding loop.
+              experience, and enterprise operations into one managed operating loop.
             </p>
           </div>
 

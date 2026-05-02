@@ -8,7 +8,7 @@ import { createMetadata } from '@/lib/metadata';
 export const metadata = createMetadata({
   title: 'About ClearForge — We Build Production AI',
   description:
-    'Strategy consulting discipline meets AI engineering depth. We build production AI, train your team to run it, and make ourselves replaceable.',
+    'Operating discipline meets AI engineering depth. We build production AI, train your team to run it, and make ourselves replaceable.',
   path: '/about',
 });
 
@@ -19,11 +19,11 @@ const values = [
   },
   {
     title: 'Senior-led teams',
-    desc: 'The people who scope your engagement are the people who deliver it. No bait-and-switch with junior consultants.',
+    desc: 'The people who scope your engagement are the people who deliver it. You work with senior operators who can make tradeoffs in the room.',
   },
   {
     title: 'Engineering + operating discipline',
-    desc: 'We combine management consulting rigor with production engineering standards. Systems are tested, documented, and built to last.',
+    desc: 'We combine workflow discipline with production engineering standards. Systems are tested, documented, and built to last.',
   },
   {
     title: 'Build capability, not dependency',
@@ -35,7 +35,7 @@ const platformReasons = [
   {
     question: 'Platforms require a data science team',
     answer:
-      'DataRobot and Dataiku are powerful — if you already have a team to build, validate, and maintain models. Most mid-market companies do not.',
+      'DataRobot and Dataiku can help if you already have a team to build, validate, and maintain models. Most mid-market companies do not.',
   },
   {
     question: 'Platforms solve the tool problem, not the business problem',
@@ -70,7 +70,7 @@ export default function AboutPage() {
               className="mt-6 text-display max-w-3xl text-bone"
               style={{ fontFamily: 'var(--font-instrument-serif)' }}
             >
-              We build production AI. Not strategy decks.
+              We build production AI. Not shelfware.
             </h1>
           </FadeIn>
           <FadeIn delay={0.15}>
@@ -119,8 +119,8 @@ export default function AboutPage() {
               <div className="mt-12 lg:col-span-7 lg:mt-0">
                 <p className="text-body-lg text-warm-gray">
                   Before founding ClearForge, James spent over a decade in management consulting and
-                  technology transformation at Bain, EY, and Capgemini — advising mid-market and
-                  Fortune 500 companies on operations, AI strategy, and digital transformation.
+                  enterprise technology at Bain, EY, and Capgemini - advising mid-market and Fortune
+                  500 companies on operations, AI strategy, and delivery.
                 </p>
                 <p className="mt-6 text-body text-warm-gray">
                   He built ClearForge because he kept seeing the same problem: companies spent
@@ -135,7 +135,7 @@ export default function AboutPage() {
                   </div>
                   <div>
                     <p className="metric text-brass">EY</p>
-                    <p className="mt-1 text-body-sm text-warm-gray">Transformation</p>
+                    <p className="mt-1 text-body-sm text-warm-gray">Delivery</p>
                   </div>
                   <div>
                     <p className="metric text-brass">Capgemini</p>
@@ -204,7 +204,7 @@ export default function AboutPage() {
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Generate My AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
+                Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>

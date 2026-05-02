@@ -16,7 +16,7 @@ const footerLinks = {
   'Use Cases': [
     { href: '/use-cases/ai-sales-pipeline-acceleration', label: 'AI Sales Pipeline' },
     { href: '/use-cases/ai-customer-service-excellence', label: 'Customer Service AI' },
-    { href: '/use-cases/ai-operations-efficiency-machine', label: 'Operations Efficiency' },
+    { href: '/use-cases/ai-operations-efficiency-system', label: 'Operations Efficiency' },
     { href: '/use-cases', label: `View all ${useCases.length} →` },
   ],
   Company: [
@@ -46,7 +46,8 @@ export function Footer() {
               <p className="overline">Ready to find the value?</p>
               <h2 className="mt-4 text-display text-bone">Start with the operating map.</h2>
               <p className="mt-4 text-body-lg text-stone">
-                See where AI can move revenue, cost, or throughput before you commit to a build.
+                See which workflow could improve revenue, cost, or throughput before you commit to a
+                build.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">

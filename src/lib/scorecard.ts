@@ -151,7 +151,7 @@ export const questions: ScorecardQuestion[] = [
   },
   {
     id: 20,
-    text: 'We would invest in AI if we could see clear ROI within 6-12 months',
+    text: 'We would invest in AI if the baseline metrics, owner, and proof plan were clear',
     pillar: 'strategy',
   },
 ];
@@ -193,7 +193,7 @@ export function getQuestionsForPillar(pillarKey: PillarKey): ScorecardQuestion[]
   return questions.filter((q) => q.pillar === pillarKey);
 }
 
-function buildRoadmap(pillarScores: PillarScore[], compositeScore: number): RoadmapStep[] {
+function buildRoadmap(pillarScores: PillarScore[], _compositeScore: number): RoadmapStep[] {
   const sorted = [...pillarScores].sort((a, b) => a.percentage - b.percentage);
   const roadmap: RoadmapStep[] = [];
 
@@ -256,7 +256,7 @@ function buildRoadmap(pillarScores: PillarScore[], compositeScore: number): Road
       phase: 'Phase 3',
       title: 'Scale & Optimize',
       description:
-        'Expand proven AI systems across the organization. Replicate wins from one area to the next. Your AI agents get smarter every cycle - performance compounds, not plateaus.',
+        'Expand proven AI systems across the organization. Replicate wins from one area to the next using baseline metrics, adoption reviews, and quality controls.',
       service: 'Managed AI Operations',
       timeline: 'Ongoing',
     });
@@ -267,7 +267,7 @@ function buildRoadmap(pillarScores: PillarScore[], compositeScore: number): Road
     phase: 'Phase 4',
     title: 'Continuous AI Operations',
     description:
-      'We run and optimize your AI operations continuously. Real-time dashboards, monthly performance reviews, and agents that improve with every cycle. The value compounds over time.',
+      'We run and optimize your AI operations continuously. Real-time dashboards, monthly performance reviews, adoption checks, and quality controls keep the system accountable after launch.',
     service: 'Managed AI Operations',
     timeline: 'Ongoing',
   });
@@ -335,15 +335,15 @@ export function calculateResults(answers: Answers): ScorecardResult {
     maturityDescription =
       "You're well-positioned for production AI. Your data, team, and processes can support sophisticated AI agents across priority workflows. Now it is about expanding carefully and proving value as you go.";
     recommendation =
-      'Deploy AI agents at scale with AI Agent Design & Build, then transition to Managed AI Operations for continuous optimization.';
+      'Expand AI agents through priority workflows with AI Agent Design & Build, then transition to Managed AI Operations for ongoing measurement and improvement.';
     recommendedService = 'AI Agent Design & Build';
     segment = 'A';
   } else {
     maturityLevel = 'Leader';
     maturityDescription =
-      "Your organization is AI-ready across all dimensions. You're in the top tier - positioned to build sustainable competitive advantages through AI-native operations and a hybrid workforce.";
+      'Your organization is AI-ready across the core dimensions. The next job is to keep every agent tied to an accountable workflow, owner, control, and operating metric.';
     recommendation =
-      'Managed AI Operations keeps your AI systems compounding in value. Focus on scaling across the organization and measuring human + agent productivity together.';
+      'Managed AI Operations keeps your AI systems measured and accountable. Focus on expanding through governed workflows and measuring human + agent productivity together.';
     recommendedService = 'Managed AI Operations';
     segment = 'A+';
   }

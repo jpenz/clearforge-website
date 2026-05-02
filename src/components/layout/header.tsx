@@ -48,7 +48,7 @@ const NAV_SECTIONS = [
     links: [
       { href: '/use-cases/ai-sales-pipeline-acceleration', label: 'AI Sales Pipeline' },
       { href: '/use-cases/ai-customer-service-excellence', label: 'Customer Service AI' },
-      { href: '/use-cases/ai-operations-efficiency-machine', label: 'Operations Efficiency' },
+      { href: '/use-cases/ai-operations-efficiency-system', label: 'Operations Efficiency' },
       { href: '/use-cases/ai-knowledge-work-automation', label: 'Knowledge Work Automation' },
       {
         href: '/use-cases/ai-quality-control-exception-management',

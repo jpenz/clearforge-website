@@ -35,24 +35,24 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       title: 'Forge Diagnostic',
       duration: '4 weeks',
       description:
-        'Mapped the value chain, identified AI opportunities, and built a prioritized roadmap tied to measurable KPIs.',
+        'Mapped the value chain, named the workflow constraints, and chose the first builds tied to owner-visible KPIs.',
     },
     {
       title: 'Forge Sprint',
       duration: '10-14 weeks',
       description:
-        'Redesigned workflows, deployed AI agents with human-in-the-loop controls, established KPI baselines from day one.',
+        'Redesigned workflows, shipped AI-assisted controls with human review, and established KPI baselines from day one.',
     },
     {
       title: 'Forge Scale',
       duration: 'Ongoing',
       description:
-        'Continuous optimization, team training, and expansion to new divisions and use cases. Compounding gains monthly.',
+        'Tuned the cadence, trained the team, and expanded only after the first workflow was adopted and measured.',
     },
   ];
 
   const quote =
-    "They didn't just hand us a strategy deck. They built the systems, trained the team, and stayed until the numbers moved.";
+    "They didn't just hand us a strategy deck. They built the workflow, trained the team, and stayed until the numbers moved.";
   const quoteAttribution = `${cs.industry} — ClearForge Client`;
 
   return (
@@ -68,7 +68,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       <CaseStudyStory
         industry={cs.industry}
         title={cs.title}
-        challenge={cs.excerpt || 'A complex operating challenge that required a working system.'}
+        challenge={cs.excerpt || 'A complex operating challenge that required a working build.'}
         challengeMetric={cs.heroMetric}
         challengeMetricLabel={cs.heroMetricLabel}
         phases={phases}

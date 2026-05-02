@@ -13,7 +13,7 @@ const collectionLd = {
   name: 'AI Use Cases for Growth, Service, Operations, Quality, and PE Value Creation',
   url: 'https://clearforge.ai/use-cases',
   description:
-    'Concrete AI use cases ClearForge builds for mid-market operators: sales pipeline acceleration, customer service, operations efficiency, knowledge work, quality exceptions, and PE portfolio value creation.',
+    'Practical AI use cases ClearForge builds for operators: sales pipeline acceleration, service quality, operations flow, knowledge work, quality exceptions, and PE value creation.',
   hasPart: useCases.map((useCase) => ({
     '@type': 'Service',
     name: useCase.title,
@@ -30,12 +30,12 @@ const breadcrumbLd = breadcrumbJsonLd([
 export const metadata = createMetadata({
   title: 'AI Use Cases for Growth, Service, Operations, and Margin',
   description:
-    'Explore practical AI use cases ClearForge builds for mid-market operators: sales pipeline acceleration, customer service, operations efficiency, knowledge work, quality exceptions, and PE value creation.',
+    'Explore practical AI use cases ClearForge builds for operators: sales pipeline acceleration, service quality, operations flow, knowledge work, quality exceptions, and PE value creation.',
   path: '/use-cases',
   keywords: [
     'AI use cases',
     'AI automation use cases',
-    'AI agents use cases',
+    'AI workflow use cases',
     'AI workflow automation',
     'mid-market AI consulting',
   ],
@@ -43,8 +43,8 @@ export const metadata = createMetadata({
 
 const operatingLoop = [
   'Find the constraint',
-  'Design the human-reviewed workflow',
-  'Ship the first workflow',
+  'Design the review path',
+  'Ship the first working flow',
   'Measure adoption and margin',
 ];
 
@@ -68,22 +68,21 @@ export default function UseCasesPage() {
         <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
           <p className="overline">AI Use Cases</p>
           <h1 className="mt-6 max-w-5xl text-display text-bone">
-            Where custom AI usually earns its keep first.
+            Where AI earns a place in the operating cadence.
           </h1>
           <p className="mt-7 max-w-2xl text-body-lg text-stone">
-            These are the use cases where AI most often turns into real buyer urgency: growth,
-            customer service, operations speed, knowledge work, quality, and PE value creation. Each
-            page shows the trigger pattern, operating workflow, dashboard view, and first build
-            path.
+            These are the places where the work is already hurting: growth, service, operations
+            flow, knowledge work, quality, and PE value creation. Each page shows the trigger,
+            owner, review path, operating view, and first build worth shipping.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Generate My AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
+                Map My First Build <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>
-              <Link href="#use-case-grid">Explore Use Cases</Link>
+              <Link href="#use-case-grid">Review Use Cases</Link>
             </Button>
           </div>
 
@@ -104,14 +103,14 @@ export default function UseCasesPage() {
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-16 lg:items-end">
             <div className="lg:col-span-5">
-              <p className="overline">High-Value Workflows</p>
+              <p className="overline">High-Value Work</p>
               <h2 className="mt-6 text-display">
                 Built around the problems that drain growth, speed, and margin.
               </h2>
             </div>
             <p className="mt-8 text-body-lg text-warm-gray lg:col-span-6 lg:col-start-7 lg:mt-0">
-              Each use case starts with an operating constraint your team can already feel, then
-              shows the AI system, human workflow, and first build path that would change it.
+              Each use case starts with a constraint your team can already name, then shows the
+              workflow, review path, owner view, and first build that would change it.
             </p>
           </div>
 
@@ -143,7 +142,7 @@ export default function UseCasesPage() {
                       {useCase.summary}
                     </p>
                     <div className="mt-6 flex items-center justify-between border-t border-divider pt-5">
-                      <span className="text-sm font-semibold text-anthracite">View the build</span>
+                      <span className="text-sm font-semibold text-anthracite">Open the build</span>
                       <ArrowRight className="h-4 w-4 text-brass transition-transform group-hover:translate-x-1" />
                     </div>
                   </div>
@@ -160,22 +159,22 @@ export default function UseCasesPage() {
             <div className="lg:col-span-5">
               <p className="overline">Why These Use Cases Work</p>
               <h2 className="mt-6 text-display">
-                AI gets valuable when it changes the daily operating cadence.
+                AI gets valuable when it changes how the work is run.
               </h2>
             </div>
             <div className="mt-10 space-y-8 lg:col-span-7 lg:mt-0">
               {[
                 [
                   'They start with business triggers',
-                  'The best AI systems know what event creates urgency: a capital project, delayed handoff, quality issue, service risk, or portfolio value lever.',
+                  'The useful builds know what event creates urgency: a capital project, delayed handoff, quality issue, service risk, or portfolio value lever.',
                 ],
                 [
                   'They make the work concrete',
-                  'The build becomes specific: what gets automated, who reviews it, what decision changes, what cadence runs, and where human judgment stays in control.',
+                  'The build becomes specific: what gets drafted, who reviews it, what decision changes, what cadence runs, and where human judgment stays in control.',
                 ],
                 [
-                  'They compound through feedback',
-                  'Every workflow needs a review loop so the system learns from rep feedback, service outcomes, exception patterns, and management decisions.',
+                  'They improve through field feedback',
+                  'Every workflow needs a review loop so feedback from reps, service outcomes, exception patterns, and management decisions changes the next run.',
                 ],
               ].map(([title, description]) => (
                 <div key={title} className="border-t border-divider pt-6">
@@ -190,15 +189,15 @@ export default function UseCasesPage() {
 
       <section className="dark-section noise-texture py-24 lg:py-40">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">Find your highest-value AI use case.</h2>
+          <h2 className="text-display text-bone">Find the first AI build worth shipping.</h2>
           <p className="mt-6 text-body-lg text-stone">
-            Start with your website. We will map the growth, speed, quality, service, efficiency,
-            and margin opportunities worth building first.
+            Start with the work already slowing the business down. We will map the growth, speed,
+            quality, service, and margin opportunities worth building first.
           </p>
           <div className="mt-10">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Generate My AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
+                Map My First Build <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>

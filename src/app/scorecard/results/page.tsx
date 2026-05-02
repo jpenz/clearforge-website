@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { type Answers, calculateResults, type ScorecardResult } from '@/lib/scorecard';
+import { calculateResults, type ScorecardResult } from '@/lib/scorecard';
 
 /** Animated pillar progress bar — native CSS transition, no framer-motion. */
 function PillarBar({ percentage, color }: { percentage: number; color: string }) {

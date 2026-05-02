@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { isRateLimited } from '@/lib/rate-limit';
+import { logServerError } from '@/lib/server-logger';
 
 /**
  * POST /api/discover/value-chain
@@ -99,7 +100,7 @@ Generate a custom AI value chain for this company. Output STRICT JSON in this ex
           "name": "Activity name (3-5 words)",
           "aiImpact": "What ClearForge ships here. 1 sentence describing the AI agent / automation. Be specific to their business.",
           "type": "agent" | "automation" | "model" | "copilot",
-          "impact": "Quantified business impact (e.g., '20-40% sales productivity lift', 'Reduce DSO 5-15 days')"
+          "impact": "Metric to baseline and improve, plus the evidence needed before estimating value"
         }
       ]
     }
@@ -117,10 +118,10 @@ Generate a custom AI value chain for this company. Output STRICT JSON in this ex
 - Generate EXACTLY 5 functions covering the operating value chain (e.g., Sales & Commercial, Marketing, Operations, Customer Service, Finance & Back Office). Adapt to their specific business.
 - Each function should have EXACTLY 4 activities — specific to this company, not generic
 - Activity \`aiImpact\` should reference their actual products, customers, or workflows where possible
-- Activity \`impact\` should name the metric to move. Include a number only when it can be responsibly inferred from the company or industry context.
+- Activity \`impact\` should name the metric to baseline and improve. Do not invent ROI, lift, savings, or payback. Include a number only when directly supported by the research; otherwise state the evidence needed before estimating value.
 - \`type\` distribution: at least 1 agent, 1 automation, 1 model, 1 copilot across the full chain
 - \`topPriorities\` should pick the 3 activities most likely to matter for THIS company based on their industry, scale, and signals from research. Prioritize activities tied to revenue, throughput, or near-term cost.
-- No marketing fluff. Specific, actionable. Sound like a Bain-trained operator wrote it.
+- No marketing fluff or generic future-state language. Specific, actionable. Prefer baseline metrics, accountable owners, workflow adoption, controls, and evidence.
 
 Output ONLY the JSON, no preamble.`;
 
@@ -140,7 +141,7 @@ Output ONLY the JSON, no preamble.`;
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('Claude error:', errorText);
+      logServerError('Claude error:', errorText);
       return NextResponse.json({ error: 'Generation failed', fallback: true }, { status: 200 });
     }
 
@@ -155,7 +156,7 @@ Output ONLY the JSON, no preamble.`;
     try {
       valueChain = JSON.parse(jsonString);
     } catch {
-      console.error('Failed to parse JSON from Claude:', content);
+      logServerError('Failed to parse JSON from Claude:', content);
       return NextResponse.json(
         { error: 'Invalid response format', fallback: true },
         { status: 200 },
@@ -164,7 +165,7 @@ Output ONLY the JSON, no preamble.`;
 
     return NextResponse.json(valueChain);
   } catch (error) {
-    console.error('Value chain API error:', error);
+    logServerError('Value chain API error:', error);
     return NextResponse.json({ error: 'Generation failed', fallback: true }, { status: 200 });
   }
 }

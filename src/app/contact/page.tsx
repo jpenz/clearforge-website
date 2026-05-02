@@ -12,7 +12,7 @@ const revenueOptions = ['Under $5M', '$5M - $25M', '$25M - $100M', '$100M - $500
 const expectations = [
   'We respond within one business day — usually same day.',
   'A 30-minute confidential discovery call to understand your business.',
-  'An honest assessment of whether AI can help and which engagement fits.',
+  'An honest assessment of the workflow, owner, data, and engagement fit.',
   'If we are not the right fit, we will tell you and recommend who is.',
 ];
 
@@ -95,8 +95,8 @@ export default function ContactPage() {
           <p className="overline">Get in Touch</p>
           <h1 className="mt-6 text-display max-w-3xl text-bone">Book a 15-Min Diagnostic Call</h1>
           <p className="mt-6 max-w-xl text-body-lg text-stone">
-            No pitch decks. No pressure. A straightforward conversation about where AI can drive
-            measurable results for your company.
+            No sales theater. No pressure. A straightforward conversation about the workflow, data,
+            owner, and baseline you want to improve.
           </p>
         </div>
       </section>

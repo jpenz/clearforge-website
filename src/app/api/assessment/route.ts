@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { isRateLimited } from '@/lib/rate-limit';
 import { type Answers, calculateResults, questions, type ScorecardResult } from '@/lib/scorecard';
+import { logServerError, logServerInfo } from '@/lib/server-logger';
 import { saveAssessmentLead } from '@/lib/supabase';
 import { normalizePublicCompanyUrl } from '@/lib/url-safety';
 
@@ -187,16 +188,16 @@ async function fetchCompanyResearch(
 
 2) VALUE CHAIN MAP: Break down their core value chain into 5-7 stages (e.g., Lead Generation > Sales > Delivery > Support > Retention). For each stage, note the likely current state (manual, semi-automated, or automated).
 
-3) AUTOMATION HOTSPOTS: Identify the top 3-4 highest-value automation opportunities aligned to their challenge: "${challenge}". For each hotspot:
+3) AUTOMATION HOTSPOTS: Identify the top 3-4 best-supported automation opportunities aligned to their challenge: "${challenge}". For each hotspot:
    - Which value chain stage it targets
    - What an AI agent or workflow could do
-   - Estimated impact (time saved, revenue uplift, cost reduction)
+   - Baseline metric, workflow owner, adoption requirement, and control needed
    - Implementation complexity (low/medium/high)
 
-4) GROWTH PATHS: 2 ways AI could help them find new growth
-5) SYSTEM BUILDING: 2 ways AI could turn that growth path into a repeatable workflow
+4) GROWTH PATHS: 2 evidence-based ways AI could help them find new growth
+5) SYSTEM BUILDING: 2 ways AI could turn that growth path into a repeatable workflow with ownership and controls
 
-Write for a CEO/COO audience in plain, direct language. Industry: ${industry}.`;
+Do not invent ROI, lift, savings, or payback. Write for a CEO/COO audience in plain, direct language. Industry: ${industry}.`;
 
   return queryPerplexity(prompt);
 }
@@ -205,14 +206,14 @@ async function fetchIndustryBestInClass(industry: string, challenge: string): Pr
   const prompt = `For the ${industry} industry, define what strong AI-enabled operations look like for this core pain point: "${challenge}".
 
 Provide:
-1) 12-MONTH TARGET OPERATING MODEL: What the operation looks like when AI workflows are running in production
+1) PRODUCTION WORKFLOW STANDARD: What must be true for AI workflows to run in production with owners, controls, and adoption
 2) 5 SEPARATING CAPABILITIES: What leaders do that followers don't
-3) 5 KPI RANGES: Specific metrics leaders monitor with benchmark ranges
+3) 5 KPI BASELINES: Specific metrics leaders monitor. Include benchmark ranges only when they are broadly accepted; otherwise name the metric to baseline.
 4) AI AGENT USE CASES: 3 specific AI agent workflows that top performers deploy for this pain point
 5) EXECUTION MISTAKES: 3 common mistakes companies make when trying to solve this with AI
-6) MATURITY PATH: Now (quick wins, 30 days) > Next (system builds, 90 days) > Expand (repeatable value, 12 months)
+6) MATURITY PATH: Now (baseline and controls) > Next (one workflow build) > Expand (repeatable adoption)
 
-Keep it under 400 words. Be specific with numbers and examples. Write for operators, not technologists.`;
+Keep it under 400 words. Do not invent ROI, lift, savings, or payback. Be specific with evidence, metrics, and examples. Write for operators, not technologists.`;
 
   return queryPerplexity(prompt);
 }
@@ -260,7 +261,7 @@ Every ${params.industry} business runs through a core sequence: lead generation,
 Based on your challenge and industry context, three practical automation opportunities stand out: (1) an AI-assisted workflow that reduces manual touchpoints in your core bottleneck area, (2) intelligence gathering that gives your team better data before decisions, and (3) a monitoring and alerting system that catches issues before they become larger problems. Each should be baselined before a build begins.
 
 ## What Best-in-Class Looks Like
-Strong operators in ${params.industry} use AI inside daily workflows, not novelty use cases. In 12 months, this should mean faster cycle times, clearer decision ownership, and measurable KPI movement with less operational drag.
+Strong operators in ${params.industry} use AI inside daily workflows, not novelty use cases. The practical standard is clear workflow ownership, baselined cycle times, monitored quality, and adoption habits that hold after launch.
 
 ## What You've Already Tried
 Most teams in this position have tested disconnected tools, generated local wins, and then hit adoption stalls. This pattern often happens when ownership is split and workflow redesign is treated as an afterthought. Your readiness profile points to this same risk if the next move is not integrated.
@@ -289,12 +290,13 @@ Style rules:
 - Emotional truth first, rational evidence second
 - Calm confidence, no pressure language
 - In "Your Value Chain" section: map 5-7 stages of their business, mark which are manual vs automated, identify the bottleneck
-- In "Top Automation Opportunities" section: list 3-4 specific AI agent workflows with value hypotheses and baseline metrics
+- In "Top Automation Opportunities" section: list 3-4 specific AI agent workflows with value hypotheses, baseline metrics, workflow owners, adoption needs, and controls
 - Use short micro-stories in the "Concerns" section (2 concise examples)
 - End with a clear, low-commitment next step that creates urgency without pressure
 - Keep each section 3 to 5 sentences
 - No em dashes
 - No buzzwords like leverage, synergy, paradigm, holistic
+- Do not invent ROI, lift, savings, payback, or unsupported future-state claims
 - Write for a CEO/COO audience in plain language`;
 
 function buildUserPrompt(params: {
@@ -346,7 +348,7 @@ async function generateWithClaude(userPrompt: string): Promise<string | null> {
 
   if (!response.ok) {
     const details = await response.text();
-    console.error('Claude CLOSER report request failed:', details);
+    logServerError('Claude CLOSER report request failed:', details);
     return null;
   }
 
@@ -380,7 +382,7 @@ async function generateWithGroq(userPrompt: string): Promise<string | null> {
 
     if (!response.ok) {
       const details = await response.text();
-      console.error(`Groq request failed for ${model}:`, details);
+      logServerError(`Groq request failed for ${model}:`, details);
       continue;
     }
 
@@ -408,14 +410,14 @@ async function generateCloserReport(params: {
   // Primary: Claude Sonnet 4.6
   const claudeReport = await generateWithClaude(userPrompt);
   if (claudeReport) {
-    console.log('CLOSER report generated via Claude Sonnet 4.6');
+    logServerInfo('CLOSER report generated via Claude Sonnet 4.6');
     return claudeReport.replace(/\u2014/g, '-');
   }
 
   // Fallback: Groq Llama
   const groqReport = await generateWithGroq(userPrompt);
   if (groqReport) {
-    console.log('CLOSER report generated via Groq (fallback)');
+    logServerInfo('CLOSER report generated via Groq fallback');
     return groqReport.replace(/\u2014/g, '-');
   }
 
@@ -479,7 +481,7 @@ async function sendAssessmentEmails(params: {
 }): Promise<boolean> {
   const resend = getResendClient();
   if (!resend) {
-    console.error('RESEND_API_KEY is missing; skipping assessment email send.');
+    logServerError('RESEND_API_KEY is missing; skipping assessment email send.');
     return false;
   }
 
@@ -556,7 +558,7 @@ async function sendAssessmentEmails(params: {
 
     return true;
   } catch (error) {
-    console.error('Assessment email send failed', error);
+    logServerError('Assessment email send failed', error);
     return false;
   }
 }
@@ -623,7 +625,7 @@ export async function POST(req: NextRequest) {
       try {
         companyResearch = await fetchCompanyResearch(companyUrl, industry, challenge);
       } catch (error) {
-        console.error('Assessment company research failed', error);
+        logServerError('Assessment company research failed', error);
         companyResearch = `We could not retrieve live research for ${companyUrl}. Recommendations are based on your assessment responses and industry context.`;
       }
     }
@@ -633,7 +635,7 @@ export async function POST(req: NextRequest) {
     try {
       industryBestInClass = await fetchIndustryBestInClass(industry, challenge);
     } catch (error) {
-      console.error('Assessment industry benchmark research failed', error);
+      logServerError('Assessment industry benchmark research failed', error);
     }
 
     let closerReport: string;
@@ -650,7 +652,7 @@ export async function POST(req: NextRequest) {
         suggestedEngagement,
       });
     } catch (error) {
-      console.error('Assessment report generation failed', error);
+      logServerError('Assessment report generation failed', error);
       closerReport = buildFallbackCloser({
         challenge,
         company,
@@ -703,7 +705,7 @@ export async function POST(req: NextRequest) {
     });
 
     if (leadId) {
-      console.log(`Assessment lead saved: ${leadId} (${email})`);
+      logServerInfo(`Assessment lead saved: ${leadId} (${email})`);
     }
 
     return NextResponse.json({
@@ -728,7 +730,7 @@ export async function POST(req: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('Assessment API error', error);
+    logServerError('Assessment API error', error);
     return NextResponse.json({ error: 'Failed to process assessment request.' }, { status: 500 });
   }
 }

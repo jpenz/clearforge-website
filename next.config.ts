@@ -96,6 +96,11 @@ const nextConfig: NextConfig = {
         destination: "/industries/wholesale-distribution",
         permanent: true,
       },
+      {
+        source: "/use-cases/ai-operations-efficiency-machine",
+        destination: "/use-cases/ai-operations-efficiency-system",
+        permanent: true,
+      },
     ];
   },
 

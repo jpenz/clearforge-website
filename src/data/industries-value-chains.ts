@@ -158,7 +158,7 @@ export const industries: Industry[] = [
             name: 'Computer-vision quality inspection',
             aiImpact: 'Replace visual inspection with vision model on production line',
             type: 'model',
-            impact: '10x inspection throughput, 60-80% defect catch rate lift',
+            impact: 'Higher inspection coverage with defect-catch rate tracked by line',
           },
           {
             name: 'Production scheduling optimization',
@@ -254,12 +254,12 @@ export const industries: Industry[] = [
       {
         title: 'Reactive Maintenance Cycles',
         description:
-          'Unplanned downtime costs 10x more than scheduled maintenance. Legacy systems generate data but lack the intelligence layer.',
+          'Unplanned downtime is materially more expensive than scheduled maintenance. Legacy systems generate data but lack the operating layer to act on it.',
         metric: '82%',
         metricLabel: 'Still use reactive maintenance',
       },
       {
-        title: 'Quality Control at Scale',
+        title: 'Quality Control Under Throughput Pressure',
         description:
           'Manual inspection catches defects after the fact. Visual sampling cannot keep pace with throughput demands.',
         metric: '15-20%',
@@ -274,7 +274,7 @@ export const industries: Industry[] = [
       },
     ],
     forgeApplication:
-      'The Forge Method for manufacturing starts with the operational AI Diagnostic — process-level mapping across production, supply chain, and commercial workflows, with quantified ROI for each. Sprint engagements typically deploy 1-3 production systems integrated with existing MES/ERP/SCADA. Scale runs the operating cadence and expansion across sites and divisions.',
+      'The Forge Method for manufacturing starts with the operational AI Diagnostic — process-level mapping across production, supply chain, and commercial workflows, with baseline metrics for each. Sprint engagements typically deploy 1-3 production systems integrated with existing MES/ERP/SCADA. Scale runs the operating cadence, measurement review, and expansion across sites and divisions.',
     caseStudySlug: 'industrial-manufacturer',
     videoBackground: '/videos/manufacturing.mp4',
   },
@@ -323,7 +323,7 @@ export const industries: Industry[] = [
             name: 'Stress testing automation',
             aiImpact: 'Agent runs scenarios, drafts narrative, formats regulatory submission',
             type: 'agent',
-            impact: '5-10x faster scenario cycle time',
+            impact: 'Faster scenario refresh cycles with documented assumptions',
           },
           {
             name: 'Model documentation',
@@ -361,7 +361,7 @@ export const industries: Industry[] = [
             name: 'SAR drafting copilot',
             aiImpact: 'Generate SAR narrative from case file with cited evidence',
             type: 'copilot',
-            impact: 'Investigators handle 2-3x more cases',
+            impact: 'Investigators clear more cases with consistent evidence packs',
           },
         ],
       },
@@ -380,7 +380,7 @@ export const industries: Industry[] = [
             name: 'Document intake automation',
             aiImpact: 'Extract data from loan apps, claims, account opening docs',
             type: 'automation',
-            impact: '95%+ accuracy at 10x throughput',
+            impact: 'Higher extraction throughput with accuracy sampled by document type',
           },
           {
             name: 'Complaint classification',
@@ -399,7 +399,8 @@ export const industries: Industry[] = [
       {
         function: 'Sales & Marketing',
         icon: 'Target',
-        description: 'Personalize at scale while remaining inside marketing-compliance guardrails.',
+        description:
+          'Tailor customer outreach by segment while staying inside marketing-compliance guardrails.',
         activities: [
           {
             name: 'Next-best-product model',
@@ -412,7 +413,7 @@ export const industries: Industry[] = [
             name: 'Marketing copy generation',
             aiImpact: 'Agent drafts campaign copy and runs through compliance checks before send',
             type: 'agent',
-            impact: '5x content velocity, 100% compliance coverage',
+            impact: 'Faster campaign drafting with compliance checks before send',
           },
           {
             name: 'Attrition early-warning',
@@ -425,7 +426,7 @@ export const industries: Industry[] = [
             aiImpact:
               'Agent enriches leads with firmographic data and routes to RM by territory and capacity',
             type: 'agent',
-            impact: '2-3x lead conversion',
+            impact: 'Higher routed-lead acceptance and follow-up rates',
           },
         ],
       },
@@ -602,7 +603,7 @@ export const industries: Industry[] = [
             name: 'Appeal letter drafting',
             aiImpact: 'Agent reads denial reason, pulls clinical evidence, drafts appeal',
             type: 'agent',
-            impact: '3-5x appeal volume per FTE',
+            impact: 'More appeal volume per FTE with overturn rate tracked',
           },
           {
             name: 'Patient billing copilot',
@@ -694,7 +695,7 @@ export const industries: Industry[] = [
       {
         title: 'Reimbursement Pressure',
         description:
-          'Value-based contracts require analytics most provider organizations are not equipped to run at scale.',
+          'Value-based contracts require patient-level analytics many provider organizations cannot run reliably today.',
         metric: '40%',
         metricLabel: 'Of clinician time on EHR documentation',
       },
@@ -741,7 +742,7 @@ export const industries: Industry[] = [
             aiImpact:
               'Agent enriches every account with firmographic, technographic, intent signals',
             type: 'agent',
-            impact: '2-3x SQL conversion rate',
+            impact: 'Higher SQL conversion with source-level attribution',
           },
           {
             name: 'Personalized landing-page generation',
@@ -754,13 +755,13 @@ export const industries: Industry[] = [
             aiImpact:
               'Agent drafts persona-tailored outbound from research signals; rep edits + sends',
             type: 'agent',
-            impact: '3-5x reply rate',
+            impact: 'Higher reply rate with controlled message tests',
           },
           {
             name: 'Content strategy copilot',
             aiImpact: 'Identify content gaps, draft briefs, and generate first-draft articles',
             type: 'copilot',
-            impact: '5-10x content velocity',
+            impact: 'Faster content refresh with review checkpoints',
           },
         ],
       },
@@ -800,7 +801,7 @@ export const industries: Industry[] = [
       {
         function: 'Customer Success',
         icon: 'Users',
-        description: 'Predict churn and expand accounts at scale.',
+        description: 'Predict churn and focus expansion work on accounts with evidence.',
         activities: [
           {
             name: 'Churn prediction model',
@@ -811,7 +812,8 @@ export const industries: Industry[] = [
           },
           {
             name: 'EBR/QBR automation',
-            aiImpact: 'Agent generates QBR deck with usage trends, ROI, expansion opportunities',
+            aiImpact:
+              'Agent generates QBR deck with usage trends, business-case notes, and expansion signals',
             type: 'agent',
             impact: '50-70% CSM time reduction per QBR',
           },
@@ -904,7 +906,7 @@ export const industries: Industry[] = [
       {
         title: 'Retention Pressure',
         description:
-          'NRR is the #1 metric public SaaS comps. Manual CSM models cannot deliver consistent expansion at scale.',
+          'NRR is the #1 metric public SaaS comps. Manual CSM models struggle to maintain consistent expansion coverage across the account base.',
         metric: '110%',
         metricLabel: 'NRR target — most fall short',
       },
@@ -942,7 +944,7 @@ export const industries: Industry[] = [
     ],
     marketContext: [
       { stat: '$13T', label: 'Global PE AUM' },
-      { stat: '5-7%', label: 'EBITDA uplift potential from systematic AI deployment' },
+      { stat: '5-7%', label: 'EBITDA improvement cited in portfolio AI benchmarks' },
       { stat: '<25%', label: 'Of portcos have a coherent AI plan' },
       { stat: '12-18 mo', label: 'Typical lag between platform sponsor and bolt-on adoption' },
     ],
@@ -957,7 +959,7 @@ export const industries: Industry[] = [
             aiImpact:
               'Agent maps sub-sector ecosystems, identifies private targets matching thesis',
             type: 'agent',
-            impact: '5-10x sourcing throughput',
+            impact: 'More sourced targets reviewed per deal team',
           },
           {
             name: 'AI-readiness diligence',
@@ -1271,7 +1273,7 @@ export const industries: Industry[] = [
             name: 'Document intake',
             aiImpact: 'Auto-classify and process inbound endorsements, audits, supporting docs',
             type: 'automation',
-            impact: '10x throughput at 95%+ accuracy',
+            impact: 'Higher document throughput with accuracy sampled by file type',
           },
           {
             name: 'Complaint analytics',
@@ -1456,9 +1458,10 @@ export const industries: Industry[] = [
           },
           {
             name: 'Ad-creative generation',
-            aiImpact: 'Agent generates ad variants by audience and channel; tests at scale',
+            aiImpact:
+              'Agent generates ad variants by audience and channel; tests against holdout metrics',
             type: 'agent',
-            impact: '3-5x creative throughput',
+            impact: 'More creative variants tested per campaign cycle',
           },
           {
             name: 'CRM journey orchestration',
@@ -1917,7 +1920,7 @@ export const industries: Industry[] = [
             name: 'Document intake',
             aiImpact: 'Process BOLs, PODs, customs forms with structured extraction',
             type: 'automation',
-            impact: '95%+ accuracy at 10x throughput',
+            impact: 'Higher document throughput with accuracy sampled by load type',
           },
         ],
       },
@@ -2016,7 +2019,7 @@ export const industries: Industry[] = [
             aiImpact:
               'Score and prioritize accounts by service-line fit, recent triggers, and white space',
             type: 'agent',
-            impact: '2-3x meeting density per partner',
+            impact: 'More prepared meetings per partner week',
           },
           {
             name: 'Proposal-acceleration copilot',
@@ -2048,7 +2051,7 @@ export const industries: Industry[] = [
             name: 'Research-and-synthesis agent',
             aiImpact: 'Agent runs market scans, competitor analysis, and primary research drafts',
             type: 'agent',
-            impact: '5-10x research velocity',
+            impact: 'Faster research assembly with source traceability',
           },
           {
             name: 'Document-drafting copilot',
@@ -2228,7 +2231,7 @@ export const industries: Industry[] = [
             name: 'Deal-screening agent',
             aiImpact: 'Agent screens incoming OMs against thesis criteria, drafts initial memo',
             type: 'agent',
-            impact: '5-10x deal-throughput',
+            impact: 'More deals screened with consistent diligence packets',
           },
           {
             name: 'Rent-roll extraction',
@@ -2300,7 +2303,7 @@ export const industries: Industry[] = [
           },
           {
             name: 'Capital-plan optimization',
-            aiImpact: 'Optimize capex spend across portfolio for best ROI',
+            aiImpact: 'Prioritize capex spend across portfolio by risk, return, and timing',
             type: 'model',
             impact: '10-20% capex prioritization improvement',
           },
@@ -2436,7 +2439,7 @@ export const industries: Industry[] = [
             name: 'Bid-opportunity agent',
             aiImpact: 'Agent scans permits, plan rooms, and RFP feeds for fit-to-thesis projects',
             type: 'agent',
-            impact: '3-5x qualified pipeline',
+            impact: 'More qualified bid opportunities per pursuit team',
           },
           {
             name: 'Quantity takeoff automation',
@@ -2653,7 +2656,7 @@ export const industries: Industry[] = [
             name: 'Concept-testing automation',
             aiImpact: 'Auto-generate and test concept variations against target audience',
             type: 'agent',
-            impact: 'Test 10x more concepts at lower cost',
+            impact: 'Test more concepts before committing launch spend',
           },
           {
             name: 'Competitive-monitoring agent',
@@ -2747,7 +2750,7 @@ export const industries: Industry[] = [
             name: 'Image-recognition shelf audit',
             aiImpact: 'Vision model checks planogram compliance and OSA from photos',
             type: 'model',
-            impact: '10x audit coverage at lower cost',
+            impact: 'Broader audit coverage with lower manual sampling effort',
           },
           {
             name: 'Joint-business-plan copilot',
@@ -2766,13 +2769,13 @@ export const industries: Industry[] = [
       {
         function: 'Marketing & Shopper',
         icon: 'Megaphone',
-        description: 'Personalize at scale and prove marketing ROI.',
+        description: 'Personalize shopper outreach and tie spend to measured lift.',
         activities: [
           {
             name: 'Creative-generation agent',
             aiImpact: 'Generate ad and packaging variants by audience and channel',
             type: 'agent',
-            impact: '5-10x creative throughput',
+            impact: 'More tested creative variants per campaign cycle',
           },
           {
             name: 'Media-mix model',
@@ -2782,7 +2785,7 @@ export const industries: Industry[] = [
           },
           {
             name: 'Shopper-marketing personalization',
-            aiImpact: 'Personalize offers and content per shopper at retailer scale',
+            aiImpact: 'Personalize offers and content by shopper segment and retail channel',
             type: 'model',
             impact: '15-30% redemption lift',
           },
@@ -2858,7 +2861,7 @@ export const industries: Industry[] = [
             name: 'Literature-synthesis agent',
             aiImpact: 'Continuous monitoring and synthesis of relevant publications',
             type: 'agent',
-            impact: '5-10x faster literature review',
+            impact: 'Faster literature review with cited evidence tables',
           },
           {
             name: 'Target-identification model',
@@ -2999,7 +3002,7 @@ export const industries: Industry[] = [
       {
         title: 'Commercial Productivity',
         description:
-          'Field-medical and sales teams need personalization at scale within MLR guardrails.',
+          'Field-medical and sales teams need account-specific content within MLR guardrails.',
         metric: '$1.4T',
         metricLabel: 'Global pharma market',
       },
@@ -3085,7 +3088,7 @@ export const industries: Industry[] = [
             name: 'Asset-inspection automation',
             aiImpact: 'Vision models inspect lines, poles, transformers from drone imagery',
             type: 'model',
-            impact: '5-10x inspection coverage',
+            impact: 'Broader inspection coverage with exception review queues',
           },
         ],
       },
@@ -3110,7 +3113,7 @@ export const industries: Industry[] = [
             name: 'Energy-efficiency agent',
             aiImpact: 'Recommend efficiency improvements by customer usage profile',
             type: 'agent',
-            impact: 'Lift program participation 2-3x',
+            impact: 'Higher program participation with cohort-level tracking',
           },
           {
             name: 'Collections optimization',
@@ -3230,9 +3233,9 @@ export const industries: Industry[] = [
           },
           {
             name: 'Content-generation agent',
-            aiImpact: 'Generate property/destination content at scale',
+            aiImpact: 'Generate property and destination content from approved source details',
             type: 'agent',
-            impact: '10x content velocity',
+            impact: 'Faster refresh cycles for property content',
           },
         ],
       },
@@ -3355,7 +3358,7 @@ export const industries: Industry[] = [
       {
         title: 'Loyalty Erosion',
         description:
-          'OTAs erode brand-direct demand. Personalization at scale rebuilds direct relationships.',
+          'OTAs erode brand-direct demand. Better guest segmentation supports direct relationships.',
         metric: '$11T',
         metricLabel: 'Global market',
       },
@@ -3772,7 +3775,7 @@ export const industries: Industry[] = [
       {
         function: 'Instruction & Learning',
         icon: 'BookOpen',
-        description: 'Personalize at scale; free educators for the human work.',
+        description: 'Adapt support to learner needs and free educators for human judgment.',
         activities: [
           {
             name: 'Personalized-tutoring agent',
@@ -3874,7 +3877,7 @@ export const industries: Industry[] = [
       {
         title: 'Student-Outcome Variance',
         description:
-          'Outcome gaps persist across student populations. Personalization at scale is the lever.',
+          'Outcome gaps persist across student populations. Earlier signal detection helps target support.',
         metric: '15-25%',
         metricLabel: 'Of students at risk of dropping out',
       },

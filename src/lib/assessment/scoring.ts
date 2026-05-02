@@ -75,17 +75,17 @@ export function validateBusinessContext(ctx: Record<string, string | undefined>)
     }
   }
 
-  const email = ctx['email'];
+  const email = ctx.email;
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     if (!invalid.includes('email')) invalid.push('email');
   }
 
-  const challenge = ctx['challenge'];
+  const challenge = ctx.challenge;
   if (challenge && challenge.trim().length < 20) {
     if (!invalid.includes('challenge')) invalid.push('challenge');
   }
 
-  const website = ctx['website'];
+  const website = ctx.website;
   if (website && website.trim().length > 0) {
     try {
       new URL(website.trim().startsWith('http') ? website.trim() : `https://${website.trim()}`);

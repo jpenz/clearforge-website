@@ -71,11 +71,11 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
             <div className="mt-10 flex flex-wrap gap-4">
               <Button size="lg" asChild>
                 <Link href="/discover">
-                  Generate My AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
+                  Map My First Build <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline-light" asChild>
-                <Link href="#system">See What Gets Built</Link>
+                <Link href="#system">See the Operating Build</Link>
               </Button>
             </div>
           </div>
@@ -123,7 +123,7 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
           <div className="lg:grid lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
               <p className="overline">Best Fit</p>
-              <h2 className="mt-6 text-display">Where this creates the most value.</h2>
+              <h2 className="mt-6 text-display">Where this is worth the effort.</h2>
               <p className="mt-6 text-body-lg text-warm-gray">{useCase.bestFor}</p>
             </div>
             <div className="mt-12 lg:col-span-7 lg:mt-0">
@@ -145,9 +145,9 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
 
       <section id="system" className="dark-section noise-texture py-24 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <p className="overline">The System</p>
+          <p className="overline">Operating Build</p>
           <h2 className="mt-6 max-w-3xl text-display text-bone">
-            What ClearForge builds around the work.
+            What ClearForge puts around the work.
           </h2>
           <div className="mt-16 grid gap-0 lg:grid-cols-4">
             {useCase.machine.map((layer, index) => (
@@ -168,7 +168,7 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
           <div className="lg:grid lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-4">
               <p className="overline">Production Plays</p>
-              <h2 className="mt-6 text-display">The first systems worth shipping.</h2>
+              <h2 className="mt-6 text-display">The first builds worth shipping.</h2>
             </div>
             <div className="mt-12 lg:col-span-8 lg:mt-0">
               <div className="grid gap-8 sm:grid-cols-2">
@@ -187,7 +187,7 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
       <section className="border-t border-divider bg-recessed py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <p className="overline">Implementation Path</p>
-          <h2 className="mt-6 max-w-3xl text-display">From use case to operating habit.</h2>
+          <h2 className="mt-6 max-w-3xl text-display">From use case to management habit.</h2>
           <div className="mt-16 border-t border-divider">
             {useCase.process.map((step, index) => (
               <div
@@ -259,15 +259,15 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
 
       <section className="dark-section noise-texture py-24 lg:py-40">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">Find where this applies inside your company.</h2>
+          <h2 className="text-display text-bone">Find where this belongs in your company.</h2>
           <p className="mt-6 text-body-lg text-stone">
-            The fastest path is not choosing a generic AI tool. It is finding the workflow worth
-            fixing, building the system around it, and training your team into the new cadence.
+            The fastest path is choosing one workflow worth fixing, building the controls around it,
+            and training your team into the new cadence.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Generate My AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
+                Map My First Build <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>

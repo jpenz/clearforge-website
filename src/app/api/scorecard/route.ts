@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { isRateLimited } from '@/lib/rate-limit';
+import { logServerError } from '@/lib/server-logger';
 import { saveAssessmentLead } from '@/lib/supabase';
 import { normalizePublicCompanyUrl } from '@/lib/url-safety';
 
@@ -110,7 +111,7 @@ export async function POST(request: Request) {
       segment: typeof segment === 'string' ? segment : undefined,
     });
   } catch (error) {
-    console.error('Scorecard submission error:', error);
+    logServerError('Scorecard submission error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
@@ -177,7 +178,7 @@ export async function PUT(request: Request) {
 
     return NextResponse.json({ success: true, leadSaved: !!leadId });
   } catch (error) {
-    console.error('Scorecard lead capture error:', error);
+    logServerError('Scorecard lead capture error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

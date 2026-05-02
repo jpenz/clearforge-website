@@ -220,7 +220,7 @@ export function calculateScore(answers: Answers): ScoreResult {
   } else if (percentage >= 35) {
     tier = 'curious';
     tierDescription =
-      "You're AI Curious. You've recognized the opportunity but need to build foundational capabilities. Small, focused steps now will pay off significantly as AI adoption accelerates.";
+      "You're AI Curious. You've recognized the opportunity but need to build foundational capabilities. Small, focused steps now should create baseline evidence, owner clarity, and adoption habits before larger AI investments.";
     gapFromLeader = 75 - percentage;
     recommendations = [
       'Start with a focused AI readiness assessment',
@@ -232,7 +232,7 @@ export function calculateScore(answers: Answers): ScoreResult {
   } else {
     tier = 'behind';
     tierDescription =
-      "You're AI Behind. Your competitors are likely already leveraging AI to gain advantages in efficiency, customer experience, or innovation. The good news: starting now with the right foundation sets you up for rapid progress.";
+      "You're AI Behind. Competitors may already be using AI to improve efficiency, customer experience, or execution quality. The good news: starting now with the right foundation gives you a clearer path to measurable progress.";
     gapFromLeader = 75 - percentage;
     recommendations = [
       'Begin with an AI readiness audit',

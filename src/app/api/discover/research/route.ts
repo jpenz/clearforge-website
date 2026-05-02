@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { isRateLimited } from '@/lib/rate-limit';
+import { logServerError } from '@/lib/server-logger';
 import { getCompanyDomain } from '@/lib/url-safety';
 
 /**
@@ -60,7 +61,7 @@ export async function POST(request: Request) {
       // 3. Industry-specific AI use cases
       perplexitySearch(
         perplexityKey,
-        `What are the most impactful AI and automation use cases for a company like ${domain}? Consider their specific industry, business model, and operations. Focus on: revenue operations, cost reduction, process automation, AI agents, and predictive analytics. Give specific, actionable use cases with estimated ROI.`,
+        `What are the most practical AI and automation use cases for a company like ${domain}? Consider their specific industry, business model, and operations. Focus on revenue operations, cost control, process automation, AI agents, and predictive analytics. For each use case, identify the workflow owner, baseline metric to measure, adoption requirement, controls, and evidence needed before estimating value. Do not estimate ROI unless sourced evidence supports it.`,
       ),
     ]);
 
@@ -75,7 +76,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(intelligence);
   } catch (error) {
-    console.error('Research API error:', error);
+    logServerError('Research API error:', error);
     return NextResponse.json(
       {
         error: 'Research failed',
@@ -113,14 +114,14 @@ async function perplexitySearch(apiKey: string, query: string): Promise<string> 
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('Perplexity error:', errorText);
+      logServerError('Perplexity error:', errorText);
       return 'Research unavailable for this query.';
     }
 
     const data = await response.json();
     return data.choices?.[0]?.message?.content || 'No results found.';
   } catch (error) {
-    console.error('Perplexity search error:', error);
+    logServerError('Perplexity search error:', error);
     return 'Research unavailable.';
   }
 }

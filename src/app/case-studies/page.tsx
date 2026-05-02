@@ -7,16 +7,15 @@ import { caseStudies } from '@/data/case-studies';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'Case Studies — Real Outcomes, Verified Results | ClearForge',
+  title: 'Case Studies — Operator Proof | ClearForge',
   description:
-    'Real outcomes from real engagements. See how ClearForge turns AI strategy into operating performance with measurable results.',
+    'Real client work from ClearForge: what changed, what shipped, and how the operating cadence improved.',
   path: '/case-studies',
 });
 
 export default function CaseStudiesPage() {
   return (
     <>
-      {/* — Hero with atmospheric bg — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <Image
           src="/images/abstract-assessment.webp"
@@ -33,16 +32,15 @@ export default function CaseStudiesPage() {
             className="mt-6 text-display max-w-3xl text-bone"
             style={{ fontFamily: 'var(--font-instrument-serif)' }}
           >
-            Real Outcomes. Verified Results.
+            Proof from work that shipped.
           </h1>
           <p className="mt-6 max-w-xl text-body-lg text-stone">
-            Every engagement is measured against revenue, cost, or throughput. We build, we ship, we
-            deploy — and we measure what happens next.
+            Each case shows the constraint, the operating build, and the evidence leaders used to
+            manage what happened next.
           </p>
         </div>
       </section>
 
-      {/* — Case Study List — Editorial ruled-line, matches homepage Results ═ */}
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <Stagger className="mt-0" stagger={0.08}>
@@ -85,18 +83,17 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      {/* — CTA — */}
       <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">See how we would help your company.</h2>
+          <h2 className="text-display text-bone">See what we would build first.</h2>
           <p className="mt-6 text-body-lg text-stone">
-            Every business is different. Start with a Forge Diagnostic and we will show you exactly
-            where AI can drive measurable results.
+            Start with a Forge Diagnostic. We will identify the workflow worth fixing, the owner who
+            needs the view, and the first shipped build that can prove itself.
           </p>
           <div className="mt-10">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Generate My AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
+                Map My First Build <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>

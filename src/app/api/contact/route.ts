@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { logServerError } from '@/lib/server-logger';
 import { saveContactLead } from '@/lib/supabase';
 
 function getResendClient(): Resend | null {
@@ -124,7 +125,7 @@ export async function POST(req: NextRequest) {
 
     const resend = getResendClient();
     if (!resend) {
-      console.error('RESEND_API_KEY is missing; skipping contact email send.');
+      logServerError('RESEND_API_KEY is missing; skipping contact email send.');
       return NextResponse.json(
         { error: 'Contact service is temporarily unavailable.' },
         { status: 503 },
@@ -151,7 +152,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error('Contact form error:', err);
+    logServerError('Contact form error:', err);
     return NextResponse.json(
       { error: 'Something went wrong. Please email us directly.' },
       { status: 500 },
