@@ -1,8 +1,8 @@
 /**
- * Cyber Security Technology Company AI Transformation Blueprint
+ * CrowdStrike Enterprise AI Transformation Blueprint
  *
  * Source data:
- *  - Public FY2026 10-K metrics for a $5B+ ARR cybersecurity technology company
+ *  - Public FY2026 10-K metrics for CrowdStrike / a $5B+ ARR cybersecurity platform company
  *  - Apollo people-search sample n=1,000, titles classified into functions
  *  - Public enterprise AI strategy role requirements and internal AI platform signals
  *
@@ -38,6 +38,278 @@ export const blueprintSummary = {
   blendedLoadedCostKUSD: 150,
 };
 
+export const roleBrief = {
+  heard: [
+    {
+      label: 'Enterprise AI roadmap',
+      body: 'Own the internal AI strategy that connects platforms, tooling, capability building, and measurable movement toward the $10B revenue goal.',
+    },
+    {
+      label: 'AI Center of Excellence',
+      body: 'Build the cross-functional engine of product, engineering, analytics, governance, and functional operators that turns AI ambition into repeatable execution.',
+    },
+    {
+      label: 'Executive governance',
+      body: 'Chair the AI SteerCo, force prioritization, make investment and buy-vs-build decisions, and keep C-suite focus on value, risk, and adoption.',
+    },
+    {
+      label: 'Agentic transformation',
+      body: 'Deploy autonomous workflows across the enterprise, integrate them into daily systems, and bend the OpEx curve through process redesign.',
+    },
+  ],
+  beliefs: [
+    {
+      label: 'This is not a tools rollout',
+      body: 'The win is an enterprise operating system for human-plus-agent work: one roadmap, one governance model, one value pipeline, and many business-owned workflows.',
+    },
+    {
+      label: 'Near-term proof funds the long-term model',
+      body: 'The first 90 days should prove visible value in a few high-signal wedges, then recycle the lessons into a permanent opportunity pipeline.',
+    },
+    {
+      label: 'Governance belongs in the build system',
+      body: 'Security, compliance, evaluations, data boundaries, human approval, and model-risk controls should be designed into every intake gate, not inspected afterward.',
+    },
+    {
+      label: 'Customer Zero should sharpen the product',
+      body: 'Internal agent deployments should create a feedback loop for Falcon, Charlotte AI, field enablement, customer operations, and enterprise platform priorities.',
+    },
+  ],
+};
+
+export type AutomationAmbitionWedge = {
+  opportunity: string;
+  ambition: string;
+  firstPainPoints: string;
+  valueSignal: string;
+  sponsor: string;
+};
+
+export const automationAmbitionWedges: AutomationAmbitionWedge[] = [
+  {
+    opportunity: 'Revenue execution machine',
+    ambition:
+      'Every seller and sales engineer gets account intelligence, module-fit narratives, RFP drafts, stakeholder maps, and pipeline risk before the deal review.',
+    firstPainPoints:
+      'Manual account research, inconsistent RFP cycle times, stale CRM notes, MEDDICC risk buried in calls.',
+    valueSignal: 'Seller capacity, win-rate lift, deal velocity, forecast accuracy',
+    sponsor: 'CRO / RevOps',
+  },
+  {
+    opportunity: 'Customer time-to-value machine',
+    ambition:
+      'Implementation, support, and success teams move customers from signed to protected faster with agent-built runbooks and proactive risk detection.',
+    firstPainPoints:
+      'Runbooks rebuilt from templates, support summaries written manually, escalation risk found late.',
+    valueSignal: 'Time to value, CSAT, support handle time, renewal readiness',
+    sponsor: 'COO / Customer Officer',
+  },
+  {
+    opportunity: 'Threat-to-customer intelligence engine',
+    ambition:
+      'Threat research becomes a high-velocity internal signal factory for product, field, marketing, support, and customer-specific risk briefs.',
+    firstPainPoints:
+      'IOC enrichment, report drafting, telemetry synthesis, and field translation consume analyst time.',
+    valueSignal: 'Research cycle time, analyst leverage, customer-facing intelligence velocity',
+    sponsor: 'CTO / Head of Intel',
+  },
+  {
+    opportunity: 'Engineering delivery factory',
+    ambition:
+      'Engineering agents generate tests, docs, PR review notes, incident summaries, and migration support inside approved development workflows.',
+    firstPainPoints:
+      'Boilerplate, test coverage, documentation, incident log synthesis, and tribal knowledge transfer.',
+    valueSignal: 'Cycle time, escaped defects, MTTR, engineer focus time',
+    sponsor: 'CTO / Engineering',
+  },
+  {
+    opportunity: 'Enterprise operations control tower',
+    ambition:
+      'A governed executive control tower tracks AI value, adoption, risk, spend, policy approvals, and next-wave opportunities across functions.',
+    firstPainPoints:
+      'QBR deck churn, spreadsheet PMO updates, fragmented ROI tracking, slow policy approvals.',
+    valueSignal: 'OpEx leverage, decision cycle time, adoption, risk visibility',
+    sponsor: 'CFO / CIO / CAIO',
+  },
+];
+
+export type AutomationPlaybookChapter = {
+  title: string;
+  body: string;
+};
+
+export const automationPlaybookChapters: AutomationPlaybookChapter[] = [
+  {
+    title: 'Mission and operating model',
+    body: 'Defines the AI CoE mandate, business ownership model, SteerCo cadence, decision rights, and what qualifies as production value.',
+  },
+  {
+    title: 'Teams, roles, and tools',
+    body: 'Clarifies who owns value, who owns architecture, who approves risk, who signs off adoption, and which enterprise tools are system-of-record.',
+  },
+  {
+    title: 'Intake to value journey',
+    body: 'Turns ideas into shipped agent workflows through repeatable stages, gates, checklists, metric baselines, and adoption routines.',
+  },
+  {
+    title: 'Artifact library preview',
+    body: 'Includes teasers for opportunity charters, value scorecards, security reviews, model evaluations, launch plans, and value-realization templates.',
+  },
+];
+
+export type AutomationPlaybookStage = {
+  stage: string;
+  focus: string;
+  gate: string;
+  artifactPreview: string;
+  crowdstrikeApplication: string;
+};
+
+export const automationPlaybookJourney: AutomationPlaybookStage[] = [
+  {
+    stage: 'Intake',
+    focus:
+      'Capture the business problem, workflow owner, current-state pain, systems touched, and why this matters now.',
+    gate: 'Business owner named and executive sponsor confirmed.',
+    artifactPreview: 'Opportunity intake brief',
+    crowdstrikeApplication:
+      'Revenue, customer, engineering, threat intel, and G&A leaders submit opportunities into one AI value pipeline.',
+  },
+  {
+    stage: 'Validate',
+    focus:
+      'Confirm value at stake, data availability, process readiness, adoption pull, security profile, and build-vs-buy options.',
+    gate: 'SteerCo approves diagnostic priority and expected value thesis.',
+    artifactPreview: 'Value and feasibility scorecard',
+    crowdstrikeApplication:
+      'The AI CoE pressure-tests whether a workflow should be automated, assisted, redesigned, or left alone.',
+  },
+  {
+    stage: 'Define',
+    focus:
+      'Baseline the current process, define target metrics, assign product and technical owners, and lock the first production scope.',
+    gate: 'KPI baseline, target outcome, and human approval model signed off.',
+    artifactPreview: 'Use-case charter',
+    crowdstrikeApplication:
+      'Each agent has an explicit owner for cycle time, quality, capacity, customer experience, or risk reduction.',
+  },
+  {
+    stage: 'Design',
+    focus:
+      'Design the human-plus-agent workflow, data access, UX, integrations, evaluations, audit trail, and escalation rules.',
+    gate: 'Architecture, security, compliance, and change-management review complete.',
+    artifactPreview: 'Future-state workflow map',
+    crowdstrikeApplication:
+      'Agents are designed around Salesforce, ServiceNow, Jira, GitHub, Workday, Anaplan, telemetry, and approved knowledge sources.',
+  },
+  {
+    stage: 'Develop and test',
+    focus:
+      'Build in short sprints, test against real cases, measure quality, document failure modes, and tune before launch.',
+    gate: 'Evaluation threshold met and launch risks accepted by owners.',
+    artifactPreview: 'Eval pack and release checklist',
+    crowdstrikeApplication:
+      'The CoE creates reusable patterns for prompts, tools, retrieval, routing, observability, and model fallback.',
+  },
+  {
+    stage: 'Deploy and adopt',
+    focus:
+      'Launch with role training, manager routines, support path, usage analytics, and frontline feedback loops.',
+    gate: 'Adoption owner confirms readiness and support model is live.',
+    artifactPreview: 'Launch and adoption plan',
+    crowdstrikeApplication:
+      'Managers see agent usage, exception rates, quality trends, and workflow adoption in the weekly operating cadence.',
+  },
+  {
+    stage: 'Assess value',
+    focus:
+      'Compare before/after metrics, capture lessons, decide whether to scale, stop, tune, or recycle into the next wave.',
+    gate: 'Value realized, risk posture, and scale decision reviewed by SteerCo.',
+    artifactPreview: 'Value-realization readout',
+    crowdstrikeApplication:
+      'Every shipped agent feeds the Customer Zero product loop and the next quarterly AI investment decision.',
+  },
+];
+
+export type RoleCoverageItem = {
+  requirement: string;
+  ownership: string;
+  proof: string;
+};
+
+export const roleCoverage: RoleCoverageItem[] = [
+  {
+    requirement: 'Define the Enterprise AI Roadmap',
+    ownership:
+      'Build the company-wide AI roadmap tied to $10B ARR ambition, OpEx leverage, product feedback loops, and function-level operating metrics.',
+    proof:
+      'Led automation ambition work that identified $150M to $200M+ of enterprise opportunity and converted it into an evergreen pipeline model.',
+  },
+  {
+    requirement: 'Lead the AI Center of Excellence',
+    ownership:
+      'Stand up the cross-functional AI CoE with product, engineering, analytics, governance, and business operators aligned to shared standards.',
+    proof:
+      "Founding team member and first hire in Bain's Automation Center of Excellence, helping build the practice model from zero.",
+  },
+  {
+    requirement: 'Chair AI SteerCo and investment governance',
+    ownership:
+      'Run the executive cadence, force tradeoff decisions, maintain the opportunity backlog, and guide build-vs-buy investment calls.',
+    proof:
+      'Built executive-ready operating routines, value scorecards, and decision frameworks for complex transformation portfolios.',
+  },
+  {
+    requirement: 'Governance, ethics, risk, and compliance',
+    ownership:
+      'Embed data access, evaluations, human approval, model risk, audit trail, and responsible-use controls into every delivery gate.',
+    proof:
+      'Designed enterprise GenAI strategy frameworks across model selection, RAG patterns, risk controls, compliance review, and responsible adoption.',
+  },
+  {
+    requirement: 'Deploy agentic systems',
+    ownership:
+      'Move from pilots to production agents that execute workflow steps, route exceptions, measure outcomes, and improve through managed loops.',
+    proof:
+      'ClearForge ships production multi-agent systems with model routing, tool orchestration, human handoffs, and measurable operating outcomes.',
+  },
+  {
+    requirement: 'Cross-enterprise integration',
+    ownership:
+      'Integrate agents into CRM, ERP, ITSM, engineering, HRIS, finance planning, data lake, and collaboration workflows without creating shadow systems.',
+    proof:
+      'Built agent workflows across sales intelligence, research, reporting, pipeline management, contact discovery, and team performance analytics.',
+  },
+  {
+    requirement: 'Drive productivity step-change',
+    ownership:
+      'Target high-volume workflows where speed, quality, customer experience, and margin improve together, then measure capacity freed and reinvested.',
+    proof:
+      'This blueprint translates public operating data into a function-by-function value map with ~4,200 FTE-equivalent capacity freed as a starting hypothesis.',
+  },
+  {
+    requirement: 'Innovation scouting',
+    ownership:
+      'Continuously evaluate LLMs, agent frameworks, enterprise AI platforms, retrieval patterns, evaluation tooling, and automation vendors.',
+    proof:
+      'Hands-on builder across frontier models and agent stacks, with a practical bias toward utility over hype.',
+  },
+  {
+    requirement: 'Executive gravity and consulting DNA',
+    ownership:
+      'Translate ambiguous executive ambition into a crisp narrative, investment thesis, operating plan, and measurable delivery model.',
+    proof:
+      'Bain Senior Manager, EY Performance Improvement, and Capgemini Financial Services transformation experience.',
+  },
+  {
+    requirement: 'Customer Zero mindset',
+    ownership:
+      'Use internal deployments to create product feedback loops, sharpen employee experience, and prove AI operating patterns before scaling.',
+    proof:
+      'Built ClearForge as Customer Zero: the methods, agents, research systems, and operating loops are used internally before being sold externally.',
+  },
+];
+
 export type StrategicPillar = {
   label: string;
   headline: string;
@@ -47,35 +319,33 @@ export type StrategicPillar = {
 
 export const strategicProposal: StrategicPillar[] = [
   {
-    label: 'Find the growth spots',
-    headline:
-      'Turn every market, account, product, and customer signal into a ranked opportunity map.',
-    body: 'The company already has the ingredients: account activity, product telemetry, threat research, support demand, partner motion, renewal signals, and field intelligence. ClearForge would connect those signals into a single view of where growth is hiding and which teams should act first.',
+    label: 'Define the roadmap',
+    headline: 'Connect $10B revenue ambition to the internal workflows that must change first.',
+    body: 'CrowdStrike already has the ingredients: account activity, product telemetry, threat research, support demand, partner motion, renewal signals, and field intelligence. I would connect those signals into one ranked view of where growth, speed, quality, customer trust, and OpEx leverage are hiding.',
     proof:
-      'Output: a ranked portfolio of expansion plays, retention risks, product gaps, and operational bottlenecks with named owners and value at stake.',
+      'Output: a company-wide Enterprise AI roadmap with value at stake, named owners, risk posture, investment asks, and a sequenced first-year portfolio.',
   },
   {
-    label: 'Build the machine',
-    headline:
-      'Design the AI operating system around the actual value chain, not isolated point tools.',
-    body: 'The proposal is not another chatbot layer. It is a people-plus-AI machine where agents collect signals, draft the work, route exceptions, measure outcomes, and compound learning across product, GTM, customer, and operating teams.',
+    label: 'Build the CoE',
+    headline: 'Create the AI Center of Excellence as a delivery engine, not a policy committee.',
+    body: 'The AI CoE should behave like a product and transformation team: business PMs own outcomes, engineers own systems, analysts own measurement, governance owns guardrails, and functional leaders own adoption.',
     proof:
-      'Output: a future-state blueprint for the company, including agent roles, data sources, governance, integrations, and measurable business outcomes.',
+      'Output: an operating model with roles, decision rights, intake gates, reusable build patterns, vendor standards, and a weekly value cadence.',
   },
   {
-    label: 'Prove it in production',
+    label: 'Govern the system',
     headline:
-      'Pick the first five to eight use cases where speed, margin, quality, and customer experience improve together.',
-    body: 'ClearForge would start with practical workflows: account intelligence, RFP response, support deflection, product feedback clustering, threat research drafting, engineering delivery, and executive operating rhythm.',
+      'Make security, compliance, evaluation, and human judgment part of the production path.',
+    body: 'Responsible AI cannot live in a side deck. Every agent needs clear data boundaries, evaluation thresholds, approval paths, audit trails, incident handling, and retirement criteria before it scales.',
     proof:
-      'Output: production agents shipped in 90 days with before/after baselines on cycle time, cost, win rate, support quality, and employee capacity freed.',
+      'Output: AI governance embedded into the intake-to-value playbook so every workflow ships with controls, not just enthusiasm.',
   },
   {
-    label: 'Scale the capability',
-    headline: 'Stand up the operating cadence so this becomes a permanent company advantage.',
+    label: 'Scale agentic operations',
+    headline: 'Turn first-wave wins into a permanent company operating advantage.',
     body: 'The goal is not a pile of pilots. The goal is an evergreen AI transformation system: every function has an opportunity backlog, every agent has a metric owner, and the leadership team can see adoption, ROI, risk, and next-wave value in one place.',
     proof:
-      'Output: AI Center of Excellence governance, monthly value reviews, reusable build patterns, and a living enterprise opportunity pipeline.',
+      'Output: production agents shipped in waves, measured by business outcomes, and scaled through a repeatable enterprise playbook.',
   },
 ];
 
@@ -259,24 +529,26 @@ export const futureStateUseCases: FutureStateUseCase[] = [
 export const proposalRoadmap = [
   {
     window: 'Days 1 to 30',
-    name: 'Strategy diagnostic',
+    name: 'Enterprise AI diagnostic',
     promise:
-      'Convert public and internal operating data into a prioritized opportunity map across the full company value chain.',
+      'Convert public and internal operating data into a prioritized opportunity map across the full company value chain, with the SteerCo aligned on first-wave value.',
     deliverables: [
       'Value-chain map with current-state friction',
       'Ranked use-case portfolio with value, effort, and risk scoring',
       'Executive business case for the first 90 days',
+      'AI CoE operating model and governance gates',
     ],
   },
   {
     window: 'Days 31 to 90',
     name: 'Production proof',
     promise:
-      'Ship the first five to eight agents where speed, quality, customer experience, and margin move together.',
+      'Ship the first five to eight agents where speed, quality, customer experience, employee experience, and margin move together.',
     deliverables: [
       'Production agent backlog and sprint cadence',
       'Before/after baselines for cycle time, cost, quality, and adoption',
       'Reusable agent patterns for security, evaluation, and change management',
+      'Customer Zero feedback loop into product, platform, and enterprise architecture teams',
     ],
   },
   {
@@ -689,7 +961,7 @@ export const transformationMethod = [
     name: 'Identify',
     weeks: '1 to 4',
     description:
-      'Map every function and value-chain activity at a $5B+ ARR Cyber Security Technology Company against the agent archetype taxonomy. Score by AI fit and dollar value.',
+      'Map every function and value-chain activity at CrowdStrike against the agent archetype taxonomy. Score by AI fit, dollar value, risk, adoption pull, and Customer Zero product feedback potential.',
     deliverable:
       'Enterprise opportunity map: every function, every activity, scored on AI agent suitability + dollar opportunity. Ranked pipeline ready for sequencing.',
     companySpecific:
@@ -732,7 +1004,7 @@ export const transformationMethod = [
 
 export const whyJames = {
   appreciation:
-    'This company has done something rare: built a category, scaled beyond $5B ARR, and created an enterprise data fabric that few security companies can match. That operating scale is exactly why the next advantage will come from applying AI to the company itself, not only to customer-facing products.',
+    'CrowdStrike has done something rare: built a category, scaled beyond $5B ARR, and created an enterprise data fabric that few security companies can match. That operating scale is exactly why the next advantage will come from applying AI to the company itself, not only to customer-facing products.',
   shareholderSince: 2020,
   experienceMatches: [
     {
@@ -753,7 +1025,7 @@ export const whyJames = {
     {
       jdRequirement: 'Identify opportunities for OpEx optimization through automation',
       proof:
-        'This blueprint is the answer in a $5B+ ARR Cyber Security Technology Company-specific terms. ~4,200 FTE-equivalent capacity freed. $631M annual run-rate. Real role examples, real from-state and to-state, real agent architectures.',
+        'This blueprint is the answer in CrowdStrike-specific terms. ~4,200 FTE-equivalent capacity freed. $631M annual run-rate. Real role examples, real from-state and to-state, real agent architectures.',
     },
     {
       jdRequirement: 'Buy-vs-build decisions, AI investment governance',
@@ -775,9 +1047,9 @@ export const whyJames = {
 
 export const carnegieAppeal = {
   genuineInterest:
-    'I have followed this company closely as an operator, builder, and long-term believer in the cybersecurity platform shift. This is not a generic AI pitch. It is a company-specific view of where AI can improve growth, speed, quality, customer experience, efficiency, and margin.',
+    'I have followed CrowdStrike closely as an operator, builder, and long-term believer in the cybersecurity platform shift. This is not a generic AI pitch. It is a company-specific view of where I would improve growth, speed, quality, customer experience, efficiency, and margin if hired into the Enterprise AI role or engaged as a contractor.',
   whatTheyDoAlready:
-    'The company already understands that AI is becoming the dividing line in security. The open opportunity is to take the same seriousness used for customer-facing innovation and apply it inside every function: the revenue engine, product factory, support motion, research workflow, and operating model.',
+    'CrowdStrike already understands that AI is becoming the dividing line in security. The open opportunity is to take the same seriousness used for customer-facing innovation and apply it inside every function: the revenue engine, product factory, support motion, research workflow, and operating model.',
   callToAction:
-    'I would like 15 minutes to walk through the proposal, pressure-test the assumptions, and identify the first sprint that would create visible value fastest.',
+    'The next conversation is not "can James talk AI?" It is which first 90-day wedge I should own as employee, contractor, or advisor.',
 };
