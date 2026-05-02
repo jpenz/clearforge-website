@@ -3,9 +3,13 @@ import {
   BarChart3,
   BookOpen,
   Brain,
+  Calculator,
   CheckCircle2,
   ClipboardCheck,
   Compass,
+  Database,
+  ExternalLink,
+  FileText,
   Flag,
   Gauge,
   LineChart,
@@ -28,8 +32,11 @@ import {
   automationAmbitionWedges,
   automationPlaybookChapters,
   automationPlaybookJourney,
+  blueprintBuildSteps,
+  blueprintSourceRules,
   blueprintSummary,
   carnegieAppeal,
+  crowdstrikeSourceTrail,
   cybersecurityCompanyFY2026,
   functionAnalysis,
   futureStateUseCases,
@@ -67,6 +74,8 @@ const valueChainIcons: LucideIcon[] = [
 const useCaseIcons: LucideIcon[] = [Compass, LineChart, ShieldCheck, Brain, Users, Network];
 const roleBriefIcons: LucideIcon[] = [Target, Users, ShieldCheck, Workflow];
 const beliefIcons: LucideIcon[] = [Sparkles, Rocket, Lock, Brain];
+const buildStepIcons: LucideIcon[] = [FileText, Database, Network, Calculator];
+const sourceRuleIcons: LucideIcon[] = [ShieldCheck, Brain, Calculator, Database];
 const ambitionIcons: LucideIcon[] = [LineChart, Users, ShieldCheck, Brain, Gauge];
 const playbookIcons: LucideIcon[] = [
   Flag,
@@ -80,6 +89,7 @@ const playbookIcons: LucideIcon[] = [
 
 const blueprintNav = [
   { href: '#role-brief', label: 'Role brief' },
+  { href: '#methodology', label: 'Method' },
   { href: '#ambition-value', label: 'Ambition value' },
   { href: '#automation-playbook', label: 'Playbook preview' },
   { href: '#value-chain', label: 'Future state' },
@@ -299,6 +309,109 @@ export default function CybersecurityBlueprintPage() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      <section id="methodology" className="scroll-mt-24 bg-warm-white py-24 lg:py-40">
+        <div className="mx-auto max-w-[1300px] px-6 lg:px-10">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-20">
+            <div className="lg:col-span-4">
+              <p className="overline">How this blueprint was built</p>
+              <h2 className="mt-6 text-display">
+                What I did, what I am proposing first, and where the facts came from.
+              </h2>
+              <p className="mt-6 text-body-lg text-warm-gray">
+                This page is meant to show executive judgment, not pretend I have internal access.
+                The CrowdStrike-specific facts are public. The operating model, opportunity
+                sequence, and value math are my initial proposal.
+              </p>
+            </div>
+
+            <div className="mt-12 lg:col-span-8 lg:mt-0">
+              <div className="grid gap-8 md:grid-cols-2">
+                {blueprintBuildSteps.map((step, index) => {
+                  const Icon = buildStepIcons[index] ?? FileText;
+
+                  return (
+                    <div key={step.label} className="border-t border-divider pt-6">
+                      <div className="flex gap-4">
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-divider bg-parchment text-brass">
+                          <Icon className="h-5 w-5" aria-hidden="true" />
+                        </span>
+                        <div>
+                          <h3 className="text-h4 text-anthracite">{step.label}</h3>
+                          <p className="mt-3 text-body-sm text-warm-gray">{step.body}</p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-14 border-t border-divider pt-10">
+                <p className="font-mono text-xs uppercase tracking-widest text-brass">
+                  What is fact vs. proposal
+                </p>
+                <div className="mt-8 grid gap-6 md:grid-cols-2">
+                  {blueprintSourceRules.map((rule, index) => {
+                    const Icon = sourceRuleIcons[index] ?? ShieldCheck;
+
+                    return (
+                      <div key={rule.label} className="border-l-2 border-divider pl-5">
+                        <div className="flex gap-3">
+                          <Icon className="mt-1 h-4 w-4 shrink-0 text-brass" aria-hidden="true" />
+                          <div>
+                            <h3 className="text-body font-medium text-anthracite">{rule.label}</h3>
+                            <p className="mt-2 text-body-sm text-warm-gray">{rule.body}</p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="mt-14 overflow-x-auto border-t border-divider pt-10">
+                <p className="font-mono text-xs uppercase tracking-widest text-brass">
+                  CrowdStrike source trail
+                </p>
+                <table className="mt-6 w-full min-w-[820px] border-collapse">
+                  <thead>
+                    <tr className="border-b border-divider">
+                      <th className="py-4 pr-6 text-left font-mono text-xs uppercase tracking-widest text-warm-gray">
+                        Specific claim
+                      </th>
+                      <th className="py-4 pr-6 text-left font-mono text-xs uppercase tracking-widest text-warm-gray">
+                        Public source
+                      </th>
+                      <th className="py-4 text-left font-mono text-xs uppercase tracking-widest text-warm-gray">
+                        Used for
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {crowdstrikeSourceTrail.map((source) => (
+                      <tr key={source.claim} className="border-b border-divider">
+                        <td className="py-5 pr-6 text-body-sm text-anthracite">{source.claim}</td>
+                        <td className="py-5 pr-6 text-body-sm">
+                          <a
+                            href={source.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 text-brass transition-colors hover:text-anthracite"
+                          >
+                            {source.source}
+                            <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                          </a>
+                        </td>
+                        <td className="py-5 text-body-sm text-warm-gray">{source.usedFor}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -596,9 +709,9 @@ export default function CybersecurityBlueprintPage() {
             Starting from public-company math, then refining with internal data.
           </h2>
           <p className="mt-6 max-w-2xl text-body-lg text-warm-gray">
-            Baseline sourced from public FY2026 reporting for a cybersecurity technology company
-            that ended its fiscal year on {cybersecurityCompanyFY2026.fiscalYearEnded}. Internal
-            validation would replace estimates with actual system-of-record data.
+            Baseline sourced from CrowdStrike FY2026 public reporting for the fiscal year ended{' '}
+            {cybersecurityCompanyFY2026.fiscalYearEnded}. Internal validation would replace the
+            estimates with actual system-of-record data before any investment decision.
           </p>
 
           <div className="mt-16 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">

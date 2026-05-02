@@ -77,6 +77,89 @@ export const roleBrief = {
   ],
 };
 
+export type BlueprintBuildStep = {
+  label: string;
+  body: string;
+};
+
+export const blueprintBuildSteps: BlueprintBuildStep[] = [
+  {
+    label: '1. Read the role like an operator',
+    body: 'I translated the Enterprise AI Strategy and Transformation mandate into operating jobs: roadmap, AI CoE, SteerCo, governance, agentic systems, enterprise integrations, productivity, scouting, and Customer Zero feedback loops.',
+  },
+  {
+    label: '2. Built the company baseline from public data',
+    body: 'I pulled the FY2026 revenue, ARR, employee count, free cash flow, and operating expense base from CrowdStrike public materials, then used those as the factual anchor for the page.',
+  },
+  {
+    label: '3. Mapped the enterprise value chain',
+    body: 'I organized the company into the workflows where internal AI can move performance: market signal, product, threat intelligence, engineering, GTM, onboarding, support, operations, and governance.',
+  },
+  {
+    label: '4. Turned the baseline into a first proposal',
+    body: 'I created an initial 30-day diagnostic, 90-day production proof, and 12-month scale model with ambition wedges, governance gates, operating analytics, and a preview of the intake-to-value playbook.',
+  },
+];
+
+export type BlueprintSourceRule = {
+  label: string;
+  body: string;
+};
+
+export const blueprintSourceRules: BlueprintSourceRule[] = [
+  {
+    label: 'CrowdStrike facts',
+    body: 'Revenue, ARR, employee count, named products, and public operating metrics are sourced from CrowdStrike investor relations, SEC filings, or public job-posting mirrors.',
+  },
+  {
+    label: 'James / ClearForge work',
+    body: 'The automation ambition model, playbook structure, value-chain interpretation, use-case sequencing, and role-fit narrative are my proposal, based on prior transformation work and the playbooks referenced for this page.',
+  },
+  {
+    label: 'Estimates',
+    body: 'Function headcount allocation, FTE-equivalent capacity freed, run-rate savings, and the lead/sales analytics examples are directional hypotheses for executive discussion, not CrowdStrike-reported numbers.',
+  },
+  {
+    label: 'Internal validation needed',
+    body: 'If hired or engaged, I would replace every estimate with Workday, Salesforce, Jira, ServiceNow, product telemetry, finance, support, and adoption data before any investment decision.',
+  },
+];
+
+export type CrowdStrikeSource = {
+  claim: string;
+  source: string;
+  href: string;
+  usedFor: string;
+};
+
+export const crowdstrikeSourceTrail: CrowdStrikeSource[] = [
+  {
+    claim: 'FY2026 revenue, ARR, net new ARR, free cash flow, and annual highlights',
+    source: 'CrowdStrike FY2026 financial results',
+    href: 'https://ir.crowdstrike.com/news-releases/news-release-details/crowdstrike-reports-fourth-quarter-and-fiscal-year-2026/',
+    usedFor: 'Hero metrics, FY2026 baseline, and the scale of the $5B+ ARR operating environment.',
+  },
+  {
+    claim: '10,698 employees and FY2026 statement-of-operations detail',
+    source: 'CrowdStrike FY2026 Form 10-K',
+    href: 'https://ir.crowdstrike.com/node/16071/html',
+    usedFor:
+      'Employee base, subscription/professional services revenue, and OpEx categories used in the function-level model.',
+  },
+  {
+    claim: '$10B ending ARR ambition and AI-era platform language',
+    source: 'CrowdStrike Q1 FY2026 financial results',
+    href: 'https://ir.crowdstrike.com/news-releases/news-release-details/crowdstrike-reports-first-quarter-fiscal-year-2026-financial/',
+    usedFor: 'The role framing around aligning internal AI to the $10B revenue / ARR ambition.',
+  },
+  {
+    claim: 'Enterprise AI Strategy and Transformation role mandate',
+    source: 'Public job-posting mirror and role text supplied by James',
+    href: 'https://remotive.com/remote/jobs/ai-ml/vice-president-enterprise-ai-strategy-and-transformation-4481275',
+    usedFor: 'Role coverage matrix, mandate interpretation, and initial 90-day ownership proposal.',
+  },
+];
+
 export type AutomationAmbitionWedge = {
   opportunity: string;
   ambition: string;

@@ -24,6 +24,8 @@ test.describe('Cybersecurity blueprint', () => {
     await expect(page.getByRole('heading', { level: 1 })).toContainText(
       /If hired to lead Enterprise AI at CrowdStrike/i,
     );
+    await expect(page.getByText(/How this blueprint was built/i).first()).toBeVisible();
+    await expect(page.getByText(/CrowdStrike source trail/i).first()).toBeVisible();
     await expect(page.getByText(/Automation playbook preview/i).first()).toBeVisible();
     await expect(page.getByText(/Role coverage/i).first()).toBeVisible();
     await expect(page.getByText(/Function-level value map/i).first()).toBeVisible();
@@ -44,6 +46,6 @@ test.describe('Cybersecurity blueprint', () => {
 
     expect(layout.bodyWidth).toBeLessThanOrEqual(layout.viewportWidth + 5);
     expect(layout.documentWidth).toBeLessThanOrEqual(layout.viewportWidth + 5);
-    expect(layout.sectionCount).toBeGreaterThanOrEqual(11);
+    expect(layout.sectionCount).toBeGreaterThanOrEqual(12);
   });
 });
