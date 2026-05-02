@@ -44,7 +44,7 @@ export function HeroScroll() {
 
       {/* Content overlay */}
       <div className="relative z-10 mx-auto flex min-h-[86svh] w-full max-w-[1400px] flex-col justify-center px-4 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-10 lg:pb-40">
-        <p className="overline text-xs animate-fade-in">AI growth systems for operators</p>
+        <p className="overline text-xs animate-fade-in">Custom AI transformation for operators</p>
 
         <h1 className="mt-7 max-w-[980px] text-[2.7rem] leading-[1.02] text-bone sm:text-[4rem] lg:text-[5.2rem]">
           Find the growth spots. Build the AI machine to win them.
@@ -54,9 +54,9 @@ export function HeroScroll() {
         </p>
 
         <p className="mt-8 max-w-2xl text-body-lg text-stone animate-fade-in-up delay-3">
-          ClearForge maps where AI can unlock growth, speed, quality, customer service, efficiency,
-          and margin, then builds the agents, workflows, and operating routines your team uses to
-          become the best-run company in the market.
+          ClearForge is a strategy-and-technology firm that finds where AI can move the economics of
+          your business, then builds the custom agents, workflows, data paths, governance, and team
+          routines that make the change real.
         </p>
 
         <div className="mt-7 grid max-w-3xl grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-5 animate-fade-in-up delay-3">
@@ -79,7 +79,7 @@ export function HeroScroll() {
           </Link>
         </div>
         <p className="mt-3 text-xs text-stone/50 animate-fade-in delay-5">
-          Five minutes. Website-based analysis. No sales call required.
+          Five minutes. Company-specific first read. No template deck.
         </p>
       </div>
     </section>

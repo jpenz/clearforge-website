@@ -27,20 +27,20 @@ export const services: Service[] = [
   {
     slug: 'ai-revenue-operations',
     title: 'AI Revenue Operations',
-    tagline: 'Turn data into deals with AI-powered sales automation.',
+    tagline: 'Custom AI systems for pipeline, account intelligence, and commercial execution.',
     description:
-      'We build AI-driven revenue engines that automate prospecting, surface intent signals, orchestrate personalized outreach, and give your team real-time pipeline analytics — so you close more, faster.',
+      'We redesign the revenue workflow and build the custom agents, signal engines, CRM integrations, and operating dashboards that help teams find the right accounts, act faster, and manage pipeline with discipline.',
     icon: 'LineChart',
     heroBg: '/images/abstract-value-creation.webp',
     idealClient:
       'Mid-market and growth-stage B2B companies looking to scale sales without linearly scaling headcount.',
     deliverables: [
-      'AI-powered prospect identification and scoring',
-      'Intent signal monitoring and alert system',
-      'Automated outreach sequences with personalization',
-      'Pipeline analytics dashboard with forecasting',
-      'CRM enrichment and data hygiene automation',
-      'Sales team enablement and training',
+      'Revenue value map and workflow redesign',
+      'Custom account signal and trigger engine',
+      'CRM enrichment, routing, and data quality automation',
+      'Agent-assisted outreach, research, and follow-up workflows',
+      'Pipeline analytics, forecast movement, and team performance dashboards',
+      'Sales leadership cadence, adoption plan, and enablement',
     ],
     outcomes: [
       {
@@ -90,20 +90,20 @@ export const services: Service[] = [
   {
     slug: 'performance-improvement',
     title: 'Performance Improvement',
-    tagline: 'Find the waste. Fix the processes. Measure the results.',
+    tagline: 'AI-enabled operating model redesign for speed, quality, and margin.',
     description:
-      'We use process mining, operational diagnostics, and custom automation to find inefficiencies hiding in your workflows — then build solutions that eliminate them and deliver measurable cost savings.',
+      'We map how work actually moves, quantify the delays and error patterns, then build custom agents, workflow automations, analytics, and controls that remove drag without breaking the operating model.',
     icon: 'Cog',
     heroBg: '/images/abstract-dataflow.webp',
     idealClient:
       'Operations-heavy companies spending too much on manual processes, data entry, or coordination overhead.',
     deliverables: [
-      'Process mining and bottleneck analysis',
-      'Operational efficiency diagnostics',
-      'Custom automation for top-3 identified opportunities',
-      'Real-time performance dashboards',
-      'Standard operating procedures documentation',
-      'Team training and change management',
+      'Operating model and process maturity assessment',
+      'Bottleneck, exception, and margin leakage analysis',
+      'Custom automation for priority workflow constraints',
+      'Throughput, quality, and ownership dashboards',
+      'Future-state SOPs, controls, and escalation rules',
+      'Team training, adoption plan, and performance cadence',
     ],
     outcomes: [
       {
@@ -153,20 +153,20 @@ export const services: Service[] = [
   {
     slug: 'pe-value-creation',
     title: 'PE Value Creation',
-    tagline: 'AI-driven value creation for portfolio companies.',
+    tagline: 'Portfolio AI strategy, build sprints, and repeatable value creation playbooks.',
     description:
-      'We partner with PE firms and their portfolio companies to identify and execute AI-driven value creation levers — from 90-day sprints to portfolio-wide AI playbooks that drive EBITDA improvement from due diligence through exit prep.',
+      'We help sponsors and portfolio leaders set AI ambition, compare value levers across companies, build the first custom systems, and turn proven plays into a portfolio-wide operating capability.',
     icon: 'Rocket',
     heroBg: '/images/abstract-forge-progression.webp',
     idealClient:
       'PE firms and their portfolio companies looking to accelerate value creation with AI.',
     deliverables: [
-      'AI opportunity assessment and business case',
-      '90-day value creation sprints',
-      'Portfolio-wide AI playbook development',
-      'EBITDA improvement initiatives',
-      'Due diligence AI readiness evaluation',
-      'Exit preparation: AI asset documentation',
+      'Portfolio AI ambition and value-creation thesis',
+      'AI readiness and value lever assessment by company',
+      '90-day custom build sprints tied to EBITDA levers',
+      'Common operating playbooks for revenue, service, operations, and G&A',
+      'Portfolio dashboard for adoption, run-rate value, and risk',
+      'Exit narrative and AI asset documentation',
     ],
     outcomes: [
       {
@@ -216,20 +216,21 @@ export const services: Service[] = [
   {
     slug: 'custom-ai-agents',
     title: 'Custom AI Agents',
-    tagline: 'Bespoke AI agents built for your specific workflows.',
+    tagline:
+      'Strategy, engineering, integration, and governance for agents built around your workflows.',
     description:
-      'We design and build custom AI agents that handle complex, multi-step workflows across sales, operations, and finance. Not chatbots — intelligent agents that take action, make decisions, and integrate with your existing systems.',
+      'We design and build custom AI agents for complex, multi-step work across sales, operations, finance, service, and knowledge workflows. Not chatbots or generic copilots - working systems that integrate with your tools, escalate to people, and improve with use.',
     icon: 'Bot',
     heroBg: '/images/abstract-network.webp',
     idealClient:
       'Companies with complex, repetitive workflows that require judgment and cross-system coordination.',
     deliverables: [
-      'Custom AI agent design and architecture',
-      'Integration with existing tools and data sources',
-      'Workflow orchestration and decision logic',
-      'Monitoring and observability dashboards',
-      'Guardrails and escalation protocols',
-      'Documentation and team onboarding',
+      'Agent strategy, workflow scope, and success metrics',
+      'Custom agent architecture and orchestration design',
+      'Integration with existing tools, documents, and data sources',
+      'Decision logic, approvals, escalation paths, and guardrails',
+      'Monitoring, observability, quality checks, and dashboards',
+      'Runbooks, documentation, team onboarding, and governance',
     ],
     outcomes: [
       {

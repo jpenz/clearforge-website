@@ -1,5 +1,5 @@
 /**
- * The Forge Method™ — three named engagement products.
+ * The Forge Method™ — three named engagement paths.
  * Single source of truth for /services and /pricing pages.
  */
 
@@ -23,7 +23,7 @@ export const forgeProducts: ForgeProduct[] = [
     period: 'one-time',
     timeline: '4 weeks',
     description:
-      'A senior-led assessment that maps your highest-value AI opportunities, scores data readiness, and delivers an execution-ready roadmap — not a strategy deck.',
+      'A senior-led assessment that maps your highest-value AI opportunities, scores data readiness, and delivers an execution-ready roadmap - not a generic strategy deck.',
     whatsIncluded: [
       'Stakeholder interviews across leadership and operations',
       'Process mapping with AI opportunity scoring',
@@ -42,7 +42,7 @@ export const forgeProducts: ForgeProduct[] = [
     period: 'one-time',
     timeline: '10–14 weeks',
     description:
-      'An intensive build engagement. We diagnose the problem, engineer the solution, deploy it into production, and train your team to run it — all in one sprint.',
+      'An intensive build engagement. We diagnose the problem, engineer the solution, deploy it into production, and train your team to run it - all in one sprint.',
     whatsIncluded: [
       'Working production system, not a prototype',
       'Integration with your existing tech stack',
@@ -63,7 +63,7 @@ export const forgeProducts: ForgeProduct[] = [
     period: '/month',
     timeline: 'Ongoing',
     description:
-      'Continuous AI operations embedded in your business. New agents built monthly, existing systems optimized, and senior strategy on demand.',
+      'Continuous AI operations embedded in your business. Live systems improved monthly, new workflows scoped as value appears, and senior strategy on demand.',
     whatsIncluded: [
       'Senior AI expertise on demand',
       'New AI agents built and deployed monthly',
