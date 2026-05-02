@@ -23,9 +23,9 @@ import { useCases } from '@/data/use-cases';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'ClearForge — AI Growth Systems for Mid-Market Operators',
+  title: 'ClearForge - Custom AI Transformation Systems',
   description:
-    'ClearForge finds the growth, service, speed, quality, efficiency, and margin opportunities in your operating model, then builds the AI systems and team routines to win them.',
+    'ClearForge helps operators set AI ambition, find value, build custom agents and workflows, and train teams into a measurable AI operating model.',
   path: '',
 });
 
@@ -38,25 +38,61 @@ const activityCount = industries.reduce(
 
 const operatingGaps = [
   {
-    signal: 'Growth is trapped in the value chain',
+    signal: 'Value is trapped in the operating model',
     symptom:
-      'Every industry has places where leads are missed, customers wait, quality slips, and margin leaks.',
+      'Every company has places where leads are missed, customers wait, quality slips, decisions stall, and margin leaks.',
     response:
-      'We map the operating model and identify the specific workflows where AI can create market advantage.',
+      'We map the value chain and identify the specific workflows where custom AI can change growth, speed, quality, service, or cost.',
   },
   {
-    signal: 'AI pilots do not change the company',
+    signal: 'AI pilots do not transform the business',
     symptom:
-      'A demo can look impressive while the people, data, controls, and daily operating rhythm stay the same.',
+      'A model can look impressive while the business process, data path, controls, incentives, and daily operating rhythm stay the same.',
     response:
-      'We build the agents and workflows into the way your team actually sells, serves, produces, and manages.',
+      'We design and build the agents, workflows, integrations, governance, and adoption routines into the way your team actually works.',
   },
   {
-    signal: 'Best-in-market requires a machine',
+    signal: 'Competitive advantage requires a system',
     symptom:
-      'Speed, quality, service, efficiency, and margin cannot depend on heroic manual effort.',
+      'Speed, quality, service, efficiency, and margin cannot depend on heroic manual effort or disconnected off-the-shelf tools.',
     response:
-      'We install the AI-plus-people operating system that makes better performance repeatable.',
+      'We install the AI-plus-people operating system that makes better performance repeatable and measurable.',
+  },
+];
+
+const transformationMaturity = [
+  {
+    dimension: 'Ambition and value case',
+    expectation:
+      'Define where AI changes growth, margin, service, quality, or speed - not where a model looks interesting.',
+    clearforge:
+      'Set the AI ambition, quantify the business case, and choose the first workflows worth building.',
+  },
+  {
+    dimension: 'Operating model design',
+    expectation:
+      'Redesign how work moves across people, systems, decisions, handoffs, and controls.',
+    clearforge:
+      'Map the current value chain and design the future-state workflow before engineering starts.',
+  },
+  {
+    dimension: 'Custom technology build',
+    expectation:
+      'Fit AI into the existing CRM, ERP, data, documents, and approval paths that run the business.',
+    clearforge:
+      'Build custom agents, data paths, dashboards, integrations, and exception handling around your systems.',
+  },
+  {
+    dimension: 'People and adoption',
+    expectation: 'Give teams a new operating cadence, not another application to remember.',
+    clearforge:
+      'Train leaders and frontline users into the workflow, KPIs, review rhythm, and human-in-the-loop decisions.',
+  },
+  {
+    dimension: 'Governance and improvement',
+    expectation: 'Make the system observable, auditable, safe to operate, and better every month.',
+    clearforge:
+      'Install monitoring, escalation rules, quality checks, ownership, and an improvement backlog after launch.',
   },
 ];
 
@@ -165,12 +201,12 @@ export default function Home() {
       <div className="border-b border-divider bg-warm-white">
         <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-3 px-4 py-4 text-xs text-warm-gray sm:px-6 sm:py-5 lg:flex-row lg:px-10">
           <span className="font-semibold text-anthracite">
-            Founded by ex-Bain, EY, and Capgemini
+            Strategy, engineering, adoption, and governance
           </span>
           <span className="hidden text-divider lg:inline">/</span>
-          <span>Production AI systems for operators, PE teams, and growth companies</span>
+          <span>Custom AI systems for operators, PE teams, and growth companies</span>
           <span className="hidden text-divider lg:inline">/</span>
-          <span>Find growth spots, build the AI machine, train the team into it</span>
+          <span>Find the value, build the system, train the organization</span>
         </div>
       </div>
 
@@ -180,8 +216,8 @@ export default function Home() {
             <div className="max-w-4xl">
               <p className="overline">The Gap We Close</p>
               <h2 className="mt-6 text-display">
-                The winners will not be the companies with the most AI demos. They will be the
-                companies that turn AI into a better operating machine.
+                AI transformation only works when strategy, technology, people, and economics move
+                together.
               </h2>
             </div>
           </SectionReveal>
@@ -235,6 +271,43 @@ export default function Home() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-divider bg-parchment py-20 sm:py-32 lg:py-40">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
+          <SectionReveal animation="fade-up">
+            <div className="lg:grid lg:grid-cols-12 lg:items-end lg:gap-12">
+              <div className="lg:col-span-7">
+                <p className="overline">Transformation Maturity</p>
+                <h2 className="mt-6 max-w-3xl text-display">
+                  Enterprise-grade transformation discipline. Builder-speed execution.
+                </h2>
+              </div>
+              <div className="mt-8 lg:col-span-5 lg:mt-0">
+                <p className="text-body-lg text-warm-gray">
+                  The best AI programs do not start with a vendor demo. They align ambition, value,
+                  workflow, technology, adoption, and controls, then prove the model in production.
+                </p>
+              </div>
+            </div>
+          </SectionReveal>
+
+          <div className="mt-14 border-t border-divider">
+            {transformationMaturity.map((item, index) => (
+              <div
+                key={item.dimension}
+                className="grid gap-5 border-b border-divider py-7 lg:grid-cols-[4rem_1.15fr_1fr_1fr] lg:items-start lg:gap-8"
+              >
+                <span className="metric text-sm text-brass">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3 className="text-h4">{item.dimension}</h3>
+                <p className="text-body-sm leading-relaxed text-warm-gray">{item.expectation}</p>
+                <p className="text-body-sm leading-relaxed text-anthracite">{item.clearforge}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

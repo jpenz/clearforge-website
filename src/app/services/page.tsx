@@ -8,9 +8,9 @@ import { services } from '@/data/services';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'The Forge Method — How We Build | ClearForge',
+  title: 'AI Transformation Services - Strategy and Build | ClearForge',
   description:
-    'Three named products with transparent pricing. Forge Diagnostic, Forge Sprint, and Forge Scale — built for mid-market and growth-stage companies.',
+    'ClearForge sets AI ambition, maps value, builds custom agents and workflows, and trains teams into a measurable AI operating model.',
   path: '/services',
 });
 
@@ -73,16 +73,19 @@ export default function ServicesPage() {
               className="mt-6 text-display max-w-3xl text-bone"
               style={{ fontFamily: 'var(--font-instrument-serif)' }}
             >
-              The Forge Method™
+              AI transformation, built around your operating model.
             </h1>
           </FadeIn>
           <FadeIn delay={0.15}>
             <p className="mt-6 max-w-xl text-body-lg text-stone">
-              Three named products. Transparent pricing. Built for mid-market and growth-stage
-              companies who need AI that works in production — not a strategy deck that sits in a
-              drawer.
+              ClearForge combines strategy and technology in one accountable engagement: set the AI
+              ambition, map the value, build the custom systems, and train the team into the new way
+              of working.
             </p>
-            <p className="mt-4 max-w-xl text-body text-stone">We build, we ship, we deploy.</p>
+            <p className="mt-4 max-w-xl text-body text-stone">
+              Not a generic platform. Not a deck that stops at recommendations. Custom AI designed
+              for the business you actually run.
+            </p>
           </FadeIn>
         </div>
       </section>
@@ -90,8 +93,10 @@ export default function ServicesPage() {
       {/* — Three Forge Products — editorial ruled-line — */}
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <p className="overline">Named Products</p>
-          <h2 className="mt-6 text-display max-w-2xl">Three engagements. One accountable team.</h2>
+          <p className="overline">Engagement Architecture</p>
+          <h2 className="mt-6 text-display max-w-2xl">
+            Three ways to move from ambition to production.
+          </h2>
 
           <Stagger className="mt-16" stagger={0.12}>
             {forgeProducts.map((product, i) => (
@@ -206,8 +211,10 @@ export default function ServicesPage() {
       {/* — All Services — */}
       <section className="border-t border-divider bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <p className="overline">What We Build</p>
-          <h2 className="mt-6 text-display max-w-2xl">Four capabilities. One team.</h2>
+          <p className="overline">Capabilities</p>
+          <h2 className="mt-6 text-display max-w-2xl">
+            Strategy, engineering, integration, and adoption in one team.
+          </h2>
 
           <div className="mt-16 grid gap-0 lg:grid-cols-2">
             {services.map((svc, i) => (
@@ -233,19 +240,21 @@ export default function ServicesPage() {
       {/* — Platform vs. Partner — */}
       <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <p className="overline">Platform vs. Partner</p>
-          <h2 className="mt-6 text-display text-bone max-w-2xl">Why not just buy a platform?</h2>
+          <p className="overline">Platform vs. Transformation Partner</p>
+          <h2 className="mt-6 text-display text-bone max-w-2xl">
+            Platforms are ingredients. Transformation is designed.
+          </h2>
           <p className="mt-6 max-w-2xl text-body-lg text-stone">
-            Platforms like DataRobot and Dataiku are powerful tools — but they require your team to
-            build, validate, deploy, and maintain every model. If you have a mature data science
-            team, they make sense. If you need production AI and the capability to run it, you need
-            a partner.
+            Off-the-shelf AI can help a team move faster, but it does not decide which workflows
+            matter, redesign the operating model, integrate messy systems, manage exception risk, or
+            train people into a new cadence.
           </p>
 
           <div className="mt-14 border-t border-divider-dark pt-8">
             <p className="text-body-lg text-bone max-w-2xl">
-              We build production AI AND train your team to run it. When we leave, the system works
-              and your people own it.
+              ClearForge builds the custom system and the management routine around it. When the
+              first sprint ends, the workflow works, the owners are trained, and the next value
+              lever is visible.
             </p>
           </div>
         </div>
@@ -266,10 +275,12 @@ export default function ServicesPage() {
       {/* — CTA — */}
       <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">Ready to see what AI can do for your business?</h2>
+          <h2 className="text-display text-bone">
+            Ready to see where custom AI can move the business?
+          </h2>
           <p className="mt-6 text-body-lg text-stone">
-            The Forge Diagnostic gives you a clear picture of your highest-value opportunities in
-            four weeks. No commitment beyond that.
+            The Forge Diagnostic gives you a clear picture of the highest-value opportunities,
+            system architecture, adoption path, and economics before you commit to a build.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
