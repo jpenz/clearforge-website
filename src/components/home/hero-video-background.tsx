@@ -8,6 +8,8 @@ export function HeroVideoBackground() {
       webm="/videos/hero.webm"
       priority
       storageKey="clearforge:hero-motion-paused"
+      imageClassName="opacity-[0.64]"
+      videoClassName="opacity-[0.7]"
       controlClassName="top-24 right-4 lg:top-auto lg:right-8 lg:bottom-28"
     />
   );

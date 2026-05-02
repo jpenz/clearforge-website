@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { HeroSignalOverlay } from './hero-signal-overlay';
 import { HeroVideoBackground } from './hero-video-background';
 
 /**
@@ -18,6 +19,7 @@ export function HeroScroll() {
   return (
     <section className="dark-section relative min-h-[86svh] overflow-hidden">
       <HeroVideoBackground />
+      <HeroSignalOverlay />
 
       {/* Gradient — keeps headline legible */}
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,15,30,0.92)_0%,rgba(10,15,30,0.74)_46%,rgba(10,15,30,0.38)_100%)] pointer-events-none" />
