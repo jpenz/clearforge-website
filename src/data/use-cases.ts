@@ -282,10 +282,10 @@ export const useCases: UseCase[] = [
       ],
     },
     visual: {
-      poster: '/images/use-cases/ai-sales-pipeline-acceleration.webp',
+      poster: '/images/use-cases/sales-pipeline-dashboard-command-center.webp',
       mp4: '/videos/use-cases/ai-sales-pipeline-acceleration.mp4',
       webm: '/videos/use-cases/ai-sales-pipeline-acceleration.webm',
-      alt: 'Abstract revenue operating system with connected prospect and opportunity signals',
+      alt: 'AI sales pipeline dashboard showing trigger volume, qualified opportunities, and forecast movement',
     },
     symptoms: [
       'Sales leaders cannot see which accounts deserve attention this week.',
@@ -545,10 +545,10 @@ export const useCases: UseCase[] = [
       ],
     },
     visual: {
-      poster: '/images/use-cases/ai-customer-service-excellence.webp',
+      poster: '/images/use-cases/customer-service-quality-dashboard.webp',
       mp4: '/videos/use-cases/ai-customer-service-excellence.mp4',
       webm: '/videos/use-cases/ai-customer-service-excellence.webm',
-      alt: 'Abstract customer service operations network with routed support signals',
+      alt: 'Customer service dashboard showing SLA health, case routing, deflection, and escalation risk',
     },
     symptoms: [
       'Customers wait because every request is treated like a blank page.',
@@ -815,10 +815,10 @@ export const useCases: UseCase[] = [
       ],
     },
     visual: {
-      poster: '/images/use-cases/ai-operations-efficiency-machine.webp',
+      poster: '/images/use-cases/operations-efficiency-dashboard.webp',
       mp4: '/videos/use-cases/ai-operations-efficiency-machine.mp4',
       webm: '/videos/use-cases/ai-operations-efficiency-machine.webm',
-      alt: 'Abstract operating value chain with bottlenecks being rerouted into smoother workflows',
+      alt: 'Operations efficiency dashboard showing throughput, bottlenecks, cycle time, and exception ownership',
     },
     symptoms: [
       'Managers spend too much time chasing status instead of improving throughput.',
@@ -1076,10 +1076,10 @@ export const useCases: UseCase[] = [
       ],
     },
     visual: {
-      poster: '/images/use-cases/ai-knowledge-work-automation.webp',
+      poster: '/images/use-cases/knowledge-work-automation-dashboard.webp',
       mp4: '/videos/use-cases/ai-knowledge-work-automation.mp4',
       webm: '/videos/use-cases/ai-knowledge-work-automation.webm',
-      alt: 'Abstract knowledge system transforming document and research signals into decision paths',
+      alt: 'Knowledge work dashboard showing document intake, cited briefs, decision queues, and research confidence',
     },
     symptoms: [
       'Experts spend valuable hours gathering context before they can make a decision.',
@@ -1332,10 +1332,10 @@ export const useCases: UseCase[] = [
       ],
     },
     visual: {
-      poster: '/images/use-cases/ai-quality-control-exception-management.webp',
+      poster: '/images/use-cases/quality-exception-intelligence-dashboard.webp',
       mp4: '/videos/use-cases/ai-quality-control-exception-management.mp4',
       webm: '/videos/use-cases/ai-quality-control-exception-management.webm',
-      alt: 'Abstract quality system detecting and routing operational exception signals',
+      alt: 'Quality exception dashboard showing defect heatmap, containment status, root causes, and repeat issue risk',
     },
     symptoms: [
       'Exceptions are found late, after cost, customer impact, or rework has already grown.',
@@ -1586,10 +1586,10 @@ export const useCases: UseCase[] = [
       ],
     },
     visual: {
-      poster: '/images/use-cases/pe-portfolio-ai-value-creation.webp',
+      poster: '/images/use-cases/pe-portfolio-value-creation-dashboard.webp',
       mp4: '/videos/use-cases/pe-portfolio-ai-value-creation.mp4',
       webm: '/videos/use-cases/pe-portfolio-ai-value-creation.webm',
-      alt: 'Abstract portfolio value creation map with connected operating company systems',
+      alt: 'Private equity portfolio dashboard showing EBITDA pipeline, initiative status, and portfolio company value creation',
     },
     symptoms: [
       'Portfolio companies are experimenting with AI but not scaling measurable systems.',
