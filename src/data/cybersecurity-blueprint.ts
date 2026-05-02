@@ -1,11 +1,11 @@
 /**
- * CrowdStrike Enterprise AI Transformation Blueprint
+ * Cyber Security Technology Company AI Transformation Blueprint
  *
  * Source data:
- *  - CrowdStrike FY2026 10-K (filed Mar 2026, fiscal year ended Jan 31, 2026)
+ *  - a $5B+ ARR Cyber Security Technology Company FY2026 10-K (filed Mar 2026, fiscal year ended Jan 31, 2026)
  *  - Apollo people-search sample n=1,000 (titles classified into functions)
  *  - Job posting: VP, Enterprise AI Strategy and Transformation (Remote, $300-340K)
- *  - Company posts on Charlotte AI / AgentWorks / Agentic SOC (Spring 2026 release)
+ *  - Company posts on the company\'s agentic security platform / AgentWorks / Agentic SOC (Spring 2026 release)
  *
  * Methodology:
  *  - Triangulated headcount per function from OpEx allocation + Apollo titles + cybersec benchmarks
@@ -85,10 +85,10 @@ export const functionAnalysis: FunctionAnalysis[] = [
       fromState:
         'AE manually researches each net-new account before outreach. SDR builds account plan from scratch. RFPs take 3 to 5 days each. Forecasting calls drain 4 hours weekly per RSM.',
       toState:
-        'Charlotte-style account agent auto-generates account brief, top 3 entry plays, named-account contact map, and 80 percent draft RFP within 30 minutes of request. Forecast agent assembles weighted pipeline view daily and flags slip risks before the call.',
+        'their agentic security platform-style account agent auto-generates account brief, top 3 entry plays, named-account contact map, and 80 percent draft RFP within 30 minutes of request. Forecast agent assembles weighted pipeline view daily and flags slip risks before the call.',
       agentArchetype: 'Account Intelligence + RFP + Forecast Agent',
       exampleOutput:
-        'For a Fortune 100 healthcare prospect: company brief, 3 entry plays grounded in Falcon module fit, 12 named contacts mapped to ICP, draft RFP with module-level pricing — produced in 28 minutes vs 2.5 days.',
+        'For a Fortune 100 healthcare prospect: company brief, 3 entry plays grounded in a security platform module fit, 12 named contacts mapped to ICP, draft RFP with module-level pricing — produced in 28 minutes vs 2.5 days.',
     },
   },
   {
@@ -117,22 +117,22 @@ export const functionAnalysis: FunctionAnalysis[] = [
         'AI pair-programming agent embedded in IDE generates first-draft code, tests, and docs. Log-analysis agent pulls top 3 hypotheses for any incident in under 5 minutes. PR review agent enforces team patterns before human review.',
       agentArchetype: 'Coding Copilot + Log Forensics + PR Review Agent',
       exampleOutput:
-        'For a new Falcon cloud module: 60 percent of unit tests auto-generated, API docs drafted from OpenAPI spec, 2 of 3 incident root-causes surfaced before on-call paged.',
+        'For a new their unified security platform cloud module: 60 percent of unit tests auto-generated, API docs drafted from OpenAPI spec, 2 of 3 incident root-causes surfaced before on-call paged.',
     },
   },
   {
     function: 'Threat Intel & Research',
     estimatedHeadcount: 856,
     shareOfTotalHCPct: 8.0,
-    derivationNote: 'Falcon OverWatch + Counter Adversary Operations + Charlotte AI training',
+    derivationNote: 'their unified security platform managed threat hunting + adversary research operations + the company\'s agentic security platform training',
     aiAutomationPct: 50.0,
     fteEquivalentFreed: 428,
     annualHoursFreed: 890240,
     highValueAreas:
-      'Threat triage, malware family clustering, IOC enrichment, report drafting, telemetry summarization (Charlotte AI eats own dog food)',
+      'Threat triage, malware family clustering, IOC enrichment, report drafting, telemetry summarization (the company\'s agentic security platform eats own dog food)',
     sampleApolloTitles: [
       'Senior Threat Researcher',
-      'Counter Adversary Specialist for Intel and Hunting',
+      'adversary research Specialist for Intel and Hunting',
       'Information Security | Threat Intelligence',
       'Senior Malware Analyst',
       'Incident Response Consultant',
@@ -141,10 +141,10 @@ export const functionAnalysis: FunctionAnalysis[] = [
     sampleNamedEmployees: [],
     fromTo: {
       fromState:
-        'Analyst manually triages alerts in Falcon console. Malware sample analysis takes hours per family. Adversary report drafted from scratch over multi-day cycles.',
+        'Analyst manually triages alerts in their unified security platform console. Malware sample analysis takes hours per family. Adversary report drafted from scratch over multi-day cycles.',
       toState:
-        'Charlotte AI AgentWorks orchestrates triage, clusters malware variants by behavior, enriches IOCs across telemetry, and drafts adversary report in minutes — analyst becomes the editor and decision-maker, not the producer.',
-      agentArchetype: 'Charlotte AI Triage + Malware Clustering + Report Drafting Agent',
+        'the company\'s existing agentic security platform orchestrates triage, clusters malware variants by behavior, enriches IOCs across telemetry, and drafts adversary report in minutes — analyst becomes the editor and decision-maker, not the producer.',
+      agentArchetype: 'the company\'s agentic security platform Triage + Malware Clustering + Report Drafting Agent',
       exampleOutput:
         'For a new ransomware variant: behavioral cluster auto-identified, IOC list enriched across customer telemetry, draft attribution + TTP report ready for analyst review in 12 minutes.',
     },
@@ -170,7 +170,7 @@ export const functionAnalysis: FunctionAnalysis[] = [
       fromState:
         'Tier 1 handles 70 percent of L1 tickets that have known answers in KB. Average ticket time 22 minutes. Escalations take human triage. Case summary written manually at close.',
       toState:
-        'Customer-facing chat agent grounded on Falcon docs deflects 50 percent of L1 before ticket creation. Internal copilot drafts response to remaining tickets, summarizes case, and routes escalations automatically.',
+        'Customer-facing chat agent grounded on their unified security platform docs deflects 50 percent of L1 before ticket creation. Internal copilot drafts response to remaining tickets, summarizes case, and routes escalations automatically.',
       agentArchetype: 'Tier 1 Deflection + Response Drafting + Case Summarization Agent',
       exampleOutput:
         'Self-service ratio rises from 18 percent to 40 percent. Avg handle time drops 22 to 12 min. Engineers focus on novel issues that require judgment.',
@@ -201,7 +201,7 @@ export const functionAnalysis: FunctionAnalysis[] = [
         'Content agent drafts technical blog from product specs and threat reports in under 1 hour, ready for editorial review. Event playbook agent generates region-specific run-of-show. Campaign agent reallocates spend daily based on conversion deltas.',
       agentArchetype: 'Content Drafting + Event Playbook + Spend Reallocation Agent',
       exampleOutput:
-        'For Black Hat 2026: regional event playbook, social calendar, and 12 customer-meeting briefings generated from a single intake brief in 4 hours vs 3 days.',
+        'For a major industry conference: regional event playbook, social calendar, and 12 customer-meeting briefings generated from a single intake brief in 4 hours vs 3 days.',
     },
   },
   {
@@ -257,7 +257,7 @@ export const functionAnalysis: FunctionAnalysis[] = [
         'Implementation agent assembles customer-specific runbook in 1 hour from intake (industry, modules, integrations). Status report agent drafts weekly update from Jira and Slack. Config-Q&A agent grounded on customer environment answers in real time.',
       agentArchetype: 'Implementation Runbook + Status Report + Config Q&A Agent',
       exampleOutput:
-        'New Falcon Identity Protection deployment: runbook delivered Day 1 vs Week 2 historically. Customer config questions answered 80 percent without engineer escalation.',
+        'New an identity protection module deployment: runbook delivered Day 1 vs Week 2 historically. Customer config questions answered 80 percent without engineer escalation.',
     },
   },
   {
@@ -282,10 +282,10 @@ export const functionAnalysis: FunctionAnalysis[] = [
       fromState:
         'PM clusters 200+ user interviews manually. PRDs drafted from scratch. Competitive analysis quarterly, not continuous.',
       toState:
-        'Research synthesis agent clusters user interviews and CSAT comments into themes weekly. PRD agent drafts from epic + research. Competitive intel agent monitors SentinelOne, Palo Alto, Microsoft daily and flags shifts.',
+        'Research synthesis agent clusters user interviews and CSAT comments into themes weekly. PRD agent drafts from epic + research. Competitive intel agent monitors top-tier security competitors daily and flags shifts.',
       agentArchetype: 'Research Synthesis + PRD + Competitive Intel Agent',
       exampleOutput:
-        'For Falcon Identity Protection roadmap: 240 user comments clustered into 9 themes, draft PRD for top 3, competitor feature matrix updated daily — PM time on synthesis drops 60 percent.',
+        'For an identity protection module roadmap: 240 user comments clustered into 9 themes, draft PRD for top 3, competitor feature matrix updated daily — PM time on synthesis drops 60 percent.',
     },
   },
   {
@@ -375,7 +375,7 @@ export const functionAnalysis: FunctionAnalysis[] = [
     function: 'Legal & Compliance',
     estimatedHeadcount: 214,
     shareOfTotalHCPct: 2.0,
-    derivationNote: 'Public company legal, GDPR, FedRAMP, contracts, regulatory monitoring',
+    derivationNote: 'Public company legal, GDPR, federal compliance frameworks, contracts, regulatory monitoring',
     aiAutomationPct: 35.0,
     fteEquivalentFreed: 75,
     annualHoursFreed: 156000,
@@ -391,7 +391,7 @@ export const functionAnalysis: FunctionAnalysis[] = [
       fromState:
         'Counsel manually reviews 200+ contracts monthly. NDAs drafted from templates. Reg-monitoring is quarterly review.',
       toState:
-        'Contract review agent flags non-standard clauses with risk scoring and suggested redlines. NDA agent assembles in 5 min. Reg-monitoring agent watches FedRAMP, GDPR, state privacy daily and flags impacts.',
+        'Contract review agent flags non-standard clauses with risk scoring and suggested redlines. NDA agent assembles in 5 min. Reg-monitoring agent watches federal compliance frameworks and global privacy regulations daily and flags impacts.',
       agentArchetype: 'Contract Review + NDA + Reg-Monitor Agent',
       exampleOutput:
         'Counsel time-on-review drops 50 percent. NDA cycle: 2 days to 30 minutes. Reg-watch is daily not quarterly.',
@@ -432,11 +432,11 @@ export const transformationMethod = [
     name: 'Identify',
     weeks: '1 to 4',
     description:
-      'Map every function and value-chain activity at CrowdStrike against the agent archetype taxonomy. Score by AI fit and dollar value.',
+      'Map every function and value-chain activity at a $5B+ ARR Cyber Security Technology Company against the agent archetype taxonomy. Score by AI fit and dollar value.',
     deliverable:
       'Enterprise opportunity map: every function, every activity, scored on AI agent suitability + dollar opportunity. Ranked pipeline ready for sequencing.',
     crowdstrikeSpecific:
-      'Already drafted in this blueprint. Refined in week 1 with internal data (Workday headcount, Salesforce activity logs, Jira ticket volumes, Falcon telemetry).',
+      'Already drafted in this blueprint. Refined in week 1 with internal data (Workday headcount, Salesforce activity logs, Jira ticket volumes, their unified security platform telemetry).',
   },
   {
     phase: 2,
@@ -447,7 +447,7 @@ export const transformationMethod = [
     deliverable:
       'Per-opportunity business case with baseline metrics, target metrics, FTE-equivalent capacity freed, and dollar savings.',
     crowdstrikeSpecific:
-      'Anchor on the 33 Falcon modules, GTM segments, and the 13 enterprise functions. Each opportunity ties to a named OKR owner.',
+      'Anchor on the 33 a security platform modules, GTM segments, and the 13 enterprise functions. Each opportunity ties to a named OKR owner.',
   },
   {
     phase: 3,
@@ -469,13 +469,13 @@ export const transformationMethod = [
     deliverable:
       'Production agents shipped, metrics captured, evergreen opportunity pipeline standing up the next wave automatically.',
     crowdstrikeSpecific:
-      'Charlotte AI AgentWorks is the natural production runtime for internal-facing agents. External-facing customer agents follow the same playbook.',
+      'the company\'s existing agentic security platform is the natural production runtime for internal-facing agents. External-facing customer agents follow the same playbook.',
   },
 ];
 
 export const whyJames = {
   appreciation:
-    'CrowdStrike has done something rare. You built a category, defined the modern endpoint, and crossed $5B ARR with 22 percent growth. Charlotte AI AgentWorks puts agentic security into the hands of every analyst. The 33 cloud modules of the Falcon platform are an enterprise data fabric that few companies can match.',
+    'This Company has done something rare. You built a category, defined the modern endpoint, and crossed $5B ARR with 22 percent growth. the company\'s existing agentic security platform puts agentic security into the hands of every analyst. The 33 cloud modules of their unified security platform are an enterprise data fabric that few companies can match.',
   shareholderSince: 2020,
   experienceMatches: [
     {
@@ -496,7 +496,7 @@ export const whyJames = {
     {
       jdRequirement: 'Identify opportunities for OpEx optimization through automation',
       proof:
-        'This blueprint is the answer in CrowdStrike-specific terms. ~4,200 FTE-equivalent capacity freed. $631M annual run-rate. Real role examples, real from-state and to-state, real agent architectures.',
+        'This blueprint is the answer in a $5B+ ARR Cyber Security Technology Company-specific terms. ~4,200 FTE-equivalent capacity freed. $631M annual run-rate. Real role examples, real from-state and to-state, real agent architectures.',
     },
     {
       jdRequirement: 'Buy-vs-build decisions, AI investment governance',
@@ -517,9 +517,9 @@ export const whyJames = {
 
 export const carnegieAppeal = {
   geninuneInterest:
-    'I\'ve been a CrowdStrike shareholder since 2020 — through the Falcon expansion, the Charlotte AI launch, the Spring \'26 platform release. This isn\'t a job to me. This is the company I have been studying, betting on, and rooting for from the outside. I want to help build it from the inside.',
+    'I\'ve been a a $5B+ ARR Cyber Security Technology Company shareholder since 2020 — through their unified security platform expansion, the company\'s agentic security platform launch, the Spring \'26 platform release. This isn\'t a job to me. This is the company I have been studying, betting on, and rooting for from the outside. I want to help build it from the inside.',
   whatTheyDoAlready:
-    'You don\'t need me to tell you AI is the dividing line. Michael Sentonas already said it. You don\'t need me to tell you the Falcon platform is the right substrate for agentic security — Charlotte AI AgentWorks proves it. What you do need is someone who can take the same playbook you used to build the agentic SOC for customers and apply it inside CrowdStrike to unlock the next leg of the $10B journey.',
+    'You don\'t need me to tell you AI is the dividing line. Their own leadership has said this publicly. You don\'t need me to tell you their unified security platform is the right substrate for agentic security — their own internal AI rollouts already prove it. What you do need is someone who can take the same playbook you used to build the agentic SOC for customers and apply it inside the Company to unlock the next leg of the $10B journey.',
   callToAction:
     'I\'d like 15 minutes with the hiring leader to discuss the blueprint above and how this lands inside the AI Center of Excellence operating model.',
 };

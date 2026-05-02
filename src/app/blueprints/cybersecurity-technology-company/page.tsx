@@ -9,20 +9,20 @@ import {
   functionAnalysis,
   transformationMethod,
   whyJames,
-} from '@/data/crowdstrike-blueprint';
+} from '@/data/cybersecurity-blueprint';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'CrowdStrike Enterprise AI Transformation Blueprint — ClearForge',
+  title: 'Cyber Security Technology Company AI Transformation Blueprint — ClearForge',
   description:
-    'A specific, data-grounded view of where AI agents create value across every function of CrowdStrike. ~4,200 FTE-equivalent capacity freed. ~$631M annual run-rate. Real role examples, real from-state and to-state.',
-  path: '/blueprints/crowdstrike',
+    'A specific, data-grounded view of where AI agents create value across every function of a $5B+ ARR Cyber Security Technology Company. ~4,200 FTE-equivalent capacity freed. ~$631M annual run-rate. Real role examples, real from-state and to-state.',
+  path: '/blueprints/cybersecurity-technology-company',
 });
 
 const fmt = (n: number) => n.toLocaleString('en-US');
 const fmtMoney = (n: number) => `$${n.toLocaleString('en-US')}M`;
 
-export default function CrowdStrikeBlueprintPage() {
+export default function CybersecurityBlueprintPage() {
   return (
     <>
       {/* ── Hero ── */}
@@ -37,13 +37,13 @@ export default function CrowdStrikeBlueprintPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-forge-black via-forge-black/85 to-forge-black/40 pointer-events-none" />
         <div className="relative mx-auto max-w-[1200px] px-6 lg:px-10">
-          <p className="overline">Blueprint · For CrowdStrike</p>
+          <p className="overline">Blueprint · For a Cyber Security Leader</p>
           <h1 className="mt-6 text-display max-w-4xl text-bone">
-            The Enterprise AI Transformation Blueprint for CrowdStrike.
+            The Enterprise AI Transformation Blueprint for a $5B+ ARR Cyber Security Technology Company.
           </h1>
           <p className="mt-8 max-w-3xl text-body-lg text-stone">
             A specific, function-by-function view of where AI agents create
-            value across CrowdStrike — grounded in the FY2026 10-K, a
+            value across this Cyber Security Technology Company — grounded in the FY2026 10-K, a
             thousand-person sample of current titles, and the same
             opportunity-identification methodology that delivered $150 to
             $200M in G&A automation value at Dell.
@@ -110,7 +110,7 @@ export default function CrowdStrikeBlueprintPage() {
                   &ldquo;AI is not optional. It is the dividing line between those who can adapt and those who will be left behind.&rdquo;
                 </p>
                 <p className="mt-2 text-body-sm text-warm-gray">
-                  Michael Sentonas, President — CrowdStrike
+                  A senior leader at the Company
                 </p>
               </div>
             </div>
@@ -126,7 +126,7 @@ export default function CrowdStrikeBlueprintPage() {
             Starting where you are, not where I imagine you to be.
           </h2>
           <p className="mt-6 max-w-2xl text-body-lg text-warm-gray">
-            Sourced from CrowdStrike&apos;s FY2026 10-K (filed March 2026, fiscal year ended January 31, 2026).
+            Sourced from the Company&apos;s FY2026 10-K (filed March 2026, fiscal year ended January 31, 2026).
           </p>
 
           <div className="mt-16 grid gap-y-10 gap-x-12 sm:grid-cols-2 lg:grid-cols-4">
@@ -159,7 +159,7 @@ export default function CrowdStrikeBlueprintPage() {
             Where AI agents create value, by function.
           </h2>
           <p className="mt-6 max-w-2xl text-body-lg text-stone">
-            Sorted by FTE-equivalent capacity freed. Click into any function for the from-state, to-state, agent archetype, and a real CrowdStrike example.
+            Sorted by FTE-equivalent capacity freed. Click into any function for the from-state, to-state, agent archetype, and a real real example.
           </p>
 
           <div className="mt-16 overflow-x-auto">
@@ -324,7 +324,7 @@ export default function CrowdStrikeBlueprintPage() {
                     </div>
                     <div className="mt-6">
                       <p className="font-mono text-[10px] uppercase tracking-widest text-warm-gray">
-                        Real CrowdStrike example
+                        Real real example
                       </p>
                       <p className="mt-2 text-body italic text-warm-gray">
                         {f.fromTo.exampleOutput}
@@ -346,7 +346,7 @@ export default function CrowdStrikeBlueprintPage() {
             Identify · Size · Sequence · Sprint.
           </h2>
           <p className="mt-6 max-w-2xl text-body-lg text-stone">
-            The same playbook used to deliver $150 to $200M in G&A automation value at Dell — adapted for CrowdStrike&apos;s scale, GTM motion, and 33-module Falcon platform.
+            The same playbook used to deliver $150 to $200M in G&A automation value at Dell — adapted for the Company&apos;s scale, GTM motion, and 33-module unified security platform.
           </p>
 
           <div className="mt-16 space-y-0">
@@ -378,7 +378,7 @@ export default function CrowdStrikeBlueprintPage() {
                     </div>
                     <div className="mt-4 border-l-2 border-divider-dark pl-5">
                       <p className="font-mono text-[10px] uppercase tracking-widest text-stone">
-                        At CrowdStrike specifically
+                        At this Company specifically
                       </p>
                       <p className="mt-2 text-body text-stone">
                         {p.crowdstrikeSpecific}
@@ -448,14 +448,14 @@ export default function CrowdStrikeBlueprintPage() {
               </Link>
             </Button>
             <Button size="lg" variant="ghost" asChild>
-              <a href="mailto:james@clearforge.ai?subject=CrowdStrike%20VP%20Enterprise%20AI%20Strategy">
+              <a href="mailto:james@clearforge.ai?subject=a $5B+ ARR Cyber Security Technology Company%20VP%20Enterprise%20AI%20Strategy">
                 james@clearforge.ai
               </a>
             </Button>
           </div>
           <p className="mt-12 text-body-sm text-stone">
             James Penz · Founder, ClearForge.AI · Ex-Bain Automation Center of
-            Excellence · CrowdStrike shareholder since 2020
+            Excellence · a $5B+ ARR Cyber Security Technology Company shareholder since 2020
           </p>
         </div>
       </section>
