@@ -333,7 +333,7 @@ export function calculateResults(answers: Answers): ScorecardResult {
   } else if (rounded <= 80) {
     maturityLevel = 'Advanced';
     maturityDescription =
-      "You're well-positioned for AI transformation. Your data, team, and processes can support sophisticated AI agents operating across your business. Now it's about scaling and compounding the value.";
+      "You're well-positioned for production AI. Your data, team, and processes can support sophisticated AI agents across priority workflows. Now it is about expanding carefully and proving value as you go.";
     recommendation =
       'Deploy AI agents at scale with AI Agent Design & Build, then transition to Managed AI Operations for continuous optimization.';
     recommendedService = 'AI Agent Design & Build';

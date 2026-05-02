@@ -7,7 +7,7 @@ const defaultOgImage = {
   url: `${siteUrl}/images/og-image.webp`,
   width: 1200,
   height: 630,
-  alt: 'ClearForge AI transformation systems',
+  alt: 'ClearForge custom AI strategy and build systems',
 };
 
 export const coreKeywords = [
@@ -17,7 +17,7 @@ export const coreKeywords = [
   'managed AI operations',
   'legacy system modernization',
   'AI marketing and revenue operations',
-  'industry AI transformation',
+  'industry AI systems',
   'AI value gap',
 ];
 
@@ -47,7 +47,7 @@ export function createMetadata({
     authors: [{ name: 'ClearForge' }],
     creator: 'ClearForge',
     publisher: 'ClearForge',
-    category: 'AI transformation consulting',
+    category: 'AI strategy and build consulting',
     ...(noIndex && { robots: { index: false, follow: false } }),
     alternates: {
       canonical: url,
@@ -139,7 +139,7 @@ export const websiteJsonLd = {
   url: siteUrl,
   inLanguage: 'en-US',
   description:
-    'ClearForge helps business leaders set AI ambition, map the value chain, build custom agentic workflows, and train teams to operate them.',
+    'ClearForge helps business leaders set AI ambition, map the value chain, build custom AI workflows, and train teams to operate them.',
   publisher: {
     '@type': 'ProfessionalService',
     '@id': `${siteUrl}/#organization`,
@@ -368,7 +368,7 @@ export function caseStudyJsonLd(study: {
     about: [
       { '@type': 'Thing', name: study.industry },
       { '@type': 'Thing', name: study.service },
-      { '@type': 'Thing', name: 'custom AI transformation' },
+      { '@type': 'Thing', name: 'custom AI systems' },
     ],
     mentions: [
       {

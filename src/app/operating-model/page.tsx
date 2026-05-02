@@ -21,9 +21,9 @@ export const metadata = createMetadata({
   path: '/operating-model',
   keywords: [
     'AI operating model',
-    'custom AI transformation',
+    'custom AI systems',
     'AI center of excellence',
-    'agentic workflow design',
+    'AI workflow design',
   ],
 });
 
@@ -31,7 +31,7 @@ const phases = [
   {
     title: 'Set Ambition',
     description:
-      'Define the business performance step-change AI must create: revenue growth, margin expansion, faster service, better quality, or OPEX leverage.',
+      'Define the business result AI must improve: revenue growth, margin, service speed, quality, or operating cost.',
     output: 'Executive ambition, value thesis, and decision guardrails',
   },
   {
@@ -47,7 +47,7 @@ const phases = [
     output: 'Future-state workflow, governance path, and KPI tree',
   },
   {
-    title: 'Build the Machine',
+    title: 'Build the System',
     description:
       'Engineer the custom agents, copilots, data paths, dashboards, integrations, and controls around the systems that already run the business.',
     output: 'Production AI workflow with testing and human-in-the-loop controls',
@@ -94,7 +94,7 @@ const executiveControls = [
 const boardQuestions = [
   'Where can AI materially bend the revenue or OPEX curve?',
   'Which workflows should be redesigned before we buy or build more tools?',
-  'What can agents do autonomously, and where must people stay in the loop?',
+  'What can agents do without review, and where must people approve the work?',
   'Which systems, data, and approvals must be integrated for production use?',
   'How will leaders know whether AI is improving performance or just creating activity?',
   'What governance model makes the system safe, observable, and scalable?',
@@ -124,7 +124,7 @@ const operatingFaqs = [
   {
     question: 'What is an AI operating model?',
     answer:
-      'An AI operating model defines how business ambition, value-chain priorities, agentic workflows, human review, governance, systems integration, adoption, and KPI measurement work together in production.',
+      'An AI operating model defines how business ambition, value-chain priorities, AI workflows, human review, governance, systems integration, adoption, and KPI measurement work together in production.',
   },
   {
     question: 'How does ClearForge choose the first AI workflow to build?',
@@ -151,7 +151,7 @@ export default function OperatingModelPage() {
           serviceJsonLd({
             title: 'AI Operating Model Design and Build',
             description:
-              'ClearForge sets AI ambition, maps value chains, builds custom agentic workflows, and trains teams into a measurable operating model.',
+              'ClearForge sets AI ambition, maps value chains, builds custom AI workflows, and trains teams into a measurable operating model.',
             path: '/operating-model',
           }),
           breadcrumbJsonLd([
@@ -172,7 +172,7 @@ export default function OperatingModelPage() {
               </h1>
               <p className="mt-6 max-w-2xl text-body-lg text-stone">
                 ClearForge helps leadership set the AI ambition, map the value chain, build the
-                custom agentic workflows, and train the organization to run the new machine.
+                custom AI workflows, and train the organization to run the new cadence.
               </p>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <Button size="lg" asChild>
@@ -197,7 +197,7 @@ export default function OperatingModelPage() {
                 <div className="mt-6 space-y-4">
                   {[
                     ['Ambition', 'What must AI make measurably better?'],
-                    ['Value Map', 'Where is the highest-confidence leverage?'],
+                    ['Value Map', 'Where is the best first workflow?'],
                     ['Build System', 'What agents, workflows, and data paths are required?'],
                     ['Adoption Loop', 'How do people, KPIs, and governance make it stick?'],
                   ].map(([label, detail], index) => (
@@ -386,11 +386,11 @@ export default function OperatingModelPage() {
         <div className="mx-auto max-w-[840px] px-4 sm:px-6 lg:px-10">
           <p className="overline text-brass-light">Start Here</p>
           <h2 className="mt-6 text-display text-bone">
-            Generate the first value map. Then build the first machine.
+            Generate the first value map. Then build the first workflow.
           </h2>
           <p className="mt-6 text-body-lg text-stone">
-            Forge Intelligence gives you a fast read on where AI could create leverage. ClearForge
-            turns the right opportunities into production systems.
+            Forge Intelligence gives you a fast read on where AI could matter. ClearForge turns the
+            right opportunities into production systems.
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Button size="lg" asChild>

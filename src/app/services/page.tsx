@@ -8,7 +8,7 @@ import { services } from '@/data/services';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'AI Transformation Services - Strategy and Build | ClearForge',
+  title: 'Custom AI Strategy and Build Services | ClearForge',
   description:
     'ClearForge sets AI ambition, maps value, builds custom agents and workflows, and trains teams into a measurable AI operating model.',
   path: '/services',
@@ -26,28 +26,28 @@ const industries = [
     icon: Landmark,
     name: 'Financial Services',
     problem: 'Compliance bottlenecks and manual document processing drain margin',
-    outcome: '95% reduction in processing errors with automated workflows',
+    outcome: 'Document review, exception routing, and compliance evidence in one workflow',
     href: '/industries/financial-services',
   },
   {
     icon: HeartPulse,
     name: 'Healthcare',
     problem: 'Revenue cycle leakage and administrative burden on clinical staff',
-    outcome: '40% reduction in claim processing time',
+    outcome: 'Claims, denials, and patient-access work routed with clearer ownership',
     href: '/industries/healthcare',
   },
   {
     icon: Code2,
     name: 'SaaS',
     problem: 'Scaling customer success and support without scaling headcount',
-    outcome: '80% of workflow steps automated with custom AI agents',
+    outcome: 'Customer health, renewal prep, and support demand visible earlier',
     href: '/industries/saas',
   },
   {
     icon: Briefcase,
     name: 'PE Portfolio',
     problem: 'No shared framework to identify AI value levers across portfolio companies',
-    outcome: '10% average EBITDA lift within 90-day sprint cycles',
+    outcome: 'Comparable value backlog, 90-day sprint plan, and board-ready tracking',
     href: '/industries/private-equity',
   },
 ];
@@ -73,14 +73,14 @@ export default function ServicesPage() {
               className="mt-6 text-display max-w-3xl text-bone"
               style={{ fontFamily: 'var(--font-instrument-serif)' }}
             >
-              AI transformation, built around your operating model.
+              Custom AI, built around how your business actually runs.
             </h1>
           </FadeIn>
           <FadeIn delay={0.15}>
             <p className="mt-6 max-w-xl text-body-lg text-stone">
-              ClearForge combines strategy and technology in one accountable engagement: set the AI
-              ambition, map the value, build the custom systems, and train the team into the new way
-              of working.
+              ClearForge combines strategy and technology in one accountable engagement: choose the
+              workflow, size the business case, build the custom system, and train the team into the
+              new way of working.
             </p>
             <p className="mt-4 max-w-xl text-body text-stone">
               Not a generic platform. Not a deck that stops at recommendations. Custom AI designed
@@ -240,9 +240,9 @@ export default function ServicesPage() {
       {/* — Platform vs. Partner — */}
       <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <p className="overline">Platform vs. Transformation Partner</p>
+          <p className="overline">Platform vs. Build Partner</p>
           <h2 className="mt-6 text-display text-bone max-w-2xl">
-            Platforms are ingredients. Transformation is designed.
+            Platforms are ingredients. The working system has to be designed.
           </h2>
           <p className="mt-6 max-w-2xl text-body-lg text-stone">
             Off-the-shelf AI can help a team move faster, but it does not decide which workflows

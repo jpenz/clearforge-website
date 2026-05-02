@@ -144,7 +144,7 @@ export const caseStudies: CaseStudy[] = [
     },
     evidenceNotes: [
       'Positioning, website, lead capture, CRM workflow, and follow-up were built as one operating system.',
-      'The transformation was designed for owner usability, not a complex enterprise stack.',
+      'The system was designed for owner usability, not a complex enterprise stack.',
     ],
     scale:
       'With systems documented and running continuously, the business is no longer dependent on one-off referrals. It now has an operating model that can be scaled, handed off, and diligenced by potential acquirers. Anonymous client quote: "For the first time, marketing is a system in this business, not a guess."',
@@ -162,17 +162,17 @@ export const caseStudies: CaseStudy[] = [
     challenge:
       "Sales teams across 16 divisions operated in silos with no shared market intelligence. Prospecting was manual, inconsistent, and untethered from the company's actual product capabilities. Cross-sell opportunities across divisions were invisible. Leadership had no unified view of where capital projects were happening, which accounts were under-served, and where the real white space existed. The commercial model had not evolved even as the market, the tools, and buyer behavior had fundamentally changed.",
     solution: [
-      "Deployed proprietary AI agents scanning capital projects, industrial demand signals, and competitive movements across 20+ states — calibrated specifically to the client's product lines",
+      "Deployed custom signal collectors and scoring workflows across capital projects, industrial demand signals, and competitive movement in 20+ states — calibrated specifically to the client's product lines",
       'Built 24 active intelligence triggers across three core business divisions — each generating scored, enriched opportunities in real time',
-      'Created 631+ AI-generated sales playbooks tailored by opportunity, vertical, and buyer persona — with entry strategies, competitive analysis, and risk assessments',
-      'Built and deployed a purpose-built sales intelligence platform — with visual pipeline management, AI-generated playbooks, automated contact discovery, and performance analytics the sales team uses daily',
+      'Created 631+ rep-ready sales playbooks tailored by opportunity, vertical, and buyer persona — with entry strategies, competitive analysis, and risk assessments',
+      'Built and deployed a purpose-built sales intelligence platform — with visual pipeline management, playbooks, contact discovery, and performance analytics the sales team uses daily',
       'Designed a portfolio-level expansion model prioritizing 5 additional divisions for AI deployment based on market size, AI fit scoring, and transferable trigger architecture',
       'Mapped a commercial model redesign framework — diagnostic-first approach to aligning sales structure, compensation, and AI tools to margin-focused growth',
     ],
     continuousModel: [
-      'AI agents monitor thousands of market signals daily — every closed-won and closed-lost data point refines the scoring model, compounding precision month over month',
+      'Market-signal workflows monitor thousands of sources daily — every closed-won and closed-lost data point refines the scoring model',
       'New triggers, territories, and divisions are added continuously — the intelligence architecture scales horizontally, with each deployment accelerating faster than the last',
-      'The platform captures structured feedback on every playbook (1–5 star ratings across 4 dimensions), creating a closed-loop system that improves AI output quality automatically',
+      'The platform captures structured feedback on every playbook (1–5 star ratings across 4 dimensions), creating a closed-loop system that improves output quality',
       'Market shifts are auto-captured within hours, not weeks — ensuring the sales team always has the freshest intelligence and first-mover advantage on capital projects',
     ],
     outcomes: [
@@ -185,7 +185,7 @@ export const caseStudies: CaseStudy[] = [
         metric: '32x',
         description: 'Ramp from 19 to 613 opportunities per month during calibration',
       },
-      { metric: '631+', description: 'AI-generated sales playbooks with competitive analysis' },
+      { metric: '631+', description: 'Rep-ready sales playbooks with competitive analysis' },
       { metric: '20+', description: 'States covered with active intelligence triggers' },
       {
         metric: '$20B+',
@@ -195,7 +195,7 @@ export const caseStudies: CaseStudy[] = [
     systemLayers: [
       {
         name: 'Market signal intelligence',
-        role: 'AI agents monitored capital projects, industrial demand signals, competitive movements, and geography-specific triggers.',
+        role: 'Custom signal workflows monitored capital projects, industrial demand signals, competitive movements, and geography-specific triggers.',
         evidence: '1,181 qualified opportunities identified across three divisions in six months.',
       },
       {
@@ -260,7 +260,7 @@ export const caseStudies: CaseStudy[] = [
       'The most important design choice was closing the loop between market signal, sales action, manager coaching, and AI quality feedback.',
     ],
     scale:
-      'What began as a two-division pilot expanded into an enterprise-wide intelligence system in under six months. The platform now covers three core divisions — with the largest generating over 950 opportunities alone — and five additional divisions ready for deployment. ClearForge built a custom sales intelligence dashboard that the team uses daily to manage the full pipeline, and is now designing a commercial model transformation to align sales structure, compensation, and coverage to the intelligence the AI is generating. The system gets exponentially smarter every month — by Month 12, the precision and coverage will be fundamentally different from Month 1.',
+      'What began as a two-division pilot expanded into a division-level intelligence system in under six months. The platform now covers three core divisions — with the largest generating over 950 opportunities alone — and five additional divisions ready for deployment. ClearForge built a custom sales intelligence dashboard that the team uses daily to manage the full pipeline, and is now designing commercial model changes to align sales structure, compensation, and coverage to the market intelligence. As field feedback accumulates, the scoring and playbooks become more accurate month by month.',
   },
   {
     slug: 'pe-portfolio-diagnostic-plan',

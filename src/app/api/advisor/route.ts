@@ -190,7 +190,7 @@ Outline a 3-phase approach ClearForge would take. Be specific to their situation
 - AI Marketing & Revenue Operations
 
 ## Where This Puts You in 12 Months
-Paint the outcome picture. How does solving this position them to win in their industry? What does their operation look like after transformation? Be concrete and aspirational but realistic.
+Paint the outcome picture. How does solving this position them to win in their industry? What does their operation look like after the workflow is fixed and adopted? Be concrete and realistic.
 
 ## Recommended Next Step
 Suggest a specific ClearForge engagement type and timeline. Close with an invitation to a discovery call.

@@ -68,9 +68,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       <CaseStudyStory
         industry={cs.industry}
         title={cs.title}
-        challenge={
-          cs.excerpt || 'A complex operational challenge requiring AI-driven transformation.'
-        }
+        challenge={cs.excerpt || 'A complex operating challenge that required a working system.'}
         challengeMetric={cs.heroMetric}
         challengeMetricLabel={cs.heroMetricLabel}
         phases={phases}

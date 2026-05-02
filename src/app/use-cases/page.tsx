@@ -42,8 +42,8 @@ export const metadata = createMetadata({
 });
 
 const operatingLoop = [
-  'Find the growth spot',
-  'Design the AI + people machine',
+  'Find the constraint',
+  'Design the human-reviewed workflow',
   'Ship the first workflow',
   'Measure adoption and margin',
 ];
@@ -68,12 +68,13 @@ export default function UseCasesPage() {
         <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
           <p className="overline">AI Use Cases</p>
           <h1 className="mt-6 max-w-5xl text-display text-bone">
-            The highest-leverage places to build AI into the operating machine.
+            Where custom AI usually earns its keep first.
           </h1>
           <p className="mt-7 max-w-2xl text-body-lg text-stone">
             These are the use cases where AI most often turns into real buyer urgency: growth,
             customer service, operations speed, knowledge work, quality, and PE value creation. Each
-            page shows the trigger pattern, the machine, and the first build path.
+            page shows the trigger pattern, operating workflow, dashboard view, and first build
+            path.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Button size="lg" asChild>
@@ -142,9 +143,7 @@ export default function UseCasesPage() {
                       {useCase.summary}
                     </p>
                     <div className="mt-6 flex items-center justify-between border-t border-divider pt-5">
-                      <span className="text-sm font-semibold text-anthracite">
-                        View the machine
-                      </span>
+                      <span className="text-sm font-semibold text-anthracite">View the build</span>
                       <ArrowRight className="h-4 w-4 text-brass transition-transform group-hover:translate-x-1" />
                     </div>
                   </div>
@@ -171,8 +170,8 @@ export default function UseCasesPage() {
                   'The best AI systems know what event creates urgency: a capital project, delayed handoff, quality issue, service risk, or portfolio value lever.',
                 ],
                 [
-                  'They make the machine concrete',
-                  'The work becomes specific: what gets built, who uses it, what decisions change, what cadence runs, and where human judgment stays in the loop.',
+                  'They make the work concrete',
+                  'The build becomes specific: what gets automated, who reviews it, what decision changes, what cadence runs, and where human judgment stays in control.',
                 ],
                 [
                   'They compound through feedback',

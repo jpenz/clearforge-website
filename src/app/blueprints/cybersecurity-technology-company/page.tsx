@@ -53,7 +53,7 @@ import { createMetadata } from '@/lib/metadata';
 export const metadata = createMetadata({
   title: 'CrowdStrike Enterprise AI Transformation Blueprint | James Penz',
   description:
-    'An independent Enterprise AI leadership and contractor blueprint from James Penz: roadmap, AI Center of Excellence, governance, agentic systems, value-chain use cases, and 90-day production path for CrowdStrike.',
+    'An independent Enterprise AI leadership and contractor blueprint from James Penz: roadmap, AI Center of Excellence, governance, AI workflows, value-chain use cases, and 90-day production path for CrowdStrike.',
   path: '/blueprints/cybersecurity-technology-company',
 });
 
@@ -133,8 +133,8 @@ export default function CybersecurityBlueprintPage() {
           </h1>
           <p className="mt-8 max-w-3xl text-body-lg text-stone">
             Prepared by James Penz to show how I would define the AI roadmap, lead the AI Center of
-            Excellence, chair the SteerCo, govern responsible adoption, and deploy agentic systems
-            that help support the path to $10B ARR with stronger OpEx leverage.
+            Excellence, chair the SteerCo, govern responsible adoption, and deploy AI workflows that
+            help support the path to $10B ARR with stronger OpEx discipline.
           </p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <Button size="lg" asChild>
@@ -263,8 +263,8 @@ export default function CybersecurityBlueprintPage() {
               </div>
 
               <p className="mt-10 border-l-2 border-brass pl-5 text-body text-anthracite">
-                The practical answer is a repeatable transformation engine: find the growth and
-                efficiency wedges, build the AI-plus-people machine around them, govern it with
+                The practical answer is a repeatable delivery model: find the growth and efficiency
+                wedges, build the AI-plus-people workflow around them, govern it with
                 CrowdStrike-level rigor, and scale only what proves business value.
               </p>
             </div>
@@ -422,7 +422,7 @@ export default function CybersecurityBlueprintPage() {
             <div className="lg:col-span-4">
               <p className="overline">Automation ambition console</p>
               <h2 className="mt-6 text-display text-bone">
-                First find the value pockets. Then build the machine around them.
+                First find the value pockets. Then build the workflow around them.
               </h2>
               <p className="mt-6 text-body-lg text-stone">
                 This preview mirrors how I would run ambition setting: combine interviews, in-flight
@@ -647,8 +647,8 @@ export default function CybersecurityBlueprintPage() {
             Six wedge systems that make the strategy real.
           </h2>
           <p className="mt-6 max-w-3xl text-body-lg text-warm-gray">
-            These are the highest-leverage places to prove the machine: growth, revenue execution,
-            threat intelligence, engineering, customer time-to-value, and executive governance.
+            These are the first places I would prove value: growth, revenue execution, threat
+            intelligence, engineering, customer time-to-value, and executive governance.
           </p>
 
           <div className="mt-16 grid gap-x-12 gap-y-12 lg:grid-cols-2">
@@ -1010,7 +1010,7 @@ export default function CybersecurityBlueprintPage() {
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <p className="overline">Execution path</p>
           <h2 className="mt-6 max-w-4xl text-display text-bone">
-            A 30-day diagnostic, a 90-day proof, then a permanent AI transformation engine.
+            A 30-day diagnostic, a 90-day proof, then a permanent AI delivery model.
           </h2>
 
           <div className="mt-16 grid gap-8 lg:grid-cols-3">
@@ -1034,7 +1034,7 @@ export default function CybersecurityBlueprintPage() {
           </div>
 
           <div className="mt-20 border-t border-divider-dark pt-12">
-            <p className="overline">ClearForge transformation method</p>
+            <p className="overline">ClearForge delivery method</p>
             <h3 className="mt-5 max-w-3xl text-h1 text-bone">
               Identify, size, sequence, sprint - with business metrics attached.
             </h3>

@@ -53,14 +53,14 @@ export const roleBrief = {
       body: 'Chair the AI SteerCo, force prioritization, make investment and buy-vs-build decisions, and keep C-suite focus on value, risk, and adoption.',
     },
     {
-      label: 'Agentic transformation',
-      body: 'Deploy autonomous workflows across the enterprise, integrate them into daily systems, and bend the OpEx curve through process redesign.',
+      label: 'AI workflow deployment',
+      body: 'Deploy reviewed AI workflows across the enterprise, integrate them into daily systems, and bend the OpEx curve through process redesign.',
     },
   ],
   beliefs: [
     {
       label: 'This is not a tools rollout',
-      body: 'The win is an enterprise operating system for human-plus-agent work: one roadmap, one governance model, one value pipeline, and many business-owned workflows.',
+      body: 'The win is a company operating model for human-plus-AI work: one roadmap, one governance model, one value pipeline, and many business-owned workflows.',
     },
     {
       label: 'Near-term proof funds the long-term model',
@@ -85,7 +85,7 @@ export type BlueprintBuildStep = {
 export const blueprintBuildSteps: BlueprintBuildStep[] = [
   {
     label: '1. Read the role like an operator',
-    body: 'I translated the Enterprise AI Strategy and Transformation mandate into operating jobs: roadmap, AI CoE, SteerCo, governance, agentic systems, enterprise integrations, productivity, scouting, and Customer Zero feedback loops.',
+    body: 'I translated the Enterprise AI Strategy and Transformation mandate into operating jobs: roadmap, AI CoE, SteerCo, governance, reviewed AI workflows, enterprise integrations, productivity, scouting, and Customer Zero feedback loops.',
   },
   {
     label: '2. Built the company baseline from public data',
@@ -170,7 +170,7 @@ export type AutomationAmbitionWedge = {
 
 export const automationAmbitionWedges: AutomationAmbitionWedge[] = [
   {
-    opportunity: 'Revenue execution machine',
+    opportunity: 'Revenue execution system',
     ambition:
       'Every seller and sales engineer gets account intelligence, module-fit narratives, RFP drafts, stakeholder maps, and pipeline risk before the deal review.',
     firstPainPoints:
@@ -179,7 +179,7 @@ export const automationAmbitionWedges: AutomationAmbitionWedge[] = [
     sponsor: 'CRO / RevOps',
   },
   {
-    opportunity: 'Customer time-to-value machine',
+    opportunity: 'Customer time-to-value system',
     ambition:
       'Implementation, support, and success teams move customers from signed to protected faster with agent-built runbooks and proactive risk detection.',
     firstPainPoints:
@@ -193,7 +193,7 @@ export const automationAmbitionWedges: AutomationAmbitionWedge[] = [
       'Threat research becomes a high-velocity internal signal factory for product, field, marketing, support, and customer-specific risk briefs.',
     firstPainPoints:
       'IOC enrichment, report drafting, telemetry synthesis, and field translation consume analyst time.',
-    valueSignal: 'Research cycle time, analyst leverage, customer-facing intelligence velocity',
+    valueSignal: 'Research cycle time, analyst capacity, customer-facing intelligence velocity',
     sponsor: 'CTO / Head of Intel',
   },
   {
@@ -211,7 +211,7 @@ export const automationAmbitionWedges: AutomationAmbitionWedge[] = [
       'A governed executive control tower tracks AI value, adoption, risk, spend, policy approvals, and next-wave opportunities across functions.',
     firstPainPoints:
       'QBR deck churn, spreadsheet PMO updates, fragmented ROI tracking, slow policy approvals.',
-    valueSignal: 'OpEx leverage, decision cycle time, adoption, risk visibility',
+    valueSignal: 'OpEx movement, decision cycle time, adoption, risk visibility',
     sponsor: 'CFO / CIO / CAIO',
   },
 ];
@@ -324,7 +324,7 @@ export const roleCoverage: RoleCoverageItem[] = [
   {
     requirement: 'Define the Enterprise AI Roadmap',
     ownership:
-      'Build the company-wide AI roadmap tied to $10B ARR ambition, OpEx leverage, product feedback loops, and function-level operating metrics.',
+      'Build the company-wide AI roadmap tied to $10B ARR ambition, OpEx movement, product feedback loops, and function-level operating metrics.',
     proof:
       'Led automation ambition work that identified $150M to $200M+ of enterprise opportunity and converted it into an evergreen pipeline model.',
   },
@@ -404,14 +404,14 @@ export const strategicProposal: StrategicPillar[] = [
   {
     label: 'Define the roadmap',
     headline: 'Connect $10B revenue ambition to the internal workflows that must change first.',
-    body: 'CrowdStrike already has the ingredients: account activity, product telemetry, threat research, support demand, partner motion, renewal signals, and field intelligence. I would connect those signals into one ranked view of where growth, speed, quality, customer trust, and OpEx leverage are hiding.',
+    body: 'CrowdStrike already has the ingredients: account activity, product telemetry, threat research, support demand, partner motion, renewal signals, and field intelligence. I would connect those signals into one ranked view of where growth, speed, quality, customer trust, and OpEx improvement are most likely.',
     proof:
       'Output: a company-wide Enterprise AI roadmap with value at stake, named owners, risk posture, investment asks, and a sequenced first-year portfolio.',
   },
   {
     label: 'Build the CoE',
     headline: 'Create the AI Center of Excellence as a delivery engine, not a policy committee.',
-    body: 'The AI CoE should behave like a product and transformation team: business PMs own outcomes, engineers own systems, analysts own measurement, governance owns guardrails, and functional leaders own adoption.',
+    body: 'The AI CoE should behave like a product and delivery team: business PMs own outcomes, engineers own systems, analysts own measurement, governance owns guardrails, and functional leaders own adoption.',
     proof:
       'Output: an operating model with roles, decision rights, intake gates, reusable build patterns, vendor standards, and a weekly value cadence.',
   },
@@ -424,9 +424,9 @@ export const strategicProposal: StrategicPillar[] = [
       'Output: AI governance embedded into the intake-to-value playbook so every workflow ships with controls, not just enthusiasm.',
   },
   {
-    label: 'Scale agentic operations',
+    label: 'Scale AI operations',
     headline: 'Turn first-wave wins into a permanent company operating advantage.',
-    body: 'The goal is not a pile of pilots. The goal is an evergreen AI transformation system: every function has an opportunity backlog, every agent has a metric owner, and the leadership team can see adoption, ROI, risk, and next-wave value in one place.',
+    body: 'The goal is not a pile of pilots. The goal is a durable AI operating model: every function has an opportunity backlog, every agent has a metric owner, and the leadership team can see adoption, ROI, risk, and next-wave value in one place.',
     proof:
       'Output: production agents shipped in waves, measured by business outcomes, and scaled through a repeatable enterprise playbook.',
   },
@@ -518,9 +518,9 @@ export const valueChainFutureState: ValueChainStage[] = [
     today:
       'The operating system is split across QBR decks, spreadsheets, ticket queues, policy reviews, and ad hoc executive requests.',
     futureState:
-      'An AI operating control tower tracks initiative health, ROI, staffing, risk, compliance, and executive decisions across the transformation portfolio.',
+      'An AI operating control tower tracks initiative health, ROI, staffing, risk, compliance, and executive decisions across the company portfolio.',
     useCases: ['Executive brief agent', 'Close and variance agent', 'AI governance tracker'],
-    metric: 'Management cycle time, OpEx leverage, risk visibility, decision quality',
+    metric: 'Management cycle time, OpEx movement, risk visibility, decision quality',
   },
 ];
 
@@ -638,7 +638,7 @@ export const proposalRoadmap = [
     window: 'Months 4 to 12',
     name: 'Scale the operating system',
     promise:
-      'Turn early wins into a permanent AI transformation capability owned by the business, measured by value, and governed with discipline.',
+      'Turn early wins into a permanent AI capability owned by the business, measured by value, and governed with discipline.',
     deliverables: [
       'AI Center of Excellence operating model',
       'Executive control tower for ROI, risk, adoption, and next-wave value',
@@ -1103,7 +1103,7 @@ export const whyJames = {
     {
       jdRequirement: 'Deploy autonomous workflows and agentic systems',
       proof:
-        'ClearForge.AI ships production multi-agent systems. AgentForge: 44 tools, 6 agent teams, 9-tier model router across Claude, GPT-4, Gemini, Groq, MiniMax. Real production workloads, real customers, real ROI.',
+        'ClearForge ships production multi-agent systems with tool access, model routing, human review, logging, and customer-facing delivery discipline.',
     },
     {
       jdRequirement: 'Identify opportunities for OpEx optimization through automation',

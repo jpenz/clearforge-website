@@ -196,7 +196,7 @@ export function calculateScore(answers: Answers): ScoreResult {
   if (percentage >= 75) {
     tier = 'leader';
     tierDescription =
-      "You're an AI Leader. Your organization has strong foundations across data, automation, and team capabilities. You're well-positioned to leverage advanced AI solutions and build sustainable competitive advantages.";
+      "You're an AI Leader. Your organization has strong foundations across data, automation, and team capabilities. You're ready to build advanced AI workflows around the places where execution quality matters most.";
     gapFromLeader = 0;
     recommendations = [
       'Expand AI initiatives to new business units',

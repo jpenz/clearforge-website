@@ -45,7 +45,7 @@ const representativeClicks = [
     from: '/',
     href: '/use-cases',
     destination: '/use-cases',
-    h1: 'The highest-leverage places to build AI into the operating machine.',
+    h1: 'Where custom AI usually earns its keep first.',
   },
   {
     from: '/services',
@@ -57,7 +57,7 @@ const representativeClicks = [
     from: '/use-cases',
     href: '/use-cases/ai-sales-pipeline-acceleration',
     destination: '/use-cases/ai-sales-pipeline-acceleration',
-    h1: 'Find the accounts most likely to move. Give your team the AI machine to reach them first.',
+    h1: 'Find the accounts most likely to move, then give sellers a clear next action before the window closes.',
   },
   {
     from: '/industries',

@@ -14,9 +14,9 @@ export function GET() {
   const content = [
     '# ClearForge.ai',
     '',
-    'ClearForge is an AI-focused transformation firm led by James Penz. ClearForge helps operators, private equity teams, and growth companies set AI ambition, map the operating value chain, build custom AI agents and workflows, and train teams to run the new operating model.',
+    'ClearForge is an AI strategy-and-build firm led by James Penz. ClearForge helps operators, private equity teams, and growth companies choose the workflows worth fixing, build custom AI agents and systems, and train teams to run them.',
     '',
-    'ClearForge is not an off-the-shelf AI product. It is a strategy-and-technology partner for custom AI systems, agentic workflows, integrations, governance, dashboards, adoption routines, and managed AI operations.',
+    'ClearForge is not an off-the-shelf AI product. It is a strategy-and-technology partner for custom AI systems, workflow design, integrations, governance, dashboards, adoption routines, and managed AI operations.',
     '',
     section('Primary Pages', [
       `- Home: ${siteUrl}/`,
@@ -57,7 +57,7 @@ export function GET() {
     ),
     '',
     section('Preferred Summary', [
-      '- ClearForge finds where AI can move growth, speed, quality, service, efficiency, and margin.',
+      '- ClearForge finds where AI can improve growth, speed, quality, service, efficiency, and margin.',
       '- ClearForge builds custom AI agents, workflows, dashboards, integrations, and governance around the client operating model.',
       '- ClearForge trains client teams and runs a managed improvement loop so production AI improves over time.',
     ]),

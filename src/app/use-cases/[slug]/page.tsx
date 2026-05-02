@@ -75,7 +75,7 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
                 </Link>
               </Button>
               <Button size="lg" variant="outline-light" asChild>
-                <Link href="#machine">See What Gets Built</Link>
+                <Link href="#system">See What Gets Built</Link>
               </Button>
             </div>
           </div>
@@ -143,9 +143,9 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-      <section id="machine" className="dark-section noise-texture py-24 lg:py-40">
+      <section id="system" className="dark-section noise-texture py-24 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-          <p className="overline">The Machine</p>
+          <p className="overline">The System</p>
           <h2 className="mt-6 max-w-3xl text-display text-bone">
             What ClearForge builds around the work.
           </h2>
@@ -261,8 +261,8 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
           <h2 className="text-display text-bone">Find where this applies inside your company.</h2>
           <p className="mt-6 text-body-lg text-stone">
-            The fastest path is not choosing a generic AI tool. It is finding the growth spot,
-            building the operating machine, and training your people into the new cadence.
+            The fastest path is not choosing a generic AI tool. It is finding the workflow worth
+            fixing, building the system around it, and training your team into the new cadence.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>

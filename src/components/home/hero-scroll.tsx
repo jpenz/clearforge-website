@@ -29,10 +29,10 @@ export function HeroScroll() {
       <div className="absolute bottom-0 left-0 right-0 hidden border-t border-bone/10 lg:block">
         <div className="mx-auto grid max-w-[1400px] grid-cols-4 px-10">
           {[
-            ['01', 'Find growth spots'],
-            ['02', 'Build the AI machine'],
-            ['03', 'Train the people'],
-            ['04', 'Win the market'],
+            ['01', 'Find the constraint'],
+            ['02', 'Design the workflow'],
+            ['03', 'Ship the system'],
+            ['04', 'Run the cadence'],
           ].map(([step, label]) => (
             <div key={step} className="border-l border-bone/10 px-6 py-5 last:border-r">
               <p className="metric text-xs text-brass-light">{step}</p>
@@ -44,19 +44,19 @@ export function HeroScroll() {
 
       {/* Content overlay */}
       <div className="relative z-10 mx-auto flex min-h-[86svh] w-full max-w-[1400px] flex-col justify-center px-4 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-10 lg:pb-40">
-        <p className="overline text-xs animate-fade-in">Custom AI transformation for operators</p>
+        <p className="overline text-xs animate-fade-in">Custom AI systems for operators</p>
 
         <h1 className="mt-7 max-w-[980px] text-[2.7rem] leading-[1.02] text-bone sm:text-[4rem] lg:text-[5.2rem]">
-          Find the growth spots. Build the AI machine to win them.
+          Find the work that moves the numbers. Build the AI system that makes it repeatable.
         </h1>
         <p className="mt-3 max-w-[900px] font-display text-[2.25rem] italic leading-[1.05] text-brass-light sm:text-[3.4rem] lg:text-[4.2rem]">
-          With your people in the loop.
+          With your people in control.
         </p>
 
         <p className="mt-8 max-w-2xl text-body-lg text-stone animate-fade-in-up delay-3">
-          ClearForge is a strategy-and-technology firm that finds where AI can move the economics of
-          your business, then builds the custom agents, workflows, data paths, governance, and team
-          routines that make the change real.
+          ClearForge maps the revenue, service, quality, cost, and decision workflows where better
+          execution would matter, then builds the agents, integrations, dashboards, controls, and
+          team routines to run them.
         </p>
 
         <div className="mt-7 grid max-w-3xl grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-5 animate-fade-in-up delay-3">

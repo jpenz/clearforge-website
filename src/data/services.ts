@@ -44,24 +44,24 @@ export const services: Service[] = [
     ],
     outcomes: [
       {
-        value: '30%',
-        label: 'Pipeline Increase',
-        description: 'Average increase in qualified pipeline within 90 days',
+        value: 'Signal',
+        label: 'Account Priority',
+        description: 'Named buying triggers and scored accounts for seller action',
       },
       {
-        value: '3.5x',
-        label: 'Conversion Lift',
-        description: 'Improvement in lead-to-opportunity conversion rates',
+        value: '<48h',
+        label: 'Response Target',
+        description: 'A practical SLA for validated high-fit account events',
       },
       {
-        value: '15 hrs',
-        label: 'Per Rep / Week Saved',
-        description: 'Time saved per rep on manual prospecting tasks',
+        value: 'Clean',
+        label: 'CRM Hygiene',
+        description: 'Missing fields, stale pursuits, and next actions surfaced',
       },
       {
-        value: '60%',
-        label: 'Faster Response',
-        description: 'Reduction in lead response time with AI routing',
+        value: 'Weekly',
+        label: 'Leader Review',
+        description: 'Pipeline quality, rep follow-through, and trigger tuning cadence',
       },
     ],
     workflow: [
@@ -73,17 +73,18 @@ export const services: Service[] = [
       {
         phase: 'Week 3-4',
         title: 'Design',
-        description: 'Map ideal revenue architecture and AI integration points.',
+        description: 'Define the trigger taxonomy, owner rules, CRM path, and review cadence.',
       },
       {
         phase: 'Week 5-8',
         title: 'Build',
-        description: 'Implement AI prospecting, outreach automation, and analytics.',
+        description:
+          'Ship account scoring, rep briefs, routing, follow-up workflows, and analytics.',
       },
       {
         phase: 'Ongoing',
         title: 'Optimize',
-        description: 'A/B test, refine models, and scale what works.',
+        description: 'Review conversion quality, tune signals, and expand the motion that works.',
       },
     ],
   },
@@ -107,24 +108,24 @@ export const services: Service[] = [
     ],
     outcomes: [
       {
-        value: '$240K',
-        label: 'Annual Savings',
-        description: 'Average annual cost savings from process automation',
+        value: 'Baseline',
+        label: 'Cost Of Drag',
+        description: 'Cycle time, rework, expedite cost, and manual coordination quantified',
       },
       {
-        value: '40%',
-        label: 'Time Reduction',
-        description: 'Decrease in manual process completion time',
+        value: 'Owner',
+        label: 'Exception Control',
+        description: 'Every stuck item has a named owner, evidence, and next step',
       },
       {
-        value: '95%',
-        label: 'Error Reduction',
-        description: 'Improvement in accuracy for automated workflows',
+        value: 'Gate',
+        label: 'Quality Check',
+        description: 'Work moves forward only when required inputs are complete',
       },
       {
-        value: '2x',
-        label: 'Throughput',
-        description: 'Increase in processing capacity without additional headcount',
+        value: 'Live',
+        label: 'Management View',
+        description: 'Throughput, quality, blockers, and cost impact visible in one place',
       },
     ],
     workflow: [
@@ -141,7 +142,7 @@ export const services: Service[] = [
       {
         phase: 'Week 5-8',
         title: 'Build',
-        description: 'Implement automations, dashboards, and integrations.',
+        description: 'Ship routing, validation, summaries, dashboards, and integrations.',
       },
       {
         phase: 'Week 9+',
@@ -170,41 +171,41 @@ export const services: Service[] = [
     ],
     outcomes: [
       {
-        value: '10%',
-        label: 'EBITDA Lift',
-        description: 'Average EBITDA improvement across portfolio engagements',
+        value: 'Ranked',
+        label: 'Value Backlog',
+        description: 'Portfolio companies compared by value, readiness, and sponsor pull',
       },
       {
         value: '90 days',
-        label: 'To First ROI',
-        description: 'Time from engagement start to measurable value delivery',
+        label: 'To First System',
+        description: 'A first workflow built, measured, and ready to reuse as a pattern',
       },
       {
-        value: '3x',
-        label: 'Multiple Impact',
-        description: 'Contribution to valuation improvement at exit',
+        value: 'Board',
+        label: 'Value Trace',
+        description: 'Adoption, KPI movement, risk, and next wave tracked for sponsors',
       },
       {
-        value: '5+',
-        label: 'Use Cases Identified',
-        description: 'AI applications identified per portfolio company',
+        value: 'Reusable',
+        label: 'Playbooks',
+        description: 'Revenue, service, operations, reporting, and quality patterns codified',
       },
     ],
     workflow: [
       {
         phase: 'Week 1-2',
         title: 'Assess',
-        description: 'AI readiness evaluation, opportunity mapping, quick-win identification.',
+        description: 'Compare value pools, workflows, data readiness, sponsor ownership, and risk.',
       },
       {
         phase: 'Week 3-6',
         title: 'Sprint',
-        description: 'Execute top-priority AI initiatives with measurable KPIs.',
+        description: 'Build one priority workflow with measurable adoption and KPI movement.',
       },
       {
         phase: 'Week 7-12',
         title: 'Scale',
-        description: 'Expand wins across the organization, build internal capability.',
+        description: 'Package the pattern, train owners, and prepare the next company or function.',
       },
       {
         phase: 'Ongoing',
@@ -234,24 +235,24 @@ export const services: Service[] = [
     ],
     outcomes: [
       {
-        value: '80%',
-        label: 'Automation',
-        description: 'Percentage of targeted workflow steps automated',
+        value: 'Scoped',
+        label: 'Workflow Boundary',
+        description: 'Clear trigger, inputs, outputs, owner, and exception path before build',
       },
       {
-        value: '24/7',
-        label: 'Operation',
-        description: 'Agents work around the clock without fatigue or errors',
+        value: 'Reviewed',
+        label: 'Human Control',
+        description: 'Approval gates, confidence thresholds, and escalation rules built in',
       },
       {
-        value: '10x',
-        label: 'Speed',
-        description: 'Improvement in workflow completion time vs. manual',
+        value: 'Observable',
+        label: 'Quality Checks',
+        description: 'Usage, errors, exceptions, audit trail, and output quality visible',
       },
       {
-        value: '99%',
-        label: 'Accuracy',
-        description: 'Decision accuracy with built-in quality checks',
+        value: 'Owned',
+        label: 'Operating Cadence',
+        description: 'A manager review rhythm so the system improves after launch',
       },
     ],
     workflow: [
@@ -268,7 +269,7 @@ export const services: Service[] = [
       {
         phase: 'Week 5-8',
         title: 'Build & Test',
-        description: 'Develop agent, integrate with systems, rigorous testing.',
+        description: 'Develop the agent, integrate with systems, test edge cases, and train users.',
       },
       {
         phase: 'Ongoing',

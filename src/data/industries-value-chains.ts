@@ -64,7 +64,7 @@ export const industries: Industry[] = [
     hero: 'Apply AI to throughput, planning, and commercial execution without disrupting critical operations.',
     oneLiner: 'Production AI for the shop floor and the front office.',
     overview: [
-      'Manufacturers are balancing margin pressure, volatile demand, and workforce constraints while operating on complex system landscapes. AI creates significant leverage — but only when deployed inside real production and commercial workflows.',
+      'Manufacturers are balancing margin pressure, volatile demand, and workforce constraints while operating on complex system landscapes. AI matters only when it is deployed inside real production and commercial workflows.',
       'ClearForge helps manufacturers prioritize where AI changes operating economics first, then build and run those systems with measurable accountability.',
     ],
     marketContext: [
@@ -145,7 +145,7 @@ export const industries: Industry[] = [
       {
         function: 'Production & Operations',
         icon: 'Settings',
-        description: 'Use AI to keep lines running, predict failures, and unlock OEE.',
+        description: 'Use AI to keep lines running, predict failures, and improve OEE.',
         activities: [
           {
             name: 'Predictive maintenance',
@@ -924,7 +924,7 @@ export const industries: Industry[] = [
       },
     ],
     forgeApplication:
-      'The Forge Method for SaaS focuses on the highest-leverage GTM and Operations workflows. Diagnostic identifies where AI moves CAC, NRR, or gross margin most. Sprint deploys 1-2 production agents integrated with Salesforce/HubSpot, billing, and product analytics. Scale operates the agents and expands across motions.',
+      'The Forge Method for SaaS focuses on GTM and operations workflows where CAC, NRR, or gross margin can move. Diagnostic ranks the first workflow. Sprint deploys 1-2 production agents integrated with Salesforce/HubSpot, billing, and product analytics. Scale operates the agents and expands across motions.',
     videoBackground: '/videos/saas.mp4',
   },
 
@@ -972,8 +972,8 @@ export const industries: Industry[] = [
             impact: '60-80% legal review time reduction',
           },
           {
-            name: 'Synergy modeling copilot',
-            aiImpact: 'Quantify revenue and cost synergies for bolt-on combinations',
+            name: 'Integration-value modeling copilot',
+            aiImpact: 'Quantify revenue and cost opportunities for bolt-on combinations',
             type: 'copilot',
             impact: 'Diligence cycle compressed by 1-2 weeks',
           },
@@ -1350,7 +1350,7 @@ export const industries: Industry[] = [
       },
     ],
     forgeApplication:
-      'The Forge Method for insurance carriers builds underwriting and claim agents with explainability, audit logs, and human-in-the-loop controls. Diagnostic identifies highest-leverage workflows by line. Sprint deploys 1-2 production systems integrated to PAS/CMS. Scale operates governance and expands across lines and geographies.',
+      'The Forge Method for insurance carriers builds underwriting and claim agents with explainability, audit logs, and human-in-the-loop controls. Diagnostic ranks workflows by line. Sprint deploys 1-2 production systems integrated to PAS/CMS. Scale operates governance and expands across lines and geographies.',
   },
 
   // RETAIL & E-COMMERCE
@@ -1562,7 +1562,7 @@ export const industries: Industry[] = [
       },
     ],
     forgeApplication:
-      'The Forge Method for retail starts in the area of highest economic leverage — pricing, demand, or fulfillment — and ships production agents inside existing merchandising and ops workflows. Sprint typically targets a 2-5 point gross margin or 5-15% inventory improvement. Scale operates the agents and expands across categories and channels.',
+      'The Forge Method for retail starts where the economics are clearest — pricing, demand, or fulfillment — and ships production agents inside existing merchandising and ops workflows. Sprint targets are baselined before build, then reviewed against gross margin, inventory, service, and labor metrics.',
   },
 
   // WHOLESALE & DISTRIBUTION
@@ -1768,7 +1768,7 @@ export const industries: Industry[] = [
       {
         title: 'Service-Level Variability',
         description:
-          'On-time-ship and order accuracy vary by branch. Customers feel it; large accounts use it as leverage.',
+          'On-time-ship and order accuracy vary by branch. Customers feel it, and large accounts notice.',
         metric: '$10T+',
         metricLabel: 'Global market',
       },
@@ -2234,7 +2234,7 @@ export const industries: Industry[] = [
             name: 'Rent-roll extraction',
             aiImpact: 'Auto-extract rent roll data from PDFs into structured model',
             type: 'automation',
-            impact: '95%+ accuracy at 100x speed',
+            impact: 'Faster underwriting model prep with reviewable extraction accuracy',
           },
           {
             name: 'Comp-set analysis',
@@ -2826,7 +2826,7 @@ export const industries: Industry[] = [
       },
     ],
     forgeApplication:
-      'The Forge Method for CPG starts with the highest-leverage workflow — typically RGM, demand sensing, or trade promotion. Sprint deploys 1-2 production agents integrated to ERP, planning, and trade-management systems. Scale operates the agents and expands across categories and customers.',
+      'The Forge Method for CPG starts with the workflow most likely to move economics — typically RGM, demand sensing, or trade promotion. Sprint deploys 1-2 production agents integrated to ERP, planning, and trade-management systems. Scale operates the agents and expands across categories and customers.',
   },
 
   // LIFE SCIENCES & PHARMA
@@ -3716,7 +3716,7 @@ export const industries: Industry[] = [
       },
     ],
     forgeApplication:
-      'The Forge Method for automotive starts with the workflow with the highest economic leverage — usually quality triage, dealer F&I automation, or supply-chain risk. Sprint deploys 1-2 production agents integrated to PLM, MES, or DMS. Scale operates the agents and expands.',
+      'The Forge Method for automotive starts with the workflow where value and readiness are clearest — usually quality triage, dealer F&I automation, or supply-chain risk. Sprint deploys 1-2 production agents integrated to PLM, MES, or DMS. Scale operates the agents and expands.',
   },
 
   // EDUCATION
@@ -3894,7 +3894,7 @@ export const industries: Industry[] = [
       },
     ],
     forgeApplication:
-      'The Forge Method for education starts with the workflow with the highest leverage — typically enrollment, advising, or grading. Sprint deploys 1-2 production agents integrated to SIS/LMS. Scale operates the agents and expands across the institution.',
+      'The Forge Method for education starts with the workflow where student outcomes, staff time, or revenue impact can be measured — typically enrollment, advising, or grading. Sprint deploys 1-2 production agents integrated to SIS/LMS. Scale operates the agents and expands across the institution.',
   },
 ];
 

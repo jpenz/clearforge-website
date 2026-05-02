@@ -74,7 +74,7 @@ const transformationMaturity = [
     expectation:
       'Redesign how work moves across people, systems, decisions, handoffs, and controls.',
     clearforge:
-      'Map the current value chain and design the future-state workflow before engineering starts.',
+      'Map the current value chain and write the future workflow before engineering starts.',
   },
   {
     dimension: 'Custom technology build',
@@ -123,9 +123,9 @@ const implementationStandards = [
 const valueMapSteps = [
   {
     icon: Route,
-    label: 'Find the growth spots',
+    label: 'Find the constraint',
     detail:
-      'Forge Intelligence reads your website and maps where your industry, customers, and workflows create leverage.',
+      'Forge Intelligence reads your website and maps the workflows most likely to affect revenue, cost, service, speed, or quality.',
   },
   {
     icon: Gauge,
@@ -135,9 +135,9 @@ const valueMapSteps = [
   },
   {
     icon: Workflow,
-    label: 'Build the first machine',
+    label: 'Scope the first build',
     detail:
-      'You leave with the first AI system to scope: agents, workflow, data path, controls, and team adoption.',
+      'You leave with the first system to scope: workflow, data path, controls, human review, and adoption path.',
   },
 ];
 
@@ -243,8 +243,7 @@ export default function Home() {
             <div className="max-w-4xl">
               <p className="overline">The Gap We Close</p>
               <h2 className="mt-6 text-display">
-                AI transformation only works when strategy, technology, people, and economics move
-                together.
+                AI only matters when it changes how the work gets done.
               </h2>
             </div>
           </SectionReveal>
@@ -273,12 +272,11 @@ export default function Home() {
             <SectionReveal animation="slide-left" className="lg:col-span-5">
               <p className="overline">The Advantage Loop</p>
               <h2 className="mt-6 text-display">
-                Build the machine that makes you faster, sharper, and harder to compete with.
+                Build the operating loop that makes better work repeatable.
               </h2>
               <p className="mt-6 text-body-lg text-warm-gray">
-                ClearForge does not separate technology from people. We design the operating loop:
-                what AI handles, what your people decide, how work moves, and how performance
-                improves every week.
+                ClearForge does not separate technology from people. We define what AI handles, what
+                your team decides, how work moves, and which numbers should improve.
               </p>
             </SectionReveal>
 
@@ -309,7 +307,7 @@ export default function Home() {
               <div className="lg:col-span-7">
                 <p className="overline">Transformation Maturity</p>
                 <h2 className="mt-6 max-w-3xl text-display">
-                  Enterprise-grade transformation discipline. Builder-speed execution.
+                  Board-room discipline. Builder-speed execution.
                 </h2>
               </div>
               <div className="mt-8 lg:col-span-5 lg:mt-0">
@@ -350,8 +348,9 @@ export default function Home() {
             </div>
             <div className="mt-8 lg:col-span-5 lg:mt-0">
               <p className="text-body-lg text-warm-gray">
-                ClearForge treats AI as an operating system: measurable, governed, adopted, and
-                continuously improved. That is what separates transformation from a tool rollout.
+                ClearForge treats AI as a new way to run the work: measured, governed, adopted, and
+                improved after launch. That is what separates a production system from a tool
+                rollout.
               </p>
               <Button variant="secondary" className="mt-6" asChild>
                 <Link href="/operating-model" data-analytics="home_standards_operating_model">
@@ -385,15 +384,14 @@ export default function Home() {
               <div className="lg:col-span-7">
                 <p className="overline">Use Cases</p>
                 <h2 className="mt-6 max-w-3xl text-display">
-                  The first AI machines worth building have a trigger, a workflow, and a feedback
-                  loop.
+                  The first AI builds worth funding have a trigger, an owner, and a review loop.
                 </h2>
               </div>
               <div className="mt-8 lg:col-span-5 lg:mt-0">
                 <p className="text-body-lg text-warm-gray">
-                  ClearForge starts where AI becomes operational leverage: sales, service,
-                  operations, knowledge work, quality, and portfolio value creation. Each one is
-                  built to become an operating cadence, not a one-off tool.
+                  ClearForge starts where teams already feel pain: sales, service, operations,
+                  knowledge work, quality, and portfolio value creation. Each build is tied to a
+                  cadence leaders can inspect.
                 </p>
               </div>
             </div>
@@ -521,12 +519,11 @@ export default function Home() {
           <SectionReveal animation="scale-up">
             <p className="overline">Start Here</p>
             <h2 className="mt-6 max-w-3xl text-display">
-              Find the growth spots before you build anything.
+              Find the work worth fixing before you build anything.
             </h2>
             <p className="mt-6 max-w-2xl text-body-lg text-warm-gray">
-              Enter your website and Forge Intelligence drafts the first version of your operating
-              value chain, then highlights where AI can make you faster, higher quality, more
-              responsive, more efficient, and more profitable.
+              Enter your website and Forge Intelligence drafts a first-pass value chain, then shows
+              which workflows could improve speed, quality, service, cost, or margin.
             </p>
           </SectionReveal>
 
@@ -711,7 +708,7 @@ export default function Home() {
                 operating system.
               </p>
               <p className="mt-4 text-body text-warm-gray">
-                The people on your discovery call are the people who do the work. No leverage model,
+                The people on your discovery call are the people who do the work. No pyramid model,
                 offshore handoff, or translation layer between recommendation and implementation.
               </p>
 

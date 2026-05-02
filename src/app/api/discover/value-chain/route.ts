@@ -117,9 +117,9 @@ Generate a custom AI value chain for this company. Output STRICT JSON in this ex
 - Generate EXACTLY 5 functions covering the operating value chain (e.g., Sales & Commercial, Marketing, Operations, Customer Service, Finance & Back Office). Adapt to their specific business.
 - Each function should have EXACTLY 4 activities — specific to this company, not generic
 - Activity \`aiImpact\` should reference their actual products, customers, or workflows where possible
-- Activity \`impact\` should include a number (percentage or specific outcome metric)
+- Activity \`impact\` should name the metric to move. Include a number only when it can be responsibly inferred from the company or industry context.
 - \`type\` distribution: at least 1 agent, 1 automation, 1 model, 1 copilot across the full chain
-- \`topPriorities\` should pick the 3 highest-leverage activities for THIS company based on their industry, scale, and signals from research. Prioritize activities tied to revenue, throughput, or near-term cost.
+- \`topPriorities\` should pick the 3 activities most likely to matter for THIS company based on their industry, scale, and signals from research. Prioritize activities tied to revenue, throughput, or near-term cost.
 - No marketing fluff. Specific, actionable. Sound like a Bain-trained operator wrote it.
 
 Output ONLY the JSON, no preamble.`;

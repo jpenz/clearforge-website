@@ -193,8 +193,8 @@ async function fetchCompanyResearch(
    - Estimated impact (time saved, revenue uplift, cost reduction)
    - Implementation complexity (low/medium/high)
 
-4) GROWTH LEVERS: 2 ways AI could help them find new growth (where to grow)
-5) MACHINE BUILDING: 2 ways AI could operationalize that growth (how to build the machine)
+4) GROWTH PATHS: 2 ways AI could help them find new growth
+5) SYSTEM BUILDING: 2 ways AI could turn that growth path into a repeatable workflow
 
 Write for a CEO/COO audience in plain, direct language. Industry: ${industry}.`;
 
@@ -202,15 +202,15 @@ Write for a CEO/COO audience in plain, direct language. Industry: ${industry}.`;
 }
 
 async function fetchIndustryBestInClass(industry: string, challenge: string): Promise<string> {
-  const prompt = `For the ${industry} industry, define what best-in-class AI-enabled operations look like for this core pain point: "${challenge}".
+  const prompt = `For the ${industry} industry, define what strong AI-enabled operations look like for this core pain point: "${challenge}".
 
 Provide:
-1) 12-MONTH TARGET OPERATING MODEL: What the operation looks like when AI is working at scale
+1) 12-MONTH TARGET OPERATING MODEL: What the operation looks like when AI workflows are running in production
 2) 5 SEPARATING CAPABILITIES: What leaders do that followers don't
 3) 5 KPI RANGES: Specific metrics leaders monitor with benchmark ranges
 4) AI AGENT USE CASES: 3 specific AI agent workflows that top performers deploy for this pain point
 5) EXECUTION MISTAKES: 3 common mistakes companies make when trying to solve this with AI
-6) MATURITY PATH: Now (quick wins, 30 days) > Next (system builds, 90 days) > Scale (compound value, 12 months)
+6) MATURITY PATH: Now (quick wins, 30 days) > Next (system builds, 90 days) > Expand (repeatable value, 12 months)
 
 Keep it under 400 words. Be specific with numbers and examples. Write for operators, not technologists.`;
 
@@ -254,13 +254,13 @@ You are here because "${params.challenge}" is now blocking growth and execution 
 The core issue is not access to AI tools. The issue is a strategy-to-execution gap where process design, team habits, and system readiness are misaligned. The result is effort without compounding business value.
 
 ## Your Value Chain and Where AI Fits
-Every ${params.industry} business runs through a core sequence: lead generation, qualification, delivery, fulfillment, and retention. Based on your assessment, the friction is concentrated in the middle stages where manual handoffs, inconsistent processes, and information gaps slow execution. These are exactly the stages where AI agents create compounding value when deployed with proper controls.
+Every ${params.industry} business runs through a core sequence: lead generation, qualification, delivery, fulfillment, and retention. Based on your assessment, the friction is concentrated in the middle stages where manual handoffs, inconsistent processes, and information gaps slow execution. These are the stages where AI agents can create value when deployed with proper controls.
 
 ## Top Automation Opportunities
-Based on your challenge and industry context, three high-impact automation opportunities stand out: (1) An AI-powered workflow that reduces manual touchpoints in your core bottleneck area. (2) Automated intelligence gathering that gives your team better data before every decision. (3) A monitoring and alerting system that catches issues before they become problems. Each of these can be built and measured within 60 days.
+Based on your challenge and industry context, three practical automation opportunities stand out: (1) an AI-assisted workflow that reduces manual touchpoints in your core bottleneck area, (2) intelligence gathering that gives your team better data before decisions, and (3) a monitoring and alerting system that catches issues before they become larger problems. Each should be baselined before a build begins.
 
 ## What Best-in-Class Looks Like
-Best-in-class in ${params.industry} looks like disciplined execution with AI embedded in daily workflows, not novelty use cases. In 12 months, this means faster cycle times, clearer decision ownership, and measurable KPI lift with less operational drag.
+Strong operators in ${params.industry} use AI inside daily workflows, not novelty use cases. In 12 months, this should mean faster cycle times, clearer decision ownership, and measurable KPI movement with less operational drag.
 
 ## What You've Already Tried
 Most teams in this position have tested disconnected tools, generated local wins, and then hit adoption stalls. This pattern often happens when ownership is split and workflow redesign is treated as an afterthought. Your readiness profile points to this same risk if the next move is not integrated.
@@ -272,7 +272,7 @@ Concern: "Will this become a long consulting project?" Micro-story: A portfolio 
 You have enough signal to act with confidence and without overcommitting. The right next step is a ${params.suggestedEngagement}. This gives you a focused 90-day execution path with clear owners, metrics, and checkpoints. We will show you the value chain map, automation hotspots, and exactly where to start. No commitment beyond the conversation.`;
 }
 
-const CLOSER_SYSTEM_PROMPT = `You are a senior ClearForge advisor writing an AI transformation strategy report.
+const CLOSER_SYSTEM_PROMPT = `You are a senior ClearForge advisor writing an AI operating plan.
 Write in eight sections with these exact headings:
 ## Why This Matters Now
 ## The Core Problem
@@ -289,7 +289,7 @@ Style rules:
 - Emotional truth first, rational evidence second
 - Calm confidence, no pressure language
 - In "Your Value Chain" section: map 5-7 stages of their business, mark which are manual vs automated, identify the bottleneck
-- In "Top Automation Opportunities" section: list 3-4 specific AI agent workflows with estimated ROI
+- In "Top Automation Opportunities" section: list 3-4 specific AI agent workflows with value hypotheses and baseline metrics
 - Use short micro-stories in the "Concerns" section (2 concise examples)
 - End with a clear, low-commitment next step that creates urgency without pressure
 - Keep each section 3 to 5 sentences
@@ -318,7 +318,7 @@ Maturity level: ${params.scorecard.maturityLevel}
 Pillar summary: ${buildPillarSummary(params.scorecard)}
 Past-attempt inference: ${buildPastAttemptInference(params.scorecard)}
 Company research: ${params.companyResearch}
-Industry best-in-class benchmark: ${params.industryBestInClass}
+Industry operator benchmark: ${params.industryBestInClass}
 Recommended engagement: ${params.suggestedEngagement}
 
 Write the full strategy report in markdown with the exact headings above.`;

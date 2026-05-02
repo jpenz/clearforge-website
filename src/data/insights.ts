@@ -141,7 +141,7 @@ The best agent systems do not begin with the question "which model should we use
 For a revenue team, the workflow might be signal detection, account prioritization, playbook generation, contact discovery, outreach prep, and manager coaching. For a service team, it might be intake triage, case summarization, knowledge retrieval, response drafting, escalation, and QA. The stack should fit the work.
 
 ## Layer 1: Signal and Trigger Logic
-Every agentic workflow needs a trigger. Something happens that starts the work: a new lead, capital project, customer complaint, quality exception, invoice mismatch, renewal risk, or executive request. Good systems define the trigger precisely and prevent noisy activity from flooding the team.
+Every AI workflow needs a trigger. Something happens that starts the work: a new lead, capital project, customer complaint, quality exception, invoice mismatch, renewal risk, or executive request. Good systems define the trigger precisely and prevent noisy activity from flooding the team.
 
 ## Layer 2: Business Context
 Agents need structured context from CRM, ERP, documents, product rules, pricing history, customer records, support tickets, and policies. The quality of the context usually matters more than the novelty of the model.
@@ -226,7 +226,7 @@ Agents identify high-fit prospects, expansion signals, churn risk, pricing oppor
 Agents triage cases, draft responses, retrieve knowledge, summarize interactions, and flag escalation risk. The KPI link is handle time, first-contact resolution, service cost, and customer satisfaction.
 
 ### Operations Throughput
-Agents compress quoting, scheduling, reporting, order review, invoice matching, and exception handling. The KPI link is labor leverage, cycle time, error rate, and margin leakage.
+Agents compress quoting, scheduling, reporting, order review, invoice matching, and exception handling. The KPI link is labor capacity, cycle time, error rate, and margin leakage.
 
 ### Management Productivity
 Agents prepare operating reviews, synthesize KPIs, identify exceptions, draft action plans, and track commitments. The KPI link is decision speed and leadership capacity.
@@ -1178,7 +1178,7 @@ Low-volume, high-ambiguity work without clear data context or governance.`,
     readingTime: 12,
     author: jamesPenz,
     body: `## TL;DR
-AI consulting costs in 2026 generally fall into four bands: fixed-fee diagnostics ($10K-$25K), implementation sprints ($75K-$250K), enterprise transformations ($500K-$2M+), and ongoing managed AI operations ($5K-$25K per month). Mid-market companies ($25M-$500M revenue) typically pay $90K-$300K all-in for a first production AI system, with 3-5x ROI expected within 12 months. Pricing transparency is increasingly a competitive wedge: 73% of B2B buyers prefer upfront pricing, but most large consulting firms still hide it.
+AI consulting costs in 2026 generally fall into four bands: fixed-fee diagnostics ($10K-$25K), implementation sprints ($75K-$250K), enterprise programs ($500K-$2M+), and ongoing managed AI operations ($5K-$25K per month). Mid-market companies ($25M-$500M revenue) typically pay $90K-$300K all-in for a first production AI system. Pricing transparency is increasingly a competitive wedge: 73% of B2B buyers prefer upfront pricing, but most large consulting firms still hide it.
 
 ## What "AI Consulting" Actually Includes
 The phrase "AI consulting" covers very different scopes depending on the firm. Before comparing prices, separate these into four categories:
@@ -1186,7 +1186,7 @@ The phrase "AI consulting" covers very different scopes depending on the firm. B
 1. **AI strategy and diagnostic** — workflow analysis, opportunity identification, ROI sizing, roadmap. Output is a plan, not a working system.
 2. **AI agent and automation build** — engineering production systems, integrating with existing software, training models, deploying agents.
 3. **Managed AI operations** — running, monitoring, and optimizing deployed systems on an ongoing basis.
-4. **Enterprise AI transformation** — multi-year programs covering strategy, build, change management, and governance across the company.
+4. **Enterprise AI program** — multi-year work covering strategy, build, change management, and governance across the company.
 
 Most mid-market buyers want categories 1 and 2 (with option 3) and don't need category 4. Yet category 4 pricing is what shows up in most public benchmarks, which inflates expectations.
 
@@ -1200,7 +1200,7 @@ ClearForge benchmark: **Forge Diagnostic, $15K, 4 weeks, money-back guarantee** 
 ### Tier 2: AI Implementation Sprint ($75K-$250K)
 A 10-14 week engagement that builds and deploys a working production AI system in one workflow. Includes integration with existing systems (CRM, ERP, custom apps), data pipelines, model training, agent orchestration, and team training.
 
-ClearForge benchmark: **Forge Sprint, $75K-$200K, 10-14 weeks**, scoped to a single high-leverage workflow.
+ClearForge benchmark: **Forge Sprint, $75K-$200K, 10-14 weeks**, scoped to one workflow with a clear owner and baseline metric.
 
 Variation drivers within the band:
 - Integration complexity (3 systems vs 12 systems)
@@ -1255,7 +1255,7 @@ This is changing. Mid-market AI consulting firms increasingly publish their tier
 ## ROI Expectations
 For mid-market companies, **typical ROI on a $90K-$300K Sprint engagement is 3-5x within 12 months** through cost reduction, throughput improvement, or revenue lift. AI in private equity portfolios drives 5-7% EBITDA uplift when systematically deployed (BCG, McKinsey research, 2026).
 
-A $15K Diagnostic frequently uncovers $200K+ in identifiable quick-win opportunities. A $100K Sprint routinely produces $300K-$500K in annual operating value through automation, error reduction, and throughput gains.
+A $15K Diagnostic should uncover a value backlog large enough to justify the next decision. A $100K Sprint should have a named workflow, baseline metric, owner, and business case before engineering begins.
 
 ## When to Pay More vs Less
 **Pay more for:** Senior-led teams when speed-to-production matters, regulated environments where compliance shortcuts are dangerous, and engagements where the firm has named industry-specific case studies.
@@ -1265,7 +1265,7 @@ A $15K Diagnostic frequently uncovers $200K+ in identifiable quick-win opportuni
 **Don't pay for:** Strategy decks with no implementation path, "AI strategy" engagements that don't end with a working system, vendor-pushed platform deployments where the consultant is incentivized to expand the platform footprint.
 
 ## Bottom Line
-For a mid-market company starting AI in 2026, expect to invest **$15K for a credible diagnostic and $100K-$200K for the first production system**. Total first-year all-in including managed operations: **$150K-$350K**. Expect 3-5x ROI within 12 months. Demand pricing transparency, fixed-fee phase 1, senior staffing, and outcome-tied milestones.`,
+For a mid-market company starting AI in 2026, expect to invest **$15K for a credible diagnostic and $100K-$200K for the first production system**. Total first-year all-in including managed operations: **$150K-$350K**. Demand pricing transparency, fixed-fee phase 1, senior staffing, baseline metrics, and outcome-tied milestones.`,
     relatedSlugs: [
       'ai-readiness-assessment-guide',
       'fractional-caio-vs-full-time',
@@ -1303,7 +1303,7 @@ For a mid-market company starting AI in 2026, expect to invest **$15K for a cred
       {
         question: 'What is the typical ROI on AI consulting?',
         answer:
-          'Mid-market companies typically see 3-5x ROI within 12 months on a $90K-$300K Sprint engagement, primarily through cost reduction, throughput improvement, or revenue lift. PE portfolios see 5-7% EBITDA uplift from systematic AI deployment.',
+          'ROI depends on the workflow, baseline, adoption, and implementation quality. A credible Sprint should define the value hypothesis before build and track cost reduction, throughput improvement, revenue lift, quality, or cycle time after launch.',
       },
       {
         question: 'Why do most AI consulting firms hide their pricing?',

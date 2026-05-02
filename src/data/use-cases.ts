@@ -119,7 +119,7 @@ export const useCases: UseCase[] = [
     eyebrow: 'Revenue growth',
     seoTitle: 'AI Sales Pipeline Acceleration for B2B Growth',
     metaDescription:
-      'Build an AI sales pipeline machine that finds growth spots, prioritizes accounts, automates follow-up, and gives sales leaders cleaner forecast visibility.',
+      'Build an AI sales pipeline system that finds account triggers, prioritizes follow-up, and gives sales leaders cleaner forecast visibility.',
     keywords: [
       'AI sales pipeline',
       'AI sales automation',
@@ -128,9 +128,9 @@ export const useCases: UseCase[] = [
       'sales pipeline acceleration',
     ],
     summary:
-      'Turn scattered CRM data, market triggers, intent signals, and seller activity into a disciplined growth machine.',
+      'Turn scattered CRM data, market triggers, intent signals, and seller activity into a disciplined growth system.',
     heroStatement:
-      'Find the accounts most likely to move. Give your team the AI machine to reach them first.',
+      'Find the accounts most likely to move, then give sellers a clear next action before the window closes.',
     outcome:
       'More qualified pipeline, faster follow-up, cleaner data, and a sales team focused on judgment instead of manual research.',
     bestFor:
@@ -146,7 +146,7 @@ export const useCases: UseCase[] = [
     },
     operatorView: {
       eyebrow: 'Anonymized Operator View',
-      headline: 'What the growth machine looks like once it is operating.',
+      headline: 'What the growth system looks like once it is operating.',
       body: 'A CEO, COO, PE operator, or owner needs to see how ClearForge finds the growth spots, turns them into scored pursuits, gives people the next action, and learns from the field every week.',
       productLabel: 'Growth Intelligence Command',
       rhythm: 'Weekly territory growth review',
@@ -275,7 +275,7 @@ export const useCases: UseCase[] = [
           detail: 'Capital project, expansion, regulation, or buyer change.',
         },
         {
-          label: 'AI machine',
+          label: 'Workflow system',
           detail: 'Score, brief, route, draft, and recommend the next action.',
         },
         { label: 'Team judgment', detail: 'Validate fit, update outcome, and improve the model.' },
@@ -369,7 +369,7 @@ export const useCases: UseCase[] = [
       },
       {
         phase: 'Weeks 2-3',
-        title: 'Build the trigger machine',
+        title: 'Build the trigger system',
         description:
           'Connect data sources, design the trigger taxonomy, create scoring logic, and ship the first account intelligence workflow.',
       },
@@ -443,7 +443,7 @@ export const useCases: UseCase[] = [
     },
     operatorView: {
       eyebrow: 'Anonymized Operator View',
-      headline: 'What the service machine looks like when speed has controls.',
+      headline: 'What the service system looks like when speed has controls.',
       body: 'The right service system gives leaders a live picture of demand, escalation risk, draft quality, customer sentiment, and where human judgment is required before trust is damaged.',
       productLabel: 'Service Quality Command',
       rhythm: 'Daily backlog and escalation standup',
@@ -537,7 +537,10 @@ export const useCases: UseCase[] = [
           label: 'Customer signal',
           detail: 'Ticket, email, sentiment, SLA, or account-risk event.',
         },
-        { label: 'AI machine', detail: 'Classify, draft, route, quality-check, and flag risk.' },
+        {
+          label: 'Workflow system',
+          detail: 'Classify, draft, route, quality-check, and flag risk.',
+        },
         {
           label: 'Team judgment',
           detail: 'Approve, personalize, resolve, and improve the knowledge base.',
@@ -602,7 +605,7 @@ export const useCases: UseCase[] = [
       {
         title: 'Knowledge gap loop',
         description:
-          'Identifies repeated questions and missing documentation so the service machine gets smarter every week.',
+          'Identifies repeated questions and missing documentation so the service system improves every week.',
       },
     ],
     metrics: [
@@ -675,7 +678,7 @@ export const useCases: UseCase[] = [
   },
   {
     slug: 'ai-operations-efficiency-machine',
-    title: 'AI Operations Efficiency Machine',
+    title: 'AI Operations Efficiency System',
     shortTitle: 'Operations Efficiency',
     eyebrow: 'Margin expansion',
     seoTitle: 'AI Operations Automation for Efficiency and Margin',
@@ -691,7 +694,7 @@ export const useCases: UseCase[] = [
     summary:
       'Find the places where work slows down, then build the AI workflows that remove drag without breaking the operating model.',
     heroStatement:
-      'Turn manual handoffs and hidden bottlenecks into an operating machine that moves faster every week.',
+      'Turn manual handoffs and hidden bottlenecks into a workflow your managers can actually control.',
     outcome:
       'Less rework, fewer delays, cleaner handoffs, faster cycle times, and a clearer path to margin expansion.',
     bestFor:
@@ -707,7 +710,7 @@ export const useCases: UseCase[] = [
     },
     operatorView: {
       eyebrow: 'Anonymized Operator View',
-      headline: 'What the operations machine shows leaders every day.',
+      headline: 'What the operations system shows leaders every day.',
       body: 'Operators do not need another attractive dashboard. They need a work-control view that shows which handoffs are stuck, what evidence is missing, who owns the decision, and what gets margin back.',
       productLabel: 'Operations Flow Command',
       rhythm: 'Daily throughput and exception review',
@@ -805,7 +808,7 @@ export const useCases: UseCase[] = [
           detail: 'Missing input, wait time, status drift, or variance event.',
         },
         {
-          label: 'AI machine',
+          label: 'Workflow system',
           detail: 'Validate, route, draft, summarize, and surface the blocker.',
         },
         {
@@ -896,7 +899,7 @@ export const useCases: UseCase[] = [
       },
       {
         phase: 'Weeks 2-3',
-        title: 'Build the work machine',
+        title: 'Build the work-control system',
         description:
           'Create stage gates, routing, validation, summaries, and reporting workflows around the real process.',
       },
@@ -954,7 +957,7 @@ export const useCases: UseCase[] = [
     summary:
       'Give analysts, managers, and experts an AI layer that finds, reads, compares, summarizes, and prepares decisions.',
     heroStatement:
-      'Stop making your best people hunt for context. Put the knowledge machine around them.',
+      'Stop making your best people hunt for context. Put the evidence, draft, and review path around them.',
     outcome:
       'Faster research, cleaner reporting, more consistent analysis, and better use of scarce expert judgment.',
     bestFor:
@@ -1066,7 +1069,7 @@ export const useCases: UseCase[] = [
           detail: 'Source, document, meeting note, report, or market event.',
         },
         {
-          label: 'AI machine',
+          label: 'Workflow system',
           detail: 'Extract, compare, cite, score, draft, and highlight uncertainty.',
         },
         {
@@ -1230,7 +1233,7 @@ export const useCases: UseCase[] = [
     },
     operatorView: {
       eyebrow: 'Anonymized Operator View',
-      headline: 'What the exception machine shows before quality slips compound.',
+      headline: 'What the exception system shows before quality slips compound.',
       body: 'A serious quality system shows severity, ownership, customer exposure, root-cause evidence, corrective action, and repeat patterns before failures turn into rework, claims, or reputation damage.',
       productLabel: 'Exception Control Tower',
       rhythm: 'Daily severity and corrective-action review',
@@ -1324,7 +1327,10 @@ export const useCases: UseCase[] = [
           label: 'Quality signal',
           detail: 'Claim, inspection, return, complaint, recall, or nonconformance.',
         },
-        { label: 'AI machine', detail: 'Detect, classify, group, route, and summarize evidence.' },
+        {
+          label: 'Workflow system',
+          detail: 'Detect, classify, group, route, and summarize evidence.',
+        },
         {
           label: 'Team judgment',
           detail: 'Contain, correct, verify, and remove the repeat cause.',
@@ -1449,7 +1455,7 @@ export const useCases: UseCase[] = [
       {
         question: 'What makes this different from a dashboard?',
         answer:
-          'Dashboards show what happened. An exception machine routes the issue, prepares context, tracks action, and helps leaders prevent the repeat.',
+          'Dashboards show what happened. An exception system routes the issue, prepares context, tracks action, and helps leaders prevent the repeat.',
       },
     ],
   },
@@ -1477,7 +1483,7 @@ export const useCases: UseCase[] = [
     bestFor:
       'PE firms, operating partners, and portfolio leadership teams that need practical AI initiatives tied to hold-period economics.',
     fieldProof: {
-      headline: 'Reusable value creation comes from retuning the same machine.',
+      headline: 'Reusable value creation comes from retuning the same operating pattern.',
       body: 'The same operating pattern can support different business lines: one trigger taxonomy for industrial projects, another for automation demand, another for data-center infrastructure, another for specialty materials. That is the portfolio lesson: build the architecture once, retune it for each company and value lever.',
       bullets: [
         'Screen companies for repeatable revenue, service, operations, reporting, and quality plays.',
@@ -1579,7 +1585,7 @@ export const useCases: UseCase[] = [
           detail: 'Repeated pain, sponsor pull, KPI gap, or exit narrative lever.',
         },
         {
-          label: 'AI machine',
+          label: 'Workflow system',
           detail: 'Screen, rank, brief, track, and package reusable playbooks.',
         },
         { label: 'Team judgment', detail: 'Fund, govern, remove blockers, and scale what works.' },
