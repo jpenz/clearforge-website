@@ -47,6 +47,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.83,
   }));
 
+  const blueprintPages: MetadataRoute.Sitemap = [
+    {
+      url: `${siteUrl}/blueprints/cybersecurity-technology-company`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.78,
+    },
+  ];
+
   const caseStudyPages: MetadataRoute.Sitemap = caseStudies.map((study) => ({
     url: `${siteUrl}/case-studies/${study.slug}`,
     lastModified,
@@ -72,6 +81,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...industryPages,
     ...servicePages,
     ...useCasePages,
+    ...blueprintPages,
     ...caseStudyPages,
     ...insightPages,
     ...legal,

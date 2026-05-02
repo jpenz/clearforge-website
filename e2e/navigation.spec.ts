@@ -17,6 +17,7 @@ const PAGES = [
   { path: '/services/performance-improvement', name: 'Performance Improvement' },
   { path: '/about', name: 'About' },
   { path: '/case-studies', name: 'Case Studies' },
+  { path: '/blueprints/cybersecurity-technology-company', name: 'Cybersecurity Blueprint' },
   { path: '/contact', name: 'Contact' },
   { path: '/scorecard', name: 'Scorecard' },
 ];
@@ -47,18 +48,16 @@ test.describe('Page Loads — No Errors', () => {
 });
 
 test.describe('Navigation flows', () => {
-  test('clicking Services nav link goes to /services', async ({ page }) => {
+  test('clicking Capabilities nav link goes to /services', async ({ page }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
 
-    const servicesLink = page
+    const capabilitiesLink = page
       .getByRole('navigation')
-      .getByRole('link', { name: /^services$/i })
+      .getByRole('link', { name: /^capabilities$/i })
       .first();
 
-    // It may be in a dropdown — hover first
-    await servicesLink.hover().catch(() => {});
-    await servicesLink.click();
+    await capabilitiesLink.click();
     await page.waitForLoadState('domcontentloaded');
     expect(page.url()).toContain('/services');
   });
