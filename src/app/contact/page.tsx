@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { trackEvent } from '@/lib/analytics';
 
 const revenueOptions = ['Under $5M', '$5M - $25M', '$25M - $100M', '$100M - $500M', '$500M+'];
 
@@ -33,6 +34,10 @@ export default function ContactPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    trackEvent('contact_form_submit', {
+      revenue: form.revenue || 'not_provided',
+      has_company: Boolean(form.company.trim()),
+    });
     try {
       await fetch('/api/contact', {
         method: 'POST',

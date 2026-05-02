@@ -15,6 +15,7 @@ const PAGES = [
   { path: '/services/custom-ai-agents', name: 'Custom AI Agents' },
   { path: '/services/pe-value-creation', name: 'PE Value Creation' },
   { path: '/services/performance-improvement', name: 'Performance Improvement' },
+  { path: '/operating-model', name: 'Operating Model' },
   { path: '/about', name: 'About' },
   { path: '/case-studies', name: 'Case Studies' },
   { path: '/blueprints/cybersecurity-technology-company', name: 'Cybersecurity Blueprint' },
@@ -66,7 +67,7 @@ test.describe('Navigation flows', () => {
     test.skip(testInfo.project.name !== 'mobile', 'Mobile menu is only visible on small screens.');
 
     await page.goto('/');
-    await page.waitForLoadState('domcontentloaded');
+    await page.waitForLoadState('networkidle');
 
     await page.getByRole('button', { name: /open menu/i }).click();
     const menu = page.getByRole('dialog');
@@ -80,7 +81,7 @@ test.describe('Navigation flows', () => {
     await page.waitForLoadState('networkidle');
 
     const cta = page
-      .getByRole('link', { name: /get started|book a call|contact|scorecard|assessment/i })
+      .getByRole('link', { name: /get started|book a call|contact|scorecard|assessment|value map/i })
       .first();
 
     const isVisible = await cta.isVisible().catch(() => false);

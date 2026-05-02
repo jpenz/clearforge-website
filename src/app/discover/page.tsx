@@ -2,7 +2,9 @@
 
 import {
   ArrowRight,
+  BarChart3,
   Building2,
+  ClipboardCheck,
   FileText,
   Globe,
   Loader2,
@@ -12,6 +14,7 @@ import {
   Send,
   Sparkles,
   Star,
+  Target,
   User,
   X,
 } from 'lucide-react';
@@ -19,6 +22,7 @@ import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { ChatMessage } from '@/components/discover/chat-message';
 import { Button } from '@/components/ui/button';
+import { trackEvent } from '@/lib/analytics';
 
 interface Message {
   role: 'assistant' | 'user' | 'system';
@@ -79,6 +83,32 @@ const SITUATION_CARDS = [
   },
 ];
 
+const VALUE_MAP_DELIVERABLES = [
+  {
+    icon: Target,
+    label: 'Value-chain map',
+    detail:
+      'A company-specific view of where AI could move growth, speed, quality, service, or margin.',
+  },
+  {
+    icon: BarChart3,
+    label: 'Maturity read',
+    detail:
+      'A practical score of readiness, operating friction, adoption risk, and first-build potential.',
+  },
+  {
+    icon: ClipboardCheck,
+    label: 'First-build agenda',
+    detail: 'The workflow, agents, data path, controls, and owners ClearForge would scope first.',
+  },
+  {
+    icon: FileText,
+    label: 'Executive report',
+    detail:
+      'A concise PDF-style report you can print, share, or use to prepare a leadership discussion.',
+  },
+];
+
 export default function DiscoverPage() {
   const [phase, setPhase] = useState<'url' | 'researching' | 'value-chain' | 'chat'>('url');
   const [websiteUrl, setWebsiteUrl] = useState('');
@@ -108,6 +138,7 @@ export default function DiscoverPage() {
     e.preventDefault();
     if (!websiteUrl.trim()) return;
 
+    trackEvent('ai_value_map_started', { mode: 'website', domain: websiteUrl.trim() });
     setPhase('researching');
 
     try {
@@ -183,6 +214,12 @@ export default function DiscoverPage() {
     const curious = Object.entries(annotations)
       .filter(([_, a]) => a.priority === 'curious')
       .map(([key, a]) => ({ key, notes: a.notes }));
+
+    trackEvent('ai_value_chain_reviewed', {
+      must_have_count: must.length,
+      curious_count: curious.length,
+      company: valueChain.companyName,
+    });
 
     const summary =
       must.length === 0 && curious.length === 0
@@ -292,6 +329,10 @@ export default function DiscoverPage() {
     e.preventDefault();
     if (!reportName.trim() || !reportEmail.trim()) return;
 
+    trackEvent('ai_value_map_report_requested', {
+      company: reportCompany.trim() || valueChain?.companyName || intelligence?.domain || 'unknown',
+      message_count: messages.filter((m) => m.role !== 'system').length,
+    });
     setReportLoading(true);
     try {
       const res = await fetch('/api/discover/report', {
@@ -421,15 +462,15 @@ export default function DiscoverPage() {
       {/* ═══ PHASE 1: URL INPUT ═══ */}
       {phase === 'url' && (
         <div className="flex-1 flex items-center justify-center px-4 sm:px-6">
-          <div className="max-w-xl w-full text-center">
+          <div className="max-w-3xl w-full text-center">
             <Sparkles className="h-10 w-10 text-brass mx-auto mb-6" />
             <h2 className="text-display text-bone">Let&apos;s analyze your business.</h2>
-            <p className="mt-4 text-body-lg text-stone max-w-md mx-auto">
-              Enter your company website and our AI will research your value chain, identify
-              automation opportunities, and find roles we can help automate.
+            <p className="mt-4 text-body-lg text-stone max-w-xl mx-auto">
+              Enter your company website and Forge Intelligence will draft a value-chain map,
+              maturity read, and first-build recommendation for a custom AI operating system.
             </p>
 
-            <form onSubmit={handleUrlSubmit} className="mt-10">
+            <form onSubmit={handleUrlSubmit} className="mt-10 mx-auto max-w-xl">
               <div className="flex flex-col sm:flex-row gap-3">
                 <div className="flex-1 relative">
                   <Globe className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-stone" />
@@ -460,6 +501,19 @@ export default function DiscoverPage() {
               Skip — I&apos;ll describe my business instead
             </button>
 
+            <div className="mt-10 grid gap-3 text-left sm:grid-cols-2">
+              {VALUE_MAP_DELIVERABLES.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div key={item.label} className="border border-divider-dark bg-bone/[0.03] p-4">
+                    <Icon className="h-4 w-4 text-brass-light" />
+                    <p className="mt-3 text-sm font-semibold text-bone">{item.label}</p>
+                    <p className="mt-1 text-xs leading-relaxed text-stone">{item.detail}</p>
+                  </div>
+                );
+              })}
+            </div>
+
             <div className="mt-12 sm:mt-16 grid grid-cols-3 gap-4 sm:gap-8 text-center">
               {[
                 { metric: '5 min', label: 'To complete' },
@@ -486,10 +540,10 @@ export default function DiscoverPage() {
             </h2>
             <div className="mt-8 space-y-3 text-left max-w-sm mx-auto">
               {[
-                'Analyzing your business model and value chain',
-                'Identifying industry-specific AI use cases',
-                'Scanning for job postings and roles to automate',
-                'Generating a custom AI value chain for your business',
+                'Mapping your business model and operating value chain',
+                'Scoring industry-specific AI use cases and maturity signals',
+                'Scanning for roles, handoffs, and workflows AI can improve',
+                'Generating the first-build agenda for a custom AI operating model',
               ].map((step, i) => (
                 <div
                   key={step}
@@ -523,8 +577,22 @@ export default function DiscoverPage() {
               </h2>
               <p className="mt-4 text-body text-stone max-w-2xl">
                 Click any activity to mark priority and add notes. Your annotations carry into the
-                conversation and the final report.
+                conversation and the final report, so the next step is grounded in your operating
+                reality.
               </p>
+
+              <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                {VALUE_MAP_DELIVERABLES.slice(0, 3).map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.label} className="border border-divider-dark p-4">
+                      <Icon className="h-4 w-4 text-brass-light" />
+                      <p className="mt-3 text-sm font-semibold text-bone">{item.label}</p>
+                      <p className="mt-1 text-xs leading-relaxed text-stone">{item.detail}</p>
+                    </div>
+                  );
+                })}
+              </div>
 
               {/* ClearForge top priorities — anchor for visitor */}
               {valueChain.topPriorities && valueChain.topPriorities.length > 0 && (
@@ -765,8 +833,9 @@ export default function DiscoverPage() {
                         Ready for your personalized AI value map?
                       </h3>
                       <p className="text-xs text-stone mt-1">
-                        Based on our conversation, we&apos;ll generate a detailed report with
-                        specific recommendations for your business.
+                        Based on the value chain and conversation, we&apos;ll generate a concise
+                        executive report with maturity read, first-build recommendation, risks, and
+                        next steps.
                       </p>
 
                       {!showReportForm ? (

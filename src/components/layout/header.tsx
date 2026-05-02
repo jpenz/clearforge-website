@@ -61,6 +61,7 @@ const NAV_SECTIONS = [
     title: 'The Forge Method',
     links: [
       { href: '/services', label: 'How We Work' },
+      { href: '/operating-model', label: 'AI Operating Model' },
       { href: '/pricing', label: 'Investment & Timeline' },
       { href: '/discover', label: 'AI Value Map' },
       { href: '/scorecard', label: 'AI Readiness Scorecard' },
@@ -80,6 +81,7 @@ const NAV_SECTIONS = [
 const TOP_NAV = [
   { href: '/industries', label: 'Industries', hasDropdown: true },
   { href: '/services', label: 'Capabilities', hasDropdown: true },
+  { href: '/operating-model', label: 'Operating Model' },
   { href: '/use-cases', label: 'Use Cases' },
   { href: '/case-studies', label: 'Case Studies' },
   { href: '/insights', label: 'Insights' },

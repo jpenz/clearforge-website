@@ -43,6 +43,244 @@ const jamesPenz = {
 
 export const insights: Insight[] = [
   {
+    slug: 'ai-pilots-operating-systems',
+    title: 'Why AI Pilots Fail to Become Operating Systems',
+    excerpt:
+      'Most AI pilots prove that a model can work. They do not prove that the business can run differently. Here is the operating-model gap leaders have to close.',
+    category: 'AI Strategy',
+    date: '2026-05-02',
+    readingTime: 11,
+    author: jamesPenz,
+    body: `## TL;DR
+AI pilots fail when they test technology without redesigning the workflow around it. The problem is rarely that the model cannot produce useful output. The problem is that the business has not defined the owner, data path, exception rules, approval logic, adoption cadence, or performance metric that would make the output operational. A pilot becomes an operating system only when it changes how work is triggered, routed, decided, measured, and improved.
+
+## A Pilot Is Not a Transformation
+Most AI pilots are designed to answer a narrow question: can this model or agent complete a task? That is useful, but it is not enough. A company can run a successful pilot and still fail to create business value because the surrounding operating model never changed.
+
+The leadership question is different: can this workflow run faster, cheaper, better, or more consistently because AI is now part of the way work happens? That question forces a different design standard.
+
+## The Five Missing Pieces
+### 1. A Business Owner
+If no leader owns the KPI, the pilot becomes a technology experiment. Every meaningful AI initiative needs a named business owner accountable for revenue, cost, throughput, quality, or service movement.
+
+### 2. A Workflow Boundary
+AI cannot improve an undefined process. The team needs to know when the work starts, what context the system receives, what action the AI takes, what a person reviews, and when the workflow ends.
+
+### 3. A Data Path
+Strong AI output depends on context. If customer records, documents, pricing logic, case history, or operating rules are scattered across systems, the build must solve that context problem before scale.
+
+### 4. Control Rules
+Production AI needs confidence thresholds, escalation paths, human approval, audit trail, rollback, and clear failure modes. These rules are not bureaucracy. They are what makes the system safe enough to use.
+
+### 5. An Improvement Cadence
+AI systems drift without management. Leaders need a recurring review of usage, quality, exceptions, cycle time, and outcome movement. That cadence turns launch into compounding learning.
+
+## The Pilot-to-System Test
+A pilot is ready to become an operating system when the team can answer six questions:
+
+1. Which KPI should move?
+2. Who owns the KPI?
+3. What workflow will change?
+4. What context does the system need?
+5. What decisions stay with people?
+6. How will performance be reviewed after launch?
+
+If those answers are fuzzy, more experimentation will not help much. The better move is to redesign the operating model around one high-value workflow and then build narrowly.
+
+## What ClearForge Builds Instead
+ClearForge starts with the value chain, not the model. We identify the places where better information, faster routing, stronger recommendations, or automated execution can change business performance. Then we build the custom agents, data paths, dashboards, controls, and adoption routines around that workflow.
+
+The result is not "an AI tool." It is a new way for the team to run sales, service, operations, quality, knowledge work, or portfolio value creation.
+
+## Recommended Next Move
+Choose one pilot that looked promising but stalled. Reframe it as an operating-system design problem. Map the workflow, owner, KPI, data path, controls, and adoption cadence before deciding whether to invest another dollar in technology.`,
+    relatedSlugs: ['widening-ai-value-gap', 'ai-agents-new-workforce'],
+    seo: {
+      title: 'Why AI Pilots Fail to Become Operating Systems',
+      description:
+        'Learn why AI pilots stall and how leaders convert AI experiments into production operating systems with owners, workflows, controls, and KPIs.',
+      keywords: ['AI pilots fail', 'AI operating system', 'AI transformation strategy'],
+    },
+    tags: {
+      solutions: ['ai-strategy', 'managed-operations', 'custom-ai-agents'],
+      industries: ['manufacturing', 'private-equity', 'professional-services'],
+    },
+    faqs: [
+      {
+        question: 'Why do most AI pilots fail?',
+        answer:
+          'They test model output without redesigning the workflow, ownership, controls, data path, and adoption cadence required for production value.',
+      },
+      {
+        question: 'When is an AI pilot ready to scale?',
+        answer:
+          'When it has a KPI owner, defined workflow boundary, reliable data path, control rules, and a recurring performance review cadence.',
+      },
+      {
+        question: 'What should leaders do with a stalled AI pilot?',
+        answer:
+          'Reframe it around the operating model: what work changes, who owns the outcome, what context is required, and how the system will be managed.',
+      },
+    ],
+  },
+  {
+    slug: 'custom-agent-stack-mid-market',
+    title: 'The Custom Agent Stack for Mid-Market Companies',
+    excerpt:
+      'Mid-market companies do not need an AI science project. They need a practical agent stack that connects work, data, controls, and dashboards.',
+    category: 'AI Agents',
+    date: '2026-05-02',
+    readingTime: 10,
+    author: jamesPenz,
+    body: `## TL;DR
+A custom agent stack is the set of AI workers, workflow rules, data context, integrations, approvals, and dashboards that let a company run a specific operating process better. Mid-market leaders should avoid starting with a platform decision. Start with the workflow economics, then build the smallest reliable stack that can move the KPI.
+
+## The Stack Starts With the Work
+The best agent systems do not begin with the question "which model should we use?" They begin with "which workflow should run differently?" That distinction matters because agent design is mostly operating design.
+
+For a revenue team, the workflow might be signal detection, account prioritization, playbook generation, contact discovery, outreach prep, and manager coaching. For a service team, it might be intake triage, case summarization, knowledge retrieval, response drafting, escalation, and QA. The stack should fit the work.
+
+## Layer 1: Signal and Trigger Logic
+Every agentic workflow needs a trigger. Something happens that starts the work: a new lead, capital project, customer complaint, quality exception, invoice mismatch, renewal risk, or executive request. Good systems define the trigger precisely and prevent noisy activity from flooding the team.
+
+## Layer 2: Business Context
+Agents need structured context from CRM, ERP, documents, product rules, pricing history, customer records, support tickets, and policies. The quality of the context usually matters more than the novelty of the model.
+
+## Layer 3: Agent Workflows
+This is where the system performs useful work: research, enrichment, summarization, classification, recommendation, routing, drafting, calculation, or execution. The agent should have a clear job and a clear boundary.
+
+## Layer 4: Human Review and Escalation
+Mid-market companies need practical controls. The system should know when confidence is high enough to proceed, when a person must approve, when to escalate, and when to stop. This is how leaders get speed without losing control.
+
+## Layer 5: Integration Into Daily Tools
+If the workflow lives outside the systems people already use, adoption suffers. A good custom stack pushes the right action into CRM, ticketing, email, Slack or Teams, ERP, dashboards, or the purpose-built interface where the work is managed.
+
+## Layer 6: Performance Dashboard
+Leaders need to see usage, quality, cycle time, exception rate, conversion, cost savings, and financial movement. Without measurement, the system becomes another invisible layer of software.
+
+## What Not to Overbuild
+Do not start by trying to automate everything. Do not build a general agent that can do any task. Do not require a perfect data lake before starting. The right first stack is narrow, measurable, and connected to a workflow where the economics are obvious.
+
+## The ClearForge View
+Custom does not mean unnecessarily complex. It means the system is designed around the way your business actually creates value. The first version should be tight enough to launch quickly and instrumented enough to improve every month.`,
+    relatedSlugs: ['ai-agents-new-workforce', 'continuous-ai-agents'],
+    seo: {
+      title: 'The Custom Agent Stack for Mid-Market Companies',
+      description:
+        'A practical guide to the AI agent stack mid-market companies need: triggers, context, workflows, controls, integrations, and dashboards.',
+      keywords: ['custom AI agents', 'agentic workflow', 'mid-market AI automation'],
+    },
+    tags: {
+      solutions: ['custom-ai-agents', 'ai-automation', 'managed-operations'],
+      industries: ['manufacturing', 'saas', 'wholesale-distribution'],
+    },
+    faqs: [
+      {
+        question: 'What is a custom agent stack?',
+        answer:
+          'It is the workflow-specific combination of AI agents, business context, integrations, controls, and dashboards needed to improve a real operating process.',
+      },
+      {
+        question: 'Should mid-market companies buy a platform first?',
+        answer:
+          'Usually no. They should first define the workflow economics and then choose or build only the technology needed to move that KPI.',
+      },
+      {
+        question: 'How narrow should the first agent build be?',
+        answer:
+          'Narrow enough to launch quickly, specific enough to measure, and important enough that improvement matters to a business leader.',
+      },
+    ],
+  },
+  {
+    slug: 'pe-ai-ebitda-playbook',
+    title: 'How PE Firms Turn AI Experiments into EBITDA',
+    excerpt:
+      'Private equity teams need a repeatable way to convert AI opportunities into value creation. This playbook shows the operating discipline required.',
+    category: 'PE Value Creation',
+    date: '2026-05-02',
+    readingTime: 12,
+    author: jamesPenz,
+    body: `## TL;DR
+Private equity firms create AI value when they treat AI as a portfolio operating capability, not a collection of experiments. The practical path is to diagnose value pools, score readiness, select a small number of high-confidence plays, install governance, and measure the movement in EBITDA-linked KPIs.
+
+## The PE AI Trap
+Many portfolio companies are experimenting with AI independently. One team tests customer service tools. Another tries sales automation. Another buys copilot licenses. Activity rises, but the operating team still cannot answer the important question: where is AI moving EBITDA?
+
+The problem is not lack of interest. It is lack of a portfolio operating model.
+
+## Start With Value Pools
+AI value creation should map to the same levers operating teams already manage: revenue growth, gross margin, SG&A efficiency, working capital, retention, service cost, quality cost, and management productivity. A good diagnostic starts by identifying where those value pools are largest and where workflows are most ready for change.
+
+## Score Readiness Before Sequencing
+The highest-value idea is not always the best first build. Portfolio teams should score each use case by data readiness, system complexity, adoption risk, leadership ownership, implementation speed, and repeatability across companies. This prevents capital from going into attractive but hard-to-operate ideas too early.
+
+## Choose Plays, Not Pilots
+A play has a clear business owner, baseline metric, implementation pattern, dashboard, and governance cadence. A pilot often has a tool and a vague hope. PE teams should build a library of plays that can repeat across companies with adaptation.
+
+## Examples of EBITDA-Linked AI Plays
+### Revenue Intelligence
+Agents identify high-fit prospects, expansion signals, churn risk, pricing opportunities, and account actions. The KPI link is pipeline quality, win rate, retention, and sales productivity.
+
+### Service Cost and Quality
+Agents triage cases, draft responses, retrieve knowledge, summarize interactions, and flag escalation risk. The KPI link is handle time, first-contact resolution, service cost, and customer satisfaction.
+
+### Operations Throughput
+Agents compress quoting, scheduling, reporting, order review, invoice matching, and exception handling. The KPI link is labor leverage, cycle time, error rate, and margin leakage.
+
+### Management Productivity
+Agents prepare operating reviews, synthesize KPIs, identify exceptions, draft action plans, and track commitments. The KPI link is decision speed and leadership capacity.
+
+## Governance Is a Value Lever
+Governance is sometimes treated as a brake. In PE-backed companies, it should be treated as an accelerator. Clear approval rules, access control, audit trail, and KPI ownership make management teams more comfortable moving from experiment to production.
+
+## The Portfolio Operating Cadence
+The most effective PE teams run a recurring AI value creation cadence:
+
+1. Monthly review of portfolio AI opportunities.
+2. Company-level readiness and value scoring.
+3. Wave-based build sequencing.
+4. KPI dashboard review.
+5. Playbook capture after each deployment.
+6. Reuse across the next company.
+
+That cadence turns learning into an operating asset.
+
+## The ClearForge View
+AI should show up in the value creation plan with the same rigor as pricing, procurement, sales effectiveness, or lean operations. The difference is that AI can create compounding capability when the playbook is reusable.
+
+## Recommended Next Move
+Run a 90-day portfolio AI diagnostic. Select the first wave of EBITDA-linked plays, assign owners, and build one production workflow that can become a reusable pattern across the portfolio.`,
+    relatedSlugs: ['pe-value-creation-with-ai', 'ai-readiness-assessment-guide'],
+    seo: {
+      title: 'How PE Firms Turn AI Experiments into EBITDA',
+      description:
+        'A private equity AI value creation playbook for diagnosing value pools, sequencing AI plays, installing governance, and tracking EBITDA-linked KPIs.',
+      keywords: ['private equity AI', 'AI EBITDA', 'portfolio value creation AI'],
+    },
+    tags: {
+      solutions: ['pe-value-creation', 'ai-strategy', 'managed-operations'],
+      industries: ['private-equity', 'manufacturing', 'professional-services'],
+    },
+    faqs: [
+      {
+        question: 'How should PE firms evaluate AI opportunities?',
+        answer:
+          'Score them by EBITDA linkage, data readiness, system complexity, adoption risk, leadership ownership, speed-to-value, and repeatability.',
+      },
+      {
+        question: 'What is the difference between an AI pilot and an AI play?',
+        answer:
+          'A play has a business owner, baseline metric, implementation pattern, dashboard, and governance cadence. A pilot often only tests a tool.',
+      },
+      {
+        question: 'Where should a PE operating team start?',
+        answer:
+          'Start with a portfolio diagnostic, select a small first wave of EBITDA-linked plays, and build one production workflow that can be reused.',
+      },
+    ],
+  },
+  {
     slug: 'widening-ai-value-gap',
     title: 'The Widening AI Value Gap: Why Most Companies Are Falling Behind',
     excerpt:

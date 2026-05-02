@@ -96,6 +96,29 @@ const transformationMaturity = [
   },
 ];
 
+const implementationStandards = [
+  {
+    title: 'Business case before build',
+    detail:
+      'Every initiative starts with the KPI owner, baseline, value hypothesis, and threshold for success.',
+  },
+  {
+    title: 'Custom workflow design',
+    detail:
+      'Agents are designed around the real handoffs, approvals, edge cases, and systems your team already uses.',
+  },
+  {
+    title: 'Human-in-the-loop controls',
+    detail:
+      'We define confidence thresholds, escalation paths, audit trail, quality checks, and failure modes up front.',
+  },
+  {
+    title: 'Managed improvement loop',
+    detail:
+      'After launch, adoption, quality, exceptions, and performance movement are reviewed in a recurring operating cadence.',
+  },
+];
+
 const valueMapSteps = [
   {
     icon: Route,
@@ -306,6 +329,43 @@ export default function Home() {
                 <h3 className="text-h4">{item.dimension}</h3>
                 <p className="text-body-sm leading-relaxed text-warm-gray">{item.expectation}</p>
                 <p className="text-body-sm leading-relaxed text-anthracite">{item.clearforge}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-divider bg-warm-white py-20 sm:py-28 lg:py-36">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
+          <div className="lg:grid lg:grid-cols-12 lg:items-end lg:gap-12">
+            <div className="lg:col-span-7">
+              <p className="overline">Implementation Standards</p>
+              <h2 className="mt-6 max-w-3xl text-display">
+                Built for executive confidence, not experimentation theater.
+              </h2>
+            </div>
+            <div className="mt-8 lg:col-span-5 lg:mt-0">
+              <p className="text-body-lg text-warm-gray">
+                ClearForge treats AI as an operating system: measurable, governed, adopted, and
+                continuously improved. That is what separates transformation from a tool rollout.
+              </p>
+              <Button variant="secondary" className="mt-6" asChild>
+                <Link href="/operating-model" data-analytics="home_standards_operating_model">
+                  See the AI Operating Model <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+          <div className="mt-14 grid border-t border-divider lg:grid-cols-4">
+            {implementationStandards.map((item) => (
+              <div
+                key={item.title}
+                className="border-b border-divider py-8 lg:border-r lg:px-7 lg:first:pl-0 lg:last:border-r-0"
+              >
+                <Shield className="h-5 w-5 text-brass" />
+                <h3 className="mt-5 text-h4">{item.title}</h3>
+                <p className="mt-3 text-body-sm leading-relaxed text-warm-gray">{item.detail}</p>
               </div>
             ))}
           </div>

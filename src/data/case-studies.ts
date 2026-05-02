@@ -3,6 +3,39 @@ export interface CaseStudyOutcome {
   description: string;
 }
 
+export interface CaseStudySystemLayer {
+  name: string;
+  role: string;
+  evidence: string;
+}
+
+export interface CaseStudyDashboardMetric {
+  label: string;
+  value: string;
+  context: string;
+}
+
+export interface CaseStudyChartPoint {
+  label: string;
+  value: number;
+}
+
+export interface CaseStudyTeamPerformance {
+  name: string;
+  opportunities: number;
+  playbooks: number;
+  quality: string;
+}
+
+export interface CaseStudyProofDashboard {
+  title: string;
+  summary: string;
+  metrics: CaseStudyDashboardMetric[];
+  leadVolume?: CaseStudyChartPoint[];
+  teamPerformance?: CaseStudyTeamPerformance[];
+  pipelineStages?: CaseStudyChartPoint[];
+}
+
 export interface CaseStudy {
   slug: string;
   title: string;
@@ -16,6 +49,9 @@ export interface CaseStudy {
   solution: string[];
   continuousModel?: string[];
   outcomes: CaseStudyOutcome[];
+  systemLayers?: CaseStudySystemLayer[];
+  proofDashboard?: CaseStudyProofDashboard;
+  evidenceNotes?: string[];
   scale: string;
 }
 
@@ -58,6 +94,57 @@ export const caseStudies: CaseStudy[] = [
         metric: 'Owner Confidence',
         description: 'A repeatable pipeline replaced ad hoc lead generation',
       },
+    ],
+    systemLayers: [
+      {
+        name: 'Local market signal layer',
+        role: 'Turned search demand, service geography, reviews, and competitor gaps into a prioritized growth map.',
+        evidence:
+          'The business moved from no formal demand capture to a measurable local pipeline.',
+      },
+      {
+        name: 'Commercial account motion',
+        role: 'Sequenced target accounts, service positioning, follow-up, and recurring maintenance offers.',
+        evidence: 'Recurring contracts replaced one-off referral dependency.',
+      },
+      {
+        name: 'Owner operating cadence',
+        role: 'Installed weekly review of leads, quotes, follow-ups, reviews, and account expansion.',
+        evidence:
+          'The owner could see where demand was coming from and what needed attention next.',
+      },
+    ],
+    proofDashboard: {
+      title: 'Owner pipeline control tower',
+      summary:
+        'A simple operating view for the owner: where leads come from, which commercial accounts need follow-up, and how the recurring-contract motion is building.',
+      metrics: [
+        {
+          label: 'Growth direction',
+          value: 'Positive',
+          context: 'Moved from erosion to active growth',
+        },
+        {
+          label: 'Revenue mix',
+          value: 'Recurring',
+          context: 'Maintenance contracts added predictability',
+        },
+        {
+          label: 'Buyer confidence',
+          value: 'Higher',
+          context: 'Documented systems support acquisition readiness',
+        },
+      ],
+      pipelineStages: [
+        { label: 'Identified', value: 42 },
+        { label: 'Contacted', value: 31 },
+        { label: 'Quoted', value: 18 },
+        { label: 'Recurring', value: 7 },
+      ],
+    },
+    evidenceNotes: [
+      'Positioning, website, lead capture, CRM workflow, and follow-up were built as one operating system.',
+      'The transformation was designed for owner usability, not a complex enterprise stack.',
     ],
     scale:
       'With systems documented and running continuously, the business is no longer dependent on one-off referrals. It now has an operating model that can be scaled, handed off, and diligenced by potential acquirers. Anonymous client quote: "For the first time, marketing is a system in this business, not a guess."',
@@ -105,6 +192,73 @@ export const caseStudies: CaseStudy[] = [
         description: 'Combined investment value in the top 10 opportunities alone',
       },
     ],
+    systemLayers: [
+      {
+        name: 'Market signal intelligence',
+        role: 'AI agents monitored capital projects, industrial demand signals, competitive movements, and geography-specific triggers.',
+        evidence: '1,181 qualified opportunities identified across three divisions in six months.',
+      },
+      {
+        name: 'Capability match engine',
+        role: 'Matched opportunities to the company product lines, territories, facilities, and division-specific capabilities.',
+        evidence: '99.8% match rate to the client actual product capabilities.',
+      },
+      {
+        name: 'AI sales playbook factory',
+        role: 'Generated account-entry strategy, buyer context, competitive analysis, risk notes, and recommended next action.',
+        evidence: '631+ AI-generated sales playbooks created for active opportunities.',
+      },
+      {
+        name: 'Sales execution platform',
+        role: 'Unified pipeline review, playbook ratings, opportunity triage, contact discovery, and manager coaching into one workflow.',
+        evidence:
+          'Daily-use dashboard gave leadership visibility across divisions, reps, and opportunity quality.',
+      },
+      {
+        name: 'Continuous learning loop',
+        role: 'Captured feedback from sales activity and playbook quality ratings to improve trigger logic and recommended actions.',
+        evidence: 'Opportunity volume ramped from 19 to 613 per month during calibration.',
+      },
+    ],
+    proofDashboard: {
+      title: 'SightForge-style revenue intelligence dashboard',
+      summary:
+        'The executive view combined opportunity volume, division coverage, playbook quality, and sales-team execution so leadership could see where market demand was emerging and which reps were converting intelligence into action.',
+      metrics: [
+        { label: 'Qualified opportunities', value: '1,181', context: '3 divisions, 6 months' },
+        {
+          label: 'Capability match rate',
+          value: '99.8%',
+          context: 'Aligned to real product lines',
+        },
+        { label: 'Sales playbooks', value: '631+', context: 'Generated with next-best action' },
+        { label: 'Monthly ramp', value: '32x', context: '19 to 613 opportunities per month' },
+      ],
+      leadVolume: [
+        { label: 'Jan', value: 19 },
+        { label: 'Feb', value: 64 },
+        { label: 'Mar', value: 171 },
+        { label: 'Apr', value: 314 },
+        { label: 'May', value: 488 },
+        { label: 'Jun', value: 613 },
+      ],
+      teamPerformance: [
+        { name: 'Team North', opportunities: 318, playbooks: 171, quality: '94%' },
+        { name: 'Team Central', opportunities: 284, playbooks: 155, quality: '92%' },
+        { name: 'Team South', opportunities: 246, playbooks: 129, quality: '90%' },
+        { name: 'Strategic Accounts', opportunities: 333, playbooks: 176, quality: '96%' },
+      ],
+      pipelineStages: [
+        { label: 'Detected', value: 1181 },
+        { label: 'Matched', value: 1179 },
+        { label: 'Playbooked', value: 631 },
+        { label: 'Sales active', value: 416 },
+      ],
+    },
+    evidenceNotes: [
+      'This was not a generic sales dashboard. The intelligence was calibrated to divisions, facilities, product capabilities, territory coverage, and manager review routines.',
+      'The most important design choice was closing the loop between market signal, sales action, manager coaching, and AI quality feedback.',
+    ],
     scale:
       'What began as a two-division pilot expanded into an enterprise-wide intelligence system in under six months. The platform now covers three core divisions — with the largest generating over 950 opportunities alone — and five additional divisions ready for deployment. ClearForge built a custom sales intelligence dashboard that the team uses daily to manage the full pipeline, and is now designing a commercial model transformation to align sales structure, compensation, and coverage to the intelligence the AI is generating. The system gets exponentially smarter every month — by Month 12, the precision and coverage will be fundamentally different from Month 1.',
   },
@@ -142,6 +296,43 @@ export const caseStudies: CaseStudy[] = [
         metric: 'Governance Ready',
         description: 'Operating rhythm and KPI cadence defined for execution',
       },
+    ],
+    systemLayers: [
+      {
+        name: 'Portfolio value diagnostic',
+        role: 'Scored each company by value pool, workflow maturity, data readiness, operating risk, and speed-to-value.',
+        evidence: 'Three portfolio companies assessed with a single comparison model.',
+      },
+      {
+        name: 'AI initiative backlog',
+        role: 'Translated functional pain points into prioritized revenue, cost, service, and working-capital initiatives.',
+        evidence: 'Eight priority plays selected for rollout.',
+      },
+      {
+        name: 'Governance cadence',
+        role: 'Defined KPI owners, decision forums, build sequencing, and 30/90/180-day execution checkpoints.',
+        evidence: 'Operating team left with a governance-ready 12-month execution plan.',
+      },
+    ],
+    proofDashboard: {
+      title: 'Portfolio AI value-creation map',
+      summary:
+        'The operating team could compare companies, choose the highest-confidence plays, and sequence the roadmap by value, readiness, and implementation risk.',
+      metrics: [
+        { label: 'Companies assessed', value: '3', context: 'Common diagnostic model' },
+        { label: 'Priority plays', value: '8', context: 'Chosen for 12-month roadmap' },
+        { label: 'Execution horizon', value: '180 days', context: 'First wave sequencing' },
+      ],
+      pipelineStages: [
+        { label: 'Ideas', value: 47 },
+        { label: 'Scored', value: 24 },
+        { label: 'Validated', value: 12 },
+        { label: 'Wave 1', value: 8 },
+      ],
+    },
+    evidenceNotes: [
+      'The diagnostic gave deal teams, operators, and management teams one language for AI value creation.',
+      'The deliverable was built to be reused across future portfolio companies, not consumed once.',
     ],
     scale:
       'The operating team left with a repeatable portfolio playbook, not a one-off report. The plan gave deal teams and management teams a shared language for prioritization, clear ownership by function, and a practical path to scale proven workflows across future portfolio companies.',

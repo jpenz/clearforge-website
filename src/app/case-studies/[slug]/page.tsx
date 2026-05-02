@@ -66,6 +66,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       challengeMetricLabel={cs.heroMetricLabel}
       phases={phases}
       outcomes={cs.outcomes.slice(0, 4)}
+      systemLayers={cs.systemLayers}
+      proofDashboard={cs.proofDashboard}
+      evidenceNotes={cs.evidenceNotes}
       quote={quote}
       quoteAttribution={quoteAttribution}
       compoundResult={cs.continuousModel ? cs.continuousModel.join(' ') : undefined}
