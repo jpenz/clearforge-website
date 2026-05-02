@@ -12,12 +12,15 @@ export function ChatMessage({ content, role }: { content: string; role: 'user' |
 
   // Simple markdown transforms
   const renderContent = (text: string) => {
-    return text.split('\n').map((line, i) => {
+    let offset = 0;
+    return text.split('\n').map((line) => {
+      const key = `${offset}-${line}`;
+      offset += line.length + 1;
       // Bullet list
       if (line.match(/^[-•]\s/)) {
         const bulletContent = line.replace(/^[-•]\s/, '');
         return (
-          <li key={i} className="ml-4 list-disc text-body-sm">
+          <li key={key} className="ml-4 list-disc text-body-sm">
             {renderInline(bulletContent)}
           </li>
         );
@@ -26,18 +29,18 @@ export function ChatMessage({ content, role }: { content: string; role: 'user' |
       if (line.match(/^\d+\.\s/)) {
         const numContent = line.replace(/^\d+\.\s/, '');
         return (
-          <li key={i} className="ml-4 list-decimal text-body-sm">
+          <li key={key} className="ml-4 list-decimal text-body-sm">
             {renderInline(numContent)}
           </li>
         );
       }
       // Empty line = paragraph break
       if (line.trim() === '') {
-        return <br key={i} />;
+        return <br key={key} />;
       }
       // Regular line
       return (
-        <p key={i} className="text-body-sm">
+        <p key={key} className="text-body-sm">
           {renderInline(line)}
         </p>
       );
@@ -57,7 +60,11 @@ export function ChatMessage({ content, role }: { content: string; role: 'user' |
         if (boldMatch.index > 0) {
           parts.push(remaining.substring(0, boldMatch.index));
         }
-        parts.push(<strong key={key++} className="font-semibold">{boldMatch[1]}</strong>);
+        parts.push(
+          <strong key={key++} className="font-semibold">
+            {boldMatch[1]}
+          </strong>,
+        );
         remaining = remaining.substring(boldMatch.index + boldMatch[0].length);
         continue;
       }
@@ -85,9 +92,7 @@ export function ChatMessage({ content, role }: { content: string; role: 'user' |
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
       <div
         className={`max-w-[85%] p-5 space-y-1 ${
-          isUser
-            ? 'bg-brass text-white'
-            : 'bg-divider-dark text-bone border border-divider-dark'
+          isUser ? 'bg-brass text-white' : 'bg-divider-dark text-bone border border-divider-dark'
         }`}
       >
         {renderContent(content)}

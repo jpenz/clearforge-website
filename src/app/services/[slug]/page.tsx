@@ -2,7 +2,7 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { services, getServiceBySlug } from '@/data/services';
+import { getServiceBySlug, services } from '@/data/services';
 import { createMetadata } from '@/lib/metadata';
 
 export function generateStaticParams() {
@@ -20,11 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   });
 }
 
-export default async function ServiceDetailPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const service = getServiceBySlug(slug);
   if (!service) notFound();
@@ -62,9 +58,7 @@ export default async function ServiceDetailPage({
               >
                 {service.tagline}
               </h1>
-              <p className="mt-6 max-w-xl text-body-lg text-stone">
-                {service.description}
-              </p>
+              <p className="mt-6 max-w-xl text-body-lg text-stone">{service.description}</p>
               <div className="mt-10">
                 <Button size="lg" asChild>
                   <Link href="/contact">
@@ -77,25 +71,12 @@ export default async function ServiceDetailPage({
             {/* Right: headline stat — visual anchor, magazine-style pull-quote */}
             <div className="mt-16 lg:col-span-5 lg:mt-0">
               <div className="border-l border-brass/40 pl-8 lg:pl-10">
-                <p className="overline text-brass-light text-[10px]">
-                  Typical Outcome
-                </p>
-                <p
-                  className="mt-4 text-brass-light"
-                  style={{
-                    fontFamily: 'var(--font-instrument-serif)',
-                    fontSize: 'clamp(4rem, 8vw, 7rem)',
-                    lineHeight: 0.92,
-                    letterSpacing: '-0.04em',
-                    fontWeight: 400,
-                  }}
-                >
+                <p className="overline text-brass-light text-[10px]">Typical Outcome</p>
+                <p className="mt-4 font-display text-[4rem] leading-[0.92] text-brass-light sm:text-[5.5rem] lg:text-[7rem]">
                   {heroStat.value}
                 </p>
                 <p className="mt-4 text-h3 text-bone">{heroStat.label}</p>
-                <p className="mt-3 text-body-sm text-stone max-w-xs">
-                  {heroStat.description}
-                </p>
+                <p className="mt-3 text-body-sm text-stone max-w-xs">{heroStat.description}</p>
               </div>
             </div>
           </div>
@@ -106,31 +87,15 @@ export default async function ServiceDetailPage({
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <p className="overline">Expected Outcomes</p>
-          <h2 className="mt-6 text-display max-w-2xl">
-            What this looks like in practice.
-          </h2>
+          <h2 className="mt-6 text-display max-w-2xl">What this looks like in practice.</h2>
           <div className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4">
             {service.outcomes.map((o) => (
               <div key={o.label} className="border-t border-divider pt-6">
-                <p
-                  className="text-brass"
-                  style={{
-                    fontFamily: 'var(--font-jetbrains-mono, monospace)',
-                    fontSize: 'clamp(2rem, 3.5vw, 2.75rem)',
-                    lineHeight: 1,
-                    letterSpacing: '-0.02em',
-                    fontWeight: 500,
-                    fontVariantNumeric: 'tabular-nums',
-                  }}
-                >
+                <p className="metric text-[2rem] font-medium leading-none text-brass sm:text-[2.4rem] lg:text-[2.75rem]">
                   {o.value}
                 </p>
-                <p className="mt-3 text-body font-semibold text-anthracite">
-                  {o.label}
-                </p>
-                <p className="mt-2 text-body-sm text-warm-gray leading-relaxed">
-                  {o.description}
-                </p>
+                <p className="mt-3 text-body font-semibold text-anthracite">{o.label}</p>
+                <p className="mt-2 text-body-sm text-warm-gray leading-relaxed">{o.description}</p>
               </div>
             ))}
           </div>
@@ -145,17 +110,14 @@ export default async function ServiceDetailPage({
               <p className="overline">Deliverables</p>
               <h2 className="mt-6 text-display">What you get.</h2>
               <p className="mt-6 text-body text-warm-gray max-w-sm">
-                Every engagement ends with a working system in production —
-                not a strategy deck on a shelf.
+                Every engagement ends with a working system in production — not a strategy deck on a
+                shelf.
               </p>
             </div>
             <div className="mt-12 lg:col-span-8 lg:mt-0">
               <ul className="space-y-0">
                 {service.deliverables.map((d, i) => (
-                  <li
-                    key={d}
-                    className="flex items-start gap-5 border-t border-divider py-6"
-                  >
+                  <li key={d} className="flex items-start gap-5 border-t border-divider py-6">
                     <span
                       className="text-brass shrink-0"
                       style={{
@@ -167,9 +129,7 @@ export default async function ServiceDetailPage({
                     >
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <p className="text-body text-anthracite leading-relaxed">
-                      {d}
-                    </p>
+                    <p className="text-body text-anthracite leading-relaxed">{d}</p>
                   </li>
                 ))}
                 <li className="border-t border-divider" />
@@ -203,32 +163,13 @@ export default async function ServiceDetailPage({
                   </div>
 
                   <div className="lg:pl-10">
-                    <p
-                      className="text-brass-light"
-                      style={{
-                        fontFamily: 'var(--font-jetbrains-mono, monospace)',
-                        fontSize: '0.75rem',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.1em',
-                      }}
-                    >
+                    <p className="metric text-xs uppercase text-brass-light">
                       {String(i + 1).padStart(2, '0')} · {w.phase}
                     </p>
-                    <h3
-                      className="mt-4 text-bone"
-                      style={{
-                        fontFamily: 'var(--font-instrument-serif)',
-                        fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
-                        lineHeight: 1.1,
-                        letterSpacing: '-0.02em',
-                        fontWeight: 400,
-                      }}
-                    >
+                    <h3 className="mt-4 font-display text-[1.5rem] leading-[1.1] text-bone sm:text-[1.75rem] lg:text-[2rem]">
                       {w.title}
                     </h3>
-                    <p className="mt-3 text-body-sm text-stone leading-relaxed">
-                      {w.description}
-                    </p>
+                    <p className="mt-3 text-body-sm text-stone leading-relaxed">{w.description}</p>
                   </div>
                 </div>
               ))}
@@ -246,9 +187,7 @@ export default async function ServiceDetailPage({
               <h2 className="mt-6 text-display">Is this right for you?</h2>
             </div>
             <div className="mt-10 lg:col-span-7 lg:mt-0">
-              <p className="text-body-lg text-warm-gray">
-                {service.idealClient}
-              </p>
+              <p className="text-body-lg text-warm-gray">{service.idealClient}</p>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Button size="lg" asChild>
                   <Link href="/contact">
@@ -256,7 +195,7 @@ export default async function ServiceDetailPage({
                   </Link>
                 </Button>
                 <Button size="lg" variant="secondary" asChild>
-                  <Link href="/discover">Take the AI Assessment</Link>
+                  <Link href="/discover">Generate AI Value Map</Link>
                 </Button>
               </div>
             </div>

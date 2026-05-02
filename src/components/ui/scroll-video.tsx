@@ -110,10 +110,7 @@ export function ScrollVideo({
   );
 
   return (
-    <section
-      ref={sectionRef}
-      className={`relative overflow-hidden ${className}`}
-    >
+    <section ref={sectionRef} className={`relative overflow-hidden ${className}`}>
       <video
         ref={videoRef}
         src={src}

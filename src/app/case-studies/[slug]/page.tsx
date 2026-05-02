@@ -4,8 +4,9 @@ import { caseStudies, getCaseStudy } from '@/data/case-studies';
 
 const CaseStudyStory = dynamic(
   () => import('@/components/case-study-story').then((m) => ({ default: m.CaseStudyStory })),
-  { loading: () => <div className="min-h-screen" /> }
+  { loading: () => <div className="min-h-screen" /> },
 );
+
 import { createMetadata } from '@/lib/metadata';
 
 export function generateStaticParams() {
@@ -30,19 +31,37 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   // Map case study data to story props
   const phases = [
-    { title: 'Forge Diagnostic', duration: '4 weeks', description: 'Mapped the value chain, identified AI opportunities, and built a prioritized roadmap tied to measurable KPIs.' },
-    { title: 'Forge Sprint', duration: '10-14 weeks', description: 'Redesigned workflows, deployed AI agents with human-in-the-loop controls, established KPI baselines from day one.' },
-    { title: 'Forge Scale', duration: 'Ongoing', description: 'Continuous optimization, team training, and expansion to new divisions and use cases. Compounding gains monthly.' },
+    {
+      title: 'Forge Diagnostic',
+      duration: '4 weeks',
+      description:
+        'Mapped the value chain, identified AI opportunities, and built a prioritized roadmap tied to measurable KPIs.',
+    },
+    {
+      title: 'Forge Sprint',
+      duration: '10-14 weeks',
+      description:
+        'Redesigned workflows, deployed AI agents with human-in-the-loop controls, established KPI baselines from day one.',
+    },
+    {
+      title: 'Forge Scale',
+      duration: 'Ongoing',
+      description:
+        'Continuous optimization, team training, and expansion to new divisions and use cases. Compounding gains monthly.',
+    },
   ];
 
-  const quote = "They didn't just hand us a strategy deck. They built the systems, trained the team, and stayed until the numbers moved.";
+  const quote =
+    "They didn't just hand us a strategy deck. They built the systems, trained the team, and stayed until the numbers moved.";
   const quoteAttribution = `${cs.industry} — ClearForge Client`;
 
   return (
     <CaseStudyStory
       industry={cs.industry}
       title={cs.title}
-      challenge={cs.excerpt || 'A complex operational challenge requiring AI-driven transformation.'}
+      challenge={
+        cs.excerpt || 'A complex operational challenge requiring AI-driven transformation.'
+      }
       challengeMetric={cs.heroMetric}
       challengeMetricLabel={cs.heroMetricLabel}
       phases={phases}

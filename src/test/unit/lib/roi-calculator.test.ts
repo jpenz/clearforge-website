@@ -24,18 +24,13 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import {
-  type ROIInputs,
-  calculateROI,
-  formatCurrency,
-  industries,
-} from '@/lib/roi-calculator';
+import { calculateROI, formatCurrency, industries, type ROIInputs } from '@/lib/roi-calculator';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
 function defaultInputs(overrides: Partial<ROIInputs> = {}): ROIInputs {
   return {
-    annualRevenue: 10_000_000,  // $10M
+    annualRevenue: 10_000_000, // $10M
     employees: 100,
     manualHoursPerWeek: 200,
     industry: 'manufacturing',

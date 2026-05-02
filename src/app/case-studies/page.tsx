@@ -1,8 +1,8 @@
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { Stagger, StaggerItem } from '@/components/ui/animate';
+import { Button } from '@/components/ui/button';
 import { caseStudies } from '@/data/case-studies';
 import { createMetadata } from '@/lib/metadata';
 
@@ -36,8 +36,8 @@ export default function CaseStudiesPage() {
             Real Outcomes. Verified Results.
           </h1>
           <p className="mt-6 max-w-xl text-body-lg text-stone">
-            Every engagement is measured against revenue, cost, or throughput.
-            We build, we ship, we deploy — and we measure what happens next.
+            Every engagement is measured against revenue, cost, or throughput. We build, we ship, we
+            deploy — and we measure what happens next.
           </p>
         </div>
       </section>
@@ -88,17 +88,15 @@ export default function CaseStudiesPage() {
       {/* — CTA — */}
       <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">
-            See how we would help your company.
-          </h2>
+          <h2 className="text-display text-bone">See how we would help your company.</h2>
           <p className="mt-6 text-body-lg text-stone">
-            Every business is different. Start with a Forge Diagnostic and we
-            will show you exactly where AI can drive measurable results.
+            Every business is different. Start with a Forge Diagnostic and we will show you exactly
+            where AI can drive measurable results.
           </p>
           <div className="mt-10">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
+                Generate My AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>

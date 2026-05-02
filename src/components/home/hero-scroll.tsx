@@ -1,9 +1,7 @@
-'use client';
-
 import { ArrowRight } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { HeroVideoBackground } from './hero-video-background';
 
 /**
  * V8.18 Editorial Hero with ambient video background.
@@ -13,91 +11,73 @@ import { Button } from '@/components/ui/button';
  * quickly, not wait through a forced animation. Reverted to a plain
  * autoplay loop: the video adds motion without interrupting scroll.
  *
- * Mobile gets the same video (now only 271KB, down from 4.8MB in V8.4),
- * so we no longer need a separate static image fallback for mobile.
+ * The background media is now isolated in HeroVideoBackground so accessibility,
+ * reduced-motion behavior, and future generated video assets stay in one place.
  */
 export function HeroScroll() {
   return (
-    <section className="dark-section relative min-h-screen flex items-end overflow-hidden">
-      {/* Ambient video background */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster="/images/hero-bg.webp"
-        className="absolute inset-0 w-full h-full object-cover opacity-60"
-      >
-        <source src="/videos/hero.mp4" type="video/mp4" />
-      </video>
-
-      {/* Mobile-only static fallback for reduced-motion users */}
-      <Image
-        src="/images/hero-bg.webp"
-        alt=""
-        fill
-        sizes="100vw"
-        priority
-        fetchPriority="high"
-        className="object-cover opacity-40 motion-reduce:block hidden pointer-events-none"
-      />
+    <section className="dark-section relative min-h-[86svh] overflow-hidden">
+      <HeroVideoBackground />
 
       {/* Gradient — keeps headline legible */}
-      <div className="absolute inset-0 bg-gradient-to-t from-forge-black via-forge-black/35 to-forge-black/25 pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,15,30,0.92)_0%,rgba(10,15,30,0.74)_46%,rgba(10,15,30,0.38)_100%)] pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-forge-black to-transparent pointer-events-none" />
+
+      {/* Process rail — text in the scene, not a separate card. */}
+      <div className="absolute bottom-0 left-0 right-0 hidden border-t border-bone/10 lg:block">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-4 px-10">
+          {[
+            ['01', 'Find growth spots'],
+            ['02', 'Build the AI machine'],
+            ['03', 'Train the people'],
+            ['04', 'Win the market'],
+          ].map(([step, label]) => (
+            <div key={step} className="border-l border-bone/10 px-6 py-5 last:border-r">
+              <p className="metric text-xs text-brass-light">{step}</p>
+              <p className="mt-1 text-sm text-bone/70">{label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Content overlay */}
-      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-10 pb-16 sm:pb-20 lg:pb-28 pt-32 sm:pt-40">
-        <p className="overline text-xs animate-fade-in">
-          Production AI for Mid-Market &amp; Growth-Stage Companies
-        </p>
+      <div className="relative z-10 mx-auto flex min-h-[86svh] w-full max-w-[1400px] flex-col justify-center px-4 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-10 lg:pb-40">
+        <p className="overline text-xs animate-fade-in">AI growth systems for operators</p>
 
-        <h1
-          className="mt-8 max-w-[1050px] text-bone animate-fade-in-up delay-1"
-          style={{
-            fontFamily: 'var(--font-instrument-serif)',
-            fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
-            lineHeight: 1.04,
-            letterSpacing: '-0.03em',
-            fontWeight: 400,
-          }}
-        >
-          AI strategy that ends in a working system.
+        <h1 className="mt-7 max-w-[980px] text-[2.7rem] leading-[1.02] text-bone sm:text-[4rem] lg:text-[5.2rem]">
+          Find the growth spots. Build the AI machine to win them.
         </h1>
-        <p
-          className="mt-2 max-w-[1050px] text-brass-light animate-fade-in-up delay-2"
-          style={{
-            fontFamily: 'var(--font-instrument-serif)',
-            fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
-            lineHeight: 1.04,
-            letterSpacing: '-0.03em',
-            fontWeight: 400,
-            fontStyle: 'italic',
-          }}
-        >
-          Not a deck on a shelf.
+        <p className="mt-3 max-w-[900px] font-display text-[2.25rem] italic leading-[1.05] text-brass-light sm:text-[3.4rem] lg:text-[4.2rem]">
+          With your people in the loop.
         </p>
 
-        <p className="mt-8 text-body-lg text-stone max-w-xl animate-fade-in-up delay-3">
-          We diagnose, build, and deploy AI systems for mid-market
-          operators — in ten weeks, measured against revenue, cost, or
-          throughput. The same senior team stays from first brief to
-          production.
+        <p className="mt-8 max-w-2xl text-body-lg text-stone animate-fade-in-up delay-3">
+          ClearForge maps where AI can unlock growth, speed, quality, customer service, efficiency,
+          and margin, then builds the agents, workflows, and operating routines your team uses to
+          become the best-run company in the market.
         </p>
+
+        <div className="mt-7 grid max-w-3xl grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-5 animate-fade-in-up delay-3">
+          {['Growth', 'Speed', 'Quality', 'Service', 'Margin'].map((advantage) => (
+            <div key={advantage} className="border-t border-bone/15 pt-3">
+              <p className="text-xs font-semibold text-bone/80">{advantage}</p>
+            </div>
+          ))}
+        </div>
 
         <div className="mt-10 flex flex-wrap items-center gap-6 animate-fade-in-up delay-4">
           <Button size="lg" asChild>
-            <Link href="/discover">Get My Free AI Readiness Score</Link>
+            <Link href="/discover">Generate My AI Value Map</Link>
           </Button>
           <Link
             href="#results"
             className="inline-flex items-center gap-2 text-sm text-stone hover:text-bone transition-colors link-underline"
           >
-            See the work <ArrowRight className="h-4 w-4" />
+            See proof <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
         <p className="mt-3 text-xs text-stone/50 animate-fade-in delay-5">
-          Five minutes. No sales call. AI-powered readiness report.
+          Five minutes. Website-based analysis. No sales call required.
         </p>
       </div>
     </section>

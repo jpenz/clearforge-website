@@ -117,15 +117,18 @@ export function GsapTextReveal({
     { scope: containerRef, dependencies: [text, scrub, stagger] },
   );
 
-  const words = text.split(' ');
+  let wordOffset = 0;
+  const words = text.split(' ').map((word) => {
+    const key = `${wordOffset}-${word}`;
+    wordOffset += word.length + 1;
+    return { key, word };
+  });
 
   return (
     <Tag ref={containerRef as React.Ref<never>} className={className} style={style}>
-      {words.map((word, i) => (
-        <span key={`${word}-${i}`} className="inline-block overflow-hidden mr-[0.25em] last:mr-0">
-          <span className="gsap-word-inner inline-block will-change-transform">
-            {word}
-          </span>
+      {words.map(({ key, word }) => (
+        <span key={key} className="inline-block overflow-hidden mr-[0.25em] last:mr-0">
+          <span className="gsap-word-inner inline-block will-change-transform">{word}</span>
         </span>
       ))}
     </Tag>

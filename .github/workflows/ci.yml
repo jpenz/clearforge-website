@@ -126,6 +126,7 @@ jobs:
         with:
           name: next-build
           path: .next/
+          include-hidden-files: true
           retention-days: 1
 
   # ── 8. Playwright E2E ────────────────────────────────────────────────────────
@@ -145,7 +146,7 @@ jobs:
         with:
           name: next-build
           path: .next/
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chromium webkit
       - run: npm run test:e2e
         env:
           CI: true

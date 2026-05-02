@@ -5,20 +5,19 @@
  * This module re-exports it alongside helpers used by the new UI components.
  */
 
-export {
-  calculateResults,
-  getQuestionsForPillar,
-  pillars,
-  questions,
-  scaleLabels,
-} from '@/lib/scorecard';
-
 export type {
   Answers,
   PillarKey,
   PillarScore,
   RoadmapStep,
   ScorecardResult,
+} from '@/lib/scorecard';
+export {
+  calculateResults,
+  getQuestionsForPillar,
+  pillars,
+  questions,
+  scaleLabels,
 } from '@/lib/scorecard';
 
 /**

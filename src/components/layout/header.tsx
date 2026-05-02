@@ -1,8 +1,9 @@
 'use client';
 
+import { ArrowRight, ChevronRight, Menu, X } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { X, Menu, ArrowRight, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -35,6 +36,7 @@ const NAV_SECTIONS = [
   {
     title: 'Capabilities',
     links: [
+      { href: '/use-cases', label: 'AI Use Cases' },
       { href: '/services/ai-revenue-operations', label: 'AI Revenue Operations' },
       { href: '/services/performance-improvement', label: 'Performance Improvement' },
       { href: '/services/pe-value-creation', label: 'PE Value Creation' },
@@ -42,11 +44,26 @@ const NAV_SECTIONS = [
     ],
   },
   {
+    title: 'Use Cases',
+    links: [
+      { href: '/use-cases/ai-sales-pipeline-acceleration', label: 'AI Sales Pipeline' },
+      { href: '/use-cases/ai-customer-service-excellence', label: 'Customer Service AI' },
+      { href: '/use-cases/ai-operations-efficiency-machine', label: 'Operations Efficiency' },
+      { href: '/use-cases/ai-knowledge-work-automation', label: 'Knowledge Work Automation' },
+      {
+        href: '/use-cases/ai-quality-control-exception-management',
+        label: 'Quality Exceptions',
+      },
+      { href: '/use-cases/pe-portfolio-ai-value-creation', label: 'PE Portfolio AI' },
+    ],
+  },
+  {
     title: 'The Forge Method',
     links: [
       { href: '/services', label: 'How We Work' },
       { href: '/pricing', label: 'Investment & Timeline' },
-      { href: '/discover', label: 'AI Readiness Assessment' },
+      { href: '/discover', label: 'AI Value Map' },
+      { href: '/scorecard', label: 'AI Readiness Scorecard' },
     ],
   },
   {
@@ -63,20 +80,21 @@ const NAV_SECTIONS = [
 const TOP_NAV = [
   { href: '/industries', label: 'Industries', hasDropdown: true },
   { href: '/services', label: 'Capabilities', hasDropdown: true },
+  { href: '/use-cases', label: 'Use Cases' },
   { href: '/case-studies', label: 'Case Studies' },
   { href: '/insights', label: 'Insights' },
   { href: '/about', label: 'About Us' },
 ];
 
 export function Header() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  const [pastHero, setPastHero] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const hideHeader = pathname === '/discover';
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 10);
-      setPastHero(window.scrollY > window.innerHeight * 0.8);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -85,17 +103,21 @@ export function Header() {
 
   useEffect(() => {
     document.body.style.overflow = sidebarOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [sidebarOpen]);
 
-  const onHero = !pastHero && !scrolled;
+  if (hideHeader) return null;
 
   return (
     <>
       <header
         className={cn(
           'fixed left-0 right-0 top-0 z-50 transition-all duration-300',
-          scrolled ? 'border-b border-divider/30 bg-forge-black/90 backdrop-blur-xl' : 'bg-transparent',
+          scrolled
+            ? 'border-b border-divider/30 bg-forge-black/90 backdrop-blur-xl'
+            : 'bg-transparent',
           scrolled ? 'h-14' : 'h-16',
         )}
       >
@@ -111,9 +133,7 @@ export function Header() {
               <Menu className="h-5 w-5" />
             </button>
             <Link href="/" className="flex items-center">
-              <span className="text-lg font-semibold text-bone tracking-tight">
-                ClearForge
-              </span>
+              <span className="text-lg font-semibold text-bone">ClearForge</span>
             </Link>
           </div>
 
@@ -132,8 +152,13 @@ export function Header() {
 
           {/* Right: CTA + search */}
           <div className="flex items-center gap-3">
-            <Button variant="default" size="sm" className="hidden sm:inline-flex text-xs shadow-sm hover:shadow-md" asChild>
-              <Link href="/discover">Get My AI Score</Link>
+            <Button
+              variant="default"
+              size="sm"
+              className="hidden sm:inline-flex text-xs shadow-sm hover:shadow-md"
+              asChild
+            >
+              <Link href="/discover">Generate AI Value Map</Link>
             </Button>
           </div>
         </div>
@@ -143,18 +168,25 @@ export function Header() {
       {sidebarOpen && (
         <div className="fixed inset-0 z-[60]" aria-modal="true" role="dialog">
           {/* Backdrop */}
-          <div
+          <button
+            type="button"
+            aria-label="Close navigation overlay"
             className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in"
             onClick={() => setSidebarOpen(false)}
           />
 
           {/* Sidebar panel */}
-          <div className="absolute left-0 top-0 bottom-0 w-full max-w-[480px] bg-forge-black border-r border-divider-dark overflow-y-auto"
+          <div
+            className="absolute left-0 top-0 bottom-0 w-full max-w-[480px] bg-forge-black border-r border-divider-dark overflow-y-auto"
             style={{ animation: 'slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1)' }}
           >
             {/* Sidebar header */}
             <div className="flex items-center justify-between px-5 sm:px-8 py-5 border-b border-divider-dark">
-              <Link href="/" onClick={() => setSidebarOpen(false)} className="text-lg font-semibold text-bone tracking-tight">
+              <Link
+                href="/"
+                onClick={() => setSidebarOpen(false)}
+                className="text-lg font-semibold text-bone"
+              >
                 ClearForge
               </Link>
               <button
@@ -171,7 +203,7 @@ export function Header() {
             <div className="px-5 sm:px-8 py-6 space-y-8">
               {NAV_SECTIONS.map((section) => (
                 <div key={section.title}>
-                  <h3 className="text-xs font-semibold uppercase tracking-[0.1em] text-stone mb-4">
+                  <h3 className="text-xs font-semibold uppercase text-stone mb-4">
                     {section.title}
                   </h3>
                   <ul className="space-y-1">
@@ -196,18 +228,21 @@ export function Header() {
             <div className="px-5 sm:px-8 py-6 border-t border-divider-dark">
               <Button className="w-full" size="lg" asChild>
                 <Link href="/discover" onClick={() => setSidebarOpen(false)}>
-                  Get My AI Score <ArrowRight className="ml-2 h-4 w-4" />
+                  Generate AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <p className="mt-3 text-xs text-stone text-center">
-                Free · 5 minutes · AI-powered analysis
+                Free · 5 minutes · website-based analysis
               </p>
             </div>
 
             {/* Sidebar footer */}
             <div className="px-5 sm:px-8 py-6 border-t border-divider-dark">
               <div className="space-y-3">
-                <a href="mailto:james@clearforge.ai" className="block text-sm text-stone hover:text-bone transition-colors">
+                <a
+                  href="mailto:james@clearforge.ai"
+                  className="block text-sm text-stone hover:text-bone transition-colors"
+                >
                   james@clearforge.ai
                 </a>
                 <p className="text-xs text-stone/60">

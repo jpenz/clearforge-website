@@ -1,4 +1,7 @@
 import { NextResponse } from 'next/server';
+import { isRateLimited } from '@/lib/rate-limit';
+import { saveAssessmentLead } from '@/lib/supabase';
+import { normalizePublicCompanyUrl } from '@/lib/url-safety';
 
 function normalize(value: unknown): string {
   return typeof value === 'string' ? value.trim() : '';
@@ -8,16 +11,44 @@ function validateEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-function isHttpUrl(url: string): boolean {
-  return /^https?:\/\//i.test(url);
-}
-
 function isRecord(value: unknown): value is Record<string, unknown> {
   return !!value && typeof value === 'object' && !Array.isArray(value);
 }
 
+function normalizePillarScores(value: unknown): Record<string, number> {
+  if (Array.isArray(value)) {
+    return Object.fromEntries(
+      value
+        .map((pillar) => {
+          const key = normalize((pillar as { key?: unknown }).key);
+          const percentage = (pillar as { percentage?: unknown }).percentage;
+          return key && typeof percentage === 'number' ? [key, Math.round(percentage)] : undefined;
+        })
+        .filter((entry): entry is [string, number] => !!entry),
+    );
+  }
+
+  if (isRecord(value)) {
+    return Object.fromEntries(
+      Object.entries(value).filter((entry): entry is [string, number] => {
+        const [, score] = entry;
+        return typeof score === 'number' && Number.isFinite(score);
+      }),
+    );
+  }
+
+  return {};
+}
+
 export async function POST(request: Request) {
   try {
+    if (isRateLimited(request.headers, 'scorecard-submit', 20, 60 * 60 * 1000)) {
+      return NextResponse.json(
+        { error: 'Too many submissions. Please try again later.' },
+        { status: 429 },
+      );
+    }
+
     const body = (await request.json()) as Record<string, unknown>;
     const answers = body.answers;
     const results = body.results;
@@ -27,7 +58,36 @@ export async function POST(request: Request) {
     const company = normalize(body.company);
 
     if (!isRecord(answers) || !isRecord(results)) {
-      return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 });
+      const score = body.score;
+      const maturity = normalize(body.maturityLevel);
+
+      if (!name || !email || !company || typeof score !== 'number' || !maturity) {
+        return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 });
+      }
+
+      if (!validateEmail(email)) {
+        return NextResponse.json({ error: 'Please provide a valid email.' }, { status: 400 });
+      }
+
+      const leadId = await saveAssessmentLead({
+        name,
+        email,
+        company,
+        role: '',
+        industry: '',
+        challenge: 'Scorecard results request',
+        composite_score: Math.round(score),
+        maturity_level: maturity,
+        pillar_scores: normalizePillarScores(body.pillarScores),
+        suggested_solutions: [],
+        suggested_engagement: '',
+        closer_report: '',
+        company_research: '',
+        industry_best_in_class: '',
+        source: 'scorecard-results-gate',
+      });
+
+      return NextResponse.json({ success: true, leadSaved: !!leadId });
     }
 
     const compositeScore = results.compositeScore;
@@ -42,18 +102,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Please provide a valid email.' }, { status: 400 });
     }
 
-    console.log('=== SCORECARD SUBMISSION ===');
-    console.log('Source:', source || 'scorecard-form');
-    console.log('Name:', name || '(not provided)');
-    console.log('Email:', email || '(not provided)');
-    console.log('Company:', company || '(not provided)');
-    console.log('Score:', compositeScore);
-    console.log('Maturity:', maturityLevel);
-    console.log('Segment:', typeof segment === 'string' ? segment : '(not provided)');
-    console.log('Answers:', JSON.stringify(answers));
-    console.log('============================');
-
-    return NextResponse.json({ success: true });
+    return NextResponse.json({
+      success: true,
+      source: source || 'scorecard-form',
+      score: compositeScore,
+      maturityLevel,
+      segment: typeof segment === 'string' ? segment : undefined,
+    });
   } catch (error) {
     console.error('Scorecard submission error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
@@ -62,6 +117,13 @@ export async function POST(request: Request) {
 
 export async function PUT(request: Request) {
   try {
+    if (isRateLimited(request.headers, 'scorecard-lead', 10, 60 * 60 * 1000)) {
+      return NextResponse.json(
+        { error: 'Too many submissions. Please try again later.' },
+        { status: 429 },
+      );
+    }
+
     const body = (await request.json()) as Record<string, unknown>;
 
     const email = normalize(body.email);
@@ -76,11 +138,6 @@ export async function PUT(request: Request) {
 
     // Backward-compatible mode for the old results gate implementation.
     if (!painPoint && isRecord(body.results)) {
-      console.log('=== SCORECARD LEGACY LEAD ===');
-      console.log('Email:', email);
-      console.log('Segment:', normalize(body.segment));
-      console.log('Results:', JSON.stringify(body.results));
-      console.log('============================');
       return NextResponse.json({ success: true });
     }
 
@@ -91,22 +148,34 @@ export async function PUT(request: Request) {
       );
     }
 
-    if (companyUrl && !isHttpUrl(companyUrl)) {
+    const publicCompanyUrl = companyUrl ? normalizePublicCompanyUrl(companyUrl) : null;
+    if (companyUrl && !publicCompanyUrl) {
       return NextResponse.json(
-        { error: 'Company website must start with http:// or https://.' },
+        { error: 'Please provide a valid public company website.' },
         { status: 400 },
       );
     }
 
-    console.log('=== SCORECARD QUALIFIED LEAD ===');
-    console.log('Email:', email);
-    console.log('Company:', company || '(not provided)');
-    console.log('Company URL:', companyUrl || '(not provided)');
-    console.log('Pain Point:', painPoint);
-    console.log('Scorecard:', scorecard ? JSON.stringify(scorecard) : '(not provided)');
-    console.log('================================');
+    const leadId = await saveAssessmentLead({
+      name: email,
+      email,
+      company,
+      role: '',
+      industry: '',
+      challenge: painPoint,
+      company_url: publicCompanyUrl?.toString(),
+      composite_score: typeof scorecard?.compositeScore === 'number' ? scorecard.compositeScore : 0,
+      maturity_level: normalize(scorecard?.maturityLevel),
+      pillar_scores: normalizePillarScores(scorecard?.pillarScores),
+      suggested_solutions: [],
+      suggested_engagement: '',
+      closer_report: '',
+      company_research: '',
+      industry_best_in_class: '',
+      source: 'scorecard-qualified-lead',
+    });
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, leadSaved: !!leadId });
   } catch (error) {
     console.error('Scorecard lead capture error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

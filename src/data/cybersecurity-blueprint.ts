@@ -2,18 +2,17 @@
  * Cyber Security Technology Company AI Transformation Blueprint
  *
  * Source data:
- *  - a $5B+ ARR Cyber Security Technology Company FY2026 10-K (filed Mar 2026, fiscal year ended Jan 31, 2026)
- *  - Apollo people-search sample n=1,000 (titles classified into functions)
- *  - Job posting: VP, Enterprise AI Strategy and Transformation (Remote, $300-340K)
- *  - Company posts on the company\'s agentic security platform / AgentWorks / Agentic SOC (Spring 2026 release)
+ *  - Public FY2026 10-K metrics for a $5B+ ARR cybersecurity technology company
+ *  - Apollo people-search sample n=1,000, titles classified into functions
+ *  - Public enterprise AI strategy role requirements and internal AI platform signals
  *
  * Methodology:
- *  - Triangulated headcount per function from OpEx allocation + Apollo titles + cybersec benchmarks
- *  - AI-automation % per function from Bain Dell Automation Ambition methodology
+ *  - Triangulated headcount per function from OpEx allocation, title samples, and cybersecurity benchmarks
+ *  - AI-automation % per function from the Bain/Dell Automation Ambition methodology
  *  - From-state / to-state inspired by Bain Automation playbook archetypes
  */
 
-export const crowdstrikeFY2026 = {
+export const cybersecurityCompanyFY2026 = {
   totalEmployees: 10698,
   fiscalYearEnded: 'January 31, 2026',
   totalRevenueM: 4812,
@@ -38,6 +37,260 @@ export const blueprintSummary = {
   estimatedAnnualOpExSavingsM: 631, // 4,204 FTEs * $150K loaded cost
   blendedLoadedCostKUSD: 150,
 };
+
+export type StrategicPillar = {
+  label: string;
+  headline: string;
+  body: string;
+  proof: string;
+};
+
+export const strategicProposal: StrategicPillar[] = [
+  {
+    label: 'Find the growth spots',
+    headline:
+      'Turn every market, account, product, and customer signal into a ranked opportunity map.',
+    body: 'The company already has the ingredients: account activity, product telemetry, threat research, support demand, partner motion, renewal signals, and field intelligence. ClearForge would connect those signals into a single view of where growth is hiding and which teams should act first.',
+    proof:
+      'Output: a ranked portfolio of expansion plays, retention risks, product gaps, and operational bottlenecks with named owners and value at stake.',
+  },
+  {
+    label: 'Build the machine',
+    headline:
+      'Design the AI operating system around the actual value chain, not isolated point tools.',
+    body: 'The proposal is not another chatbot layer. It is a people-plus-AI machine where agents collect signals, draft the work, route exceptions, measure outcomes, and compound learning across product, GTM, customer, and operating teams.',
+    proof:
+      'Output: a future-state blueprint for the company, including agent roles, data sources, governance, integrations, and measurable business outcomes.',
+  },
+  {
+    label: 'Prove it in production',
+    headline:
+      'Pick the first five to eight use cases where speed, margin, quality, and customer experience improve together.',
+    body: 'ClearForge would start with practical workflows: account intelligence, RFP response, support deflection, product feedback clustering, threat research drafting, engineering delivery, and executive operating rhythm.',
+    proof:
+      'Output: production agents shipped in 90 days with before/after baselines on cycle time, cost, win rate, support quality, and employee capacity freed.',
+  },
+  {
+    label: 'Scale the capability',
+    headline: 'Stand up the operating cadence so this becomes a permanent company advantage.',
+    body: 'The goal is not a pile of pilots. The goal is an evergreen AI transformation system: every function has an opportunity backlog, every agent has a metric owner, and the leadership team can see adoption, ROI, risk, and next-wave value in one place.',
+    proof:
+      'Output: AI Center of Excellence governance, monthly value reviews, reusable build patterns, and a living enterprise opportunity pipeline.',
+  },
+];
+
+export type ValueChainStage = {
+  stage: string;
+  owner: string;
+  today: string;
+  futureState: string;
+  useCases: string[];
+  metric: string;
+};
+
+export const valueChainFutureState: ValueChainStage[] = [
+  {
+    stage: 'Market signal + ICP',
+    owner: 'Strategy, RevOps, Marketing',
+    today:
+      'Market movement, competitive shifts, trigger events, and customer pain signals live across analyst notes, call transcripts, CRM fields, web intent, and field anecdotes.',
+    futureState:
+      'An AI market radar scores segments, accounts, and buying centers daily, then recommends the highest-probability expansion plays and new-logo motions.',
+    useCases: ['Growth-spot radar', 'ICP refresh engine', 'Competitive movement monitor'],
+    metric: 'Pipeline created from priority segments, win-rate lift, research hours eliminated',
+  },
+  {
+    stage: 'Product strategy + roadmap',
+    owner: 'Product, UX, Product Marketing',
+    today:
+      'Roadmap inputs arrive from sales calls, support tickets, threat research, customer advisory boards, and competitor launches, but synthesis is slow and episodic.',
+    futureState:
+      'A product intelligence layer clusters customer feedback, maps it to modules and ARR impact, drafts PRDs, and tracks competitor gaps continuously.',
+    useCases: ['Feedback clustering', 'PRD drafting', 'Module whitespace map'],
+    metric: 'Faster roadmap decisions, better expansion attach, fewer low-signal builds',
+  },
+  {
+    stage: 'Threat research + intelligence',
+    owner: 'Threat Research, Intelligence, Managed Services',
+    today:
+      'Analysts spend high-value time enriching IOCs, clustering activity, drafting reports, and converting raw telemetry into customer-ready insight.',
+    futureState:
+      'Research agents enrich indicators, cluster attacker behavior, draft first-pass reports, and push relevant insights into product, marketing, support, and customer success.',
+    useCases: ['IOC enrichment', 'Adversary report drafting', 'Customer-specific risk briefs'],
+    metric: 'Analyst capacity freed, report cycle time, customer-facing intelligence velocity',
+  },
+  {
+    stage: 'Engineering delivery + quality',
+    owner: 'Engineering, SRE, Platform',
+    today:
+      'Engineering time is consumed by boilerplate, tests, docs, PR review, incident log analysis, and knowledge transfer across module teams.',
+    futureState:
+      'Engineering agents generate tests and docs, inspect PRs against team patterns, summarize incidents, and surface root-cause hypotheses before handoff.',
+    useCases: ['Test generation', 'PR quality copilot', 'Incident root-cause assistant'],
+    metric: 'Cycle time, escaped defects, incident MTTR, engineer focus time',
+  },
+  {
+    stage: 'GTM execution + sales',
+    owner: 'Sales, Sales Engineering, Alliances',
+    today:
+      'AEs, SDRs, SEs, and alliance teams rebuild account research, RFP responses, mutual action plans, and stakeholder maps one deal at a time.',
+    futureState:
+      'A revenue agent generates account briefs, entry plays, module fit, RFP drafts, stakeholder maps, MEDDICC risk, and next-best actions from CRM and product signals.',
+    useCases: ['Account intelligence', 'RFP response agent', 'Pipeline risk forecast'],
+    metric: 'Seller capacity, proposal cycle time, deal velocity, forecast accuracy',
+  },
+  {
+    stage: 'Onboarding + professional services',
+    owner: 'Customer Success, Professional Services, Implementation',
+    today:
+      'Implementation teams translate customer context into runbooks, integration plans, status reports, and enablement materials with heavy manual effort.',
+    futureState:
+      'Deployment agents assemble customer-specific runbooks, generate weekly status narratives, answer configuration questions, and surface risks before go-live.',
+    useCases: ['Deployment runbook agent', 'Customer config Q&A', 'Go-live risk monitor'],
+    metric: 'Time to value, implementation margin, escalation rate, customer confidence',
+  },
+  {
+    stage: 'Support + success + retention',
+    owner: 'Support, Success, Renewals',
+    today:
+      'Known-answer tickets, case summarization, escalation routing, renewal prep, and health-risk diagnosis take capacity away from higher-value customer work.',
+    futureState:
+      'Support and success agents deflect common issues, draft responses, summarize cases, create renewal briefs, and detect adoption risks from product telemetry.',
+    useCases: ['Tier 1 deflection', 'Renewal brief agent', 'Customer health risk detector'],
+    metric: 'CSAT, handle time, renewal readiness, churn risk detected earlier',
+  },
+  {
+    stage: 'Enterprise operations + governance',
+    owner: 'Finance, Legal, HR, IT, Executive Team',
+    today:
+      'The operating system is split across QBR decks, spreadsheets, ticket queues, policy reviews, and ad hoc executive requests.',
+    futureState:
+      'An AI operating control tower tracks initiative health, ROI, staffing, risk, compliance, and executive decisions across the transformation portfolio.',
+    useCases: ['Executive brief agent', 'Close and variance agent', 'AI governance tracker'],
+    metric: 'Management cycle time, OpEx leverage, risk visibility, decision quality',
+  },
+];
+
+export type FutureStateUseCase = {
+  name: string;
+  strategicRole: string;
+  agentSystem: string;
+  firstDataSources: string[];
+  businessOutcomes: string[];
+};
+
+export const futureStateUseCases: FutureStateUseCase[] = [
+  {
+    name: 'Growth-Spot Radar',
+    strategicRole: 'Find the highest-probability pockets of expansion before the market sees them.',
+    agentSystem:
+      'Continuously reads CRM activity, support themes, threat research, web intent, installed-base modules, and competitor movement to recommend the next segment, account, and product play.',
+    firstDataSources: [
+      'Salesforce',
+      'Gong or call transcripts',
+      'product telemetry',
+      'support tickets',
+    ],
+    businessOutcomes: [
+      'More qualified pipeline',
+      'faster account planning',
+      'clearer segment bets',
+    ],
+  },
+  {
+    name: 'Revenue Execution Agent',
+    strategicRole:
+      'Give every AE, SE, and alliance lead the research capacity of a dedicated strategy team.',
+    agentSystem:
+      'Builds account briefs, stakeholder maps, module-fit narratives, RFP drafts, mutual action plans, pricing context, and deal-risk alerts.',
+    firstDataSources: ['CRM', 'knowledge base', 'pricing rules', 'security platform documentation'],
+    businessOutcomes: [
+      'Shorter sales cycles',
+      'better forecast accuracy',
+      'higher seller throughput',
+    ],
+  },
+  {
+    name: 'Threat-to-Customer Intelligence Engine',
+    strategicRole:
+      'Convert deep research into customer value, product insight, and field-ready narratives faster.',
+    agentSystem:
+      'Enriches IOCs, clusters adversary behavior, drafts reports, generates customer-specific risk briefs, and routes relevant intelligence to product and GTM teams.',
+    firstDataSources: [
+      'threat telemetry',
+      'research notes',
+      'customer environments',
+      'public threat feeds',
+    ],
+    businessOutcomes: [
+      'faster intelligence publishing',
+      'stronger customer trust',
+      'more differentiated product stories',
+    ],
+  },
+  {
+    name: 'AI Delivery Factory',
+    strategicRole: 'Increase engineering throughput without trading off quality or reliability.',
+    agentSystem:
+      'Generates tests, docs, migration notes, and PR reviews; summarizes incidents; proposes root-cause hypotheses; and turns tribal knowledge into reusable engineering patterns.',
+    firstDataSources: ['GitHub', 'Jira', 'incident logs', 'OpenAPI specs'],
+    businessOutcomes: ['shorter delivery cycles', 'lower MTTR', 'better platform quality'],
+  },
+  {
+    name: 'Customer Time-to-Value Machine',
+    strategicRole:
+      'Make onboarding, implementation, and support feel faster, more precise, and more proactive.',
+    agentSystem:
+      'Creates deployment runbooks, answers configuration questions, drafts status reports, deflects known-answer support, and builds renewal briefs from product usage.',
+    firstDataSources: ['support KB', 'implementation plans', 'Jira', 'product telemetry'],
+    businessOutcomes: ['faster onboarding', 'higher CSAT', 'better retention economics'],
+  },
+  {
+    name: 'Enterprise AI Control Tower',
+    strategicRole:
+      'Give the executive team one trusted view of where AI is creating value and where execution is blocked.',
+    agentSystem:
+      'Tracks opportunity pipeline, adoption, risk, spend, ROI, policy approvals, owner accountability, and next-wave use cases across every function.',
+    firstDataSources: ['Workday', 'Anaplan', 'Salesforce', 'Jira', 'ServiceNow'],
+    businessOutcomes: ['visible ROI', 'faster decisions', 'repeatable governance'],
+  },
+];
+
+export const proposalRoadmap = [
+  {
+    window: 'Days 1 to 30',
+    name: 'Strategy diagnostic',
+    promise:
+      'Convert public and internal operating data into a prioritized opportunity map across the full company value chain.',
+    deliverables: [
+      'Value-chain map with current-state friction',
+      'Ranked use-case portfolio with value, effort, and risk scoring',
+      'Executive business case for the first 90 days',
+    ],
+  },
+  {
+    window: 'Days 31 to 90',
+    name: 'Production proof',
+    promise:
+      'Ship the first five to eight agents where speed, quality, customer experience, and margin move together.',
+    deliverables: [
+      'Production agent backlog and sprint cadence',
+      'Before/after baselines for cycle time, cost, quality, and adoption',
+      'Reusable agent patterns for security, evaluation, and change management',
+    ],
+  },
+  {
+    window: 'Months 4 to 12',
+    name: 'Scale the operating system',
+    promise:
+      'Turn early wins into a permanent AI transformation capability owned by the business, measured by value, and governed with discipline.',
+    deliverables: [
+      'AI Center of Excellence operating model',
+      'Executive control tower for ROI, risk, adoption, and next-wave value',
+      'Function-by-function roadmap through the next fiscal planning cycle',
+    ],
+  },
+];
 
 export type FromToState = {
   fromState: string;
@@ -85,10 +338,10 @@ export const functionAnalysis: FunctionAnalysis[] = [
       fromState:
         'AE manually researches each net-new account before outreach. SDR builds account plan from scratch. RFPs take 3 to 5 days each. Forecasting calls drain 4 hours weekly per RSM.',
       toState:
-        'their agentic security platform-style account agent auto-generates account brief, top 3 entry plays, named-account contact map, and 80 percent draft RFP within 30 minutes of request. Forecast agent assembles weighted pipeline view daily and flags slip risks before the call.',
+        'Account agents auto-generate an account brief, top 3 entry plays, named-account contact map, and 80 percent draft RFP within 30 minutes of request. Forecast agents assemble weighted pipeline views daily and flag slip risks before the call.',
       agentArchetype: 'Account Intelligence + RFP + Forecast Agent',
       exampleOutput:
-        'For a Fortune 100 healthcare prospect: company brief, 3 entry plays grounded in a security platform module fit, 12 named contacts mapped to ICP, draft RFP with module-level pricing — produced in 28 minutes vs 2.5 days.',
+        'For a Fortune 100 healthcare prospect: company brief, 3 entry plays grounded in module fit, 12 named contacts mapped to ICP, draft RFP with module-level pricing — produced in 28 minutes vs 2.5 days.',
     },
   },
   {
@@ -117,19 +370,20 @@ export const functionAnalysis: FunctionAnalysis[] = [
         'AI pair-programming agent embedded in IDE generates first-draft code, tests, and docs. Log-analysis agent pulls top 3 hypotheses for any incident in under 5 minutes. PR review agent enforces team patterns before human review.',
       agentArchetype: 'Coding Copilot + Log Forensics + PR Review Agent',
       exampleOutput:
-        'For a new their unified security platform cloud module: 60 percent of unit tests auto-generated, API docs drafted from OpenAPI spec, 2 of 3 incident root-causes surfaced before on-call paged.',
+        'For a new cloud module: 60 percent of unit tests auto-generated, API docs drafted from OpenAPI spec, 2 of 3 incident root-causes surfaced before on-call paged.',
     },
   },
   {
     function: 'Threat Intel & Research',
     estimatedHeadcount: 856,
     shareOfTotalHCPct: 8.0,
-    derivationNote: 'their unified security platform managed threat hunting + adversary research operations + the company\'s agentic security platform training',
+    derivationNote:
+      'managed threat hunting, adversary research operations, and agentic security training requirements',
     aiAutomationPct: 50.0,
     fteEquivalentFreed: 428,
     annualHoursFreed: 890240,
     highValueAreas:
-      'Threat triage, malware family clustering, IOC enrichment, report drafting, telemetry summarization (the company\'s agentic security platform eats own dog food)',
+      'Threat triage, malware family clustering, IOC enrichment, report drafting, telemetry summarization, analyst copilots',
     sampleApolloTitles: [
       'Senior Threat Researcher',
       'adversary research Specialist for Intel and Hunting',
@@ -141,10 +395,10 @@ export const functionAnalysis: FunctionAnalysis[] = [
     sampleNamedEmployees: [],
     fromTo: {
       fromState:
-        'Analyst manually triages alerts in their unified security platform console. Malware sample analysis takes hours per family. Adversary report drafted from scratch over multi-day cycles.',
+        'Analyst manually triages alerts in the security console. Malware sample analysis takes hours per family. Adversary reports are drafted from scratch over multi-day cycles.',
       toState:
-        'the company\'s existing agentic security platform orchestrates triage, clusters malware variants by behavior, enriches IOCs across telemetry, and drafts adversary report in minutes — analyst becomes the editor and decision-maker, not the producer.',
-      agentArchetype: 'the company\'s agentic security platform Triage + Malware Clustering + Report Drafting Agent',
+        'Internal research agents orchestrate triage, cluster malware variants by behavior, enrich IOCs across telemetry, and draft adversary reports in minutes — analysts become editors and decision-makers, not manual producers.',
+      agentArchetype: 'Threat Triage + Malware Clustering + Report Drafting Agent',
       exampleOutput:
         'For a new ransomware variant: behavioral cluster auto-identified, IOC list enriched across customer telemetry, draft attribution + TTP report ready for analyst review in 12 minutes.',
     },
@@ -170,7 +424,7 @@ export const functionAnalysis: FunctionAnalysis[] = [
       fromState:
         'Tier 1 handles 70 percent of L1 tickets that have known answers in KB. Average ticket time 22 minutes. Escalations take human triage. Case summary written manually at close.',
       toState:
-        'Customer-facing chat agent grounded on their unified security platform docs deflects 50 percent of L1 before ticket creation. Internal copilot drafts response to remaining tickets, summarizes case, and routes escalations automatically.',
+        'Customer-facing chat agent grounded on product docs deflects 50 percent of L1 before ticket creation. Internal copilot drafts response to remaining tickets, summarizes cases, and routes escalations automatically.',
       agentArchetype: 'Tier 1 Deflection + Response Drafting + Case Summarization Agent',
       exampleOutput:
         'Self-service ratio rises from 18 percent to 40 percent. Avg handle time drops 22 to 12 min. Engineers focus on novel issues that require judgment.',
@@ -236,7 +490,8 @@ export const functionAnalysis: FunctionAnalysis[] = [
     function: 'Professional Services',
     estimatedHeadcount: 535,
     shareOfTotalHCPct: 5.0,
-    derivationNote: '$247M services revenue + $203M services cost-of-revenue, IR + deployment + advisory',
+    derivationNote:
+      '$247M services revenue + $203M services cost-of-revenue, IR + deployment + advisory',
     aiAutomationPct: 35.0,
     fteEquivalentFreed: 187,
     annualHoursFreed: 388960,
@@ -257,7 +512,7 @@ export const functionAnalysis: FunctionAnalysis[] = [
         'Implementation agent assembles customer-specific runbook in 1 hour from intake (industry, modules, integrations). Status report agent drafts weekly update from Jira and Slack. Config-Q&A agent grounded on customer environment answers in real time.',
       agentArchetype: 'Implementation Runbook + Status Report + Config Q&A Agent',
       exampleOutput:
-        'New an identity protection module deployment: runbook delivered Day 1 vs Week 2 historically. Customer config questions answered 80 percent without engineer escalation.',
+        'New identity-protection module deployment: runbook delivered Day 1 vs Week 2 historically. Customer config questions answered 80 percent without engineer escalation.',
     },
   },
   {
@@ -292,7 +547,8 @@ export const functionAnalysis: FunctionAnalysis[] = [
     function: 'Finance',
     estimatedHeadcount: 321,
     shareOfTotalHCPct: 3.0,
-    derivationNote: '$670M G&A, public company finance scale (FP&A, controllership, treasury, billing)',
+    derivationNote:
+      '$670M G&A, public company finance scale (FP&A, controllership, treasury, billing)',
     aiAutomationPct: 45.0,
     fteEquivalentFreed: 144,
     annualHoursFreed: 299520,
@@ -375,7 +631,8 @@ export const functionAnalysis: FunctionAnalysis[] = [
     function: 'Legal & Compliance',
     estimatedHeadcount: 214,
     shareOfTotalHCPct: 2.0,
-    derivationNote: 'Public company legal, GDPR, federal compliance frameworks, contracts, regulatory monitoring',
+    derivationNote:
+      'Public company legal, GDPR, federal compliance frameworks, contracts, regulatory monitoring',
     aiAutomationPct: 35.0,
     fteEquivalentFreed: 75,
     annualHoursFreed: 156000,
@@ -435,8 +692,8 @@ export const transformationMethod = [
       'Map every function and value-chain activity at a $5B+ ARR Cyber Security Technology Company against the agent archetype taxonomy. Score by AI fit and dollar value.',
     deliverable:
       'Enterprise opportunity map: every function, every activity, scored on AI agent suitability + dollar opportunity. Ranked pipeline ready for sequencing.',
-    crowdstrikeSpecific:
-      'Already drafted in this blueprint. Refined in week 1 with internal data (Workday headcount, Salesforce activity logs, Jira ticket volumes, their unified security platform telemetry).',
+    companySpecific:
+      'Already drafted in this blueprint. Refined in week 1 with internal data such as Workday headcount, Salesforce activity logs, Jira ticket volumes, support queues, and product telemetry.',
   },
   {
     phase: 2,
@@ -446,8 +703,8 @@ export const transformationMethod = [
       'For each opportunity, build the from-state baseline (current cycle time, $ cost, error rates) and the to-state target (post-agent metrics).',
     deliverable:
       'Per-opportunity business case with baseline metrics, target metrics, FTE-equivalent capacity freed, and dollar savings.',
-    crowdstrikeSpecific:
-      'Anchor on the 33 a security platform modules, GTM segments, and the 13 enterprise functions. Each opportunity ties to a named OKR owner.',
+    companySpecific:
+      'Anchor on the module portfolio, GTM segments, customer journey, and the 13 enterprise functions. Each opportunity ties to a named OKR owner.',
   },
   {
     phase: 3,
@@ -457,7 +714,7 @@ export const transformationMethod = [
       'Order opportunities by value, speed-to-deploy, and risk. Build a 90-day sprint backlog and a 12-month roadmap. Lock executive sponsors.',
     deliverable:
       '90-day sprint backlog (5 to 8 priority opportunities), 12-month roadmap, named sponsors, governance cadence, success metrics.',
-    crowdstrikeSpecific:
+    companySpecific:
       'Aligned to the AI Center of Excellence operating model. The AI Steering Committee gets a single roadmap with weekly tracking.',
   },
   {
@@ -468,25 +725,25 @@ export const transformationMethod = [
       'Deploy agents into production through 2-week sprint cycles. Measure outcomes in business metrics, not pilots. Capture and recycle learnings into the evergreen pipeline.',
     deliverable:
       'Production agents shipped, metrics captured, evergreen opportunity pipeline standing up the next wave automatically.',
-    crowdstrikeSpecific:
-      'the company\'s existing agentic security platform is the natural production runtime for internal-facing agents. External-facing customer agents follow the same playbook.',
+    companySpecific:
+      'Internal-facing agents can start on governed enterprise tooling, while customer-facing agents follow the same playbook with stricter evaluation, security, and support-readiness gates.',
   },
 ];
 
 export const whyJames = {
   appreciation:
-    'This Company has done something rare. You built a category, defined the modern endpoint, and crossed $5B ARR with 22 percent growth. the company\'s existing agentic security platform puts agentic security into the hands of every analyst. The 33 cloud modules of their unified security platform are an enterprise data fabric that few companies can match.',
+    'This company has done something rare: built a category, scaled beyond $5B ARR, and created an enterprise data fabric that few security companies can match. That operating scale is exactly why the next advantage will come from applying AI to the company itself, not only to customer-facing products.',
   shareholderSince: 2020,
   experienceMatches: [
     {
       jdRequirement: 'Architect and direct AI Center of Excellence',
       proof:
-        'First hire and founding team member of Bain\'s Automation Center of Excellence. Built the practice, the methodology, and the operating model from zero.',
+        "First hire and founding team member of Bain's Automation Center of Excellence. Built the practice, the methodology, and the operating model from zero.",
     },
     {
       jdRequirement: 'Define the Enterprise AI Roadmap',
       proof:
-        'Led Dell Automation Ambition: identified $150 to $200M in G&A opportunities across 5 priority workstreams, built the evergreen opportunity pipeline that became Dell\'s permanent capability.',
+        "Led Dell Automation Ambition: identified $150 to $200M in G&A opportunities across 5 priority workstreams, built the evergreen opportunity pipeline that became Dell's permanent capability.",
     },
     {
       jdRequirement: 'Deploy autonomous workflows and agentic systems',
@@ -505,7 +762,8 @@ export const whyJames = {
     },
     {
       jdRequirement: 'Top-tier management consulting',
-      proof: 'Bain & Company, Senior Manager (Automation Center of Excellence). Prior: EY Performance Improvement, Capgemini Financial Services Tech Transformation.',
+      proof:
+        'Bain & Company, Senior Manager (Automation Center of Excellence). Prior: EY Performance Improvement, Capgemini Financial Services Tech Transformation.',
     },
     {
       jdRequirement: 'Customer Zero mindset',
@@ -516,10 +774,10 @@ export const whyJames = {
 };
 
 export const carnegieAppeal = {
-  geninuneInterest:
-    'I\'ve been a a $5B+ ARR Cyber Security Technology Company shareholder since 2020 — through their unified security platform expansion, the company\'s agentic security platform launch, the Spring \'26 platform release. This isn\'t a job to me. This is the company I have been studying, betting on, and rooting for from the outside. I want to help build it from the inside.',
+  genuineInterest:
+    'I have followed this company closely as an operator, builder, and long-term believer in the cybersecurity platform shift. This is not a generic AI pitch. It is a company-specific view of where AI can improve growth, speed, quality, customer experience, efficiency, and margin.',
   whatTheyDoAlready:
-    'You don\'t need me to tell you AI is the dividing line. Their own leadership has said this publicly. You don\'t need me to tell you their unified security platform is the right substrate for agentic security — their own internal AI rollouts already prove it. What you do need is someone who can take the same playbook you used to build the agentic SOC for customers and apply it inside the Company to unlock the next leg of the $10B journey.',
+    'The company already understands that AI is becoming the dividing line in security. The open opportunity is to take the same seriousness used for customer-facing innovation and apply it inside every function: the revenue engine, product factory, support motion, research workflow, and operating model.',
   callToAction:
-    'I\'d like 15 minutes with the hiring leader to discuss the blueprint above and how this lands inside the AI Center of Excellence operating model.',
+    'I would like 15 minutes to walk through the proposal, pressure-test the assumptions, and identify the first sprint that would create visible value fastest.',
 };

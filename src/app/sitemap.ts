@@ -3,6 +3,7 @@ import { caseStudies } from '@/data/case-studies';
 import { industries } from '@/data/industries-value-chains';
 import { insights } from '@/data/insights';
 import { services } from '@/data/services';
+import { useCases } from '@/data/use-cases';
 
 const siteUrl = 'https://clearforge.ai';
 const lastModified = new Date();
@@ -13,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/discover`, lastModified, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${siteUrl}/scorecard`, lastModified, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${siteUrl}/services`, lastModified, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${siteUrl}/use-cases`, lastModified, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${siteUrl}/industries`, lastModified, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${siteUrl}/case-studies`, lastModified, changeFrequency: 'weekly', priority: 0.88 },
     { url: `${siteUrl}/pricing`, lastModified, changeFrequency: 'monthly', priority: 0.85 },
@@ -38,6 +40,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  const useCasePages: MetadataRoute.Sitemap = useCases.map((useCase) => ({
+    url: `${siteUrl}/use-cases/${useCase.slug}`,
+    lastModified,
+    changeFrequency: 'monthly',
+    priority: 0.83,
+  }));
+
+  const blueprintPages: MetadataRoute.Sitemap = [
+    {
+      url: `${siteUrl}/blueprints/cybersecurity-technology-company`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.78,
+    },
+  ];
+
   const caseStudyPages: MetadataRoute.Sitemap = caseStudies.map((study) => ({
     url: `${siteUrl}/case-studies/${study.slug}`,
     lastModified,
@@ -62,6 +80,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...tier2,
     ...industryPages,
     ...servicePages,
+    ...useCasePages,
+    ...blueprintPages,
     ...caseStudyPages,
     ...insightPages,
     ...legal,

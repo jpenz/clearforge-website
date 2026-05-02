@@ -1,7 +1,7 @@
 import {
-  ArrowRight,
   Activity,
   AlertTriangle,
+  ArrowRight,
   BarChart3,
   Beaker,
   BookOpen,
@@ -23,7 +23,7 @@ import {
   Headphones,
   Heart,
   Lightbulb,
-  Map,
+  Map as MapIcon,
   Megaphone,
   Network,
   Package,
@@ -48,11 +48,12 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Button } from '@/components/ui/button';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
+import { Button } from '@/components/ui/button';
 import { caseStudies } from '@/data/case-studies';
-import { getIndustry, industries } from '@/data/industries-value-chains';
 import type { ActivityType } from '@/data/industries-value-chains';
+import { getIndustry, industries } from '@/data/industries-value-chains';
 import { breadcrumbJsonLd, createMetadata, industryServiceJsonLd } from '@/lib/metadata';
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -66,7 +67,12 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const industry = getIndustry(slug);
-  if (!industry) return createMetadata({ title: 'Industry — ClearForge', description: 'AI agents and automation by industry.', path: `/industries/${slug}` });
+  if (!industry)
+    return createMetadata({
+      title: 'Industry — ClearForge',
+      description: 'AI agents and automation by industry.',
+      path: `/industries/${slug}`,
+    });
 
   return createMetadata({
     title: `AI Agents & Automation for ${industry.name} | ClearForge`,
@@ -87,12 +93,50 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 // ─────────────────────────────────────────────────────────────────────────
 
 const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
-  Activity, AlertTriangle, BarChart3, Beaker, BookOpen, Boxes, Briefcase,
-  Building2, Calculator, Calendar, Car, CheckCircle, Code, Compass,
-  DollarSign, Eye, FileSearch, FileText, Globe, HardHat, Headphones,
-  Heart, Lightbulb, Map, Megaphone, Network, Package, Phone, Search,
-  Settings, Shield, ShieldCheck, ShoppingBag, ShoppingCart, Stethoscope,
-  Store, Tag, Target, TrendingUp, Truck, Users, Warehouse, Wrench, Zap,
+  Activity,
+  AlertTriangle,
+  BarChart3,
+  Beaker,
+  BookOpen,
+  Boxes,
+  Briefcase,
+  Building2,
+  Calculator,
+  Calendar,
+  Car,
+  CheckCircle,
+  Code,
+  Compass,
+  DollarSign,
+  Eye,
+  FileSearch,
+  FileText,
+  Globe,
+  HardHat,
+  Headphones,
+  Heart,
+  Lightbulb,
+  Map: MapIcon,
+  Megaphone,
+  Network,
+  Package,
+  Phone,
+  Search,
+  Settings,
+  Shield,
+  ShieldCheck,
+  ShoppingBag,
+  ShoppingCart,
+  Stethoscope,
+  Store,
+  Tag,
+  Target,
+  TrendingUp,
+  Truck,
+  Users,
+  Warehouse,
+  Wrench,
+  Zap,
 };
 
 const TYPE_LABEL: Record<ActivityType, string> = {
@@ -118,7 +162,9 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
   const industry = getIndustry(slug);
   if (!industry) notFound();
 
-  const caseStudy = industry.caseStudySlug ? caseStudies.find((c) => c.slug === industry.caseStudySlug) : undefined;
+  const caseStudy = industry.caseStudySlug
+    ? caseStudies.find((c) => c.slug === industry.caseStudySlug)
+    : undefined;
 
   // For "view all activities" total
   const totalActivities = industry.valueChain.reduce((acc, fn) => acc + fn.activities.length, 0);
@@ -132,8 +178,8 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbsLd) }} />
+      <JsonLdScript data={serviceLd} />
+      <JsonLdScript data={crumbsLd} />
       {/* ── Hero ── editorial two-column with optional video bg ── */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         {industry.videoBackground ? (
@@ -198,15 +244,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                   <ul className="mt-4 space-y-5">
                     {industry.marketContext.map((item) => (
                       <li key={item.label}>
-                        <span
-                          className="metric"
-                          style={{
-                            fontFamily: 'var(--font-jetbrains-mono, monospace)',
-                            fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
-                            color: 'var(--color-brass-light)',
-                            letterSpacing: '-0.02em',
-                          }}
-                        >
+                        <span className="metric text-[1.5rem] text-brass-light sm:text-[1.9rem] lg:text-[2.25rem]">
                           {item.stat}
                         </span>
                         <p className="mt-1 text-body-sm text-stone max-w-xs">{item.label}</p>
@@ -223,14 +261,28 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       {/* ── Jump-link strip — Slalom pattern, premium consulting standard ── */}
       <div className="bg-warm-white border-b border-divider sticky top-14 z-30 backdrop-blur-sm">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 py-3 overflow-x-auto">
-          <nav className="flex items-center gap-x-6 sm:gap-x-8 text-[11px] uppercase tracking-widest text-warm-gray whitespace-nowrap">
+          <nav className="flex items-center gap-x-6 sm:gap-x-8 text-[11px] uppercase text-warm-gray whitespace-nowrap">
             <span className="text-anthracite font-semibold">Jump to:</span>
-            <a href="#overview" className="hover:text-brass transition-colors">Overview</a>
-            <a href="#value-chain" className="hover:text-brass transition-colors">Value Chain</a>
-            <a href="#challenges" className="hover:text-brass transition-colors">Challenges</a>
-            <a href="#forge-method" className="hover:text-brass transition-colors">How We Engage</a>
-            {caseStudy && <a href="#case" className="hover:text-brass transition-colors">Case Study</a>}
-            <a href="#discuss" className="hover:text-brass transition-colors">Talk</a>
+            <a href="#overview" className="hover:text-brass transition-colors">
+              Overview
+            </a>
+            <a href="#value-chain" className="hover:text-brass transition-colors">
+              Value Chain
+            </a>
+            <a href="#challenges" className="hover:text-brass transition-colors">
+              Challenges
+            </a>
+            <a href="#forge-method" className="hover:text-brass transition-colors">
+              How We Engage
+            </a>
+            {caseStudy && (
+              <a href="#case" className="hover:text-brass transition-colors">
+                Case Study
+              </a>
+            )}
+            <a href="#discuss" className="hover:text-brass transition-colors">
+              Talk
+            </a>
           </nav>
         </div>
       </div>
@@ -245,7 +297,9 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             </div>
             <div className="mt-12 lg:col-span-7 lg:mt-0 space-y-6">
               {industry.overview.map((p) => (
-                <p key={p} className="text-body-lg text-warm-gray">{p}</p>
+                <p key={p} className="text-body-lg text-warm-gray">
+                  {p}
+                </p>
               ))}
             </div>
           </div>
@@ -253,7 +307,10 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       </section>
 
       {/* ── VALUE CHAIN ── the editorial centerpiece ── */}
-      <section id="value-chain" className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40 scroll-mt-24">
+      <section
+        id="value-chain"
+        className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40 scroll-mt-24"
+      >
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-16 lg:items-end">
             <div className="lg:col-span-7">
@@ -265,9 +322,10 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                 Every function. Every activity. Where AI fits.
               </h2>
               <p className="mt-6 max-w-2xl text-body-lg text-stone">
-                The full operating value chain for {industry.shortName.toLowerCase()} — and the specific
-                activities ClearForge automates or runs as AI agents inside each function.
-                {totalActivities} addressable activities across {industry.valueChain.length} functions.
+                The full operating value chain for {industry.shortName.toLowerCase()} — and the
+                specific activities ClearForge automates or runs as AI agents inside each function.
+                {totalActivities} addressable activities across {industry.valueChain.length}{' '}
+                functions.
               </p>
             </div>
             <div className="lg:col-span-5 lg:flex lg:justify-end mt-8 lg:mt-0">
@@ -319,13 +377,15 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                             <div className="flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-2 lg:gap-6">
                               <h4 className="text-body-lg text-bone font-medium">{act.name}</h4>
                               <span
-                                className={`shrink-0 inline-flex items-center text-[10px] uppercase tracking-widest border px-2 py-1 ${TYPE_BADGE_CLASS[act.type]}`}
+                                className={`shrink-0 inline-flex items-center text-[10px] uppercase border px-2 py-1 ${TYPE_BADGE_CLASS[act.type]}`}
                               >
                                 {TYPE_LABEL[act.type]}
                               </span>
                             </div>
                             <p className="mt-3 text-body text-stone">{act.aiImpact}</p>
-                            <p className="mt-2 text-body-sm text-brass-light font-medium">{act.impact}</p>
+                            <p className="mt-2 text-body-sm text-brass-light font-medium">
+                              {act.impact}
+                            </p>
                           </li>
                         ))}
                       </ul>
@@ -342,7 +402,9 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       <section id="challenges" className="bg-parchment py-24 lg:py-40 scroll-mt-24">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <p className="overline">Industry Challenges</p>
-          <h2 className="mt-6 text-display max-w-3xl">Where {industry.shortName.toLowerCase()} operators are losing margin today</h2>
+          <h2 className="mt-6 text-display max-w-3xl">
+            Where {industry.shortName.toLowerCase()} operators are losing margin today
+          </h2>
           <Stagger className="mt-16 lg:grid lg:grid-cols-2 lg:gap-x-16" stagger={0.1}>
             {industry.challenges.map((ch) => (
               <StaggerItem key={ch.title} className="border-t border-divider py-10 lg:py-12">
@@ -350,7 +412,10 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                   <h3 className="text-h3">{ch.title}</h3>
                   <p className="mt-3 text-body text-warm-gray max-w-lg">{ch.description}</p>
                   <div className="mt-5 flex items-baseline gap-3 flex-wrap">
-                    <span className="metric text-2xl text-anthracite" style={{ fontFamily: 'var(--font-jetbrains-mono, monospace)' }}>
+                    <span
+                      className="metric text-2xl text-anthracite"
+                      style={{ fontFamily: 'var(--font-jetbrains-mono, monospace)' }}
+                    >
                       {ch.metric}
                     </span>
                     <span className="text-xs text-warm-gray leading-snug">{ch.metricLabel}</span>
@@ -369,7 +434,9 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
           <div className="lg:grid lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-5">
               <p className="overline">The Forge Method</p>
-              <h2 className="mt-6 text-display">How ClearForge ships AI in {industry.shortName.toLowerCase()}.</h2>
+              <h2 className="mt-6 text-display">
+                How ClearForge ships AI in {industry.shortName.toLowerCase()}.
+              </h2>
             </div>
             <div className="mt-12 lg:col-span-7 lg:mt-0">
               <p className="text-body-lg text-warm-gray">{industry.forgeApplication}</p>
@@ -389,7 +456,9 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               </div>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Button asChild>
-                  <Link href="/services">See Capabilities <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                  <Link href="/services">
+                    See Capabilities <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </Button>
                 <Button variant="secondary" asChild>
                   <Link href="/pricing">View Pricing</Link>
@@ -402,7 +471,10 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
 
       {/* ── Linked case study (if present) ── */}
       {caseStudy && (
-        <section id="case" className="border-t border-divider bg-parchment py-24 lg:py-40 scroll-mt-24">
+        <section
+          id="case"
+          className="border-t border-divider bg-parchment py-24 lg:py-40 scroll-mt-24"
+        >
           <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
             <p className="overline">Related Case Study</p>
             <Link
@@ -410,7 +482,10 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               className="group block mt-6 lg:grid lg:grid-cols-12 lg:gap-12"
             >
               <div className="lg:col-span-8">
-                <h3 className="text-h2 group-hover:text-brass transition-colors" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
+                <h3
+                  className="text-h2 group-hover:text-brass transition-colors"
+                  style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                >
                   {caseStudy.title}
                 </h3>
                 <p className="mt-4 text-body-lg text-warm-gray max-w-2xl">{caseStudy.excerpt}</p>
@@ -426,7 +501,9 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                   >
                     {caseStudy.heroMetric}
                   </span>
-                  <p className="mt-1 text-body-sm text-warm-gray max-w-[200px] ml-auto">{caseStudy.heroMetricLabel}</p>
+                  <p className="mt-1 text-body-sm text-warm-gray max-w-[200px] ml-auto">
+                    {caseStudy.heroMetricLabel}
+                  </p>
                 </div>
               </div>
             </Link>
@@ -435,9 +512,15 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       )}
 
       {/* ── CTA ── */}
-      <section id="discuss" className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40 scroll-mt-24">
+      <section
+        id="discuss"
+        className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40 scroll-mt-24"
+      >
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
+          <h2
+            className="text-display text-bone"
+            style={{ fontFamily: 'var(--font-instrument-serif)' }}
+          >
             Get a custom value chain for your business.
           </h2>
           <p className="mt-6 text-body-lg text-stone">

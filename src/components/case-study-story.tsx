@@ -55,91 +55,103 @@ export function CaseStudyStory({
   const act4Ref = useRef<HTMLDivElement>(null);
   const quoteWordsRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    if (typeof window === 'undefined' || window.innerWidth < 768) return;
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  useGSAP(
+    () => {
+      if (typeof window === 'undefined' || window.innerWidth < 768) return;
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // ACT 1: Soft stagger reveal on page load (no pinning — pinning felt wrong
-    // for B2B consulting, same reason we reverted the home hero in V8.18).
-    // immediateRender: false so content stays visible if animation never fires.
-    const act1Text = act1TextRef.current;
-    if (act1Text && !prefersReduced) {
-      const lines = act1Text.querySelectorAll('.reveal-line');
-      gsap.fromTo(
-        lines,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          ease: 'power3.out',
-          stagger: 0.08,
-          immediateRender: false,
-        },
-      );
-    }
-
-    // ACT 2: Horizontal scroll timeline
-    const act2 = act2Ref.current;
-    const track = timelineTrackRef.current;
-    const line = timelineLineRef.current;
-    if (act2 && track && line) {
-      const totalWidth = track.scrollWidth - window.innerWidth;
-      gsap.to(track, {
-        x: -totalWidth,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: act2,
-          start: 'top top',
-          end: `+=${totalWidth}`,
-          pin: true,
-          scrub: 0.5,
-        },
-      });
-      // Line fill
-      gsap.to(line, {
-        scaleX: 1,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: act2,
-          start: 'top top',
-          end: `+=${totalWidth}`,
-          scrub: 0.5,
-        },
-      });
-    }
-
-    // ACT 4: Quote word-by-word reveal.
-    // immediateRender: false keeps words visible until ScrollTrigger fires.
-    const act4 = act4Ref.current;
-    const quoteEl = quoteWordsRef.current;
-    if (act4 && quoteEl && !prefersReduced) {
-      const words = quoteEl.querySelectorAll('.quote-word');
-      gsap.fromTo(
-        words,
-        { opacity: 0.15 },
-        {
-          opacity: 1,
-          stagger: 0.05,
-          immediateRender: false,
-          scrollTrigger: {
-            trigger: act4,
-            start: 'top 60%',
-            end: 'center center',
-            scrub: true,
+      // ACT 1: Soft stagger reveal on page load (no pinning — pinning felt wrong
+      // for B2B consulting, same reason we reverted the home hero in V8.18).
+      // immediateRender: false so content stays visible if animation never fires.
+      const act1Text = act1TextRef.current;
+      if (act1Text && !prefersReduced) {
+        const lines = act1Text.querySelectorAll('.reveal-line');
+        gsap.fromTo(
+          lines,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: 'power3.out',
+            stagger: 0.08,
+            immediateRender: false,
           },
-        },
-      );
-    }
-  }, { scope: act1Ref });
+        );
+      }
 
-  // Split quote into words for animation
-  const quoteWords = quote.split(' ');
+      // ACT 2: Horizontal scroll timeline
+      const act2 = act2Ref.current;
+      const track = timelineTrackRef.current;
+      const line = timelineLineRef.current;
+      if (act2 && track && line) {
+        const totalWidth = track.scrollWidth - window.innerWidth;
+        gsap.to(track, {
+          x: -totalWidth,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: act2,
+            start: 'top top',
+            end: `+=${totalWidth}`,
+            pin: true,
+            scrub: 0.5,
+          },
+        });
+        // Line fill
+        gsap.to(line, {
+          scaleX: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: act2,
+            start: 'top top',
+            end: `+=${totalWidth}`,
+            scrub: 0.5,
+          },
+        });
+      }
+
+      // ACT 4: Quote word-by-word reveal.
+      // immediateRender: false keeps words visible until ScrollTrigger fires.
+      const act4 = act4Ref.current;
+      const quoteEl = quoteWordsRef.current;
+      if (act4 && quoteEl && !prefersReduced) {
+        const words = quoteEl.querySelectorAll('.quote-word');
+        gsap.fromTo(
+          words,
+          { opacity: 0.15 },
+          {
+            opacity: 1,
+            stagger: 0.05,
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: act4,
+              start: 'top 60%',
+              end: 'center center',
+              scrub: true,
+            },
+          },
+        );
+      }
+    },
+    { scope: act1Ref },
+  );
+
+  const challengeSentences = challenge.split('. ');
+
+  let quoteOffset = 0;
+  const quoteWords = quote.split(' ').map((word) => {
+    const key = `${quoteOffset}-${word}`;
+    quoteOffset += word.length + 1;
+    return { key, word };
+  });
 
   return (
     <>
       {/* ═══ ACT 1: THE PROBLEM ═══ */}
-      <section ref={act1Ref} className="dark-section noise-texture relative min-h-screen overflow-hidden">
+      <section
+        ref={act1Ref}
+        className="dark-section noise-texture relative min-h-screen overflow-hidden"
+      >
         <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 py-20 sm:py-32 lg:py-0 lg:min-h-screen lg:flex lg:items-center">
           <div className="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
             {/* Left: The challenge */}
@@ -147,9 +159,10 @@ export function CaseStudyStory({
               <p className="overline reveal-line">{industry}</p>
               <h1 className="mt-6 text-display-xl text-bone reveal-line">{title}</h1>
               <div className="mt-8 space-y-4">
-                {challenge.split('. ').map((sentence, i) => (
-                  <p key={i} className="text-body-lg text-stone reveal-line">
-                    {sentence}{i < challenge.split('. ').length - 1 ? '.' : ''}
+                {challengeSentences.map((sentence, i) => (
+                  <p key={sentence} className="text-body-lg text-stone reveal-line">
+                    {sentence}
+                    {i < challengeSentences.length - 1 ? '.' : ''}
                   </p>
                 ))}
               </div>
@@ -166,7 +179,11 @@ export function CaseStudyStory({
 
       {/* ═══ ACT 2: THE INTERVENTION — Horizontal scroll (desktop) / Vertical stack (mobile) ═══ */}
       {/* Desktop: horizontal scroll with GSAP */}
-      <section ref={act2Ref} className="bg-parchment overflow-hidden hidden md:block" style={{ height: '100vh' }}>
+      <section
+        ref={act2Ref}
+        className="bg-parchment overflow-hidden hidden md:block"
+        style={{ height: '100vh' }}
+      >
         <div className="h-full flex flex-col justify-center">
           {/* Section header */}
           <div className="mx-auto max-w-[1400px] px-6 lg:px-10 mb-12">
@@ -177,7 +194,11 @@ export function CaseStudyStory({
           {/* Timeline line */}
           <div className="mx-auto max-w-[1400px] px-6 lg:px-10 mb-8">
             <div className="h-0.5 bg-divider relative">
-              <div ref={timelineLineRef} className="absolute inset-y-0 left-0 bg-brass origin-left" style={{ transform: 'scaleX(0)' }} />
+              <div
+                ref={timelineLineRef}
+                className="absolute inset-y-0 left-0 bg-brass origin-left"
+                style={{ transform: 'scaleX(0)' }}
+              />
             </div>
           </div>
 
@@ -186,8 +207,10 @@ export function CaseStudyStory({
             {phases.map((phase, i) => (
               <div key={phase.title} className="shrink-0 w-[400px] lg:w-[500px]">
                 <div className="border border-divider bg-surface p-8 h-full">
-                  <span className="metric text-sm text-brass">Phase {String(i + 1).padStart(2, '0')}</span>
-                  <span className="text-xs text-warm-gray ml-3 uppercase tracking-wider">{phase.duration}</span>
+                  <span className="metric text-sm text-brass">
+                    Phase {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="text-xs text-warm-gray ml-3 uppercase">{phase.duration}</span>
                   <h3 className="mt-4 text-h3">{phase.title}</h3>
                   <p className="mt-4 text-body text-warm-gray">{phase.description}</p>
                 </div>
@@ -215,8 +238,10 @@ export function CaseStudyStory({
           <div className="mt-10 space-y-4">
             {phases.map((phase, i) => (
               <div key={phase.title} className="border border-divider bg-surface p-5">
-                <span className="metric text-sm text-brass">Phase {String(i + 1).padStart(2, '0')}</span>
-                <span className="text-xs text-warm-gray ml-3 uppercase tracking-wider">{phase.duration}</span>
+                <span className="metric text-sm text-brass">
+                  Phase {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="text-xs text-warm-gray ml-3 uppercase">{phase.duration}</span>
                 <h3 className="mt-3 text-h3">{phase.title}</h3>
                 <p className="mt-3 text-body text-warm-gray">{phase.description}</p>
               </div>
@@ -241,7 +266,9 @@ export function CaseStudyStory({
 
           <div className="mt-12 sm:mt-16 grid grid-cols-2 gap-4 sm:gap-8 lg:grid-cols-4 lg:gap-12">
             {outcomes.map((outcome, i) => (
-              <div key={outcome.description} className="text-center"
+              <div
+                key={outcome.description}
+                className="text-center"
                 style={{ animationDelay: `${i * 0.15}s` }}
               >
                 <MetricCounter
@@ -259,12 +286,17 @@ export function CaseStudyStory({
       {/* ═══ ACT 4: THE IMPACT — Quote reveal ═══ */}
       <section ref={act4Ref} className="bg-parchment py-16 sm:py-24 lg:py-40">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10 text-center">
-          <span className="block text-[50px] sm:text-[80px] leading-none text-brass/20" aria-hidden>&ldquo;</span>
+          <span className="block text-[50px] sm:text-[80px] leading-none text-brass/20" aria-hidden>
+            &ldquo;
+          </span>
 
           <div ref={quoteWordsRef} className="mt-4">
-            <p className="text-h1 text-anthracite leading-snug" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
-              {quoteWords.map((word, i) => (
-                <span key={i} className="quote-word inline-block mr-[0.3em]">
+            <p
+              className="text-h1 text-anthracite leading-snug"
+              style={{ fontFamily: 'var(--font-instrument-serif)' }}
+            >
+              {quoteWords.map(({ key, word }) => (
+                <span key={key} className="quote-word inline-block mr-[0.3em]">
                   {word}
                 </span>
               ))}
@@ -291,7 +323,9 @@ export function CaseStudyStory({
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
-              <Link href="/discover">Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              <Link href="/discover">
+                Generate My AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>
               <Link href="/case-studies">See More Case Studies</Link>

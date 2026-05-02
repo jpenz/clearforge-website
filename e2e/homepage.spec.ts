@@ -46,8 +46,17 @@ test.describe('Homepage', () => {
     await expect(cta).toBeVisible();
   });
 
-  test('navigation links are present', async ({ page }) => {
-    const nav = page.getByRole('navigation').first();
+  test('navigation links are present', async ({ page }, testInfo) => {
+    if (testInfo.project.name === 'mobile') {
+      const menuButton = page.getByRole('button', { name: /open menu/i });
+      await expect(menuButton).toBeVisible();
+      await menuButton.click();
+      await expect(page.getByRole('dialog')).toBeVisible();
+      await expect(page.getByRole('link', { name: /how we work/i })).toBeVisible();
+      return;
+    }
+
+    const nav = page.getByRole('navigation', { name: /main navigation/i });
     await expect(nav).toBeVisible();
   });
 

@@ -116,19 +116,40 @@ export function ForgeMethodDiagram() {
         .fromTo(
           nums,
           { opacity: 0, y: 40 },
-          { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.12, immediateRender: false },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: 'power3.out',
+            stagger: 0.12,
+            immediateRender: false,
+          },
           '-=0.5',
         )
         .fromTo(
           content,
           { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', stagger: 0.08, immediateRender: false },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power3.out',
+            stagger: 0.08,
+            immediateRender: false,
+          },
           '-=0.4',
         )
         .fromTo(
           items,
           { opacity: 0, x: -10 },
-          { opacity: 1, x: 0, duration: 0.4, ease: 'power3.out', stagger: 0.04, immediateRender: false },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.4,
+            ease: 'power3.out',
+            stagger: 0.04,
+            immediateRender: false,
+          },
           '-=0.3',
         );
     },
@@ -156,12 +177,8 @@ export function ForgeMethodDiagram() {
             >
               {/* Big number — the visual hero */}
               <div
-                className="fm-num text-brass/90"
+                className="fm-num font-display text-[5rem] leading-[0.85] text-brass/90 sm:text-[7rem] lg:text-[8.5rem]"
                 style={{
-                  fontFamily: 'var(--font-instrument-serif)',
-                  fontSize: 'clamp(5rem, 11vw, 9rem)',
-                  letterSpacing: '-0.04em',
-                  lineHeight: 0.82,
                   fontWeight: 400,
                 }}
               >
@@ -171,19 +188,14 @@ export function ForgeMethodDiagram() {
               {/* Phase name + featured badge */}
               <div className="mt-6 flex items-baseline justify-between gap-3 flex-wrap">
                 <h3
-                  className="text-anthracite"
+                  className="font-display text-[1.6rem] leading-tight text-anthracite sm:text-[1.85rem] lg:text-[2rem]"
                   style={{
-                    fontFamily: 'var(--font-instrument-serif)',
-                    fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
-                    letterSpacing: '-0.02em',
                     fontWeight: 400,
                   }}
                 >
                   {phase.name}
                 </h3>
-                {phase.featured && (
-                  <span className="overline text-[10px]">Most chosen</span>
-                )}
+                {phase.featured && <span className="overline text-[10px]">Most chosen</span>}
               </div>
 
               <p className="mt-1 text-body-sm text-warm-gray">{phase.sub}</p>

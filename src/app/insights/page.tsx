@@ -35,8 +35,8 @@ export default function InsightsPage() {
             Thinking that shapes how we work.
           </h1>
           <p className="mt-6 max-w-xl text-body-lg text-stone">
-            Practical frameworks, lessons from real engagements, and honest
-            perspectives on where AI actually creates value.
+            Practical frameworks, lessons from real engagements, and honest perspectives on where AI
+            actually creates value.
           </p>
         </div>
       </section>
@@ -50,26 +50,18 @@ export default function InsightsPage() {
               className="group block lg:grid lg:grid-cols-12 lg:gap-20"
             >
               <div className="lg:col-span-8">
-                <span className="text-body-sm font-medium text-brass">
-                  {featured.category}
-                </span>
+                <span className="text-body-sm font-medium text-brass">{featured.category}</span>
                 <h2 className="mt-4 text-display group-hover:text-brass transition-colors">
                   {featured.title}
                 </h2>
-                <p className="mt-6 text-body-lg text-warm-gray">
-                  {featured.excerpt}
-                </p>
+                <p className="mt-6 text-body-lg text-warm-gray">{featured.excerpt}</p>
                 <span className="mt-6 inline-flex items-center text-sm font-medium text-brass">
                   Read article <ArrowRight className="ml-1 h-3.5 w-3.5" />
                 </span>
               </div>
               <div className="mt-8 lg:col-span-4 lg:mt-0 lg:flex lg:flex-col lg:justify-end">
-                <p className="text-body-sm text-warm-gray">
-                  {featured.author.name}
-                </p>
-                <p className="text-body-sm text-warm-gray">
-                  {featured.readingTime} min read
-                </p>
+                <p className="text-body-sm text-warm-gray">{featured.author.name}</p>
+                <p className="text-body-sm text-warm-gray">{featured.readingTime} min read</p>
               </div>
             </Link>
           </div>
@@ -101,14 +93,11 @@ export default function InsightsPage() {
                     <h3 className="mt-3 text-h2 group-hover:text-brass transition-colors">
                       {article.title}
                     </h3>
-                    <p className="mt-3 text-body text-warm-gray max-w-2xl">
-                      {article.excerpt}
-                    </p>
+                    <p className="mt-3 text-body text-warm-gray max-w-2xl">{article.excerpt}</p>
                   </div>
                   <div className="mt-4 lg:col-span-4 lg:mt-0 lg:flex lg:items-end lg:justify-end">
                     <span className="inline-flex items-center text-sm font-medium text-brass opacity-0 group-hover:opacity-100 transition-opacity">
-                      Read article{' '}
-                      <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                      Read article <ArrowRight className="ml-1 h-3.5 w-3.5" />
                     </span>
                   </div>
                 </div>
@@ -117,9 +106,7 @@ export default function InsightsPage() {
 
             {rest.length === 0 && (
               <div className="border-t border-divider pt-10">
-                <p className="text-body text-warm-gray">
-                  More articles coming soon.
-                </p>
+                <p className="text-body text-warm-gray">More articles coming soon.</p>
               </div>
             )}
           </div>
@@ -129,12 +116,10 @@ export default function InsightsPage() {
       {/* ── CTA ── */}
       <section className="dark-section py-24 lg:py-40">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">
-            Want to talk through a specific challenge?
-          </h2>
+          <h2 className="text-display text-bone">Want to talk through a specific challenge?</h2>
           <p className="mt-6 text-body-lg text-stone">
-            These articles represent how we think. A discovery call shows how we
-            apply it to your business.
+            These articles represent how we think. A discovery call shows how we apply it to your
+            business.
           </p>
           <div className="mt-10">
             <Button size="lg" asChild>

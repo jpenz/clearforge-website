@@ -65,7 +65,7 @@ export default async function OGImage() {
           style={{
             fontSize: '14px',
             fontWeight: 600,
-            letterSpacing: '0.18em',
+            letterSpacing: 0,
             textTransform: 'uppercase',
             color: '#00E5C3',
           }}
@@ -81,7 +81,7 @@ export default async function OGImage() {
           fontWeight: 700,
           color: '#F1F5F9',
           lineHeight: 1.0,
-          letterSpacing: '-0.03em',
+          letterSpacing: 0,
           margin: 0,
           maxWidth: '800px',
         }}

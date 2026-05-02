@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 const siteUrl = 'https://clearforge.ai';
 const siteName = 'ClearForge.ai';
+const titleBrandSuffix = ' | ClearForge';
 
 export const coreKeywords = [
   'AI consulting',
@@ -29,9 +30,12 @@ export function createMetadata({
 }): Metadata {
   const url = `${siteUrl}${path}`;
   const mergedKeywords = [...new Set([...coreKeywords, ...keywords])];
+  const normalizedTitle = title.endsWith(titleBrandSuffix)
+    ? title.slice(0, -titleBrandSuffix.length)
+    : title;
 
   return {
-    title,
+    title: normalizedTitle,
     description,
     keywords: mergedKeywords,
     ...(noIndex && { robots: { index: false, follow: false } }),
@@ -39,7 +43,7 @@ export function createMetadata({
       canonical: url,
     },
     openGraph: {
-      title,
+      title: normalizedTitle,
       description,
       url,
       siteName,
@@ -48,7 +52,7 @@ export function createMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: normalizedTitle,
       description,
     },
   };
@@ -111,9 +115,7 @@ export const organizationJsonLd = {
     'AI implementation',
     'mid-market AI consulting',
   ],
-  sameAs: [
-    'https://www.linkedin.com/company/clearforge-ai/',
-  ],
+  sameAs: ['https://www.linkedin.com/company/clearforge-ai/'],
 };
 
 export function industryServiceJsonLd(industry: {

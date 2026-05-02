@@ -17,6 +17,7 @@ const PAGES = [
   { path: '/services/performance-improvement', name: 'Performance Improvement' },
   { path: '/about', name: 'About' },
   { path: '/case-studies', name: 'Case Studies' },
+  { path: '/blueprints/cybersecurity-technology-company', name: 'Cybersecurity Blueprint' },
   { path: '/contact', name: 'Contact' },
   { path: '/scorecard', name: 'Scorecard' },
 ];
@@ -47,23 +48,34 @@ test.describe('Page Loads — No Errors', () => {
 });
 
 test.describe('Navigation flows', () => {
-  test('clicking Services nav link goes to /services', async ({ page }) => {
+  test('clicking Capabilities nav link goes to /services', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name === 'mobile', 'Desktop nav is replaced by the mobile menu.');
+
     await page.goto('/');
     await page.waitForLoadState('networkidle');
 
-    const servicesLink = page
-      .getByRole('navigation')
-      .getByRole('link', { name: /^services$/i })
+    const capabilitiesLink = page
+      .getByRole('navigation', { name: /main navigation/i })
+      .getByRole('link', { name: /^capabilities$/i })
       .first();
 
-    // It may be in a dropdown — hover first
-    await servicesLink.hover().catch(() => {});
-    await servicesLink.click();
-    await page.waitForLoadState('domcontentloaded');
-    expect(page.url()).toContain('/services');
+    await Promise.all([page.waitForURL('**/services'), capabilitiesLink.click()]);
   });
 
-  test('clicking CTA navigates to a valid destination', async ({ page }) => {
+  test('mobile menu links to the services page', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'mobile', 'Mobile menu is only visible on small screens.');
+
+    await page.goto('/');
+    await page.waitForLoadState('domcontentloaded');
+
+    await page.getByRole('button', { name: /open menu/i }).click();
+    const menu = page.getByRole('dialog');
+    await expect(menu).toBeVisible();
+
+    await Promise.all([page.waitForURL('**/services'), menu.getByRole('link', { name: /how we work/i }).click()]);
+  });
+
+  test('primary CTA points to a valid destination', async ({ page }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
 
@@ -74,11 +86,11 @@ test.describe('Navigation flows', () => {
     const isVisible = await cta.isVisible().catch(() => false);
     if (!isVisible) return; // skip if no CTA found
 
-    await cta.click();
-    await page.waitForLoadState('domcontentloaded');
+    const href = await cta.getAttribute('href');
+    expect(href).toBeTruthy();
 
-    // Should have navigated somewhere (not the same page or an error page)
-    const response = await page.goto(page.url());
+    const target = new URL(href ?? '/', page.url());
+    const response = await page.request.get(target.toString());
     expect(response?.status()).toBeLessThan(400);
   });
 
