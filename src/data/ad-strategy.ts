@@ -11,8 +11,8 @@
  * boutique AI shops, fractional CAIO firms), and channel benchmarks.
  *
  * Key strategic insights:
- * - Buyer narrative is "execution gap" / "pilot purgatory" — 80% of pilots
- *   stuck, only 16% scale enterprise-wide. Mirror this language.
+ * - Buyer narrative is "execution gap" / "pilot purgatory" — leaders have
+ *   activity, but the operating model is not changing. Mirror this language.
  * - Pricing transparency is a wedge against MBB + Slalom (both hide pricing)
  * - The $15K Forge Diagnostic is the TOFU magnet — make it the primary CTA
  * - LinkedIn = primary B2B channel (CPC $5-15, CPL $50-200, conv to opp 2-3x
@@ -20,10 +20,9 @@
  * - Meta = retargeting only (CPM 2-4x lower but targeting too coarse for
  *   $25M-$500M ICP firmographic precision)
  * - Search has $20-40 CPC for head terms; long-tail industry+role $5-15
- * - Quality Score 8+ pays 37% below median — disciplined ad/LP relevance
- *   is the single biggest lever
- * - 89% of brand searches show AI Overviews — content must be optimized
- *   for citation in ChatGPT/Claude/Perplexity, not just blue-link SEO
+ * - Disciplined ad/LP relevance is the single biggest controllable lever
+ * - Content must be optimized for citation in ChatGPT/Claude/Perplexity,
+ *   not just blue-link SEO
  */
 
 export interface KeywordCluster {
@@ -281,8 +280,8 @@ export const adCampaigns: AdCampaign[] = [
     budget: '$2-3K/mo',
     copyVariants: [
       {
-        headline: '80% of AI pilots never ship. We built a process to fix that.',
-        body: 'Forge Diagnostic ($15K, 4 weeks) gives you a roadmap of where AI ships in 90 days — measured against revenue, cost, or throughput.',
+        headline: 'AI pilots stall when no one owns the workflow.',
+        body: 'Forge Diagnostic ($15K, 4 weeks) turns pilot activity into a ranked workflow roadmap with owners, baselines, controls, and a next build decision.',
         cta: 'See the framework',
       },
     ],
@@ -328,7 +327,7 @@ export const adCampaigns: AdCampaign[] = [
       },
       {
         headline: 'AI Diagnostic for Mid-Market | $15K Fixed Fee | 4 Weeks',
-        body: 'Forge Diagnostic identifies 3+ actionable AI opportunities with ROI projections. Money-back guarantee.',
+        body: 'Forge Diagnostic identifies 3+ measurable AI opportunities with baselines, owners, evidence needs, and a next build decision.',
         cta: 'Book a Diagnostic',
       },
     ],
@@ -366,7 +365,7 @@ export const adCampaigns: AdCampaign[] = [
     copyVariants: [
       {
         headline: 'Production AI Agents | Built in 10 Weeks | ClearForge',
-        body: 'AI agents for RevOps, customer service, supply chain. Built and deployed by senior team. 89% reach production.',
+        body: 'AI agents for RevOps, customer service, and supply chain workflows. Built around owners, controls, adoption, and measurement.',
         cta: 'See AI Agent Capabilities',
       },
     ],
@@ -462,8 +461,8 @@ export const buyerLanguage = [
   'AI workforce readiness',
   'pilot to production',
   'stuck in pilot',
-  '80% of pilots never scale',
-  'only 16% scale enterprise-wide',
+  'pilot without an owner',
+  'workflow ready for production',
   'AI Overviews / answer engines',
   'AI agents in production',
   '90-day AI roadmap',

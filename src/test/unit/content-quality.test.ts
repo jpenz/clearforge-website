@@ -48,7 +48,9 @@ import { journeyStages, solutions } from '@/data/solutions';
 import { useCases } from '@/data/use-cases';
 import {
   aiTransformationOfferCatalogJsonLd,
+  clearForgeMethodJsonLd,
   coreKeywords,
+  founderPersonJsonLd,
   organizationJsonLd,
   siteNavigationJsonLd,
   websiteJsonLd,
@@ -66,6 +68,11 @@ const bannedPatterns = [
   /\bhighest-leverage\b/i,
   /\bleverage\b/i,
   /\b3-5x ROI\b/i,
+  /\baverage ROI\b/i,
+  /\bmedian payback\b/i,
+  /\bROI projections\b/i,
+  /\b89% (?:reach|reaches|projects)\b/i,
+  /\b95% of AI Pilots\b/i,
   /\b100x speed\b/i,
   /\bexponentially smarter\b/i,
   /\bworld-class\b/i,
@@ -149,7 +156,9 @@ describe('buyer-facing content quality', () => {
       },
       metadata: {
         aiTransformationOfferCatalogJsonLd,
+        clearForgeMethodJsonLd,
         coreKeywords,
+        founderPersonJsonLd,
         organizationJsonLd,
         siteNavigationJsonLd,
         websiteJsonLd,

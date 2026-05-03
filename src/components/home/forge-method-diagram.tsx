@@ -42,8 +42,8 @@ const PHASES: Phase[] = [
     deliverables: [
       'Value chain map across your operations',
       'AI readiness score, 5 pillars',
-      'Prioritized roadmap with ROI projections',
-      '3+ quick-win opportunities or full refund',
+      'Prioritized roadmap with baselines and evidence needs',
+      '3+ measurable opportunities or full refund',
     ],
   },
   {

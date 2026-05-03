@@ -44,7 +44,9 @@ export function RouteScrollRestoration() {
     if (!pathname) return;
 
     const frame = window.requestAnimationFrame(settleScrollPosition);
-    const timers = [80, 240].map((delay) => window.setTimeout(settleScrollPosition, delay));
+    const timers = [80, 240, 600, 1000].map((delay) =>
+      window.setTimeout(settleScrollPosition, delay),
+    );
 
     return () => {
       window.cancelAnimationFrame(frame);

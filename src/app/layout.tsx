@@ -11,7 +11,9 @@ import { RouteScrollRestoration } from '@/components/layout/route-scroll-restora
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import {
   aiTransformationOfferCatalogJsonLd,
+  clearForgeMethodJsonLd,
   coreKeywords,
+  founderPersonJsonLd,
   organizationJsonLd,
   siteNavigationJsonLd,
   websiteJsonLd,
@@ -77,9 +79,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <JsonLdScript
           data={[
             organizationJsonLd,
+            founderPersonJsonLd,
             websiteJsonLd,
             siteNavigationJsonLd,
             aiTransformationOfferCatalogJsonLd,
+            clearForgeMethodJsonLd,
           ]}
         />
         {ga4MeasurementId ? <GoogleAnalytics measurementId={ga4MeasurementId} /> : null}

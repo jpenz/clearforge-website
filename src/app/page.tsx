@@ -169,7 +169,7 @@ const prioritySituations = [
     situation: 'AI pilots are stuck in demonstration mode',
     problem:
       'The model works in a demo, but nobody owns the workflow, data path, QA loop, or rollout.',
-    metric: '89% of ClearForge projects reach production',
+    metric: 'Production path defined before build',
     link: '/services/custom-ai-agents',
   },
   {
@@ -190,7 +190,7 @@ const prioritySituations = [
     situation: 'Operations are losing margin to manual coordination',
     problem:
       'Quoting, scheduling, claims, reporting, and review cycles depend on people stitching systems together.',
-    metric: '$240K average annual savings identified',
+    metric: 'Baseline savings model before build',
     link: '/services/performance-improvement',
   },
 ];
@@ -500,10 +500,16 @@ export default function Home() {
         <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="grid gap-y-12 gap-x-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-16">
             {[
-              { value: '$47M+', label: 'Client revenue influenced across 15 engagements' },
-              { value: '3.2x', label: 'Average ROI with median payback under 90 days' },
-              { value: '89%', label: 'Projects reaching production across recent work' },
-              { value: '10', label: 'Weeks from kickoff to deployment, on average' },
+              { value: '4', label: 'Weeks to a fixed-fee diagnostic and prioritized build case' },
+              {
+                value: '10',
+                label: 'Weeks to a first production workflow when the data path is ready',
+              },
+              {
+                value: '3+',
+                label: 'Measurable opportunities required or the diagnostic is refunded',
+              },
+              { value: '1', label: 'Named operating owner before every Sprint starts' },
             ].map((stat) => (
               <div key={stat.label}>
                 <MetricCounter value={stat.value} className="metric-xl text-brass-light" />
@@ -667,8 +673,9 @@ export default function Home() {
               <div>
                 <p className="text-h4">The ClearForge Guarantee</p>
                 <p className="mt-2 text-body text-warm-gray">
-                  If our Forge Diagnostic does not identify at least 3 actionable AI opportunities
-                  with clear ROI projections, we refund your investment.
+                  If our Forge Diagnostic does not identify at least 3 measurable AI opportunities
+                  with a baseline, owner, evidence needs, and next build decision, we refund your
+                  investment.
                 </p>
               </div>
             </div>

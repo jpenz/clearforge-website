@@ -130,6 +130,29 @@ export const organizationJsonLd = {
   sameAs: ['https://www.linkedin.com/company/clearforge-ai/'],
 };
 
+export const founderPersonJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${siteUrl}/#james-penz`,
+  name: 'James Penz',
+  jobTitle: 'Founder & Managing Partner',
+  url: `${siteUrl}/about`,
+  sameAs: ['https://www.linkedin.com/in/jamesrpenz/'],
+  worksFor: {
+    '@type': 'ProfessionalService',
+    '@id': `${siteUrl}/#organization`,
+    name: 'ClearForge',
+  },
+  knowsAbout: [
+    'AI transformation strategy',
+    'business process automation',
+    'AI operating models',
+    'private equity value creation',
+    'revenue operations',
+    'enterprise AI governance',
+  ],
+};
+
 export const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -145,6 +168,52 @@ export const websiteJsonLd = {
     '@id': `${siteUrl}/#organization`,
     name: 'ClearForge',
   },
+};
+
+export const clearForgeMethodJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  '@id': `${siteUrl}/#clearforge-method`,
+  name: 'The ClearForge Method',
+  description:
+    'A senior-led method for selecting the AI workflows worth changing, building production systems around them, training the team, and reviewing performance after launch.',
+  provider: {
+    '@type': 'ProfessionalService',
+    '@id': `${siteUrl}/#organization`,
+    name: 'ClearForge',
+  },
+  step: [
+    {
+      '@type': 'HowToStep',
+      position: 1,
+      name: 'Diagnose the value chain',
+      text: 'Map the operating value chain, identify workflow constraints, and select the opportunities with a measurable baseline and accountable owner.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 2,
+      name: 'Design the operating model',
+      text: 'Define workflow boundaries, data paths, review rules, exception handling, adoption routines, and the performance dashboard before engineering starts.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 3,
+      name: 'Build the production system',
+      text: 'Ship custom AI workflows, agents, integrations, controls, and dashboards around the client systems people already use.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 4,
+      name: 'Train the team',
+      text: 'Prepare leaders and frontline users to operate the new workflow, review exceptions, and make better decisions with the system.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 5,
+      name: 'Measure and improve',
+      text: 'Run a recurring measurement cadence for usage, quality, cycle time, cost, revenue, service, and the next wave of value.',
+    },
+  ],
 };
 
 export const siteNavigationJsonLd = {
