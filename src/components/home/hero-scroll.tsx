@@ -54,9 +54,9 @@ export function HeroScroll() {
         </p>
 
         <p className="mt-8 max-w-2xl text-body-lg text-stone animate-fade-in-up delay-3">
-          ClearForge maps the revenue, service, quality, cost, and decision workflows where better
-          execution would matter, then builds the agents, integrations, dashboards, controls, and
-          team routines to run them.
+          Most teams already have AI ideas, tools, and demos. What they need is one workflow with a
+          clear owner, reliable data path, control model, and management cadence. ClearForge helps
+          you choose it, build it, and run it until the work changes.
         </p>
 
         <div className="mt-7 grid max-w-3xl grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-5 animate-fade-in-up delay-3">
@@ -71,6 +71,11 @@ export function HeroScroll() {
           <Button size="lg" asChild>
             <Link href="/discover" data-analytics="home_hero_generate_value_map">
               Generate My AI Value Map
+            </Link>
+          </Button>
+          <Button size="lg" variant="outline-light" asChild>
+            <Link href="/contact" data-analytics="home_hero_book_diagnostic">
+              Book a Diagnostic Call
             </Link>
           </Button>
           <Link

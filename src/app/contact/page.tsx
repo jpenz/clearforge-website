@@ -10,8 +10,8 @@ import { trackEvent } from '@/lib/analytics';
 const revenueOptions = ['Under $5M', '$5M - $25M', '$25M - $100M', '$100M - $500M', '$500M+'];
 
 const expectations = [
-  'We respond within one business day — usually same day.',
-  'A 30-minute confidential discovery call to understand your business.',
+  'James responds within one business day, usually same day.',
+  'A 15-minute confidential diagnostic call focused on one workflow.',
   'An honest assessment of the workflow, owner, data, and engagement fit.',
   'If we are not the right fit, we will tell you and recommend who is.',
 ];
@@ -80,7 +80,7 @@ export default function ContactPage() {
 
   return (
     <>
-      {/* — Hero with atmospheric bg — */}
+      {/* Hero with atmospheric bg */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <Image
           src="/images/abstract-network.webp"
@@ -92,11 +92,14 @@ export default function ContactPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-forge-black via-forge-black/80 to-forge-black/40 pointer-events-none" />
         <div className="relative mx-auto max-w-[1200px] px-6 lg:px-10">
-          <p className="overline">Get in Touch</p>
-          <h1 className="mt-6 text-display max-w-3xl text-bone">Book a 15-Min Diagnostic Call</h1>
+          <p className="overline">Bring One Stuck Workflow</p>
+          <h1 className="mt-6 text-display max-w-3xl text-bone">
+            Let us pressure-test whether it is worth building.
+          </h1>
           <p className="mt-6 max-w-xl text-body-lg text-stone">
-            No sales theater. No pressure. A straightforward conversation about the workflow, data,
-            owner, and baseline you want to improve.
+            No sales theater. No pressure. A straightforward conversation about the workflow, owner,
+            data path, baseline, and control points you would need before custom AI belongs in
+            production.
           </p>
         </div>
       </section>
@@ -104,11 +107,11 @@ export default function ContactPage() {
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-20">
-            {/* Left — Info */}
+            {/* Left - Info */}
             <div className="lg:col-span-5">
               <p className="overline">How We Engage</p>
               <h2 className="mt-6 text-display">
-                Direct access. Senior team. One business-day response.
+                Direct access to James. Clear next step or a fast no.
               </h2>
 
               <div className="mt-12 space-y-8">
@@ -159,7 +162,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Right — Form */}
+            {/* Right - Form */}
             <div className="mt-16 lg:col-span-7 lg:mt-0">
               <form
                 onSubmit={handleSubmit}
@@ -254,12 +257,12 @@ export default function ContactPage() {
                     value={form.challenge}
                     onChange={handleChange}
                     className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite placeholder:text-warm-gray/50 focus:border-brass focus:outline-none focus:ring-0 resize-none"
-                    placeholder="What is the biggest operational challenge you are trying to solve with AI?"
+                    placeholder="Which workflow should run faster, cleaner, or with less manual coordination?"
                   />
                 </div>
 
                 <Button type="submit" size="lg">
-                  Send My Request <ArrowRight className="ml-2 h-4 w-4" />
+                  Send the Workflow <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </form>
             </div>

@@ -25,12 +25,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const service = getServiceBySlug(slug);
   if (!service) notFound();
 
-  // Headline outcome — displayed in the hero as a visual anchor
+  // Headline outcome displayed in the hero as a visual anchor.
   const heroStat = service.outcomes[0];
 
   return (
     <>
-      {/* ── Hero — atmospheric bg + two-column with headline outcome ── */}
+      {/* Hero with atmospheric bg and headline outcome */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <div className="absolute inset-0 pointer-events-none">
           <video
@@ -62,16 +62,16 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               <div className="mt-10">
                 <Button size="lg" asChild>
                   <Link href="/contact">
-                    Start a Conversation <ArrowRight className="ml-2 h-4 w-4" />
+                    Book a Diagnostic Call <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </div>
             </div>
 
-            {/* Right: headline stat — visual anchor, magazine-style pull-quote */}
+            {/* Right: headline stat visual anchor */}
             <div className="mt-16 lg:col-span-5 lg:mt-0">
               <div className="border-l border-brass/40 pl-8 lg:pl-10">
-                <p className="overline text-brass-light text-[10px]">Typical Outcome</p>
+                <p className="overline text-brass-light text-[10px]">First Proof Point</p>
                 <p className="mt-4 font-display text-[4rem] leading-[0.92] text-brass-light sm:text-[5.5rem] lg:text-[7rem]">
                   {heroStat.value}
                 </p>
@@ -83,7 +83,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-      {/* ── Outcomes — 4 up with value / label / description ── */}
+      {/* Outcomes */}
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <p className="overline">Expected Outcomes</p>
@@ -102,7 +102,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-      {/* ── Deliverables ── */}
+      {/* Deliverables */}
       <section className="border-t border-divider bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-20">
@@ -110,8 +110,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               <p className="overline">Deliverables</p>
               <h2 className="mt-6 text-display">What you get.</h2>
               <p className="mt-6 text-body text-warm-gray max-w-sm">
-                Every engagement ends with a working system in production — not a strategy deck on a
-                shelf.
+                The work is not finished when the deck is done. The selected workflow needs a
+                baseline, owner, controls, users, and a review cadence.
               </p>
             </div>
             <div className="mt-12 lg:col-span-8 lg:mt-0">
@@ -139,7 +139,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-      {/* ── Workflow — editorial numbered flow with connecting rule ── */}
+      {/* Workflow */}
       <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <p className="overline">How It Works</p>
@@ -147,7 +147,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             className="mt-6 text-display max-w-3xl text-bone"
             style={{ fontFamily: 'var(--font-instrument-serif)' }}
           >
-            From kickoff to results.
+            From selected workflow to operating cadence.
           </h2>
 
           {/* Horizontal rule connecting the 4 phases on desktop */}
@@ -178,7 +178,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-      {/* ── Ideal Client + final CTA ── */}
+      {/* Ideal client and final CTA */}
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-20">

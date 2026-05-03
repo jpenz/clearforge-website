@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Stagger, StaggerItem } from '@/components/ui/animate';
 import { Button } from '@/components/ui/button';
+import { UseCaseCardVisual } from '@/components/use-cases/use-case-card-visual';
 import { useCases } from '@/data/use-cases';
 import { breadcrumbJsonLd, createMetadata } from '@/lib/metadata';
 
@@ -122,20 +123,11 @@ export default function UseCasesPage() {
                   className="group block overflow-hidden border border-divider bg-warm-white transition-colors hover:bg-white"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden">
-                    <Image
-                      src={useCase.visual.poster}
-                      alt={useCase.visual.alt}
-                      fill
-                      sizes="(min-width: 1024px) 33vw, 100vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-forge-black/60 via-transparent to-transparent" />
-                    <p className="absolute left-5 bottom-5 overline text-brass-light">
-                      {useCase.eyebrow}
-                    </p>
+                    <UseCaseCardVisual useCase={useCase} />
                   </div>
                   <div className="p-6 lg:p-7">
-                    <h3 className="text-h3 transition-colors group-hover:text-brass">
+                    <p className="overline text-[10px]">{useCase.eyebrow}</p>
+                    <h3 className="mt-2 text-h3 transition-colors group-hover:text-brass">
                       {useCase.title}
                     </h3>
                     <p className="mt-4 text-body-sm leading-relaxed text-warm-gray">

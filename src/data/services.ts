@@ -33,7 +33,7 @@ export const services: Service[] = [
     icon: 'LineChart',
     heroBg: '/images/abstract-value-creation.webp',
     idealClient:
-      'Mid-market and growth-stage B2B companies looking to scale sales without linearly scaling headcount.',
+      'B2B companies where high-fit accounts are being missed, seller time is going into research and cleanup, or pipeline reviews depend too much on stories instead of current buying signals.',
     deliverables: [
       'Revenue value map and workflow redesign',
       'Custom account signal and trigger engine',
@@ -97,7 +97,7 @@ export const services: Service[] = [
     icon: 'Cog',
     heroBg: '/images/abstract-dataflow.webp',
     idealClient:
-      'Operations-heavy companies spending too much on manual processes, data entry, or coordination overhead.',
+      'Operations-heavy companies where managers are chasing status, exceptions are handled differently by each team, and margin is leaking through wait time, rework, expedite cost, or manual coordination.',
     deliverables: [
       'Operating model and process maturity assessment',
       'Bottleneck, exception, and margin leakage analysis',
@@ -160,7 +160,7 @@ export const services: Service[] = [
     icon: 'Rocket',
     heroBg: '/images/abstract-forge-progression.webp',
     idealClient:
-      'PE firms and their portfolio companies looking to accelerate value creation with AI.',
+      'PE firms and portfolio leaders who need a repeatable way to compare AI build candidates, fund the first sprint, and show adoption and KPI movement without asking each company to invent its own method.',
     deliverables: [
       'Portfolio AI ambition and value-creation thesis',
       'AI readiness and value lever assessment by company',
@@ -224,7 +224,7 @@ export const services: Service[] = [
     icon: 'Bot',
     heroBg: '/images/abstract-network.webp',
     idealClient:
-      'Companies with complex, repetitive workflows that require judgment and cross-system coordination.',
+      'Companies with recurring work that crosses systems, requires judgment, and breaks down when the handoff, evidence, approval, or exception path is not explicit.',
     deliverables: [
       'Agent strategy, workflow scope, and success metrics',
       'Custom agent architecture and orchestration design',

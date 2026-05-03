@@ -18,6 +18,7 @@ import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Button } from '@/components/ui/button';
 import { GsapTextReveal } from '@/components/ui/gsap-text-reveal';
 import { OperatorSystemPreview } from '@/components/use-cases/operator-system-preview';
+import { UseCaseCardVisual } from '@/components/use-cases/use-case-card-visual';
 import { caseStudies } from '@/data/case-studies';
 import { industries } from '@/data/industries-value-chains';
 import { useCases } from '@/data/use-cases';
@@ -57,7 +58,25 @@ const operatingGaps = [
     symptom:
       'Speed, quality, service, efficiency, and margin cannot depend on heroic manual effort or disconnected off-the-shelf tools.',
     response:
-      'We install the AI-plus-people operating system that makes better performance repeatable and measurable.',
+      'We build the workflow, controls, dashboard, and team rhythm that make better performance repeatable and measurable.',
+  },
+];
+
+const buyerRealities = [
+  {
+    tension: 'You have AI activity, but not enough operating change.',
+    response:
+      'The useful question is not "which model should we use?" It is "which workflow deserves a new way to run?"',
+  },
+  {
+    tension: 'Your best people are still doing too much coordination by hand.',
+    response:
+      'The first build should give them better context, cleaner handoffs, and fewer avoidable status checks.',
+  },
+  {
+    tension: 'You need confidence before you fund a larger program.',
+    response:
+      'Start with a diagnostic that names the owner, baseline, data path, control points, and first production scope.',
   },
 ];
 
@@ -117,6 +136,24 @@ const implementationStandards = [
     title: 'Managed improvement loop',
     detail:
       'After launch, adoption, quality, exceptions, and performance movement are reviewed in a recurring operating cadence.',
+  },
+];
+
+const trustFilters = [
+  {
+    title: 'No platform-first answer',
+    detail:
+      'We start with the workflow, owner, baseline, and operating constraint before recommending tools or architecture.',
+  },
+  {
+    title: 'No value claim without a baseline',
+    detail:
+      'Every business case needs a current-state metric, evidence plan, decision owner, and threshold for success.',
+  },
+  {
+    title: 'No build without adoption',
+    detail:
+      'A workflow is not production-ready until users are trained, controls are visible, and leaders have a review rhythm.',
   },
 ];
 
@@ -198,7 +235,7 @@ const prioritySituations = [
 const objections = [
   {
     q: "We're not big enough for enterprise AI.",
-    a: 'You do not need an enterprise transformation office. You need one high-value workflow, a reliable data path, and an implementation team accountable for adoption.',
+    a: 'You do not need a large program office. You need one high-value workflow, a reliable data path, and an implementation team accountable for adoption.',
   },
   {
     q: "We've already tried AI.",
@@ -236,6 +273,26 @@ export default function Home() {
           <span>Find the value, build the system, train the organization</span>
         </div>
       </div>
+
+      <section className="border-b border-divider bg-warm-white py-14 sm:py-16">
+        <div className="mx-auto grid max-w-[1400px] gap-8 px-4 sm:px-6 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16 lg:px-10">
+          <div>
+            <p className="overline">Start With the Real Problem</p>
+            <h2 className="mt-5 text-h1">AI is easy to demo and hard to operate.</h2>
+          </div>
+          <div className="border-t border-divider">
+            {buyerRealities.map((item) => (
+              <div
+                key={item.tension}
+                className="grid gap-3 border-b border-divider py-5 sm:grid-cols-[0.9fr_1.1fr] sm:gap-8"
+              >
+                <p className="text-body font-semibold text-anthracite">{item.tension}</p>
+                <p className="text-body-sm leading-relaxed text-warm-gray">{item.response}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="bg-parchment py-20 sm:py-28 lg:py-36">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
@@ -375,6 +432,28 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="border-t border-divider bg-recessed py-20 sm:py-28 lg:py-36">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5">
+              <p className="overline">How We Earn Trust</p>
+              <h2 className="mt-6 text-display">A few things we will not do.</h2>
+            </div>
+            <div className="mt-12 border-t border-divider lg:col-span-7 lg:mt-0">
+              {trustFilters.map((item) => (
+                <div
+                  key={item.title}
+                  className="grid gap-4 border-b border-divider py-7 sm:grid-cols-[0.65fr_1fr] sm:gap-8"
+                >
+                  <h3 className="text-h4">{item.title}</h3>
+                  <p className="text-body text-warm-gray">{item.detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <OperatorSystemPreview useCase={salesPipelineUseCase} />
 
       <section className="border-t border-divider bg-parchment py-20 sm:py-32 lg:py-40">
@@ -405,20 +484,11 @@ export default function Home() {
                 className="group overflow-hidden border border-divider bg-warm-white transition-colors hover:bg-white"
               >
                 <div className="relative aspect-[16/9] overflow-hidden">
-                  <Image
-                    src={useCase.visual.poster}
-                    alt={useCase.visual.alt}
-                    fill
-                    sizes="(min-width: 1024px) 33vw, 100vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-forge-black/65 via-transparent to-transparent" />
-                  <p className="absolute left-5 bottom-5 overline text-brass-light">
-                    {useCase.eyebrow}
-                  </p>
+                  <UseCaseCardVisual useCase={useCase} />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-h3 transition-colors group-hover:text-brass">
+                  <p className="overline text-[10px]">{useCase.eyebrow}</p>
+                  <h3 className="mt-2 text-h3 transition-colors group-hover:text-brass">
                     {useCase.shortTitle}
                   </h3>
                   <p className="mt-3 text-body-sm leading-relaxed text-warm-gray">
