@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Target, Users } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -27,6 +27,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
   // Headline outcome displayed in the hero as a visual anchor.
   const heroStat = service.outcomes[0];
+  const deliverableGroups = [
+    { label: 'Scope', value: service.deliverables[0] },
+    { label: 'System', value: service.deliverables[2] },
+    { label: 'Adoption', value: service.deliverables[5] },
+  ].filter((item) => item.value);
 
   return (
     <>
@@ -109,31 +114,39 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             <div className="lg:col-span-4">
               <p className="overline">Deliverables</p>
               <h2 className="mt-6 text-display">What you get.</h2>
-              <p className="mt-6 text-body text-warm-gray max-w-sm">
-                The work is not finished when the deck is done. The selected workflow needs a
-                baseline, owner, controls, users, and a review cadence.
-              </p>
+              <div className="mt-8 grid gap-px overflow-hidden border border-divider bg-divider">
+                {deliverableGroups.map((item) => (
+                  <div key={item.label} className="bg-parchment p-5">
+                    <p className="overline text-[10px] text-brass">{item.label}</p>
+                    <p className="mt-2 text-body-sm font-medium text-anthracite">{item.value}</p>
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="mt-12 lg:col-span-8 lg:mt-0">
-              <ul className="space-y-0">
+              <div className="grid gap-px overflow-hidden border border-divider bg-divider sm:grid-cols-2">
                 {service.deliverables.map((d, i) => (
-                  <li key={d} className="flex items-start gap-5 border-t border-divider py-6">
-                    <span
-                      className="text-brass shrink-0"
-                      style={{
-                        fontFamily: 'var(--font-jetbrains-mono, monospace)',
-                        fontSize: '0.875rem',
-                        fontVariantNumeric: 'tabular-nums',
-                        lineHeight: 1.6,
-                      }}
-                    >
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <p className="text-body text-anthracite leading-relaxed">{d}</p>
-                  </li>
+                  <div key={d} className="bg-parchment p-6">
+                    <div className="flex items-center justify-between gap-4">
+                      <span
+                        className="text-brass"
+                        style={{
+                          fontFamily: 'var(--font-jetbrains-mono, monospace)',
+                          fontSize: '0.875rem',
+                          fontVariantNumeric: 'tabular-nums',
+                          lineHeight: 1,
+                        }}
+                      >
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <CheckCircle2 className="h-4 w-4 shrink-0 text-brass" />
+                    </div>
+                    <p className="mt-6 text-body-sm font-medium leading-relaxed text-anthracite">
+                      {d}
+                    </p>
+                  </div>
                 ))}
-                <li className="border-t border-divider" />
-              </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -181,13 +194,30 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       {/* Ideal client and final CTA */}
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-20">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
               <p className="overline">Ideal Client</p>
               <h2 className="mt-6 text-display">Is this right for you?</h2>
             </div>
             <div className="mt-10 lg:col-span-7 lg:mt-0">
-              <p className="text-body-lg text-warm-gray">{service.idealClient}</p>
+              <div className="border-l border-brass pl-6">
+                <p className="text-body-lg text-anthracite">{service.idealClient}</p>
+              </div>
+              <div className="mt-8 grid gap-px overflow-hidden border border-divider bg-divider sm:grid-cols-3">
+                {[
+                  { icon: Target, label: 'Measurable workflow' },
+                  { icon: Users, label: 'Named business owner' },
+                  { icon: CheckCircle2, label: 'Ready to adopt' },
+                ].map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.label} className="flex items-center gap-3 bg-parchment p-4">
+                      <Icon className="h-4 w-4 shrink-0 text-brass" />
+                      <p className="text-body-sm font-medium text-anthracite">{item.label}</p>
+                    </div>
+                  );
+                })}
+              </div>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Button size="lg" asChild>
                   <Link href="/contact">

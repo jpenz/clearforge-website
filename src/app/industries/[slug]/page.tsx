@@ -153,6 +153,51 @@ const TYPE_BADGE_CLASS: Record<ActivityType, string> = {
   copilot: 'border-divider text-warm-gray',
 };
 
+type ValueChainFunction = (typeof industries)[number]['valueChain'][number];
+
+function ValueChainFunctionRow({ fn, index }: { fn: ValueChainFunction; index: number }) {
+  const Icon = ICONS[fn.icon] ?? Settings;
+
+  return (
+    <div className="border-t border-divider-dark pt-10">
+      <div className="lg:grid lg:grid-cols-12 lg:gap-12">
+        <div className="lg:col-span-4">
+          <div className="flex items-center gap-3">
+            <span className="metric text-sm text-brass">{String(index + 1).padStart(2, '0')}</span>
+            <Icon className="h-4 w-4 text-brass" />
+          </div>
+          <h3
+            className="mt-3 text-h2 text-bone"
+            style={{ fontFamily: 'var(--font-instrument-serif)' }}
+          >
+            {fn.function}
+          </h3>
+          <p className="mt-4 text-body text-stone max-w-md">{fn.description}</p>
+        </div>
+
+        <div className="mt-10 lg:col-span-8 lg:mt-0">
+          <ul className="divide-y divide-divider-dark">
+            {fn.activities.map((act) => (
+              <li key={act.name} className="py-6 lg:py-7">
+                <div className="flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-2 lg:gap-6">
+                  <h4 className="text-body-lg text-bone font-medium">{act.name}</h4>
+                  <span
+                    className={`shrink-0 inline-flex items-center text-[10px] uppercase border px-2 py-1 ${TYPE_BADGE_CLASS[act.type]}`}
+                  >
+                    {TYPE_LABEL[act.type]}
+                  </span>
+                </div>
+                <p className="mt-3 text-body text-stone">{act.aiImpact}</p>
+                <p className="mt-2 text-body-sm text-brass-light font-medium">{act.impact}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────────
 // Page
 // ─────────────────────────────────────────────────────────────────────────
@@ -168,6 +213,8 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
 
   // For "view all activities" total
   const totalActivities = industry.valueChain.reduce((acc, fn) => acc + fn.activities.length, 0);
+  const primaryFunctions = industry.valueChain.slice(0, 3);
+  const remainingFunctions = industry.valueChain.slice(3);
 
   const serviceLd = industryServiceJsonLd(industry);
   const crumbsLd = breadcrumbJsonLd([
@@ -319,11 +366,11 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                 className="mt-6 text-display text-bone"
                 style={{ fontFamily: 'var(--font-instrument-serif)' }}
               >
-                Every function. Every activity. Where AI fits.
+                The first places to look for AI value.
               </h2>
               <p className="mt-6 max-w-2xl text-body-lg text-stone">
-                The full operating value chain for {industry.shortName.toLowerCase()} — and the
-                specific activities ClearForge automates or runs as AI agents inside each function.
+                Start with the functions where work is most measurable, repeated, and constrained.
+                The full {industry.shortName.toLowerCase()} value chain stays available below:{' '}
                 {totalActivities} addressable activities across {industry.valueChain.length}{' '}
                 functions.
               </p>
@@ -347,53 +394,34 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
           </div>
 
           <div className="mt-16 space-y-16 lg:space-y-24">
-            {industry.valueChain.map((fn, i) => {
-              const Icon = ICONS[fn.icon] ?? Settings;
-              return (
-                <div key={fn.function} className="border-t border-divider-dark pt-10">
-                  <div className="lg:grid lg:grid-cols-12 lg:gap-12">
-                    {/* Left: function header */}
-                    <div className="lg:col-span-4">
-                      <div className="flex items-center gap-3">
-                        <span className="metric text-sm text-brass">
-                          {String(i + 1).padStart(2, '0')}
-                        </span>
-                        <Icon className="h-4 w-4 text-brass" />
-                      </div>
-                      <h3
-                        className="mt-3 text-h2 text-bone"
-                        style={{ fontFamily: 'var(--font-instrument-serif)' }}
-                      >
-                        {fn.function}
-                      </h3>
-                      <p className="mt-4 text-body text-stone max-w-md">{fn.description}</p>
-                    </div>
+            {primaryFunctions.map((fn, i) => (
+              <ValueChainFunctionRow key={fn.function} fn={fn} index={i} />
+            ))}
 
-                    {/* Right: activities — ruled-line list */}
-                    <div className="mt-10 lg:col-span-8 lg:mt-0">
-                      <ul className="divide-y divide-divider-dark">
-                        {fn.activities.map((act) => (
-                          <li key={act.name} className="py-6 lg:py-7">
-                            <div className="flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-2 lg:gap-6">
-                              <h4 className="text-body-lg text-bone font-medium">{act.name}</h4>
-                              <span
-                                className={`shrink-0 inline-flex items-center text-[10px] uppercase border px-2 py-1 ${TYPE_BADGE_CLASS[act.type]}`}
-                              >
-                                {TYPE_LABEL[act.type]}
-                              </span>
-                            </div>
-                            <p className="mt-3 text-body text-stone">{act.aiImpact}</p>
-                            <p className="mt-2 text-body-sm text-brass-light font-medium">
-                              {act.impact}
-                            </p>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
+            {remainingFunctions.length > 0 && (
+              <details className="group border-t border-divider-dark pt-10">
+                <summary className="flex cursor-pointer list-none flex-col gap-4 border border-divider-dark bg-bone/[0.04] p-6 transition-colors hover:bg-bone/[0.08] sm:flex-row sm:items-center sm:justify-between">
+                  <span>
+                    <span className="overline text-[10px] text-brass-light">Full Value Chain</span>
+                    <span className="mt-2 block text-h3 text-bone">
+                      View {remainingFunctions.length} more functions and every activity
+                    </span>
+                  </span>
+                  <span className="text-sm font-semibold text-brass-light transition-transform group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <div className="mt-16 space-y-16 lg:space-y-24">
+                  {remainingFunctions.map((fn, offset) => (
+                    <ValueChainFunctionRow
+                      key={fn.function}
+                      fn={fn}
+                      index={primaryFunctions.length + offset}
+                    />
+                  ))}
                 </div>
-              );
-            })}
+              </details>
+            )}
           </div>
         </div>
       </section>

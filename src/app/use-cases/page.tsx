@@ -49,6 +49,31 @@ const operatingLoop = [
   'Measure adoption and margin',
 ];
 
+const useCaseLegend = [
+  ['Trigger', 'What event makes the work urgent'],
+  ['Owner', 'Who reviews and acts'],
+  ['Control', 'Where judgment stays human'],
+  ['First build', 'What ships before scale'],
+];
+
+const valueStages = [
+  {
+    label: 'Trigger',
+    title: 'Start where the business already feels friction.',
+    detail: 'A delayed handoff, quality issue, service risk, missed growth signal, or margin leak.',
+  },
+  {
+    label: 'Workflow',
+    title: 'Make the operating path visible.',
+    detail: 'Draft, route, enrich, review, approve, and escalate with ownership built in.',
+  },
+  {
+    label: 'Cadence',
+    title: 'Turn the build into management rhythm.',
+    detail: 'Inspect adoption, conversion, exceptions, and margin impact before expanding.',
+  },
+];
+
 export default function UseCasesPage() {
   return (
     <>
@@ -71,11 +96,14 @@ export default function UseCasesPage() {
           <h1 className="mt-6 max-w-5xl text-display text-bone">
             Where AI earns a place in the operating cadence.
           </h1>
-          <p className="mt-7 max-w-2xl text-body-lg text-stone">
-            These are the places where the work is already hurting: growth, service, operations
-            flow, knowledge work, quality, and PE value creation. Each page shows the trigger,
-            owner, review path, operating view, and first build worth shipping.
-          </p>
+          <div className="mt-8 grid max-w-4xl gap-px overflow-hidden border border-bone/15 bg-bone/15 sm:grid-cols-4">
+            {useCaseLegend.map(([label, detail]) => (
+              <div key={label} className="bg-forge-black/55 p-4 backdrop-blur-sm">
+                <p className="overline text-[10px] text-brass-light">{label}</p>
+                <p className="mt-2 text-sm leading-relaxed text-stone">{detail}</p>
+              </div>
+            ))}
+          </div>
           <div className="mt-10 flex flex-wrap gap-4">
             <Button size="lg" asChild>
               <Link href="/discover">
@@ -147,33 +175,43 @@ export default function UseCasesPage() {
 
       <section className="border-t border-divider bg-recessed py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-12">
+            <div className="lg:col-span-4">
               <p className="overline">Why These Use Cases Work</p>
               <h2 className="mt-6 text-display">
                 AI gets valuable when it changes how the work is run.
               </h2>
             </div>
-            <div className="mt-10 space-y-8 lg:col-span-7 lg:mt-0">
-              {[
-                [
-                  'They start with business triggers',
-                  'The useful builds know what event creates urgency: a capital project, delayed handoff, quality issue, service risk, or portfolio value lever.',
-                ],
-                [
-                  'They make the work concrete',
-                  'The build becomes specific: what gets drafted, who reviews it, what decision changes, what cadence runs, and where human judgment stays in control.',
-                ],
-                [
-                  'They improve through field feedback',
-                  'Every workflow needs a review loop so feedback from reps, service outcomes, exception patterns, and management decisions changes the next run.',
-                ],
-              ].map(([title, description]) => (
-                <div key={title} className="border-t border-divider pt-6">
-                  <h3 className="text-h3">{title}</h3>
-                  <p className="mt-3 text-body text-warm-gray">{description}</p>
-                </div>
-              ))}
+            <div className="mt-12 lg:col-span-8 lg:mt-0">
+              <div className="grid overflow-hidden border border-divider bg-warm-white lg:grid-cols-3">
+                {valueStages.map((stage, index) => (
+                  <div
+                    key={stage.label}
+                    className="relative border-b border-divider p-6 last:border-b-0 lg:border-r lg:border-b-0 lg:last:border-r-0"
+                  >
+                    <div className="flex items-center justify-between gap-4">
+                      <p className="overline text-[10px]">{stage.label}</p>
+                      <span className="metric text-xs text-brass">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                    </div>
+                    <h3 className="mt-8 text-h3">{stage.title}</h3>
+                    <p className="mt-4 text-body-sm leading-relaxed text-warm-gray">
+                      {stage.detail}
+                    </p>
+                    {index < valueStages.length - 1 ? (
+                      <ArrowRight className="absolute right-5 bottom-5 hidden h-4 w-4 text-brass lg:block" />
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                {['Business trigger', 'Human review', 'Field feedback'].map((control) => (
+                  <div key={control} className="border-t border-divider pt-4">
+                    <p className="text-sm font-semibold text-anthracite">{control}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
