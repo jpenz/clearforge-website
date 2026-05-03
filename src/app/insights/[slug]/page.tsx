@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Button } from '@/components/ui/button';
-import { insights } from '@/data/insights';
+import { formatDate, insights } from '@/data/insights';
 import { articleJsonLd, breadcrumbJsonLd, createMetadata, faqJsonLd } from '@/lib/metadata';
 
 function getInsight(slug: string) {
@@ -137,6 +137,8 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
     slug: insight.slug,
     date: insight.date,
     author: insight.author.name,
+    keywords: insight.seo.keywords,
+    section: insight.category,
   });
   const breadcrumbLd = breadcrumbJsonLd([
     { name: 'Home', path: '/' },
@@ -155,6 +157,9 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
         <div className="mx-auto max-w-3xl px-6 lg:px-10">
           <div className="flex items-center gap-4">
             <span className="text-body-sm font-medium text-brass">{insight.category}</span>
+            <time className="text-body-sm text-stone" dateTime={insight.date}>
+              {formatDate(insight.date)}
+            </time>
             <span className="text-body-sm text-stone">{insight.readingTime} min read</span>
           </div>
           <h1 className="mt-6 text-display text-bone">{insight.title}</h1>
@@ -164,6 +169,13 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
               <p className="text-body-sm font-medium text-bone">{insight.author.name}</p>
               <p className="text-body-sm text-stone">{insight.author.role}</p>
             </div>
+          </div>
+          <div className="mt-6 border-t border-bone/15 pt-5">
+            <p className="text-body-sm leading-relaxed text-stone">
+              Editorial standard: ClearForge insights separate original operating frameworks from
+              externally sourced claims. We avoid unsupported ROI, savings, payback, and benchmark
+              claims unless the evidence is visible.
+            </p>
           </div>
         </div>
       </section>

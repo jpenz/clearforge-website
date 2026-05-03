@@ -49,6 +49,7 @@ import { useCases } from '@/data/use-cases';
 import {
   aiTransformationOfferCatalogJsonLd,
   clearForgeMethodJsonLd,
+  clearForgeProfilePageJsonLd,
   coreKeywords,
   founderPersonJsonLd,
   organizationJsonLd,
@@ -157,6 +158,7 @@ describe('buyer-facing content quality', () => {
       metadata: {
         aiTransformationOfferCatalogJsonLd,
         clearForgeMethodJsonLd,
+        clearForgeProfilePageJsonLd,
         coreKeywords,
         founderPersonJsonLd,
         organizationJsonLd,

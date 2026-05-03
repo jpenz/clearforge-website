@@ -12,6 +12,7 @@ import { JsonLdScript } from '@/components/seo/json-ld-script';
 import {
   aiTransformationOfferCatalogJsonLd,
   clearForgeMethodJsonLd,
+  clearForgeProfilePageJsonLd,
   coreKeywords,
   founderPersonJsonLd,
   organizationJsonLd,
@@ -84,6 +85,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             siteNavigationJsonLd,
             aiTransformationOfferCatalogJsonLd,
             clearForgeMethodJsonLd,
+            clearForgeProfilePageJsonLd,
           ]}
         />
         {ga4MeasurementId ? <GoogleAnalytics measurementId={ga4MeasurementId} /> : null}

@@ -1839,7 +1839,11 @@ export function getInsightsByTag(slug: string): Insight[] {
 }
 
 export function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString('en-US', {
+  const [year, month, day] = dateString.split('-').map(Number);
+  const date =
+    year && month && day ? new Date(year, month - 1, day) : new Date(`${dateString}T12:00:00`);
+
+  return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

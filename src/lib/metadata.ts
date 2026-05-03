@@ -216,6 +216,24 @@ export const clearForgeMethodJsonLd = {
   ],
 };
 
+export const clearForgeProfilePageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  '@id': `${siteUrl}/about#profile`,
+  url: `${siteUrl}/about`,
+  name: 'About ClearForge',
+  dateModified: '2026-05-03',
+  mainEntity: {
+    '@type': 'Organization',
+    '@id': `${siteUrl}/#organization`,
+    name: 'ClearForge',
+    description:
+      'ClearForge is an AI strategy-and-build firm that diagnoses operating constraints, builds production AI workflows, and trains teams to run them.',
+    founder: { '@id': `${siteUrl}/#james-penz` },
+  },
+  mentions: [{ '@id': `${siteUrl}/#james-penz` }, { '@id': `${siteUrl}/#clearforge-method` }],
+};
+
 export const siteNavigationJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
@@ -381,21 +399,34 @@ export function articleJsonLd(article: {
   description: string;
   slug: string;
   date: string;
+  dateModified?: string;
   author: string;
+  keywords?: string[];
+  section?: string;
 }) {
+  const url = `${siteUrl}/insights/${article.slug}`;
+  const isFounderAuthored = article.author === 'James Penz';
+
   return {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: article.title,
     description: article.description,
-    url: `${siteUrl}/insights/${article.slug}`,
+    url,
+    mainEntityOfPage: url,
     datePublished: article.date,
+    dateModified: article.dateModified ?? article.date,
+    image: defaultOgImage.url,
+    articleSection: article.section,
+    keywords: article.keywords,
     author: {
       '@type': 'Person',
+      ...(isFounderAuthored ? { '@id': `${siteUrl}/#james-penz`, url: `${siteUrl}/about` } : {}),
       name: article.author,
     },
     publisher: {
-      '@type': 'Organization',
+      '@type': 'ProfessionalService',
+      '@id': `${siteUrl}/#organization`,
       name: 'ClearForge',
       url: siteUrl,
     },

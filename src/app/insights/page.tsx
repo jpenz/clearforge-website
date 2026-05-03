@@ -2,7 +2,7 @@ import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { insights } from '@/data/insights';
+import { formatDate, insights } from '@/data/insights';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
@@ -61,6 +61,9 @@ export default function InsightsPage() {
               </div>
               <div className="mt-8 lg:col-span-4 lg:mt-0 lg:flex lg:flex-col lg:justify-end">
                 <p className="text-body-sm text-warm-gray">{featured.author.name}</p>
+                <time className="text-body-sm text-warm-gray" dateTime={featured.date}>
+                  {formatDate(featured.date)}
+                </time>
                 <p className="text-body-sm text-warm-gray">{featured.readingTime} min read</p>
               </div>
             </Link>
@@ -86,6 +89,9 @@ export default function InsightsPage() {
                       <span className="text-body-sm font-medium text-brass">
                         {article.category}
                       </span>
+                      <time className="text-body-sm text-warm-gray" dateTime={article.date}>
+                        {formatDate(article.date)}
+                      </time>
                       <span className="text-body-sm text-warm-gray">
                         {article.readingTime} min read
                       </span>
