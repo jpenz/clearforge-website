@@ -152,13 +152,11 @@ export default function Home() {
 
       <div className="border-b border-divider bg-warm-white">
         <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-3 px-4 py-4 text-xs text-warm-gray sm:px-6 sm:py-5 lg:flex-row lg:px-10">
-          <span className="font-semibold text-anthracite">
-            Strategy, engineering, adoption, and governance
-          </span>
+          <span className="font-semibold text-anthracite">Diagnose the workflow</span>
           <span className="hidden text-divider lg:inline">/</span>
-          <span>Custom AI systems for operators, PE teams, and growth companies</span>
+          <span>Build the custom AI system</span>
           <span className="hidden text-divider lg:inline">/</span>
-          <span>Find the value, build the system, train the organization</span>
+          <span>Train the team to run it</span>
         </div>
       </div>
 

@@ -38,6 +38,18 @@ export default function CaseStudiesPage() {
             Each case shows the constraint, the operating build, and the evidence leaders used to
             manage what happened next.
           </p>
+          <div className="mt-10 grid gap-px overflow-hidden border border-bone/10 bg-bone/10 sm:grid-cols-3">
+            {[
+              ['01', 'Constraint named'],
+              ['02', 'System shipped'],
+              ['03', 'Evidence visible'],
+            ].map(([step, label]) => (
+              <div key={step} className="bg-forge-black/70 p-4">
+                <p className="metric text-xs text-brass-light">{step}</p>
+                <p className="mt-1 text-sm font-semibold text-bone">{label}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

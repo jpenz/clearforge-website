@@ -47,16 +47,16 @@ export function HeroScroll() {
         <p className="overline text-xs animate-fade-in">Custom AI systems for operators</p>
 
         <h1 className="mt-7 max-w-[980px] text-[2.7rem] leading-[1.02] text-bone sm:text-[4rem] lg:text-[5.2rem]">
-          Find the work that moves the numbers. Build the AI system that makes it repeatable.
+          Find the workflow worth fixing. Build the AI system that runs it better.
         </h1>
         <p className="mt-3 max-w-[900px] font-display text-[2.25rem] italic leading-[1.05] text-brass-light sm:text-[3.4rem] lg:text-[4.2rem]">
           With your people in control.
         </p>
 
         <p className="mt-8 max-w-2xl text-body-lg text-stone animate-fade-in-up delay-3">
-          Most teams already have AI ideas, tools, and demos. What they need is one workflow with a
-          clear owner, reliable data path, control model, and management cadence. ClearForge helps
-          you choose it, build it, and run it until the work changes.
+          ClearForge is an AI strategy and build partner. We diagnose the workflow, build the custom
+          agents, dashboards, integrations, and controls, then train your team to run the new
+          operating cadence.
         </p>
 
         <div className="mt-7 grid max-w-3xl grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-5 animate-fade-in-up delay-3">

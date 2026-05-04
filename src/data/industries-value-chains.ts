@@ -1140,7 +1140,7 @@ export const industries: Industry[] = [
     forgeApplication:
       'The Forge Method for PE delivers a portfolio-level diagnostic, then deploys repeatable AI plays across portcos. Diagnostic surfaces top opportunities tied to EBITDA. Sprint deploys 1-2 priority plays per portco. Scale runs the operating cadence and expands the playbook to new portcos and bolt-ons.',
     caseStudySlug: 'pe-portfolio-diagnostic-plan',
-    videoBackground: '/videos/pe.mp4',
+    videoBackground: '/videos/private-equity.mp4',
   },
 
   // INSURANCE
