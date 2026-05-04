@@ -1488,39 +1488,39 @@ For a mid-market company starting AI in 2026, expect to invest **$15K for a cred
   // ── AEO/GEO PILLAR — AI Readiness Assessment ──────────────────────────
   {
     slug: 'ai-readiness-assessment-guide',
-    title: 'AI Readiness Assessment: What It Is, How to Do One, and What It Costs',
+    title: 'AI Readiness Assessment: What It Is, How to Run One, and What It Costs',
     excerpt:
-      'An AI readiness assessment evaluates whether your company has the data, processes, talent, and leadership alignment to deploy AI successfully. This guide explains the five pillars, how to conduct one, what tools exist, and what a paid assessment delivers vs free.',
+      'An AI readiness assessment should reveal whether one workflow is ready for a production AI build. This guide explains the five build-readiness gates, what free tools can tell you, and when a paid diagnostic is warranted.',
     category: 'AI Strategy',
     date: '2026-04-22',
     readingTime: 11,
     author: jamesPenz,
     body: `## TL;DR
-An AI readiness assessment scores your company across five pillars (data, workforce, process, technology, strategic alignment) to determine whether AI deployment is likely to succeed and where to start. Free online scorecards take 5-15 minutes and produce a directional score. Paid diagnostics ($10K-$25K, 4-6 weeks) produce a prioritized roadmap with value sizing. The assessment is the first step before any AI investment above $50K. Most failed pilots break down because of scoping, ownership, data quality, or adoption readiness, not model capability alone.
+An AI readiness assessment should test whether one workflow has the value case, workflow clarity, data path, controls, and adoption cadence to become a production AI build. Free online diagnostics take 5-15 minutes and produce a directional score. Paid diagnostics ($10K-$25K, 4-6 weeks) produce a prioritized roadmap, evidence plan, and first build decision. Most failed pilots break down because of scoping, ownership, data quality, or adoption readiness, not model capability alone.
 
 ## What Is an AI Readiness Assessment?
 An AI readiness assessment is a structured evaluation of whether an organization has the foundations to deploy AI successfully. It produces a score (typically 0-100), a tier classification (e.g., Starter, Developing, Advanced, Leader), and a prioritized list of gaps to close before investing.
 
 The framework dates back to digital modernization maturity models from the 2010s but has been adapted for AI's specific failure modes — particularly the high rate of pilot-to-production failure. The largest causes are usually insufficient organizational readiness, weak workflow ownership, and unclear operating metrics, not insufficient technology.
 
-## The Five Pillars of AI Readiness
+## The Five Build-Readiness Gates
 
-### 1. Data Readiness (typical weight: 25-30%)
-Whether your data is accessible, structured, and trustworthy enough for AI agents to work with. Specific signals: data centralization (or lack of), trust in core operational data, master data quality, lineage and audit capability.
+### 1. Ambition and Value Case
+Whether the first workflow has a named business reason, accountable owner, baseline, and value threshold.
 
-### 2. Workforce & Leadership Readiness (typical weight: 20-25%)
-Whether your team is prepared to work alongside AI agents. Specific signals: AI literacy across functions, change-management capacity, role redesign experience, executive AI fluency.
+### 2. Workflow Clarity
+Whether handoffs, exceptions, approvals, rework, and performance measures are visible enough to redesign.
 
-### 3. Process Maturity (typical weight: 15-25%)
-Whether your workflows are documented, measured, and ready to be redesigned for AI. Specific signals: process documentation depth, KPI instrumentation, exception handling, decision-making clarity.
+### 3. Data Path
+Whether source systems, documents, data owners, access patterns, and trust gaps are clear before build.
 
-### 4. Technology & Systems (typical weight: 15-20%)
-Whether your infrastructure can support AI deployment. Specific signals: cloud maturity, API surface, data-warehouse readiness, legacy-system bridging capability, security posture.
+### 4. Controls and Integration
+Whether the workflow can connect to existing systems with human review, escalation, audit trail, and failure handling.
 
-### 5. Strategic Alignment (typical weight: 10-15%)
-Whether AI is tied to your growth strategy with budget and executive commitment behind it. Specific signals: explicit AI thesis at the executive level, named AI budget owner, KPI-tied use cases, board-level visibility.
+### 5. Adoption Cadence
+Whether users and managers have the time, permission, training, and review rhythm to change daily work.
 
-The exact weights vary by framework. ClearForge's AI Readiness Scorecard weighs Data and Workforce most heavily because those two pillars predict AI deployment success more strongly than the others.
+ClearForge scores readiness around one workflow, not the company in the abstract. The goal is to decide whether that workflow is ready for a production build or needs operating clarity first.
 
 ## Free vs Paid Assessments
 
@@ -1538,7 +1538,7 @@ The exact weights vary by framework. ClearForge's AI Readiness Scorecard weighs 
 ## How to Conduct an AI Readiness Assessment
 
 ### Step 1: Score yourself across five pillars
-Use a structured framework. Free scorecards (like ClearForge's 20-question scorecard) take 5-10 minutes and produce a baseline score across the five pillars.
+Use a structured framework. The ClearForge Diagnostic takes about four minutes and scores one workflow across value case, workflow clarity, data path, controls, and adoption.
 
 ### Step 2: Identify the top 2 weakest pillars
 Most companies have a clear pattern — typically Data or Workforce is the weakest. Address those first; the others compound.
@@ -1558,7 +1558,7 @@ A reputable paid Diagnostic ($10K-$25K, 4-6 weeks) should produce:
 1. **Workflow opportunity mapping** — every workflow scored for AI applicability and economic upside
 2. **Data readiness audit** — assessment of data quality, accessibility, and gaps to close
 3. **Prioritized roadmap** — ranked initiatives with effort, value case, and dependencies
-4. **Quantified business case** — first-year and 3-year financial projections
+4. **Evidence-backed business case** — value assumptions, baseline metric, and proof plan
 5. **Implementation sequencing** — which workflow to start with and why
 6. **Vendor and build-vs-buy recommendations** — for each priority initiative
 
@@ -1577,21 +1577,21 @@ ClearForge's Forge Diagnostic ($15K, 4 weeks) includes all six. If 3+ measurable
 - If your data infrastructure is fundamentally broken — fix that first; an AI assessment will just confirm that.
 
 ## Free Tools to Use Right Now
-- **ClearForge AI Readiness Scorecard** (clearforge.ai/scorecard) — 20-question, 5-pillar, takes 5-10 minutes, produces tier classification and roadmap recommendation.
+- **ClearForge Diagnostic** (clearforge.ai/scorecard) — 10-question, workflow-specific, takes about 4 minutes, produces a build-readiness readout and roadmap recommendation.
 - **Forge Intelligence** (clearforge.ai/discover) — analyzes your company website to generate AI use cases and value-chain mapping.
 - **MIT/BCG AI Maturity Index** — academic framework, useful for board-level conversation.
 
 ## Bottom Line
-An AI readiness assessment is the cheapest insurance against an expensive AI failure. Free scorecards are sufficient for self-education and board alignment. A paid Diagnostic ($10K-$25K) is warranted when AI investment is above $50K. The five pillars (data, workforce, process, technology, strategic alignment) are stable across frameworks; the weights vary. **Focus on workforce readiness — it's the most under-rated pillar and the highest predictor of pilot-to-production success.**`,
+An AI readiness assessment is useful only when it changes the build decision. Free diagnostics are sufficient for self-education and board alignment. A paid Diagnostic ($10K-$25K) is warranted when meaningful budget is on the line. The practical test is simple: can you name the workflow, owner, baseline, data path, controls, and adoption cadence before engineering starts?`,
     relatedSlugs: [
       'ai-consulting-cost',
       'why-ai-pilots-fail-5-things-work',
       'fractional-caio-vs-full-time',
     ],
     seo: {
-      title: 'AI Readiness Assessment 2026: What It Is, How to Do One, What It Costs',
+      title: 'AI Readiness Assessment 2026: What It Is, How to Run One, What It Costs',
       description:
-        'An AI readiness assessment scores your company across data, workforce, process, technology, and strategy. Free scorecards take 10 minutes; paid diagnostics cost $10-25K and produce a roadmap. Complete 2026 guide.',
+        'An AI readiness assessment should test value case, workflow clarity, data path, controls, and adoption cadence before a production AI build. Free tools, paid diagnostics, and cost guide.',
       keywords: [
         'AI readiness assessment',
         'AI maturity assessment',
@@ -1610,17 +1610,17 @@ An AI readiness assessment is the cheapest insurance against an expensive AI fai
       {
         question: 'What is an AI readiness assessment?',
         answer:
-          'An AI readiness assessment is a structured evaluation of whether an organization has the foundations (data, workforce, process, technology, strategic alignment) to deploy AI successfully. It produces a score, tier classification, and prioritized list of gaps to close before investing.',
+          'An AI readiness assessment is a structured evaluation of whether a company, team, or workflow has the foundations to deploy AI successfully. The best assessments produce a score, tier classification, and a short list of gaps to close before investing.',
       },
       {
         question: 'How much does an AI readiness assessment cost?',
         answer:
-          "Free online scorecards take 10 minutes. Paid Diagnostics cost $10K-$25K and run 4-6 weeks, producing a prioritized roadmap with value sizing. ClearForge's Forge Diagnostic is $15K with a money-back guarantee if 3+ measurable opportunities are not identified.",
+          "Free online diagnostics usually take 5-15 minutes. Paid Diagnostics cost $10K-$25K and run 4-6 weeks, producing a prioritized roadmap, evidence plan, and first build decision. ClearForge's Forge Diagnostic is $15K with a money-back guarantee if 3+ measurable opportunities are not identified.",
       },
       {
-        question: 'What are the 5 pillars of AI readiness?',
+        question: 'What are the 5 gates of AI build-readiness?',
         answer:
-          'The five pillars are: (1) Data Readiness, (2) Workforce & Leadership, (3) Process Maturity, (4) Technology & Systems, (5) Strategic Alignment. Data and Workforce are typically weighted highest because they predict deployment success most strongly.',
+          'ClearForge uses five gates: (1) Ambition and Value Case, (2) Workflow Clarity, (3) Data Path, (4) Controls and Integration, and (5) Adoption Cadence. Each gate asks whether the first workflow is ready to become a production build.',
       },
       {
         question: 'How long does an AI readiness assessment take?',
@@ -1630,7 +1630,7 @@ An AI readiness assessment is the cheapest insurance against an expensive AI fai
       {
         question: 'Should I do a free or paid AI readiness assessment?',
         answer:
-          'Free scorecards are sufficient for self-education and board alignment. Paid Diagnostics are warranted when AI investment is above $50K because they produce a prioritized roadmap with ROI sizing per opportunity, not just a directional score.',
+          'Free diagnostics are sufficient for self-education and board alignment. Paid Diagnostics are warranted when meaningful budget is on the line because they produce a workflow roadmap, evidence plan, and explicit build decision, not just a directional score.',
       },
       {
         question: 'How often should we run an AI readiness assessment?',

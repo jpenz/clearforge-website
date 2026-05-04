@@ -74,16 +74,16 @@ export function HeroScroll() {
             </Link>
           </Button>
           <Button size="lg" variant="outline-light" asChild>
-            <Link href="/contact" data-analytics="home_hero_book_diagnostic">
-              Book a Diagnostic Call
+            <Link href="/scorecard" data-analytics="home_hero_take_diagnostic">
+              Take Readiness Diagnostic
             </Link>
           </Button>
           <Link
-            href="#results"
-            data-analytics="home_hero_see_proof"
+            href="/contact"
+            data-analytics="home_hero_book_diagnostic"
             className="inline-flex items-center gap-2 text-sm text-stone hover:text-bone transition-colors link-underline"
           >
-            See proof <ArrowRight className="h-4 w-4" />
+            Book a call <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
         <p className="mt-3 text-xs text-stone/50 animate-fade-in delay-5">

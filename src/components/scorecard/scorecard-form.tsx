@@ -77,6 +77,9 @@ export function ScorecardForm() {
         <div className="border border-divider bg-warm-white p-5">
           <h3 className="text-h4 text-anthracite">{currentPillar.name}</h3>
           <p className="text-body-sm text-warm-gray mt-1">{currentPillar.description}</p>
+          <p className="mt-4 text-xs font-medium uppercase tracking-[0.16em] text-brass">
+            Answer for one workflow you would actually fund
+          </p>
         </div>
 
         {currentQuestions.map((question, i) => (
@@ -103,7 +106,7 @@ export function ScorecardForm() {
             className="gap-2"
             size="lg"
           >
-            {isSubmitting ? 'Calculating...' : 'See My Results'}
+            {isSubmitting ? 'Calculating...' : 'See My Diagnostic Readout'}
             <ArrowRight className="h-4 w-4" />
           </Button>
         ) : (

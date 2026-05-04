@@ -26,7 +26,7 @@ export default function PrivacyPage() {
             <h2 className="text-h2">Information We Collect</h2>
             <p className="mt-4 text-body text-warm-gray">
               We collect information you provide directly to us, such as when you fill out a contact
-              form, take the AI Readiness Scorecard, or communicate with us via email. This may
+              form, take the ClearForge Diagnostic, or communicate with us via email. This may
               include your name, email address, company name, job title, and any other information
               you choose to provide.
             </p>

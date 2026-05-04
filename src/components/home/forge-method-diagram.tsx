@@ -41,8 +41,8 @@ const PHASES: Phase[] = [
     pricing: 'From $15K',
     deliverables: [
       'Value chain map across your operations',
-      'AI readiness score, 5 pillars',
-      'Prioritized roadmap with baselines and evidence needs',
+      'Build-readiness readout across 5 gates',
+      'First workflow decision with baseline and evidence needs',
       '3+ measurable opportunities or full refund',
     ],
   },

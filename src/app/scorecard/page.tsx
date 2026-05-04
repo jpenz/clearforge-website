@@ -10,14 +10,31 @@ const ScorecardForm = dynamic(
 export default function ScorecardPage() {
   return (
     <>
-      <section className="bg-parchment pt-24 sm:pt-32 pb-6 sm:pb-8 lg:pt-40 lg:pb-12">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10">
-          <p className="overline">AI Maturity Scorecard</p>
-          <h1 className="mt-6 text-display text-anthracite">How ready is your business for AI?</h1>
-          <p className="mt-4 text-body-lg text-warm-gray">
-            20 questions across 5 pillars. Takes about 5 minutes. Get your AI maturity score, pillar
-            breakdown, and a personalized roadmap.
-          </p>
+      <section className="dark-section pt-24 pb-10 sm:pt-32 sm:pb-14 lg:pt-40 lg:pb-20">
+        <div className="mx-auto grid max-w-[1100px] gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_0.72fr] lg:items-end lg:px-10">
+          <div>
+            <p className="overline">ClearForge Diagnostic</p>
+            <h1 className="mt-6 text-display text-bone">
+              Is your first AI workflow ready to build?
+            </h1>
+            <p className="mt-4 text-body-lg text-stone">
+              Ten questions across value case, workflow, data path, controls, and adoption cadence.
+              The readout shows where a build would stall and what ClearForge would inspect first.
+            </p>
+          </div>
+
+          <div className="grid gap-px overflow-hidden border border-divider-dark bg-divider-dark sm:grid-cols-3 lg:grid-cols-1">
+            {[
+              ['01', 'Select one workflow'],
+              ['02', 'Expose the weakest pillar'],
+              ['03', 'Map the first build path'],
+            ].map(([step, label]) => (
+              <div key={step} className="bg-forge-black/70 p-4">
+                <p className="metric text-xs text-brass">{step}</p>
+                <p className="mt-1 text-sm font-semibold text-bone">{label}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -12,9 +12,19 @@ export const metadata = createMetadata({
   path: '/insights',
 });
 
+const fieldGuideSlugs = [
+  'clearforge-ai-transformation-maturity-model',
+  'ai-pilots-operating-systems',
+  'custom-agent-stack-mid-market',
+  'pe-ai-ebitda-playbook',
+];
+
 export default function InsightsPage() {
   const featured = insights[0];
   const rest = insights.slice(1);
+  const fieldGuides = fieldGuideSlugs
+    .map((slug) => insights.find((insight) => insight.slug === slug))
+    .filter((insight): insight is (typeof insights)[number] => Boolean(insight));
 
   return (
     <>
@@ -30,21 +40,59 @@ export default function InsightsPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-forge-black via-forge-black/80 to-forge-black/40 pointer-events-none" />
         <div className="relative mx-auto max-w-[1200px] px-6 lg:px-10">
-          <p className="overline">Insights</p>
+          <p className="overline">ClearForge Field Library</p>
           <h1 className="mt-6 text-display max-w-3xl text-bone">
-            Thinking that shapes how we work.
+            Executive briefs for building AI that ships.
           </h1>
           <p className="mt-6 max-w-xl text-body-lg text-stone">
-            Practical frameworks, lessons from real engagements, and honest perspectives on where AI
-            actually creates value.
+            Strategy, workflow design, custom agent architecture, governance, and adoption guidance
+            for leaders who need AI to improve how the company actually runs.
           </p>
         </div>
       </section>
+
+      {/* ── Start Here ── */}
+      {fieldGuides.length > 0 && (
+        <section className="border-b border-divider bg-warm-white py-16 lg:py-24">
+          <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
+            <div className="grid gap-10 lg:grid-cols-[0.42fr_0.58fr] lg:items-start">
+              <div>
+                <p className="overline">Start Here</p>
+                <h2 className="mt-4 text-h2">The shortest path through the library.</h2>
+                <p className="mt-4 text-body text-warm-gray">
+                  Four reads cover the operating model: maturity, pilot-to-production movement,
+                  custom stack design, and PE value creation.
+                </p>
+              </div>
+              <div className="grid gap-px overflow-hidden border border-divider bg-divider sm:grid-cols-2">
+                {fieldGuides.map((guide) => (
+                  <Link
+                    key={guide.slug}
+                    href={`/insights/${guide.slug}`}
+                    className="group bg-warm-white p-5 transition-colors hover:bg-parchment"
+                  >
+                    <span className="text-xs font-medium uppercase tracking-[0.16em] text-brass">
+                      {guide.category}
+                    </span>
+                    <h3 className="mt-3 text-h4 transition-colors group-hover:text-brass">
+                      {guide.title}
+                    </h3>
+                    <p className="mt-3 text-body-sm leading-relaxed text-warm-gray">
+                      {guide.excerpt}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── Featured Article ── */}
       {featured && (
         <section className="bg-warm-white py-24 lg:py-40">
           <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
+            <p className="overline mb-10">Featured Brief</p>
             <Link
               href={`/insights/${featured.slug}`}
               className="group block lg:grid lg:grid-cols-12 lg:gap-20"
@@ -74,7 +122,7 @@ export default function InsightsPage() {
       {/* ── All Articles ── */}
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-          <p className="overline">All Articles</p>
+          <p className="overline">Library</p>
 
           <div className="mt-12 grid gap-0">
             {rest.map((article) => (
@@ -122,16 +170,19 @@ export default function InsightsPage() {
       {/* ── CTA ── */}
       <section className="dark-section py-24 lg:py-40">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">Want to talk through a specific challenge?</h2>
+          <h2 className="text-display text-bone">Want to pressure-test one workflow?</h2>
           <p className="mt-6 text-body-lg text-stone">
-            These articles represent how we think. A discovery call shows how we apply it to your
-            business.
+            Bring the workflow you are considering. The diagnostic shows whether the value case,
+            data path, controls, and adoption cadence are ready for a build.
           </p>
-          <div className="mt-10">
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
-              <Link href="/contact">
-                Book a 15-Min Diagnostic Call <ArrowRight className="ml-2 h-4 w-4" />
+              <Link href="/scorecard">
+                Run Diagnostic <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
+            </Button>
+            <Button size="lg" variant="outline-light" asChild>
+              <Link href="/discover">Generate AI Value Map</Link>
             </Button>
           </div>
         </div>

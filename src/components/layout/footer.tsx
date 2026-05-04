@@ -21,7 +21,7 @@ const footerLinks = {
   ],
   Company: [
     { href: '/case-studies', label: 'Case Studies' },
-    { href: '/scorecard', label: 'AI Readiness Scorecard' },
+    { href: '/scorecard', label: 'ClearForge Diagnostic' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
   ],
@@ -46,18 +46,18 @@ export function Footer() {
               <p className="overline">Ready to find the value?</p>
               <h2 className="mt-4 text-display text-bone">Start with the operating map.</h2>
               <p className="mt-4 text-body-lg text-stone">
-                See which workflow could improve revenue, cost, or throughput before you commit to a
-                build.
+                Run the diagnostic, then map the workflow worth building before you commit to a
+                sprint.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
               <Button size="lg" className="shadow-lg hover:shadow-xl" asChild>
-                <Link href="/discover">
-                  Generate AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
+                <Link href="/scorecard">
+                  Run Diagnostic <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline-light" asChild>
-                <Link href="/contact">Book a Diagnostic Call</Link>
+                <Link href="/discover">Generate AI Value Map</Link>
               </Button>
             </div>
           </div>

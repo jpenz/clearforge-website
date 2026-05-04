@@ -64,7 +64,7 @@ const NAV_SECTIONS = [
       { href: '/operating-model', label: 'AI Operating Model' },
       { href: '/pricing', label: 'Investment & Timeline' },
       { href: '/discover', label: 'AI Value Map' },
-      { href: '/scorecard', label: 'AI Readiness Scorecard' },
+      { href: '/scorecard', label: 'ClearForge Diagnostic' },
     ],
   },
   {
@@ -160,7 +160,7 @@ export function Header() {
               className="hidden sm:inline-flex text-xs shadow-sm hover:shadow-md"
               asChild
             >
-              <Link href="/discover">Generate AI Value Map</Link>
+              <Link href="/scorecard">Run Diagnostic</Link>
             </Button>
           </div>
         </div>
@@ -229,12 +229,12 @@ export function Header() {
             {/* Sidebar CTA */}
             <div className="px-5 sm:px-8 py-6 border-t border-divider-dark">
               <Button className="w-full" size="lg" asChild>
-                <Link href="/discover" onClick={() => setSidebarOpen(false)}>
-                  Generate AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
+                <Link href="/scorecard" onClick={() => setSidebarOpen(false)}>
+                  Run Diagnostic <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <p className="mt-3 text-xs text-stone text-center">
-                Free · 5 minutes · website-based analysis
+                Free · 4 minutes · workflow-readiness readout
               </p>
             </div>
 

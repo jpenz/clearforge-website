@@ -38,7 +38,7 @@ export function GET() {
       `- Home: ${siteUrl}/`,
       `- AI Operating Model: ${siteUrl}/operating-model`,
       `- AI Value Map: ${siteUrl}/discover`,
-      `- AI Readiness Scorecard: ${siteUrl}/scorecard`,
+      `- ClearForge Diagnostic: ${siteUrl}/scorecard`,
       `- Services: ${siteUrl}/services`,
       `- Use Cases: ${siteUrl}/use-cases`,
       `- Industries: ${siteUrl}/industries`,

@@ -507,7 +507,7 @@ async function sendAssessmentEmails(params: {
       <div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
         <div style="background:#0f172a;padding:20px 24px;">
           <p style="margin:0;color:#5eead4;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">ClearForge.ai</p>
-          <h1 style="margin:8px 0 0;color:#fff;font-size:24px;line-height:1.25;">AI Readiness & Opportunity Report</h1>
+          <h1 style="margin:8px 0 0;color:#fff;font-size:24px;line-height:1.25;">AI Build-Readiness & Opportunity Report</h1>
         </div>
         <div style="padding:24px;">
           <p style="margin:0 0 10px;color:#334155;">Prepared for ${safeName} at ${safeCompany}.</p>
@@ -544,7 +544,7 @@ async function sendAssessmentEmails(params: {
       from: 'ClearForge <website@clearforge.ai>',
       to: [params.email],
       replyTo: 'james@clearforge.ai',
-      subject: 'Your ClearForge AI Readiness & Opportunity Report',
+      subject: 'Your ClearForge AI Build-Readiness Report',
       html: userEmailHtml,
     });
 

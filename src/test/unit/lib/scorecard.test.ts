@@ -1,9 +1,9 @@
 /**
  * scorecard.test.ts
  *
- * Unit tests for the AI Readiness Scorecard engine.
- * This is the core business logic — users fill this out and get a personalized
- * roadmap. Getting scores and tiers right directly affects lead quality.
+ * Unit tests for the ClearForge Diagnostic engine.
+ * This is the core business logic — users answer a focused workflow diagnostic
+ * and get a personalized build-readiness readout.
  *
  * Coverage targets:
  *  - calculateResults() — weighted pillar scoring + composite
@@ -68,8 +68,8 @@ describe('pillars', () => {
 // ── Question integrity ──────────────────────────────────────────────────────
 
 describe('questions', () => {
-  it('has at least 15 questions', () => {
-    expect(questions.length).toBeGreaterThanOrEqual(15);
+  it('has exactly 10 questions for a focused diagnostic', () => {
+    expect(questions).toHaveLength(10);
   });
 
   it('all question IDs are unique', () => {

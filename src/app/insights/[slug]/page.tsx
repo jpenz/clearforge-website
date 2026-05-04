@@ -15,6 +15,15 @@ function cleanInlineText(text: string) {
   return text.replace(/\*\*/g, '');
 }
 
+function slugifyHeading(heading: string) {
+  return (
+    heading
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '') || 'section'
+  );
+}
+
 function renderMarkdownBlocks(markdown: string) {
   const blocks: ReactNode[] = [];
   const paragraphLines: string[] = [];
@@ -128,7 +137,18 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
   const related = insight.relatedSlugs.map((s) => getInsight(s)).filter(Boolean);
 
   /* Split the markdown body into sections by ## headings */
-  const sections = insight.body.split(/^## /m).filter(Boolean);
+  const sections = insight.body
+    .split(/^## /m)
+    .filter(Boolean)
+    .map((section, index) => {
+      const lines = section.split('\n');
+      const heading = lines[0]?.trim() || `Section ${index + 1}`;
+      return {
+        id: `${slugifyHeading(heading)}-${index + 1}`,
+        heading,
+        body: lines.slice(1).join('\n').trim(),
+      };
+    });
 
   /* Schema.org structured data for AEO/GEO citation lift */
   const articleLd = articleJsonLd({
@@ -180,21 +200,52 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
+      {/* ── Article Roadmap ── */}
+      {sections.length > 0 && (
+        <section className="border-y border-divider bg-warm-white py-12 lg:py-16">
+          <div className="mx-auto max-w-4xl px-6 lg:px-10">
+            <div className="grid gap-8 lg:grid-cols-[0.36fr_0.64fr] lg:items-start">
+              <div>
+                <p className="overline">In This Brief</p>
+                <h2 className="mt-4 text-h3">Use the article like an operating memo.</h2>
+                <p className="mt-3 text-body-sm leading-relaxed text-warm-gray">
+                  Start with the section closest to your decision, then use the FAQ for the
+                  plain-English answer.
+                </p>
+              </div>
+              <div className="grid gap-px overflow-hidden border border-divider bg-divider sm:grid-cols-2">
+                {sections.slice(0, 6).map((section, index) => (
+                  <Link
+                    key={section.id}
+                    href={`#${section.id}`}
+                    className="group flex min-h-20 gap-4 bg-warm-white p-4 transition-colors hover:bg-parchment"
+                  >
+                    <span className="metric text-xs text-brass">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="text-sm font-semibold leading-snug text-anthracite transition-colors group-hover:text-brass">
+                      {section.heading}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── Body ── */}
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-3xl px-6 lg:px-10">
           <div className="prose-forge space-y-12">
-            {sections.map((section) => {
-              const lines = section.split('\n');
-              const heading = lines[0]?.trim();
-              const body = lines.slice(1).join('\n').trim();
-              return (
-                <div key={section.slice(0, 120)}>
-                  {heading && <h2 className="text-h2 mb-6">{heading}</h2>}
-                  {renderMarkdownBlocks(body)}
-                </div>
-              );
-            })}
+            {sections.map((section) => (
+              <div key={section.id}>
+                <h2 id={section.id} className="scroll-mt-28 text-h2 mb-6">
+                  {section.heading}
+                </h2>
+                {renderMarkdownBlocks(section.body)}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -205,15 +256,21 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
           <div className="mx-auto max-w-3xl px-6 lg:px-10">
             <p className="overline">FAQ</p>
             <h2 className="mt-6 text-display">Common questions.</h2>
-            <div className="mt-12">
+            <div className="mt-12 grid gap-3">
               {insight.faqs.map((faq, i) => (
-                <div key={faq.question}>
-                  <div className="py-8">
-                    <h3 className="text-h4">{faq.question}</h3>
-                    <p className="mt-3 text-body text-warm-gray">{faq.answer}</p>
-                  </div>
-                  {i < insight.faqs.length - 1 && <div className="h-px bg-divider" />}
-                </div>
+                <details
+                  key={faq.question}
+                  open={i === 0}
+                  className="group border border-divider bg-warm-white p-5"
+                >
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-h4">
+                    <span>{faq.question}</span>
+                    <span className="mt-1 text-brass transition-transform group-open:rotate-45">
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-4 text-body text-warm-gray">{faq.answer}</p>
+                </details>
               ))}
             </div>
           </div>
@@ -249,18 +306,18 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
       {/* ── CTA ── */}
       <section className="dark-section py-24 lg:py-40">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">Ready to put this into practice?</h2>
+          <h2 className="text-display text-bone">Ready to test this against your workflow?</h2>
           <p className="mt-6 text-body-lg text-stone">
-            These ideas become real in the context of your business. Let us show you how.
+            Run the diagnostic, then map where the value sits before you commit to a build.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
-              <Link href="/contact">
-                Book a 15-Min Diagnostic Call <ArrowRight className="ml-2 h-4 w-4" />
+              <Link href="/scorecard">
+                Run Diagnostic <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>
-              <Link href="/insights">All Insights</Link>
+              <Link href="/discover">Generate AI Value Map</Link>
             </Button>
           </div>
         </div>

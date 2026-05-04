@@ -80,13 +80,13 @@ export const keywordClusters: KeywordCluster[] = [
     ],
     estimatedCPC: '$8-18 (very high commercial intent)',
     contentNeeded: [
-      'AI Readiness Scorecard pillar page (exists at /scorecard)',
+      'ClearForge Diagnostic pillar page (exists at /scorecard)',
       'How to Know If Your Company Is AI Ready (long-form Q&A)',
       "Free vs Paid AI Diagnostic — Buyer's Guide",
       'AI Maturity Model: 4-tier framework explained',
     ],
     primaryLandingPage: '/scorecard',
-    primaryCTA: 'Take the free AI Readiness Scorecard',
+    primaryCTA: 'Run the free ClearForge Diagnostic',
   },
   {
     id: 'ai-pe-value',
@@ -321,9 +321,9 @@ export const adCampaigns: AdCampaign[] = [
     budget: '$2-4K/mo, $80-150 target CPL',
     copyVariants: [
       {
-        headline: 'AI Readiness Assessment | Free in 5 Minutes | ClearForge',
-        body: '20 questions across 5 pillars. Get your AI maturity score and a personalized roadmap. Bain-trained team. No sales call required.',
-        cta: 'Take the Free Scorecard',
+        headline: 'AI Build-Readiness Diagnostic | ClearForge',
+        body: 'Ten workflow-specific questions. See the value case, data path, controls, and adoption gaps before funding a build.',
+        cta: 'Run the Diagnostic',
       },
       {
         headline: 'AI Diagnostic for Mid-Market | $15K Fixed Fee | 4 Weeks',
