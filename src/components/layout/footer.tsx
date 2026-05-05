@@ -7,6 +7,7 @@ import { useCases } from '@/data/use-cases';
 const footerLinks = {
   Services: [
     { href: '/operating-model', label: 'AI Operating Model' },
+    { href: '/blueprints', label: 'AI Build Blueprints' },
     { href: '/use-cases', label: 'AI Use Cases' },
     { href: '/services/ai-revenue-operations', label: 'AI Revenue Operations' },
     { href: '/services/performance-improvement', label: 'Performance Improvement' },
@@ -21,6 +22,7 @@ const footerLinks = {
   ],
   Company: [
     { href: '/case-studies', label: 'Case Studies' },
+    { href: '/blueprints', label: 'Blueprints' },
     { href: '/scorecard', label: 'ClearForge Diagnostic' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },

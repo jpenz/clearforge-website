@@ -1,9 +1,10 @@
 import { ArrowRight, CheckCircle2, Target, Users } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Button } from '@/components/ui/button';
 import { getServiceBySlug, services } from '@/data/services';
-import { createMetadata } from '@/lib/metadata';
+import { breadcrumbJsonLd, createMetadata, serviceJsonLd } from '@/lib/metadata';
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -32,9 +33,22 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
     { label: 'System', value: service.deliverables[2] },
     { label: 'Adoption', value: service.deliverables[5] },
   ].filter((item) => item.value);
+  const breadcrumbLd = breadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: service.title, path: `/services/${slug}` },
+  ]);
+  const serviceLd = serviceJsonLd({
+    title: service.title,
+    description: service.description,
+    slug,
+  });
 
   return (
     <>
+      <JsonLdScript data={breadcrumbLd} />
+      <JsonLdScript data={serviceLd} />
+
       {/* Hero with atmospheric bg and headline outcome */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <div className="absolute inset-0 pointer-events-none">
@@ -64,11 +78,14 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 {service.tagline}
               </h1>
               <p className="mt-6 max-w-xl text-body-lg text-stone">{service.description}</p>
-              <div className="mt-10">
+              <div className="mt-10 flex flex-wrap gap-4">
                 <Button size="lg" asChild>
                   <Link href="/contact">
                     Book a Diagnostic Call <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
+                </Button>
+                <Button size="lg" variant="outline-light" asChild>
+                  <Link href="/discover">Generate AI Value Map</Link>
                 </Button>
               </div>
             </div>

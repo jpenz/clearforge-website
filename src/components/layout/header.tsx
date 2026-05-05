@@ -62,6 +62,7 @@ const NAV_SECTIONS = [
     links: [
       { href: '/services', label: 'How We Work' },
       { href: '/operating-model', label: 'AI Operating Model' },
+      { href: '/blueprints', label: 'AI Build Blueprints' },
       { href: '/pricing', label: 'Investment & Timeline' },
       { href: '/discover', label: 'AI Value Map' },
       { href: '/scorecard', label: 'ClearForge Diagnostic' },

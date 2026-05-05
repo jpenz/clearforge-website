@@ -1,11 +1,12 @@
 import { ArrowRight, CheckCircle2, Gauge, Layers3, Shield, Workflow } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
 import { Button } from '@/components/ui/button';
 import { forgeProducts } from '@/data/forge-products';
 import { services } from '@/data/services';
-import { createMetadata } from '@/lib/metadata';
+import { breadcrumbJsonLd, createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
   title: 'Custom AI Strategy and Build Services | ClearForge',
@@ -13,6 +14,26 @@ export const metadata = createMetadata({
     'ClearForge selects workflows, sets baselines, builds custom agents, and trains teams into a measurable AI operating model.',
   path: '/services',
 });
+
+const collectionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'ClearForge Custom AI Strategy and Build Services',
+  url: 'https://clearforge.ai/services',
+  description:
+    'ClearForge services for AI strategy, custom agents, revenue operations, performance improvement, PE value creation, and managed AI operations.',
+  hasPart: services.map((service) => ({
+    '@type': 'Service',
+    name: service.title,
+    url: `https://clearforge.ai/services/${service.slug}`,
+    description: service.tagline,
+  })),
+};
+
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: 'Home', path: '/' },
+  { name: 'Services', path: '/services' },
+]);
 
 const capabilityRails = [
   {
@@ -63,6 +84,9 @@ const guaranteeItems = [
 export default function ServicesPage() {
   return (
     <>
+      <JsonLdScript data={collectionLd} />
+      <JsonLdScript data={breadcrumbLd} />
+
       {/* — Hero with atmospheric bg — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <Image

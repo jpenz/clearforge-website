@@ -1,9 +1,10 @@
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Button } from '@/components/ui/button';
 import { formatDate, insights } from '@/data/insights';
-import { createMetadata } from '@/lib/metadata';
+import { breadcrumbJsonLd, createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
   title: 'Insights — ClearForge',
@@ -11,6 +12,28 @@ export const metadata = createMetadata({
     'Practical thinking on AI strategy, performance improvement, and value creation from the ClearForge team.',
   path: '/insights',
 });
+
+const collectionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'ClearForge Field Library',
+  url: 'https://clearforge.ai/insights',
+  description:
+    'Executive briefs on AI strategy, workflow design, custom agent architecture, governance, adoption, and PE value creation.',
+  hasPart: insights.map((insight) => ({
+    '@type': 'BlogPosting',
+    headline: insight.title,
+    url: `https://clearforge.ai/insights/${insight.slug}`,
+    description: insight.excerpt,
+    datePublished: insight.date,
+    dateModified: insight.dateModified ?? insight.date,
+  })),
+};
+
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: 'Home', path: '/' },
+  { name: 'Insights', path: '/insights' },
+]);
 
 const fieldGuideSlugs = [
   'clearforge-ai-transformation-maturity-model',
@@ -28,6 +51,9 @@ export default function InsightsPage() {
 
   return (
     <>
+      <JsonLdScript data={collectionLd} />
+      <JsonLdScript data={breadcrumbLd} />
+
       {/* ── Hero with atmospheric bg ── */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <Image

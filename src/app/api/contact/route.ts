@@ -35,6 +35,11 @@ function sanitize(str: string): string {
     .trim();
 }
 
+function stringField(body: Record<string, unknown>, key: string): string {
+  const value = body[key];
+  return typeof value === 'string' ? value : '';
+}
+
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -52,8 +57,16 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const body = await req.json();
-    const { name, email, company, revenue, message, website } = body;
+    const body = (await req.json()) as Record<string, unknown>;
+    const name = stringField(body, 'name');
+    const email = stringField(body, 'email');
+    const company = stringField(body, 'company');
+    const revenue = stringField(body, 'revenue');
+    const message = stringField(body, 'message');
+    const role = stringField(body, 'role');
+    const workflowArea = stringField(body, 'workflowArea');
+    const urgency = stringField(body, 'urgency');
+    const website = stringField(body, 'website');
 
     // Honeypot
     if (website) {
@@ -73,7 +86,10 @@ export async function POST(req: NextRequest) {
       email.length > 200 ||
       company.length > 200 ||
       revenue.length > 100 ||
-      message.length > 5000
+      message.length > 5000 ||
+      (role && role.length > 200) ||
+      (workflowArea && workflowArea.length > 200) ||
+      (urgency && urgency.length > 200)
     ) {
       return NextResponse.json(
         { error: 'One or more fields exceed the maximum length.' },
@@ -86,6 +102,17 @@ export async function POST(req: NextRequest) {
     const safeCompany = sanitize(company);
     const safeRevenue = sanitize(revenue);
     const safeMessage = sanitize(message);
+    const safeRole = sanitize(role || '');
+    const safeWorkflowArea = sanitize(workflowArea || '');
+    const safeUrgency = sanitize(urgency || '');
+    const leadMessage = [
+      safeWorkflowArea ? `Workflow area: ${safeWorkflowArea}` : '',
+      safeUrgency ? `Preferred next step: ${safeUrgency}` : '',
+      safeRole ? `Role: ${safeRole}` : '',
+      safeMessage,
+    ]
+      .filter(Boolean)
+      .join('\n\n');
 
     const emailHtml = `
       <div style="font-family: -apple-system, sans-serif; max-width: 600px; margin: 0 auto; color: #2D2D2D;">
@@ -110,6 +137,18 @@ export async function POST(req: NextRequest) {
             <tr>
               <td style="padding: 8px 0; font-weight: 600; vertical-align: top;">Email</td>
               <td style="padding: 8px 0;"><a href="mailto:${safeEmail}" style="color: #0F1A2E;">${safeEmail}</a></td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-weight: 600; vertical-align: top;">Role</td>
+              <td style="padding: 8px 0;">${safeRole || 'Not provided'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-weight: 600; vertical-align: top;">Workflow</td>
+              <td style="padding: 8px 0;">${safeWorkflowArea || 'Not provided'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-weight: 600; vertical-align: top;">Timing</td>
+              <td style="padding: 8px 0;">${safeUrgency || 'Not provided'}</td>
             </tr>
           </table>
           <div style="background: #F9FAFB; padding: 20px; border-radius: 8px; border-left: 3px solid #B8860B;">
@@ -146,7 +185,7 @@ export async function POST(req: NextRequest) {
       email: safeEmail,
       company: safeCompany,
       revenue: safeRevenue,
-      message: safeMessage,
+      message: leadMessage,
       source: 'contact_form',
     });
 

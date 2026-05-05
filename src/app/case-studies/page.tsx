@@ -1,10 +1,11 @@
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Stagger, StaggerItem } from '@/components/ui/animate';
 import { Button } from '@/components/ui/button';
 import { caseStudies } from '@/data/case-studies';
-import { createMetadata } from '@/lib/metadata';
+import { breadcrumbJsonLd, createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
   title: 'Case Studies — Operator Proof | ClearForge',
@@ -13,9 +14,33 @@ export const metadata = createMetadata({
   path: '/case-studies',
 });
 
+const collectionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'ClearForge Case Studies',
+  url: 'https://clearforge.ai/case-studies',
+  description:
+    'Real ClearForge work showing the operating constraint, shipped system, and evidence leaders used after launch.',
+  hasPart: caseStudies.map((study) => ({
+    '@type': 'Article',
+    headline: study.title,
+    url: `https://clearforge.ai/case-studies/${study.slug}`,
+    description: study.excerpt,
+    articleSection: study.industry,
+  })),
+};
+
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: 'Home', path: '/' },
+  { name: 'Case Studies', path: '/case-studies' },
+]);
+
 export default function CaseStudiesPage() {
   return (
     <>
+      <JsonLdScript data={collectionLd} />
+      <JsonLdScript data={breadcrumbLd} />
+
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <Image
           src="/images/abstract-assessment.webp"

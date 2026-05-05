@@ -12,6 +12,7 @@ export interface Insight {
   excerpt: string;
   category: InsightCategory;
   date: string;
+  dateModified?: string;
   readingTime: number;
   author: {
     name: string;

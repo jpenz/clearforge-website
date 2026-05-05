@@ -7,6 +7,7 @@
  */
 
 import { expect, type Page, test } from '@playwright/test';
+import { blueprints } from '../src/data/blueprints';
 import { caseStudies } from '../src/data/case-studies';
 import { industries } from '../src/data/industries-value-chains';
 import { insights } from '../src/data/insights';
@@ -16,6 +17,7 @@ import { useCases } from '../src/data/use-cases';
 const staticRoutes = [
   '/',
   '/about',
+  '/blueprints',
   '/blueprints/cybersecurity-technology-company',
   '/case-studies',
   '/contact',
@@ -36,9 +38,12 @@ const contentRoutes = [
   ...services.map((service) => `/services/${service.slug}`),
   ...useCases.map((useCase) => `/use-cases/${useCase.slug}`),
   ...industries.map((industry) => `/industries/${industry.slug}`),
+  ...blueprints
+    .filter((blueprint) => blueprint.slug !== 'cybersecurity-technology-company')
+    .map((blueprint) => blueprint.href),
   ...caseStudies.map((study) => `/case-studies/${study.slug}`),
   ...insights.map((insight) => `/insights/${insight.slug}`),
-];
+].filter((path, index, routes) => routes.indexOf(path) === index);
 
 const representativeClicks = [
   {

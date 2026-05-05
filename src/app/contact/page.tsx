@@ -8,6 +8,21 @@ import { Button } from '@/components/ui/button';
 import { trackEvent } from '@/lib/analytics';
 
 const revenueOptions = ['Under $5M', '$5M - $25M', '$25M - $100M', '$100M - $500M', '$500M+'];
+const workflowAreaOptions = [
+  'Revenue growth',
+  'Customer service quality',
+  'Operations efficiency',
+  'Knowledge work',
+  'Quality exceptions',
+  'PE portfolio value creation',
+  'Enterprise AI governance',
+];
+const urgencyOptions = [
+  'Exploring options',
+  'Need a diagnostic this month',
+  'Need a sprint scoped',
+  'Active executive priority',
+];
 
 const expectations = [
   'James responds within one business day, usually same day.',
@@ -22,9 +37,14 @@ export default function ContactPage() {
     email: '',
     company: '',
     revenue: '',
-    challenge: '',
+    role: '',
+    workflowArea: '',
+    urgency: '',
+    message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
@@ -34,18 +54,40 @@ export default function ContactPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    trackEvent('contact_form_submit', {
+    setError('');
+    setIsSubmitting(true);
+    const eventProperties = {
       revenue: form.revenue || 'not_provided',
+      workflow_area: form.workflowArea || 'not_provided',
+      urgency: form.urgency || 'not_provided',
       has_company: Boolean(form.company.trim()),
-    });
+    };
+
     try {
-      await fetch('/api/contact', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
+      trackEvent(response.ok ? 'contact_form_submit_success' : 'contact_form_submit_error', {
+        ...eventProperties,
+        status: response.status,
+      });
+      if (!response.ok) {
+        setError(
+          'Something did not send. Please check the required fields or email James directly.',
+        );
+        setIsSubmitting(false);
+        return;
+      }
     } catch {
-      // silent — we still show confirmation
+      trackEvent('contact_form_submit_error', {
+        ...eventProperties,
+        status: 'network_error',
+      });
+      setError('Network issue. Please try again or email James directly.');
+      setIsSubmitting(false);
+      return;
     }
     setSubmitted(true);
   }
@@ -166,7 +208,7 @@ export default function ContactPage() {
             <div className="mt-16 lg:col-span-7 lg:mt-0">
               <form
                 onSubmit={handleSubmit}
-                data-analytics="contact_form_submit"
+                data-analytics="contact_form_submit_attempt"
                 className="space-y-8"
               >
                 <div>
@@ -212,6 +254,7 @@ export default function ContactPage() {
                     id="company"
                     name="company"
                     type="text"
+                    required
                     value={form.company}
                     onChange={handleChange}
                     className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite placeholder:text-warm-gray/50 focus:border-brass focus:outline-none focus:ring-0"
@@ -229,6 +272,7 @@ export default function ContactPage() {
                   <select
                     id="revenue"
                     name="revenue"
+                    required
                     value={form.revenue}
                     onChange={handleChange}
                     className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite focus:border-brass focus:outline-none focus:ring-0"
@@ -243,26 +287,94 @@ export default function ContactPage() {
                 </div>
 
                 <div>
+                  <label htmlFor="role" className="block text-body-sm font-medium text-anthracite">
+                    Role
+                  </label>
+                  <input
+                    id="role"
+                    name="role"
+                    type="text"
+                    value={form.role}
+                    onChange={handleChange}
+                    className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite placeholder:text-warm-gray/50 focus:border-brass focus:outline-none focus:ring-0"
+                    placeholder="CEO, COO, CRO, operating partner, founder..."
+                  />
+                </div>
+
+                <div>
                   <label
-                    htmlFor="challenge"
+                    htmlFor="workflowArea"
                     className="block text-body-sm font-medium text-anthracite"
                   >
-                    Biggest Challenge
+                    Workflow Area
+                  </label>
+                  <select
+                    id="workflowArea"
+                    name="workflowArea"
+                    value={form.workflowArea}
+                    onChange={handleChange}
+                    className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite focus:border-brass focus:outline-none focus:ring-0"
+                  >
+                    <option value="">Select the closest area</option>
+                    {workflowAreaOptions.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="urgency"
+                    className="block text-body-sm font-medium text-anthracite"
+                  >
+                    Preferred Next Step
+                  </label>
+                  <select
+                    id="urgency"
+                    name="urgency"
+                    value={form.urgency}
+                    onChange={handleChange}
+                    className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite focus:border-brass focus:outline-none focus:ring-0"
+                  >
+                    <option value="">Select timing</option>
+                    {urgencyOptions.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block text-body-sm font-medium text-anthracite"
+                  >
+                    Workflow To Pressure-Test
                   </label>
                   <textarea
-                    id="challenge"
-                    name="challenge"
+                    id="message"
+                    name="message"
                     rows={4}
                     required
-                    value={form.challenge}
+                    value={form.message}
                     onChange={handleChange}
                     className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite placeholder:text-warm-gray/50 focus:border-brass focus:outline-none focus:ring-0 resize-none"
                     placeholder="Which workflow should run faster, cleaner, or with less manual coordination?"
                   />
                 </div>
 
-                <Button type="submit" size="lg">
-                  Send the Workflow <ArrowRight className="ml-2 h-4 w-4" />
+                {error && (
+                  <p className="border-l border-brass bg-warm-white px-4 py-3 text-body-sm text-anthracite">
+                    {error}
+                  </p>
+                )}
+
+                <Button type="submit" size="lg" disabled={isSubmitting}>
+                  {isSubmitting ? 'Sending...' : 'Send the Workflow'}
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </form>
             </div>

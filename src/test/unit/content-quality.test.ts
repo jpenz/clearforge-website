@@ -16,6 +16,7 @@ import {
   keywordClusters,
   positioningAngles,
 } from '@/data/ad-strategy';
+import { blueprints } from '@/data/blueprints';
 import { caseStudies } from '@/data/case-studies';
 import {
   automationAmbitionWedges,
@@ -120,6 +121,7 @@ describe('buyer-facing content quality', () => {
   it('does not reintroduce obvious AI-slop phrases', () => {
     const corpus = {
       caseStudies,
+      blueprints,
       cybersecurityBlueprint: {
         automationAmbitionWedges,
         automationPlaybookChapters,

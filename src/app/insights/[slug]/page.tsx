@@ -126,6 +126,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: insight.seo.description,
     path: `/insights/${slug}`,
     keywords: insight.seo.keywords,
+    type: 'article',
+    publishedTime: insight.date,
+    modifiedTime: insight.dateModified ?? insight.date,
+    authors: [insight.author.name],
   });
 }
 

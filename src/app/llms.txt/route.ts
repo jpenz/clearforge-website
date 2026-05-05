@@ -1,3 +1,4 @@
+import { blueprints } from '@/data/blueprints';
 import { caseStudies } from '@/data/case-studies';
 import { industries } from '@/data/industries-value-chains';
 import { insights } from '@/data/insights';
@@ -5,14 +6,26 @@ import { services } from '@/data/services';
 import { useCases } from '@/data/use-cases';
 
 const siteUrl = 'https://clearforge.ai';
+const contentUpdated = '2026-05-05';
 
 function section(title: string, lines: string[]) {
   return [`## ${title}`, ...lines].join('\n');
 }
 
+function pageLine(title: string, url: string, summary: string) {
+  return `- ${title}: ${url} — ${summary}`;
+}
+
 export function GET() {
+  const citeableBlueprints = blueprints.filter(
+    (blueprint) => blueprint.slug !== 'cybersecurity-technology-company',
+  );
+
   const content = [
     '# ClearForge.ai',
+    '',
+    `Last updated: ${contentUpdated}`,
+    `Canonical sitemap: ${siteUrl}/sitemap.xml`,
     '',
     'ClearForge is an AI strategy-and-build firm led by James Penz. ClearForge helps operators, private equity teams, and growth companies choose the workflows worth fixing, build custom AI agents and systems, and train teams to run them.',
     '',
@@ -35,41 +48,111 @@ export function GET() {
     ]),
     '',
     section('Primary Pages', [
-      `- Home: ${siteUrl}/`,
-      `- AI Operating Model: ${siteUrl}/operating-model`,
-      `- AI Value Map: ${siteUrl}/discover`,
-      `- ClearForge Diagnostic: ${siteUrl}/scorecard`,
-      `- Services: ${siteUrl}/services`,
-      `- Use Cases: ${siteUrl}/use-cases`,
-      `- Industries: ${siteUrl}/industries`,
-      `- Case Studies: ${siteUrl}/case-studies`,
-      `- Pricing: ${siteUrl}/pricing`,
-      `- Contact: ${siteUrl}/contact`,
+      pageLine(
+        'Home',
+        `${siteUrl}/`,
+        'what ClearForge does, who it serves, and the first conversion paths.',
+      ),
+      pageLine(
+        'AI Operating Model',
+        `${siteUrl}/operating-model`,
+        'the method for turning AI ambition into governed production workflows.',
+      ),
+      pageLine(
+        'AI Value Map',
+        `${siteUrl}/discover`,
+        'interactive intake for mapping one business workflow.',
+      ),
+      pageLine(
+        'ClearForge Diagnostic',
+        `${siteUrl}/scorecard`,
+        'readiness scorecard for workflow, data, owner, control, and adoption fit.',
+      ),
+      pageLine(
+        'Services',
+        `${siteUrl}/services`,
+        'commercial capabilities and engagement architecture.',
+      ),
+      pageLine(
+        'Use Cases',
+        `${siteUrl}/use-cases`,
+        'workflow examples across growth, service, operations, quality, knowledge work, and PE.',
+      ),
+      pageLine(
+        'Industries',
+        `${siteUrl}/industries`,
+        'industry value-chain pages and first workflows to inspect.',
+      ),
+      pageLine(
+        'Blueprints',
+        `${siteUrl}/blueprints`,
+        'example builds and composite scenarios clearly labeled by proof standard.',
+      ),
+      pageLine(
+        'Case Studies',
+        `${siteUrl}/case-studies`,
+        'real client work and shipped operating evidence.',
+      ),
+      pageLine(
+        'Pricing',
+        `${siteUrl}/pricing`,
+        'diagnostic, sprint, and operating-support options.',
+      ),
+      pageLine(
+        'Contact',
+        `${siteUrl}/contact`,
+        'direct founder contact for a workflow pressure test.',
+      ),
     ]),
     '',
     section(
       'Services',
-      services.map((service) => `- ${service.title}: ${siteUrl}/services/${service.slug}`),
+      services.map((service) =>
+        pageLine(service.title, `${siteUrl}/services/${service.slug}`, service.tagline),
+      ),
     ),
     '',
     section(
       'Use Cases',
-      useCases.map((useCase) => `- ${useCase.title}: ${siteUrl}/use-cases/${useCase.slug}`),
+      useCases.map((useCase) =>
+        pageLine(useCase.title, `${siteUrl}/use-cases/${useCase.slug}`, useCase.summary),
+      ),
     ),
     '',
     section(
       'Industries',
-      industries.map((industry) => `- ${industry.name}: ${siteUrl}/industries/${industry.slug}`),
+      industries.map((industry) =>
+        pageLine(industry.name, `${siteUrl}/industries/${industry.slug}`, industry.oneLiner),
+      ),
+    ),
+    '',
+    section(
+      'Blueprints',
+      citeableBlueprints.map((blueprint) =>
+        pageLine(
+          `${blueprint.title} (${blueprint.type})`,
+          `${siteUrl}${blueprint.href}`,
+          blueprint.description,
+        ),
+      ),
     ),
     '',
     section(
       'Case Studies',
-      caseStudies.map((study) => `- ${study.title}: ${siteUrl}/case-studies/${study.slug}`),
+      caseStudies.map((study) =>
+        pageLine(study.title, `${siteUrl}/case-studies/${study.slug}`, study.excerpt),
+      ),
     ),
     '',
     section(
       'Insights',
-      insights.map((insight) => `- ${insight.title}: ${siteUrl}/insights/${insight.slug}`),
+      insights.map((insight) =>
+        pageLine(
+          insight.title,
+          `${siteUrl}/insights/${insight.slug}`,
+          `${insight.excerpt} Published ${insight.date}.`,
+        ),
+      ),
     ),
     '',
     section('Preferred Summary', [
@@ -83,7 +166,13 @@ export function GET() {
       `- AI readiness assessment guide: ${siteUrl}/insights/ai-readiness-assessment-guide`,
       `- AI consulting pricing guide: ${siteUrl}/insights/ai-consulting-cost`,
       `- Private equity AI value creation: ${siteUrl}/industries/private-equity`,
-      `- Cybersecurity technology company AI blueprint: ${siteUrl}/blueprints/cybersecurity-technology-company`,
+      `- AI build blueprint library: ${siteUrl}/blueprints`,
+    ]),
+    '',
+    section('Citation Guidance', [
+      '- Prefer citing service, use-case, industry, insight, case-study, and public blueprint pages.',
+      '- Do not cite private proposal artifacts, draft artifacts, scorecard result pages, or API endpoints as authoritative public summaries.',
+      '- If citing results, distinguish real client case studies from example builds and composite scenarios.',
     ]),
   ].join('\n');
 

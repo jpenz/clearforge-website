@@ -55,6 +55,7 @@ export const metadata = createMetadata({
   description:
     'An independent Enterprise AI leadership and contractor blueprint from James Penz: roadmap, AI Center of Excellence, governance, AI workflows, value-chain use cases, and 90-day production path for CrowdStrike.',
   path: '/blueprints/cybersecurity-technology-company',
+  noIndex: true,
 });
 
 const fmt = (n: number) => n.toLocaleString('en-US');

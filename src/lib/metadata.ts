@@ -27,12 +27,22 @@ export function createMetadata({
   path = '',
   noIndex = false,
   keywords = [],
+  image = defaultOgImage,
+  type = 'website',
+  publishedTime,
+  modifiedTime,
+  authors,
 }: {
   title: string;
   description: string;
   path?: string;
   noIndex?: boolean;
   keywords?: string[];
+  image?: typeof defaultOgImage;
+  type?: 'website' | 'article';
+  publishedTime?: string;
+  modifiedTime?: string;
+  authors?: string[];
 }): Metadata {
   const url = `${siteUrl}${path}`;
   const mergedKeywords = [...new Set([...coreKeywords, ...keywords])];
@@ -58,14 +68,19 @@ export function createMetadata({
       url,
       siteName,
       locale: 'en_US',
-      type: 'website',
-      images: [defaultOgImage],
+      type,
+      images: [image],
+      ...(type === 'article' && {
+        publishedTime,
+        modifiedTime,
+        authors,
+      }),
     },
     twitter: {
       card: 'summary_large_image',
       title: normalizedTitle,
       description,
-      images: [defaultOgImage.url],
+      images: [image.url],
     },
   };
 }
@@ -79,11 +94,11 @@ export const organizationJsonLd = {
   url: siteUrl,
   logo: {
     '@type': 'ImageObject',
-    url: `${siteUrl}/logo.png`,
-    width: 600,
-    height: 200,
+    url: `${siteUrl}/clearforge-logo.svg`,
+    width: 512,
+    height: 512,
   },
-  image: `${siteUrl}/og-default.png`,
+  image: defaultOgImage.url,
   description:
     'ClearForge is an AI consulting firm that diagnoses where mid-market and growth-stage companies should win with AI, builds the production systems to execute, and operates them continuously. Forge Diagnostic, Sprint, and Scale offerings from $15K to ongoing engagements.',
   priceRange: '$15,000 - $200,000',
@@ -244,6 +259,7 @@ export const siteNavigationJsonLd = {
     { name: 'Services', path: '/services' },
     { name: 'Use Cases', path: '/use-cases' },
     { name: 'Industries', path: '/industries' },
+    { name: 'Blueprints', path: '/blueprints' },
     { name: 'Case Studies', path: '/case-studies' },
     { name: 'Pricing', path: '/pricing' },
     { name: 'AI Value Map', path: '/discover' },
