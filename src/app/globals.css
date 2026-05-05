@@ -215,6 +215,10 @@ h3, h4, h5, h6 {
   0%, 100% { opacity: 0.3; transform: scale(0.86); }
   45% { opacity: 0.9; transform: scale(1); }
 }
+@keyframes heroSceneFloat {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-10px, 8px, 0); }
+}
 
 .animate-fade-in-up {
   animation: fadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -252,6 +256,10 @@ h3, h4, h5, h6 {
 .hero-signal-node.delay-3 { animation-delay: 1.8s; }
 .hero-signal-node.delay-4 { animation-delay: 2.4s; }
 .hero-signal-node.delay-5 { animation-delay: 3s; }
+.hero-scene-float {
+  animation: heroSceneFloat 14s ease-in-out infinite;
+  will-change: transform;
+}
 
 /* ── Focus ── */
 *:focus-visible {
@@ -355,4 +363,5 @@ h3, h4, h5, h6 {
   .glow-pulse { animation: none; }
   .animate-fade-in-up, .animate-fade-in { animation: none; opacity: 1; }
   .hero-signal-line, .hero-signal-node { animation: none; }
+  .hero-scene-float { animation: none; }
 }

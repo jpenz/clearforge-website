@@ -290,14 +290,19 @@ function TeamPerformancePanel({
 export function OperatorSystemPreview({
   useCase,
   className,
+  variant = 'full',
 }: {
   useCase: UseCase;
   className?: string;
+  variant?: 'full' | 'compact';
 }) {
   const view = useCase.operatorView;
+  const isCompact = variant === 'compact';
   const maxStageCount = Math.max(
     ...view.stages.map((stage) => Number.parseInt(stage.count.replace(/\D/g, ''), 10) || 1),
   );
+  const visibleStages = isCompact ? view.stages.slice(0, 4) : view.stages;
+  const visibleOpportunities = isCompact ? view.opportunities.slice(0, 2) : view.opportunities;
 
   return (
     <section
@@ -307,17 +312,44 @@ export function OperatorSystemPreview({
       )}
     >
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-10">
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.6fr] lg:items-start">
+        <div
+          className={cn(
+            'grid gap-12 lg:items-start',
+            isCompact ? 'lg:grid-cols-[0.72fr_1.28fr]' : 'lg:grid-cols-[0.9fr_1.6fr]',
+          )}
+        >
           <div>
             <p className="overline">{view.eyebrow}</p>
-            <h2 className="mt-6 text-display text-bone">{view.headline}</h2>
+            <h2
+              className={cn(
+                'mt-6 text-display text-bone',
+                isCompact && 'max-w-xl text-[2.45rem] sm:text-[3.25rem] lg:text-[4rem]',
+              )}
+            >
+              {view.headline}
+            </h2>
             <p className="mt-6 text-body-lg text-stone">{view.body}</p>
 
-            <div className="mt-8 grid gap-3">
-              {view.autonomy.map((item) => (
-                <AutonomyRow key={item.label} {...item} />
-              ))}
-            </div>
+            {isCompact ? (
+              <div className="mt-8 grid gap-3">
+                {[
+                  'Live signals turn into accountable work.',
+                  'Leaders see movement, gaps, and owner feedback.',
+                  'The weekly review improves the system instead of debating the data.',
+                ].map((item) => (
+                  <div key={item} className="flex gap-3 border border-bone/10 bg-bone/5 p-4">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brass-light" />
+                    <p className="text-sm leading-relaxed text-stone">{item}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-8 grid gap-3">
+                {view.autonomy.map((item) => (
+                  <AutonomyRow key={item.label} {...item} />
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="overflow-hidden border border-bone/10 bg-[#0D1425] shadow-2xl shadow-forge-black/40">
@@ -353,7 +385,12 @@ export function OperatorSystemPreview({
                 </div>
               ) : null}
 
-              <div className="mt-6 grid gap-5 xl:grid-cols-[1.12fr_0.88fr]">
+              <div
+                className={cn(
+                  'mt-6 grid gap-5',
+                  isCompact ? 'xl:grid-cols-1' : 'xl:grid-cols-[1.12fr_0.88fr]',
+                )}
+              >
                 <div className="min-w-0 border border-bone/10 bg-forge-black/35">
                   <div className="flex flex-wrap items-center justify-between gap-3 border-b border-bone/10 px-4 py-4">
                     <div className="flex items-center gap-2">
@@ -366,7 +403,7 @@ export function OperatorSystemPreview({
                   </div>
 
                   <div className="grid gap-2 p-4 sm:grid-cols-3">
-                    {view.stages.map((stage) => (
+                    {visibleStages.map((stage) => (
                       <StagePill key={stage.label} {...stage} maxCount={maxStageCount} />
                     ))}
                   </div>
@@ -378,77 +415,81 @@ export function OperatorSystemPreview({
                       <span className="md:col-span-2">Stage</span>
                       <span className="md:col-span-3">Next Action</span>
                     </div>
-                    {view.opportunities.map((opportunity) => (
+                    {visibleOpportunities.map((opportunity) => (
                       <OpportunityRow key={opportunity.name} opportunity={opportunity} />
                     ))}
                   </div>
                 </div>
 
-                <div className="grid gap-5">
-                  <div className="border border-bone/10 bg-bone/5 p-4">
-                    <div className="flex items-center gap-2">
-                      <CalendarCheck className="h-4 w-4 text-brass-light" />
-                      <p className="text-sm font-semibold text-bone">Action Plan</p>
-                    </div>
-                    <div className="mt-4 space-y-3">
-                      {view.actionPlan.map((item) => (
-                        <div key={item.phase} className="grid grid-cols-[4.5rem_1fr] gap-3">
-                          <p className="metric text-xs text-brass-light">{item.phase}</p>
-                          <p className="text-xs leading-relaxed text-stone">{item.action}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="border border-amber-300/20 bg-amber-300/10 p-4">
-                    <div className="flex items-center gap-2">
-                      <AlertTriangle className="h-4 w-4 text-amber-200" />
-                      <p className="text-sm font-semibold text-bone">Intelligence Gaps</p>
-                    </div>
-                    <div className="mt-4 space-y-3">
-                      {view.intelligenceGaps.map((gap) => (
-                        <div key={gap} className="flex gap-3">
-                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-200" />
-                          <p className="text-xs leading-relaxed text-stone">{gap}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="border border-bone/10 bg-forge-black/35 p-4">
-                    <div className="flex items-center gap-2">
-                      <ClipboardCheck className="h-4 w-4 text-brass-light" />
-                      <p className="text-sm font-semibold text-bone">Feedback Loop</p>
-                    </div>
-                    <div className="mt-4 grid gap-3">
-                      {view.feedbackLoop.map((item, index) => (
-                        <div key={item.label} className="flex gap-3">
-                          <div className="flex flex-col items-center">
-                            <span className="flex h-7 w-7 items-center justify-center rounded-full border border-bone/10 bg-bone/5">
-                              {index === view.feedbackLoop.length - 1 ? (
-                                <CheckCircle2 className="h-3.5 w-3.5 text-brass-light" />
-                              ) : (
-                                <Target className="h-3.5 w-3.5 text-stone" />
-                              )}
-                            </span>
-                            {index < view.feedbackLoop.length - 1 ? (
-                              <span className="h-6 w-px bg-bone/10" />
-                            ) : null}
+                {isCompact ? null : (
+                  <div className="grid gap-5">
+                    <div className="border border-bone/10 bg-bone/5 p-4">
+                      <div className="flex items-center gap-2">
+                        <CalendarCheck className="h-4 w-4 text-brass-light" />
+                        <p className="text-sm font-semibold text-bone">Action Plan</p>
+                      </div>
+                      <div className="mt-4 space-y-3">
+                        {view.actionPlan.map((item) => (
+                          <div key={item.phase} className="grid grid-cols-[4.5rem_1fr] gap-3">
+                            <p className="metric text-xs text-brass-light">{item.phase}</p>
+                            <p className="text-xs leading-relaxed text-stone">{item.action}</p>
                           </div>
-                          <div className="pb-3">
-                            <div className="flex items-center gap-2">
-                              <p className="text-sm font-semibold text-bone">{item.label}</p>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="border border-amber-300/20 bg-amber-300/10 p-4">
+                      <div className="flex items-center gap-2">
+                        <AlertTriangle className="h-4 w-4 text-amber-200" />
+                        <p className="text-sm font-semibold text-bone">Intelligence Gaps</p>
+                      </div>
+                      <div className="mt-4 space-y-3">
+                        {view.intelligenceGaps.map((gap) => (
+                          <div key={gap} className="flex gap-3">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-200" />
+                            <p className="text-xs leading-relaxed text-stone">{gap}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="border border-bone/10 bg-forge-black/35 p-4">
+                      <div className="flex items-center gap-2">
+                        <ClipboardCheck className="h-4 w-4 text-brass-light" />
+                        <p className="text-sm font-semibold text-bone">Feedback Loop</p>
+                      </div>
+                      <div className="mt-4 grid gap-3">
+                        {view.feedbackLoop.map((item, index) => (
+                          <div key={item.label} className="flex gap-3">
+                            <div className="flex flex-col items-center">
+                              <span className="flex h-7 w-7 items-center justify-center rounded-full border border-bone/10 bg-bone/5">
+                                {index === view.feedbackLoop.length - 1 ? (
+                                  <CheckCircle2 className="h-3.5 w-3.5 text-brass-light" />
+                                ) : (
+                                  <Target className="h-3.5 w-3.5 text-stone" />
+                                )}
+                              </span>
                               {index < view.feedbackLoop.length - 1 ? (
-                                <ArrowRight className="h-3.5 w-3.5 text-stone" />
+                                <span className="h-6 w-px bg-bone/10" />
                               ) : null}
                             </div>
-                            <p className="mt-1 text-xs leading-relaxed text-stone">{item.detail}</p>
+                            <div className="pb-3">
+                              <div className="flex items-center gap-2">
+                                <p className="text-sm font-semibold text-bone">{item.label}</p>
+                                {index < view.feedbackLoop.length - 1 ? (
+                                  <ArrowRight className="h-3.5 w-3.5 text-stone" />
+                                ) : null}
+                              </div>
+                              <p className="mt-1 text-xs leading-relaxed text-stone">
+                                {item.detail}
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>

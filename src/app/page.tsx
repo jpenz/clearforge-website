@@ -1,25 +1,31 @@
-import { ArrowRight, CheckCircle2, Shield, Sparkles } from 'lucide-react';
-import Image from 'next/image';
+import {
+  ArrowRight,
+  CheckCircle2,
+  Gauge,
+  LineChart,
+  Search,
+  Shield,
+  Sparkles,
+  Target,
+  Users,
+  Workflow,
+} from 'lucide-react';
 import Link from 'next/link';
-import { ForgeMethodDiagram } from '@/components/home/forge-method-diagram';
 import { HeroScroll } from '@/components/home/hero-scroll';
 import { SectionReveal, StaggerReveal } from '@/components/home/homepage-animations';
 import { MetricCounter } from '@/components/home/metric-counter';
-import { OperatingChangeMap } from '@/components/home/operating-change-map';
-import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Button } from '@/components/ui/button';
-import { GsapTextReveal } from '@/components/ui/gsap-text-reveal';
 import { OperatorSystemPreview } from '@/components/use-cases/operator-system-preview';
 import { UseCaseCardVisual } from '@/components/use-cases/use-case-card-visual';
 import { caseStudies } from '@/data/case-studies';
 import { industries } from '@/data/industries-value-chains';
 import { useCases } from '@/data/use-cases';
-import { createMetadata, faqJsonLd } from '@/lib/metadata';
+import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'ClearForge - Custom AI Transformation Systems',
+  title: 'ClearForge - Custom AI Operating Systems',
   description:
-    'ClearForge helps operators set AI ambition, find value, build custom agents and workflows, and train teams into a measurable AI operating model.',
+    'ClearForge helps operators find the workflow worth fixing, build the custom AI system around it, and install the cadence that makes performance measurable.',
   path: '',
 });
 
@@ -30,112 +36,141 @@ const activityCount = industries.reduce(
   0,
 );
 
-const breakdownSignals = [
+const buyerProblems = [
   {
-    title: 'AI activity, little operating change',
-    signal: 'Teams test tools, but the workflow still runs through manual coordination.',
-    move: 'Pick one workflow with a named owner, baseline, data path, and first production scope.',
+    icon: LineChart,
+    buyer: 'CEO / owner',
+    title: 'Growth is not showing up where the market is moving.',
+    detail: 'Signals, accounts, and next actions are scattered across tools and people.',
   },
   {
-    title: 'Good people, too much hand stitching',
-    signal:
-      'Leads, requests, exceptions, and approvals move through inboxes, meetings, and memory.',
-    move: 'Build the agent, dashboard, handoff, and review path around how the work actually moves.',
+    icon: Users,
+    buyer: 'COO',
+    title: 'Service quality depends on heroic follow-up.',
+    detail: 'Work gets done, but through inboxes, memory, and uneven handoffs.',
   },
   {
-    title: 'Pressure to fund AI without proof',
-    signal:
-      'Executives need confidence that the next build can improve growth, speed, quality, service, or margin.',
-    move: 'Run a diagnostic that shows value, feasibility, controls, adoption needs, and the first build decision.',
-  },
-];
-
-const operatingReadiness = [
-  {
-    dimension: 'Ambition and value case',
-    standard: 'KPI owner, baseline, value threshold',
-    clearforge: 'Set the AI ambition and choose the first workflow worth funding.',
+    icon: Gauge,
+    buyer: 'PE operator',
+    title: 'Margin improvement is trapped in exception work.',
+    detail: 'The opportunity is visible, but the operating system to capture it is missing.',
   },
   {
-    dimension: 'Operating model design',
-    standard: 'Future workflow, decisions, handoffs, controls',
-    clearforge: 'Map how work moves before engineering starts.',
-  },
-  {
-    dimension: 'Custom technology build',
-    standard: 'Agents, data paths, dashboards, integrations',
-    clearforge: 'Fit the build into the systems the team already uses.',
-  },
-  {
-    dimension: 'People and adoption',
-    standard: 'Training, roles, decision rights, review rhythm',
-    clearforge: 'Train leaders and users into the new way of working.',
-  },
-  {
-    dimension: 'Governance and improvement',
-    standard: 'Monitoring, escalation, audit trail, backlog',
-    clearforge: 'Keep the system observable, safe, and improving after launch.',
+    icon: Search,
+    buyer: 'Leadership team',
+    title: 'AI pilots are active, but the work still runs the old way.',
+    detail: 'Tools exist. The workflow, owner, control loop, and adoption model do not.',
   },
 ];
 
-const readinessChecks = [
+const buildModel = [
   {
-    title: 'Owner named',
-    detail: 'One accountable operator can approve scope and review results.',
+    icon: Target,
+    title: 'Find the constraint',
+    detail:
+      'Map the value chain, baseline the current workflow, and choose the first build that can move a real KPI.',
+    output: 'AI value map',
   },
   {
-    title: 'Baseline measured',
-    detail: 'Current volume, cost, cycle time, quality, or revenue signal is visible.',
+    icon: Workflow,
+    title: 'Build the system',
+    detail:
+      'Design the agents, data paths, dashboards, integrations, and exception rules around how work actually moves.',
+    output: 'Production workflow',
   },
   {
-    title: 'Data path known',
-    detail: 'The sources, systems, documents, and gaps are understood before build.',
-  },
-  {
-    title: 'Controls explicit',
-    detail: 'Confidence thresholds, escalation rules, and review rights are defined.',
-  },
-  {
-    title: 'Users trained',
-    detail: 'The team knows what AI handles and where human judgment stays.',
-  },
-  {
-    title: 'Review cadence set',
-    detail: 'Adoption, exceptions, quality, and movement are reviewed after launch.',
+    icon: Gauge,
+    title: 'Run the cadence',
+    detail:
+      'Train the team, install the review rhythm, and keep improving the system with measured feedback.',
+    output: 'Operating control loop',
   },
 ];
 
-const trustRules = [
+const proofNotes = ['Constraint', 'System shipped', 'Measured result', 'Operating change'];
+
+const priorityUseCaseCopy = [
   {
-    avoid: 'No platform-first answer',
-    instead: 'Workflow-first architecture',
+    slug: 'ai-sales-pipeline-acceleration',
+    focus: 'Revenue growth',
+    line: 'Find buying events, match them to fit, and give sellers the next action.',
+    signal: 'Lead volume, stage movement, seller feedback',
   },
   {
-    avoid: 'No value claim without a baseline',
-    instead: 'Evidence plan before forecast',
+    slug: 'ai-customer-service-excellence',
+    focus: 'Service quality',
+    line: 'Reduce response variance while keeping judgment and escalation visible.',
+    signal: 'Response time, repeat issues, escalation quality',
   },
   {
-    avoid: 'No build without adoption',
-    instead: 'Training and controls built into launch',
+    slug: 'ai-operations-efficiency',
+    focus: 'Operations efficiency',
+    line: 'Move manual coordination, approvals, and exception queues into a managed workflow.',
+    signal: 'Cycle time, backlog, manual load',
+  },
+  {
+    slug: 'ai-knowledge-work-automation',
+    focus: 'Knowledge work',
+    line: 'Turn research, drafting, review, and reuse into a faster expert workflow.',
+    signal: 'Hours saved, quality checks, reuse rate',
+  },
+  {
+    slug: 'ai-quality-control-exception-management',
+    focus: 'Quality exceptions',
+    line: 'Detect repeat issues, route work to the right owner, and close the learning loop.',
+    signal: 'Exception rate, rework, root-cause closure',
+  },
+  {
+    slug: 'pe-portfolio-ai-value-creation',
+    focus: 'PE value creation',
+    line: 'Prioritize portfolio workflows by value, feasibility, adoption, and EBITDA path.',
+    signal: 'Value map, build priority, owner readiness',
   },
 ];
 
-const objections = [
+type PriorityUseCase = (typeof priorityUseCaseCopy)[number] & {
+  useCase: (typeof useCases)[number];
+};
+
+const priorityUseCases: PriorityUseCase[] = priorityUseCaseCopy.flatMap((item) => {
+  const useCase = useCases.find((candidate) => candidate.slug === item.slug);
+  return useCase ? [{ ...item, useCase }] : [];
+});
+
+const firstThirtyDays = [
   {
-    q: "We're not big enough for enterprise AI.",
-    a: 'You do not need a large program office. You need one high-value workflow, a reliable data path, and an implementation team accountable for adoption.',
+    day: '01',
+    title: 'Pressure-test the value chain',
+    detail: 'Identify the workflows with enough volume, pain, data, ownership, and upside.',
   },
   {
-    q: "We've already tried AI.",
-    a: 'Most failed pilots were never tied to a business metric or operating owner. Every ClearForge build is measured against revenue, cost, throughput, quality, or cycle time.',
+    day: '10',
+    title: 'Choose the first production bet',
+    detail: 'Compare build options by KPI impact, feasibility, risk, and adoption load.',
   },
   {
-    q: 'Why not just buy a platform?',
-    a: 'Platforms give you capability. They do not redesign the workflow, integrate the messy edge cases, train the team, or keep the system improving after launch.',
+    day: '30',
+    title: 'Leave with a build case',
+    detail: 'Define the architecture, sprint scope, controls, owner cadence, and decision path.',
+  },
+];
+
+const trustStandards = [
+  {
+    title: 'Workflow before platform',
+    detail: 'The work is mapped before tools are chosen.',
   },
   {
-    q: 'How do we know where to start?',
-    a: 'Start with the AI Value Map. It gives you a fast, company-specific read on where AI is likely to create value before you commit to a paid engagement.',
+    title: 'Proof before scale',
+    detail: 'The first system must earn the next one.',
+  },
+  {
+    title: 'Human control by design',
+    detail: 'Escalation, review rights, and audit trails are part of the build.',
+  },
+  {
+    title: 'Guarantee on the first bet',
+    detail: 'Three measurable opportunities or the diagnostic investment is refunded.',
   },
 ];
 
@@ -145,208 +180,200 @@ const salesPipelineUseCase =
 export default function Home() {
   return (
     <>
-      <JsonLdScript
-        data={faqJsonLd(objections.map((item) => ({ question: item.q, answer: item.a })))}
-      />
       <HeroScroll />
 
-      <div className="border-b border-divider bg-warm-white">
-        <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-3 px-4 py-4 text-xs text-warm-gray sm:px-6 sm:py-5 lg:flex-row lg:px-10">
-          <span className="font-semibold text-anthracite">Diagnose the workflow</span>
-          <span className="hidden text-divider lg:inline">/</span>
-          <span>Build the custom AI system</span>
-          <span className="hidden text-divider lg:inline">/</span>
-          <span>Train the team to run it</span>
+      <section className="border-b border-divider bg-warm-white">
+        <div className="mx-auto grid max-w-[1400px] gap-0 px-4 sm:px-6 lg:grid-cols-3 lg:px-10">
+          {[
+            ['01', 'Find the workflow worth fixing'],
+            ['02', 'Build the custom AI system'],
+            ['03', 'Train the team to run it'],
+          ].map(([number, label]) => (
+            <div
+              key={number}
+              className="border-b border-divider py-5 lg:border-b-0 lg:border-r lg:px-8 lg:first:pl-0 lg:last:border-r-0"
+            >
+              <p className="metric text-xs text-brass">{number}</p>
+              <p className="mt-2 text-sm font-semibold text-anthracite">{label}</p>
+            </div>
+          ))}
         </div>
-      </div>
+      </section>
 
-      <section className="bg-parchment py-20 sm:py-28 lg:py-36">
+      <section className="bg-parchment py-20 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
-          <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start lg:gap-16">
+          <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-end lg:gap-16">
             <SectionReveal animation="slide-left">
-              <p className="overline">Operating Change</p>
+              <p className="overline">When To Call</p>
               <h2 className="mt-6 text-display">
-                AI is easy to demo. The advantage comes from making it operable.
+                AI needs a business target before it needs more tools.
               </h2>
-              <p className="mt-6 max-w-2xl text-body-lg text-warm-gray">
-                ClearForge starts with the business constraint, then builds the custom AI, workflow,
-                controls, dashboard, and team rhythm that make better performance repeatable.
+            </SectionReveal>
+            <SectionReveal animation="fade-up">
+              <p className="max-w-3xl text-body-lg text-warm-gray">
+                ClearForge is built for leaders who can already feel the drag: missed growth,
+                inconsistent service, slow knowledge work, margin leaks, or AI pilots that never
+                changed the operating rhythm.
+              </p>
+            </SectionReveal>
+          </div>
+
+          <StaggerReveal className="mt-14 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {buyerProblems.map((problem) => {
+              const Icon = problem.icon;
+              return (
+                <div key={problem.title} className="border border-divider bg-warm-white p-6">
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="text-xs font-semibold uppercase tracking-[0.16em] text-warm-gray">
+                      {problem.buyer}
+                    </span>
+                    <Icon className="h-5 w-5 text-brass" />
+                  </div>
+                  <h3 className="mt-5 text-h4">{problem.title}</h3>
+                  <p className="mt-3 text-body-sm leading-relaxed text-warm-gray">
+                    {problem.detail}
+                  </p>
+                </div>
+              );
+            })}
+          </StaggerReveal>
+        </div>
+      </section>
+
+      <section className="border-t border-divider bg-warm-white py-20 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
+          <div className="grid gap-12 lg:grid-cols-[0.84fr_1.16fr] lg:items-start lg:gap-16">
+            <SectionReveal animation="slide-left">
+              <p className="overline">What We Build</p>
+              <h2 className="mt-6 text-display">A working system, not a better deck.</h2>
+              <p className="mt-6 max-w-xl text-body-lg text-warm-gray">
+                The deliverable is a new way for the work to run: AI where it helps, people where
+                judgment matters, and leaders with a clear view of performance.
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <Button asChild>
-                  <Link href="/operating-model">
-                    See the operating model <ArrowRight className="ml-2 h-4 w-4" />
+                  <Link href="/services">
+                    See services <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
                 <Button variant="secondary" asChild>
-                  <Link href="/case-studies">View proof</Link>
+                  <Link href="/operating-model">Operating model</Link>
                 </Button>
               </div>
             </SectionReveal>
 
-            <SectionReveal animation="fade-up">
-              <OperatingChangeMap />
-            </SectionReveal>
-          </div>
-
-          <div className="mt-16 grid border-t border-divider lg:grid-cols-3">
-            {breakdownSignals.map((item) => (
-              <div
-                key={item.title}
-                className="border-b border-divider py-8 lg:border-r lg:px-8 lg:first:pl-0 lg:last:border-r-0"
-              >
-                <p className="text-h4">{item.title}</p>
-                <p className="mt-3 text-body-sm leading-relaxed text-warm-gray">{item.signal}</p>
-                <p className="mt-5 flex items-start gap-3 text-body-sm font-medium text-anthracite">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brass" />
-                  <span>{item.move}</span>
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <OperatorSystemPreview useCase={salesPipelineUseCase} />
-
-      <section id="results" className="scroll-mt-20 bg-recessed py-20 sm:py-32 lg:py-40">
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-16">
-            <SectionReveal animation="slide-left" className="lg:col-span-5">
-              <p className="overline">Proof</p>
-              <h2 className="mt-6 text-display">Selected outcomes from production work.</h2>
-              <p className="mt-6 text-body-lg text-warm-gray">
-                We keep the work anchored to business movement: qualified opportunities, margin,
-                processing accuracy, cycle time, EBITDA, and adoption.
-              </p>
-            </SectionReveal>
-
-            <div className="mt-12 lg:col-span-7 lg:mt-0">
-              {(caseStudies || []).slice(0, 3).map((cs) => (
-                <Link
-                  key={cs.slug}
-                  href={`/case-studies/${cs.slug}`}
-                  className="group block border-t border-divider"
-                >
-                  <div className="py-8 sm:py-10">
-                    <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline sm:justify-between">
-                      <div className="min-w-0 flex-1">
-                        <span className="overline text-[10px]">{cs.industry}</span>
-                        <h3 className="mt-2 text-h2 transition-colors duration-300 group-hover:text-brass">
-                          {cs.title}
-                        </h3>
+            <div className="grid gap-4">
+              {buildModel.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <SectionReveal
+                    key={item.title}
+                    animation="fade-up"
+                    className="border border-divider bg-parchment p-6 sm:p-7"
+                  >
+                    <div className="grid gap-5 sm:grid-cols-[3rem_1fr_auto] sm:items-start">
+                      <div className="flex h-11 w-11 items-center justify-center border border-brass/30 bg-brass/10 text-brass">
+                        <Icon className="h-5 w-5" />
                       </div>
-                      <div className="flex shrink-0 items-baseline gap-8">
-                        <div>
-                          <span className="metric text-2xl text-brass sm:text-3xl">
-                            {cs.heroMetric}
-                          </span>
-                          <p className="mt-1 text-xs text-warm-gray">{cs.heroMetricLabel}</p>
-                        </div>
-                        <ArrowRight className="h-5 w-5 text-warm-gray transition-all duration-300 group-hover:translate-x-2 group-hover:text-brass" />
+                      <div>
+                        <p className="metric text-xs text-brass">
+                          {String(index + 1).padStart(2, '0')}
+                        </p>
+                        <h3 className="mt-2 text-h3">{item.title}</h3>
+                        <p className="mt-3 text-body-sm leading-relaxed text-warm-gray">
+                          {item.detail}
+                        </p>
                       </div>
+                      <span className="w-fit border border-divider bg-warm-white px-3 py-2 text-xs font-semibold text-anthracite">
+                        {item.output}
+                      </span>
                     </div>
-                  </div>
-                </Link>
-              ))}
-              <div className="border-t border-divider" />
+                  </SectionReveal>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="border-t border-divider bg-warm-white py-20 sm:py-28 lg:py-36">
+      <OperatorSystemPreview
+        useCase={salesPipelineUseCase}
+        variant="compact"
+        className="py-20 sm:py-24 lg:py-32"
+      />
+
+      <section id="results" className="scroll-mt-20 bg-recessed py-20 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
-          <div className="lg:grid lg:grid-cols-12 lg:items-end lg:gap-12">
-            <div className="lg:col-span-7">
-              <p className="overline">How ClearForge Makes It Operable</p>
-              <h2 className="mt-6 max-w-3xl text-display">
-                Board-room discipline. Builder-speed execution.
-              </h2>
-            </div>
-            <div className="mt-8 lg:col-span-5 lg:mt-0">
-              <p className="text-body-lg text-warm-gray">
-                The work moves from ambition to production only when value, workflow, technology,
-                adoption, and governance are designed together.
+          <div className="grid gap-10 lg:grid-cols-[0.68fr_1.32fr] lg:gap-16">
+            <SectionReveal animation="slide-left">
+              <p className="overline">Proof You Can Inspect</p>
+              <h2 className="mt-6 text-display">Less claim. More operating evidence.</h2>
+              <p className="mt-6 text-body-lg text-warm-gray">
+                Every serious AI build should answer four questions before it asks for scale.
               </p>
-            </div>
-          </div>
-
-          <div className="mt-14 overflow-hidden border border-divider">
-            <div className="hidden grid-cols-[1fr_1fr_1fr] border-b border-divider bg-parchment px-6 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-warm-gray lg:grid">
-              <span>Dimension</span>
-              <span>Operator Standard</span>
-              <span>ClearForge Role</span>
-            </div>
-            {operatingReadiness.map((item, index) => (
-              <div
-                key={item.dimension}
-                className="grid gap-4 border-b border-divider bg-warm-white p-6 last:border-b-0 lg:grid-cols-[4rem_1fr_1fr_1fr] lg:items-start"
-              >
-                <span className="metric text-sm text-brass">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <h3 className="text-h4">{item.dimension}</h3>
-                <p className="text-body-sm leading-relaxed text-warm-gray">{item.standard}</p>
-                <p className="text-body-sm leading-relaxed text-anthracite">{item.clearforge}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-12 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-            <div className="grid gap-3 sm:grid-cols-2">
-              {readinessChecks.map((item) => (
-                <div key={item.title} className="border border-divider bg-parchment p-5">
-                  <Shield className="h-5 w-5 text-brass" />
-                  <h3 className="mt-4 text-h4">{item.title}</h3>
-                  <p className="mt-2 text-body-sm leading-relaxed text-warm-gray">{item.detail}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="border border-divider bg-recessed p-6 sm:p-8">
-              <p className="overline text-[10px]">Trust Rules</p>
-              <h3 className="mt-4 text-h3">A few things we will not do.</h3>
-              <div className="mt-6 divide-y divide-divider border-t border-divider">
-                {trustRules.map((rule) => (
-                  <div key={rule.avoid} className="grid gap-3 py-5 sm:grid-cols-[1fr_1fr] sm:gap-6">
-                    <p className="text-body-sm font-semibold text-anthracite">{rule.avoid}</p>
-                    <p className="text-body-sm text-warm-gray">{rule.instead}</p>
+              <div className="mt-8 grid grid-cols-2 gap-3">
+                {proofNotes.map((note) => (
+                  <div key={note} className="border border-divider bg-warm-white p-4">
+                    <CheckCircle2 className="h-4 w-4 text-brass" />
+                    <p className="mt-3 text-sm font-semibold text-anthracite">{note}</p>
                   </div>
                 ))}
               </div>
-              <Button variant="secondary" className="mt-6" asChild>
-                <Link href="/operating-model" data-analytics="home_standards_operating_model">
-                  See the AI Operating Model <ArrowRight className="ml-2 h-4 w-4" />
+            </SectionReveal>
+
+            <div className="grid gap-4">
+              {caseStudies.slice(0, 3).map((cs) => (
+                <Link
+                  key={cs.slug}
+                  href={`/case-studies/${cs.slug}`}
+                  className="group border border-divider bg-warm-white p-6 transition-colors hover:bg-white sm:p-7"
+                >
+                  <div className="grid gap-5 sm:grid-cols-[1fr_auto] sm:items-start">
+                    <div>
+                      <p className="overline text-[10px]">{cs.industry}</p>
+                      <h3 className="mt-3 text-h3 transition-colors group-hover:text-brass">
+                        {cs.title}
+                      </h3>
+                      <p className="mt-3 line-clamp-2 text-body-sm leading-relaxed text-warm-gray">
+                        {cs.excerpt}
+                      </p>
+                    </div>
+                    <div className="sm:text-right">
+                      <MetricCounter value={cs.heroMetric} className="metric text-3xl text-brass" />
+                      <p className="mt-2 max-w-[12rem] text-xs leading-relaxed text-warm-gray">
+                        {cs.heroMetricLabel}
+                      </p>
+                    </div>
+                  </div>
+                  <span className="mt-5 inline-flex items-center text-sm font-semibold text-brass">
+                    Read case study <ArrowRight className="ml-2 h-4 w-4" />
+                  </span>
                 </Link>
-              </Button>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="border-t border-divider bg-parchment py-20 sm:py-32 lg:py-40">
+      <section className="border-t border-divider bg-parchment py-20 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <SectionReveal animation="fade-up">
-            <div className="lg:grid lg:grid-cols-12 lg:items-end lg:gap-12">
-              <div className="lg:col-span-7">
-                <p className="overline">Use Cases</p>
-                <h2 className="mt-6 max-w-3xl text-display">
-                  The first AI builds worth funding have a trigger, an owner, and a review loop.
+            <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end lg:gap-16">
+              <div>
+                <p className="overline">Where We Start</p>
+                <h2 className="mt-6 text-display">
+                  Six first workflows that buyers understand fast.
                 </h2>
               </div>
-              <div className="mt-8 lg:col-span-5 lg:mt-0">
-                <p className="text-body-lg text-warm-gray">
-                  ClearForge starts where teams already feel pain: sales, service, operations,
-                  knowledge work, quality, and portfolio value creation. Each build is tied to a
-                  cadence leaders can inspect.
-                </p>
-              </div>
+              <p className="max-w-3xl text-body-lg text-warm-gray">
+                These are not generic AI categories. They are operating surfaces where owners can
+                see volume, exceptions, accountability, and economic value.
+              </p>
             </div>
           </SectionReveal>
 
-          <StaggerReveal className="mt-16 grid gap-6 lg:grid-cols-3">
-            {useCases.slice(0, 6).map((useCase) => (
+          <StaggerReveal className="mt-14 grid gap-5 lg:grid-cols-3">
+            {priorityUseCases.map(({ useCase, focus, line, signal }) => (
               <Link
                 key={useCase.slug}
                 href={`/use-cases/${useCase.slug}`}
@@ -356,269 +383,128 @@ export default function Home() {
                   <UseCaseCardVisual useCase={useCase} />
                 </div>
                 <div className="p-6">
-                  <p className="overline text-[10px]">{useCase.eyebrow}</p>
+                  <p className="overline text-[10px]">{focus}</p>
                   <h3 className="mt-2 text-h3 transition-colors group-hover:text-brass">
                     {useCase.shortTitle}
                   </h3>
-                  <p className="mt-3 text-body-sm leading-relaxed text-warm-gray">
-                    {useCase.summary}
+                  <p className="mt-3 text-body-sm leading-relaxed text-warm-gray">{line}</p>
+                  <p className="mt-5 border-t border-divider pt-4 text-xs font-semibold uppercase tracking-[0.14em] text-warm-gray">
+                    {signal}
                   </p>
-                  <span className="mt-5 inline-flex items-center text-sm font-semibold text-brass">
-                    See the use case <ArrowRight className="ml-2 h-4 w-4" />
-                  </span>
                 </div>
               </Link>
             ))}
           </StaggerReveal>
-
-          <div className="mt-12">
-            <Button variant="secondary" asChild>
-              <Link href="/use-cases">View All AI Use Cases</Link>
-            </Button>
-          </div>
         </div>
       </section>
 
-      <section className="dark-section relative overflow-hidden py-20 sm:py-32 lg:py-40">
-        <div className="absolute inset-0 pointer-events-none">
-          <Image
-            src="/images/abstract-dataflow.webp"
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover opacity-[0.14]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-forge-black/70 via-forge-black/40 to-forge-black" />
-        </div>
-        <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
-          <div className="grid gap-y-12 gap-x-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-16">
-            {[
-              { value: '4', label: 'Weeks to a fixed-fee diagnostic and prioritized build case' },
-              {
-                value: '10',
-                label: 'Weeks to a first production workflow when the data path is ready',
-              },
-              {
-                value: '3+',
-                label: 'Measurable opportunities required or the diagnostic is refunded',
-              },
-              { value: '1', label: 'Named operating owner before every Sprint starts' },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <MetricCounter value={stat.value} className="metric-xl text-brass-light" />
-                <p className="mt-4 text-body-sm leading-relaxed text-stone">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-parchment py-20 sm:py-32 lg:py-40">
+      <section className="border-t border-divider bg-warm-white py-20 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
-          <SectionReveal animation="fade-up">
-            <div className="lg:grid lg:grid-cols-12 lg:items-end lg:gap-12">
-              <div className="lg:col-span-7">
-                <p className="overline">Industry Coverage</p>
-                <h2 className="mt-6 max-w-3xl text-display">
-                  Production AI for every operating value chain.
-                </h2>
-              </div>
-              <div className="mt-6 lg:col-span-5 lg:mt-0 lg:text-right">
-                <p className="text-body-lg text-warm-gray">
-                  {industryCount} industries. {activityCount}+ activities mapped to agents,
-                  predictive models, copilots, and workflow automations.
-                </p>
-              </div>
-            </div>
-          </SectionReveal>
-
-          <StaggerReveal className="mt-16 grid gap-x-12 gap-y-0 sm:grid-cols-2 lg:grid-cols-3">
-            {industries.slice(0, 9).map((ind) => {
-              const total = ind.valueChain.reduce((a, fn) => a + fn.activities.length, 0);
-              return (
-                <Link
-                  key={ind.slug}
-                  href={`/industries/${ind.slug}`}
-                  className="group -mx-4 block border-t border-divider px-4 py-6 transition-colors hover:bg-warm-white"
-                >
-                  <div className="flex items-baseline justify-between gap-4">
-                    <h3 className="text-h4 transition-colors group-hover:text-brass">
-                      {ind.shortName}
-                    </h3>
-                    <span className="metric shrink-0 text-xs text-warm-gray">{total}</span>
-                  </div>
-                  <p className="mt-1 line-clamp-2 text-body-sm text-warm-gray">{ind.oneLiner}</p>
-                </Link>
-              );
-            })}
-          </StaggerReveal>
-          <div className="border-t border-divider" />
-
-          <div className="mt-12 flex flex-wrap items-center justify-between gap-4">
-            <p className="text-body-sm text-warm-gray">
-              Do not see your industry? Forge Intelligence generates a custom value chain from your
-              website.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Button variant="secondary" asChild>
-                <Link href="/industries">View All Industries</Link>
-              </Button>
-              <Button asChild>
-                <Link href="/discover">
-                  Generate Custom Value Chain <ArrowRight className="ml-2 h-4 w-4" />
+          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-16">
+            <SectionReveal animation="slide-left">
+              <p className="overline">First 30 Days</p>
+              <h2 className="mt-6 text-display">A fast path to a build/no-build decision.</h2>
+              <p className="mt-6 text-body-lg text-warm-gray">
+                The diagnostic is intentionally narrow. It creates enough clarity to fund the first
+                production workflow without pretending the whole company has been transformed.
+              </p>
+              <Button className="mt-8" asChild>
+                <Link href="/pricing">
+                  View engagement options <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-parchment py-20 sm:py-32 lg:py-40">
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
-          <SectionReveal animation="scale-up">
-            <p className="overline">Our Approach</p>
-            <h2 className="mt-6 max-w-3xl text-display">The Forge Method™</h2>
-            <p className="mt-6 max-w-2xl text-body-lg text-warm-gray">
-              Clear timelines. Transparent investment. Guaranteed deliverables. Three phases from
-              opportunity to production and ongoing improvement.
-            </p>
-          </SectionReveal>
-
-          <ForgeMethodDiagram />
-
-          <div className="mt-20 border-t border-brass/20 pt-10">
-            <div className="flex max-w-2xl items-start gap-4">
-              <Shield className="mt-1 h-5 w-5 shrink-0 text-brass" />
-              <div>
-                <p className="text-h4">The ClearForge Guarantee</p>
-                <p className="mt-2 text-body text-warm-gray">
-                  If our Forge Diagnostic does not identify at least 3 measurable AI opportunities
-                  with a baseline, owner, evidence needs, and next build decision, we refund your
-                  investment.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="dark-section py-20 sm:py-32 lg:py-40">
-        <div className="mx-auto max-w-[1000px] px-4 sm:px-6 lg:px-10">
-          <GsapTextReveal
-            text="They did not just hand us a strategy deck. They built the systems, trained the team, and stayed until the numbers moved."
-            tag="h2"
-            className="text-display leading-snug text-bone"
-            scrub
-          />
-          <div className="mt-10 flex items-center gap-4">
-            <div className="h-px w-12 bg-brass-light" />
-            <p className="text-body text-stone">
-              <span className="font-semibold text-bone">VP of Operations</span> — Industrial
-              Manufacturer, $180M Revenue
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-parchment py-20 sm:py-32 lg:py-40">
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
-          <div className="items-start lg:grid lg:grid-cols-12 lg:gap-20">
-            <SectionReveal animation="clip-reveal" className="lg:col-span-5">
-              <p className="overline">Who Does the Work</p>
-              <h2 className="mt-6 text-display">Built by operators. Not outsourced.</h2>
             </SectionReveal>
-            <div className="mt-10 lg:col-span-7 lg:mt-0">
-              <p className="text-body-lg text-warm-gray">
-                ClearForge was founded by James Penz after 15 years at Bain, EY, and Capgemini to
-                solve the problem he saw everywhere: smart strategy that never became a working
-                operating system.
-              </p>
-              <p className="mt-4 text-body text-warm-gray">
-                The people on your discovery call are the people who do the work. No pyramid model,
-                offshore handoff, or translation layer between recommendation and implementation.
-              </p>
 
-              <div className="mt-10 flex flex-wrap gap-12">
-                {[
-                  { label: 'Bain', sub: 'AI Automation' },
-                  { label: 'EY', sub: 'Digital' },
-                  { label: 'Capgemini', sub: 'Consulting' },
-                ].map((item) => (
-                  <div key={item.label}>
-                    <span className="metric text-xl text-brass">{item.label}</span>
-                    <p className="mt-1 text-xs text-warm-gray">{item.sub}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-10 border-t border-divider pt-8">
-                <p className="font-display text-body italic text-anthracite">
-                  &ldquo;The gap between what gets recommended and what gets built is where most AI
-                  programs die. ClearForge exists to close that gap.&rdquo;
-                </p>
-                <p className="mt-3 text-xs text-warm-gray">James Penz, Founder</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="dark-section py-20 sm:py-28">
-        <div className="mx-auto max-w-[1000px] px-4 text-center sm:px-6 lg:px-10">
-          <Sparkles className="mx-auto h-7 w-7 text-brass-light" />
-          <p className="overline mt-6">Forge Intelligence</p>
-          <h2 className="mt-6 text-display text-bone">See your first value map in minutes.</h2>
-          <p className="mx-auto mt-6 max-w-xl text-body-lg text-stone">
-            Enter your website. Get a company-specific AI value chain, priority prompts, and a
-            clearer starting point before any call.
-          </p>
-          <Button size="lg" className="mt-10" asChild>
-            <Link href="/discover">
-              Generate My AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
-      </section>
-
-      <section className="bg-parchment py-20 sm:py-32 lg:py-40">
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-20">
-            <div className="lg:col-span-4">
-              <p className="overline">Honest Answers</p>
-              <h2 className="mt-6 text-display">What leadership usually asks.</h2>
-              <p className="mt-6 text-body text-warm-gray">
-                Short answers first. The deeper work happens in the diagnostic.
-              </p>
-            </div>
-            <div className="mt-10 grid gap-4 lg:col-span-8 lg:mt-0 lg:grid-cols-2">
-              {objections.map((o, index) => (
-                <details
-                  key={o.q}
-                  className="group border border-divider bg-warm-white p-6"
-                  open={index === 0}
+            <div className="grid gap-4">
+              {firstThirtyDays.map((step) => (
+                <SectionReveal
+                  key={step.day}
+                  animation="fade-up"
+                  className="grid gap-5 border border-divider bg-parchment p-6 sm:grid-cols-[4rem_1fr] sm:p-7"
                 >
-                  <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
-                    <span className="text-h4">&ldquo;{o.q}&rdquo;</span>
-                    <span className="mt-1 text-brass transition-transform group-open:rotate-45">
-                      +
-                    </span>
-                  </summary>
-                  <p className="mt-4 text-body-sm leading-relaxed text-warm-gray">{o.a}</p>
-                </details>
+                  <p className="metric text-2xl text-brass">{step.day}</p>
+                  <div>
+                    <h3 className="text-h3">{step.title}</h3>
+                    <p className="mt-3 text-body-sm leading-relaxed text-warm-gray">
+                      {step.detail}
+                    </p>
+                  </div>
+                </SectionReveal>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="dark-section py-20 sm:py-32 lg:py-40">
-        <div className="mx-auto max-w-[840px] px-4 sm:px-6 lg:px-10">
-          <h2 className="text-display text-bone">Start with the map. Build what matters.</h2>
-          <p className="mt-6 text-body-lg text-stone">
-            Use Forge Intelligence for the first read, then bring ClearForge in when you are ready
-            to scope the first production system.
+      <section className="dark-section py-20 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
+          <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-start lg:gap-16">
+            <SectionReveal animation="slide-left">
+              <Shield className="h-7 w-7 text-brass-light" />
+              <p className="overline mt-6">Trust Standard</p>
+              <h2 className="mt-6 text-display text-bone">Founder-led. Operator-grade.</h2>
+              <p className="mt-6 text-body-lg text-stone">
+                ClearForge was founded by James Penz after 15 years in transformation work to close
+                the gap between what gets recommended and what actually gets built.
+              </p>
+            </SectionReveal>
+
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {trustStandards.map((standard) => (
+                <div key={standard.title} className="border border-bone/10 bg-bone/[0.04] p-6">
+                  <CheckCircle2 className="h-5 w-5 text-brass-light" />
+                  <h3 className="mt-5 text-h4 text-bone">{standard.title}</h3>
+                  <p className="mt-3 text-body-sm leading-relaxed text-stone">{standard.detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-14 grid gap-6 border-t border-bone/10 pt-10 md:grid-cols-3">
+            {[
+              { value: '15+', label: 'Years across Bain, EY, Capgemini, and operator builds' },
+              { value: `${industryCount}`, label: 'Industries mapped into AI value chains' },
+              {
+                value: `${activityCount}+`,
+                label: 'Activities available for first-pass value mapping',
+              },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <MetricCounter value={stat.value} className="metric text-3xl text-brass-light" />
+                <p className="mt-3 text-body-sm leading-relaxed text-stone">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-wrap gap-3 border-t border-bone/10 pt-8">
+            {[
+              'Bain: AI automation discipline',
+              'EY: digital transformation controls',
+              'Capgemini: enterprise delivery',
+            ].map((item) => (
+              <span
+                key={item}
+                className="border border-bone/10 bg-bone/[0.04] px-4 py-2 text-xs font-semibold text-stone"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="dark-section py-20 sm:py-28">
+        <div className="mx-auto max-w-[980px] px-4 text-center sm:px-6 lg:px-10">
+          <Sparkles className="mx-auto h-7 w-7 text-brass-light" />
+          <p className="overline mt-6">Start Here</p>
+          <h2 className="mt-6 text-display text-bone">
+            Get the first value map before the first meeting.
+          </h2>
+          <p className="mx-auto mt-6 max-w-2xl text-body-lg text-stone">
+            Enter your website, get a company-specific first read, and use the diagnostic call to
+            decide whether the first workflow is worth building.
           </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button size="lg" asChild>
               <Link href="/discover">
                 Generate AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
