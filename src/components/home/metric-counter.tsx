@@ -75,11 +75,11 @@ export function MetricCounter({
           snap: { val: decimalPlaces > 0 ? 1 / 10 ** decimalPlaces : 1 },
           onUpdate: renderValue,
           onComplete() {
-            // Subtle brass glow that fades out after the value settles.
+            // Subtle oxide glow that fades out after the value settles.
             gsap.fromTo(
               el,
-              { textShadow: '0 0 30px rgba(210,168,93,0.28)' },
-              { textShadow: '0 0 0px rgba(210,168,93,0)', duration: 1, ease: 'power2.out' },
+              { textShadow: '0 0 30px rgba(215,138,104,0.28)' },
+              { textShadow: '0 0 0px rgba(215,138,104,0)', duration: 1, ease: 'power2.out' },
             );
           },
         });

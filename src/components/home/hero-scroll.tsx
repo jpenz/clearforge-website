@@ -14,7 +14,7 @@ export function HeroScroll() {
       <HeroOperatingScene />
 
       {/* Gradient keeps headline legible. */}
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,15,30,0.92)_0%,rgba(10,15,30,0.74)_46%,rgba(10,15,30,0.38)_100%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,13,16,0.94)_0%,rgba(11,13,16,0.76)_46%,rgba(11,13,16,0.18)_100%)] pointer-events-none" />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-forge-black to-transparent pointer-events-none" />
 
       {/* Process rail: text in the scene, not a separate card. */}
@@ -43,8 +43,8 @@ export function HeroScroll() {
         <h1 className="mt-7 max-w-[800px] text-[2.35rem] leading-[1.03] text-bone sm:text-[3.6rem] lg:text-[4.9rem]">
           Move AI from strategy to realized benefits.
         </h1>
-        <p className="mt-3 max-w-[760px] font-display text-[2rem] italic leading-[1.05] text-brass-light sm:text-[3rem] lg:text-[3.7rem]">
-          Strategy, design, build, adoption, results.
+        <p className="mt-6 max-w-[760px] text-[1.35rem] font-semibold leading-[1.2] text-brass-light sm:text-[1.75rem] lg:text-[2.15rem]">
+          Strategy. Systems. Adoption. Measured value.
         </p>
 
         <p className="mt-7 max-w-xl text-body-lg text-stone animate-fade-in-up delay-3">

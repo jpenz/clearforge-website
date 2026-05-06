@@ -21,14 +21,14 @@ const actions = [
 export function HeroOperatingScene() {
   return (
     <div
-      className="pointer-events-none absolute inset-0 overflow-hidden bg-[#070b14]"
+      className="pointer-events-none absolute inset-0 overflow-hidden bg-[#090A0C]"
       aria-hidden="true"
     >
-      <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(7,11,20,0.97)_0%,rgba(7,11,20,0.86)_44%,rgba(10,24,34,0.76)_100%)]" />
-      <div className="absolute inset-0 opacity-[0.12] [background-image:linear-gradient(rgba(234,234,242,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(234,234,242,0.18)_1px,transparent_1px)] [background-size:72px_72px]" />
+      <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(9,10,12,0.98)_0%,rgba(9,10,12,0.9)_44%,rgba(35,31,29,0.78)_100%)]" />
+      <div className="absolute inset-0 opacity-[0.1] [background-image:linear-gradient(rgba(242,239,232,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(242,239,232,0.16)_1px,transparent_1px)] [background-size:72px_72px]" />
 
       <div className="absolute right-[-18rem] top-[11%] hidden w-[58rem] max-w-[62vw] lg:block">
-        <div className="hero-scene-float border border-bone/10 bg-[#0d1425]/82 shadow-2xl shadow-forge-black/40 backdrop-blur-sm">
+        <div className="hero-scene-float border border-bone/10 bg-[#151414]/92 shadow-2xl shadow-forge-black/40 backdrop-blur-sm">
           <div className="flex items-center justify-between border-b border-bone/10 px-6 py-5">
             <div className="flex items-center gap-3">
               <Radar className="h-5 w-5 text-brass-light" />
@@ -37,7 +37,7 @@ export function HeroOperatingScene() {
                 <p className="text-xs text-stone">Benefits realization review</p>
               </div>
             </div>
-            <span className="border border-emerald-300/20 bg-emerald-300/10 px-3 py-1.5 text-xs font-semibold text-emerald-100">
+            <span className="border border-success/25 bg-success/15 px-3 py-1.5 text-xs font-semibold text-[#CDEBE4]">
               Live
             </span>
           </div>
@@ -48,7 +48,7 @@ export function HeroOperatingScene() {
                 <div key={metric.label} className="border border-bone/10 bg-bone/[0.04] p-4">
                   <p className="metric text-2xl text-brass-light">{metric.value}</p>
                   <p className="mt-2 text-xs font-semibold text-bone/80">{metric.label}</p>
-                  <p className="mt-1 text-[11px] text-emerald-200">{metric.trend}</p>
+                  <p className="mt-1 text-[11px] text-[#CDEBE4]">{metric.trend}</p>
                 </div>
               ))}
             </div>
@@ -67,7 +67,7 @@ export function HeroOperatingScene() {
                     <div key={height} className="flex flex-1 flex-col items-center gap-2">
                       <div className="flex h-32 w-full items-end">
                         <span
-                          className="w-full border border-emerald-300/20 bg-emerald-300/55"
+                          className="w-full border border-success/20 bg-success/60"
                           style={{ height: `${height}%` }}
                         />
                       </div>

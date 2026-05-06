@@ -2,29 +2,29 @@
 
 @theme inline {
   /* ── Backgrounds ── */
-  --color-parchment: #F8F8F6;
+  --color-parchment: #F7F4EE;
   --color-warm-white: #FFFFFF;
-  --color-forge-black: #0A0F1E;
+  --color-forge-black: #0B0D10;
   --color-surface: #FFFFFF;
-  --color-recessed: #F0F0ED;
+  --color-recessed: #EEE9E1;
 
   /* ── Text ── */
-  --color-anthracite: #141428;
-  --color-warm-gray: #4A4A62;
-  --color-bone: #EAEAF2;
-  --color-stone: #9090A8;
+  --color-anthracite: #171719;
+  --color-warm-gray: #56514B;
+  --color-bone: #F2EFE8;
+  --color-stone: #9A948B;
 
   /* ── Accents ── */
-  --color-brass: #8B5E24;
-  --color-brass-hover: #6F461A;
-  --color-brass-light: #D2A85D;
+  --color-brass: #9E3F2F;
+  --color-brass-hover: #7F2F24;
+  --color-brass-light: #D78A68;
 
   /* ── Borders (visible but not heavy) ── */
-  --color-divider: #C8C8D2;
-  --color-divider-dark: #232940;
+  --color-divider: #D6D0C6;
+  --color-divider-dark: #302D29;
 
   /* ── Semantic ── */
-  --color-success: #047857;
+  --color-success: #247A68;
   --color-error: #B91C1C;
 
   /* ── Fonts ── */

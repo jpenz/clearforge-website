@@ -146,11 +146,11 @@ Boardroom operating architecture: clear, structured, premium, calm.
 
 **Palette**
 
-- Forge black / deep ink for high-confidence sections
-- Warm white and parchment for executive readability
-- Brass for value, decision, and financial emphasis
-- Emerald only for success states and live system signals
-- Slate/stone for secondary text and captions
+- Carbon black for authority and contrast, avoiding navy/blue association
+- Porcelain, ivory, and warm white for executive readability
+- Red oxide / copper for value, decision, CTAs, and financial emphasis
+- Muted teal only for success states, live system signals, and dashboard movement
+- Stone and warm gray for secondary text and captions
 
 **Typography**
 
