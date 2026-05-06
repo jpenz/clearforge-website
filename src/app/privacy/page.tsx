@@ -40,6 +40,12 @@ export default function PrivacyPage() {
               landing pages, scroll depth, button clicks, form submissions, and time-on-page signals
               so we can understand which content is useful and improve the site experience.
             </p>
+            <p className="mt-4 text-body text-warm-gray">
+              We may use visitor identification and account intelligence tools to understand which
+              companies visit the site, connect visits with business contact information, and
+              prioritize relevant follow-up. These tools may process IP address, device, browser,
+              session, cookie, and publicly available company information.
+            </p>
           </div>
 
           <div>
@@ -92,6 +98,11 @@ export default function PrivacyPage() {
               tracking, and local or session storage to connect visits with campaign attribution and
               website conversion activity. These tools help us measure performance; they do not
               change the services we provide.
+            </p>
+            <p className="mt-4 text-body text-warm-gray">
+              We may also use third-party business visitor intelligence services, including Warmly,
+              to identify company-level website traffic and improve sales outreach. You can limit or
+              block many tracking technologies through your browser settings.
             </p>
           </div>
 
