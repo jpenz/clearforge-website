@@ -1,12 +1,117 @@
 import { NextResponse } from 'next/server';
+import { escapeHtml, getLeadRecipients, getResendClient, isValidEmail } from '@/lib/email';
 import { isRateLimited } from '@/lib/rate-limit';
 import { logServerError } from '@/lib/server-logger';
-import { getCompanyDomain } from '@/lib/url-safety';
+import { saveDiscoverLead } from '@/lib/supabase';
+import { normalizePublicCompanyUrl } from '@/lib/url-safety';
+
+const PERPLEXITY_TIMEOUT_MS = 16_000;
+
+function normalizeString(value: unknown, maxLength: number): string {
+  return typeof value === 'string' ? value.trim().slice(0, maxLength) : '';
+}
+
+function titleFromDomain(domain: string): string {
+  return domain
+    .replace(/^www\./, '')
+    .split('.')[0]
+    .split(/[-_]/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
+function extractSection(raw: string, heading: string, nextHeading?: string): string {
+  const start = raw.search(new RegExp(`${heading}\\s*:`, 'i'));
+  if (start === -1) return '';
+
+  const afterHeading = raw.slice(start).replace(new RegExp(`^${heading}\\s*:`, 'i'), '');
+  if (!nextHeading) return afterHeading.trim();
+
+  const next = afterHeading.search(new RegExp(`\\n\\s*${nextHeading}\\s*:`, 'i'));
+  return (next === -1 ? afterHeading : afterHeading.slice(0, next)).trim();
+}
+
+function splitCompanyResearch(raw: string, domain: string) {
+  const company = extractSection(raw, 'COMPANY_OVERVIEW', 'HIRING_AND_WORKFLOW_SIGNALS');
+  const jobs = extractSection(raw, 'HIRING_AND_WORKFLOW_SIGNALS', 'AI_USE_CASES');
+  const useCases = extractSection(raw, 'AI_USE_CASES');
+
+  return {
+    domain,
+    company:
+      company ||
+      `${titleFromDomain(domain)} appears to need a live operating-model review before AI opportunities are ranked.`,
+    jobs:
+      jobs ||
+      'Hiring and workflow signals were not available in the quick scan. Confirm current roles, handoffs, and repetitive work in discovery.',
+    useCases:
+      useCases ||
+      'Start with revenue operations, service quality, knowledge work, and back-office throughput. Baseline metrics before estimating value.',
+    researchedAt: new Date().toISOString(),
+  };
+}
+
+async function captureDiscoverLead(params: {
+  name?: string;
+  email: string;
+  company: string;
+  companyUrl: string;
+  domain: string;
+}) {
+  const safeName = escapeHtml(params.name || 'Not provided');
+  const safeEmail = escapeHtml(params.email);
+  const safeCompany = escapeHtml(params.company);
+  const safeUrl = escapeHtml(params.companyUrl);
+  const safeDomain = escapeHtml(params.domain);
+
+  const html = `
+    <div style="font-family:Inter,Arial,sans-serif;max-width:680px;margin:0 auto;padding:24px;color:#0f172a;">
+      <p style="margin:0;color:#0f766e;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">ClearForge AI Value Map</p>
+      <h1 style="margin:8px 0 12px;font-size:22px;line-height:1.25;">New website assessment started</h1>
+      <table style="width:100%;border-collapse:collapse;margin-top:18px;">
+        <tr><td style="padding:7px 0;font-weight:700;width:120px;">Company</td><td style="padding:7px 0;">${safeCompany}</td></tr>
+        <tr><td style="padding:7px 0;font-weight:700;">Website</td><td style="padding:7px 0;"><a href="${safeUrl}" style="color:#0f766e;">${safeDomain}</a></td></tr>
+        <tr><td style="padding:7px 0;font-weight:700;">Email</td><td style="padding:7px 0;"><a href="mailto:${safeEmail}" style="color:#0f766e;">${safeEmail}</a></td></tr>
+        <tr><td style="padding:7px 0;font-weight:700;">Name</td><td style="padding:7px 0;">${safeName}</td></tr>
+      </table>
+      <p style="margin-top:20px;color:#475569;line-height:1.6;">The visitor entered a company website. ClearForge should follow up even if they leave before generating the final report.</p>
+    </div>
+  `;
+
+  const resend = getResendClient();
+  const emailPromise = resend
+    ? resend.emails.send({
+        from: 'ClearForge <website@clearforge.ai>',
+        to: getLeadRecipients(),
+        replyTo: params.email,
+        subject: `AI Value Map Started: ${params.company}`,
+        html,
+      })
+    : Promise.resolve(null);
+
+  const savePromise = saveDiscoverLead({
+    name: params.name,
+    email: params.email,
+    company: params.company,
+    company_url: params.companyUrl,
+    domain: params.domain,
+    source: 'discover_website_started',
+  });
+
+  const results = await Promise.allSettled([emailPromise, savePromise]);
+  for (const result of results) {
+    if (result.status === 'rejected') {
+      logServerError('Discover lead capture failed', result.reason);
+    }
+  }
+}
 
 /**
  * POST /api/discover/research
  *
- * Takes a company website URL, uses Perplexity API to research:
+ * Takes a company website URL and lead details, captures the lead, then uses
+ * one concise Perplexity call to research:
  * 1. What the company does (value chain analysis)
  * 2. Industry-specific AI use cases
  * 3. Job postings (automation opportunities)
@@ -23,18 +128,40 @@ export async function POST(request: Request) {
       );
     }
 
-    const { url } = await request.json();
+    const body = (await request.json()) as Record<string, unknown>;
+    const submittedUrl = normalizeString(body.url, 300);
+    const company = normalizeString(body.company, 160);
+    const email = normalizeString(body.email, 200).toLowerCase();
+    const name = normalizeString(body.name, 160);
 
-    const domain = getCompanyDomain(url);
-    if (!domain) {
+    const companyUrl = normalizePublicCompanyUrl(submittedUrl);
+    if (!companyUrl) {
       return NextResponse.json(
         { error: 'Please enter a valid public company website.' },
         { status: 400 },
       );
     }
 
+    if (!company) {
+      return NextResponse.json({ error: 'Company name is required.' }, { status: 400 });
+    }
+
+    if (!email || !isValidEmail(email)) {
+      return NextResponse.json({ error: 'A valid work email is required.' }, { status: 400 });
+    }
+
+    const domain = companyUrl.hostname.replace(/^www\./, '');
+    const leadCapture = captureDiscoverLead({
+      name: name || undefined,
+      email,
+      company,
+      companyUrl: companyUrl.toString(),
+      domain,
+    });
+
     const perplexityKey = process.env.PERPLEXITY_API_KEY;
     if (!perplexityKey) {
+      await leadCapture;
       return NextResponse.json(
         {
           error: 'Research unavailable',
@@ -44,37 +171,10 @@ export async function POST(request: Request) {
       );
     }
 
-    // Run 3 Perplexity searches in parallel for speed
-    const [companyResearch, jobsResearch, industryResearch] = await Promise.all([
-      // 1. Company overview + value chain
-      perplexitySearch(
-        perplexityKey,
-        `What does ${domain} do? Analyze their business model, value chain, key products/services, target market, approximate company size/revenue, and technology stack. Be specific about their operations and workflows.`,
-      ),
+    const companyResearch = await perplexityCompanyResearch(perplexityKey, domain, company);
+    await leadCapture;
 
-      // 2. Job postings = automation opportunities
-      perplexitySearch(
-        perplexityKey,
-        `Find current job postings or careers at ${domain}. List the roles they are hiring for, especially operations, data entry, customer service, sales, marketing, and any repetitive/manual roles. If no job postings found, describe typical roles at this type of company.`,
-      ),
-
-      // 3. Industry-specific AI use cases
-      perplexitySearch(
-        perplexityKey,
-        `What are the most practical AI and automation use cases for a company like ${domain}? Consider their specific industry, business model, and operations. Focus on revenue operations, cost control, process automation, AI agents, and predictive analytics. For each use case, identify the workflow owner, baseline metric to measure, adoption requirement, controls, and evidence needed before estimating value. Do not estimate ROI unless sourced evidence supports it.`,
-      ),
-    ]);
-
-    // Structure the intelligence
-    const intelligence = {
-      domain,
-      company: companyResearch,
-      jobs: jobsResearch,
-      useCases: industryResearch,
-      researchedAt: new Date().toISOString(),
-    };
-
-    return NextResponse.json(intelligence);
+    return NextResponse.json(companyResearch);
   } catch (error) {
     logServerError('Research API error:', error);
     return NextResponse.json(
@@ -87,7 +187,10 @@ export async function POST(request: Request) {
   }
 }
 
-async function perplexitySearch(apiKey: string, query: string): Promise<string> {
+async function perplexityCompanyResearch(apiKey: string, domain: string, company: string) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), PERPLEXITY_TIMEOUT_MS);
+
   try {
     const response = await fetch('https://api.perplexity.ai/chat/completions', {
       method: 'POST',
@@ -95,33 +198,50 @@ async function perplexitySearch(apiKey: string, query: string): Promise<string> 
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
+      signal: controller.signal,
       body: JSON.stringify({
         model: 'sonar',
         messages: [
           {
             role: 'system',
             content:
-              'You are a business analyst. Provide specific, factual analysis. Include numbers, specifics, and actionable insights. Be concise but thorough.',
+              'You are a concise business analyst. Use public evidence, avoid hype, and do not invent ROI or unsupported numbers.',
           },
           {
             role: 'user',
-            content: query,
+            content: `Research ${company} at ${domain} for an AI value-map pre-assessment.
+
+Return exactly these three labeled sections:
+
+COMPANY_OVERVIEW:
+- What the company sells, who buys it, apparent operating model, value chain, scale signals, and notable constraints.
+
+HIRING_AND_WORKFLOW_SIGNALS:
+- Current hiring, roles, handoffs, service, sales, operations, finance, support, or repetitive knowledge-work signals. If hiring data is limited, state that and infer only common workflow areas for this type of company.
+
+AI_USE_CASES:
+- The most practical AI/automation use cases for this company. For each, name workflow owner, baseline metric, adoption requirement, control needed, and evidence required before estimating value.
+
+Keep the full answer under 900 words. Be specific, but write for a CEO/COO scanning quickly.`,
           },
         ],
-        max_tokens: 1500,
+        max_tokens: 1800,
       }),
     });
 
     if (!response.ok) {
       const errorText = await response.text();
       logServerError('Perplexity error:', errorText);
-      return 'Research unavailable for this query.';
+      return splitCompanyResearch('', domain);
     }
 
     const data = await response.json();
-    return data.choices?.[0]?.message?.content || 'No results found.';
+    const raw = data.choices?.[0]?.message?.content || '';
+    return splitCompanyResearch(raw, domain);
   } catch (error) {
     logServerError('Perplexity search error:', error);
-    return 'Research unavailable.';
+    return splitCompanyResearch('', domain);
+  } finally {
+    clearTimeout(timeout);
   }
 }

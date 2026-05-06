@@ -111,3 +111,48 @@ export async function saveContactLead(lead: {
 
   return data?.id ?? null;
 }
+
+export async function saveDiscoverLead(lead: {
+  name?: string;
+  email: string;
+  company: string;
+  company_url?: string;
+  domain?: string;
+  source: string;
+  report?: string;
+}): Promise<string | null> {
+  if (!supabaseAdmin) {
+    return null;
+  }
+
+  const { data, error } = await supabaseAdmin
+    .from('assessment_leads')
+    .insert({
+      name: lead.name || lead.email,
+      email: lead.email,
+      company: lead.company,
+      role: '',
+      industry: '',
+      challenge: lead.domain
+        ? `AI Value Map requested for ${lead.domain}`
+        : 'AI Value Map requested',
+      company_url: lead.company_url,
+      composite_score: 0,
+      maturity_level: '',
+      pillar_scores: {},
+      suggested_solutions: [],
+      suggested_engagement: 'AI Value Map',
+      closer_report: lead.report || '',
+      company_research: lead.domain || '',
+      industry_best_in_class: '',
+      source: lead.source,
+    })
+    .select('id')
+    .single();
+
+  if (error) {
+    return null;
+  }
+
+  return data?.id ?? null;
+}

@@ -4,6 +4,7 @@ import {
   ArrowRight,
   BarChart3,
   Building2,
+  CheckCircle2,
   ClipboardCheck,
   FileText,
   Globe,
@@ -19,7 +20,7 @@ import {
   X,
 } from 'lucide-react';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChatMessage } from '@/components/discover/chat-message';
 import { Button } from '@/components/ui/button';
 import { trackEvent } from '@/lib/analytics';
@@ -109,12 +110,39 @@ const VALUE_MAP_DELIVERABLES = [
   },
 ];
 
+const RESEARCH_PROGRESS_STEPS = [
+  {
+    label: 'Capture request',
+    detail: 'Company, website, and email are logged so ClearForge can follow up.',
+  },
+  {
+    label: 'Read the business',
+    detail: 'Scan the site and public signals for business model, buyers, and workflow clues.',
+  },
+  {
+    label: 'Find value-chain pressure',
+    detail: 'Separate growth, service, operating, knowledge-work, and quality opportunities.',
+  },
+  {
+    label: 'Draft first-build map',
+    detail: 'Translate the signals into a practical AI value-chain and starting agenda.',
+  },
+  {
+    label: 'Prepare results',
+    detail: 'Package the map so the conversation and report stay company-specific.',
+  },
+];
+
 const PROMPT_TEXT_LIMITS = {
   company: 2200,
   jobs: 1200,
   useCases: 2600,
   valueChain: 6500,
 };
+
+function isValidEmail(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
 
 function clampPromptText(text: string, maxChars: number): string {
   const normalized = text.replace(/\s+/g, ' ').trim();
@@ -172,6 +200,12 @@ function buildValueChainPromptContext(
 export default function DiscoverPage() {
   const [phase, setPhase] = useState<'url' | 'researching' | 'value-chain' | 'chat'>('url');
   const [websiteUrl, setWebsiteUrl] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [workEmail, setWorkEmail] = useState('');
+  const [contactName, setContactName] = useState('');
+  const [startError, setStartError] = useState('');
+  const [researchProgress, setResearchProgress] = useState(0);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [intelligence, setIntelligence] = useState<CompanyIntelligence | null>(null);
   const [valueChain, setValueChain] = useState<CustomValueChain | null>(null);
   const [annotations, setAnnotations] = useState<Record<string, ActivityAnnotation>>({});
@@ -183,11 +217,23 @@ export default function DiscoverPage() {
   const [showReportButton, setShowReportButton] = useState(false);
   const [reportLoading, setReportLoading] = useState(false);
   const [reportContent, setReportContent] = useState<string | null>(null);
+  const [reportDelivery, setReportDelivery] = useState<'sent' | 'not_sent' | null>(null);
   const [reportName, setReportName] = useState('');
   const [reportEmail, setReportEmail] = useState('');
   const [reportCompany, setReportCompany] = useState('');
   const [showReportForm, setShowReportForm] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (phase !== 'researching') return;
+
+    setElapsedSeconds(0);
+    const timer = window.setInterval(() => {
+      setElapsedSeconds((seconds) => seconds + 1);
+    }, 1000);
+
+    return () => window.clearInterval(timer);
+  }, [phase]);
 
   const scrollToBottom = () => {
     setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
@@ -196,9 +242,34 @@ export default function DiscoverPage() {
   // Phase 1: Research the company → generate custom value chain
   const handleUrlSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!websiteUrl.trim()) return;
+    const trimmedUrl = websiteUrl.trim();
+    const trimmedCompany = companyName.trim();
+    const trimmedEmail = workEmail.trim().toLowerCase();
+    const trimmedName = contactName.trim();
 
-    trackEvent('ai_value_map_started', { mode: 'website', domain: websiteUrl.trim() });
+    if (!trimmedUrl || !trimmedCompany || !trimmedEmail) {
+      setStartError('Please enter your company website, company name, and work email.');
+      return;
+    }
+
+    if (!isValidEmail(trimmedEmail)) {
+      setStartError('Please enter a valid work email so we can send the results.');
+      return;
+    }
+
+    setStartError('');
+    setReportEmail(trimmedEmail);
+    setReportCompany(trimmedCompany);
+    if (trimmedName) setReportName(trimmedName);
+    setResearchProgress(0);
+    window.setTimeout(() => setResearchProgress((step) => Math.max(step, 1)), 500);
+
+    trackEvent('ai_value_map_started', {
+      mode: 'website',
+      domain: trimmedUrl,
+      company: trimmedCompany,
+      has_email: true,
+    });
     setPhase('researching');
 
     try {
@@ -206,7 +277,12 @@ export default function DiscoverPage() {
       const res = await fetch('/api/discover/research', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: websiteUrl.trim() }),
+        body: JSON.stringify({
+          url: trimmedUrl,
+          company: trimmedCompany,
+          email: trimmedEmail,
+          name: trimmedName,
+        }),
       });
 
       const data = await res.json();
@@ -225,9 +301,11 @@ export default function DiscoverPage() {
       }
 
       setIntelligence(data);
+      setResearchProgress(2);
 
       // Step 2: Custom value chain (Claude Sonnet 4.5)
       try {
+        setResearchProgress(3);
         const vcRes = await fetch('/api/discover/value-chain', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -235,8 +313,9 @@ export default function DiscoverPage() {
         });
         const vcData = await vcRes.json();
 
-        if (!vcData.fallback && !vcData.error && vcData.functions) {
+        if (vcData.functions) {
           setValueChain(vcData);
+          setResearchProgress(4);
           setPhase('value-chain');
           return;
         }
@@ -370,13 +449,14 @@ export default function DiscoverPage() {
 
   const handleGenerateReport = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!reportName.trim() || !reportEmail.trim()) return;
+    if (!reportEmail.trim() || !reportCompany.trim()) return;
 
     trackEvent('ai_value_map_report_requested', {
       company: reportCompany.trim() || valueChain?.companyName || intelligence?.domain || 'unknown',
       message_count: messages.filter((m) => m.role !== 'system').length,
     });
     setReportLoading(true);
+    setReportDelivery(null);
     try {
       const res = await fetch('/api/discover/report', {
         method: 'POST',
@@ -394,17 +474,20 @@ export default function DiscoverPage() {
           name: reportName.trim(),
           email: reportEmail.trim(),
           company: reportCompany.trim(),
+          companyUrl: websiteUrl.trim(),
         }),
       });
 
       const data = await res.json();
       if (data.error) throw new Error(data.error);
       setReportContent(data.report || data.content || JSON.stringify(data, null, 2));
+      setReportDelivery(data.emailSent ? 'sent' : 'not_sent');
       setShowReportForm(false);
     } catch {
       setReportContent(
         'Report generation failed. Please try again or contact james@clearforge.ai for a personalized assessment.',
       );
+      setReportDelivery(null);
     } finally {
       setReportLoading(false);
     }
@@ -516,28 +599,72 @@ export default function DiscoverPage() {
             <form
               onSubmit={handleUrlSubmit}
               data-analytics="discover_url_submit"
-              className="mt-10 mx-auto max-w-xl"
+              className="mt-10 mx-auto max-w-2xl"
             >
-              <div className="flex flex-col sm:flex-row gap-3">
-                <div className="flex-1 relative">
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="relative sm:col-span-2">
                   <Globe className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-stone" />
                   <input
                     type="text"
                     value={websiteUrl}
                     onChange={(e) => setWebsiteUrl(e.target.value)}
-                    placeholder="yourcompany.com"
+                    placeholder="Company website, e.g. yourcompany.com"
                     className="w-full bg-divider-dark border border-divider-dark text-bone placeholder:text-stone pl-11 pr-4 py-4 text-sm focus:border-brass focus:outline-none transition-colors"
+                    required
+                    autoComplete="url"
                   />
                 </div>
+                <div className="relative">
+                  <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-stone" />
+                  <input
+                    type="text"
+                    value={companyName}
+                    onChange={(e) => setCompanyName(e.target.value)}
+                    placeholder="Company name"
+                    className="w-full bg-divider-dark border border-divider-dark text-bone placeholder:text-stone pl-11 pr-4 py-4 text-sm focus:border-brass focus:outline-none transition-colors"
+                    required
+                    autoComplete="organization"
+                  />
+                </div>
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-stone" />
+                  <input
+                    type="email"
+                    value={workEmail}
+                    onChange={(e) => setWorkEmail(e.target.value)}
+                    placeholder="Work email for results"
+                    className="w-full bg-divider-dark border border-divider-dark text-bone placeholder:text-stone pl-11 pr-4 py-4 text-sm focus:border-brass focus:outline-none transition-colors"
+                    required
+                    autoComplete="email"
+                  />
+                </div>
+                <div className="relative sm:col-span-2">
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-stone" />
+                  <input
+                    type="text"
+                    value={contactName}
+                    onChange={(e) => setContactName(e.target.value)}
+                    placeholder="Your name (optional)"
+                    className="w-full bg-divider-dark border border-divider-dark text-bone placeholder:text-stone pl-11 pr-4 py-4 text-sm focus:border-brass focus:outline-none transition-colors"
+                    autoComplete="name"
+                  />
+                </div>
+                {startError && (
+                  <p className="sm:col-span-2 text-left text-xs text-brass-light">{startError}</p>
+                )}
                 <Button
                   type="submit"
                   size="lg"
-                  disabled={!websiteUrl.trim()}
-                  className="w-full sm:w-auto"
+                  disabled={!websiteUrl.trim() || !companyName.trim() || !workEmail.trim()}
+                  className="w-full sm:col-span-2"
                 >
                   Analyze <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
+              <p className="mt-3 text-xs leading-relaxed text-stone">
+                We send the report to your work email and notify ClearForge so James can follow up
+                with a sharper recommendation if the automated scan misses context.
+              </p>
             </form>
 
             <button
@@ -563,9 +690,9 @@ export default function DiscoverPage() {
 
             <div className="mt-12 sm:mt-16 grid grid-cols-3 gap-4 sm:gap-8 text-center">
               {[
-                { metric: '5 min', label: 'To complete' },
+                { metric: '<60 sec', label: 'Typical first map' },
                 { metric: 'Free', label: 'No commitment' },
-                { metric: 'PDF', label: 'Personalized report' },
+                { metric: 'Email', label: 'Results delivered' },
               ].map((item) => (
                 <div key={item.label}>
                   <span className="metric text-lg text-brass">{item.metric}</span>
@@ -580,31 +707,64 @@ export default function DiscoverPage() {
       {/* ═══ PHASE 2: RESEARCHING ═══ */}
       {phase === 'researching' && (
         <div className="flex-1 flex items-center justify-center px-6">
-          <div className="text-center">
-            <Loader2 className="h-10 w-10 text-brass mx-auto animate-spin" />
+          <div className="w-full max-w-xl text-center">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center border border-brass/40 bg-brass/10">
+              <Loader2 className="h-6 w-6 text-brass animate-spin" />
+            </div>
             <h2 className="mt-6 text-h2 text-bone">
               Researching {websiteUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')}...
             </h2>
-            <div className="mt-8 space-y-3 text-left max-w-sm mx-auto">
-              {[
-                'Mapping your business model and operating value chain',
-                'Scoring industry-specific AI use cases and maturity signals',
-                'Scanning for roles, handoffs, and workflows AI can improve',
-                'Generating the first-build agenda for a custom AI operating model',
-              ].map((step, i) => (
-                <div
-                  key={step}
-                  className="flex items-center gap-3 text-sm text-stone animate-fade-in"
-                  style={{ animationDelay: `${i * 0.5}s` }}
-                >
-                  <div
-                    className="w-1.5 h-1.5 bg-brass rounded-full animate-pulse"
-                    style={{ animationDelay: `${i * 0.3}s` }}
-                  />
-                  {step}
-                </div>
-              ))}
+            <p className="mt-3 text-body-sm text-stone">
+              Building a company-specific value map for{' '}
+              <span className="text-bone">{companyName || 'your company'}</span>. Elapsed:{' '}
+              {elapsedSeconds}s.
+            </p>
+
+            <div className="mt-8 h-1 w-full bg-divider-dark">
+              <div
+                className="h-full bg-brass transition-all duration-500"
+                style={{
+                  width: `${Math.min(96, ((researchProgress + 1) / RESEARCH_PROGRESS_STEPS.length) * 100)}%`,
+                }}
+              />
             </div>
+
+            <div className="mt-8 space-y-3 text-left">
+              {RESEARCH_PROGRESS_STEPS.map((step, i) => {
+                const isComplete = i < researchProgress;
+                const isCurrent = i === researchProgress;
+                return (
+                  <div
+                    key={step.label}
+                    className={`flex items-start gap-3 border border-divider-dark px-4 py-3 transition-colors ${
+                      isCurrent ? 'bg-bone/[0.04] text-bone' : 'text-stone'
+                    }`}
+                    style={{ animationDelay: `${i * 0.5}s` }}
+                  >
+                    {isComplete ? (
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brass-light" />
+                    ) : isCurrent ? (
+                      <Loader2 className="mt-0.5 h-4 w-4 shrink-0 animate-spin text-brass" />
+                    ) : (
+                      <span className="mt-1.5 h-2 w-2 shrink-0 border border-stone/50" />
+                    )}
+                    <span>
+                      <span className="block text-sm font-medium">{step.label}</span>
+                      <span className="mt-0.5 block text-xs leading-relaxed text-stone">
+                        {step.detail}
+                      </span>
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+
+            {elapsedSeconds > 18 && (
+              <p className="mt-5 text-xs leading-relaxed text-stone">
+                Still working. If live research is slow, we will fall back to a practical first map
+                and keep the conversation moving.
+              </p>
+            )}
           </div>
         </div>
       )}
@@ -881,8 +1041,7 @@ export default function DiscoverPage() {
                       </h3>
                       <p className="text-xs text-stone mt-1">
                         Based on the value chain and conversation, we&apos;ll generate a concise
-                        executive report with maturity read, first-build recommendation, risks, and
-                        next steps.
+                        executive report, show it here, and email it to your work inbox.
                       </p>
 
                       {!showReportForm ? (
@@ -903,8 +1062,7 @@ export default function DiscoverPage() {
                             <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-stone" />
                             <input
                               type="text"
-                              required
-                              placeholder="Your name"
+                              placeholder="Your name (optional)"
                               value={reportName}
                               onChange={(e) => setReportName(e.target.value)}
                               className="w-full bg-forge-black border border-divider-dark text-bone placeholder:text-stone pl-10 pr-4 py-2.5 text-sm focus:border-brass focus:outline-none transition-colors"
@@ -925,7 +1083,8 @@ export default function DiscoverPage() {
                             <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-stone" />
                             <input
                               type="text"
-                              placeholder="Company name (optional)"
+                              required
+                              placeholder="Company name"
                               value={reportCompany}
                               onChange={(e) => setReportCompany(e.target.value)}
                               className="w-full bg-forge-black border border-divider-dark text-bone placeholder:text-stone pl-10 pr-4 py-2.5 text-sm focus:border-brass focus:outline-none transition-colors"
@@ -964,7 +1123,19 @@ export default function DiscoverPage() {
                   <div className="flex items-center justify-between mb-4 no-print">
                     <div className="flex items-center gap-3">
                       <FileText className="h-5 w-5 text-brass" />
-                      <h3 className="text-sm font-bold text-bone">Your AI Readiness Report</h3>
+                      <div>
+                        <h3 className="text-sm font-bold text-bone">Your AI Readiness Report</h3>
+                        {reportDelivery === 'sent' && (
+                          <p className="mt-0.5 text-xs text-stone">
+                            Emailed to <span className="text-bone">{reportEmail}</span>.
+                          </p>
+                        )}
+                        {reportDelivery === 'not_sent' && (
+                          <p className="mt-0.5 text-xs text-stone">
+                            Report generated here. Email delivery did not confirm.
+                          </p>
+                        )}
+                      </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <button
