@@ -22,24 +22,25 @@ export function TransformationSpine() {
           </SectionReveal>
         </div>
 
-        <div className="mt-14 border border-divider bg-parchment">
-          <div className="grid lg:grid-cols-5">
+        <div className="relative mt-16">
+          <div className="absolute left-0 right-0 top-[2.15rem] hidden h-px bg-divider lg:block" />
+          <div className="grid gap-10 lg:grid-cols-5">
             {transformationSpine.map((item, index) => {
               const Icon = homeIcons[item.icon];
               return (
                 <div
                   key={item.title}
-                  className="group relative border-b border-divider p-6 transition-colors hover:bg-warm-white lg:border-b-0 lg:border-r lg:last:border-r-0"
+                  className="group relative border-t border-divider pt-6 lg:border-t-0 lg:pt-0"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <p className="metric text-xs text-brass">
+                  <div className="flex items-center justify-between gap-4 lg:block">
+                    <p className="metric relative z-10 inline-flex bg-warm-white pr-4 text-xs text-brass lg:bg-white">
                       {String(index + 1).padStart(2, '0')}
                     </p>
-                    <Icon className="h-5 w-5 text-brass" />
+                    <Icon className="h-5 w-5 text-brass lg:mt-8" />
                   </div>
-                  <h3 className="mt-7 text-h4">{item.title}</h3>
+                  <h3 className="mt-6 max-w-[13rem] text-h4">{item.title}</h3>
                   <p className="mt-4 text-body-sm leading-relaxed text-warm-gray">{item.detail}</p>
-                  <p className="mt-7 border-t border-divider pt-4 text-xs font-semibold uppercase tracking-[0.14em] text-anthracite">
+                  <p className="mt-7 border-l border-brass pl-3 text-xs font-semibold uppercase tracking-[0.14em] text-anthracite">
                     {item.output}
                   </p>
                 </div>

@@ -6,6 +6,7 @@ import { SectionReveal, StaggerReveal } from '@/components/home/homepage-animati
 import { homeIcons } from '@/components/home/icon-map';
 import { MetricCounter } from '@/components/home/metric-counter';
 import { TransformationSpine } from '@/components/home/transformation-spine';
+import { ValueOperatingSystem } from '@/components/home/value-operating-system';
 import { Button } from '@/components/ui/button';
 import { UseCaseCardVisual } from '@/components/use-cases/use-case-card-visual';
 import { caseStudies } from '@/data/case-studies';
@@ -48,7 +49,7 @@ export default function Home() {
     <>
       <HeroScroll />
 
-      <section className="bg-parchment py-16 sm:py-20 lg:py-24">
+      <section className="bg-parchment py-12 sm:py-16 lg:py-20">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-end lg:gap-16">
             <SectionReveal animation="slide-left">
@@ -66,27 +67,37 @@ export default function Home() {
             </SectionReveal>
           </div>
 
-          <StaggerReveal className="mt-14 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {marketGaps.map((problem) => {
+          <StaggerReveal className="mt-14 border-y border-divider">
+            {marketGaps.map((problem, index) => {
               const Icon = homeIcons[problem.icon];
               return (
-                <div key={problem.title} className="border border-divider bg-warm-white p-6">
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="text-xs font-semibold uppercase tracking-[0.16em] text-warm-gray">
+                <div
+                  key={problem.title}
+                  className="grid gap-4 border-t border-divider py-6 first:border-t-0 md:grid-cols-[10rem_1fr_2rem] md:items-start lg:py-8"
+                >
+                  <div className="flex items-center justify-between gap-4 md:block">
+                    <span className="text-xs font-semibold uppercase text-brass">
                       {problem.label}
                     </span>
-                    <Icon className="h-5 w-5 text-brass" />
+                    <p className="metric text-xs text-warm-gray md:mt-4">
+                      {String(index + 1).padStart(2, '0')}
+                    </p>
                   </div>
-                  <h3 className="mt-5 text-h4">{problem.title}</h3>
-                  <p className="mt-3 text-body-sm leading-relaxed text-warm-gray">
-                    {problem.detail}
-                  </p>
+                  <div>
+                    <h3 className="max-w-3xl text-h3">{problem.title}</h3>
+                    <p className="mt-3 max-w-2xl text-body-sm leading-relaxed text-warm-gray">
+                      {problem.detail}
+                    </p>
+                  </div>
+                  <Icon className="h-5 w-5 text-brass md:justify-self-end" />
                 </div>
               );
             })}
           </StaggerReveal>
         </div>
       </section>
+
+      <ValueOperatingSystem />
 
       <TransformationSpine />
 
@@ -102,43 +113,46 @@ export default function Home() {
                 The point is not a demo. The point is an operating change leaders can inspect,
                 manage, and scale.
               </p>
-              <div className="mt-8 grid grid-cols-2 gap-3">
+              <div className="mt-8 border-y border-divider">
                 {proofNotes.map((note) => (
-                  <div key={note} className="border border-divider bg-warm-white p-4">
-                    <CheckCircle2 className="h-4 w-4 text-brass" />
-                    <p className="mt-3 text-sm font-semibold text-anthracite">{note}</p>
+                  <div
+                    key={note}
+                    className="flex items-center gap-3 border-t border-divider py-3 first:border-t-0"
+                  >
+                    <CheckCircle2 className="h-4 w-4 text-success" />
+                    <p className="text-sm font-semibold text-anthracite">{note}</p>
                   </div>
                 ))}
               </div>
             </SectionReveal>
 
-            <div className="grid gap-4">
+            <div className="border-y border-divider">
               {caseStudies.slice(0, 3).map((cs) => (
                 <Link
                   key={cs.slug}
                   href={`/case-studies/${cs.slug}`}
-                  className="group border border-divider bg-warm-white p-6 transition-colors hover:bg-white sm:p-7"
+                  className="group grid gap-5 border-t border-divider py-7 first:border-t-0 sm:grid-cols-[1fr_auto] sm:items-start"
                 >
-                  <div className="grid gap-5 sm:grid-cols-[1fr_auto] sm:items-start">
+                  <div>
+                    <p className="overline text-[10px]">{cs.industry}</p>
+                    <h3 className="mt-3 text-h3 transition-colors group-hover:text-brass">
+                      {cs.title}
+                    </h3>
+                    <p className="mt-3 line-clamp-2 text-body-sm leading-relaxed text-warm-gray">
+                      {cs.excerpt}
+                    </p>
+                  </div>
+                  <div className="flex items-end justify-between gap-5 sm:block sm:text-right">
                     <div>
-                      <p className="overline text-[10px]">{cs.industry}</p>
-                      <h3 className="mt-3 text-h3 transition-colors group-hover:text-brass">
-                        {cs.title}
-                      </h3>
-                      <p className="mt-3 line-clamp-2 text-body-sm leading-relaxed text-warm-gray">
-                        {cs.excerpt}
-                      </p>
-                    </div>
-                    <div className="sm:text-right">
                       <MetricCounter value={cs.heroMetric} className="metric text-3xl text-brass" />
                       <p className="mt-2 max-w-[12rem] text-xs leading-relaxed text-warm-gray">
                         {cs.heroMetricLabel}
                       </p>
                     </div>
+                    <span className="inline-flex items-center text-sm font-semibold text-brass">
+                      Read <ArrowRight className="ml-2 h-4 w-4" />
+                    </span>
                   </div>
-                  <span className="mt-5 inline-flex items-center text-sm font-semibold text-brass">
-                    Read case study <ArrowRight className="ml-2 h-4 w-4" />
-                  </span>
                 </Link>
               ))}
             </div>
@@ -163,26 +177,27 @@ export default function Home() {
             </div>
           </SectionReveal>
 
-          <StaggerReveal className="mt-14 grid gap-5 lg:grid-cols-3">
+          <StaggerReveal className="mt-14 border-y border-divider">
             {priorityUseCases.map(({ useCase, focus, line, signal }) => (
               <Link
                 key={useCase.slug}
                 href={`/use-cases/${useCase.slug}`}
-                className="group overflow-hidden border border-divider bg-warm-white transition-colors hover:bg-white"
+                className="group grid gap-6 border-t border-divider py-7 first:border-t-0 md:grid-cols-[minmax(14rem,0.48fr)_1fr_minmax(10rem,0.32fr)_auto] md:items-center lg:py-8"
               >
-                <div className="relative aspect-[16/9] overflow-hidden">
+                <div className="relative aspect-[16/9] overflow-hidden bg-forge-black">
                   <UseCaseCardVisual useCase={useCase} />
                 </div>
-                <div className="p-6">
+                <div>
                   <p className="overline text-[10px]">{focus}</p>
                   <h3 className="mt-2 text-h3 transition-colors group-hover:text-brass">
                     {useCase.shortTitle}
                   </h3>
                   <p className="mt-3 text-body-sm leading-relaxed text-warm-gray">{line}</p>
-                  <p className="mt-5 border-t border-divider pt-4 text-xs font-semibold uppercase tracking-[0.14em] text-warm-gray">
-                    {signal}
-                  </p>
                 </div>
+                <p className="border-l border-divider pl-4 text-xs font-semibold uppercase tracking-[0.14em] text-warm-gray">
+                  {signal}
+                </p>
+                <ArrowRight className="hidden h-5 w-5 text-brass transition-transform group-hover:translate-x-1 md:block" />
               </Link>
             ))}
           </StaggerReveal>
@@ -206,16 +221,19 @@ export default function Home() {
               </Button>
             </SectionReveal>
 
-            <div className="grid gap-4">
+            <div className="relative grid gap-8 lg:grid-cols-4 lg:gap-10">
+              <div className="absolute left-0 right-0 top-[1.45rem] hidden h-px bg-divider lg:block" />
               {firstNinetyDays.map((step) => (
                 <SectionReveal
                   key={step.day}
                   animation="fade-up"
-                  className="grid gap-5 border border-divider bg-parchment p-6 sm:grid-cols-[4rem_1fr] sm:p-7"
+                  className="relative border-t border-divider pt-6 lg:border-t-0"
                 >
-                  <p className="metric text-2xl text-brass">{step.day}</p>
+                  <p className="metric relative z-10 inline-flex bg-warm-white pr-4 text-2xl text-brass">
+                    {step.day}
+                  </p>
                   <div>
-                    <h3 className="text-h3">{step.title}</h3>
+                    <h3 className="mt-6 text-h3">{step.title}</h3>
                     <p className="mt-3 text-body-sm leading-relaxed text-warm-gray">
                       {step.detail}
                     </p>
@@ -242,12 +260,17 @@ export default function Home() {
               </p>
             </SectionReveal>
 
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <div className="border-y border-bone/10">
               {trustStandards.map((standard) => (
-                <div key={standard.title} className="border border-bone/10 bg-bone/[0.04] p-6">
-                  <CheckCircle2 className="h-5 w-5 text-brass-light" />
-                  <h3 className="mt-5 text-h4 text-bone">{standard.title}</h3>
-                  <p className="mt-3 text-body-sm leading-relaxed text-stone">{standard.detail}</p>
+                <div
+                  key={standard.title}
+                  className="grid gap-4 border-t border-bone/10 py-5 first:border-t-0 md:grid-cols-[1fr_1.4fr] md:items-start"
+                >
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-success" />
+                    <h3 className="text-h4 text-bone">{standard.title}</h3>
+                  </div>
+                  <p className="text-body-sm leading-relaxed text-stone">{standard.detail}</p>
                 </div>
               ))}
             </div>
@@ -269,7 +292,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="mt-10 flex flex-wrap gap-3 border-t border-bone/10 pt-8">
+          <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-bone/10 pt-8">
             {[
               'Bain: AI automation discipline',
               'EY: digital transformation controls',
@@ -277,7 +300,7 @@ export default function Home() {
             ].map((item) => (
               <span
                 key={item}
-                className="border border-bone/10 bg-bone/[0.04] px-4 py-2 text-xs font-semibold text-stone"
+                className="border-l border-brass-light/35 pl-3 text-xs font-semibold text-stone"
               >
                 {item}
               </span>

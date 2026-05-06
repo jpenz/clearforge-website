@@ -18,19 +18,18 @@ export function BenefitsRealizationSystem() {
               see what AI handled, where people reviewed or overrode it, what changed operationally,
               and which teams are turning usage into measurable value.
             </p>
-            <div className="mt-8 border border-brass-light/20 bg-brass-light/10 p-5">
-              <div className="flex items-start gap-3">
-                <Trophy className="mt-0.5 h-5 w-5 shrink-0 text-brass-light" />
-                <p className="text-body-sm leading-relaxed text-stone">
-                  Incentives should reward value realized, quality held, customer outcomes, and
-                  responsible adoption. The wrong metric is raw prompt volume or tool logins.
-                </p>
-              </div>
+            <div className="mt-8 flex items-start gap-4 border-l border-brass-light pl-5">
+              <Trophy className="mt-0.5 h-5 w-5 shrink-0 text-brass-light" />
+              <p className="max-w-xl text-body-sm leading-relaxed text-stone">
+                Incentives should reward value realized, quality held, customer outcomes, and
+                responsible adoption. The wrong metric is raw prompt volume or tool logins.
+              </p>
             </div>
           </div>
 
-          <div className="border border-bone/10 bg-[#0d1425]">
-            <div className="flex items-center justify-between border-b border-bone/10 px-5 py-4">
+          <div className="relative overflow-hidden bg-[#0A0B0D]">
+            <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(242,239,232,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(242,239,232,0.18)_1px,transparent_1px)] [background-size:44px_44px]" />
+            <div className="relative flex items-center justify-between border-y border-bone/10 px-5 py-4">
               <div className="flex items-center gap-3">
                 <ShieldCheck className="h-5 w-5 text-brass-light" />
                 <div>
@@ -38,16 +37,19 @@ export function BenefitsRealizationSystem() {
                   <p className="text-xs text-stone">Monthly value and adoption review</p>
                 </div>
               </div>
-              <span className="hidden border border-bone/10 bg-bone/[0.04] px-3 py-1.5 text-xs text-stone sm:inline-flex">
+              <span className="hidden border-l border-success/40 pl-3 text-xs text-stone sm:inline-flex">
                 Role-level, not keystroke-level
               </span>
             </div>
 
-            <div className="grid gap-4 p-5 lg:grid-cols-3">
+            <div className="relative grid border-b border-bone/10 lg:grid-cols-3">
               {benefitsDashboardPanels.map((panel) => {
                 const Icon = homeIcons[panel.icon];
                 return (
-                  <div key={panel.title} className="border border-bone/10 bg-bone/[0.04] p-4">
+                  <div
+                    key={panel.title}
+                    className="border-b border-bone/10 p-5 last:border-b-0 lg:border-b-0 lg:border-r lg:last:border-r-0"
+                  >
                     <div className="flex items-center gap-2">
                       <Icon className="h-4 w-4 text-brass-light" />
                       <p className="text-sm font-semibold text-bone">{panel.title}</p>
@@ -68,13 +70,13 @@ export function BenefitsRealizationSystem() {
               })}
             </div>
 
-            <div className="grid border-t border-bone/10 md:grid-cols-4">
+            <div className="relative grid md:grid-cols-4">
               {benefitsOperatingModel.map((item) => (
                 <div
                   key={item.title}
                   className="border-b border-bone/10 p-5 md:border-b-0 md:border-r md:last:border-r-0"
                 >
-                  <CheckCircle2 className="h-4 w-4 text-brass-light" />
+                  <CheckCircle2 className="h-4 w-4 text-success" />
                   <h3 className="mt-4 text-h4 text-bone">{item.title}</h3>
                   <p className="mt-3 text-xs leading-relaxed text-stone">{item.detail}</p>
                   <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-brass-light">
