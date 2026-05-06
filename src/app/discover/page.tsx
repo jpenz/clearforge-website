@@ -6,18 +6,24 @@ import {
   Building2,
   CheckCircle2,
   ClipboardCheck,
+  ExternalLink,
   FileText,
   Globe,
+  LineChart,
   Loader2,
   Mail,
   MessageSquare,
   Printer,
+  Save,
   Send,
+  ShieldCheck,
   Sparkles,
   Star,
   Target,
+  TrendingUp,
   User,
   X,
+  Zap,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
@@ -35,6 +41,16 @@ interface CompanyIntelligence {
   company: string;
   jobs: string;
   useCases: string;
+  growthSignals?: string;
+  sourceNotes?: string;
+  sources?: SourceReference[];
+  fallback?: boolean;
+}
+
+interface SourceReference {
+  title?: string;
+  url: string;
+  publisher?: string;
 }
 
 type ActivityType = 'agent' | 'automation' | 'model' | 'copilot';
@@ -64,6 +80,40 @@ interface ActivityAnnotation {
   priority?: Priority;
   notes?: string;
 }
+
+interface AmbitionBrief {
+  companyName: string;
+  domain: string;
+  industry: string;
+  ambition: string;
+  industryThesis: string;
+  growthSignals: string[];
+  futureState: { label: string; detail: string }[];
+  financialUpside: { label: string; range: string; basis: string }[];
+  firstMoves: string[];
+  sources: SourceReference[];
+}
+
+interface DiscoverDraft {
+  savedAt?: string;
+  phase?: 'url' | 'researching' | 'brief' | 'value-chain' | 'chat';
+  websiteUrl?: string;
+  companyName?: string;
+  workEmail?: string;
+  contactName?: string;
+  intelligence?: CompanyIntelligence | null;
+  valueChain?: CustomValueChain | null;
+  ambitionBrief?: AmbitionBrief | null;
+  annotations?: Record<string, ActivityAnnotation>;
+  messages?: Message[];
+  reportContent?: string | null;
+  reportDelivery?: 'sent' | 'not_sent' | null;
+  reportName?: string;
+  reportEmail?: string;
+  reportCompany?: string;
+}
+
+const DISCOVER_DRAFT_KEY = 'clearforge_discover_draft_v3';
 
 const SITUATION_CARDS = [
   {
@@ -138,6 +188,7 @@ const PROMPT_TEXT_LIMITS = {
   jobs: 1200,
   useCases: 2600,
   valueChain: 6500,
+  ambition: 4200,
 };
 
 function isValidEmail(email: string): boolean {
@@ -148,6 +199,132 @@ function clampPromptText(text: string, maxChars: number): string {
   const normalized = text.replace(/\s+/g, ' ').trim();
   if (normalized.length <= maxChars) return normalized;
   return `${normalized.slice(0, maxChars).trim()}...`;
+}
+
+function splitSignalLines(text?: string): string[] {
+  if (!text) return [];
+
+  return text
+    .split(/\n|•/)
+    .map((line) =>
+      line
+        .replace(/^[-*\d.)\s]+/, '')
+        .replace(/\[[^\]]+\]/g, '')
+        .trim(),
+    )
+    .filter((line) => line.length > 24)
+    .slice(0, 4);
+}
+
+function sourceLabel(source: SourceReference): string {
+  if (source.publisher) return source.publisher;
+  if (source.title) return source.title;
+
+  try {
+    return new URL(source.url).hostname.replace(/^www\./, '');
+  } catch {
+    return 'Source';
+  }
+}
+
+function sourceFromUrl(url: string): SourceReference | null {
+  try {
+    const parsed = new URL(url);
+    return {
+      url,
+      publisher: parsed.hostname.replace(/^www\./, ''),
+    };
+  } catch {
+    return null;
+  }
+}
+
+function compactPriorityLabel(priority: string): string {
+  return priority.split('—')[0]?.trim() || priority;
+}
+
+function buildAmbitionBrief(
+  intelligence: CompanyIntelligence,
+  valueChain: CustomValueChain | null,
+  submittedCompanyName: string,
+): AmbitionBrief {
+  const companyName = submittedCompanyName || valueChain?.companyName || intelligence.domain;
+  const industry = valueChain?.industry || 'Operating Company';
+  const industryDescriptor =
+    industry.toLowerCase() === 'operating company'
+      ? 'business'
+      : `${industry.toLowerCase()} operator`;
+  const growthSignals = splitSignalLines(intelligence.growthSignals);
+  const sourceNotes = splitSignalLines(intelligence.sourceNotes);
+  const sources = [
+    ...(intelligence.sources ?? []),
+    ...sourceNotes
+      .map((line) => sourceFromUrl(line))
+      .filter((source): source is SourceReference => Boolean(source)),
+  ]
+    .filter((source, index, all) => all.findIndex((other) => other.url === source.url) === index)
+    .slice(0, 5);
+
+  const firstMoves = valueChain?.topPriorities?.slice(0, 3).map(compactPriorityLabel) ?? [
+    'Lead Signal Scoring',
+    'Exception Control Tower',
+    'Knowledge Answer Agent',
+  ];
+
+  return {
+    companyName,
+    domain: intelligence.domain,
+    industry,
+    ambition: `${companyName} can become a faster-learning ${industryDescriptor}: sharper demand sensing, tighter workflow control, and a team cadence that turns AI usage into measured value.`,
+    industryThesis:
+      growthSignals[0] ||
+      `The highest-confidence growth path is to find where demand, service quality, operational exceptions, and knowledge work already constrain ${companyName}'s speed or margin.`,
+    growthSignals: growthSignals.length
+      ? growthSignals
+      : [
+          'Public growth signals were limited in the quick scan, so the first review should validate demand sources, customer segments, workflow bottlenecks, and competitor motion.',
+          'The strongest near-term AI candidates are usually the workflows with high frequency, clear owners, repeated decisions, and measurable revenue, service, speed, or margin outcomes.',
+        ],
+    futureState: [
+      {
+        label: 'Growth sensing',
+        detail:
+          'AI monitors account, market, service, and pipeline signals so leaders see where demand is moving before the operating plan drifts.',
+      },
+      {
+        label: 'Operating control',
+        detail:
+          'Agents and automations route work, catch exceptions, prepare decisions, and keep humans in control of high-risk or high-value moments.',
+      },
+      {
+        label: 'Benefits cadence',
+        detail:
+          'Usage, cycle time, quality, service, revenue, and margin metrics are reviewed together so adoption is tied to financial realization.',
+      },
+    ],
+    financialUpside: [
+      {
+        label: 'Revenue momentum',
+        range: '+3-8%',
+        basis:
+          'Qualified pipeline, speed-to-lead, win-rate hygiene, renewal risk, and next-best-action coverage to validate before forecasting.',
+      },
+      {
+        label: 'Earnings contribution',
+        range: '+1-4 pts',
+        basis:
+          'Gross margin, avoidable rework, exception volume, team capacity, support burden, and cycle-time reduction in the first workflow.',
+      },
+      {
+        label: 'Capacity release',
+        range: '10-25%',
+        basis:
+          'Manual research, handoff, documentation, triage, reporting, and follow-up hours that can be redeployed to higher-value work.',
+      },
+    ],
+    firstMoves,
+    sources,
+  };
 }
 
 function buildValueChainPromptContext(
@@ -198,16 +375,21 @@ function buildValueChainPromptContext(
 }
 
 export default function DiscoverPage() {
-  const [phase, setPhase] = useState<'url' | 'researching' | 'value-chain' | 'chat'>('url');
+  const [phase, setPhase] = useState<'url' | 'researching' | 'brief' | 'value-chain' | 'chat'>(
+    'url',
+  );
   const [websiteUrl, setWebsiteUrl] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [workEmail, setWorkEmail] = useState('');
   const [contactName, setContactName] = useState('');
   const [startError, setStartError] = useState('');
+  const [savedDraft, setSavedDraft] = useState<DiscoverDraft | null>(null);
+  const [lastSavedLabel, setLastSavedLabel] = useState('');
   const [researchProgress, setResearchProgress] = useState(0);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [intelligence, setIntelligence] = useState<CompanyIntelligence | null>(null);
   const [valueChain, setValueChain] = useState<CustomValueChain | null>(null);
+  const [ambitionBrief, setAmbitionBrief] = useState<AmbitionBrief | null>(null);
   const [annotations, setAnnotations] = useState<Record<string, ActivityAnnotation>>({});
   const [expandedActivity, setExpandedActivity] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -225,6 +407,20 @@ export default function DiscoverPage() {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(DISCOVER_DRAFT_KEY);
+      if (!stored) return;
+
+      const draft = JSON.parse(stored) as DiscoverDraft;
+      if (draft.websiteUrl || draft.messages?.length || draft.ambitionBrief) {
+        setSavedDraft(draft);
+      }
+    } catch {
+      // A corrupted draft should never block a fresh assessment.
+    }
+  }, []);
+
+  useEffect(() => {
     if (phase !== 'researching') return;
 
     setElapsedSeconds(0);
@@ -235,8 +431,86 @@ export default function DiscoverPage() {
     return () => window.clearInterval(timer);
   }, [phase]);
 
+  useEffect(() => {
+    if (phase === 'url' && !messages.length && !intelligence && !valueChain && !ambitionBrief) {
+      return;
+    }
+
+    const handle = window.setTimeout(() => {
+      try {
+        const savedAt = new Date().toISOString();
+        const draft: DiscoverDraft = {
+          savedAt,
+          phase,
+          websiteUrl,
+          companyName,
+          workEmail,
+          contactName,
+          intelligence,
+          valueChain,
+          ambitionBrief,
+          annotations,
+          messages,
+          reportContent,
+          reportDelivery,
+          reportName,
+          reportEmail,
+          reportCompany,
+        };
+        window.localStorage.setItem(DISCOVER_DRAFT_KEY, JSON.stringify(draft));
+        setLastSavedLabel(
+          new Date(savedAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
+        );
+      } catch {
+        // Local autosave is a convenience, never a blocker.
+      }
+    }, 250);
+
+    return () => window.clearTimeout(handle);
+  }, [
+    phase,
+    websiteUrl,
+    companyName,
+    workEmail,
+    contactName,
+    intelligence,
+    valueChain,
+    ambitionBrief,
+    annotations,
+    messages,
+    reportContent,
+    reportDelivery,
+    reportName,
+    reportEmail,
+    reportCompany,
+  ]);
+
   const scrollToBottom = () => {
     setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
+  };
+
+  const restoreDraft = (draft: DiscoverDraft) => {
+    setWebsiteUrl(draft.websiteUrl || '');
+    setCompanyName(draft.companyName || '');
+    setWorkEmail(draft.workEmail || '');
+    setContactName(draft.contactName || '');
+    setIntelligence(draft.intelligence || null);
+    setValueChain(draft.valueChain || null);
+    setAmbitionBrief(draft.ambitionBrief || null);
+    setAnnotations(draft.annotations || {});
+    setMessages(draft.messages || []);
+    setReportContent(draft.reportContent || null);
+    setReportDelivery(draft.reportDelivery || null);
+    setReportName(draft.reportName || draft.contactName || '');
+    setReportEmail(draft.reportEmail || draft.workEmail || '');
+    setReportCompany(draft.reportCompany || draft.companyName || '');
+    setSavedDraft(null);
+    setPhase(draft.phase && draft.phase !== 'researching' ? draft.phase : 'url');
+    trackEvent('ai_value_map_draft_resumed', {
+      company: draft.companyName || 'unknown',
+      has_brief: Boolean(draft.ambitionBrief),
+      message_count: draft.messages?.length ?? 0,
+    });
   };
 
   // Phase 1: Research the company → generate custom value chain
@@ -287,7 +561,7 @@ export default function DiscoverPage() {
 
       const data = await res.json();
 
-      if (data.fallback || data.error) {
+      if (data.error && !data.domain) {
         setIntelligence(null);
         setMessages([
           {
@@ -315,8 +589,17 @@ export default function DiscoverPage() {
 
         if (vcData.functions) {
           setValueChain(vcData);
+          const brief = buildAmbitionBrief(data, vcData, trimmedCompany);
+          setAmbitionBrief(brief);
+          setMessages([
+            {
+              role: 'assistant',
+              content: `I drafted a first-pass ambition brief for **${brief.companyName}** from the website and public signals. The ranges are hypotheses to validate, not a forecast.\n\nWhich assumption should we tighten first: growth, earnings, adoption, or controls?`,
+            },
+          ]);
+          setShowSituations(false);
           setResearchProgress(4);
-          setPhase('value-chain');
+          setPhase('brief');
           return;
         }
       } catch {
@@ -324,9 +607,10 @@ export default function DiscoverPage() {
       }
 
       // Fallback: skip value chain, go straight to chat
+      setAmbitionBrief(buildAmbitionBrief(data, null, trimmedCompany));
       const openingMessage = `I've done some research on **${data.domain}** to give you a head start.\n\nBased on what I've found, I can see several areas where AI could drive significant impact for your business.\n\n**What's the single biggest operational challenge you're facing right now?**`;
       setMessages([{ role: 'assistant', content: openingMessage }]);
-      setPhase('chat');
+      setPhase('brief');
     } catch {
       setIntelligence(null);
       setMessages([
@@ -401,10 +685,13 @@ export default function DiscoverPage() {
         if (valueChain) {
           vcContext = `\n\n${buildValueChainPromptContext(valueChain, annotations)}`;
         }
+        const ambitionContext = ambitionBrief
+          ? `\n\n## Living Ambition Brief\nAmbition: ${ambitionBrief.ambition}\nIndustry thesis: ${ambitionBrief.industryThesis}\nGrowth signals:\n${ambitionBrief.growthSignals.map((signal) => `- ${signal}`).join('\n')}\nFinancial hypotheses to validate:\n${ambitionBrief.financialUpside.map((item) => `- ${item.label}: ${item.range} (${item.basis})`).join('\n')}`
+          : '';
 
         contextMessages.unshift({
           role: 'system',
-          content: `COMPANY RESEARCH CONTEXT (from live research on ${intelligence.domain}):\n\n## Company Overview:\n${clampPromptText(intelligence.company, PROMPT_TEXT_LIMITS.company)}\n\n## Current Job Postings (roles we can automate):\n${clampPromptText(intelligence.jobs, PROMPT_TEXT_LIMITS.jobs)}\n\n## AI Use Cases for This Company:\n${clampPromptText(intelligence.useCases, PROMPT_TEXT_LIMITS.useCases)}${vcContext}\n\nINSTRUCTIONS: Use this context to give highly specific, personalized recommendations. Reference their actual business, products, and operations by name. When discussing job postings, explain how AI agents could handle those roles more efficiently. Be specific to THEIR company, not generic.`,
+          content: `COMPANY RESEARCH CONTEXT (from live research on ${intelligence.domain}):\n\n## Company Overview:\n${clampPromptText(intelligence.company, PROMPT_TEXT_LIMITS.company)}\n\n## Current Job Postings (roles we can automate):\n${clampPromptText(intelligence.jobs, PROMPT_TEXT_LIMITS.jobs)}\n\n## AI Use Cases for This Company:\n${clampPromptText(intelligence.useCases, PROMPT_TEXT_LIMITS.useCases)}${ambitionContext}${vcContext}\n\nINSTRUCTIONS: Use this context to give highly specific, personalized recommendations. Reference their actual business, products, and operations by name. When discussing job postings, explain how AI agents could handle those roles more efficiently. Be specific to THEIR company, not generic. Treat any upside ranges as hypotheses to validate with baseline data, not as promised outcomes.`,
         });
       }
 
@@ -447,13 +734,13 @@ export default function DiscoverPage() {
     }
   };
 
-  const handleGenerateReport = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const sendCurrentResults = async (source: 'brief' | 'chat' | 'form') => {
     if (!reportEmail.trim() || !reportCompany.trim()) return;
 
     trackEvent('ai_value_map_report_requested', {
       company: reportCompany.trim() || valueChain?.companyName || intelligence?.domain || 'unknown',
       message_count: messages.filter((m) => m.role !== 'system').length,
+      source,
     });
     setReportLoading(true);
     setReportDelivery(null);
@@ -470,6 +757,7 @@ export default function DiscoverPage() {
             })),
           intelligence,
           valueChain,
+          ambitionBrief,
           annotations,
           name: reportName.trim(),
           email: reportEmail.trim(),
@@ -491,6 +779,11 @@ export default function DiscoverPage() {
     } finally {
       setReportLoading(false);
     }
+  };
+
+  const handleGenerateReport = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await sendCurrentResults('form');
   };
 
   const renderReportMarkdown = (text: string) => {
@@ -566,6 +859,307 @@ export default function DiscoverPage() {
     ]);
     setPhase('chat');
   };
+
+  const visibleMessages = messages.filter((m) => m.role !== 'system');
+
+  const renderReportContent = (compact = false) =>
+    reportContent ? (
+      <div className="border border-brass/30 bg-forge-black/80 p-5 print-report">
+        <div className="flex items-start justify-between gap-3 mb-4 no-print">
+          <div className="flex items-start gap-3">
+            <FileText className="mt-0.5 h-5 w-5 shrink-0 text-brass" />
+            <div>
+              <h3 className="text-sm font-bold text-bone">Current AI Value Map</h3>
+              {reportDelivery === 'sent' && (
+                <p className="mt-0.5 text-xs text-stone">
+                  Emailed to <span className="text-bone">{reportEmail}</span>.
+                </p>
+              )}
+              {reportDelivery === 'not_sent' && (
+                <p className="mt-0.5 text-xs text-stone">
+                  Saved here. Email delivery did not confirm.
+                </p>
+              )}
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="inline-flex items-center gap-2 border border-divider-dark px-3 py-1.5 text-xs text-stone transition-colors hover:text-bone"
+            >
+              <Printer className="h-3.5 w-3.5" /> Print
+            </button>
+            <button
+              type="button"
+              onClick={() => setReportContent(null)}
+              className="p-1 text-stone transition-colors hover:text-bone"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+        <div
+          className={`border-t border-divider-dark pt-4 space-y-1 ${compact ? 'max-h-[340px] overflow-y-auto pr-2' : ''}`}
+        >
+          {renderReportMarkdown(reportContent)}
+        </div>
+      </div>
+    ) : null;
+
+  const renderConversationPanel = (mode: 'brief' | 'chat') => (
+    <div className="flex h-full min-h-[560px] flex-col border border-divider-dark bg-[#0d1117]/90">
+      <div className="border-b border-divider-dark p-4 sm:p-5">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="overline text-brass-light">Forge Intelligence</p>
+            <h3 className="mt-1 text-h3 text-bone">Refine the ambition.</h3>
+            <p className="mt-1 text-xs leading-relaxed text-stone">
+              Ask for sharper assumptions, a better first workflow, risk controls, or the business
+              case logic. Progress autosaves{lastSavedLabel ? ` at ${lastSavedLabel}` : ''}.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => void sendCurrentResults(mode)}
+            disabled={reportLoading || !reportEmail.trim() || !reportCompany.trim()}
+            className="inline-flex shrink-0 items-center gap-2 border border-brass/40 px-3 py-2 text-xs font-semibold text-brass-light transition-colors hover:border-brass-light hover:text-bone disabled:opacity-50"
+          >
+            {reportLoading ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+            ) : (
+              <Mail className="h-3.5 w-3.5" />
+            )}
+            Send
+          </button>
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto p-4 sm:p-5">
+        <div className="space-y-4">
+          {visibleMessages.map((msg) => (
+            <ChatMessage
+              key={`${msg.role}-${msg.content.slice(0, 120)}`}
+              content={msg.content}
+              role={msg.role as 'user' | 'assistant'}
+            />
+          ))}
+
+          {showSituations && (
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {SITUATION_CARDS.map((card) => (
+                <button
+                  type="button"
+                  key={card.label}
+                  onClick={() => sendMessage(card.detail)}
+                  className="group border border-divider-dark p-4 text-left transition-colors hover:border-brass"
+                >
+                  <p className="text-sm font-semibold text-bone transition-colors group-hover:text-brass">
+                    {card.label}
+                  </p>
+                  <p className="mt-1 text-xs text-stone">{card.detail}</p>
+                </button>
+              ))}
+            </div>
+          )}
+
+          {mode === 'brief' && !isStreaming && (
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              {[
+                'Tighten the revenue hypothesis',
+                'Show the first 90-day build',
+                'What controls do we need?',
+                'Rewrite this for my CEO',
+              ].map((prompt) => (
+                <button
+                  key={prompt}
+                  type="button"
+                  onClick={() => sendMessage(prompt)}
+                  className="border border-divider-dark px-3 py-2 text-left text-xs text-stone transition-colors hover:border-brass/60 hover:text-bone"
+                >
+                  {prompt}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {isStreaming && (
+            <div className="flex justify-start">
+              <div className="max-w-[85%] border border-divider-dark bg-divider-dark p-4">
+                <div className="flex items-center gap-2 text-xs text-stone">
+                  <Loader2 className="h-3.5 w-3.5 animate-spin text-brass" />
+                  Sharpening the recommendation...
+                </div>
+              </div>
+            </div>
+          )}
+
+          {renderReportContent(true)}
+          <div ref={bottomRef} />
+        </div>
+      </div>
+
+      <div className="border-t border-divider-dark p-3 sm:p-4">
+        <form
+          onSubmit={handleChatSubmit}
+          data-analytics="discover_chat_submit"
+          className="flex gap-2"
+        >
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Ask how to improve the ambition, business case, controls, or first build..."
+            className="min-w-0 flex-1 border border-divider-dark bg-forge-black px-3 py-3 text-base text-bone transition-colors placeholder:text-stone focus:border-brass focus:outline-none sm:text-sm"
+            disabled={isStreaming}
+          />
+          <Button type="submit" disabled={isStreaming || !input.trim()} size="default">
+            <Send className="h-4 w-4" />
+          </Button>
+        </form>
+        <p className="mt-2 flex items-center justify-center gap-1.5 text-xs text-stone">
+          <Save className="h-3.5 w-3.5" />
+          Autosaved in this browser. Email the current version anytime.
+        </p>
+      </div>
+    </div>
+  );
+
+  const renderAmbitionBrief = () =>
+    ambitionBrief ? (
+      <div className="space-y-8">
+        <section className="border-b border-divider-dark pb-8">
+          <p className="overline text-brass-light">First-pass ambition brief</p>
+          <h2 className="mt-4 text-display text-bone">
+            {ambitionBrief.companyName}: future state.
+          </h2>
+          <p className="mt-4 max-w-3xl text-body-lg text-stone">{ambitionBrief.ambition}</p>
+          <div className="mt-6 flex flex-wrap items-center gap-3 text-xs text-stone">
+            <span className="inline-flex items-center gap-2 border border-divider-dark px-3 py-2">
+              <Globe className="h-3.5 w-3.5 text-brass" /> {ambitionBrief.domain}
+            </span>
+            <span className="inline-flex items-center gap-2 border border-divider-dark px-3 py-2">
+              <LineChart className="h-3.5 w-3.5 text-brass" /> {ambitionBrief.industry}
+            </span>
+            <span className="inline-flex items-center gap-2 border border-divider-dark px-3 py-2">
+              <ShieldCheck className="h-3.5 w-3.5 text-brass" /> Ranges to validate
+            </span>
+          </div>
+        </section>
+
+        <section className="grid gap-4 md:grid-cols-3">
+          {ambitionBrief.financialUpside.map((item) => (
+            <div key={item.label} className="border border-divider-dark bg-bone/[0.03] p-5">
+              <p className="text-xs uppercase tracking-[0.18em] text-stone">{item.label}</p>
+              <p className="metric mt-3 text-3xl text-brass-light">{item.range}</p>
+              <p className="mt-3 text-xs leading-relaxed text-stone">{item.basis}</p>
+            </div>
+          ))}
+        </section>
+
+        <section className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+          <div className="border border-divider-dark p-5 sm:p-6">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="h-4 w-4 text-brass" />
+              <h3 className="text-h3 text-bone">Where industry growth pressure is coming from.</h3>
+            </div>
+            <p className="mt-3 text-body-sm text-stone">{ambitionBrief.industryThesis}</p>
+            <ul className="mt-5 space-y-3">
+              {ambitionBrief.growthSignals.map((signal) => (
+                <li
+                  key={signal}
+                  className="border-t border-divider-dark pt-3 text-body-sm text-bone"
+                >
+                  {signal}
+                </li>
+              ))}
+            </ul>
+            {ambitionBrief.sources.length > 0 && (
+              <div className="mt-5 flex flex-wrap gap-2">
+                {ambitionBrief.sources.map((source) => (
+                  <a
+                    key={source.url}
+                    href={source.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 border border-divider-dark px-3 py-1.5 text-xs text-stone transition-colors hover:border-brass/60 hover:text-bone"
+                  >
+                    {sourceLabel(source)}
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                ))}
+              </div>
+            )}
+            {ambitionBrief.sources.length === 0 && (
+              <p className="mt-5 border border-divider-dark px-3 py-2 text-xs leading-relaxed text-stone">
+                Live research did not return citations in this environment. The production scan
+                attaches source links when the research provider returns them; otherwise the brief
+                labels the assumptions to validate.
+              </p>
+            )}
+          </div>
+
+          <div className="border border-divider-dark p-5 sm:p-6">
+            <div className="flex items-center gap-2">
+              <Zap className="h-4 w-4 text-brass" />
+              <h3 className="text-h3 text-bone">The operating ambition.</h3>
+            </div>
+            <div className="mt-5 space-y-4">
+              {ambitionBrief.futureState.map((state) => (
+                <div key={state.label} className="border-t border-divider-dark pt-4">
+                  <p className="text-sm font-semibold text-bone">{state.label}</p>
+                  <p className="mt-1 text-body-sm text-stone">{state.detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="border border-divider-dark p-5 sm:p-6">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="overline text-brass-light">First build agenda</p>
+              <h3 className="mt-2 text-h3 text-bone">
+                Start where value, workflow ownership, and adoption can meet.
+              </h3>
+            </div>
+            <Button onClick={() => void sendCurrentResults('brief')} disabled={reportLoading}>
+              {reportLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending
+                </>
+              ) : (
+                <>
+                  Send Current Results <Mail className="ml-2 h-4 w-4" />
+                </>
+              )}
+            </Button>
+          </div>
+
+          <div className="mt-6 grid gap-3 md:grid-cols-3">
+            {ambitionBrief.firstMoves.map((move, index) => (
+              <div key={move} className="border border-divider-dark bg-bone/[0.03] p-4">
+                <span className="metric text-xs text-brass">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <p className="mt-3 text-sm font-semibold text-bone">{move}</p>
+              </div>
+            ))}
+          </div>
+
+          {valueChain && (
+            <div className="mt-6 grid gap-3 md:grid-cols-2">
+              {valueChain.functions.map((fn) => (
+                <div key={fn.function} className="border border-divider-dark p-4">
+                  <p className="text-sm font-semibold text-bone">{fn.function}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-stone">{fn.description}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      </div>
+    ) : null;
 
   return (
     <div className="min-h-screen bg-forge-black flex flex-col">
@@ -667,6 +1261,41 @@ export default function DiscoverPage() {
               </p>
             </form>
 
+            {savedDraft && (
+              <div className="mx-auto mt-5 max-w-2xl border border-brass/30 bg-brass/5 p-4 text-left">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-bone">Resume saved value map?</p>
+                    <p className="mt-1 text-xs text-stone">
+                      {savedDraft.companyName || savedDraft.websiteUrl || 'Previous assessment'}
+                      {savedDraft.savedAt
+                        ? ` · saved ${new Date(savedDraft.savedAt).toLocaleDateString()}`
+                        : ''}
+                    </p>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => restoreDraft(savedDraft)}
+                      className="border border-brass/40 px-3 py-2 text-xs font-semibold text-brass-light transition-colors hover:border-brass-light hover:text-bone"
+                    >
+                      Resume
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        window.localStorage.removeItem(DISCOVER_DRAFT_KEY);
+                        setSavedDraft(null);
+                      }}
+                      className="border border-divider-dark px-3 py-2 text-xs text-stone transition-colors hover:text-bone"
+                    >
+                      Start fresh
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <button
               type="button"
               onClick={handleSkip}
@@ -765,6 +1394,42 @@ export default function DiscoverPage() {
                 and keep the conversation moving.
               </p>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* ═══ PHASE 2.25: LIVING AMBITION BRIEF ═══ */}
+      {phase === 'brief' && ambitionBrief && (
+        <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6 sm:py-8 lg:px-10">
+          <div className="mx-auto max-w-[1400px]">
+            <div className="mb-5 flex flex-col gap-3 border-b border-divider-dark pb-5 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-2 text-xs text-stone">
+                <Save className="h-3.5 w-3.5 text-brass" />
+                <span>
+                  {lastSavedLabel ? `Saved at ${lastSavedLabel}` : 'Autosave is on'} · refine
+                  anytime
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => void sendCurrentResults('brief')}
+                disabled={reportLoading}
+                className="inline-flex items-center justify-center gap-2 border border-brass/40 px-4 py-2 text-xs font-semibold text-brass-light transition-colors hover:border-brass-light hover:text-bone disabled:opacity-50"
+              >
+                {reportLoading ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                ) : (
+                  <Mail className="h-3.5 w-3.5" />
+                )}
+                Send current results
+              </button>
+            </div>
+            <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_430px]">
+              <div>{renderAmbitionBrief()}</div>
+              <div className="xl:sticky xl:top-6 xl:h-[calc(100vh-8rem)]">
+                {renderConversationPanel('brief')}
+              </div>
+            </div>
           </div>
         </div>
       )}

@@ -139,6 +139,16 @@ export async function POST(request: Request) {
           }[];
         }
       | undefined;
+    const ambitionBrief = body.ambitionBrief as
+      | {
+          ambition?: string;
+          industryThesis?: string;
+          growthSignals?: string[];
+          financialUpside?: { label?: string; range?: string; basis?: string }[];
+          firstMoves?: string[];
+          sources?: { url?: string; title?: string; publisher?: string }[];
+        }
+      | undefined;
     const annotations = body.annotations;
     const name = normalizeString(body.name, 120);
     const email = normalizeString(body.email, 200).toLowerCase();
@@ -193,10 +203,15 @@ export async function POST(request: Request) {
       }
     }
 
+    let ambitionContext = '';
+    if (ambitionBrief) {
+      ambitionContext = `\n\n## Living Ambition Brief\nAmbition: ${normalizeString(ambitionBrief.ambition, 1200)}\nIndustry thesis: ${normalizeString(ambitionBrief.industryThesis, 1000)}\nGrowth signals:\n${(ambitionBrief.growthSignals ?? []).map((signal) => `- ${normalizeString(signal, 500)}`).join('\n')}\nFinancial hypotheses:\n${(ambitionBrief.financialUpside ?? []).map((item) => `- ${normalizeString(item.label, 80)}: ${normalizeString(item.range, 80)} (${normalizeString(item.basis, 500)})`).join('\n')}\nFirst moves:\n${(ambitionBrief.firstMoves ?? []).map((move) => `- ${normalizeString(move, 160)}`).join('\n')}\nSources:\n${(ambitionBrief.sources ?? []).map((source) => `- ${normalizeString(source.publisher || source.title || 'Source', 140)}: ${normalizeString(source.url, 500)}`).join('\n')}`;
+    }
+
     // Use Claude to synthesize conversation into a structured report
     const reportPrompt = `Based on this discovery conversation, generate a structured AI value map report for ${company || 'the client'}.
 
-${intelligence ? `Company Research:\n${JSON.stringify(intelligence)}\n\n` : ''}${valueChainContext}
+${intelligence ? `Company Research:\n${JSON.stringify(intelligence)}\n\n` : ''}${ambitionContext}${valueChainContext}
 
 Conversation:
 ${messages.map((m: { role: string; content: string }) => `${m.role}: ${m.content}`).join('\n\n')}

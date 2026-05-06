@@ -89,14 +89,26 @@ export function ChatMessage({ content, role }: { content: string; role: 'user' |
   };
 
   return (
-    <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
+    <div className={`flex items-start gap-3 ${isUser ? 'justify-end' : 'justify-start'}`}>
+      {!isUser && (
+        <div className="mt-1 hidden h-7 w-7 shrink-0 items-center justify-center border border-brass/30 bg-brass/10 text-[10px] font-bold text-brass-light sm:flex">
+          FI
+        </div>
+      )}
       <div
-        className={`max-w-[85%] p-5 space-y-1 ${
-          isUser ? 'bg-brass text-white' : 'bg-divider-dark text-bone border border-divider-dark'
+        className={`max-w-[88%] p-4 space-y-1 text-sm leading-relaxed ${
+          isUser
+            ? 'bg-brass text-white'
+            : 'border border-divider-dark bg-bone/[0.045] text-bone shadow-sm'
         }`}
       >
         {renderContent(content)}
       </div>
+      {isUser && (
+        <div className="mt-1 hidden h-7 w-7 shrink-0 items-center justify-center border border-bone/15 bg-bone/10 text-[10px] font-bold text-bone sm:flex">
+          YOU
+        </div>
+      )}
     </div>
   );
 }

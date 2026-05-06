@@ -6,6 +6,7 @@ import { logServerError } from '@/lib/server-logger';
 const CHAT_MESSAGE_MAX_CHARS = 4000;
 const RESEARCH_CONTEXT_MAX_CHARS = 24000;
 const RESEARCH_CONTEXT_PREFIX = '[Research Context';
+const CHAT_TIMEOUT_MS = 14_000;
 
 const messageSchema = z
   .object({
@@ -120,20 +121,38 @@ export async function POST(request: Request) {
       content: m.content,
     }));
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1024,
-        system: SYSTEM_PROMPT,
-        messages: claudeMessages,
-      }),
-    });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), CHAT_TIMEOUT_MS);
+
+    let response: Response;
+    try {
+      response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+        },
+        signal: controller.signal,
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 700,
+          system: SYSTEM_PROMPT,
+          messages: claudeMessages,
+        }),
+      });
+    } catch (error) {
+      clearTimeout(timeout);
+      logServerError('Claude API timeout/error:', error);
+      return NextResponse.json(
+        {
+          content:
+            "I'm having a momentary issue. Your brief is saved, and you can send the current version to email from the button above.",
+        },
+        { status: 200 },
+      );
+    }
+    clearTimeout(timeout);
 
     if (!response.ok) {
       const error = await response.text();

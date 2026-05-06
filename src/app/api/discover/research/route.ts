@@ -35,7 +35,9 @@ function extractSection(raw: string, heading: string, nextHeading?: string): str
 function splitCompanyResearch(raw: string, domain: string) {
   const company = extractSection(raw, 'COMPANY_OVERVIEW', 'HIRING_AND_WORKFLOW_SIGNALS');
   const jobs = extractSection(raw, 'HIRING_AND_WORKFLOW_SIGNALS', 'AI_USE_CASES');
-  const useCases = extractSection(raw, 'AI_USE_CASES');
+  const useCases = extractSection(raw, 'AI_USE_CASES', 'INDUSTRY_GROWTH_SIGNALS');
+  const growthSignals = extractSection(raw, 'INDUSTRY_GROWTH_SIGNALS', 'SOURCE_NOTES');
+  const sourceNotes = extractSection(raw, 'SOURCE_NOTES');
 
   return {
     domain,
@@ -48,8 +50,27 @@ function splitCompanyResearch(raw: string, domain: string) {
     useCases:
       useCases ||
       'Start with revenue operations, service quality, knowledge work, and back-office throughput. Baseline metrics before estimating value.',
+    growthSignals:
+      growthSignals ||
+      'Public growth signals were limited in the quick scan. Validate demand sources, customer segments, service expectations, margin pressure, and competitive motion in discovery.',
+    sourceNotes:
+      sourceNotes ||
+      'Source coverage unavailable in the quick scan. Use the company website, public market reports, job postings, and customer-facing pages during follow-up.',
+    sources: [] as { url: string; publisher?: string }[],
     researchedAt: new Date().toISOString(),
   };
+}
+
+function sourceFromUrl(url: string): { url: string; publisher?: string } | null {
+  try {
+    const parsed = new URL(url);
+    return {
+      url,
+      publisher: parsed.hostname.replace(/^www\./, ''),
+    };
+  } catch {
+    return null;
+  }
 }
 
 async function captureDiscoverLead(params: {
@@ -162,13 +183,7 @@ export async function POST(request: Request) {
     const perplexityKey = process.env.PERPLEXITY_API_KEY;
     if (!perplexityKey) {
       await leadCapture;
-      return NextResponse.json(
-        {
-          error: 'Research unavailable',
-          fallback: true,
-        },
-        { status: 200 },
-      );
+      return NextResponse.json({ ...splitCompanyResearch('', domain), fallback: true });
     }
 
     const companyResearch = await perplexityCompanyResearch(perplexityKey, domain, company);
@@ -222,6 +237,12 @@ HIRING_AND_WORKFLOW_SIGNALS:
 AI_USE_CASES:
 - The most practical AI/automation use cases for this company. For each, name workflow owner, baseline metric, adoption requirement, control needed, and evidence required before estimating value.
 
+INDUSTRY_GROWTH_SIGNALS:
+- Where growth or margin improvement appears to be coming from in this company's industry right now. Mention demand shifts, buyer behavior, channel mix, pricing, service expectations, regulation, technology adoption, consolidation, or scale economics only when supported by public evidence.
+
+SOURCE_NOTES:
+- List 3-5 public sources or source types used for the growth signals. Prefer URLs when available.
+
 Keep the full answer under 900 words. Be specific, but write for a CEO/COO scanning quickly.`,
           },
         ],
@@ -237,7 +258,24 @@ Keep the full answer under 900 words. Be specific, but write for a CEO/COO scann
 
     const data = await response.json();
     const raw = data.choices?.[0]?.message?.content || '';
-    return splitCompanyResearch(raw, domain);
+    const citations = Array.isArray(data.citations)
+      ? data.citations
+          .filter((url: unknown): url is string => typeof url === 'string')
+          .map(sourceFromUrl)
+          .filter(
+            (
+              source: { url: string; publisher?: string } | null,
+            ): source is {
+              url: string;
+              publisher?: string;
+            } => Boolean(source),
+          )
+      : [];
+
+    return {
+      ...splitCompanyResearch(raw, domain),
+      sources: citations.slice(0, 8),
+    };
   } catch (error) {
     logServerError('Perplexity search error:', error);
     return splitCompanyResearch('', domain);
