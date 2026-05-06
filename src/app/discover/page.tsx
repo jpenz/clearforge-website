@@ -109,6 +109,66 @@ const VALUE_MAP_DELIVERABLES = [
   },
 ];
 
+const PROMPT_TEXT_LIMITS = {
+  company: 2200,
+  jobs: 1200,
+  useCases: 2600,
+  valueChain: 6500,
+};
+
+function clampPromptText(text: string, maxChars: number): string {
+  const normalized = text.replace(/\s+/g, ' ').trim();
+  if (normalized.length <= maxChars) return normalized;
+  return `${normalized.slice(0, maxChars).trim()}...`;
+}
+
+function buildValueChainPromptContext(
+  valueChain: CustomValueChain,
+  annotations: Record<string, ActivityAnnotation>,
+): string {
+  const lines = [
+    `## Custom Value Chain Generated for ${valueChain.companyName} (${valueChain.industry})`,
+  ];
+
+  if (valueChain.topPriorities.length) {
+    lines.push('### ClearForge recommended starting points');
+    for (const priority of valueChain.topPriorities) {
+      lines.push(`- ${priority}`);
+    }
+  }
+
+  valueChain.functions.forEach((fn) => {
+    lines.push(`### ${fn.function}: ${fn.description}`);
+    fn.activities.forEach((activity) => {
+      lines.push(
+        `- ${activity.name} (${activity.type}): ${activity.aiImpact} Metric/evidence: ${activity.impact}`,
+      );
+    });
+  });
+
+  const must = Object.entries(annotations)
+    .filter(([, a]) => a.priority === 'must')
+    .map(([key, a]) => `- ${key}${a.notes ? ` (notes: ${a.notes})` : ''}`);
+  const curious = Object.entries(annotations)
+    .filter(([, a]) => a.priority === 'curious')
+    .map(([key, a]) => `- ${key}${a.notes ? ` (notes: ${a.notes})` : ''}`);
+  const skip = Object.entries(annotations)
+    .filter(([, a]) => a.priority === 'skip')
+    .map(([key]) => `- ${key}`);
+
+  if (must.length || curious.length || skip.length) {
+    lines.push("## User's Priorities");
+    if (must.length) lines.push(`Must-have activities:\n${must.join('\n')}`);
+    if (curious.length) lines.push(`Curious about:\n${curious.join('\n')}`);
+    if (skip.length) lines.push(`Marked not relevant:\n${skip.join('\n')}`);
+    lines.push(
+      'Prioritize must-have activities in responses and reference specific activities by name.',
+    );
+  }
+
+  return clampPromptText(lines.join('\n'), PROMPT_TEXT_LIMITS.valueChain);
+}
+
 export default function DiscoverPage() {
   const [phase, setPhase] = useState<'url' | 'researching' | 'value-chain' | 'chat'>('url');
   const [websiteUrl, setWebsiteUrl] = useState('');
@@ -260,30 +320,12 @@ export default function DiscoverPage() {
         // Build value chain context if user annotated activities
         let vcContext = '';
         if (valueChain) {
-          const must = Object.entries(annotations)
-            .filter(([_, a]) => a.priority === 'must')
-            .map(([k, a]) => `- ${k}${a.notes ? ` (notes: ${a.notes})` : ''}`);
-          const curious = Object.entries(annotations)
-            .filter(([_, a]) => a.priority === 'curious')
-            .map(([k, a]) => `- ${k}${a.notes ? ` (notes: ${a.notes})` : ''}`);
-          const skip = Object.entries(annotations)
-            .filter(([_, a]) => a.priority === 'skip')
-            .map(([k]) => `- ${k}`);
-
-          vcContext = `\n\n## Custom Value Chain Generated for ${valueChain.companyName} (${valueChain.industry})\n\nClearForge generated a custom AI value chain for this company:\n${valueChain.functions.map((fn) => `\n### ${fn.function}\n${fn.activities.map((a) => `- ${a.name}: ${a.aiImpact} (${a.impact})`).join('\n')}`).join('')}`;
-
-          if (must.length || curious.length || skip.length) {
-            vcContext += `\n\n## User's Priorities (annotations from value chain)\n`;
-            if (must.length) vcContext += `\n**Must-have activities:**\n${must.join('\n')}\n`;
-            if (curious.length) vcContext += `\n**Curious about:**\n${curious.join('\n')}\n`;
-            if (skip.length) vcContext += `\n**Marked not relevant:**\n${skip.join('\n')}\n`;
-            vcContext += `\nPRIORITIZE the user's must-have activities in your responses. Reference these specific activities by name.`;
-          }
+          vcContext = `\n\n${buildValueChainPromptContext(valueChain, annotations)}`;
         }
 
         contextMessages.unshift({
           role: 'system',
-          content: `COMPANY RESEARCH CONTEXT (from live research on ${intelligence.domain}):\n\n## Company Overview:\n${intelligence.company}\n\n## Current Job Postings (roles we can automate):\n${intelligence.jobs}\n\n## AI Use Cases for This Company:\n${intelligence.useCases}${vcContext}\n\nINSTRUCTIONS: Use this context to give highly specific, personalized recommendations. Reference their actual business, products, and operations by name. When discussing job postings, explain how AI agents could handle those roles more efficiently. Be specific to THEIR company, not generic.`,
+          content: `COMPANY RESEARCH CONTEXT (from live research on ${intelligence.domain}):\n\n## Company Overview:\n${clampPromptText(intelligence.company, PROMPT_TEXT_LIMITS.company)}\n\n## Current Job Postings (roles we can automate):\n${clampPromptText(intelligence.jobs, PROMPT_TEXT_LIMITS.jobs)}\n\n## AI Use Cases for This Company:\n${clampPromptText(intelligence.useCases, PROMPT_TEXT_LIMITS.useCases)}${vcContext}\n\nINSTRUCTIONS: Use this context to give highly specific, personalized recommendations. Reference their actual business, products, and operations by name. When discussing job postings, explain how AI agents could handle those roles more efficiently. Be specific to THEIR company, not generic.`,
         });
       }
 
@@ -301,9 +343,10 @@ export default function DiscoverPage() {
         }),
       });
 
-      if (!response.ok) throw new Error('Failed');
-
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(typeof data.content === 'string' ? data.content : 'Failed');
+      }
       setMessages((prev) => [...prev, { role: 'assistant', content: data.content }]);
     } catch {
       setMessages((prev) => [

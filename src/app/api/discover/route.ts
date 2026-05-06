@@ -3,10 +3,29 @@ import { z } from 'zod';
 import { isRateLimited } from '@/lib/rate-limit';
 import { logServerError } from '@/lib/server-logger';
 
-const messageSchema = z.object({
-  role: z.enum(['user', 'assistant']),
-  content: z.string().min(1).max(4000),
-});
+const CHAT_MESSAGE_MAX_CHARS = 4000;
+const RESEARCH_CONTEXT_MAX_CHARS = 24000;
+const RESEARCH_CONTEXT_PREFIX = '[Research Context';
+
+const messageSchema = z
+  .object({
+    role: z.enum(['user', 'assistant']),
+    content: z.string().min(1),
+  })
+  .superRefine((message, ctx) => {
+    const isResearchContext = message.content.trimStart().startsWith(RESEARCH_CONTEXT_PREFIX);
+    const maxChars = isResearchContext ? RESEARCH_CONTEXT_MAX_CHARS : CHAT_MESSAGE_MAX_CHARS;
+
+    if (message.content.length > maxChars) {
+      ctx.addIssue({
+        code: 'too_big',
+        maximum: maxChars,
+        origin: 'string',
+        inclusive: true,
+        message: `Message must be ${maxChars} characters or fewer.`,
+      });
+    }
+  });
 
 const discoverRequestSchema = z.object({
   messages: z.array(messageSchema).min(1).max(16),
