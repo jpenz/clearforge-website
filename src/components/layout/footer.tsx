@@ -57,7 +57,7 @@ export function Footer() {
             <div className="flex flex-wrap gap-3">
               <Button size="lg" className="shadow-lg hover:shadow-xl" asChild>
                 <Link href="/contact">
-                  Book Strategy Call <ArrowRight className="ml-2 h-4 w-4" />
+                  Schedule Executive Briefing <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline-light" asChild>

@@ -7,6 +7,8 @@ const budgets = [
   { file: 'public/videos/hero.mp4', maxKb: 900 },
   { file: 'public/videos/hero.webm', maxKb: 900, optional: true },
   { file: 'public/images/hero-bg.webp', maxKb: 180 },
+  { file: 'public/images/hero-operating-system-v2.webp', maxKb: 180 },
+  { file: 'public/images/hero-operating-system-v2-mobile.webp', maxKb: 100 },
 ];
 
 const useCaseSlugs = [

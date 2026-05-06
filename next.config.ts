@@ -123,6 +123,7 @@ const nextConfig: NextConfig = {
   // Next.js 16 requires all non-default quality values to be whitelisted.
   // 65 is used for decorative atmospheric bg images on industry hero sections.
   images: {
+    formats: ["image/avif", "image/webp"],
     qualities: [65, 75],
   },
 };

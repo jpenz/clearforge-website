@@ -20,6 +20,7 @@ coverage
 # build
 build
 dist
+artifacts/generated-images
 artifacts/generated-video
 artifacts/screenshots
 

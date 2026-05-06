@@ -161,7 +161,7 @@ export function Header() {
               className="hidden sm:inline-flex text-xs shadow-sm hover:shadow-md"
               asChild
             >
-              <Link href="/contact">Book Strategy Call</Link>
+              <Link href="/contact">Executive Briefing</Link>
             </Button>
           </div>
         </div>
@@ -231,7 +231,7 @@ export function Header() {
             <div className="px-5 sm:px-8 py-6 border-t border-divider-dark">
               <Button className="w-full" size="lg" asChild>
                 <Link href="/contact" onClick={() => setSidebarOpen(false)}>
-                  Book AI Transformation Call <ArrowRight className="ml-2 h-4 w-4" />
+                  Schedule Executive Briefing <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <p className="mt-3 text-xs text-stone text-center">

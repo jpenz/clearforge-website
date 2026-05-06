@@ -1,4 +1,5 @@
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
@@ -140,7 +141,21 @@ function OutcomeChooser() {
 export function HeroScroll() {
   return (
     <section className="dark-section relative overflow-hidden bg-[radial-gradient(circle_at_78%_18%,rgba(11,94,87,0.2),transparent_30%),linear-gradient(180deg,#08090B_0%,#0B0D10_100%)]">
-      <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(242,239,232,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(242,239,232,0.18)_1px,transparent_1px)] [background-size:72px_72px]" />
+      <picture className="pointer-events-none absolute inset-0 block">
+        <source media="(max-width: 767px)" srcSet="/images/hero-operating-system-v2-mobile.webp" />
+        <Image
+          src="/images/hero-operating-system-v2.webp"
+          alt=""
+          fill
+          loading="eager"
+          fetchPriority="high"
+          sizes="100vw"
+          className="object-cover object-[72%_50%] opacity-[0.42] saturate-[0.88] md:object-center md:opacity-[0.52]"
+        />
+      </picture>
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,#08090B_0%,rgba(8,9,11,0.96)_31%,rgba(8,9,11,0.72)_59%,rgba(8,9,11,0.48)_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,9,11,0.2)_0%,rgba(8,9,11,0.72)_100%)]" />
+      <div className="absolute inset-0 opacity-[0.055] [background-image:linear-gradient(rgba(242,239,232,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(242,239,232,0.18)_1px,transparent_1px)] [background-size:72px_72px]" />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-forge-black to-transparent pointer-events-none" />
 
       <div className="relative z-10 mx-auto grid w-full max-w-[1400px] gap-10 px-4 pb-12 pt-28 sm:px-6 sm:pt-28 md:grid-cols-[0.95fr_0.58fr] md:items-center md:pb-14 lg:min-h-[74svh] lg:grid-cols-[0.9fr_0.72fr] lg:px-10 lg:pb-10">
@@ -170,8 +185,8 @@ export function HeroScroll() {
 
           <div className="mt-9 flex w-full flex-col items-stretch gap-4 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
             <Button size="lg" className="w-full sm:w-auto" asChild>
-              <Link href="/contact" data-analytics="home_hero_book_transformation_call">
-                Book AI Transformation Call
+              <Link href="/contact" data-analytics="home_hero_schedule_executive_briefing">
+                Schedule Executive Briefing
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" className="w-full sm:w-auto" asChild>
