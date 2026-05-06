@@ -27,6 +27,15 @@ CellCog reached the same core conclusion in chat `69facb91b69e11028af82528`: the
 6. Verify desktop and mobile screenshots, text contrast, and console errors.
 7. Only then generate optional video from the approved still.
 
+## Artifact Standards
+
+- Logos, icons, and precise methodology diagrams should be SVG or code-native vector components.
+- Editorial imagery, generated hero art, dashboards, and photographic surfaces should be responsive raster assets delivered through Next Image.
+- Hero/LCP imagery should use versioned filenames, explicit `sizes`, eager loading, and `fetchPriority="high"`.
+- Below-fold imagery should lazy-load, stay under the media budget, and avoid layout shift with stable dimensions.
+- Video should be muted, local, short, optimized, controlled by a visible pause/play affordance when meaningful, and backed by a static poster.
+- Cursor and motion polish should be desktop-only, disabled for coarse pointers, and disabled when the user prefers reduced motion.
+
 ## Model Guidance
 
 - `nano-banana-pro`: strongest KIE option for high-fidelity 2K/4K structured brand visuals.

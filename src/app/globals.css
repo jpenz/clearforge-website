@@ -346,6 +346,92 @@ h3, h4, h5, h6 {
 }
 .link-underline:hover::after { width: 100%; }
 
+html.premium-cursor-enabled,
+html.premium-cursor-enabled * {
+  cursor: none !important;
+}
+
+html.premium-cursor-enabled input,
+html.premium-cursor-enabled textarea,
+html.premium-cursor-enabled select,
+html.premium-cursor-enabled [contenteditable="true"],
+html.premium-cursor-enabled [role="textbox"] {
+  cursor: auto !important;
+}
+
+/* Desktop-only precision cursor. Native cursor remains for touch, reduced motion, and text inputs. */
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .premium-cursor {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+  }
+
+  .premium-cursor__ring,
+  .premium-cursor__dot {
+    position: fixed;
+    left: 0;
+    top: 0;
+    border-radius: 999px;
+    pointer-events: none;
+    transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
+    will-change: transform, width, height, opacity, border-color, background-color;
+  }
+
+  .premium-cursor__ring {
+    height: 2.2rem;
+    width: 2.2rem;
+    border: 1px solid rgba(224, 160, 114, 0.58);
+    background: rgba(224, 160, 114, 0.02);
+    box-shadow: 0 0 0 1px rgba(8, 9, 11, 0.18);
+    opacity: 0.72;
+    transition:
+      height 180ms cubic-bezier(0.16, 1, 0.3, 1),
+      width 180ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 160ms ease,
+      border-color 160ms ease,
+      background-color 160ms ease;
+  }
+
+  .premium-cursor__dot {
+    height: 0.34rem;
+    width: 0.34rem;
+    background: var(--color-brass-light);
+    opacity: 0.9;
+    transition:
+      height 120ms ease,
+      width 120ms ease,
+      opacity 120ms ease,
+      background-color 120ms ease;
+  }
+
+  .premium-cursor.is-interactive .premium-cursor__ring {
+    height: 3rem;
+    width: 3rem;
+    border-color: rgba(11, 94, 87, 0.72);
+    background: rgba(11, 94, 87, 0.08);
+    opacity: 0.95;
+  }
+
+  .premium-cursor.is-interactive .premium-cursor__dot {
+    height: 0.42rem;
+    width: 0.42rem;
+    background: var(--color-brass);
+  }
+
+  .premium-cursor.is-pressed .premium-cursor__ring {
+    height: 1.7rem;
+    width: 1.7rem;
+    opacity: 0.86;
+  }
+
+  .premium-cursor.is-hidden .premium-cursor__ring,
+  .premium-cursor.is-hidden .premium-cursor__dot {
+    opacity: 0;
+  }
+}
+
 /* Featured card glow pulse */
 @keyframes glowPulse {
   0%, 100% { box-shadow: 0 0 0 1px rgba(4, 120, 87, 0.3); }
@@ -362,4 +448,5 @@ h3, h4, h5, h6 {
   .animate-fade-in-up, .animate-fade-in { animation: none; opacity: 1; }
   .hero-signal-line, .hero-signal-node { animation: none; }
   .hero-scene-float { animation: none; }
+  .premium-cursor { display: none; }
 }
