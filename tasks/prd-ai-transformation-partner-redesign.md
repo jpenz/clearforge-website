@@ -74,6 +74,12 @@ Needs the first practical AI operating system that reduces dependency on manual 
 6. **Use benefits realization language.**
    Replace "proof," "pilot," and "experiment" language with "value thesis," "implementation," "adoption," "governance," "benefits tracking," and "operating cadence."
 
+7. **Measure human-plus-AI performance responsibly.**
+   Track role-level adoption, human review, AI contribution, override patterns, quality, and benefit movement. Do not frame this as employee surveillance or prompt-count tracking.
+
+8. **Align incentives to realized value.**
+   Reward teams for business outcomes, quality, responsible adoption, customer impact, and learning loops, not raw AI usage or tool logins.
+
 ## Recommended Information Architecture
 
 ### Homepage
@@ -111,19 +117,25 @@ Needs the first practical AI operating system that reduces dependency on manual 
    - Quality exceptions
    - PE value creation
 
-6. **Execution Evidence**
+6. **Human + AI Benefits System**
+   - AI work telemetry
+   - Human adoption signals
+   - Benefits ledger
+   - Incentive scorecard
+
+7. **Execution Evidence**
    - Case studies and metrics, framed as operating change rather than generic proof.
 
-7. **First 90 Days**
+8. **First 90 Days**
    - Align ambition
    - Select value pools
    - Design and build first systems
    - Launch adoption and benefits tracking
 
-8. **Trust Standard**
+9. **Trust Standard**
    - Founder-led, senior delivery, governance, guarantee, no handoff.
 
-9. **Final CTA**
+10. **Final CTA**
    - Book AI Transformation Call.
 
 ## Visual Direction
@@ -160,6 +172,8 @@ Boardroom operating architecture: clear, structured, premium, calm.
 - [ ] Hero no longer implies the buyer still needs AI proof.
 - [ ] Hero explains strategy, design, implementation, and benefits realization.
 - [ ] Homepage includes one clear transformation value chain.
+- [ ] Homepage explains how AI work, human adoption, and business benefit realization are tracked.
+- [ ] Incentive language rewards realized value and responsible adoption, not surveillance or raw usage.
 - [ ] Primary CTA is executive and sales-ready.
 - [ ] Use-case cards remain dashboard/context-specific.
 - [ ] Copy avoids generic AI phrases.

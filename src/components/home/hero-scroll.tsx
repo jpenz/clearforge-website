@@ -73,10 +73,10 @@ export function HeroScroll() {
           </Button>
           <Link
             href="/case-studies"
-            data-analytics="home_hero_view_proof"
+            data-analytics="home_hero_view_operating_evidence"
             className="inline-flex items-center gap-2 text-sm text-stone hover:text-bone transition-colors link-underline"
           >
-            View proof <ArrowRight className="h-4 w-4" />
+            See operating evidence <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
         <p className="mt-3 text-xs text-stone/50 animate-fade-in delay-5">

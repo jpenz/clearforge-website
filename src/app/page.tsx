@@ -1,23 +1,21 @@
-import {
-  ArrowRight,
-  CheckCircle2,
-  Gauge,
-  LineChart,
-  Search,
-  Shield,
-  Sparkles,
-  Target,
-  Users,
-  Workflow,
-} from 'lucide-react';
+import { ArrowRight, CheckCircle2, Shield, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import { BenefitsRealizationSystem } from '@/components/home/benefits-realization-system';
 import { HeroScroll } from '@/components/home/hero-scroll';
 import { SectionReveal, StaggerReveal } from '@/components/home/homepage-animations';
+import { homeIcons } from '@/components/home/icon-map';
 import { MetricCounter } from '@/components/home/metric-counter';
+import { TransformationSpine } from '@/components/home/transformation-spine';
 import { Button } from '@/components/ui/button';
-import { OperatorSystemPreview } from '@/components/use-cases/operator-system-preview';
 import { UseCaseCardVisual } from '@/components/use-cases/use-case-card-visual';
 import { caseStudies } from '@/data/case-studies';
+import {
+  firstNinetyDays,
+  marketGaps,
+  priorityUseCaseCopy,
+  proofNotes,
+  trustStandards,
+} from '@/data/homepage';
 import { industries } from '@/data/industries-value-chains';
 import { useCases } from '@/data/use-cases';
 import { createMetadata } from '@/lib/metadata';
@@ -36,112 +34,6 @@ const activityCount = industries.reduce(
   0,
 );
 
-const buyerProblems = [
-  {
-    icon: LineChart,
-    buyer: 'Strategy',
-    title: 'The ambition is real, but the value thesis is not owned.',
-    detail: 'AI priorities need a sponsor, baseline, business case, and investment sequence.',
-  },
-  {
-    icon: Workflow,
-    buyer: 'Design',
-    title: 'The workflow has not been redesigned for AI and people together.',
-    detail: 'Most teams add tools to old work instead of changing decisions, handoffs, and review.',
-  },
-  {
-    icon: Gauge,
-    buyer: 'Implementation',
-    title: 'The build is not connected to adoption and governance.',
-    detail: 'Agents, automations, dashboards, controls, and training need to launch as one system.',
-  },
-  {
-    icon: Search,
-    buyer: 'Realization',
-    title: 'Benefits are discussed, but not tracked like an operating plan.',
-    detail: 'Leaders need a cadence that shows adoption, value captured, risk, and next actions.',
-  },
-];
-
-const buildModel = [
-  {
-    icon: Target,
-    title: 'Set the AI ambition',
-    detail:
-      'Define where AI should improve growth, speed, quality, service, margin, or enterprise value.',
-    output: 'Value thesis',
-  },
-  {
-    icon: Workflow,
-    title: 'Design the operating model',
-    detail:
-      'Redesign the workflow, decisions, handoffs, controls, and roles before the build starts.',
-    output: 'Future-state work',
-  },
-  {
-    icon: Gauge,
-    title: 'Build the custom AI system',
-    detail:
-      'Implement agents, automations, dashboards, integrations, and exception rules around your systems.',
-    output: 'Production system',
-  },
-  {
-    icon: Users,
-    title: 'Drive adoption and governance',
-    detail:
-      'Train users, define human review, establish risk controls, and install the leadership cadence.',
-    output: 'Adoption model',
-  },
-  {
-    icon: LineChart,
-    title: 'Realize and scale benefits',
-    detail:
-      'Track value captured, identify leakage, improve the system, and sequence the next wave.',
-    output: 'Benefits ledger',
-  },
-];
-
-const proofNotes = ['Value thesis', 'Future workflow', 'System shipped', 'Benefits tracked'];
-
-const priorityUseCaseCopy = [
-  {
-    slug: 'ai-sales-pipeline-acceleration',
-    focus: 'Revenue growth',
-    line: 'Find buying events, match them to fit, and give sellers the next action.',
-    signal: 'Lead volume, stage movement, seller feedback',
-  },
-  {
-    slug: 'ai-customer-service-excellence',
-    focus: 'Service quality',
-    line: 'Reduce response variance while keeping judgment and escalation visible.',
-    signal: 'Response time, repeat issues, escalation quality',
-  },
-  {
-    slug: 'ai-operations-efficiency',
-    focus: 'Operations efficiency',
-    line: 'Move manual coordination, approvals, and exception queues into a managed workflow.',
-    signal: 'Cycle time, backlog, manual load',
-  },
-  {
-    slug: 'ai-knowledge-work-automation',
-    focus: 'Knowledge work',
-    line: 'Turn research, drafting, review, and reuse into a faster expert workflow.',
-    signal: 'Hours saved, quality checks, reuse rate',
-  },
-  {
-    slug: 'ai-quality-control-exception-management',
-    focus: 'Quality exceptions',
-    line: 'Detect repeat issues, route work to the right owner, and close the learning loop.',
-    signal: 'Exception rate, rework, root-cause closure',
-  },
-  {
-    slug: 'pe-portfolio-ai-value-creation',
-    focus: 'PE value creation',
-    line: 'Prioritize portfolio workflows by value, feasibility, adoption, and EBITDA path.',
-    signal: 'Value map, build priority, owner readiness',
-  },
-];
-
 type PriorityUseCase = (typeof priorityUseCaseCopy)[number] & {
   useCase: (typeof useCases)[number];
 };
@@ -151,76 +43,12 @@ const priorityUseCases: PriorityUseCase[] = priorityUseCaseCopy.flatMap((item) =
   return useCase ? [{ ...item, useCase }] : [];
 });
 
-const firstNinetyDays = [
-  {
-    day: '01',
-    title: 'Align ambition and value pools',
-    detail:
-      'Confirm the business outcomes, sponsors, baselines, constraints, and first priority areas.',
-  },
-  {
-    day: '30',
-    title: 'Design the future-state workflow',
-    detail: 'Define the operating design, controls, data path, user journey, and benefits model.',
-  },
-  {
-    day: '60',
-    title: 'Build and launch the first system',
-    detail: 'Ship the custom AI workflow with dashboard, handoffs, escalation, and user training.',
-  },
-  {
-    day: '90',
-    title: 'Run the benefits cadence',
-    detail: 'Review adoption, value captured, risks, exceptions, and the next wave of automation.',
-  },
-];
-
-const trustStandards = [
-  {
-    title: 'Strategy with implementation inside it',
-    detail: 'The roadmap is designed around what can actually be built, adopted, and measured.',
-  },
-  {
-    title: 'Workflow before platform',
-    detail: 'The operating model is designed before tools are selected.',
-  },
-  {
-    title: 'Governance by design',
-    detail: 'Human review, escalation, monitoring, and auditability are part of the system.',
-  },
-  {
-    title: 'Benefits realization discipline',
-    detail: 'Value capture is tracked after launch, not assumed at go-live.',
-  },
-];
-
-const salesPipelineUseCase =
-  useCases.find((useCase) => useCase.slug === 'ai-sales-pipeline-acceleration') ?? useCases[0];
-
 export default function Home() {
   return (
     <>
       <HeroScroll />
 
-      <section className="border-b border-divider bg-warm-white">
-        <div className="mx-auto grid max-w-[1400px] gap-0 px-4 sm:px-6 lg:grid-cols-3 lg:px-10">
-          {[
-            ['01', 'Set AI ambition'],
-            ['02', 'Design and build the system'],
-            ['03', 'Realize measurable benefits'],
-          ].map(([number, label]) => (
-            <div
-              key={number}
-              className="border-b border-divider py-5 lg:border-b-0 lg:border-r lg:px-8 lg:first:pl-0 lg:last:border-r-0"
-            >
-              <p className="metric text-xs text-brass">{number}</p>
-              <p className="mt-2 text-sm font-semibold text-anthracite">{label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-parchment py-20 sm:py-24 lg:py-32">
+      <section className="bg-parchment py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-end lg:gap-16">
             <SectionReveal animation="slide-left">
@@ -239,13 +67,13 @@ export default function Home() {
           </div>
 
           <StaggerReveal className="mt-14 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {buyerProblems.map((problem) => {
-              const Icon = problem.icon;
+            {marketGaps.map((problem) => {
+              const Icon = homeIcons[problem.icon];
               return (
                 <div key={problem.title} className="border border-divider bg-warm-white p-6">
                   <div className="flex items-center justify-between gap-4">
                     <span className="text-xs font-semibold uppercase tracking-[0.16em] text-warm-gray">
-                      {problem.buyer}
+                      {problem.label}
                     </span>
                     <Icon className="h-5 w-5 text-brass" />
                   </div>
@@ -260,69 +88,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-t border-divider bg-warm-white py-20 sm:py-24 lg:py-32">
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
-          <div className="grid gap-12 lg:grid-cols-[0.84fr_1.16fr] lg:items-start lg:gap-16">
-            <SectionReveal animation="slide-left">
-              <p className="overline">Transformation Value Chain</p>
-              <h2 className="mt-6 text-display">One accountable path from ambition to results.</h2>
-              <p className="mt-6 max-w-xl text-body-lg text-warm-gray">
-                ClearForge covers the work most AI programs split apart: strategy, operating design,
-                implementation, adoption, governance, and benefits tracking.
-              </p>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <Button asChild>
-                  <Link href="/services">
-                    Explore capabilities <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button variant="secondary" asChild>
-                  <Link href="/operating-model">See operating model</Link>
-                </Button>
-              </div>
-            </SectionReveal>
+      <TransformationSpine />
 
-            <div className="grid gap-4">
-              {buildModel.map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <SectionReveal
-                    key={item.title}
-                    animation="fade-up"
-                    className="border border-divider bg-parchment p-6 sm:p-7"
-                  >
-                    <div className="grid gap-5 sm:grid-cols-[3rem_1fr_auto] sm:items-start">
-                      <div className="flex h-11 w-11 items-center justify-center border border-brass/30 bg-brass/10 text-brass">
-                        <Icon className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <p className="metric text-xs text-brass">
-                          {String(index + 1).padStart(2, '0')}
-                        </p>
-                        <h3 className="mt-2 text-h3">{item.title}</h3>
-                        <p className="mt-3 text-body-sm leading-relaxed text-warm-gray">
-                          {item.detail}
-                        </p>
-                      </div>
-                      <span className="w-fit border border-divider bg-warm-white px-3 py-2 text-xs font-semibold text-anthracite">
-                        {item.output}
-                      </span>
-                    </div>
-                  </SectionReveal>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
+      <BenefitsRealizationSystem />
 
-      <OperatorSystemPreview
-        useCase={salesPipelineUseCase}
-        variant="compact"
-        className="py-20 sm:py-24 lg:py-32"
-      />
-
-      <section id="results" className="scroll-mt-20 bg-recessed py-20 sm:py-24 lg:py-32">
+      <section id="results" className="scroll-mt-20 bg-recessed py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-[0.68fr_1.32fr] lg:gap-16">
             <SectionReveal animation="slide-left">
@@ -376,7 +146,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-t border-divider bg-parchment py-20 sm:py-24 lg:py-32">
+      <section className="border-t border-divider bg-parchment py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <SectionReveal animation="fade-up">
             <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end lg:gap-16">
@@ -419,7 +189,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-t border-divider bg-warm-white py-20 sm:py-24 lg:py-32">
+      <section className="border-t border-divider bg-warm-white py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-16">
             <SectionReveal animation="slide-left">
@@ -457,7 +227,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="dark-section py-20 sm:py-24 lg:py-32">
+      <section className="dark-section py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-start lg:gap-16">
             <SectionReveal animation="slide-left">
@@ -516,7 +286,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="dark-section py-20 sm:py-28">
+      <section className="dark-section py-16 sm:py-20">
         <div className="mx-auto max-w-[980px] px-4 text-center sm:px-6 lg:px-10">
           <Sparkles className="mx-auto h-7 w-7 text-brass-light" />
           <p className="overline mt-6">Start Here</p>
