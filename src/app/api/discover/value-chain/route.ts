@@ -16,11 +16,13 @@ import { logServerError } from '@/lib/server-logger';
  * the same component pattern.
  */
 
+const MAX_RESEARCH_FIELD_CHARS = 12000;
+
 const companyResearchSchema = z.object({
   domain: z.string().trim().min(3).max(255),
-  company: z.string().max(6000),
-  jobs: z.string().max(6000),
-  useCases: z.string().max(6000),
+  company: z.string().max(MAX_RESEARCH_FIELD_CHARS),
+  jobs: z.string().max(MAX_RESEARCH_FIELD_CHARS),
+  useCases: z.string().max(MAX_RESEARCH_FIELD_CHARS),
 });
 
 type CompanyResearch = z.infer<typeof companyResearchSchema>;
