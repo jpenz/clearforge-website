@@ -38,13 +38,13 @@ const securityHeaders = [
       "font-src 'self' https://fonts.gstatic.com",
       // Allow scripts from self + Next.js inline scripts (required for hydration)
       isProduction
-        ? "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://plausible.io https://opps-widget.getwarmly.com"
-        : "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://plausible.io https://opps-widget.getwarmly.com",
+        ? "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://plausible.io"
+        : "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://plausible.io",
       // Browser code calls ClearForge APIs; LLM and email providers stay server-side.
-      "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://region1.google-analytics.com https://plausible.io https://*.getwarmly.com https://*.warmly.ai wss://*.getwarmly.com wss://*.warmly.ai",
+      "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://region1.google-analytics.com https://plausible.io",
       // Images: self + data URIs + Supabase storage
-      "img-src 'self' data: blob: https://*.supabase.co https://www.google-analytics.com https://*.getwarmly.com https://*.warmly.ai",
-      "frame-src 'self' https://*.getwarmly.com https://*.warmly.ai",
+      "img-src 'self' data: blob: https://*.supabase.co https://www.google-analytics.com",
+      "frame-src 'self'",
       "frame-ancestors 'self'",
       "base-uri 'self'",
       "form-action 'self'",

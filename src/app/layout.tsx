@@ -3,7 +3,6 @@ import { DM_Sans, Instrument_Serif, JetBrains_Mono } from 'next/font/google';
 import { AnalyticsTracker } from '@/components/analytics/analytics-tracker';
 import { GoogleAnalytics } from '@/components/analytics/google-analytics';
 import { PlausibleAnalytics } from '@/components/analytics/plausible-analytics';
-import { WarmlyAnalytics } from '@/components/analytics/warmly-analytics';
 import { Footer } from '@/components/layout/footer';
 import { ForgeBar } from '@/components/layout/forge-bar';
 import { Header } from '@/components/layout/header';
@@ -73,7 +72,6 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const ga4MeasurementId = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID;
   const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
-  const warmlyClientId = process.env.NEXT_PUBLIC_WARMLY_CLIENT_ID;
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -93,7 +91,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
         {ga4MeasurementId ? <GoogleAnalytics measurementId={ga4MeasurementId} /> : null}
         {plausibleDomain ? <PlausibleAnalytics domain={plausibleDomain} /> : null}
-        {warmlyClientId ? <WarmlyAnalytics clientId={warmlyClientId} /> : null}
         <AnalyticsTracker />
         <RouteScrollRestoration />
         <PremiumCursor />
