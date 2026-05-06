@@ -947,7 +947,7 @@ export const useCases: UseCase[] = [
     title: 'AI Knowledge Work Automation',
     shortTitle: 'Knowledge Work',
     eyebrow: 'Speed to insight',
-    seoTitle: 'AI Knowledge Work Automation for Research, Reporting, and Decisions',
+    seoTitle: 'AI Knowledge Work Automation for Decisions',
     metaDescription:
       'Build AI knowledge workflows for research, reporting, document review, synthesis, decision support, and expert handoffs with human judgment built in.',
     keywords: [

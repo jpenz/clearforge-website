@@ -34,7 +34,7 @@ const breadcrumbLd = breadcrumbJsonLd([
 export const metadata = createMetadata({
   title: 'Industries — AI Agents & Automation | ClearForge',
   description:
-    'AI agents and automation for every industry. Full operating value chains across financial services, manufacturing, healthcare, retail, logistics, energy, and more — with the specific activities ClearForge ships in production.',
+    'Explore operating value chains for 19 industries, with practical AI agents, copilots, models, and automations ClearForge can build in production.',
   path: '/industries',
   keywords: [
     'AI consulting industries',

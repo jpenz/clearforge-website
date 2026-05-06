@@ -9,6 +9,15 @@ const CaseStudyStory = dynamic(
   { loading: () => <div className="min-h-screen" /> },
 );
 
+function compactDescription(text: string, maxChars = 155): string {
+  const normalized = text.replace(/\s+/g, ' ').trim();
+  if (normalized.length <= maxChars) return normalized;
+
+  const clipped = normalized.slice(0, maxChars - 1);
+  const lastSpace = clipped.lastIndexOf(' ');
+  return `${clipped.slice(0, lastSpace > 80 ? lastSpace : clipped.length).trim()}...`;
+}
+
 export function generateStaticParams() {
   return caseStudies.map((cs) => ({ slug: cs.slug }));
 }
@@ -17,9 +26,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const cs = getCaseStudy(slug);
   if (!cs) return {};
+
+  const seoTitles: Record<string, string> = {
+    'home-services-turnaround': 'Home Services Pipeline Turnaround Case Study',
+    'industrial-manufacturer': '$4B Industrial AI Sales Intelligence Case Study',
+    'pe-portfolio-diagnostic-plan': 'PE Portfolio AI Diagnostic Case Study',
+  };
+
   return createMetadata({
-    title: `${cs.title} — ClearForge Case Study`,
-    description: cs.excerpt,
+    title: seoTitles[slug] ?? `${cs.industry} Case Study`,
+    description: compactDescription(cs.excerpt),
     path: `/case-studies/${slug}`,
   });
 }

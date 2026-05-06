@@ -31,7 +31,7 @@ const breadcrumbLd = breadcrumbJsonLd([
 export const metadata = createMetadata({
   title: 'AI Use Cases for Growth, Service, Operations, and Margin',
   description:
-    'Explore practical AI use cases ClearForge builds for operators: sales pipeline acceleration, service quality, operations flow, knowledge work, quality exceptions, and PE value creation.',
+    'Explore practical AI use cases for pipeline growth, service quality, operations flow, knowledge work, quality exceptions, and PE value creation.',
   path: '/use-cases',
   keywords: [
     'AI use cases',

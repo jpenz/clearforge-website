@@ -8,7 +8,7 @@ import { forgeProducts } from '@/data/forge-products';
 import { breadcrumbJsonLd, createMetadata, faqJsonLd } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'Pricing — Transparent Investment | ClearForge',
+  title: 'Pricing — Transparent AI Build Investment | ClearForge',
   description:
     'Transparent pricing for the Forge Method. Forge Diagnostic ($15K), Forge Sprint ($75K-$200K), Forge Scale ($5K-$15K/mo). No surprises.',
   path: '/pricing',
@@ -85,7 +85,7 @@ export default function PricingPage() {
             className="mt-6 text-display max-w-3xl text-bone"
             style={{ fontFamily: 'var(--font-instrument-serif)' }}
           >
-            Transparent Investment. No Surprises.
+            Transparent investment. No surprises.
           </h1>
           <p className="mt-6 max-w-xl text-body-lg text-stone">
             Every engagement is scoped around a named workflow, a baseline, an owner, and a review

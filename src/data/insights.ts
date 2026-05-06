@@ -1430,9 +1430,9 @@ For a mid-market company starting AI in 2026, expect to invest **$15K for a cred
       'why-ai-pilots-fail-5-things-work',
     ],
     seo: {
-      title: 'How Much Does AI Consulting Cost in 2026? Complete Pricing Guide',
+      title: 'AI Consulting Cost in 2026: Pricing Guide',
       description:
-        'AI consulting costs $10K-$25K for diagnostics, $75K-$250K for implementation sprints, and $5K-$25K/mo for managed ops. Complete 2026 pricing guide with cost drivers and measurement expectations.',
+        'AI consulting pricing in 2026: diagnostics, implementation sprints, managed AI operations, cost drivers, and measurement expectations.',
       keywords: [
         'AI consulting cost',
         'AI consulting pricing',
@@ -1590,9 +1590,9 @@ An AI readiness assessment is useful only when it changes the build decision. Fr
       'fractional-caio-vs-full-time',
     ],
     seo: {
-      title: 'AI Readiness Assessment 2026: What It Is, How to Run One, What It Costs',
+      title: 'AI Readiness Assessment 2026: Cost and Steps',
       description:
-        'An AI readiness assessment should test value case, workflow clarity, data path, controls, and adoption cadence before a production AI build. Free tools, paid diagnostics, and cost guide.',
+        'How to run an AI readiness assessment before a production build: value case, workflow clarity, data path, controls, adoption, and cost.',
       keywords: [
         'AI readiness assessment',
         'AI maturity assessment',
@@ -1757,9 +1757,9 @@ In those scenarios, hire full-time even if scope doesn't fully justify it.
 Fractional CAIO is the right choice for **mid-market companies with $25M-$500M revenue and AI program scope under $2M annually**. Cost is **$5K-$25K/month** vs $400K-$600K loaded comp full-time. Used as a 6-18 month bridge to evaluate whether full-time is warranted. Combine with a delivery firm for implementation; use both Strategic + Operating engagement levels depending on scope intensity.`,
     relatedSlugs: ['ai-consulting-cost', 'ai-readiness-assessment-guide', 'continuous-ai-agents'],
     seo: {
-      title: 'Fractional Chief AI Officer (CAIO) 2026: Cost, Role, vs Full-Time',
+      title: 'Fractional CAIO 2026: Cost, Role, vs Full-Time',
       description:
-        'A Fractional Chief AI Officer costs $5K-$25K/month vs $400K-$600K full-time. Complete 2026 guide: when to hire fractional, what they do, how to evaluate candidates, alternatives.',
+        'When to hire a Fractional CAIO in 2026, what the role owns, what it costs, and how to compare fractional vs full-time AI leadership.',
       keywords: [
         'fractional Chief AI Officer',
         'fractional CAIO',

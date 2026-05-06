@@ -212,7 +212,7 @@ export function CaseStudyStory({
           {/* Section header */}
           <div className="mx-auto max-w-[1400px] px-6 lg:px-10 mb-12">
             <p className="overline">The Forge Method™ Applied</p>
-            <h2 className="mt-4 text-display">How we solved it</h2>
+            <h2 className="mt-4 text-display">From constraint to operating cadence.</h2>
           </div>
 
           {/* Timeline line */}
@@ -246,7 +246,7 @@ export function CaseStudyStory({
               <div className="border-2 border-brass bg-brass/5 p-8 h-full flex flex-col justify-center">
                 <span className="metric text-sm text-brass">Results</span>
                 <h3 className="mt-4 text-h3">Keep scrolling to see what happened.</h3>
-                <p className="mt-2 text-body text-warm-gray">The numbers speak for themselves.</p>
+                <p className="mt-2 text-body text-warm-gray">The measured outcomes follow.</p>
               </div>
             </div>
           </div>
@@ -257,7 +257,7 @@ export function CaseStudyStory({
       <section className="bg-parchment py-16 md:hidden">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
           <p className="overline">The Forge Method™ Applied</p>
-          <h2 className="mt-4 text-display">How we solved it</h2>
+          <h2 className="mt-4 text-display">From constraint to operating cadence.</h2>
 
           <div className="mt-10 space-y-4">
             {phases.map((phase, i) => (
@@ -274,7 +274,7 @@ export function CaseStudyStory({
             <div className="border-2 border-brass bg-brass/5 p-5">
               <span className="metric text-sm text-brass">Results</span>
               <h3 className="mt-3 text-h3">Keep scrolling to see what happened.</h3>
-              <p className="mt-2 text-body text-warm-gray">The numbers speak for themselves.</p>
+              <p className="mt-2 text-body text-warm-gray">The measured outcomes follow.</p>
             </div>
           </div>
         </div>
@@ -284,9 +284,7 @@ export function CaseStudyStory({
       <section className="dark-section py-16 sm:py-24 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <p className="overline text-center">The Results</p>
-          <h2 className="mt-4 text-display text-bone text-center">
-            The numbers speak for themselves.
-          </h2>
+          <h2 className="mt-4 text-display text-bone text-center">Measured outcomes.</h2>
 
           <div className="mt-12 sm:mt-16 grid grid-cols-2 gap-4 sm:gap-8 lg:grid-cols-4 lg:gap-12">
             {outcomes.map((outcome, i) => (

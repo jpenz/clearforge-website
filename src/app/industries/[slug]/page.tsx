@@ -76,7 +76,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return createMetadata({
     title: `AI Agents & Automation for ${industry.name} | ClearForge`,
-    description: `${industry.oneLiner} ${industry.overview[0].slice(0, 120)}`,
+    description: compactMetaDescription(
+      `${industry.oneLiner} Value-chain use cases, controls, and first-build patterns for ${industry.shortName} operators.`,
+    ),
     path: `/industries/${industry.slug}`,
     keywords: [
       `${industry.shortName.toLowerCase()} AI`,
@@ -152,6 +154,15 @@ const TYPE_BADGE_CLASS: Record<ActivityType, string> = {
   model: 'border-divider text-warm-gray',
   copilot: 'border-divider text-warm-gray',
 };
+
+function compactMetaDescription(text: string, maxChars = 155): string {
+  const normalized = text.replace(/\s+/g, ' ').trim();
+  if (normalized.length <= maxChars) return normalized;
+
+  const clipped = normalized.slice(0, maxChars - 1);
+  const lastSpace = clipped.lastIndexOf(' ');
+  return `${clipped.slice(0, lastSpace > 80 ? lastSpace : clipped.length).trim()}.`;
+}
 
 type ValueChainFunction = (typeof industries)[number]['valueChain'][number];
 
@@ -370,9 +381,8 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               </h2>
               <p className="mt-6 max-w-2xl text-body-lg text-stone">
                 Start with the functions where work is most measurable, repeated, and constrained.
-                The full {industry.shortName.toLowerCase()} value chain stays available below:{' '}
-                {totalActivities} addressable activities across {industry.valueChain.length}{' '}
-                functions.
+                The full {industry.shortName} value chain stays available below: {totalActivities}{' '}
+                addressable activities across {industry.valueChain.length} functions.
               </p>
             </div>
             <div className="lg:col-span-5 lg:flex lg:justify-end mt-8 lg:mt-0">
@@ -431,7 +441,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <p className="overline">Industry Challenges</p>
           <h2 className="mt-6 text-display max-w-3xl">
-            Where {industry.shortName.toLowerCase()} operators are losing margin today
+            Where {industry.shortName} operators are losing margin today
           </h2>
           <Stagger className="mt-16 lg:grid lg:grid-cols-2 lg:gap-x-16" stagger={0.1}>
             {industry.challenges.map((ch) => (
@@ -463,7 +473,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             <div className="lg:col-span-5">
               <p className="overline">The Forge Method</p>
               <h2 className="mt-6 text-display">
-                How ClearForge ships AI in {industry.shortName.toLowerCase()}.
+                How ClearForge ships AI for {industry.shortName} operators.
               </h2>
             </div>
             <div className="mt-12 lg:col-span-7 lg:mt-0">

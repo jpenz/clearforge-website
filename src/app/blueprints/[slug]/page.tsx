@@ -17,8 +17,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const blueprint = getBlueprintBySlug(slug);
   if (!blueprint || blueprint.slug === 'cybersecurity-technology-company') return {};
 
+  const title =
+    blueprint.slug === 'private-equity-portfolio-ai-value-creation'
+      ? 'PE Portfolio AI Value Creation Blueprint'
+      : `${blueprint.title} | AI Build Blueprint`;
+
   return createMetadata({
-    title: `${blueprint.title} | AI Build Blueprint`,
+    title,
     description: blueprint.description,
     path: `/blueprints/${blueprint.slug}`,
     keywords: ['AI build blueprint', blueprint.title, blueprint.audience, blueprint.firstWorkflow],

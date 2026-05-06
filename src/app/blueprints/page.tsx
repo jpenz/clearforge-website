@@ -8,7 +8,7 @@ import { breadcrumbJsonLd, createMetadata } from '@/lib/metadata';
 export const metadata = createMetadata({
   title: 'AI Build Blueprints | ClearForge',
   description:
-    'Explore ClearForge AI build blueprints: example operating systems, composite scenarios, and role proposals that show what custom AI could look like before a paid sprint.',
+    'Explore ClearForge AI build blueprints: example operating systems and composite scenarios that show what custom AI could look like before a paid sprint.',
   path: '/blueprints',
   keywords: [
     'AI build blueprint',

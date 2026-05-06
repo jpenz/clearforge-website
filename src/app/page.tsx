@@ -22,7 +22,7 @@ import { useCases } from '@/data/use-cases';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'ClearForge - AI Transformation Strategy, Build, and Benefits Realization',
+  title: 'ClearForge - AI Strategy, Build, and Benefits Realization',
   description:
     'ClearForge helps leadership teams set AI ambition, redesign workflows, build custom AI systems, drive adoption, and realize measurable operating benefits.',
   path: '',
