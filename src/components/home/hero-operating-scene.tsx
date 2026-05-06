@@ -1,21 +1,21 @@
 import { CheckCircle2, Gauge, LineChart, Radar, Workflow } from 'lucide-react';
 
 const metrics = [
-  { label: 'Signals found', value: '1,181', trend: '+32x' },
-  { label: 'First contact', value: '48h', trend: 'target' },
-  { label: 'Match quality', value: '99.8%', trend: 'fit' },
+  { label: 'Value pools', value: '18', trend: 'prioritized' },
+  { label: 'Adoption coverage', value: '86%', trend: 'active users' },
+  { label: 'Benefits tracked', value: '$4.8M', trend: 'run rate' },
 ];
 
 const workflow = [
-  ['Value chain', 'Where value leaks'],
-  ['Workflow', 'What needs to run'],
-  ['Control loop', 'How it improves'],
+  ['Strategy', 'Value thesis'],
+  ['Design', 'Future workflow'],
+  ['Build', 'AI operating system'],
 ];
 
 const actions = [
-  ['Gulf Coast expansion', 'Validated', 'Strategic AE'],
-  ['Service backlog spike', 'Review', 'Ops lead'],
-  ['Quality exception cluster', 'Assigned', 'Plant owner'],
+  ['Revenue growth system', 'Scaling', 'CEO sponsor'],
+  ['Service response redesign', 'Launch', 'COO owner'],
+  ['Exception control loop', 'Adopt', 'Ops lead'],
 ];
 
 export function HeroOperatingScene() {
@@ -33,8 +33,8 @@ export function HeroOperatingScene() {
             <div className="flex items-center gap-3">
               <Radar className="h-5 w-5 text-brass-light" />
               <div>
-                <p className="text-sm font-semibold text-bone">AI Operating System</p>
-                <p className="text-xs text-stone">Weekly owner review</p>
+                <p className="text-sm font-semibold text-bone">AI Transformation Office</p>
+                <p className="text-xs text-stone">Benefits realization review</p>
               </div>
             </div>
             <span className="border border-emerald-300/20 bg-emerald-300/10 px-3 py-1.5 text-xs font-semibold text-emerald-100">
@@ -58,9 +58,9 @@ export function HeroOperatingScene() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <LineChart className="h-4 w-4 text-brass-light" />
-                    <p className="text-sm font-semibold text-bone">Lead signal volume</p>
+                    <p className="text-sm font-semibold text-bone">Benefits realization</p>
                   </div>
-                  <span className="text-xs text-stone">Jan-Jun</span>
+                  <span className="text-xs text-stone">Plan to run rate</span>
                 </div>
                 <div className="mt-6 flex h-40 items-end gap-3">
                   {[22, 31, 38, 55, 74, 96].map((height, index) => (
@@ -83,7 +83,7 @@ export function HeroOperatingScene() {
                 <div className="border border-bone/10 bg-bone/[0.04] p-5">
                   <div className="flex items-center gap-2">
                     <Workflow className="h-4 w-4 text-brass-light" />
-                    <p className="text-sm font-semibold text-bone">Build path</p>
+                    <p className="text-sm font-semibold text-bone">Transformation path</p>
                   </div>
                   <div className="mt-5 grid gap-3">
                     {workflow.map(([label, detail], index) => (
@@ -103,7 +103,7 @@ export function HeroOperatingScene() {
                 <div className="border border-bone/10 bg-forge-black/35 p-5">
                   <div className="flex items-center gap-2">
                     <Gauge className="h-4 w-4 text-brass-light" />
-                    <p className="text-sm font-semibold text-bone">Priority work</p>
+                    <p className="text-sm font-semibold text-bone">Executive workstream</p>
                   </div>
                   <div className="mt-4 space-y-3">
                     {actions.map(([name, stage, owner]) => (
@@ -126,7 +126,7 @@ export function HeroOperatingScene() {
             </div>
 
             <div className="grid grid-cols-3 gap-4 border-t border-bone/10 pt-5">
-              {['Owner named', 'Baseline measured', 'Review active'].map((item) => (
+              {['Sponsor named', 'Benefits baseline', 'Adoption tracked'].map((item) => (
                 <div
                   key={item}
                   className="flex items-center gap-2 text-xs font-semibold text-stone"

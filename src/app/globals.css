@@ -14,12 +14,10 @@
   --color-bone: #EAEAF2;
   --color-stone: #9090A8;
 
-  /* ── Accents — Emerald (darkened for AA contrast on light bg) ── */
-  /* NOTE: Variables are named "brass" for historical reasons (V7→V8 pivot),
-     but the actual value is emerald #047857. All UI uses these. */
-  --color-brass: #047857;
-  --color-brass-hover: #065F46;
-  --color-brass-light: #34D399;
+  /* ── Accents ── */
+  --color-brass: #8B5E24;
+  --color-brass-hover: #6F461A;
+  --color-brass-light: #D2A85D;
 
   /* ── Borders (visible but not heavy) ── */
   --color-divider: #C8C8D2;

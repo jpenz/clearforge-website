@@ -161,7 +161,7 @@ export function Header() {
               className="hidden sm:inline-flex text-xs shadow-sm hover:shadow-md"
               asChild
             >
-              <Link href="/scorecard">Run Diagnostic</Link>
+              <Link href="/contact">Book Strategy Call</Link>
             </Button>
           </div>
         </div>
@@ -230,12 +230,12 @@ export function Header() {
             {/* Sidebar CTA */}
             <div className="px-5 sm:px-8 py-6 border-t border-divider-dark">
               <Button className="w-full" size="lg" asChild>
-                <Link href="/scorecard" onClick={() => setSidebarOpen(false)}>
-                  Run Diagnostic <ArrowRight className="ml-2 h-4 w-4" />
+                <Link href="/contact" onClick={() => setSidebarOpen(false)}>
+                  Book AI Transformation Call <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <p className="mt-3 text-xs text-stone text-center">
-                Free · 4 minutes · workflow-readiness readout
+                Strategy, design, implementation, adoption, and benefits realization
               </p>
             </div>
 

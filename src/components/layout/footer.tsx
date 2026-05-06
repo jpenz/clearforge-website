@@ -45,17 +45,19 @@ export function Footer() {
         <div className="mx-auto max-w-[1200px] px-4 sm:px-6 py-16 lg:px-10 lg:py-28">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
             <div className="max-w-xl">
-              <p className="overline">Ready to find the value?</p>
-              <h2 className="mt-4 text-display text-bone">Start with the operating map.</h2>
+              <p className="overline">Ready to move from ambition to results?</p>
+              <h2 className="mt-4 text-display text-bone">
+                Build the AI transformation plan you can run.
+              </h2>
               <p className="mt-4 text-body-lg text-stone">
-                Run the diagnostic, then map the workflow worth building before you commit to a
-                sprint.
+                Align the value thesis, operating design, implementation plan, adoption model, and
+                benefits cadence before the next wave of AI investment.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
               <Button size="lg" className="shadow-lg hover:shadow-xl" asChild>
-                <Link href="/scorecard">
-                  Run Diagnostic <ArrowRight className="ml-2 h-4 w-4" />
+                <Link href="/contact">
+                  Book Strategy Call <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline-light" asChild>
@@ -72,8 +74,8 @@ export function Footer() {
           <div className="lg:col-span-4 space-y-6">
             <span className="text-[13px] font-bold uppercase text-bone">ClearForge</span>
             <p className="max-w-xs text-sm leading-relaxed text-stone">
-              Production AI strategy, build, and managed operations for mid-market and growth-stage
-              companies.
+              AI transformation strategy, operating design, custom implementation, adoption, and
+              benefits realization for operators.
             </p>
             <a
               href="mailto:james@clearforge.ai"

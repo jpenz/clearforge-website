@@ -23,9 +23,9 @@ import { useCases } from '@/data/use-cases';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'ClearForge - Custom AI Operating Systems',
+  title: 'ClearForge - AI Transformation Strategy, Build, and Benefits Realization',
   description:
-    'ClearForge helps operators find the workflow worth fixing, build the custom AI system around it, and install the cadence that makes performance measurable.',
+    'ClearForge helps leadership teams set AI ambition, redesign workflows, build custom AI systems, drive adoption, and realize measurable operating benefits.',
   path: '',
 });
 
@@ -39,55 +39,69 @@ const activityCount = industries.reduce(
 const buyerProblems = [
   {
     icon: LineChart,
-    buyer: 'CEO / owner',
-    title: 'Growth is not showing up where the market is moving.',
-    detail: 'Signals, accounts, and next actions are scattered across tools and people.',
+    buyer: 'Strategy',
+    title: 'The ambition is real, but the value thesis is not owned.',
+    detail: 'AI priorities need a sponsor, baseline, business case, and investment sequence.',
   },
   {
-    icon: Users,
-    buyer: 'COO',
-    title: 'Service quality depends on heroic follow-up.',
-    detail: 'Work gets done, but through inboxes, memory, and uneven handoffs.',
+    icon: Workflow,
+    buyer: 'Design',
+    title: 'The workflow has not been redesigned for AI and people together.',
+    detail: 'Most teams add tools to old work instead of changing decisions, handoffs, and review.',
   },
   {
     icon: Gauge,
-    buyer: 'PE operator',
-    title: 'Margin improvement is trapped in exception work.',
-    detail: 'The opportunity is visible, but the operating system to capture it is missing.',
+    buyer: 'Implementation',
+    title: 'The build is not connected to adoption and governance.',
+    detail: 'Agents, automations, dashboards, controls, and training need to launch as one system.',
   },
   {
     icon: Search,
-    buyer: 'Leadership team',
-    title: 'AI pilots are active, but the work still runs the old way.',
-    detail: 'Tools exist. The workflow, owner, control loop, and adoption model do not.',
+    buyer: 'Realization',
+    title: 'Benefits are discussed, but not tracked like an operating plan.',
+    detail: 'Leaders need a cadence that shows adoption, value captured, risk, and next actions.',
   },
 ];
 
 const buildModel = [
   {
     icon: Target,
-    title: 'Find the constraint',
+    title: 'Set the AI ambition',
     detail:
-      'Map the value chain, baseline the current workflow, and choose the first build that can move a real KPI.',
-    output: 'AI value map',
+      'Define where AI should improve growth, speed, quality, service, margin, or enterprise value.',
+    output: 'Value thesis',
   },
   {
     icon: Workflow,
-    title: 'Build the system',
+    title: 'Design the operating model',
     detail:
-      'Design the agents, data paths, dashboards, integrations, and exception rules around how work actually moves.',
-    output: 'Production workflow',
+      'Redesign the workflow, decisions, handoffs, controls, and roles before the build starts.',
+    output: 'Future-state work',
   },
   {
     icon: Gauge,
-    title: 'Run the cadence',
+    title: 'Build the custom AI system',
     detail:
-      'Train the team, install the review rhythm, and keep improving the system with measured feedback.',
-    output: 'Operating control loop',
+      'Implement agents, automations, dashboards, integrations, and exception rules around your systems.',
+    output: 'Production system',
+  },
+  {
+    icon: Users,
+    title: 'Drive adoption and governance',
+    detail:
+      'Train users, define human review, establish risk controls, and install the leadership cadence.',
+    output: 'Adoption model',
+  },
+  {
+    icon: LineChart,
+    title: 'Realize and scale benefits',
+    detail:
+      'Track value captured, identify leakage, improve the system, and sequence the next wave.',
+    output: 'Benefits ledger',
   },
 ];
 
-const proofNotes = ['Constraint', 'System shipped', 'Measured result', 'Operating change'];
+const proofNotes = ['Value thesis', 'Future workflow', 'System shipped', 'Benefits tracked'];
 
 const priorityUseCaseCopy = [
   {
@@ -137,40 +151,46 @@ const priorityUseCases: PriorityUseCase[] = priorityUseCaseCopy.flatMap((item) =
   return useCase ? [{ ...item, useCase }] : [];
 });
 
-const firstThirtyDays = [
+const firstNinetyDays = [
   {
     day: '01',
-    title: 'Pressure-test the value chain',
-    detail: 'Identify the workflows with enough volume, pain, data, ownership, and upside.',
-  },
-  {
-    day: '10',
-    title: 'Choose the first production bet',
-    detail: 'Compare build options by KPI impact, feasibility, risk, and adoption load.',
+    title: 'Align ambition and value pools',
+    detail:
+      'Confirm the business outcomes, sponsors, baselines, constraints, and first priority areas.',
   },
   {
     day: '30',
-    title: 'Leave with a build case',
-    detail: 'Define the architecture, sprint scope, controls, owner cadence, and decision path.',
+    title: 'Design the future-state workflow',
+    detail: 'Define the operating design, controls, data path, user journey, and benefits model.',
+  },
+  {
+    day: '60',
+    title: 'Build and launch the first system',
+    detail: 'Ship the custom AI workflow with dashboard, handoffs, escalation, and user training.',
+  },
+  {
+    day: '90',
+    title: 'Run the benefits cadence',
+    detail: 'Review adoption, value captured, risks, exceptions, and the next wave of automation.',
   },
 ];
 
 const trustStandards = [
   {
+    title: 'Strategy with implementation inside it',
+    detail: 'The roadmap is designed around what can actually be built, adopted, and measured.',
+  },
+  {
     title: 'Workflow before platform',
-    detail: 'The work is mapped before tools are chosen.',
+    detail: 'The operating model is designed before tools are selected.',
   },
   {
-    title: 'Proof before scale',
-    detail: 'The first system must earn the next one.',
+    title: 'Governance by design',
+    detail: 'Human review, escalation, monitoring, and auditability are part of the system.',
   },
   {
-    title: 'Human control by design',
-    detail: 'Escalation, review rights, and audit trails are part of the build.',
-  },
-  {
-    title: 'Guarantee on the first bet',
-    detail: 'Three measurable opportunities or the diagnostic investment is refunded.',
+    title: 'Benefits realization discipline',
+    detail: 'Value capture is tracked after launch, not assumed at go-live.',
   },
 ];
 
@@ -185,9 +205,9 @@ export default function Home() {
       <section className="border-b border-divider bg-warm-white">
         <div className="mx-auto grid max-w-[1400px] gap-0 px-4 sm:px-6 lg:grid-cols-3 lg:px-10">
           {[
-            ['01', 'Find the workflow worth fixing'],
-            ['02', 'Build the custom AI system'],
-            ['03', 'Train the team to run it'],
+            ['01', 'Set AI ambition'],
+            ['02', 'Design and build the system'],
+            ['03', 'Realize measurable benefits'],
           ].map(([number, label]) => (
             <div
               key={number}
@@ -204,16 +224,16 @@ export default function Home() {
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-end lg:gap-16">
             <SectionReveal animation="slide-left">
-              <p className="overline">When To Call</p>
+              <p className="overline">The Market Has Moved</p>
               <h2 className="mt-6 text-display">
-                AI needs a business target before it needs more tools.
+                The question is no longer whether AI works. It is who can make it operational.
               </h2>
             </SectionReveal>
             <SectionReveal animation="fade-up">
               <p className="max-w-3xl text-body-lg text-warm-gray">
-                ClearForge is built for leaders who can already feel the drag: missed growth,
-                inconsistent service, slow knowledge work, margin leaks, or AI pilots that never
-                changed the operating rhythm.
+                Leaders need a team that can connect strategy, process design, custom technology,
+                adoption, governance, and benefits realization without handing the work across
+                disconnected vendors.
               </p>
             </SectionReveal>
           </div>
@@ -244,20 +264,20 @@ export default function Home() {
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-[0.84fr_1.16fr] lg:items-start lg:gap-16">
             <SectionReveal animation="slide-left">
-              <p className="overline">What We Build</p>
-              <h2 className="mt-6 text-display">A working system, not a better deck.</h2>
+              <p className="overline">Transformation Value Chain</p>
+              <h2 className="mt-6 text-display">One accountable path from ambition to results.</h2>
               <p className="mt-6 max-w-xl text-body-lg text-warm-gray">
-                The deliverable is a new way for the work to run: AI where it helps, people where
-                judgment matters, and leaders with a clear view of performance.
+                ClearForge covers the work most AI programs split apart: strategy, operating design,
+                implementation, adoption, governance, and benefits tracking.
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <Button asChild>
                   <Link href="/services">
-                    See services <ArrowRight className="ml-2 h-4 w-4" />
+                    Explore capabilities <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
                 <Button variant="secondary" asChild>
-                  <Link href="/operating-model">Operating model</Link>
+                  <Link href="/operating-model">See operating model</Link>
                 </Button>
               </div>
             </SectionReveal>
@@ -306,10 +326,11 @@ export default function Home() {
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-[0.68fr_1.32fr] lg:gap-16">
             <SectionReveal animation="slide-left">
-              <p className="overline">Proof You Can Inspect</p>
-              <h2 className="mt-6 text-display">Less claim. More operating evidence.</h2>
+              <p className="overline">Execution Evidence</p>
+              <h2 className="mt-6 text-display">What changes when strategy becomes a system.</h2>
               <p className="mt-6 text-body-lg text-warm-gray">
-                Every serious AI build should answer four questions before it asks for scale.
+                The point is not a demo. The point is an operating change leaders can inspect,
+                manage, and scale.
               </p>
               <div className="mt-8 grid grid-cols-2 gap-3">
                 {proofNotes.map((note) => (
@@ -360,14 +381,14 @@ export default function Home() {
           <SectionReveal animation="fade-up">
             <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end lg:gap-16">
               <div>
-                <p className="overline">Where We Start</p>
+                <p className="overline">Where Value Usually Starts</p>
                 <h2 className="mt-6 text-display">
-                  Six first workflows that buyers understand fast.
+                  Six transformation surfaces that make benefits visible.
                 </h2>
               </div>
               <p className="max-w-3xl text-body-lg text-warm-gray">
-                These are not generic AI categories. They are operating surfaces where owners can
-                see volume, exceptions, accountability, and economic value.
+                Each use case starts as a workflow, but the goal is bigger: better growth, service,
+                throughput, quality, decision speed, and portfolio value.
               </p>
             </div>
           </SectionReveal>
@@ -402,21 +423,21 @@ export default function Home() {
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-16">
             <SectionReveal animation="slide-left">
-              <p className="overline">First 30 Days</p>
-              <h2 className="mt-6 text-display">A fast path to a build/no-build decision.</h2>
+              <p className="overline">First 90 Days</p>
+              <h2 className="mt-6 text-display">Move from value thesis to operating cadence.</h2>
               <p className="mt-6 text-body-lg text-warm-gray">
-                The diagnostic is intentionally narrow. It creates enough clarity to fund the first
-                production workflow without pretending the whole company has been transformed.
+                The first wave should create a credible roadmap, ship usable systems, train real
+                users, and leave leadership with a benefits review rhythm.
               </p>
               <Button className="mt-8" asChild>
                 <Link href="/pricing">
-                  View engagement options <ArrowRight className="ml-2 h-4 w-4" />
+                  View engagement model <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </SectionReveal>
 
             <div className="grid gap-4">
-              {firstThirtyDays.map((step) => (
+              {firstNinetyDays.map((step) => (
                 <SectionReveal
                   key={step.day}
                   animation="fade-up"
@@ -442,7 +463,9 @@ export default function Home() {
             <SectionReveal animation="slide-left">
               <Shield className="h-7 w-7 text-brass-light" />
               <p className="overline mt-6">Trust Standard</p>
-              <h2 className="mt-6 text-display text-bone">Founder-led. Operator-grade.</h2>
+              <h2 className="mt-6 text-display text-bone">
+                Senior strategy. Builder accountability.
+              </h2>
               <p className="mt-6 text-body-lg text-stone">
                 ClearForge was founded by James Penz after 15 years in transformation work to close
                 the gap between what gets recommended and what actually gets built.
@@ -497,21 +520,19 @@ export default function Home() {
         <div className="mx-auto max-w-[980px] px-4 text-center sm:px-6 lg:px-10">
           <Sparkles className="mx-auto h-7 w-7 text-brass-light" />
           <p className="overline mt-6">Start Here</p>
-          <h2 className="mt-6 text-display text-bone">
-            Get the first value map before the first meeting.
-          </h2>
+          <h2 className="mt-6 text-display text-bone">Turn AI ambition into an operating plan.</h2>
           <p className="mx-auto mt-6 max-w-2xl text-body-lg text-stone">
-            Enter your website, get a company-specific first read, and use the diagnostic call to
-            decide whether the first workflow is worth building.
+            Bring ClearForge in when leadership needs the roadmap, the system, the adoption model,
+            and the benefits cadence to be designed together.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button size="lg" asChild>
-              <Link href="/discover">
-                Generate AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
+              <Link href="/contact">
+                Book AI Transformation Call <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>
-              <Link href="/contact">Book a Diagnostic Call</Link>
+              <Link href="/discover">Generate AI Value Map</Link>
             </Button>
           </div>
         </div>
