@@ -64,7 +64,7 @@ vi.mock('gsap', () => ({
       fromTo: vi.fn().mockReturnThis(),
     })),
     registerPlugin: vi.fn(),
-    context: vi.fn((fn: () => void) => ({ revert: vi.fn(), kill: vi.fn() })),
+    context: vi.fn((_fn: () => void) => ({ revert: vi.fn(), kill: vi.fn() })),
   },
   ScrollTrigger: { refresh: vi.fn(), update: vi.fn() },
 }));

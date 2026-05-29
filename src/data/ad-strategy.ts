@@ -11,8 +11,8 @@
  * boutique AI shops, fractional CAIO firms), and channel benchmarks.
  *
  * Key strategic insights:
- * - Buyer narrative is "execution gap" / "pilot purgatory" — 80% of pilots
- *   stuck, only 16% scale enterprise-wide. Mirror this language.
+ * - Buyer narrative is "execution gap" / "pilot purgatory" — leaders have
+ *   activity, but the operating model is not changing. Mirror this language.
  * - Pricing transparency is a wedge against MBB + Slalom (both hide pricing)
  * - The $15K Forge Diagnostic is the TOFU magnet — make it the primary CTA
  * - LinkedIn = primary B2B channel (CPC $5-15, CPL $50-200, conv to opp 2-3x
@@ -20,10 +20,9 @@
  * - Meta = retargeting only (CPM 2-4x lower but targeting too coarse for
  *   $25M-$500M ICP firmographic precision)
  * - Search has $20-40 CPC for head terms; long-tail industry+role $5-15
- * - Quality Score 8+ pays 37% below median — disciplined ad/LP relevance
- *   is the single biggest lever
- * - 89% of brand searches show AI Overviews — content must be optimized
- *   for citation in ChatGPT/Claude/Perplexity, not just blue-link SEO
+ * - Disciplined ad/LP relevance is the single biggest controllable lever
+ * - Content must be optimized for citation in ChatGPT/Claude/Perplexity,
+ *   not just blue-link SEO
  */
 
 export interface KeywordCluster {
@@ -81,13 +80,13 @@ export const keywordClusters: KeywordCluster[] = [
     ],
     estimatedCPC: '$8-18 (very high commercial intent)',
     contentNeeded: [
-      'AI Readiness Scorecard pillar page (exists at /scorecard)',
+      'ClearForge Diagnostic pillar page (exists at /scorecard)',
       'How to Know If Your Company Is AI Ready (long-form Q&A)',
-      'Free vs Paid AI Diagnostic — Buyer\'s Guide',
+      "Free vs Paid AI Diagnostic — Buyer's Guide",
       'AI Maturity Model: 4-tier framework explained',
     ],
     primaryLandingPage: '/scorecard',
-    primaryCTA: 'Take the free AI Readiness Scorecard',
+    primaryCTA: 'Run the free ClearForge Diagnostic',
   },
   {
     id: 'ai-pe-value',
@@ -147,7 +146,7 @@ export const keywordClusters: KeywordCluster[] = [
       'AI Agents for RevOps — definitive guide',
       'AI Agents for Customer Service — top use cases ranked by ROI',
       'AI Agent Implementation Roadmap',
-      'AI Agents vs RPA vs Workflow Automation — buyer\'s guide',
+      "AI Agents vs RPA vs Workflow Automation — buyer's guide",
     ],
     primaryLandingPage: '/services/custom-ai-agents',
     primaryCTA: 'See AI Agent capabilities',
@@ -177,7 +176,7 @@ export const keywordClusters: KeywordCluster[] = [
     contentNeeded: [
       'Industry value-chain pages (✅ shipped V8.20 — 17 industries)',
       'Per-industry case study',
-      'Industry-specific buyer\'s guide',
+      "Industry-specific buyer's guide",
     ],
     primaryLandingPage: '/industries',
     primaryCTA: 'Generate Custom Value Chain',
@@ -223,7 +222,8 @@ export const adCampaigns: AdCampaign[] = [
     id: 'li-pe-operating-partner',
     channel: 'linkedin',
     name: 'PE Operating Partners — Portfolio AI Diagnostic',
-    audience: 'Job titles: Operating Partner, Portfolio Operating Executive, COO at PE-backed company. Companies: $50M-$500M revenue.',
+    audience:
+      'Job titles: Operating Partner, Portfolio Operating Executive, COO at PE-backed company. Companies: $50M-$500M revenue.',
     objective: 'conversion',
     cluster: 'ai-pe-value',
     format: 'Document Ad (PDF: PE Portfolio AI Playbook)',
@@ -247,7 +247,8 @@ export const adCampaigns: AdCampaign[] = [
     id: 'li-mfg-coo',
     channel: 'linkedin',
     name: 'Manufacturing COOs / VP Operations — AI for OEE & Supply Chain',
-    audience: 'Job titles: COO, VP Operations, Plant Manager, Supply Chain VP. Industries: industrial manufacturing, industrial goods. Companies: $50M-$500M.',
+    audience:
+      'Job titles: COO, VP Operations, Plant Manager, Supply Chain VP. Industries: industrial manufacturing, industrial goods. Companies: $50M-$500M.',
     objective: 'conversion',
     cluster: 'industry-ai',
     format: 'Single Image Ad with case study link',
@@ -259,7 +260,7 @@ export const adCampaigns: AdCampaign[] = [
         cta: 'See the case',
       },
       {
-        headline: 'Your data is generating signals you\'re not acting on.',
+        headline: "Your data is generating signals you're not acting on.",
         body: 'AI agents in supply chain, predictive maintenance, and commercial execution. Production AI in 10 weeks — not 10 quarters.',
         cta: 'Get a Forge Diagnostic',
       },
@@ -271,15 +272,16 @@ export const adCampaigns: AdCampaign[] = [
     id: 'li-thought-leader-james',
     channel: 'linkedin',
     name: 'Thought Leader Ad — James Penz / Pilot Purgatory',
-    audience: 'COO, CRO, CEO at $25M-$500M companies. Industries: Manufacturing, Financial Services, Healthcare, Distribution, SaaS, PE-backed.',
+    audience:
+      'COO, CRO, CEO at $25M-$500M companies. Industries: Manufacturing, Financial Services, Healthcare, Distribution, SaaS, PE-backed.',
     objective: 'awareness',
     cluster: 'ai-readiness',
     format: 'Thought Leader Ad (founder LinkedIn post amplification)',
     budget: '$2-3K/mo',
     copyVariants: [
       {
-        headline: '80% of AI pilots never ship. We built a process to fix that.',
-        body: 'Forge Diagnostic ($15K, 4 weeks) gives you a roadmap of where AI ships in 90 days — measured against revenue, cost, or throughput.',
+        headline: 'AI pilots stall when no one owns the workflow.',
+        body: 'Forge Diagnostic ($15K, 4 weeks) turns pilot activity into a ranked workflow roadmap with owners, baselines, controls, and a next build decision.',
         cta: 'See the framework',
       },
     ],
@@ -290,7 +292,8 @@ export const adCampaigns: AdCampaign[] = [
     id: 'li-conversation-revops',
     channel: 'linkedin',
     name: 'Conversation Ad — RevOps & CRO',
-    audience: 'CRO, VP Sales, RevOps Director, VP Revenue Operations. Companies: $25M-$200M ARR SaaS, B2B services.',
+    audience:
+      'CRO, VP Sales, RevOps Director, VP Revenue Operations. Companies: $25M-$200M ARR SaaS, B2B services.',
     objective: 'conversion',
     cluster: 'ai-agents-functions',
     format: 'Conversation Ad with 2-step CTA',
@@ -318,13 +321,13 @@ export const adCampaigns: AdCampaign[] = [
     budget: '$2-4K/mo, $80-150 target CPL',
     copyVariants: [
       {
-        headline: 'AI Readiness Assessment | Free in 5 Minutes | ClearForge',
-        body: '20 questions across 5 pillars. Get your AI maturity score and a personalized roadmap. Bain-trained team. No sales call required.',
-        cta: 'Take the Free Scorecard',
+        headline: 'AI Build-Readiness Diagnostic | ClearForge',
+        body: 'Ten workflow-specific questions. See the value case, data path, controls, and adoption gaps before funding a build.',
+        cta: 'Run the Diagnostic',
       },
       {
         headline: 'AI Diagnostic for Mid-Market | $15K Fixed Fee | 4 Weeks',
-        body: 'Forge Diagnostic identifies 3+ actionable AI opportunities with ROI projections. Money-back guarantee.',
+        body: 'Forge Diagnostic identifies 3+ measurable AI opportunities with baselines, owners, evidence needs, and a next build decision.',
         cta: 'Book a Diagnostic',
       },
     ],
@@ -362,7 +365,7 @@ export const adCampaigns: AdCampaign[] = [
     copyVariants: [
       {
         headline: 'Production AI Agents | Built in 10 Weeks | ClearForge',
-        body: 'AI agents for RevOps, customer service, supply chain. Built and deployed by senior team. 89% reach production.',
+        body: 'AI agents for RevOps, customer service, and supply chain workflows. Built around owners, controls, adoption, and measurement.',
         cta: 'See AI Agent Capabilities',
       },
     ],
@@ -458,8 +461,8 @@ export const buyerLanguage = [
   'AI workforce readiness',
   'pilot to production',
   'stuck in pilot',
-  '80% of pilots never scale',
-  'only 16% scale enterprise-wide',
+  'pilot without an owner',
+  'workflow ready for production',
   'AI Overviews / answer engines',
   'AI agents in production',
   '90-day AI roadmap',

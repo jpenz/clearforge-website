@@ -1,9 +1,9 @@
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'Forge Intelligence\u2122 \u2014 AI-Powered Discovery | ClearForge',
+  title: 'Forge Intelligence\u2122 \u2014 AI Value Map | ClearForge',
   description:
-    'Tell us about your business and challenges. Our AI-powered discovery process identifies the highest-value opportunities for AI transformation.',
+    'Enter your company website and Forge Intelligence maps the highest-value AI opportunities across your operating model.',
   path: '/discover',
 });
 

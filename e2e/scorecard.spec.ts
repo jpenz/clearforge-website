@@ -35,7 +35,7 @@ test.describe('AI Readiness Scorecard', () => {
   test('first pillar questions are visible on load', async ({ page }) => {
     await page.goto('/scorecard');
     // Score buttons (1-5) should be visible for the first question
-    const scoreButtons = page.getByRole('button').filter({ hasText: /^[1-5]$/ });
+    const scoreButtons = page.getByRole('button', { name: /3 out of 5/i });
     await expect(scoreButtons.first()).toBeVisible();
   });
 
@@ -44,7 +44,7 @@ test.describe('AI Readiness Scorecard', () => {
     await page.waitForLoadState('networkidle');
 
     // Answer all questions on the first pillar by clicking score 3 for each
-    const scoreButtons = page.getByRole('button').filter({ hasText: /^3$/ });
+    const scoreButtons = page.getByRole('button', { name: /3 out of 5/i });
     const count = await scoreButtons.count();
     expect(count).toBeGreaterThan(0);
 
@@ -77,7 +77,7 @@ test.describe('AI Readiness Scorecard', () => {
       iterations++;
 
       // Find all unanswered score-3 buttons and click them
-      const scoreButtons = page.getByRole('button').filter({ hasText: /^3$/ });
+      const scoreButtons = page.getByRole('button', { name: /3 out of 5/i });
       const count = await scoreButtons.count();
 
       if (count === 0) break;
@@ -129,7 +129,7 @@ test.describe('AI Readiness Scorecard', () => {
     await page.waitForLoadState('networkidle');
 
     // Score buttons should be visible and tappable
-    const scoreButtons = page.getByRole('button').filter({ hasText: /^[1-5]$/ });
+    const scoreButtons = page.getByRole('button', { name: /3 out of 5/i });
     await expect(scoreButtons.first()).toBeVisible();
 
     // No horizontal overflow

@@ -23,8 +23,7 @@ const EASE = 'power3.out';
 const TRIGGER_START = 'top 88%';
 
 const prefersReducedMotion = () =>
-  typeof window !== 'undefined' &&
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ------------------------------------------------------------------ */
 /*  FadeIn — single element reveal                                    */

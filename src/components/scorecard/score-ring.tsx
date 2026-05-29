@@ -50,7 +50,14 @@ export function ScoreRing({ score, size = 200, strokeWidth = 8 }: ScoreRingProps
       className="relative inline-flex items-center justify-center"
       style={{ width: size, height: size }}
     >
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="-rotate-90">
+      <svg
+        width={size}
+        height={size}
+        viewBox={`0 0 ${size} ${size}`}
+        className="-rotate-90"
+        aria-hidden="true"
+        focusable="false"
+      >
         {/* Background track */}
         <circle
           cx={center}

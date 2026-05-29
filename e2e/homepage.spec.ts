@@ -41,13 +41,23 @@ test.describe('Homepage', () => {
   test('primary CTA button is visible and clickable', async ({ page }) => {
     // Look for common CTA patterns
     const cta = page
-      .getByRole('link', { name: /get started|book a call|contact|scorecard|assessment/i })
+      .getByRole('link', { name: /get started|book a call|contact|scorecard|assessment|value map/i })
       .first();
     await expect(cta).toBeVisible();
   });
 
-  test('navigation links are present', async ({ page }) => {
-    const nav = page.getByRole('navigation').first();
+  test('navigation links are present', async ({ page }, testInfo) => {
+    if (testInfo.project.name === 'mobile') {
+      await page.waitForLoadState('networkidle');
+      const menuButton = page.getByRole('button', { name: /open menu/i });
+      await expect(menuButton).toBeVisible();
+      await menuButton.click();
+      await expect(page.getByRole('dialog')).toBeVisible();
+      await expect(page.getByRole('link', { name: /how we work/i })).toBeVisible();
+      return;
+    }
+
+    const nav = page.getByRole('navigation', { name: /main navigation/i });
     await expect(nav).toBeVisible();
   });
 

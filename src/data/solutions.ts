@@ -204,7 +204,7 @@ export const solutions: Solution[] = [
     tagline: 'Bridge your existing systems to AI.',
     headline: 'Modernize high-friction legacy workflows without a risky rip-and-replace program.',
     summary:
-      'We create integration and migration pathways that unlock AI value from existing systems while controlling delivery risk.',
+      'We create integration and migration pathways that make existing systems usable for AI while controlling delivery risk.',
     rightForYou: [
       'Core workflows depend on older ERP, on-prem, or fragmented spreadsheet systems.',
       'A full system replacement is too costly or too disruptive right now.',

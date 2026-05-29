@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">ClearForge logo</title>
+  <desc id="desc">ClearForge wordmark monogram.</desc>
+  <rect width="512" height="512" fill="#0A0F1E"/>
+  <path d="M116 256c0-83.947 63.749-148 151.202-148 54.333 0 98.522 24.143 124.411 61.988l-45.59 31.531c-17.146-24.844-44.89-39.911-78.821-39.911-50.132 0-87.104 39.563-87.104 94.392 0 54.828 36.972 94.391 87.104 94.391 34.281 0 62.025-15.416 79.171-40.261l45.94 31.531C366.074 379.856 321.885 404 267.202 404 179.749 404 116 339.947 116 256Z" fill="#F6F0E5"/>
+  <path d="M266 208h130v48H266v-48Zm0 72h102v48H266v-48Z" fill="#B8872D"/>
+</svg>

@@ -1,11 +1,26 @@
 import type { Metadata } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
 import { GeistSans } from 'geist/font/sans';
-import { Header } from '@/components/layout/header';
+import { AnalyticsTracker } from '@/components/analytics/analytics-tracker';
+import { GoogleAnalytics } from '@/components/analytics/google-analytics';
+import { PlausibleAnalytics } from '@/components/analytics/plausible-analytics';
 import { Footer } from '@/components/layout/footer';
 import { ForgeBar } from '@/components/layout/forge-bar';
+import { Header } from '@/components/layout/header';
 import { LenisProvider } from '@/components/layout/lenis-provider';
-import { coreKeywords, organizationJsonLd } from '@/lib/metadata';
+import { PremiumCursor } from '@/components/layout/premium-cursor';
+import { RouteScrollRestoration } from '@/components/layout/route-scroll-restoration';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
+import {
+  aiTransformationOfferCatalogJsonLd,
+  clearForgeMethodJsonLd,
+  clearForgeProfilePageJsonLd,
+  coreKeywords,
+  founderPersonJsonLd,
+  organizationJsonLd,
+  siteNavigationJsonLd,
+  websiteJsonLd,
+} from '@/lib/metadata';
 import './globals.css';
 
 // V9 rebrand: all-sans. Geist for display + body, JetBrains Mono for numerals.
@@ -29,13 +44,23 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     siteName: 'ClearForge',
-    images: [{ url: '/images/og-image.webp', width: 1200, height: 630, alt: 'ClearForge — AI Strategy & Execution' }],
+    images: [
+      {
+        url: '/images/og-image.webp',
+        width: 1200,
+        height: 630,
+        alt: 'ClearForge — AI Strategy & Execution',
+      },
+    ],
   },
   twitter: { card: 'summary_large_image', images: ['/images/og-image.webp'] },
   robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const ga4MeasurementId = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID;
+  const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -44,18 +69,30 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <link rel="preconnect" href="https://api.anthropic.com" crossOrigin="anonymous" />
       </head>
       <body className={`${GeistSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        <JsonLdScript
+          data={[
+            organizationJsonLd,
+            founderPersonJsonLd,
+            websiteJsonLd,
+            siteNavigationJsonLd,
+            aiTransformationOfferCatalogJsonLd,
+            clearForgeMethodJsonLd,
+            clearForgeProfilePageJsonLd,
+          ]}
         />
+        {ga4MeasurementId ? <GoogleAnalytics measurementId={ga4MeasurementId} /> : null}
+        {plausibleDomain ? <PlausibleAnalytics domain={plausibleDomain} /> : null}
+        <AnalyticsTracker />
+        <RouteScrollRestoration />
+        <PremiumCursor />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-brass focus:text-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold"
         >
           Skip to main content
         </a>
+        <Header />
         <LenisProvider>
-          <Header />
           <main id="main-content">{children}</main>
           <Footer />
           <ForgeBar />

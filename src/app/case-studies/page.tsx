@@ -1,22 +1,46 @@
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Stagger, StaggerItem } from '@/components/ui/animate';
+import { Button } from '@/components/ui/button';
 import { caseStudies } from '@/data/case-studies';
-import { createMetadata } from '@/lib/metadata';
+import { breadcrumbJsonLd, createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'Case Studies — Real Outcomes, Verified Results | ClearForge',
+  title: 'Case Studies — Operator Proof | ClearForge',
   description:
-    'Real outcomes from real engagements. See how ClearForge turns AI strategy into operating performance with measurable results.',
+    'Real client work from ClearForge: what changed, what shipped, and how the operating cadence improved.',
   path: '/case-studies',
 });
+
+const collectionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'ClearForge Case Studies',
+  url: 'https://clearforge.ai/case-studies',
+  description:
+    'Real ClearForge work showing the operating constraint, shipped system, and evidence leaders used after launch.',
+  hasPart: caseStudies.map((study) => ({
+    '@type': 'Article',
+    headline: study.title,
+    url: `https://clearforge.ai/case-studies/${study.slug}`,
+    description: study.excerpt,
+    articleSection: study.industry,
+  })),
+};
+
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: 'Home', path: '/' },
+  { name: 'Case Studies', path: '/case-studies' },
+]);
 
 export default function CaseStudiesPage() {
   return (
     <>
-      {/* — Hero with atmospheric bg — */}
+      <JsonLdScript data={collectionLd} />
+      <JsonLdScript data={breadcrumbLd} />
+
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <Image
           src="/images/abstract-assessment.webp"
@@ -33,16 +57,27 @@ export default function CaseStudiesPage() {
             className="mt-6 text-display max-w-3xl text-bone"
             style={{ fontFamily: 'var(--font-display)' }}
           >
-            Real Outcomes. Verified Results.
+            Proof from work that shipped.
           </h1>
           <p className="mt-6 max-w-xl text-body-lg text-stone">
-            Every engagement is measured against revenue, cost, or throughput.
-            We build, we ship, we deploy — and we measure what happens next.
+            Each case shows the constraint, the operating build, and the evidence leaders used to
+            manage what happened next.
           </p>
+          <div className="mt-10 grid gap-px overflow-hidden border border-bone/10 bg-bone/10 sm:grid-cols-3">
+            {[
+              ['01', 'Constraint named'],
+              ['02', 'System shipped'],
+              ['03', 'Evidence visible'],
+            ].map(([step, label]) => (
+              <div key={step} className="bg-forge-black/70 p-4">
+                <p className="metric text-xs text-brass-light">{step}</p>
+                <p className="mt-1 text-sm font-semibold text-bone">{label}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* — Case Study List — Editorial ruled-line, matches homepage Results ═ */}
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <Stagger className="mt-0" stagger={0.08}>
@@ -85,20 +120,17 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      {/* — CTA — */}
       <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">
-            See how we would help your company.
-          </h2>
+          <h2 className="text-display text-bone">See what we would build first.</h2>
           <p className="mt-6 text-body-lg text-stone">
-            Every business is different. Start with a Forge Diagnostic and we
-            will show you exactly where AI can drive measurable results.
+            Start with a Forge Diagnostic. We will identify the workflow worth fixing, the owner who
+            needs the view, and the first shipped build that can prove itself.
           </p>
           <div className="mt-10">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
+                Map My First Build <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>

@@ -7,7 +7,7 @@
  */
 
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { ProgressBar } from '@/components/scorecard/progress-bar';
 import { type PillarKey, pillars } from '@/lib/scorecard';
 

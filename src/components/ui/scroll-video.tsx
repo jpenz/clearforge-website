@@ -71,7 +71,7 @@ export function ScrollVideo({
 
       // Desktop scroll-scrub path — wait for metadata so we know duration
       const armScrub = () => {
-        if (!video.duration || !isFinite(video.duration)) return;
+        if (!video.duration || !Number.isFinite(video.duration)) return;
 
         // Prevent native looping during scrub; scroll drives currentTime
         video.loop = false;
@@ -110,10 +110,7 @@ export function ScrollVideo({
   );
 
   return (
-    <section
-      ref={sectionRef}
-      className={`relative overflow-hidden ${className}`}
-    >
+    <section ref={sectionRef} className={`relative overflow-hidden ${className}`}>
       <video
         ref={videoRef}
         src={src}

@@ -7,7 +7,12 @@
       "url": [
         "http://localhost:3000",
         "http://localhost:3000/about",
-        "http://localhost:3000/contact"
+        "http://localhost:3000/contact",
+        "http://localhost:3000/services/custom-ai-agents",
+        "http://localhost:3000/use-cases/ai-sales-pipeline-acceleration",
+        "http://localhost:3000/industries/manufacturing",
+        "http://localhost:3000/insights/clearforge-ai-transformation-maturity-model",
+        "http://localhost:3000/blueprints/industrial-sales-intelligence-command"
       ],
       "numberOfRuns": 2
     },
@@ -23,8 +28,7 @@
         "total-blocking-time": ["warn", { "maxNumericValue": 300 }],
         "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }],
         "interactive": ["warn", { "maxNumericValue": 4000 }],
-        "uses-https": "off",
-        "canonical": "off"
+        "uses-https": "off"
       }
     },
     "upload": {

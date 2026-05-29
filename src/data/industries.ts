@@ -22,7 +22,7 @@ export const deepIndustries: Industry[] = [
     shortName: 'Manufacturing',
     hero: 'Apply AI to throughput, planning, and commercial execution without disrupting critical operations.',
     overview: [
-      'Manufacturers are balancing margin pressure, volatile demand, and workforce constraints while operating on complex system landscapes. AI can create significant leverage, but only when deployed inside real production and commercial workflows.',
+      'Manufacturers are balancing margin pressure, volatile demand, and workforce constraints while operating on complex system landscapes. AI matters only when it is deployed inside real production and commercial workflows.',
       'ClearForge helps manufacturers prioritize where AI changes operating economics first, then build and run those systems with measurable accountability.',
     ],
     challenges: [

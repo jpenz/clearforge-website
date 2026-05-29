@@ -1,23 +1,33 @@
 'use client';
 
-import { ArrowRight, MapPin, Mail, Clock } from 'lucide-react';
+import { ArrowRight, Clock, Mail, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { trackEvent } from '@/lib/analytics';
 
-const revenueOptions = [
-  'Under $5M',
-  '$5M - $25M',
-  '$25M - $100M',
-  '$100M - $500M',
-  '$500M+',
+const revenueOptions = ['Under $5M', '$5M - $25M', '$25M - $100M', '$100M - $500M', '$500M+'];
+const workflowAreaOptions = [
+  'Revenue growth',
+  'Customer service quality',
+  'Operations efficiency',
+  'Knowledge work',
+  'Quality exceptions',
+  'PE portfolio value creation',
+  'Enterprise AI governance',
+];
+const urgencyOptions = [
+  'Exploring options',
+  'Need a diagnostic this month',
+  'Need a sprint scoped',
+  'Active executive priority',
 ];
 
 const expectations = [
-  'We respond within one business day — usually same day.',
-  'A 30-minute confidential discovery call to understand your business.',
-  'An honest assessment of whether AI can help and which engagement fits.',
+  'James responds within one business day, usually same day.',
+  'A 15-minute confidential diagnostic call focused on one workflow.',
+  'An honest assessment of the workflow, owner, data, and engagement fit.',
   'If we are not the right fit, we will tell you and recommend who is.',
 ];
 
@@ -27,28 +37,57 @@ export default function ContactPage() {
     email: '',
     company: '',
     revenue: '',
-    challenge: '',
+    role: '',
+    workflowArea: '',
+    urgency: '',
+    message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   function handleChange(
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setError('');
+    setIsSubmitting(true);
+    const eventProperties = {
+      revenue: form.revenue || 'not_provided',
+      workflow_area: form.workflowArea || 'not_provided',
+      urgency: form.urgency || 'not_provided',
+      has_company: Boolean(form.company.trim()),
+    };
+
     try {
-      await fetch('/api/contact', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
+      trackEvent(response.ok ? 'contact_form_submit_success' : 'contact_form_submit_error', {
+        ...eventProperties,
+        status: response.status,
+      });
+      if (!response.ok) {
+        setError(
+          'Something did not send. Please check the required fields or email James directly.',
+        );
+        setIsSubmitting(false);
+        return;
+      }
     } catch {
-      // silent — we still show confirmation
+      trackEvent('contact_form_submit_error', {
+        ...eventProperties,
+        status: 'network_error',
+      });
+      setError('Network issue. Please try again or email James directly.');
+      setIsSubmitting(false);
+      return;
     }
     setSubmitted(true);
   }
@@ -59,8 +98,7 @@ export default function ContactPage() {
         <div className="mx-auto max-w-xl px-6 text-center lg:px-10">
           <h1 className="text-display">Thank you.</h1>
           <p className="mt-6 text-body-lg text-warm-gray">
-            We will be in touch within one business day. If it is urgent, call
-            or email us directly.
+            We will be in touch within one business day. If it is urgent, call or email us directly.
           </p>
           <div className="mt-4 space-y-1">
             <a
@@ -84,7 +122,7 @@ export default function ContactPage() {
 
   return (
     <>
-      {/* — Hero with atmospheric bg — */}
+      {/* Hero with atmospheric bg */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <Image
           src="/images/abstract-network.webp"
@@ -96,13 +134,14 @@ export default function ContactPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-forge-black via-forge-black/80 to-forge-black/40 pointer-events-none" />
         <div className="relative mx-auto max-w-[1200px] px-6 lg:px-10">
-          <p className="overline">Get in Touch</p>
+          <p className="overline">Bring One Stuck Workflow</p>
           <h1 className="mt-6 text-display max-w-3xl text-bone">
-            Book a 15-Min Diagnostic Call
+            Let us pressure-test whether it is worth building.
           </h1>
           <p className="mt-6 max-w-xl text-body-lg text-stone">
-            No pitch decks. No pressure. A straightforward conversation about
-            where AI can drive measurable results for your company.
+            No sales theater. No pressure. A straightforward conversation about the workflow, owner,
+            data path, baseline, and control points you would need before custom AI belongs in
+            production.
           </p>
         </div>
       </section>
@@ -110,11 +149,11 @@ export default function ContactPage() {
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-20">
-            {/* Left — Info */}
+            {/* Left - Info */}
             <div className="lg:col-span-5">
               <p className="overline">How We Engage</p>
               <h2 className="mt-6 text-display">
-                Direct access. Senior team. One business-day response.
+                Direct access to James. Clear next step or a fast no.
               </h2>
 
               <div className="mt-12 space-y-8">
@@ -139,8 +178,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="text-h4">Based in Southeast Michigan</h3>
                     <p className="mt-1 text-body text-warm-gray">
-                      Serving clients nationally. On-site engagements available
-                      for Forge Sprint and Forge Scale relationships.
+                      Serving clients nationally. On-site engagements available for Forge Sprint and
+                      Forge Scale relationships.
                     </p>
                   </div>
                 </div>
@@ -152,12 +191,10 @@ export default function ContactPage() {
                     <ol className="mt-3 space-y-3">
                       {expectations.map((item, i) => (
                         <li
-                          key={i}
+                          key={item}
                           className="flex items-start gap-3 text-body-sm text-warm-gray"
                         >
-                          <span className="metric text-sm text-brass shrink-0">
-                            {i + 1}.
-                          </span>
+                          <span className="metric text-sm text-brass shrink-0">{i + 1}.</span>
                           {item}
                         </li>
                       ))}
@@ -167,109 +204,177 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Right — Form */}
+            {/* Right - Form */}
             <div className="mt-16 lg:col-span-7 lg:mt-0">
-              <form onSubmit={handleSubmit} className="space-y-8">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-body-sm font-medium text-anthracite"
-                >
-                  Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  value={form.name}
-                  onChange={handleChange}
-                  className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite placeholder:text-warm-gray/50 focus:border-brass focus:outline-none focus:ring-0"
-                  placeholder="Your full name"
-                />
-              </div>
+              <form
+                onSubmit={handleSubmit}
+                data-analytics="contact_form_submit_attempt"
+                className="space-y-8"
+              >
+                <div>
+                  <label htmlFor="name" className="block text-body-sm font-medium text-anthracite">
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    value={form.name}
+                    onChange={handleChange}
+                    className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite placeholder:text-warm-gray/50 focus:border-brass focus:outline-none focus:ring-0"
+                    placeholder="Your full name"
+                  />
+                </div>
 
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-body-sm font-medium text-anthracite"
-                >
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  value={form.email}
-                  onChange={handleChange}
-                  className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite placeholder:text-warm-gray/50 focus:border-brass focus:outline-none focus:ring-0"
-                  placeholder="you@company.com"
-                />
-              </div>
+                <div>
+                  <label htmlFor="email" className="block text-body-sm font-medium text-anthracite">
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={handleChange}
+                    className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite placeholder:text-warm-gray/50 focus:border-brass focus:outline-none focus:ring-0"
+                    placeholder="you@company.com"
+                  />
+                </div>
 
-              <div>
-                <label
-                  htmlFor="company"
-                  className="block text-body-sm font-medium text-anthracite"
-                >
-                  Company
-                </label>
-                <input
-                  id="company"
-                  name="company"
-                  type="text"
-                  value={form.company}
-                  onChange={handleChange}
-                  className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite placeholder:text-warm-gray/50 focus:border-brass focus:outline-none focus:ring-0"
-                  placeholder="Company name"
-                />
-              </div>
+                <div>
+                  <label
+                    htmlFor="company"
+                    className="block text-body-sm font-medium text-anthracite"
+                  >
+                    Company
+                  </label>
+                  <input
+                    id="company"
+                    name="company"
+                    type="text"
+                    required
+                    value={form.company}
+                    onChange={handleChange}
+                    className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite placeholder:text-warm-gray/50 focus:border-brass focus:outline-none focus:ring-0"
+                    placeholder="Company name"
+                  />
+                </div>
 
-              <div>
-                <label
-                  htmlFor="revenue"
-                  className="block text-body-sm font-medium text-anthracite"
-                >
-                  Annual Revenue
-                </label>
-                <select
-                  id="revenue"
-                  name="revenue"
-                  value={form.revenue}
-                  onChange={handleChange}
-                  className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite focus:border-brass focus:outline-none focus:ring-0"
-                >
-                  <option value="">Select range</option>
-                  {revenueOptions.map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                <div>
+                  <label
+                    htmlFor="revenue"
+                    className="block text-body-sm font-medium text-anthracite"
+                  >
+                    Annual Revenue
+                  </label>
+                  <select
+                    id="revenue"
+                    name="revenue"
+                    required
+                    value={form.revenue}
+                    onChange={handleChange}
+                    className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite focus:border-brass focus:outline-none focus:ring-0"
+                  >
+                    <option value="">Select range</option>
+                    {revenueOptions.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-              <div>
-                <label
-                  htmlFor="challenge"
-                  className="block text-body-sm font-medium text-anthracite"
-                >
-                  Biggest Challenge
-                </label>
-                <textarea
-                  id="challenge"
-                  name="challenge"
-                  rows={4}
-                  required
-                  value={form.challenge}
-                  onChange={handleChange}
-                  className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite placeholder:text-warm-gray/50 focus:border-brass focus:outline-none focus:ring-0 resize-none"
-                  placeholder="What is the biggest operational challenge you are trying to solve with AI?"
-                />
-              </div>
+                <div>
+                  <label htmlFor="role" className="block text-body-sm font-medium text-anthracite">
+                    Role
+                  </label>
+                  <input
+                    id="role"
+                    name="role"
+                    type="text"
+                    value={form.role}
+                    onChange={handleChange}
+                    className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite placeholder:text-warm-gray/50 focus:border-brass focus:outline-none focus:ring-0"
+                    placeholder="CEO, COO, CRO, operating partner, founder..."
+                  />
+                </div>
 
-                <Button type="submit" size="lg">
-                  Send My Request <ArrowRight className="ml-2 h-4 w-4" />
+                <div>
+                  <label
+                    htmlFor="workflowArea"
+                    className="block text-body-sm font-medium text-anthracite"
+                  >
+                    Workflow Area
+                  </label>
+                  <select
+                    id="workflowArea"
+                    name="workflowArea"
+                    value={form.workflowArea}
+                    onChange={handleChange}
+                    className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite focus:border-brass focus:outline-none focus:ring-0"
+                  >
+                    <option value="">Select the closest area</option>
+                    {workflowAreaOptions.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="urgency"
+                    className="block text-body-sm font-medium text-anthracite"
+                  >
+                    Preferred Next Step
+                  </label>
+                  <select
+                    id="urgency"
+                    name="urgency"
+                    value={form.urgency}
+                    onChange={handleChange}
+                    className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite focus:border-brass focus:outline-none focus:ring-0"
+                  >
+                    <option value="">Select timing</option>
+                    {urgencyOptions.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block text-body-sm font-medium text-anthracite"
+                  >
+                    Workflow To Pressure-Test
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    required
+                    value={form.message}
+                    onChange={handleChange}
+                    className="mt-2 block w-full border-0 border-b border-divider bg-transparent px-0 py-3 text-anthracite placeholder:text-warm-gray/50 focus:border-brass focus:outline-none focus:ring-0 resize-none"
+                    placeholder="Which workflow should run faster, cleaner, or with less manual coordination?"
+                  />
+                </div>
+
+                {error && (
+                  <p className="border-l border-brass bg-warm-white px-4 py-3 text-body-sm text-anthracite">
+                    {error}
+                  </p>
+                )}
+
+                <Button type="submit" size="lg" disabled={isSubmitting}>
+                  {isSubmitting ? 'Sending...' : 'Send the Workflow'}
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </form>
             </div>

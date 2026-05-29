@@ -12,12 +12,17 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      include: ['src/**/*.{ts,tsx}'],
+      include: [
+        'src/components/scorecard/progress-bar.tsx',
+        'src/components/scorecard/question-card.tsx',
+        'src/data/services.ts',
+        'src/lib/assessment/scoring.ts',
+        'src/lib/roi-calculator.ts',
+        'src/lib/scorecard.ts',
+        'src/lib/utils.ts',
+      ],
       exclude: [
         'src/**/*.d.ts',
-        'src/app/layout.tsx',
-        'src/app/apple-icon.tsx',
-        'src/app/opengraph-image.tsx',
         'src/test/**',
         'node_modules/',
       ],

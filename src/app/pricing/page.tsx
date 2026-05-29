@@ -1,13 +1,14 @@
 import { ArrowRight, Check } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Stagger, StaggerItem } from '@/components/ui/animate';
+import { Button } from '@/components/ui/button';
 import { forgeProducts } from '@/data/forge-products';
 import { breadcrumbJsonLd, createMetadata, faqJsonLd } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'Pricing — Transparent Investment | ClearForge',
+  title: 'Pricing — Transparent AI Build Investment | ClearForge',
   description:
     'Transparent pricing for the Forge Method. Forge Diagnostic ($15K), Forge Sprint ($75K-$200K), Forge Scale ($5K-$15K/mo). No surprises.',
   path: '/pricing',
@@ -22,7 +23,7 @@ const faqs = [
   {
     question: 'What is the timeline to see results?',
     answer:
-      'Forge Diagnostic delivers a roadmap in 4 weeks. Forge Sprint produces a working production system in 10-14 weeks. Most clients see measurable ROI within 90 days of deployment.',
+      'Forge Diagnostic delivers a build plan in 4 weeks. Forge Sprint produces a working production system in 10-14 weeks. We set baseline metrics before launch so the review cadence can compare actual workflow performance after deployment.',
   },
   {
     question: 'What if our data is not ready?',
@@ -32,17 +33,17 @@ const faqs = [
   {
     question: 'Is our company big enough for this?',
     answer:
-      'We work with mid-market and growth-stage companies. If you have operational complexity and enough data to train on, AI can drive measurable results. The Diagnostic will tell you definitively.',
+      'We work with mid-market and growth-stage companies. If you have repeatable workflows, operating data, and a team owner who can adopt the new process, the Diagnostic will show whether a build is worth pursuing.',
   },
   {
     question: 'Why not just buy DataRobot or Dataiku?',
     answer:
-      'Platforms are powerful tools — if you have a data science team to build, validate, and maintain models. We build production AI AND train your team to run it. When we leave, the system works and your people own it. No ongoing platform license required.',
+      'Platforms can help when you already have a data science team to build, validate, and maintain models. We build the workflow, integrate it with your systems, and train the operating team that will own it.',
   },
   {
     question: 'How is this different from hiring a consultant?',
     answer:
-      'Traditional consultants deliver a strategy deck and leave. We build, deploy, and train. The same senior team that diagnoses the problem engineers the solution. No handoff to junior staff, no translation layer between strategy and execution.',
+      'We do not stop at recommendations. The same senior team that diagnoses the workflow engineers the release, trains the owner, and sets the operating review cadence.',
   },
   {
     question: 'What is the payment structure?',
@@ -65,8 +66,8 @@ const breadcrumbLd = breadcrumbJsonLd([
 export default function PricingPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <JsonLdScript data={faqLd} />
+      <JsonLdScript data={breadcrumbLd} />
       {/* — Hero with atmospheric bg — */}
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
         <Image
@@ -84,11 +85,11 @@ export default function PricingPage() {
             className="mt-6 text-display max-w-3xl text-bone"
             style={{ fontFamily: 'var(--font-display)' }}
           >
-            Transparent Investment. No Surprises.
+            Transparent investment. No surprises.
           </h1>
           <p className="mt-6 max-w-xl text-body-lg text-stone">
-            Every engagement is scoped to deliver measurable results. Clients
-            typically see 3-5x return within 12 months.
+            Every engagement is scoped around a named workflow, a baseline, an owner, and a review
+            cadence for measured value after launch.
           </p>
         </div>
       </section>
@@ -101,9 +102,7 @@ export default function PricingPage() {
               <StaggerItem key={product.name}>
                 <div
                   className={`relative border-t border-divider py-12 lg:py-16 ${
-                    product.featured
-                      ? 'bg-brass/[0.03] -mx-6 px-6 lg:-mx-10 lg:px-10'
-                      : ''
+                    product.featured ? 'bg-brass/[0.03] -mx-6 px-6 lg:-mx-10 lg:px-10' : ''
                   }`}
                 >
                   <div className="lg:grid lg:grid-cols-12 lg:gap-12">
@@ -117,16 +116,7 @@ export default function PricingPage() {
                           <span className="overline text-[10px]">Most chosen</span>
                         )}
                       </div>
-                      <h3
-                        className="mt-3"
-                        style={{
-                          fontFamily: 'var(--font-display)',
-                          fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
-                          lineHeight: 1.08,
-                          letterSpacing: '-0.02em',
-                          fontWeight: 600,
-                        }}
-                      >
+                      <h3 className="mt-3 font-display text-[1.75rem] leading-[1.08] sm:text-[2.25rem] lg:text-[2.75rem]">
                         {product.name}
                       </h3>
                       <div className="mt-4 flex items-baseline gap-2">
@@ -136,13 +126,9 @@ export default function PricingPage() {
                         >
                           {product.price}
                         </span>
-                        <span className="text-body-sm text-warm-gray">
-                          {product.period}
-                        </span>
+                        <span className="text-body-sm text-warm-gray">{product.period}</span>
                       </div>
-                      <p className="mt-1 text-body-sm text-warm-gray">
-                        {product.timeline}
-                      </p>
+                      <p className="mt-1 text-body-sm text-warm-gray">{product.timeline}</p>
                       <p className="mt-6 text-body-sm text-warm-gray italic max-w-xs">
                         {product.idealFor}
                       </p>
@@ -150,10 +136,8 @@ export default function PricingPage() {
 
                     {/* Right: description, what's included, CTA */}
                     <div className="mt-8 lg:col-span-7 lg:mt-0">
-                      <p className="text-body-lg text-warm-gray">
-                        {product.description}
-                      </p>
-                      <p className="mt-8 text-xs font-semibold text-anthracite uppercase tracking-widest">
+                      <p className="text-body-lg text-warm-gray">{product.description}</p>
+                      <p className="mt-8 text-xs font-semibold text-anthracite uppercase">
                         What&apos;s Included
                       </p>
                       <ul className="mt-4 space-y-3">
@@ -188,41 +172,33 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* — ROI Framing — */}
+      {/* — Value Framing — */}
       <section className="bg-recessed py-24 lg:py-40">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-5">
-              <p className="overline">Return on Investment</p>
-              <h2 className="mt-6 text-display">
-                This is an investment, not a cost.
-              </h2>
+              <p className="overline">Measured Value</p>
+              <h2 className="mt-6 text-display">Know what will be measured before you build.</h2>
             </div>
             <div className="mt-12 lg:col-span-7 lg:mt-0">
               <p className="text-body-lg text-warm-gray">
-                Clients typically see 3-5x return within 12 months. A $15K
-                Diagnostic frequently uncovers $200K+ in quick wins. A $100K
-                Sprint routinely produces $300K-$500K in annual value through
-                automation, error reduction, and throughput gains.
+                We do not ask you to approve a build on vague upside. The Diagnostic documents the
+                workflow, current baseline, data gaps, owner decisions, and value assumptions. The
+                Sprint then tracks adoption and operating metrics against that baseline after
+                launch.
               </p>
               <div className="mt-10 grid grid-cols-3 gap-8 border-t border-divider pt-8">
                 <div>
-                  <p className="metric-lg text-brass">3-5x</p>
-                  <p className="mt-2 text-body-sm text-warm-gray">
-                    Typical ROI within 12 months
-                  </p>
+                  <p className="metric-lg text-brass">4 weeks</p>
+                  <p className="mt-2 text-body-sm text-warm-gray">Diagnostic build plan</p>
                 </div>
                 <div>
-                  <p className="metric-lg text-brass">90 days</p>
-                  <p className="mt-2 text-body-sm text-warm-gray">
-                    Time to measurable results
-                  </p>
+                  <p className="metric-lg text-brass">10-14</p>
+                  <p className="mt-2 text-body-sm text-warm-gray">Weeks to production release</p>
                 </div>
                 <div>
                   <p className="metric-lg text-brass">100%</p>
-                  <p className="mt-2 text-body-sm text-warm-gray">
-                    You own everything we build
-                  </p>
+                  <p className="mt-2 text-body-sm text-warm-gray">You own everything we build</p>
                 </div>
               </div>
             </div>
@@ -243,9 +219,7 @@ export default function PricingPage() {
                 <StaggerItem key={faq.question}>
                   <div className="py-8">
                     <h3 className="text-h4">{faq.question}</h3>
-                    <p className="mt-3 text-body text-warm-gray">
-                      {faq.answer}
-                    </p>
+                    <p className="mt-3 text-body text-warm-gray">{faq.answer}</p>
                   </div>
                   {i < faqs.length - 1 && <div className="h-px bg-divider" />}
                 </StaggerItem>
@@ -258,17 +232,15 @@ export default function PricingPage() {
       {/* — CTA — */}
       <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">
-            Ready to see the ROI for your business?
-          </h2>
+          <h2 className="text-display text-bone">Ready to inspect the workflow?</h2>
           <p className="mt-6 text-body-lg text-stone">
-            The Forge Diagnostic gives you a clear picture in four weeks. If we
-            cannot show a path to 3x return, we will tell you.
+            The Forge Diagnostic gives you a clear build plan in four weeks. If the workflow,
+            baseline, or adoption path is not strong enough, we will tell you.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Get My Free AI Readiness Score <ArrowRight className="ml-2 h-4 w-4" />
+                Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>

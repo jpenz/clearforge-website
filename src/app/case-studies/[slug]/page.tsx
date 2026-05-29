@@ -1,12 +1,22 @@
 import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { caseStudies, getCaseStudy } from '@/data/case-studies';
+import { breadcrumbJsonLd, caseStudyJsonLd, createMetadata } from '@/lib/metadata';
 
 const CaseStudyStory = dynamic(
   () => import('@/components/case-study-story').then((m) => ({ default: m.CaseStudyStory })),
-  { loading: () => <div className="min-h-screen" /> }
+  { loading: () => <div className="min-h-screen" /> },
 );
-import { createMetadata } from '@/lib/metadata';
+
+function compactDescription(text: string, maxChars = 155): string {
+  const normalized = text.replace(/\s+/g, ' ').trim();
+  if (normalized.length <= maxChars) return normalized;
+
+  const clipped = normalized.slice(0, maxChars - 1);
+  const lastSpace = clipped.lastIndexOf(' ');
+  return `${clipped.slice(0, lastSpace > 80 ? lastSpace : clipped.length).trim()}...`;
+}
 
 export function generateStaticParams() {
   return caseStudies.map((cs) => ({ slug: cs.slug }));
@@ -16,9 +26,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const cs = getCaseStudy(slug);
   if (!cs) return {};
+
+  const seoTitles: Record<string, string> = {
+    'home-services-turnaround': 'Home Services Pipeline Turnaround Case Study',
+    'industrial-manufacturer': '$4B Industrial AI Sales Intelligence Case Study',
+    'pe-portfolio-diagnostic-plan': 'PE Portfolio AI Diagnostic Case Study',
+  };
+
   return createMetadata({
-    title: `${cs.title} — ClearForge Case Study`,
-    description: cs.excerpt,
+    title: seoTitles[slug] ?? `${cs.industry} Case Study`,
+    description: compactDescription(cs.excerpt),
     path: `/case-studies/${slug}`,
   });
 }
@@ -30,26 +47,55 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   // Map case study data to story props
   const phases = [
-    { title: 'Forge Diagnostic', duration: '4 weeks', description: 'Mapped the value chain, identified AI opportunities, and built a prioritized roadmap tied to measurable KPIs.' },
-    { title: 'Forge Sprint', duration: '10-14 weeks', description: 'Redesigned workflows, deployed AI agents with human-in-the-loop controls, established KPI baselines from day one.' },
-    { title: 'Forge Scale', duration: 'Ongoing', description: 'Continuous optimization, team training, and expansion to new divisions and use cases. Compounding gains monthly.' },
+    {
+      title: 'Forge Diagnostic',
+      duration: '4 weeks',
+      description:
+        'Mapped the value chain, named the workflow constraints, and chose the first builds tied to owner-visible KPIs.',
+    },
+    {
+      title: 'Forge Sprint',
+      duration: '10-14 weeks',
+      description:
+        'Redesigned workflows, shipped AI-assisted controls with human review, and established KPI baselines from day one.',
+    },
+    {
+      title: 'Forge Scale',
+      duration: 'Ongoing',
+      description:
+        'Tuned the cadence, trained the team, and expanded only after the first workflow was adopted and measured.',
+    },
   ];
 
-  const quote = "They didn't just hand us a strategy deck. They built the systems, trained the team, and stayed until the numbers moved.";
+  const quote =
+    "They didn't just hand us a strategy deck. They built the workflow, trained the team, and stayed until the numbers moved.";
   const quoteAttribution = `${cs.industry} — ClearForge Client`;
 
   return (
-    <CaseStudyStory
-      industry={cs.industry}
-      title={cs.title}
-      challenge={cs.excerpt || 'A complex operational challenge requiring AI-driven transformation.'}
-      challengeMetric={cs.heroMetric}
-      challengeMetricLabel={cs.heroMetricLabel}
-      phases={phases}
-      outcomes={cs.outcomes.slice(0, 4)}
-      quote={quote}
-      quoteAttribution={quoteAttribution}
-      compoundResult={cs.continuousModel ? cs.continuousModel.join(' ') : undefined}
-    />
+    <>
+      <JsonLdScript data={caseStudyJsonLd(cs)} />
+      <JsonLdScript
+        data={breadcrumbJsonLd([
+          { name: 'Home', path: '/' },
+          { name: 'Case Studies', path: '/case-studies' },
+          { name: cs.title, path: `/case-studies/${cs.slug}` },
+        ])}
+      />
+      <CaseStudyStory
+        industry={cs.industry}
+        title={cs.title}
+        challenge={cs.excerpt || 'A complex operating challenge that required a working build.'}
+        challengeMetric={cs.heroMetric}
+        challengeMetricLabel={cs.heroMetricLabel}
+        phases={phases}
+        outcomes={cs.outcomes.slice(0, 4)}
+        systemLayers={cs.systemLayers}
+        proofDashboard={cs.proofDashboard}
+        evidenceNotes={cs.evidenceNotes}
+        quote={quote}
+        quoteAttribution={quoteAttribution}
+        compoundResult={cs.continuousModel ? cs.continuousModel.join(' ') : undefined}
+      />
+    </>
   );
 }

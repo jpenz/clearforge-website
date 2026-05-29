@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "defaults": {
+    "aspectRatio": "16:9",
+    "duration": 5,
+    "quality": "1080p",
+    "veoModel": "veo3",
+    "runwayModel": "runway-duration-5-generate",
+    "watermark": ""
+  },
+  "variants": [
+    {
+      "id": "ai-sales-pipeline-acceleration",
+      "title": "AI Sales Pipeline Acceleration",
+      "prompt": "Premium abstract cinematic website hero loop for AI sales pipeline acceleration. Use only unmarked metallic spheres, plain geometric nodes, and clean light paths on a dark executive surface. Brass and cool-blue signals move through opportunity clusters and converge into a disciplined growth machine. Left side has quiet dark negative space for headline copy. Absolutely no readable text, no tiny labels, no letters, no numbers, no glyphs, no logos, no UI screenshots, no people, no faces. Elegant, practical, high-trust, loopable, 16:9.",
+      "providerOverrides": {
+        "veo": {
+          "generationType": "TEXT_2_VIDEO",
+          "enableFallback": false,
+          "enableTranslation": false
+        }
+      }
+    },
+    {
+      "id": "ai-customer-service-excellence",
+      "title": "AI Customer Service Excellence",
+      "prompt": "Premium abstract cinematic website hero loop for AI customer service excellence. Use only unmarked luminous nodes, plain signal streams, and simple geometric pathways on a dark calm operations surface. Incoming signals split, route, resolve, and reconnect through brass and cool-blue paths, suggesting faster response and human oversight. Left side dark negative space for copy. Absolutely no readable text, no tiny labels, no letters, no numbers, no glyphs, no logos, no UI screenshots, no people, no faces, no call center imagery. Elegant, loopable, 16:9.",
+      "providerOverrides": {
+        "veo": {
+          "generationType": "TEXT_2_VIDEO",
+          "enableFallback": false,
+          "enableTranslation": false
+        }
+      }
+    },
+    {
+      "id": "ai-operations-efficiency-machine",
+      "title": "AI Operations Efficiency Machine",
+      "prompt": "Premium abstract cinematic website hero loop for AI operations efficiency. A dark value-chain machine with order intake, scheduling, handoffs, approvals, and finance flows represented as precise connected mechanisms. Bottlenecks glow, then re-route into a smoother operating cadence. Brass and cool-blue signals, industrial but refined. Left side has dark negative space for headline copy. No readable text, no letters, no numbers, no logos, no people, no robots, no UI screenshots. Calm, credible, loopable, 16:9.",
+      "providerOverrides": {
+        "veo": {
+          "generationType": "TEXT_2_VIDEO",
+          "enableFallback": false,
+          "enableTranslation": false
+        }
+      }
+    },
+    {
+      "id": "ai-knowledge-work-automation",
+      "title": "AI Knowledge Work Automation",
+      "prompt": "Premium abstract cinematic website hero loop for AI knowledge work automation. Build the scene from physical objects only: blank glass wafers, unmarked brass pins, cool-blue fiber paths, floating crystal blocks, and particle streams on a dark executive surface. Show scattered knowledge fragments becoming one clean intelligence lattice through light and motion only. No panels, no dashboards, no documents, no screens, no diagrams, no labels, no words, no readable or unreadable text, no letters, no numbers, no glyphs, no icons, no logos, no people, no faces. Left side has quiet dark negative space for headline copy. Elegant, restrained, loopable, 16:9.",
+      "providerOverrides": {
+        "veo": {
+          "generationType": "TEXT_2_VIDEO",
+          "enableFallback": false,
+          "enableTranslation": false
+        }
+      }
+    },
+    {
+      "id": "ai-quality-control-exception-management",
+      "title": "AI Quality Control Exception Management",
+      "prompt": "Premium abstract cinematic website hero loop for AI quality control and exception management. A dark production-quality system where tiny anomalies, defects, and exceptions appear as glowing points, then get detected, classified, routed, and resolved through an AI-assisted operating network. Refined industrial materials, brass warning paths, cool-blue verification nodes. Left side dark negative space for headline. No readable text, no letters, no numbers, no logos, no people, no faces, no UI screenshots. Precise, trustworthy, loopable, 16:9.",
+      "providerOverrides": {
+        "veo": {
+          "generationType": "TEXT_2_VIDEO",
+          "enableFallback": false,
+          "enableTranslation": false
+        }
+      }
+    },
+    {
+      "id": "pe-portfolio-ai-value-creation",
+      "title": "PE Portfolio AI Value Creation",
+      "prompt": "Premium abstract cinematic website hero loop for private equity AI value creation. A dark constellation of separate unmarked operating systems, each shown as plain geometric nodes and light paths. Common brass and cool-blue patterns connect across them, suggesting repeatable value creation and operating discipline. Executive boardroom quality, high-trust, restrained. Left side dark negative space for headline copy. Absolutely no readable text, no tiny labels, no letters, no numbers, no glyphs, no logos, no UI screenshots, no people, no faces, no finance charts. Elegant, loopable, 16:9.",
+      "providerOverrides": {
+        "veo": {
+          "generationType": "TEXT_2_VIDEO",
+          "enableFallback": false,
+          "enableTranslation": false
+        }
+      }
+    }
+  ]
+}
