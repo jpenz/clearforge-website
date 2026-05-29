@@ -12,7 +12,7 @@ Showcases services, case studies, pricing, the Forge Intelligence™ AI agent, a
 **Production URL:** https://clearforge.ai
 **Repo:** https://github.com/jpenz/clearforge-website
 **Business:** ClearForge AI (James Penz, ex-Bain AI Automation practice)
-**Current version:** V8.24
+**Current version:** V9.0 — signal-blue + all-sans rebrand, new homepage with embedded live Forge Intelligence agent hero (`/api/hero-analyze`)
 
 ---
 
@@ -47,12 +47,12 @@ The site is an **editorial typographic layout** in the tradition of McKinsey, Ba
 --color-bone:        #EAEAF2;   /* text on dark */
 --color-stone:       #9090A8;   /* secondary text on dark */
 
-/* Accent — emerald #047857 (the variable is named "brass" for
-   historical reasons from a V7→V8 pivot; the value is emerald,
-   not actual brass #B08D57). Use `text-brass` / `bg-brass`. */
---color-brass:       #047857;   /* primary accent, WCAG AA */
---color-brass-hover: #065F46;   /* hover state */
---color-brass-light: #34D399;   /* on dark sections */
+/* Accent — SIGNAL BLUE as of V9 (token still named "brass" for
+   historical reasons — do NOT rename, it resolves everywhere).
+   --color-success stays green (#047857) for semantic check marks. */
+--color-brass:       #0E5DC2;   /* primary accent (signal blue), WCAG AA */
+--color-brass-hover: #0A4A9C;   /* hover state */
+--color-brass-light: #4D8DE8;   /* on dark sections */
 
 /* Borders */
 --color-divider:      #C8C8D2;  /* on light */
@@ -61,10 +61,9 @@ The site is an **editorial typographic layout** in the tradition of McKinsey, Ba
 
 ### Typography
 
-- **Display / headlines:** Instrument Serif (via `var(--font-instrument-serif)`)
-- **Body / UI:** DM Sans (via Tailwind default — **NOT Inter, NOT Geist**)
+- **ALL-SANS as of V9.** Display + body: **Geist** (`geist` pkg → `var(--font-geist-sans)`, mapped to `--font-sans` / `--font-display`). Instrument Serif + DM Sans were removed.
 - **Metrics / mono:** JetBrains Mono (via `var(--font-jetbrains-mono)`)
-- Hero headline size: `clamp(2.5rem, 8vw, 6.5rem)` — large serif IS the design element
+- Sans display headings are weight 600 + tight negative tracking (−0.02 to −0.035em); never weight 400 (looks flabby in sans)
 - Overline: uppercase, tracking-widest, 10–12px
 - All color + text combinations verified WCAG AA
 
@@ -156,11 +155,11 @@ Homepage, Services hub + 4 service pages, Case Studies + case detail, About, Con
 
 - ❌ **No dark SaaS aesthetic** — this is editorial, not Linear/Vercel. Read the V8 design notes before styling.
 - ❌ **No cards / boxed containers** — ruled lines and whitespace only
-- ❌ **No Inter, Geist, or system-ui fonts** — Instrument Serif + DM Sans + JetBrains Mono only
+- ❌ **No serif, no Inter, no system-ui** — Geist (display+body) + JetBrains Mono (metrics) only, as of V9
 - ❌ **No stock photography** — photoreal people in offices are banned. Abstract editorial imagery (hand-drawn diagrams, data-viz, atmospheric particle fields) only.
 - ❌ **No client names in case studies** — anonymized only ("$180M industrial manufacturer")
 - ❌ **No `'use client'` on pages** — only on components that genuinely need it (GSAP, hero video)
-- ❌ **No corporate blue** — brass (#B08D57) + emerald (#047857) accents only
+- ✅ **Signal blue (#0E5DC2) is the brand accent** as of V9 — use `text-brass`/`bg-brass` (token name retained). Keep `--color-success` green for check marks.
 - ❌ **Never break the scorecard flow** — test the full 18-question path after any scorecard change
 - ❌ **Never land an orphaned asset** — if a PNG goes into `/public`, it must be referenced from source the same commit
 
@@ -168,6 +167,7 @@ Homepage, Services hub + 4 service pages, Case Studies + case detail, About, Con
 
 ## Version History
 
+- **V9.0** — Brand + homepage redesign (from Claude-design handoff, `design_handoff/`). (1) Site-wide reskin: accent emerald→signal blue `#0E5DC2`; all-sans (Geist display+body, dropped Instrument Serif + DM Sans), headings retuned to weight 600. (2) New homepage architecture: Hero → Objections → ProductionGap → Engagements → Operators → SelectedWork → CredibilityBand → FinalCTA (one component each under `components/home/`, copy in `data/homepage.ts`). (3) Hero is an embedded live **Forge Intelligence agent** — visitor enters their URL, `/api/hero-analyze` fetches the homepage + one Claude call → a flagship diagnostic thesis (gap → build → ambition → benefit → directional evidence) + 2 more plays → CTA into `/discover`. Rate-limited, honest staged loading, graceful fallback. Retired: hero-scroll, forge-method-diagram, gsap-text-reveal.
 - **V8.24** — AEO pillar articles (cost, readiness, fractional CAIO) authored by James Penz, Article+FAQPage JSON-LD on insights, CTA language lift ("Schedule a Discussion" → "Book a 15-Min Diagnostic Call" — research-backed 35% conv lift), trust line credentials prepended
 - **V8.23** — Ad strategy data file (5 keyword clusters, 8 campaigns, channel allocation 70% LinkedIn / 20% Google / 10% Meta, ownable positioning angles)
 - **V8.22** — Homepage industries surface (12 of 17), research-backed trust line ("industry: 16%", "80% stuck in pilot")
