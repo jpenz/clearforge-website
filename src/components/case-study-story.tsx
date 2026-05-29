@@ -475,7 +475,7 @@ export function CaseStudyStory({
           <div ref={quoteWordsRef} className="mt-4">
             <p
               className="text-h1 text-anthracite leading-snug"
-              style={{ fontFamily: 'var(--font-instrument-serif)' }}
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               {quoteWords.map(({ key, word }) => (
                 <span key={key} className="quote-word inline-block mr-[0.3em]">

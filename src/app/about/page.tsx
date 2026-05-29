@@ -68,7 +68,7 @@ export default function AboutPage() {
             <p className="overline">About ClearForge</p>
             <h1
               className="mt-6 text-display max-w-3xl text-bone"
-              style={{ fontFamily: 'var(--font-instrument-serif)' }}
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               We build production AI. Not shelfware.
             </h1>
@@ -193,7 +193,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
           <h2
             className="text-display text-bone"
-            style={{ fontFamily: 'var(--font-instrument-serif)' }}
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             One conversation to find&nbsp;out.
           </h2>

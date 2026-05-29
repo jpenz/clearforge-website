@@ -796,7 +796,7 @@ export default function DiscoverPage() {
           <h1
             key={key}
             className="text-2xl font-bold text-bone mt-6 mb-3"
-            style={{ fontFamily: 'var(--font-instrument-serif)' }}
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             {line.replace('# ', '')}
           </h1>
@@ -806,7 +806,7 @@ export default function DiscoverPage() {
           <h2
             key={key}
             className="text-xl font-bold text-bone mt-5 mb-2"
-            style={{ fontFamily: 'var(--font-instrument-serif)' }}
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             {line.replace('## ', '')}
           </h2>
@@ -1443,7 +1443,7 @@ export default function DiscoverPage() {
               <p className="overline text-brass-light">Your Custom Value Chain</p>
               <h2
                 className="mt-3 text-display text-bone max-w-3xl"
-                style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                style={{ fontFamily: 'var(--font-display)' }}
               >
                 {valueChain.companyName}: where AI fits.
               </h2>
@@ -1496,7 +1496,7 @@ export default function DiscoverPage() {
                     </span>
                     <h3
                       className="text-h3 text-bone"
-                      style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                      style={{ fontFamily: 'var(--font-display)' }}
                     >
                       {fn.function}
                     </h3>

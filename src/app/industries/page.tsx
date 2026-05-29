@@ -73,7 +73,7 @@ export default function IndustriesIndexPage() {
             <p className="overline">Industries</p>
             <h1
               className="mt-6 text-display max-w-4xl text-bone"
-              style={{ fontFamily: 'var(--font-instrument-serif)' }}
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               Production AI for every operating value chain.
             </h1>
@@ -102,7 +102,7 @@ export default function IndustriesIndexPage() {
                     </p>
                     <h2
                       className="mt-4 text-h1"
-                      style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                      style={{ fontFamily: 'var(--font-display)' }}
                     >
                       {category}
                     </h2>
@@ -124,7 +124,7 @@ export default function IndustriesIndexPage() {
                               <div className="flex-1 min-w-0">
                                 <h3
                                   className="text-h3 group-hover:text-brass transition-colors"
-                                  style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                                  style={{ fontFamily: 'var(--font-display)' }}
                                 >
                                   {ind.name}
                                 </h3>
@@ -193,7 +193,7 @@ export default function IndustriesIndexPage() {
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
           <h2
             className="text-display text-bone"
-            style={{ fontFamily: 'var(--font-instrument-serif)' }}
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             Where would AI move your P&amp;L first?
           </h2>

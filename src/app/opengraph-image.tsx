@@ -28,7 +28,7 @@ export default async function OGImage() {
           left: 0,
           right: 0,
           height: '4px',
-          background: 'linear-gradient(90deg, #00E5C3, #059E87, transparent)',
+          background: 'linear-gradient(90deg, #4D8DE8, #0E5DC2, transparent)',
         }}
       />
 
@@ -57,7 +57,7 @@ export default async function OGImage() {
           style={{
             width: '32px',
             height: '3px',
-            background: '#00E5C3',
+            background: '#4D8DE8',
             borderRadius: '2px',
           }}
         />
@@ -67,7 +67,7 @@ export default async function OGImage() {
             fontWeight: 600,
             letterSpacing: 0,
             textTransform: 'uppercase',
-            color: '#00E5C3',
+            color: '#4D8DE8',
           }}
         >
           AI Strategy & Execution
@@ -135,7 +135,7 @@ export default async function OGImage() {
           width: '200px',
           height: '200px',
           background:
-            'radial-gradient(circle at bottom right, rgba(0,229,195,0.08), transparent 70%)',
+            'radial-gradient(circle at bottom right, rgba(77,141,232,0.08), transparent 70%)',
         }}
       />
     </div>,

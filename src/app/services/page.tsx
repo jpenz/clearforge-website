@@ -103,7 +103,7 @@ export default function ServicesPage() {
             <p className="overline">How We Work</p>
             <h1
               className="mt-6 text-display max-w-3xl text-bone"
-              style={{ fontFamily: 'var(--font-instrument-serif)' }}
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               Custom AI, built around how your business actually runs.
             </h1>

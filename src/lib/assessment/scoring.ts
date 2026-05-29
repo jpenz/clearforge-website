@@ -47,17 +47,18 @@ export function maturityLabel(level: string): string {
 }
 
 /**
- * Returns a teal-toned CSS hex color matching the maturity level.
+ * Returns a signal-blue-toned CSS hex color matching the maturity level.
+ * Ascending ramp: slate floor → brand signal blue → bright signal blue.
  */
 export function maturityColor(level: string): string {
   const colors: Record<string, string> = {
     Foundation: '#475569',
-    Emerging: '#0891B2',
-    Developing: '#059669',
-    Advanced: '#059E87',
-    Leader: '#00E5C3',
+    Emerging: '#0A4A9C',
+    Developing: '#0E5DC2',
+    Advanced: '#2E7BE0',
+    Leader: '#4D8DE8',
   };
-  return colors[level] ?? '#00E5C3';
+  return colors[level] ?? '#4D8DE8';
 }
 
 /**

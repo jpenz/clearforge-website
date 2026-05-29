@@ -179,7 +179,7 @@ function ValueChainFunctionRow({ fn, index }: { fn: ValueChainFunction; index: n
           </div>
           <h3
             className="mt-3 text-h2 text-bone"
-            style={{ fontFamily: 'var(--font-instrument-serif)' }}
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             {fn.function}
           </h3>
@@ -276,7 +276,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                 <p className="overline">{industry.category}</p>
                 <h1
                   className="mt-6 text-display max-w-3xl text-bone"
-                  style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                  style={{ fontFamily: 'var(--font-display)' }}
                 >
                   AI Agents &amp; Automation for {industry.name}
                 </h1>
@@ -375,7 +375,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               <p className="overline">{industry.shortName} Value Chain</p>
               <h2
                 className="mt-6 text-display text-bone"
-                style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                style={{ fontFamily: 'var(--font-display)' }}
               >
                 The first places to look for AI value.
               </h2>
@@ -522,7 +522,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               <div className="lg:col-span-8">
                 <h3
                   className="text-h2 group-hover:text-brass transition-colors"
-                  style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                  style={{ fontFamily: 'var(--font-display)' }}
                 >
                   {caseStudy.title}
                 </h3>
@@ -557,7 +557,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
           <h2
             className="text-display text-bone"
-            style={{ fontFamily: 'var(--font-instrument-serif)' }}
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             Get a custom value chain for your business.
           </h2>

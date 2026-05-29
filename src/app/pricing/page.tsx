@@ -83,7 +83,7 @@ export default function PricingPage() {
           <p className="overline">Pricing</p>
           <h1
             className="mt-6 text-display max-w-3xl text-bone"
-            style={{ fontFamily: 'var(--font-instrument-serif)' }}
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             Transparent investment. No surprises.
           </h1>
