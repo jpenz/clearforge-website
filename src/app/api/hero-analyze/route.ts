@@ -15,11 +15,21 @@ import { NextResponse } from 'next/server';
  * validation, 4s fetch timeout, capped input size, graceful fallback.
  */
 
+interface HeroPriority {
+  title: string; // the flagship opportunity, 2-5 words
+  painpoint: string; // the gap costing them today
+  intervention: string; // what ClearForge would build
+  futureState: string; // the ambition / future operating state
+  benefit: string; // expected, quantified benefit
+  evidence: string; // honest directional benchmark (NOT a fabricated citation)
+}
+
 interface HeroAnalysis {
   company: string;
   industry: string;
   readinessBand: string; // e.g. "Likely 55–70"
-  teaser: string[]; // 3 short value-chain opportunities
+  priority: HeroPriority; // one flagship thesis
+  more: string[]; // 2 additional opportunity headlines
 }
 
 // ── Per-IP in-memory rate limit (per server instance; fine for v1) ──────────
@@ -107,27 +117,34 @@ export async function POST(request: Request) {
       // Unreachable site — Claude can still infer from the domain name.
     }
 
-    const prompt = `You are a senior AI consultant at ClearForge (ex-Bain AI Automation practice). A visitor entered their company website on our homepage. Give a fast, credible, specific first read — this is a teaser that makes them want the full analysis.
+    const prompt = `You are a senior AI consultant at ClearForge (ex-Bain AI Automation practice). A visitor entered their company website on our homepage. Produce a fast, credible diagnostic snapshot — one flagship "thesis" that proves we understand their business, plus two more opportunities as headlines. This is the teaser; the full cited report comes later.
 
 Domain: ${normalized.domain}
 ${siteText ? `\nHomepage content (extracted):\n"""${siteText}"""` : '\n(Homepage could not be fetched — infer reasonably from the domain.)'}
 
 Return STRICT JSON only (no markdown, no preamble):
 {
-  "company": "Best guess at the company name (short, from the content or domain)",
+  "company": "Company name (short, from the content or domain)",
   "industry": "Specific industry (1-4 words)",
-  "readinessBand": "An AI-readiness band as a range out of 100, formatted exactly like 'Likely 55–70'. Most mid-market firms land 45–70. Be realistic, not flattering.",
-  "teaser": [
-    "A specific, high-value AI/automation opportunity for THIS company (one sentence, name their actual business)",
-    "A second, different opportunity (one sentence)",
-    "A third, different opportunity (one sentence)"
+  "readinessBand": "AI-readiness band out of 100, formatted exactly like 'Likely 55–70'. Most mid-market firms land 45–70; legacy/manual operators lower. Be realistic, not flattering.",
+  "priority": {
+    "title": "The single highest-value AI opportunity for THIS company (2-5 words)",
+    "painpoint": "The specific gap costing them today — name their actual workflow/business. One crisp sentence, max 28 words.",
+    "intervention": "Exactly what ClearForge would build (an AI agent, model, or automation). One crisp sentence, max 28 words.",
+    "futureState": "The future operating state once it's live — the ambition. One crisp sentence, max 28 words.",
+    "benefit": "Expected quantified benefit with a number or range (e.g. '15–30% less spoilage', '20+ hrs/week back per rep'). One short phrase.",
+    "evidence": "An HONEST, directional benchmark that backs the benefit — typical for this industry/scale. Do NOT cite a specific study, author, or statistic you cannot verify. Frame as 'Operators at this scale typically…'. One sentence."
+  },
+  "more": [
+    "A second distinct opportunity (one sentence, under 16 words, name their business)",
+    "A third distinct opportunity (one sentence, under 16 words)"
   ]
 }
 
-Rules: be specific to their actual business, not generic. Sound like a sharp operator wrote it, not marketing. No hype. Each teaser item under 18 words.`;
+Rules: be specific to their actual business, not generic. Sound like a sharp Bain-trained operator, not marketing. No hype, no fabricated citations. Realistic numbers only.`;
 
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 12_000);
+    const timeout = setTimeout(() => controller.abort(), 20_000);
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -138,7 +155,7 @@ Rules: be specific to their actual business, not generic. Sound like a sharp ope
       signal: controller.signal,
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 700,
+        max_tokens: 1100,
         messages: [{ role: 'user', content: prompt }],
       }),
     });
@@ -161,15 +178,25 @@ Rules: be specific to their actual business, not generic. Sound like a sharp ope
     }
 
     // Shape guard
-    if (!parsed.readinessBand || !Array.isArray(parsed.teaser) || parsed.teaser.length === 0) {
+    const p = parsed.priority;
+    if (!parsed.readinessBand || !p || !p.painpoint || !p.intervention) {
       return NextResponse.json({ fallback: true }, { status: 200 });
     }
 
+    const clip = (v: unknown, n: number) => String(v ?? '').slice(0, n);
     return NextResponse.json({
-      company: String(parsed.company ?? normalized.domain).slice(0, 80),
-      industry: String(parsed.industry ?? '').slice(0, 60),
-      readinessBand: String(parsed.readinessBand).slice(0, 40),
-      teaser: parsed.teaser.slice(0, 3).map((t) => String(t).slice(0, 160)),
+      company: clip(parsed.company || normalized.domain, 80),
+      industry: clip(parsed.industry, 60),
+      readinessBand: clip(parsed.readinessBand, 40),
+      priority: {
+        title: clip(p.title, 60),
+        painpoint: clip(p.painpoint, 300),
+        intervention: clip(p.intervention, 300),
+        futureState: clip(p.futureState, 300),
+        benefit: clip(p.benefit, 120),
+        evidence: clip(p.evidence, 300),
+      },
+      more: Array.isArray(parsed.more) ? parsed.more.slice(0, 2).map((m) => clip(m, 160)) : [],
       domain: normalized.domain,
     });
   } catch {

@@ -2,9 +2,17 @@
 
 import { ArrowRight, Loader2, RotateCcw } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { hero, heroAgent } from '@/data/homepage';
+
+// Honest stages the backend actually runs, surfaced over real latency
+// (not a fake progress bar — these reflect the real work).
+const LOADING_STAGES = [
+  'Reading your homepage…',
+  'Mapping your value chain…',
+  'Drafting your priority thesis…',
+];
 
 /**
  * V9 Hero — the card IS the agent. A working Forge Intelligence agent embedded
@@ -18,11 +26,20 @@ import { hero, heroAgent } from '@/data/homepage';
  * over real latency — no fake progress theater.
  */
 
+type Priority = {
+  title: string;
+  painpoint: string;
+  intervention: string;
+  futureState: string;
+  benefit: string;
+  evidence: string;
+};
 type Analysis = {
   company: string;
   industry: string;
   readinessBand: string;
-  teaser: string[];
+  priority: Priority;
+  more: string[];
   domain: string;
 };
 type Status = 'idle' | 'loading' | 'done' | 'error';
@@ -84,6 +101,19 @@ function ForgeAgent() {
   const [status, setStatus] = useState<Status>('idle');
   const [result, setResult] = useState<Analysis | null>(null);
   const [errorMsg, setErrorMsg] = useState('');
+  const [stage, setStage] = useState(0);
+
+  // Advance the loading stage labels while analyzing.
+  useEffect(() => {
+    if (status !== 'loading') {
+      setStage(0);
+      return;
+    }
+    const id = setInterval(() => {
+      setStage((s) => Math.min(s + 1, LOADING_STAGES.length - 1));
+    }, 3200);
+    return () => clearInterval(id);
+  }, [status]);
 
   async function analyze(e: React.FormEvent) {
     e.preventDefault();
@@ -189,18 +219,28 @@ function ForgeAgent() {
           <div className="py-12 text-center">
             <Loader2 className="mx-auto h-8 w-8 animate-spin text-brass-light" />
             <p className="mt-5 text-body text-bone">Analyzing {domainLabel}…</p>
-            <p className="mt-1.5 text-body-sm text-stone">
-              Reading your homepage · mapping your value chain
+            <p className="mt-1.5 text-body-sm text-brass-light transition-opacity">
+              {LOADING_STAGES[stage]}
             </p>
+            {/* stepper dots */}
+            <div className="mt-4 flex items-center justify-center gap-1.5">
+              {LOADING_STAGES.map((label, i) => (
+                <span
+                  key={label}
+                  className={`h-1 w-6 transition-colors ${i <= stage ? 'bg-brass-light' : 'bg-divider-dark'}`}
+                  aria-hidden="true"
+                />
+              ))}
+            </div>
           </div>
         )}
 
-        {/* DONE — live result */}
+        {/* DONE — live diagnostic thesis */}
         {status === 'done' && result && (
           <div>
             <span
               className="metric text-bone"
-              style={{ fontSize: 'clamp(2.25rem, 5vw, 3.25rem)', lineHeight: 1 }}
+              style={{ fontSize: 'clamp(2rem, 4.5vw, 2.75rem)', lineHeight: 1 }}
             >
               {result.readinessBand}
             </span>
@@ -209,24 +249,59 @@ function ForgeAgent() {
               {result.industry ? ` · ${result.industry}` : ''}
             </p>
 
+            {/* Flagship thesis */}
             <div className="mt-6 border-t border-divider-dark pt-5">
               <p className="metric text-[11px] uppercase tracking-[0.16em] text-brass-light">
-                Where we&apos;d start
+                Priority play
               </p>
-              <div className="mt-3 space-y-2.5">
-                {result.teaser.map((t, i) => (
-                  <div key={t} className="flex gap-3">
-                    <span className="metric text-xs text-brass-light">0{i + 1}</span>
-                    <span className="text-body-sm text-bone">{t}</span>
+              <h3 className="mt-2 text-h4 text-bone">{result.priority.title}</h3>
+              <dl className="mt-4 space-y-3">
+                {[
+                  { k: 'The gap', v: result.priority.painpoint },
+                  { k: "What we'd build", v: result.priority.intervention },
+                  { k: 'The ambition', v: result.priority.futureState },
+                ].map((row) => (
+                  <div key={row.k}>
+                    <dt className="metric text-[10px] uppercase tracking-[0.14em] text-stone">
+                      {row.k}
+                    </dt>
+                    <dd className="mt-0.5 text-body-sm text-bone">{row.v}</dd>
                   </div>
                 ))}
+              </dl>
+              {/* Expected benefit — emphasized */}
+              <div className="mt-4 border-l-2 border-brass-light pl-3.5">
+                <p className="text-body-sm font-semibold text-brass-light">
+                  {result.priority.benefit}
+                </p>
+                <p className="mt-1 text-xs text-stone">{result.priority.evidence}</p>
               </div>
             </div>
+
+            {/* Other opportunities */}
+            {result.more.length > 0 && (
+              <div className="mt-6 border-t border-divider-dark pt-5">
+                <p className="metric text-[11px] uppercase tracking-[0.16em] text-stone">
+                  Also on the table
+                </p>
+                <div className="mt-3 space-y-2">
+                  {result.more.map((m) => (
+                    <div key={m} className="flex gap-2.5">
+                      <span
+                        className="mt-2 block h-1 w-1 shrink-0 rounded-full bg-stone"
+                        aria-hidden="true"
+                      />
+                      <span className="text-body-sm text-stone">{m}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div className="mt-6 border-t border-divider-dark pt-5">
               <Button size="default" className="w-full" asChild>
                 <Link href="/discover">
-                  Get your full value chain &amp; report <ArrowRight className="ml-2 h-4 w-4" />
+                  Get the full thesis &amp; cited report <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <button
