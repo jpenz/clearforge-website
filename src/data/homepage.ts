@@ -17,10 +17,6 @@ export const hero = {
   eyebrow: 'AI consulting for mid-market & PE-backed companies',
   headline: ['AI that ships.', 'ROI you can prove.'], // 2nd line's last word gets accent
   sub: 'We find your highest-value workflows, build the AI, and deploy it to production in 10–14 weeks — then track the ROI. Transparent pricing, no lock-in.',
-  // Live analyzer (the interactive proof element)
-  analyzerLabel: 'Free 60-second readiness check',
-  analyzerHelper: 'Our AI reads your site and scores you live. No signup.',
-  analyzeCta: 'Analyze my site',
   secondaryCta: { label: 'See engagements & pricing', href: '#engagements' },
   stats: [
     { value: '79% → 11%', label: 'Claim AI adoption vs. run agents in production' },
@@ -30,16 +26,16 @@ export const hero = {
   ],
 };
 
-// Sample shown in the analyzer card before the visitor runs their own —
-// clearly labeled "Sample" so it demonstrates the deliverable without faking proof.
-export const heroSample = {
-  band: 'Likely 55–70',
-  industry: 'e.g. mid-market industrial distributor',
-  plays: [
-    'Auto-triage inbound RFQs; route by margin and fit',
-    'Surface cross-sell white space from order history',
-    'Flag at-risk accounts from order-pattern decay',
-  ],
+// The embedded Forge Intelligence agent that lives in the hero card.
+// The visitor enters their site IN the card and it analyzes live — the card
+// IS the agent, not a passive scorecard sitting next to a separate input.
+export const heroAgent = {
+  name: 'Forge Intelligence',
+  heading: 'Score your AI readiness in 60 seconds.',
+  prompt: 'Enter your website — our agent reads it and shows where AI pays off first.',
+  cta: 'Analyze',
+  note: 'Free · instant · no signup',
+  gets: "You'll get a 0–100 readiness band and your top 3 AI opportunities.",
 };
 
 // ── Pillar strip — objection-neutralizing bullets, by objection frequency ──
