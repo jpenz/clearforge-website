@@ -27,21 +27,6 @@ export const hero = {
   ],
 };
 
-// HeroProof — production-readiness scorecard artifact
-export const heroProof = {
-  version: 'scorecard / v0.12',
-  score: 34,
-  outOf: 100,
-  tag: '● BENCHMARK',
-  lines: [
-    { k: 'Data readiness', v: '2 / 5', w: 40 },
-    { k: 'Deployment path', v: '1 / 5', w: 20 },
-    { k: 'Adoption plan', v: '1 / 5', w: 20 },
-  ],
-  footLeft: 'Most firms score < 40',
-  footRight: 'Yours in 4 min →',
-};
-
 // ── Pillar strip — objection-neutralizing bullets, by objection frequency ──
 export const pillars = [
   {
