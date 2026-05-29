@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import { JetBrains_Mono } from 'next/font/google';
-import { GeistSans } from 'geist/font/sans';
+import { DM_Sans, Instrument_Serif, JetBrains_Mono } from 'next/font/google';
 import { AnalyticsTracker } from '@/components/analytics/analytics-tracker';
 import { GoogleAnalytics } from '@/components/analytics/google-analytics';
 import { PlausibleAnalytics } from '@/components/analytics/plausible-analytics';
@@ -23,7 +22,20 @@ import {
 } from '@/lib/metadata';
 import './globals.css';
 
-// V9 rebrand: all-sans. Geist for display + body, JetBrains Mono for numerals.
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: '400',
+  style: ['normal', 'italic'],
+  variable: '--font-instrument-serif',
+  display: 'swap',
+});
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-dm-sans',
+  display: 'swap',
+});
+
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
@@ -63,12 +75,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="dns-prefetch" href="https://api.anthropic.com" />
-        <link rel="dns-prefetch" href="https://api.perplexity.ai" />
-        <link rel="preconnect" href="https://api.anthropic.com" crossOrigin="anonymous" />
-      </head>
-      <body className={`${GeistSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <body
+        className={`${instrumentSerif.variable} ${dmSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+      >
         <JsonLdScript
           data={[
             organizationJsonLd,

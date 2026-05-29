@@ -4,27 +4,33 @@ import { ArrowRight, Loader2, RotateCcw } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { hero, heroAgent } from '@/data/homepage';
 
-// Honest stages the backend actually runs, surfaced over real latency
-// (not a fake progress bar — these reflect the real work).
+/**
+ * Forge Intelligence — the live agent embedded in the hero. Visitor enters
+ * their URL; /api/hero-analyze fetches their homepage + one Claude call and
+ * returns a real readiness band + a flagship diagnostic thesis. The card
+ * transforms in place (prompt → analyzing → result). Styled for the dark
+ * hero; accents inherit the site palette via tokens.
+ *
+ * The deep run (Perplexity research + full value chain + PDF) lives on
+ * /discover, reached from the result. Honest staged loading over real
+ * latency — no fake progress theater.
+ */
+
+const AGENT = {
+  name: 'Forge Intelligence',
+  heading: 'Score your AI readiness in 60 seconds.',
+  prompt: 'Enter your website — the agent reads it and shows where AI pays off first.',
+  cta: 'Analyze',
+  note: 'Free · instant · no signup',
+  gets: "You'll get a 0–100 readiness band and your top 3 AI opportunities.",
+};
+
 const LOADING_STAGES = [
   'Reading your homepage…',
   'Mapping your value chain…',
   'Drafting your priority thesis…',
 ];
-
-/**
- * V9 Hero — the card IS the agent. A working Forge Intelligence agent embedded
- * in the hero: the visitor enters their website inside the card and it
- * transforms in place (prompt → analyzing → live result) via /api/hero-analyze
- * (one fast Claude call on their real homepage). The deep run (Perplexity
- * research + full value chain + PDF) lives on /discover, reached from the result.
- *
- * Left column (value prop) + headline render during SSR (LCP-safe); the agent
- * is a progressive-enhancement client island. Honest single "Analyzing…" state
- * over real latency — no fake progress theater.
- */
 
 type Priority = {
   title: string;
@@ -44,66 +50,13 @@ type Analysis = {
 };
 type Status = 'idle' | 'loading' | 'done' | 'error';
 
-export function Hero() {
-  return (
-    <section className="relative overflow-hidden bg-parchment">
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 pt-32 pb-16 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-[clamp(2.5rem,5vw,5rem)]">
-          {/* Left — value prop */}
-          <div>
-            <p className="overline">{hero.eyebrow}</p>
-            <h1
-              className="mt-5 text-anthracite"
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(2.75rem, 6.2vw, 5.25rem)',
-                lineHeight: 0.98,
-                letterSpacing: '-0.035em',
-                fontWeight: 600,
-              }}
-            >
-              {hero.headline[0]}
-              <br />
-              ROI you can <span className="text-brass">prove.</span>
-            </h1>
-            <p className="mt-6 max-w-xl text-body-lg text-warm-gray">{hero.sub}</p>
-            <Link
-              href={hero.secondaryCta.href}
-              className="link-underline mt-7 inline-flex items-center gap-2 text-sm font-medium text-warm-gray transition-colors hover:text-brass"
-            >
-              {hero.secondaryCta.label} <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-
-          {/* Right — the embedded agent */}
-          <ForgeAgent />
-        </div>
-
-        {/* Stat strip */}
-        <dl className="mt-[clamp(3rem,6vw,5rem)] grid grid-cols-2 lg:grid-cols-4">
-          {hero.stats.map((s) => (
-            <div
-              key={s.label}
-              className="border-t border-divider py-5 pr-6 [&:not(:first-child)]:lg:border-l [&:not(:first-child)]:lg:border-divider [&:not(:first-child)]:lg:pl-6"
-            >
-              <dt className="metric text-2xl text-anthracite sm:text-[1.75rem]">{s.value}</dt>
-              <dd className="mt-2 text-body-sm text-warm-gray">{s.label}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-    </section>
-  );
-}
-
-function ForgeAgent() {
+export function ForgeAgent() {
   const [url, setUrl] = useState('');
   const [status, setStatus] = useState<Status>('idle');
   const [result, setResult] = useState<Analysis | null>(null);
   const [errorMsg, setErrorMsg] = useState('');
   const [stage, setStage] = useState(0);
 
-  // Advance the loading stage labels while analyzing.
   useEffect(() => {
     if (status !== 'loading') {
       setStage(0);
@@ -160,18 +113,18 @@ function ForgeAgent() {
 
   return (
     <aside
-      className="dark-section border border-divider-dark"
+      className="w-full border border-bone/15 bg-black/30 backdrop-blur-sm"
       aria-live="polite"
       aria-busy={status === 'loading'}
     >
       {/* Agent status bar */}
-      <div className="flex items-center justify-between border-b border-divider-dark px-6 py-3.5 sm:px-7">
+      <div className="flex items-center justify-between border-b border-bone/12 px-5 py-3 sm:px-6">
         <span className="flex items-center gap-2">
           <span
-            className={`h-1.5 w-1.5 rounded-full ${status === 'loading' ? 'bg-brass-light animate-pulse' : 'bg-brass-light'}`}
+            className={`h-1.5 w-1.5 rounded-full bg-brass-light ${status === 'loading' ? 'animate-pulse' : ''}`}
             aria-hidden="true"
           />
-          <span className="text-sm font-semibold text-bone">{heroAgent.name}</span>
+          <span className="text-sm font-semibold text-bone">{AGENT.name}</span>
         </span>
         <span className="metric text-[10px] uppercase tracking-[0.16em] text-stone">
           {status === 'loading'
@@ -184,14 +137,14 @@ function ForgeAgent() {
         </span>
       </div>
 
-      <div className="p-6 sm:p-7">
-        {/* IDLE — the agent prompt + input */}
+      <div className="p-5 sm:p-6">
+        {/* IDLE */}
         {status === 'idle' && (
           <form onSubmit={analyze}>
-            <h2 className="text-h3 text-bone">{heroAgent.heading}</h2>
-            <p className="mt-2 text-body-sm text-stone">{heroAgent.prompt}</p>
+            <h2 className="text-h4 text-bone sm:text-h3">{AGENT.heading}</h2>
+            <p className="mt-2 text-body-sm text-stone">{AGENT.prompt}</p>
 
-            <div className="mt-5 flex items-center border border-divider-dark bg-black/20 transition-colors focus-within:border-brass-light">
+            <div className="mt-5 flex items-center border border-bone/15 bg-black/30 transition-colors focus-within:border-brass-light">
               <span className="select-none pl-3.5 text-body-sm text-stone">https://</span>
               <input
                 id="hero-url"
@@ -206,28 +159,25 @@ function ForgeAgent() {
               />
             </div>
             <Button type="submit" size="lg" className="mt-3 w-full" disabled={!url.trim()}>
-              {heroAgent.cta} <ArrowRight className="ml-2 h-4 w-4" />
+              {AGENT.cta} <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
 
-            <p className="mt-4 text-center text-xs text-stone">{heroAgent.gets}</p>
-            <p className="mt-1 text-center text-xs text-stone/70">{heroAgent.note}</p>
+            <p className="mt-4 text-center text-xs text-stone">{AGENT.gets}</p>
+            <p className="mt-1 text-center text-xs text-stone/70">{AGENT.note}</p>
           </form>
         )}
 
-        {/* LOADING — honest single state over real latency */}
+        {/* LOADING — honest staged labels over real latency */}
         {status === 'loading' && (
           <div className="py-12 text-center">
             <Loader2 className="mx-auto h-8 w-8 animate-spin text-brass-light" />
             <p className="mt-5 text-body text-bone">Analyzing {domainLabel}…</p>
-            <p className="mt-1.5 text-body-sm text-brass-light transition-opacity">
-              {LOADING_STAGES[stage]}
-            </p>
-            {/* stepper dots */}
+            <p className="mt-1.5 text-body-sm text-brass-light">{LOADING_STAGES[stage]}</p>
             <div className="mt-4 flex items-center justify-center gap-1.5">
               {LOADING_STAGES.map((label, i) => (
                 <span
                   key={label}
-                  className={`h-1 w-6 transition-colors ${i <= stage ? 'bg-brass-light' : 'bg-divider-dark'}`}
+                  className={`h-1 w-6 transition-colors ${i <= stage ? 'bg-brass-light' : 'bg-bone/15'}`}
                   aria-hidden="true"
                 />
               ))}
@@ -249,8 +199,7 @@ function ForgeAgent() {
               {result.industry ? ` · ${result.industry}` : ''}
             </p>
 
-            {/* Flagship thesis */}
-            <div className="mt-6 border-t border-divider-dark pt-5">
+            <div className="mt-6 border-t border-bone/12 pt-5">
               <p className="metric text-[11px] uppercase tracking-[0.16em] text-brass-light">
                 Priority play
               </p>
@@ -269,18 +218,14 @@ function ForgeAgent() {
                   </div>
                 ))}
               </dl>
-              {/* Expected benefit — emphasized */}
               <div className="mt-4 border-l-2 border-brass-light pl-3.5">
-                <p className="text-body-sm font-semibold text-brass-light">
-                  {result.priority.benefit}
-                </p>
+                <p className="text-body-sm font-semibold text-brass-light">{result.priority.benefit}</p>
                 <p className="mt-1 text-xs text-stone">{result.priority.evidence}</p>
               </div>
             </div>
 
-            {/* Other opportunities */}
             {result.more.length > 0 && (
-              <div className="mt-6 border-t border-divider-dark pt-5">
+              <div className="mt-6 border-t border-bone/12 pt-5">
                 <p className="metric text-[11px] uppercase tracking-[0.16em] text-stone">
                   Also on the table
                 </p>
@@ -298,9 +243,9 @@ function ForgeAgent() {
               </div>
             )}
 
-            <div className="mt-6 border-t border-divider-dark pt-5">
+            <div className="mt-6 border-t border-bone/12 pt-5">
               <Button size="default" className="w-full" asChild>
-                <Link href="/discover">
+                <Link href="/discover" data-analytics="home_hero_agent_full_report">
                   Get the full thesis &amp; cited report <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -321,9 +266,7 @@ function ForgeAgent() {
             <p className="text-body text-bone">
               {errorMsg || `We couldn't analyze ${domainLabel} just now.`}
             </p>
-            <p className="mt-2 text-body-sm text-stone">
-              Run the full analysis instead — it reads deeper.
-            </p>
+            <p className="mt-2 text-body-sm text-stone">Run the full analysis instead — it reads deeper.</p>
             <div className="mt-6 flex flex-col gap-2.5">
               <Button size="default" variant="outline-light" asChild>
                 <Link href="/discover">

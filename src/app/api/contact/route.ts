@@ -117,7 +117,7 @@ export async function POST(req: NextRequest) {
     const emailHtml = `
       <div style="font-family: -apple-system, sans-serif; max-width: 600px; margin: 0 auto; color: #2D2D2D;">
         <div style="background: #0F1A2E; padding: 24px 32px; border-radius: 8px 8px 0 0;">
-          <h1 style="color: #0E5DC2; font-size: 20px; margin: 0;">New ClearForge Inquiry</h1>
+          <h1 style="color: #B8860B; font-size: 20px; margin: 0;">New ClearForge Inquiry</h1>
           <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 4px 0 0;">clearforge.ai contact form</p>
         </div>
         <div style="padding: 32px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px;">
@@ -151,7 +151,7 @@ export async function POST(req: NextRequest) {
               <td style="padding: 8px 0;">${safeUrgency || 'Not provided'}</td>
             </tr>
           </table>
-          <div style="background: #F9FAFB; padding: 20px; border-radius: 8px; border-left: 3px solid #0E5DC2;">
+          <div style="background: #F9FAFB; padding: 20px; border-radius: 8px; border-left: 3px solid #B8860B;">
             <p style="font-weight: 600; margin: 0 0 8px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: #6B7280;">Message</p>
             <p style="margin: 0; line-height: 1.7; white-space: pre-wrap;">${safeMessage}</p>
           </div>
