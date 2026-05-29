@@ -1,18 +1,22 @@
 import { NextResponse } from 'next/server';
+import { isRateLimited } from '@/lib/rate-limit';
+import { getCompanyDomain, normalizePublicCompanyUrl } from '@/lib/url-safety';
 
 /**
  * POST /api/hero-analyze
  *
  * Fast, cheap hero teaser for the homepage. Fetches the visitor's homepage,
  * makes ONE Claude call, and returns a real (not faked) AI-readiness band plus
- * three value-chain opportunities specific to their site.
+ * a flagship diagnostic thesis specific to their site.
  *
  * Deliberately lightweight vs. the full /discover pipeline (which adds
  * Perplexity research + a full value chain + PDF). This is the teaser; the
  * deep run lives on /discover, reached via the hero CTA.
  *
- * Guardrails (public, unauthenticated surface): per-IP rate limit, domain
- * validation, 4s fetch timeout, capped input size, graceful fallback.
+ * Guardrails (public, unauthenticated surface): shared per-IP rate limit,
+ * SSRF-safe URL normalization (blocks private/metadata hosts via
+ * normalizePublicCompanyUrl), 4s fetch timeout, capped input size, graceful
+ * fallback.
  */
 
 interface HeroPriority {
@@ -32,37 +36,6 @@ interface HeroAnalysis {
   more: string[]; // 2 additional opportunity headlines
 }
 
-// ── Per-IP in-memory rate limit (per server instance; fine for v1) ──────────
-const RATE_LIMIT = 5; // requests
-const RATE_WINDOW_MS = 60_000; // per minute
-const hits = new Map<string, number[]>();
-
-function rateLimited(ip: string): boolean {
-  const now = Date.now();
-  const recent = (hits.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
-  recent.push(now);
-  hits.set(ip, recent);
-  // opportunistic cleanup
-  if (hits.size > 5000) {
-    for (const [k, v] of hits) {
-      if (v.every((t) => now - t > RATE_WINDOW_MS)) hits.delete(k);
-    }
-  }
-  return recent.length > RATE_LIMIT;
-}
-
-function normalizeUrl(raw: string): { url: string; domain: string } | null {
-  const trimmed = raw
-    .trim()
-    .replace(/^https?:\/\//i, '')
-    .replace(/\/+$/, '');
-  // basic domain shape: label.tld, optional path
-  const domain = trimmed.split('/')[0].toLowerCase();
-  if (!/^[a-z0-9.-]+\.[a-z]{2,}$/.test(domain)) return null;
-  if (domain.length > 253) return null;
-  return { url: `https://${domain}`, domain };
-}
-
 function stripHtml(html: string): string {
   return html
     .replace(/<script[\s\S]*?<\/script>/gi, ' ')
@@ -76,17 +49,14 @@ function stripHtml(html: string): string {
 
 export async function POST(request: Request) {
   try {
-    const ip =
-      request.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
-      request.headers.get('x-real-ip') ||
-      'unknown';
-    if (rateLimited(ip)) {
+    if (isRateLimited(request.headers, 'hero-analyze', 5, 60_000)) {
       return NextResponse.json({ error: 'Too many requests', fallback: true }, { status: 429 });
     }
 
     const { url } = await request.json();
-    const normalized = typeof url === 'string' ? normalizeUrl(url) : null;
-    if (!normalized) {
+    const safeUrl = normalizePublicCompanyUrl(url); // SSRF-safe: blocks private/metadata hosts
+    const domain = getCompanyDomain(url);
+    if (!safeUrl || !domain) {
       return NextResponse.json(
         { error: 'Enter a valid company website.', invalid: true },
         { status: 400 },
@@ -103,7 +73,7 @@ export async function POST(request: Request) {
     try {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 4000);
-      const res = await fetch(normalized.url, {
+      const res = await fetch(safeUrl.href, {
         signal: controller.signal,
         headers: { 'User-Agent': 'ClearForge-Hero-Analyzer/1.0 (+https://clearforge.ai)' },
         redirect: 'follow',
@@ -119,7 +89,7 @@ export async function POST(request: Request) {
 
     const prompt = `You are a senior AI consultant at ClearForge (ex-Bain AI Automation practice). A visitor entered their company website on our homepage. Produce a fast, credible diagnostic snapshot — one flagship "thesis" that proves we understand their business, plus two more opportunities as headlines. This is the teaser; the full cited report comes later.
 
-Domain: ${normalized.domain}
+Domain: ${domain}
 ${siteText ? `\nHomepage content (extracted):\n"""${siteText}"""` : '\n(Homepage could not be fetched — infer reasonably from the domain.)'}
 
 Return STRICT JSON only (no markdown, no preamble):
@@ -185,7 +155,7 @@ Rules: be specific to their actual business, not generic. Sound like a sharp Bai
 
     const clip = (v: unknown, n: number) => String(v ?? '').slice(0, n);
     return NextResponse.json({
-      company: clip(parsed.company || normalized.domain, 80),
+      company: clip(parsed.company || domain, 80),
       industry: clip(parsed.industry, 60),
       readinessBand: clip(parsed.readinessBand, 40),
       priority: {
@@ -197,7 +167,7 @@ Rules: be specific to their actual business, not generic. Sound like a sharp Bai
         evidence: clip(p.evidence, 300),
       },
       more: Array.isArray(parsed.more) ? parsed.more.slice(0, 2).map((m) => clip(m, 160)) : [],
-      domain: normalized.domain,
+      domain,
     });
   } catch {
     return NextResponse.json({ fallback: true }, { status: 200 });
