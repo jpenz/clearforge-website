@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { DM_Sans, Instrument_Serif, JetBrains_Mono } from 'next/font/google';
+import { JetBrains_Mono } from 'next/font/google';
+import { GeistSans } from 'geist/font/sans';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { ForgeBar } from '@/components/layout/forge-bar';
@@ -7,20 +8,7 @@ import { LenisProvider } from '@/components/layout/lenis-provider';
 import { coreKeywords, organizationJsonLd } from '@/lib/metadata';
 import './globals.css';
 
-const instrumentSerif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: '400',
-  style: ['normal', 'italic'],
-  variable: '--font-instrument-serif',
-  display: 'swap',
-});
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-dm-sans',
-  display: 'swap',
-});
-
+// V9 rebrand: all-sans. Geist for display + body, JetBrains Mono for numerals.
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
@@ -55,7 +43,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <link rel="dns-prefetch" href="https://api.perplexity.ai" />
         <link rel="preconnect" href="https://api.anthropic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${instrumentSerif.variable} ${dmSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <body className={`${GeistSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

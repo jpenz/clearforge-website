@@ -71,7 +71,7 @@ export default function ServicesPage() {
             <p className="overline">How We Work</p>
             <h1
               className="mt-6 text-display max-w-3xl text-bone"
-              style={{ fontFamily: 'var(--font-instrument-serif)' }}
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               The Forge Method™
             </h1>
@@ -121,11 +121,11 @@ export default function ServicesPage() {
                       <h3
                         className="mt-3"
                         style={{
-                          fontFamily: 'var(--font-instrument-serif)',
+                          fontFamily: 'var(--font-display)',
                           fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
                           lineHeight: 1.08,
                           letterSpacing: '-0.02em',
-                          fontWeight: 400,
+                          fontWeight: 600,
                         }}
                       >
                         {product.name}

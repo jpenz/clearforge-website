@@ -158,11 +158,11 @@ export function ForgeMethodDiagram() {
               <div
                 className="fm-num text-brass/90"
                 style={{
-                  fontFamily: 'var(--font-instrument-serif)',
+                  fontFamily: 'var(--font-display)',
                   fontSize: 'clamp(5rem, 11vw, 9rem)',
                   letterSpacing: '-0.04em',
                   lineHeight: 0.82,
-                  fontWeight: 400,
+                  fontWeight: 600,
                 }}
               >
                 {phase.num}
@@ -173,10 +173,10 @@ export function ForgeMethodDiagram() {
                 <h3
                   className="text-anthracite"
                   style={{
-                    fontFamily: 'var(--font-instrument-serif)',
+                    fontFamily: 'var(--font-display)',
                     fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
                     letterSpacing: '-0.02em',
-                    fontWeight: 400,
+                    fontWeight: 600,
                   }}
                 >
                   {phase.name}

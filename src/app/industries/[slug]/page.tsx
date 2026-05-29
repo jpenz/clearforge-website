@@ -172,7 +172,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                 <p className="overline">{industry.category}</p>
                 <h1
                   className="mt-6 text-display max-w-3xl text-bone"
-                  style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                  style={{ fontFamily: 'var(--font-display)' }}
                 >
                   AI Agents &amp; Automation for {industry.name}
                 </h1>
@@ -260,7 +260,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               <p className="overline">{industry.shortName} Value Chain</p>
               <h2
                 className="mt-6 text-display text-bone"
-                style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                style={{ fontFamily: 'var(--font-display)' }}
               >
                 Every function. Every activity. Where AI fits.
               </h2>
@@ -304,7 +304,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                       </div>
                       <h3
                         className="mt-3 text-h2 text-bone"
-                        style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                        style={{ fontFamily: 'var(--font-display)' }}
                       >
                         {fn.function}
                       </h3>
@@ -410,7 +410,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               className="group block mt-6 lg:grid lg:grid-cols-12 lg:gap-12"
             >
               <div className="lg:col-span-8">
-                <h3 className="text-h2 group-hover:text-brass transition-colors" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
+                <h3 className="text-h2 group-hover:text-brass transition-colors" style={{ fontFamily: 'var(--font-display)' }}>
                   {caseStudy.title}
                 </h3>
                 <p className="mt-4 text-body-lg text-warm-gray max-w-2xl">{caseStudy.excerpt}</p>
@@ -437,7 +437,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       {/* ── CTA ── */}
       <section id="discuss" className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40 scroll-mt-24">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
+          <h2 className="text-display text-bone" style={{ fontFamily: 'var(--font-display)' }}>
             Get a custom value chain for your business.
           </h2>
           <p className="mt-6 text-body-lg text-stone">

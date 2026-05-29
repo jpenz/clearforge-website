@@ -155,9 +155,9 @@ describe('maturityColor', () => {
     expect(color).toMatch(/^#[0-9A-Fa-f]{6}$/);
   });
 
-  it('returns the teal fallback (#00E5C3) for unknown levels', () => {
-    expect(maturityColor('Unknown')).toBe('#00E5C3');
-    expect(maturityColor('')).toBe('#00E5C3');
+  it('returns the signal-blue fallback (#4D8DE8) for unknown levels', () => {
+    expect(maturityColor('Unknown')).toBe('#4D8DE8');
+    expect(maturityColor('')).toBe('#4D8DE8');
   });
 
   // Levels produce distinct colors to visually differentiate maturity
@@ -173,9 +173,9 @@ describe('maturityColor', () => {
     expect(maturityColor('Foundation')).toBe('#475569');
   });
 
-  // Leader should be the vibrant teal brand color
-  it('Leader has the vibrant teal brand color', () => {
-    expect(maturityColor('Leader')).toBe('#00E5C3');
+  // Leader should be the vibrant signal-blue brand color
+  it('Leader has the vibrant signal-blue brand color', () => {
+    expect(maturityColor('Leader')).toBe('#4D8DE8');
   });
 });
 

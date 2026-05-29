@@ -58,7 +58,7 @@ export default async function ServiceDetailPage({
               <p className="overline">{service.title}</p>
               <h1
                 className="mt-6 text-display max-w-3xl text-bone"
-                style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                style={{ fontFamily: 'var(--font-display)' }}
               >
                 {service.tagline}
               </h1>
@@ -83,11 +83,11 @@ export default async function ServiceDetailPage({
                 <p
                   className="mt-4 text-brass-light"
                   style={{
-                    fontFamily: 'var(--font-instrument-serif)',
+                    fontFamily: 'var(--font-display)',
                     fontSize: 'clamp(4rem, 8vw, 7rem)',
                     lineHeight: 0.92,
                     letterSpacing: '-0.04em',
-                    fontWeight: 400,
+                    fontWeight: 600,
                   }}
                 >
                   {heroStat.value}
@@ -185,7 +185,7 @@ export default async function ServiceDetailPage({
           <p className="overline">How It Works</p>
           <h2
             className="mt-6 text-display max-w-3xl text-bone"
-            style={{ fontFamily: 'var(--font-instrument-serif)' }}
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             From kickoff to results.
           </h2>
@@ -217,11 +217,11 @@ export default async function ServiceDetailPage({
                     <h3
                       className="mt-4 text-bone"
                       style={{
-                        fontFamily: 'var(--font-instrument-serif)',
+                        fontFamily: 'var(--font-display)',
                         fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
                         lineHeight: 1.1,
                         letterSpacing: '-0.02em',
-                        fontWeight: 400,
+                        fontWeight: 600,
                       }}
                     >
                       {w.title}

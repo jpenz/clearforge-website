@@ -55,11 +55,11 @@ export function HeroScroll() {
         <h1
           className="mt-8 max-w-[1050px] text-bone animate-fade-in-up delay-1"
           style={{
-            fontFamily: 'var(--font-instrument-serif)',
+            fontFamily: 'var(--font-display)',
             fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
             lineHeight: 1.04,
             letterSpacing: '-0.03em',
-            fontWeight: 400,
+            fontWeight: 600,
           }}
         >
           AI strategy that ends in a working system.
@@ -67,11 +67,11 @@ export function HeroScroll() {
         <p
           className="mt-2 max-w-[1050px] text-brass-light animate-fade-in-up delay-2"
           style={{
-            fontFamily: 'var(--font-instrument-serif)',
+            fontFamily: 'var(--font-display)',
             fontSize: 'clamp(2.5rem, 8vw, 6.5rem)',
             lineHeight: 1.04,
             letterSpacing: '-0.03em',
-            fontWeight: 400,
+            fontWeight: 600,
             fontStyle: 'italic',
           }}
         >

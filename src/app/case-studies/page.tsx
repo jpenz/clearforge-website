@@ -31,7 +31,7 @@ export default function CaseStudiesPage() {
           <p className="overline">Case Studies</p>
           <h1
             className="mt-6 text-display max-w-3xl text-bone"
-            style={{ fontFamily: 'var(--font-instrument-serif)' }}
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             Real Outcomes. Verified Results.
           </h1>
@@ -57,7 +57,7 @@ export default function CaseStudiesPage() {
                       <span className="overline text-[10px]">{cs.industry}</span>
                       <h3
                         className="mt-3 text-h2 group-hover:text-brass transition-colors duration-300"
-                        style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                        style={{ fontFamily: 'var(--font-display)' }}
                       >
                         {cs.title}
                       </h3>

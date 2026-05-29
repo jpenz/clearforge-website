@@ -178,13 +178,13 @@ export function ScrubMarquee({ text, className }: { text: string; className?: st
   return (
     <div ref={ref} className={`overflow-hidden ${className || ''}`}>
       <div ref={trackRef} className="flex whitespace-nowrap will-change-transform">
-        <span className="text-[10vw] sm:text-[8vw] lg:text-[6vw] font-bold uppercase tracking-tight text-bone/[0.05] shrink-0 mr-[4vw]" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
+        <span className="text-[10vw] sm:text-[8vw] lg:text-[6vw] font-bold uppercase tracking-tight text-bone/[0.05] shrink-0 mr-[4vw]" style={{ fontFamily: 'var(--font-display)' }}>
           {text}
         </span>
-        <span className="text-[10vw] sm:text-[8vw] lg:text-[6vw] font-bold uppercase tracking-tight text-bone/[0.05] shrink-0 mr-[4vw]" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
+        <span className="text-[10vw] sm:text-[8vw] lg:text-[6vw] font-bold uppercase tracking-tight text-bone/[0.05] shrink-0 mr-[4vw]" style={{ fontFamily: 'var(--font-display)' }}>
           {text}
         </span>
-        <span className="text-[10vw] sm:text-[8vw] lg:text-[6vw] font-bold uppercase tracking-tight text-bone/[0.05] shrink-0 mr-[4vw]" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
+        <span className="text-[10vw] sm:text-[8vw] lg:text-[6vw] font-bold uppercase tracking-tight text-bone/[0.05] shrink-0 mr-[4vw]" style={{ fontFamily: 'var(--font-display)' }}>
           {text}
         </span>
       </div>

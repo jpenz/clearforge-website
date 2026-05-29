@@ -285,8 +285,8 @@ export default function DiscoverPage() {
 
   const renderReportMarkdown = (text: string) => {
     return text.split('\n').map((line, i) => {
-      if (line.startsWith('# ')) return <h1 key={i} className="text-2xl font-bold text-bone mt-6 mb-3" style={{ fontFamily: 'var(--font-instrument-serif)' }}>{line.replace('# ', '')}</h1>;
-      if (line.startsWith('## ')) return <h2 key={i} className="text-xl font-bold text-bone mt-5 mb-2" style={{ fontFamily: 'var(--font-instrument-serif)' }}>{line.replace('## ', '')}</h2>;
+      if (line.startsWith('# ')) return <h1 key={i} className="text-2xl font-bold text-bone mt-6 mb-3" style={{ fontFamily: 'var(--font-display)' }}>{line.replace('# ', '')}</h1>;
+      if (line.startsWith('## ')) return <h2 key={i} className="text-xl font-bold text-bone mt-5 mb-2" style={{ fontFamily: 'var(--font-display)' }}>{line.replace('## ', '')}</h2>;
       if (line.startsWith('### ')) return <h3 key={i} className="text-lg font-semibold text-bone mt-4 mb-2">{line.replace('### ', '')}</h3>;
       if (line.match(/^[-•]\s/)) return <li key={i} className="ml-4 list-disc text-sm text-stone">{line.replace(/^[-•]\s/, '')}</li>;
       if (line.match(/^\d+\.\s/)) return <li key={i} className="ml-4 list-decimal text-sm text-stone">{line.replace(/^\d+\.\s/, '')}</li>;
@@ -409,7 +409,7 @@ export default function DiscoverPage() {
               <p className="overline text-brass-light">Your Custom Value Chain</p>
               <h2
                 className="mt-3 text-display text-bone max-w-3xl"
-                style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                style={{ fontFamily: 'var(--font-display)' }}
               >
                 {valueChain.companyName}: where AI fits.
               </h2>
@@ -444,7 +444,7 @@ export default function DiscoverPage() {
                     <span className="metric text-xs text-brass">{String(fi + 1).padStart(2, '0')}</span>
                     <h3
                       className="text-h3 text-bone"
-                      style={{ fontFamily: 'var(--font-instrument-serif)' }}
+                      style={{ fontFamily: 'var(--font-display)' }}
                     >
                       {fn.function}
                     </h3>

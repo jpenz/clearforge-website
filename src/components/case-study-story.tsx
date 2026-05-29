@@ -262,7 +262,7 @@ export function CaseStudyStory({
           <span className="block text-[50px] sm:text-[80px] leading-none text-brass/20" aria-hidden>&ldquo;</span>
 
           <div ref={quoteWordsRef} className="mt-4">
-            <p className="text-h1 text-anthracite leading-snug" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
+            <p className="text-h1 text-anthracite leading-snug" style={{ fontFamily: 'var(--font-display)' }}>
               {quoteWords.map((word, i) => (
                 <span key={i} className="quote-word inline-block mr-[0.3em]">
                   {word}

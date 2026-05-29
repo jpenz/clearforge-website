@@ -311,7 +311,7 @@ export default function Home() {
               </div>
 
               <div className="mt-10 border-t border-divider pt-8">
-                <p className="text-body text-anthracite italic" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
+                <p className="text-body text-anthracite italic" style={{ fontFamily: 'var(--font-display)' }}>
                   &ldquo;I built ClearForge because I was tired of watching $200K strategy decks
                   sit on shelves. The gap between what gets recommended and what gets built
                   is where most AI programs die.&rdquo;
