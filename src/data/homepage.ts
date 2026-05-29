@@ -14,16 +14,31 @@
 
 // ── Hero ──────────────────────────────────────────────────────────────────
 export const hero = {
-  eyebrow: 'For mid-market & PE-backed companies',
+  eyebrow: 'AI consulting for mid-market & PE-backed companies',
   headline: ['AI that ships.', 'ROI you can prove.'], // 2nd line's last word gets accent
-  sub: 'We diagnose the highest-value workflows, ship production AI in 10–14 weeks, and track every dollar of impact. Transparent pricing. No platform lock-in.',
-  primaryCta: { label: 'Get your readiness score', href: '/scorecard' },
+  sub: 'We find your highest-value workflows, build the AI, and deploy it to production in 10–14 weeks — then track the ROI. Transparent pricing, no lock-in.',
+  // Live analyzer (the interactive proof element)
+  analyzerLabel: 'Free 60-second readiness check',
+  analyzerHelper: 'Our AI reads your site and scores you live. No signup.',
+  analyzeCta: 'Analyze my site',
   secondaryCta: { label: 'See engagements & pricing', href: '#engagements' },
   stats: [
     { value: '79% → 11%', label: 'Claim AI adoption vs. run agents in production' },
     { value: '$11B', label: 'AI consulting market, growing 26% YoY' },
     { value: '47%', label: 'Of PE funds increasing AI spend in 2026' },
     { value: '10–14 wk', label: 'Kickoff to live production system' },
+  ],
+};
+
+// Sample shown in the analyzer card before the visitor runs their own —
+// clearly labeled "Sample" so it demonstrates the deliverable without faking proof.
+export const heroSample = {
+  band: 'Likely 55–70',
+  industry: 'e.g. mid-market industrial distributor',
+  plays: [
+    'Auto-triage inbound RFQs; route by margin and fit',
+    'Surface cross-sell white space from order history',
+    'Flag at-risk accounts from order-pattern decay',
   ],
 };
 
