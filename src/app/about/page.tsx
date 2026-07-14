@@ -2,14 +2,13 @@ import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BookCallButton } from '@/components/booking/book-call';
-import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
 import { Button } from '@/components/ui/button';
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'About ClearForge — We Build Production AI',
+  title: 'About ClearForge — Founder-Led Production AI',
   description:
-    'Operating discipline meets AI engineering depth. We build production AI, train your team to run it, and make ourselves replaceable.',
+    'Founded by James Penz (ex-Bain, EY, Capgemini). We build production AI and stay through The Adoption Mile™ until your team runs it without us.',
   path: '/about',
 });
 
@@ -19,12 +18,12 @@ const values = [
     desc: 'Every engagement produces a working system, not a report. If we cannot build it, we do not recommend it.',
   },
   {
-    title: 'Senior-led teams',
-    desc: 'The people who scope your engagement are the people who deliver it. You work with senior operators who can make tradeoffs in the room.',
+    title: 'Senior-led, end to end',
+    desc: 'The person who scopes your engagement is the person who delivers it — and can make tradeoffs in the room.',
   },
   {
-    title: 'Engineering + operating discipline',
-    desc: 'We combine workflow discipline with production engineering standards. Systems are tested, documented, and built to last.',
+    title: 'Adoption is the deliverable',
+    desc: 'A system nobody uses is a write-off. We put a named operator, a weekly cadence, and a visible scoreboard on every launch.',
   },
   {
     title: 'Build capability, not dependency',
@@ -44,17 +43,17 @@ const platformReasons = [
       'Buying a platform is like buying a CNC machine without a machinist. The tool is only as good as the people operating it and the process around it.',
   },
   {
-    question: 'We build AND train',
+    question: 'We build AND run the adoption',
     answer:
-      'We deploy production AI and train your team to run it. When we leave, the system works and your people own it. No ongoing license dependency.',
+      'We deploy production AI, train your team, and stay on a weekly cadence until usage holds. When we leave, the system works and your people own it. No ongoing license dependency.',
   },
 ];
 
 export default function AboutPage() {
   return (
     <>
-      {/* — Hero with atmospheric bg — */}
-      <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
+      {/* — Hero — */}
+      <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-44">
         <Image
           src="/images/abstract-network.webp"
           alt=""
@@ -65,109 +64,136 @@ export default function AboutPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-forge-black via-forge-black/80 to-forge-black/40 pointer-events-none" />
         <div className="relative mx-auto max-w-[1200px] px-6 lg:px-10">
-          <FadeIn>
-            <p className="overline">About ClearForge</p>
-            <h1
-              className="mt-6 text-display max-w-3xl text-bone"
-              style={{ fontFamily: 'var(--font-display)' }}
-            >
-              We build production AI. Not shelfware.
-            </h1>
-          </FadeIn>
-          <FadeIn delay={0.15}>
-            <p className="mt-6 max-w-xl text-body-lg text-stone">
-              We build, we ship, we deploy. The same team that diagnoses the problem engineers the
-              solution and trains your people to run it.
-            </p>
-          </FadeIn>
+          <p className="overline">About ClearForge</p>
+          <h1 className="mt-6 text-display max-w-3xl text-bone">
+            We build production AI.{' '}
+            <span className="display-accent">And stay until it sticks.</span>
+          </h1>
+          <p className="mt-6 max-w-xl text-body-lg text-stone">
+            The same senior team diagnoses the workflow, engineers the system, ships it to
+            production — and runs the adoption until your people work in it every week.
+          </p>
         </div>
       </section>
 
-      {/* — Builder Identity — */}
-      <section className="bg-parchment py-24 lg:py-40">
+      {/* — Founder — the face behind the firm, first — */}
+      <section className="bg-parchment py-24 lg:py-36">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-20">
-            <div className="lg:col-span-5">
-              <p className="overline">What Makes Us Different</p>
-              <h2 className="mt-6 text-display">We build AND train your team to run it.</h2>
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-20">
+            <div className="lg:col-span-4">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[12px] border border-divider bg-surface">
+                <Image
+                  src="/images/james-penz.jpg"
+                  alt="James Penz, Founder & Managing Partner of ClearForge"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  className="object-cover object-top"
+                />
+              </div>
+              <p className="metric mt-4 text-[11px] uppercase tracking-[0.14em] text-warm-gray">
+                James Penz · Founder &amp; Managing Partner
+              </p>
             </div>
-            <div className="mt-12 lg:col-span-7 lg:mt-0">
-              <p className="text-body-lg text-warm-gray">
-                Most AI firms sell you a roadmap and leave. Others build something and create a
-                dependency so you cannot operate without them. We do neither. Every ClearForge
-                engagement ends with a working system in production and a team that knows how to
-                maintain and extend it.
-              </p>
+
+            <div className="lg:col-span-7">
+              <p className="overline">The Founder</p>
+              <h2 className="mt-6 text-display">James Penz</h2>
               <p className="mt-6 text-body-lg text-warm-gray">
-                Built for mid-market and growth-stage companies who need AI that works — not another
-                vendor relationship that drains budget without delivering results.
+                Before ClearForge, James spent over a decade in management consulting and enterprise
+                technology — at Bain &amp; Company, EY, and Capgemini — advising mid-market and
+                Fortune 500 companies on operations, AI strategy, and large-scale delivery.
               </p>
+              <p className="mt-6 text-body text-warm-gray">
+                Across those years he kept watching the same failure: companies spend millions on AI
+                strategy that never survives contact with the people who have to use it. The gap was
+                never insight. It was execution — and adoption. So he built the firm he could not
+                find in the market: senior enough to scope the problem honestly, technical enough to
+                ship working systems, and stubborn enough to stay through The Adoption Mile™ until
+                the team runs it without us.
+              </p>
+              <p className="mt-6 text-body text-warm-gray">
+                Based in Southeast Michigan. Serving clients nationally.
+              </p>
+              <div className="mt-10 grid grid-cols-3 gap-8 border-t border-divider pt-8">
+                <div>
+                  <p className="metric text-brass">Bain &amp; Company</p>
+                  <p className="mt-1 text-body-sm text-warm-gray">Strategy &amp; AI practice</p>
+                </div>
+                <div>
+                  <p className="metric text-brass">EY</p>
+                  <p className="mt-1 text-body-sm text-warm-gray">Enterprise delivery</p>
+                </div>
+                <div>
+                  <p className="metric text-brass">Capgemini</p>
+                  <p className="mt-1 text-body-sm text-warm-gray">Technology at scale</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* — Founder — */}
-      <section className="border-t border-divider bg-parchment py-24 lg:py-40">
+      {/* — The operating belief — */}
+      <section className="border-t border-divider bg-parchment py-24 lg:py-36">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-          <FadeIn>
-            <div className="lg:grid lg:grid-cols-12 lg:gap-20">
-              <div className="lg:col-span-5">
-                <p className="overline">Leadership</p>
-                <h2 className="mt-6 text-display">James Penz</h2>
-                <p className="mt-2 text-body-lg text-warm-gray">Founder &amp; Managing Partner</p>
-              </div>
-              <div className="mt-12 lg:col-span-7 lg:mt-0">
-                <p className="text-body-lg text-warm-gray">
-                  Before founding ClearForge, James spent over a decade in management consulting and
-                  enterprise technology at Bain, EY, and Capgemini - advising mid-market and Fortune
-                  500 companies on operations, AI strategy, and delivery.
-                </p>
-                <p className="mt-6 text-body text-warm-gray">
-                  He built ClearForge because he kept seeing the same problem: companies spent
-                  millions on AI strategy that never made it to production. The gap was not insight
-                  — it was execution. ClearForge exists to close that gap with a team that
-                  diagnoses, builds, and operates AI systems end to end.
-                </p>
-                <div className="mt-10 grid grid-cols-3 gap-8 border-t border-divider pt-8">
-                  <div>
-                    <p className="metric text-brass">Bain</p>
-                    <p className="mt-1 text-body-sm text-warm-gray">Strategy</p>
-                  </div>
-                  <div>
-                    <p className="metric text-brass">EY</p>
-                    <p className="mt-1 text-body-sm text-warm-gray">Delivery</p>
-                  </div>
-                  <div>
-                    <p className="metric text-brass">Capgemini</p>
-                    <p className="mt-1 text-body-sm text-warm-gray">Technology</p>
-                  </div>
+          <div className="lg:grid lg:grid-cols-12 lg:gap-20">
+            <div className="lg:col-span-5">
+              <p className="overline">The Operating Belief</p>
+              <h2 className="mt-6 text-display">
+                Shipping is half the job. <span className="display-accent">Adoption</span> is the
+                other half.
+              </h2>
+            </div>
+            <div className="mt-12 lg:col-span-7 lg:mt-0">
+              <p className="text-body-lg text-warm-gray">
+                Most AI firms sell a roadmap and leave. Some build something and create a dependency
+                you cannot operate without. We do neither. Every ClearForge engagement ends with a
+                working system in production, a named operator on your team, and a weekly adoption
+                rhythm we run together until usage holds.
+              </p>
+              <div className="mt-10 grid grid-cols-2 gap-8 border-t border-divider pt-8 sm:grid-cols-3">
+                <div>
+                  <p className="metric-lg text-brass">70%</p>
+                  <p className="mt-2 text-body-sm text-warm-gray">
+                    Weekly-active usage — the adoption bar we build to by day 90
+                  </p>
+                </div>
+                <div>
+                  <p className="metric-lg text-brass">1 owner</p>
+                  <p className="mt-2 text-body-sm text-warm-gray">
+                    Named on your team before we write a line of code
+                  </p>
+                </div>
+                <div>
+                  <p className="metric-lg text-brass">100%</p>
+                  <p className="mt-2 text-body-sm text-warm-gray">
+                    You own everything we build — code, docs, runbooks
+                  </p>
                 </div>
               </div>
             </div>
-          </FadeIn>
+          </div>
         </div>
       </section>
 
-      {/* — Values — */}
-      <section className="bg-recessed py-24 lg:py-40">
+      {/* — Principles — */}
+      <section className="bg-recessed py-24 lg:py-36">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <p className="overline">Principles</p>
           <h2 className="mt-6 text-display max-w-2xl">What we believe shapes every engagement.</h2>
-
-          <Stagger className="mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
+          <div className="mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v) => (
-              <StaggerItem key={v.title} className="border-t border-divider pt-6">
+              <div key={v.title} className="border-t border-divider pt-6">
                 <h3 className="text-h4">{v.title}</h3>
                 <p className="mt-2 text-body-sm text-warm-gray">{v.desc}</p>
-              </StaggerItem>
+              </div>
             ))}
-          </Stagger>
+          </div>
         </div>
       </section>
 
       {/* — Why Not Just Buy a Platform? — */}
-      <section className="border-t border-divider bg-parchment py-24 lg:py-40">
+      <section className="border-t border-divider bg-parchment py-24 lg:py-36">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-4">
@@ -190,24 +216,20 @@ export default function AboutPage() {
       </section>
 
       {/* — CTA — */}
-      <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
+      <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-36">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone" style={{ fontFamily: 'var(--font-display)' }}>
-            One conversation to find&nbsp;out.
-          </h2>
+          <h2 className="text-display text-bone">One conversation to find&nbsp;out.</h2>
           <p className="mt-6 text-body-lg text-stone">
-            Tell us about your business. We will be honest about whether we can help — and if so,
-            exactly how.
+            Bring one stuck workflow. We will be honest about whether it is worth building — and if
+            so, exactly how.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Button size="lg" asChild>
+            <BookCallButton size="lg" analytics="about_book_call" />
+            <Button size="lg" variant="outline-light" asChild>
               <Link href="/discover">
                 Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <BookCallButton size="lg" variant="outline-light" analytics="about_book_call">
-              Book a 30-min intro
-            </BookCallButton>
           </div>
         </div>
       </section>
