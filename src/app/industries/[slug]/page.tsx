@@ -401,7 +401,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
 
             {remainingFunctions.length > 0 && (
               <details className="group border-t border-divider-dark pt-10">
-                <summary className="flex cursor-pointer list-none flex-col gap-4 border border-divider-dark bg-bone/[0.04] p-6 transition-colors hover:bg-bone/[0.08] sm:flex-row sm:items-center sm:justify-between">
+                <summary className="flex cursor-pointer list-none items-start justify-between gap-4 border border-divider-dark bg-bone/[0.04] p-6 transition-colors hover:bg-bone/[0.08] sm:items-center">
                   <span>
                     <span className="overline text-[10px] text-brass-light">Full Value Chain</span>
                     <span className="mt-2 block text-h3 text-bone">
@@ -468,7 +468,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             </div>
             <div className="mt-12 lg:col-span-7 lg:mt-0">
               <p className="text-body-lg text-warm-gray">{industry.forgeApplication}</p>
-              <div className="mt-10 grid grid-cols-3 gap-8 border-t border-divider pt-8">
+              <div className="mt-10 grid grid-cols-1 gap-6 border-t border-divider pt-8 sm:grid-cols-3 sm:gap-8">
                 <div>
                   <p className="metric-lg text-brass">4 wks</p>
                   <p className="mt-2 text-body-sm text-warm-gray">Forge Diagnostic</p>

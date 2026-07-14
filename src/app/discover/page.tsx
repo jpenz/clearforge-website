@@ -1242,7 +1242,7 @@ export default function DiscoverPage() {
                   type="submit"
                   size="lg"
                   disabled={!websiteUrl.trim() || !companyName.trim() || !workEmail.trim()}
-                  className="w-full sm:col-span-2"
+                  className="w-full sm:col-span-2 disabled:bg-[#1B2E4E] disabled:text-bone/70 disabled:opacity-100"
                 >
                   Analyze <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>

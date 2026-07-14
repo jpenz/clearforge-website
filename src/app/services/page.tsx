@@ -186,8 +186,10 @@ export default function ServicesPage() {
             {forgeProducts.map((product, i) => (
               <StaggerItem key={product.name}>
                 <div
-                  className={`relative h-full border-t-4 bg-parchment p-6 lg:p-8 ${
-                    product.featured ? 'border-brass' : 'border-transparent'
+                  className={`relative h-full bg-parchment p-6 lg:border-t-4 lg:p-8 ${
+                    product.featured
+                      ? 'border-2 border-brass lg:border-2 lg:border-t-4'
+                      : 'border border-divider lg:border-x-0 lg:border-b-0 lg:border-t-4 lg:border-transparent'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-3">

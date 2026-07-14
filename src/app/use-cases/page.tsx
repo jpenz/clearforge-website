@@ -220,10 +220,10 @@ export default function UseCasesPage() {
         </div>
       </section>
 
-      <section className="dark-section noise-texture py-24 lg:py-40">
+      <section className="border-t border-divider bg-recessed py-20 lg:py-28">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">Find the first AI build worth shipping.</h2>
-          <p className="mt-6 text-body-lg text-stone">
+          <h2 className="text-display">Find the first AI build worth shipping.</h2>
+          <p className="mt-6 text-body-lg text-warm-gray">
             Start with the work already slowing the business down. We will map the growth, speed,
             quality, service, and margin opportunities worth building first.
           </p>

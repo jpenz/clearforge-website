@@ -60,7 +60,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             playsInline
             preload="metadata"
             poster={service.heroBg}
-            className="absolute inset-0 h-full w-full scale-110 object-cover opacity-40 blur-[10px] saturate-[0.85]"
+            className="absolute inset-0 h-full w-full scale-110 object-cover opacity-40 blur-[10px] saturate-50"
           >
             <source src={`/videos/${slug}.mp4`} type="video/mp4" />
           </video>

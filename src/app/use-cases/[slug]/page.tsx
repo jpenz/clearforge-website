@@ -270,10 +270,10 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-      <section className="dark-section noise-texture py-24 lg:py-40">
+      <section className="border-t border-divider bg-recessed py-20 lg:py-28">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">Find where this belongs in your company.</h2>
-          <p className="mt-6 text-body-lg text-stone">
+          <h2 className="text-display">Find where this belongs in your company.</h2>
+          <p className="mt-6 text-body-lg text-warm-gray">
             The fastest path is choosing one workflow worth fixing, building the controls around it,
             and training your team into the new cadence.
           </p>
@@ -283,7 +283,7 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
                 Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline-light" asChild>
+            <Button size="lg" variant="secondary" asChild>
               <Link href="/use-cases">View All Use Cases</Link>
             </Button>
           </div>

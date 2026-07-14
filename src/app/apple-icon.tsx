@@ -13,14 +13,14 @@ export default function AppleIcon() {
         justifyContent: 'center',
         width: '100%',
         height: '100%',
-        background: '#060B14',
+        background: '#081826',
         borderRadius: '36px',
       }}
     >
       <svg viewBox="0 0 32 32" fill="none" width="120" height="120">
-        <path d="M8 22V10l4-2v16l-4-2Z" fill="#4D8DE8" opacity="0.9" />
-        <path d="M14 20V12l4-2v12l-4-2Z" fill="#4D8DE8" opacity="0.7" />
-        <path d="M20 18V14l4-2v8l-4-2Z" fill="#4D8DE8" opacity="0.5" />
+        <path d="M8 22V10l4-2v16l-4-2Z" fill="#7A97FF" opacity="0.9" />
+        <path d="M14 20V12l4-2v12l-4-2Z" fill="#7A97FF" opacity="0.7" />
+        <path d="M20 18V14l4-2v8l-4-2Z" fill="#7A97FF" opacity="0.5" />
       </svg>
     </div>,
     { ...size },

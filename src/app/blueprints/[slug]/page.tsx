@@ -74,7 +74,7 @@ export default async function BlueprintDetailPage({
                 {blueprint.truthLabel}
               </p>
             </div>
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
               <Button size="lg" asChild>
                 <Link href="/discover">
                   Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />

@@ -294,7 +294,7 @@ export default function ScorecardResultsPage() {
             {result.pillarScores.map((ps) => (
               <div
                 key={ps.key}
-                className={`border p-4 sm:p-6 ${ps.key === result.weakestPillar ? 'border-error/30 bg-error/5' : ps.key === result.strongestPillar ? 'border-success/30 bg-success/5' : 'border-divider bg-surface'}`}
+                className={`border p-4 sm:p-6 ${ps.key === result.weakestPillar ? 'border-anthracite/40 bg-anthracite/[0.04]' : ps.key === result.strongestPillar ? 'border-brass/40 bg-brass/5' : 'border-divider bg-surface'}`}
               >
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-sm font-bold text-anthracite">{ps.name}</h3>
@@ -302,7 +302,7 @@ export default function ScorecardResultsPage() {
                 </div>
                 <PillarBar
                   percentage={ps.percentage}
-                  color={ps.key === result.weakestPillar ? 'bg-error' : 'bg-brass'}
+                  color={ps.key === result.weakestPillar ? 'bg-anthracite' : 'bg-brass'}
                 />
               </div>
             ))}

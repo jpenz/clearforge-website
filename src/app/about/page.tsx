@@ -114,7 +114,7 @@ export default function AboutPage() {
               <p className="mt-6 text-body text-warm-gray">
                 Based in Southeast Michigan. Serving clients nationally.
               </p>
-              <div className="mt-10 grid grid-cols-3 gap-8 border-t border-divider pt-8">
+              <div className="mt-10 grid grid-cols-1 gap-6 border-t border-divider pt-8 sm:grid-cols-3 sm:gap-8">
                 <div>
                   <p className="metric text-brass">Bain &amp; Company</p>
                   <p className="mt-1 text-body-sm text-warm-gray">Strategy &amp; AI practice</p>
@@ -164,7 +164,7 @@ export default function AboutPage() {
                     Named on your team before we write a line of code
                   </p>
                 </div>
-                <div>
+                <div className="col-span-2 sm:col-span-1">
                   <p className="metric-lg text-brass">100%</p>
                   <p className="mt-2 text-body-sm text-warm-gray">
                     You own everything we build — code, docs, runbooks
@@ -215,17 +215,17 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* — CTA — */}
-      <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-36">
+      {/* — CTA — light band; the global footer band supplies the dark close */}
+      <section className="border-t border-divider bg-recessed py-20 lg:py-28">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">One conversation to find&nbsp;out.</h2>
-          <p className="mt-6 text-body-lg text-stone">
+          <h2 className="text-display">One conversation to find&nbsp;out.</h2>
+          <p className="mt-6 text-body-lg text-warm-gray">
             Bring one stuck workflow. We will be honest about whether it is worth building — and if
             so, exactly how.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <BookCallButton size="lg" analytics="about_book_call" />
-            <Button size="lg" variant="outline-light" asChild>
+            <Button size="lg" variant="secondary" asChild>
               <Link href="/discover">
                 Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>

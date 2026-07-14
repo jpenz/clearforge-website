@@ -14,7 +14,7 @@ export default async function OGImage() {
         justifyContent: 'center',
         width: '100%',
         height: '100%',
-        background: 'linear-gradient(145deg, #060B14 0%, #0A0F1A 50%, #111827 100%)',
+        background: 'linear-gradient(145deg, #081826 0%, #0B1B2B 55%, #0F2739 100%)',
         padding: '60px 80px',
         fontFamily: 'system-ui, sans-serif',
         position: 'relative',
@@ -28,7 +28,7 @@ export default async function OGImage() {
           left: 0,
           right: 0,
           height: '4px',
-          background: 'linear-gradient(90deg, #4D8DE8, #0E5DC2, transparent)',
+          background: 'linear-gradient(90deg, #7A97FF, #1F4CDB, transparent)',
         }}
       />
 
@@ -57,7 +57,7 @@ export default async function OGImage() {
           style={{
             width: '32px',
             height: '3px',
-            background: '#4D8DE8',
+            background: '#7A97FF',
             borderRadius: '2px',
           }}
         />
@@ -67,7 +67,7 @@ export default async function OGImage() {
             fontWeight: 600,
             letterSpacing: 0,
             textTransform: 'uppercase',
-            color: '#4D8DE8',
+            color: '#7A97FF',
           }}
         >
           AI Strategy & Execution
@@ -79,7 +79,7 @@ export default async function OGImage() {
         style={{
           fontSize: '72px',
           fontWeight: 700,
-          color: '#F1F5F9',
+          color: '#EDF1F4',
           lineHeight: 1.0,
           letterSpacing: 0,
           margin: 0,
@@ -93,7 +93,7 @@ export default async function OGImage() {
       <p
         style={{
           fontSize: '24px',
-          color: '#94A3B8',
+          color: '#8D9AA6',
           lineHeight: 1.5,
           marginTop: '20px',
           maxWidth: '600px',
@@ -116,14 +116,14 @@ export default async function OGImage() {
         <span
           style={{
             fontSize: '16px',
-            color: '#475569',
+            color: '#8D9AA6',
             fontWeight: 500,
           }}
         >
           clearforge.ai
         </span>
-        <div style={{ width: '1px', height: '16px', background: '#334155' }} />
-        <span style={{ fontSize: '16px', color: '#475569' }}>Mid-Market AI Transformation</span>
+        <div style={{ width: '1px', height: '16px', background: '#1C3040' }} />
+        <span style={{ fontSize: '16px', color: '#8D9AA6' }}>Mid-Market AI Transformation</span>
       </div>
 
       {/* Corner accent */}

@@ -321,10 +321,10 @@ export function CaseStudyStory({
       </section>
 
       {/* ═══ CTA ═══ */}
-      <section className="dark-section py-16 sm:py-20 lg:py-28">
+      <section className="border-t border-divider bg-recessed py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-10">
-          <h2 className="text-display text-bone">Want results like these?</h2>
-          <p className="mt-4 text-body-lg text-stone">
+          <h2 className="text-display">Want results like these?</h2>
+          <p className="mt-4 text-body-lg text-warm-gray">
             Every engagement starts with understanding your business. Not a pitch.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -333,7 +333,7 @@ export function CaseStudyStory({
                 Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline-light" asChild>
+            <Button size="lg" variant="secondary" asChild>
               <Link href="/case-studies">See More Case Studies</Link>
             </Button>
           </div>

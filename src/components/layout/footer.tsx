@@ -115,7 +115,7 @@ export function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-divider-dark pt-7 sm:flex-row">
-          <p className="metric text-[11px] text-stone">
+          <p className="metric text-center text-[11px] leading-relaxed text-stone sm:text-left">
             © {new Date().getFullYear()} ClearForge AI · Sterling Heights, MI · All rights reserved
           </p>
           <div className="flex gap-6">

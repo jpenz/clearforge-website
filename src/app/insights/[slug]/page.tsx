@@ -327,21 +327,15 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
           <div className="mx-auto max-w-3xl px-6 lg:px-10">
             <p className="overline">FAQ</p>
             <h2 className="mt-6 text-display">Common questions.</h2>
-            <div className="mt-12 grid gap-3">
+            <div className="mt-12">
               {insight.faqs.map((faq, i) => (
-                <details
-                  key={faq.question}
-                  open={i === 0}
-                  className="group border border-divider bg-warm-white p-5"
-                >
-                  <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-h4">
-                    <span>{faq.question}</span>
-                    <span className="mt-1 text-brass transition-transform group-open:rotate-45">
-                      +
-                    </span>
-                  </summary>
-                  <p className="mt-4 text-body text-warm-gray">{faq.answer}</p>
-                </details>
+                <div key={faq.question}>
+                  <div className="py-8">
+                    <h3 className="text-h4">{faq.question}</h3>
+                    <p className="mt-3 text-body text-warm-gray">{faq.answer}</p>
+                  </div>
+                  {i < insight.faqs.length - 1 && <div className="h-px bg-divider" />}
+                </div>
               ))}
             </div>
           </div>
@@ -362,7 +356,7 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
                     className="group block border-t border-divider py-8 transition-colors hover:bg-parchment"
                   >
                     <span className="text-body-sm font-medium text-brass">{r.category}</span>
-                    <h3 className="mt-2 text-h3 group-hover:text-brass transition-colors">
+                    <h3 className="mt-2 font-display text-[1.4rem] font-medium leading-snug tracking-[-0.01em] transition-colors group-hover:text-brass">
                       {r.title}
                     </h3>
                     <p className="mt-2 text-body text-warm-gray">{r.excerpt}</p>
