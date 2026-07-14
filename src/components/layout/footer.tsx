@@ -37,7 +37,9 @@ const columns = [
     title: 'Firm',
     links: [
       { href: '/about', label: 'About' },
+      { href: '/how-we-work', label: 'How we work' },
       { href: '/pricing', label: 'Pricing' },
+      { href: '/security', label: 'Security' },
       { href: '/contact', label: 'Contact' },
     ],
   },

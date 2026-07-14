@@ -39,6 +39,7 @@ const PRODUCTS = [
 ] as const;
 
 const RESOURCES = [
+  { href: '/how-we-work', label: 'How we work' },
   { href: '/blueprints', label: 'Blueprints' },
   { href: '/insights', label: 'Insights' },
   { href: '/case-studies', label: 'Case studies' },
