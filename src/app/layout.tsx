@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { DM_Mono, Fraunces, Hanken_Grotesk } from 'next/font/google';
+import { DM_Mono, Hanken_Grotesk, Newsreader } from 'next/font/google';
 import { AnalyticsTracker } from '@/components/analytics/analytics-tracker';
 import { GoogleAnalytics } from '@/components/analytics/google-analytics';
 import { PlausibleAnalytics } from '@/components/analytics/plausible-analytics';
@@ -22,11 +22,14 @@ import {
 } from '@/lib/metadata';
 import './globals.css';
 
-// V11 tri-stack: Fraunces serif display (italic accent words) ·
+// V11 tri-stack: Newsreader serif display (sharp editorial, italic accent
+// words — the McKinsey/Financier register, not a display-wonk face) ·
 // Hanken Grotesk body/UI · DM Mono for data, eyebrows, and SKU tags.
-const fraunces = Fraunces({
+// NOTE: css var name kept as --font-fraunces from the prior stack to avoid
+// churning every font-family reference; it now resolves to Newsreader.
+const serifDisplay = Newsreader({
   subsets: ['latin'],
-  axes: ['opsz', 'SOFT', 'WONK'],
+  axes: ['opsz'],
   style: ['normal', 'italic'],
   variable: '--font-fraunces',
   display: 'swap',
@@ -83,7 +86,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <link rel="preconnect" href="https://api.anthropic.com" crossOrigin="anonymous" />
       </head>
       <body
-        className={`${fraunces.variable} ${hanken.variable} ${dmMono.variable} font-sans antialiased`}
+        className={`${serifDisplay.variable} ${hanken.variable} ${dmMono.variable} font-sans antialiased`}
       >
         <JsonLdScript
           data={[

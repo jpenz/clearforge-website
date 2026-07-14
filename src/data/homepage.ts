@@ -92,8 +92,8 @@ export const marqueeItems = [
 export const skuIntro = {
   eyebrow: '01 — The Forge System',
   headlineLead: 'Not a methodology.',
-  headlineAccent: 'Working software.',
-  lede: 'Four named systems run every engagement. You can try two of them right now, free.',
+  headlineAccent: 'Working AI systems.',
+  lede: 'Agents, automations, and dashboards your team actually works in — actions with a human in the loop, models that retrain and improve every month, results measured in the open. Two of them you can try right now, free.',
 };
 
 export const skus = [
