@@ -72,8 +72,8 @@ export function Header() {
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-all duration-300',
-        scrolled ? 'border-b border-divider bg-parchment/92 backdrop-blur-xl' : 'bg-parchment/0',
+        'fixed inset-x-0 top-0 z-50 border-b bg-parchment/95 backdrop-blur-xl transition-shadow duration-300',
+        scrolled ? 'border-divider shadow-[0_1px_12px_rgba(11,27,43,0.06)]' : 'border-divider/60',
       )}
     >
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-10">

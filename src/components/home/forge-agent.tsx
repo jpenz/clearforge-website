@@ -132,7 +132,7 @@ export function ForgeAgent() {
         {/* IDLE */}
         {status === 'idle' && (
           <form onSubmit={analyze} className="mt-4">
-            <h2 className="text-h4 text-anthracite">{heroAgent.heading}</h2>
+            <p className="text-h4 text-anthracite">{heroAgent.heading}</p>
             <p className="mt-1.5 text-body-sm text-warm-gray">{heroAgent.prompt}</p>
             <div className="mt-4 flex items-center rounded-[6px] border border-divider bg-parchment transition-colors focus-within:border-brass">
               <span className="metric select-none pl-3 text-xs text-warm-gray">https://</span>
@@ -188,7 +188,7 @@ export function ForgeAgent() {
               <p className="metric text-[11px] uppercase tracking-[0.14em] text-brass">
                 Priority play
               </p>
-              <h3 className="mt-1.5 text-h4 text-anthracite">{result.priority.title}</h3>
+              <p className="mt-1.5 text-h4 text-anthracite">{result.priority.title}</p>
               <dl className="mt-3 space-y-2.5">
                 {[
                   { k: 'The gap', v: result.priority.painpoint },
