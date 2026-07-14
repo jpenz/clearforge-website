@@ -4,6 +4,7 @@ import { ArrowRight, Clock, Mail, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { BookingInline } from '@/components/booking/book-call';
 import { Button } from '@/components/ui/button';
 import { trackEvent } from '@/lib/analytics';
 
@@ -25,9 +26,9 @@ const urgencyOptions = [
 ];
 
 const expectations = [
-  'James responds within one business day, usually same day.',
-  'A 15-minute confidential diagnostic call focused on one workflow.',
-  'An honest assessment of the workflow, owner, data, and engagement fit.',
+  'A confidential 30-minute working session — with James, not an SDR.',
+  'We pressure-test one workflow: owner, data path, baseline, control points.',
+  'An honest read on whether it is worth building, and what it would take.',
   'If we are not the right fit, we will tell you and recommend who is.',
 ];
 
@@ -139,22 +140,53 @@ export default function ContactPage() {
             Let us pressure-test whether it is worth building.
           </h1>
           <p className="mt-6 max-w-xl text-body-lg text-stone">
-            No sales theater. No pressure. A straightforward conversation about the workflow, owner,
-            data path, baseline, and control points you would need before custom AI belongs in
-            production.
+            No sales theater. No pressure. Pick a time below — a straightforward 30-minute
+            conversation about the workflow, owner, data path, baseline, and control points you
+            would need before custom AI belongs in production.
           </p>
         </div>
       </section>
 
-      <section className="bg-parchment py-24 lg:py-40">
+      {/* Primary conversion — book directly, zero back-and-forth */}
+      <section id="book" className="bg-parchment py-20 lg:py-28">
+        <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-20">
+            <div className="lg:col-span-4">
+              <p className="overline">Step 1 — Pick a Time</p>
+              <h2 className="mt-6 text-h1">Book the 30-minute intro.</h2>
+              <p className="mt-5 text-body text-warm-gray">
+                Direct with James — the calendar invite and video link land in your inbox the moment
+                you book. Bring the one workflow that should run faster, cleaner, or with less
+                manual coordination.
+              </p>
+              <ol className="mt-8 space-y-3 border-t border-divider pt-6">
+                {expectations.map((item, i) => (
+                  <li key={item} className="flex items-start gap-3 text-body-sm text-warm-gray">
+                    <span className="metric text-sm text-brass shrink-0">{i + 1}.</span>
+                    {item}
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <div className="lg:col-span-8">
+              <BookingInline className="min-h-[620px] w-full border border-divider bg-surface" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-divider bg-parchment py-24 lg:py-32">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-20">
             {/* Left - Info */}
             <div className="lg:col-span-5">
-              <p className="overline">How We Engage</p>
+              <p className="overline">Prefer to Write First?</p>
               <h2 className="mt-6 text-display">
-                Direct access to James. Clear next step or a fast no.
+                Send the workflow. Same honest read, in writing.
               </h2>
+              <p className="mt-5 text-body text-warm-gray">
+                James responds within one business day, usually same day.
+              </p>
 
               <div className="mt-12 space-y-8">
                 <div className="flex items-start gap-4 border-t border-divider pt-6">
@@ -187,18 +219,17 @@ export default function ContactPage() {
                 <div className="flex items-start gap-4 border-t border-divider pt-6">
                   <Clock className="mt-0.5 h-5 w-5 text-brass shrink-0" />
                   <div>
-                    <h3 className="text-h4">What to Expect</h3>
-                    <ol className="mt-3 space-y-3">
-                      {expectations.map((item, i) => (
-                        <li
-                          key={item}
-                          className="flex items-start gap-3 text-body-sm text-warm-gray"
-                        >
-                          <span className="metric text-sm text-brass shrink-0">{i + 1}.</span>
-                          {item}
-                        </li>
-                      ))}
-                    </ol>
+                    <h3 className="text-h4">Rather Talk Now?</h3>
+                    <p className="mt-1 text-body text-warm-gray">
+                      Skip the form —{' '}
+                      <a
+                        href="#book"
+                        className="text-brass hover:text-brass-hover transition-colors"
+                      >
+                        grab a time on the calendar above
+                      </a>{' '}
+                      and the invite is sent instantly.
+                    </p>
                   </div>
                 </div>
               </div>

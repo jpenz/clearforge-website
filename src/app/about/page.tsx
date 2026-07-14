@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { BookCallButton } from '@/components/booking/book-call';
 import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
 import { Button } from '@/components/ui/button';
 import { createMetadata } from '@/lib/metadata';
@@ -191,10 +192,7 @@ export default function AboutPage() {
       {/* — CTA — */}
       <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2
-            className="text-display text-bone"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
+          <h2 className="text-display text-bone" style={{ fontFamily: 'var(--font-display)' }}>
             One conversation to find&nbsp;out.
           </h2>
           <p className="mt-6 text-body-lg text-stone">
@@ -207,9 +205,9 @@ export default function AboutPage() {
                 Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline-light" asChild>
-              <Link href="/contact">Book a 15-Min Diagnostic Call</Link>
-            </Button>
+            <BookCallButton size="lg" variant="outline-light" analytics="about_book_call">
+              Book a 30-min intro
+            </BookCallButton>
           </div>
         </div>
       </section>

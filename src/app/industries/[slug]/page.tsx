@@ -48,6 +48,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { BookCallButton } from '@/components/booking/book-call';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
 import { Button } from '@/components/ui/button';
@@ -177,10 +178,7 @@ function ValueChainFunctionRow({ fn, index }: { fn: ValueChainFunction; index: n
             <span className="metric text-sm text-brass">{String(index + 1).padStart(2, '0')}</span>
             <Icon className="h-4 w-4 text-brass" />
           </div>
-          <h3
-            className="mt-3 text-h2 text-bone"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
+          <h3 className="mt-3 text-h2 text-bone" style={{ fontFamily: 'var(--font-display)' }}>
             {fn.function}
           </h3>
           <p className="mt-4 text-body text-stone max-w-md">{fn.description}</p>
@@ -555,10 +553,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
         className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40 scroll-mt-24"
       >
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2
-            className="text-display text-bone"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
+          <h2 className="text-display text-bone" style={{ fontFamily: 'var(--font-display)' }}>
             Get a custom value chain for your business.
           </h2>
           <p className="mt-6 text-body-lg text-stone">
@@ -571,9 +566,9 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                 Generate My Custom Value Chain <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline-light" asChild>
-              <Link href="/contact">Book a 15-Min Diagnostic Call</Link>
-            </Button>
+            <BookCallButton size="lg" variant="outline-light" analytics="industry_detail_book_call">
+              Book a 30-min intro
+            </BookCallButton>
           </div>
         </div>
       </section>

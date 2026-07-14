@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { BookCallButton } from '@/components/booking/book-call';
 import { SectionReveal } from '@/components/home/homepage-animations';
 import { MetricCounter } from '@/components/home/metric-counter';
 import { Button } from '@/components/ui/button';
@@ -28,11 +29,9 @@ export function CharcoalBand() {
                   {charcoal.primaryCta.label} <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline-light" asChild>
-                <Link href={charcoal.secondaryCta.href} data-analytics="home_charcoal_secondary">
-                  {charcoal.secondaryCta.label}
-                </Link>
-              </Button>
+              <BookCallButton size="lg" variant="outline-light" analytics="home_charcoal_book_call">
+                {charcoal.secondaryCta.label}
+              </BookCallButton>
             </div>
           </SectionReveal>
 

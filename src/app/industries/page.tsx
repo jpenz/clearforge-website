@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { BookCallButton } from '@/components/booking/book-call';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
 import { Button } from '@/components/ui/button';
@@ -100,10 +101,7 @@ export default function IndustriesIndexPage() {
                     <p className="overline">
                       {String(ci + 1).padStart(2, '0')} · {category}
                     </p>
-                    <h2
-                      className="mt-4 text-h1"
-                      style={{ fontFamily: 'var(--font-display)' }}
-                    >
+                    <h2 className="mt-4 text-h1" style={{ fontFamily: 'var(--font-display)' }}>
                       {category}
                     </h2>
                   </div>
@@ -179,9 +177,9 @@ export default function IndustriesIndexPage() {
                     Generate My Custom Value Chain <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button size="lg" variant="secondary" asChild>
-                  <Link href="/contact">Book a 15-Min Diagnostic Call</Link>
-                </Button>
+                <BookCallButton size="lg" variant="secondary" analytics="industries_book_call">
+                  Book a 30-min intro
+                </BookCallButton>
               </div>
             </div>
           </div>
@@ -191,10 +189,7 @@ export default function IndustriesIndexPage() {
       {/* — Final CTA — */}
       <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2
-            className="text-display text-bone"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
+          <h2 className="text-display text-bone" style={{ fontFamily: 'var(--font-display)' }}>
             Where would AI move your P&amp;L first?
           </h2>
           <p className="mt-6 text-body-lg text-stone">

@@ -12,6 +12,7 @@ import {
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { BookCallButton } from '@/components/booking/book-call';
 import { Button } from '@/components/ui/button';
 import { calculateResults, type PillarKey, type ScorecardResult } from '@/lib/scorecard';
 
@@ -358,11 +359,9 @@ export default function ScorecardResultsPage() {
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10 text-center">
           <h2 className="text-display text-anthracite">Turn this into a build decision.</h2>
           <div className="mt-8 flex gap-4 flex-wrap justify-center">
-            <Button size="lg" asChild>
-              <Link href="/contact">
-                Book a 15-Min Diagnostic Call <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+            <BookCallButton size="lg" analytics="scorecard_results_book_call">
+              Book a 30-min intro <ArrowRight className="ml-2 h-4 w-4" />
+            </BookCallButton>
             <Button variant="secondary" size="lg" asChild>
               <Link href="/discover">Generate AI Value Map</Link>
             </Button>

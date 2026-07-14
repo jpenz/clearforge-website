@@ -1,6 +1,7 @@
 import { ArrowRight, CheckCircle2, Gauge, Layers3, Shield, Workflow } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { BookCallButton } from '@/components/booking/book-call';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { FadeIn, Stagger, StaggerItem } from '@/components/ui/animate';
 import { Button } from '@/components/ui/button';
@@ -344,9 +345,9 @@ export default function ServicesPage() {
                 Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline-light" asChild>
-              <Link href="/contact">Book a 15-Min Diagnostic Call</Link>
-            </Button>
+            <BookCallButton size="lg" variant="outline-light" analytics="services_book_call">
+              Book a 30-min intro
+            </BookCallButton>
           </div>
         </div>
       </section>

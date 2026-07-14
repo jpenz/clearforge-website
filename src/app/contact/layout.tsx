@@ -1,7 +1,7 @@
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-  title: 'Contact ClearForge — Book a 15-Min Diagnostic Call',
+  title: 'Contact ClearForge — Book a 30-Min Intro Call',
   description:
     'Get in touch with ClearForge to discuss a custom AI strategy, build, or operating workflow. Schedule a confidential discussion with our senior team.',
   path: '/contact',

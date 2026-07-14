@@ -37,14 +37,17 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       // Allow scripts from self + Next.js inline scripts (required for hydration)
+      // + Cal.com booking embed (app.cal.com serves the embed runtime)
       isProduction
-        ? "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://plausible.io"
-        : "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://plausible.io",
+        ? "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://plausible.io https://app.cal.com https://cal.com"
+        : "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://plausible.io https://app.cal.com https://cal.com",
       // Browser code calls ClearForge APIs; LLM and email providers stay server-side.
-      "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://region1.google-analytics.com https://plausible.io",
-      // Images: self + data URIs + Supabase storage
-      "img-src 'self' data: blob: https://*.supabase.co https://www.google-analytics.com",
-      "frame-src 'self'",
+      // Cal.com embed talks to its API from the client.
+      "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://region1.google-analytics.com https://plausible.io https://app.cal.com https://api.cal.com https://cal.com",
+      // Images: self + data URIs + Supabase storage + Cal.com avatars
+      "img-src 'self' data: blob: https://*.supabase.co https://www.google-analytics.com https://app.cal.com https://cal.com",
+      // Cal.com booking iframe
+      "frame-src 'self' https://app.cal.com https://cal.com",
       "frame-ancestors 'self'",
       "base-uri 'self'",
       "form-action 'self'",
