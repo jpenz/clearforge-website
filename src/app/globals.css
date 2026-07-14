@@ -74,13 +74,15 @@ body {
   overflow-x: hidden;
 }
 
-/* ── Headings — Fraunces at medium weight, never ultra-bold ── */
+/* ── Headings — Fraunces at medium weight, never ultra-bold ──
+   No `color` here: headings inherit body ink (or .dark-section bone), so
+   text-* utilities stay able to recolor them (unlayered element rules
+   would otherwise beat Tailwind's layered utilities everywhere). */
 h1, h2 {
   font-family: var(--font-fraunces), Georgia, serif;
   line-height: 1.04;
   letter-spacing: -0.015em;
   font-weight: 550;
-  color: var(--color-anthracite);
 }
 
 h3, h4, h5, h6 {
@@ -88,7 +90,6 @@ h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.28;
   letter-spacing: -0.01em;
-  color: var(--color-anthracite);
 }
 
 /* ── Display scale — serif display, big + tight ── */
