@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import { JetBrains_Mono } from 'next/font/google';
-import { GeistSans } from 'geist/font/sans';
+import { DM_Mono, Fraunces, Hanken_Grotesk } from 'next/font/google';
 import { AnalyticsTracker } from '@/components/analytics/analytics-tracker';
 import { GoogleAnalytics } from '@/components/analytics/google-analytics';
 import { PlausibleAnalytics } from '@/components/analytics/plausible-analytics';
@@ -23,11 +22,26 @@ import {
 } from '@/lib/metadata';
 import './globals.css';
 
-// V9 rebrand: all-sans. Geist for display + body, JetBrains Mono for numerals.
-const jetbrainsMono = JetBrains_Mono({
+// V11 tri-stack: Fraunces serif display (italic accent words) ·
+// Hanken Grotesk body/UI · DM Mono for data, eyebrows, and SKU tags.
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  axes: ['opsz', 'SOFT', 'WONK'],
+  style: ['normal', 'italic'],
+  variable: '--font-fraunces',
+  display: 'swap',
+});
+
+const hanken = Hanken_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-hanken',
+  display: 'swap',
+});
+
+const dmMono = DM_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
-  variable: '--font-jetbrains-mono',
+  variable: '--font-dm-mono',
   display: 'swap',
 });
 
@@ -68,7 +82,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <link rel="dns-prefetch" href="https://api.perplexity.ai" />
         <link rel="preconnect" href="https://api.anthropic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${GeistSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <body
+        className={`${fraunces.variable} ${hanken.variable} ${dmMono.variable} font-sans antialiased`}
+      >
         <JsonLdScript
           data={[
             organizationJsonLd,

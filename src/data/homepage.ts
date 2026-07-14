@@ -1,160 +1,125 @@
 /**
- * Homepage copy + data — V9 redesign (design_handoff/).
+ * Homepage copy + data — V11 (clean-slate re-brand, precision-workshop voice).
  * Single source of truth for the homepage section components.
  *
- * Reconciliation notes (per handoff README "reconcile against @/data"):
- * - Engagements pull from forge-products.ts (the /pricing source of truth),
- *   NOT the prototype's higher placeholder prices.
- * - Founder facts use the established repo narrative (ex-Bain · EY · Capgemini,
- *   AI Automation practice), NOT the prototype's Bain-only CV.
- * - Case metrics use the real industrial-manufacturer case study numbers.
- * - Market-gap stats (79%/11%/68pt) are from the May 2026 Market Study,
- *   matching the prototype's designed thesis section.
+ * Voice rules: confident, concrete, zero hype. Every claim pairs a number
+ * with a name. SKU taxonomy (Forge Intelligence / Scorecard / Blueprints /
+ * Method) is the architecture. Engagement prices always mirror
+ * forge-products.ts (the /pricing source of truth).
  */
 
-// ── Hero ──────────────────────────────────────────────────────────────────
+// ── Hero ────────────────────────────────────────────────────────────────
 export const hero = {
-  eyebrow: 'AI consulting for mid-market & PE-backed companies',
-  headline: ['AI that ships.', 'ROI you can prove.'], // 2nd line's last word gets accent
-  sub: 'We find your highest-value workflows, build the AI, and deploy it to production in 10–14 weeks — then track the ROI. Transparent pricing, no lock-in.',
-  secondaryCta: { label: 'See engagements & pricing', href: '#engagements' },
-  stats: [
-    { value: '79% → 11%', label: 'Claim AI adoption vs. run agents in production' },
-    { value: '$11B', label: 'AI consulting market, growing 26% YoY' },
-    { value: '47%', label: 'Of PE funds increasing AI spend in 2026' },
-    { value: '10–14 wk', label: 'Kickoff to live production system' },
-  ],
+  eyebrow: 'AI strategy · build · operations — for mid-market & PE',
+  // Rendered as: "AI that actually <em>ships</em>."
+  headlineLead: 'AI that actually',
+  headlineAccent: 'ships',
+  sub: 'ClearForge finds your highest-value workflows, builds production AI, and proves the ROI — in 10–14 weeks, with pricing you can see.',
+  primaryCta: { label: 'Get your readiness score', href: '/scorecard' },
+  secondaryCta: { label: 'See engagements & pricing', href: '/pricing' },
 };
 
-// The embedded Forge Intelligence agent that lives in the hero card.
-// The visitor enters their site IN the card and it analyzes live — the card
-// IS the agent, not a passive scorecard sitting next to a separate input.
+// The live agent in the hero (browser-chrome frame). Card copy only —
+// behavior lives in components/home/forge-agent.tsx.
 export const heroAgent = {
-  name: 'Forge Intelligence',
-  heading: 'Score your AI readiness in 60 seconds.',
-  prompt: 'Enter your website — our agent reads it and shows where AI pays off first.',
+  name: 'Forge Intelligence™',
+  url: 'clearforge.ai/agent',
+  heading: 'Watch it work on your company.',
+  prompt: 'Enter your website. The agent reads it and drafts your first AI play — live.',
   cta: 'Analyze',
-  note: 'Free · instant · no signup',
-  gets: "You'll get a 0–100 readiness band and your top 3 AI opportunities.",
+  note: 'Free · ~60 seconds · no signup',
 };
 
-// ── Pillar strip — objection-neutralizing bullets, by objection frequency ──
-export const pillars = [
+// ── Trust marquee (slot #2) — numbers tied to names, anonymized-safe ────
+export const marqueeItems = [
+  { stat: '1,181', label: 'qualified opportunities · $4B industrial conglomerate' },
+  { stat: '99.8%', label: 'product-capability match rate · sales intelligence platform' },
+  { stat: '89%', label: 'of ClearForge projects reach production' },
+  { stat: '<90 days', label: 'to first measured ROI · median engagement' },
+  { stat: '631+', label: 'AI sales playbooks generated · industrial client' },
+  { stat: '17', label: 'industry value chains mapped · 300+ activities' },
+  { stat: '$20B+', label: 'investment value in top-10 surfaced opportunities' },
+];
+
+// ── The Forge System — four SKUs as product blocks (one bento) ──────────
+export const skuIntro = {
+  eyebrow: '01 — The Forge System',
+  headlineLead: 'Not a methodology.',
+  headlineAccent: 'Working software.',
+  lede: 'Four named systems run every engagement. You can try two of them right now, free.',
+};
+
+export const skus = [
   {
-    objection: 'Pilots that never ship',
-    rebuttal:
-      'We define “live” up front and build to production criteria — not another POC that dies in a deck.',
+    id: 'intelligence',
+    tag: 'FORGE-INTEL',
+    name: 'Forge Intelligence™',
+    desc: 'A live diagnostic agent. Paste a URL — it reads the business and drafts a readiness band plus the top three AI plays in about a minute.',
+    stat: '~60s',
+    statLabel: 'to first insight',
+    href: '/discover',
+    cta: 'Run the agent',
   },
   {
-    objection: 'No one can prove the ROI',
-    rebuttal:
-      'We baseline your KPIs on day one and track every dollar of impact through launch and beyond.',
+    id: 'scorecard',
+    tag: 'FORGE-SCORE',
+    name: 'Forge Scorecard™',
+    desc: 'A 20-question production-readiness score across five pillars. Benchmarked against operators at your scale — realistic, not flattering.',
+    stat: '0–100',
+    statLabel: 'readiness score',
+    href: '/scorecard',
+    cta: 'Take the scorecard',
   },
   {
-    objection: 'We’ll be locked into a vendor',
-    rebuttal:
-      'You own the code, the models, and the runbooks. Hand-built in your stack, yours to keep.',
+    id: 'blueprints',
+    tag: 'FORGE-BP',
+    name: 'Forge Blueprints™',
+    desc: 'Deployment-ready system designs from real engagements — architecture, agents, integrations, and the KPIs each one moves.',
+    stat: '8',
+    statLabel: 'published blueprints',
+    href: '/blueprints',
+    cta: 'Browse blueprints',
+  },
+  {
+    id: 'method',
+    tag: 'FORGE-METHOD',
+    name: 'Forge Method™',
+    desc: 'Diagnostic → Sprint → Scale. Fixed scope, published prices, production criteria defined up front, benefits tracked from day one.',
+    stat: '$15K',
+    statLabel: 'transparent start',
+    href: '/pricing',
+    cta: 'See the ladder',
   },
 ];
 
-// ── Production Gap ──────────────────────────────────────────────────────────
-export const productionGap = {
-  eyebrow: '01 — The thesis',
-  headline: ['79% are buying AI.', '11% are running it.'],
-  lede: 'The 68-point production gap is where strategy decks die — and where every ClearForge engagement begins.',
-  bars: [
-    { label: 'Claim AI adoption', value: 79, display: '79%', accent: false },
-    { label: 'Agents in production', value: 11, display: '11%', accent: true },
-    { label: 'Mid-market firms at full adoption', value: 15, display: '15%', accent: false },
-    { label: 'Agentic projects facing cancellation', value: 40, display: '40%', accent: true },
-  ],
-  delta: { label: 'The production gap', value: '68 pts' },
-  essays: [
-    {
-      eyebrow: 'Pilot purgatory',
-      body: 'POCs without production-readiness criteria. We define “live” up front and ship to it.',
-    },
-    {
-      eyebrow: 'Benefits void',
-      body: '72% of AI investments destroyed value because no one tracked it. We measure baselines on day one.',
-    },
-    {
-      eyebrow: 'Adoption gap',
-      body: 'Builders leave; teams revert. We ship runbooks, training, and an operating cadence — not a handoff slide.',
-    },
-  ],
+// ── Method ladder — framing only; tiers derive from forge-products.ts ───
+export const methodIntro = {
+  eyebrow: '02 — Forge Method™',
+  headlineLead: 'A transparent ladder,',
+  headlineAccent: 'priced in public.',
+  lede: 'Three engagements. Every one ships an artifact you own and credits forward into the next. No platform lock-in, no pyramid of juniors.',
 };
 
-// ── Engagements ─────────────────────────────────────────────────────────────
-// Section framing only — tier data is derived from forge-products.ts in the
-// component so prices stay in lockstep with /pricing.
-export const engagements = {
-  eyebrow: '02 — Engagements',
-  headline: ['A transparent ladder.', 'Mid-market budgets.'],
-  lede: 'Published prices, fixed scope. Each step ships an artifact you own and credits forward into the next.',
-  cta: { label: 'See full pricing & scope', href: '/pricing' },
+// ── Case metrics — numbers with names ───────────────────────────────────
+export const casesIntro = {
+  eyebrow: '03 — Evidence',
+  headlineLead: 'What changed, and',
+  headlineAccent: 'for whom.',
+  lede: 'Every engagement is measured against revenue, cost, or throughput. These are the receipts.',
 };
 
-// ── Operators ───────────────────────────────────────────────────────────────
-export const operators = {
-  eyebrow: '03 — Operators',
-  headline: ['The humans on', 'your engagement,', 'by name.'],
-  lede: 'ClearForge is staffed by senior operators only — Bain-grade strategists who also write production code. We don’t sell a methodology and pyramid a team underneath it. The signature on the proposal is the signature on the commit.',
-  points: [
-    {
-      k: 'No bench',
-      v: 'The senior operator who scopes the work runs the work. No handoff to a junior delivery team.',
-    },
-    {
-      k: 'No nameless team',
-      v: 'Every engagement lists the named humans on it. You meet them in week one.',
-    },
-    {
-      k: 'Hand-built systems',
-      v: 'Code, integrations, and runbooks are written by people — and reviewed by the operator who owns the outcome.',
-    },
-    {
-      k: 'Adoption is staffed',
-      v: 'A real human runs your training and 30-day post-launch reviews. Not a Notion doc and a Slack channel.',
-    },
+// ── Charcoal band — credibility + final CTA (the one dark moment) ───────
+export const charcoal = {
+  eyebrow: 'The firm',
+  headlineLead: 'Built by operators who',
+  headlineAccent: 'ship',
+  headlineTail: '.',
+  copy: 'ClearForge was founded by James Penz — 15 years across Bain, EY, and Capgemini, including Bain’s AI Automation practice. The person who scopes your engagement is the person who builds it. Senior operators only, named on every proposal.',
+  stats: [
+    { value: '89%', label: 'projects reach production — industry median is 16%' },
+    { value: '10–14 wk', label: 'kickoff to live production system' },
+    { value: '3', label: 'engagement tiers, prices published' },
   ],
-};
-
-// ── Selected work — real industrial-manufacturer case study ──────────────────
-export const selectedWork = {
-  eyebrow: '04 — Selected work',
-  headline: ['Sales intelligence', 'across 16 divisions.'],
-  lede: 'A $4B industrial conglomerate replaced manual, siloed prospecting with a production AI intelligence platform — calibrated to its own product lines.',
-  sector: 'Industrial · Sales Intelligence',
-  body: 'Proprietary agents scan capital projects and demand signals across 20+ states, feed reps scored opportunities daily, and surface cross-division white space — with KPIs tracked from day one.',
-  metrics: [
-    { value: '1,181', label: 'Qualified opportunities in 6 months' },
-    { value: '99.8%', label: 'Match to actual product capabilities' },
-    { value: '$20B+', label: 'Investment value in the top 10 alone' },
-  ],
-  vizTopLeft: 'SIGHTFORGE / R0.12',
-  vizTopRight: '20+ STATES',
-  vizBottomLeft: 'VALUE POOL — $ / WEEK',
-  caseSlug: 'industrial-manufacturer',
-};
-
-// ── Credibility band — reconciled to repo founder narrative ──────────────────
-export const credibility = {
-  eyebrow: '05 — Firm',
-  headline: ['A consultant', 'who builds.'],
-  copy: 'Founded by James Penz — 15 years across Bain, EY, and Capgemini, including Bain’s AI Automation practice, before building ClearForge. The team in the discovery call is the team that ships. Senior operators only.',
-  cv: [
-    { yr: '2024–', label: 'ClearForge.ai · Founder & Managing Partner' },
-    { yr: 'Prior', label: 'Bain · AI Automation practice' },
-    { yr: 'Prior', label: 'EY · Capgemini · Digital & Transformation' },
-  ],
-};
-
-// ── Final CTA ────────────────────────────────────────────────────────────────
-export const finalCta = {
-  eyebrow: '— Next step',
-  headline: ['Five questions.', 'Your production-readiness score in four minutes.'], // last line accent target = "production-readiness"
-  sub: 'See where you sit against the 11% running agents in production — and what to fix first.',
-  primaryCta: { label: 'Take the readiness score', href: '/scorecard' },
+  primaryCta: { label: 'Get your readiness score', href: '/scorecard' },
   secondaryCta: { label: 'Book a 30-min intro', href: '/contact' },
 };

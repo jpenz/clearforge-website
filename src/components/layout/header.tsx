@@ -1,269 +1,238 @@
 'use client';
 
-import { ArrowRight, ChevronRight, Menu, X } from 'lucide-react';
+import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-const NAV_SECTIONS = [
-  {
-    title: 'Industries',
-    links: [
-      { href: '/industries', label: 'All Industries' },
-      { href: '/industries/manufacturing', label: 'Manufacturing & Industrial' },
-      { href: '/industries/financial-services', label: 'Financial Services' },
-      { href: '/industries/healthcare', label: 'Healthcare' },
-      { href: '/industries/life-sciences', label: 'Life Sciences & Pharma' },
-      { href: '/industries/saas', label: 'SaaS & Technology' },
-      { href: '/industries/insurance', label: 'Insurance' },
-      { href: '/industries/private-equity', label: 'Private Equity' },
-      { href: '/industries/retail', label: 'Retail & E-commerce' },
-      { href: '/industries/wholesale-distribution', label: 'Wholesale & Distribution' },
-      { href: '/industries/logistics-transportation', label: 'Logistics & Transportation' },
-      { href: '/industries/professional-services', label: 'Professional Services' },
-      { href: '/industries/real-estate', label: 'Real Estate' },
-      { href: '/industries/construction-engineering', label: 'Construction & Engineering' },
-      { href: '/industries/consumer-products', label: 'Consumer Products' },
-      { href: '/industries/energy-utilities', label: 'Energy & Utilities' },
-      { href: '/industries/travel-hospitality', label: 'Travel & Hospitality' },
-      { href: '/industries/telecommunications', label: 'Telecommunications' },
-      { href: '/industries/automotive', label: 'Automotive & Mobility' },
-      { href: '/industries/education', label: 'Education' },
-    ],
-  },
-  {
-    title: 'Capabilities',
-    links: [
-      { href: '/use-cases', label: 'AI Use Cases' },
-      { href: '/services/ai-revenue-operations', label: 'AI Revenue Operations' },
-      { href: '/services/performance-improvement', label: 'Performance Improvement' },
-      { href: '/services/pe-value-creation', label: 'PE Value Creation' },
-      { href: '/services/custom-ai-agents', label: 'Custom AI Agents' },
-    ],
-  },
-  {
-    title: 'Use Cases',
-    links: [
-      { href: '/use-cases/ai-sales-pipeline-acceleration', label: 'AI Sales Pipeline' },
-      { href: '/use-cases/ai-customer-service-excellence', label: 'Customer Service AI' },
-      { href: '/use-cases/ai-operations-efficiency-system', label: 'Operations Efficiency' },
-      { href: '/use-cases/ai-knowledge-work-automation', label: 'Knowledge Work Automation' },
-      {
-        href: '/use-cases/ai-quality-control-exception-management',
-        label: 'Quality Exceptions',
-      },
-      { href: '/use-cases/pe-portfolio-ai-value-creation', label: 'PE Portfolio AI' },
-    ],
-  },
-  {
-    title: 'The Forge Method',
-    links: [
-      { href: '/services', label: 'How We Work' },
-      { href: '/operating-model', label: 'AI Operating Model' },
-      { href: '/blueprints', label: 'AI Build Blueprints' },
-      { href: '/pricing', label: 'Investment & Timeline' },
-      { href: '/discover', label: 'AI Value Map' },
-      { href: '/scorecard', label: 'ClearForge Diagnostic' },
-    ],
-  },
-  {
-    title: 'About',
-    links: [
-      { href: '/about', label: 'Our Story' },
-      { href: '/case-studies', label: 'Case Studies' },
-      { href: '/insights', label: 'Insights & Research' },
-      { href: '/contact', label: 'Contact' },
-    ],
-  },
-];
+/**
+ * V11 header — light (paper) nav; SKU taxonomy drives the Products menu.
+ * Desktop: hover/focus dropdowns. Mobile: full drawer. One ember CTA.
+ */
 
-const TOP_NAV = [
-  { href: '/industries', label: 'Industries', hasDropdown: true },
-  { href: '/services', label: 'Capabilities', hasDropdown: true },
-  { href: '/operating-model', label: 'Operating Model' },
-  { href: '/use-cases', label: 'Use Cases' },
-  { href: '/case-studies', label: 'Case Studies' },
+const PRODUCTS = [
+  {
+    href: '/discover',
+    tag: 'FORGE-INTEL',
+    label: 'Forge Intelligence™',
+    desc: 'Live diagnostic agent — paste a URL, get your first AI play.',
+  },
+  {
+    href: '/scorecard',
+    tag: 'FORGE-SCORE',
+    label: 'Forge Scorecard™',
+    desc: '20-question production-readiness score across five pillars.',
+  },
+  {
+    href: '/blueprints',
+    tag: 'FORGE-BP',
+    label: 'Forge Blueprints™',
+    desc: 'Deployment-ready system designs from real engagements.',
+  },
+  {
+    href: '/pricing',
+    tag: 'FORGE-METHOD',
+    label: 'Forge Method™',
+    desc: 'Diagnostic → Sprint → Scale. Fixed scope, published prices.',
+  },
+] as const;
+
+const RESOURCES = [
+  { href: '/blueprints', label: 'Blueprints' },
   { href: '/insights', label: 'Insights' },
-  { href: '/about', label: 'About Us' },
-];
+  { href: '/case-studies', label: 'Case studies' },
+  { href: '/operating-model', label: 'Operating model' },
+] as const;
+
+const TOP_LINKS = [
+  { href: '/industries', label: 'Industries' },
+  { href: '/use-cases', label: 'Use cases' },
+  { href: '/pricing', label: 'Pricing' },
+] as const;
 
 export function Header() {
-  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const hideHeader = pathname === '/discover';
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = sidebarOpen ? 'hidden' : '';
+    document.body.style.overflow = open ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
-  }, [sidebarOpen]);
-
-  if (hideHeader) return null;
+  }, [open]);
 
   return (
-    <>
-      <header
-        className={cn(
-          'fixed left-0 right-0 top-0 z-50 transition-all duration-300',
-          scrolled
-            ? 'border-b border-divider/30 bg-forge-black/90 backdrop-blur-xl'
-            : 'bg-transparent',
-          scrolled ? 'h-14' : 'h-16',
-        )}
-      >
-        <div className="mx-auto flex h-full max-w-[1400px] items-center justify-between px-6 lg:px-10">
-          {/* Left: hamburger + logo */}
-          <div className="flex items-center gap-4">
+    <header
+      className={cn(
+        'fixed inset-x-0 top-0 z-50 transition-all duration-300',
+        scrolled ? 'border-b border-divider bg-parchment/92 backdrop-blur-xl' : 'bg-parchment/0',
+      )}
+    >
+      <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-10">
+        {/* Brand */}
+        <Link href="/" className="flex items-baseline gap-0.5">
+          <span
+            className="text-xl text-anthracite"
+            style={{ fontFamily: 'var(--font-display)', fontWeight: 600 }}
+          >
+            ClearForge
+          </span>
+          <span className="metric text-sm text-brass">.ai</span>
+        </Link>
+
+        {/* Desktop nav */}
+        <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
+          {/* Products dropdown */}
+          <div className="group relative">
             <button
               type="button"
-              onClick={() => setSidebarOpen(true)}
-              className="inline-flex h-10 w-10 items-center justify-center text-bone/70 hover:text-bone transition-colors"
-              aria-label="Open menu"
+              className="flex items-center gap-1 px-3.5 py-2 text-sm font-medium text-warm-gray transition-colors hover:text-anthracite"
             >
-              <Menu className="h-5 w-5" />
+              Products <ChevronDown className="h-3.5 w-3.5" />
             </button>
-            <Link href="/" className="flex items-center">
-              <span className="text-lg font-semibold text-bone">ClearForge</span>
-            </Link>
+            <div className="invisible absolute left-0 top-full w-[26rem] translate-y-1 rounded-[12px] border border-divider bg-warm-white p-2 opacity-0 shadow-[0_20px_60px_-20px_rgba(20,18,16,0.25)] transition-all duration-150 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+              {PRODUCTS.map((p) => (
+                <Link
+                  key={p.href + p.tag}
+                  href={p.href}
+                  className="block rounded-[6px] px-3.5 py-3 transition-colors hover:bg-recessed"
+                >
+                  <span className="metric text-[10px] uppercase tracking-[0.14em] text-brass">
+                    {p.tag}
+                  </span>
+                  <span className="mt-0.5 block text-sm font-semibold text-anthracite">
+                    {p.label}
+                  </span>
+                  <span className="mt-0.5 block text-xs text-warm-gray">{p.desc}</span>
+                </Link>
+              ))}
+            </div>
           </div>
 
-          {/* Center: top nav links (desktop) */}
-          <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-1">
-            {TOP_NAV.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="px-4 py-2 text-[13px] font-medium text-bone/60 hover:text-bone transition-colors link-underline"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Right: CTA + search */}
-          <div className="flex items-center gap-3">
-            <Button
-              variant="default"
-              size="sm"
-              className="hidden sm:inline-flex text-xs shadow-sm hover:shadow-md"
-              asChild
+          {TOP_LINKS.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="px-3.5 py-2 text-sm font-medium text-warm-gray transition-colors hover:text-anthracite"
             >
-              <Link href="/contact">Executive Briefing</Link>
-            </Button>
-          </div>
-        </div>
-      </header>
+              {l.label}
+            </Link>
+          ))}
 
-      {/* ══════ SIDEBAR OVERLAY ══════ */}
-      {sidebarOpen && (
-        <div className="fixed inset-0 z-[60]" aria-modal="true" role="dialog">
-          {/* Backdrop */}
+          {/* Resources dropdown */}
+          <div className="group relative">
+            <button
+              type="button"
+              className="flex items-center gap-1 px-3.5 py-2 text-sm font-medium text-warm-gray transition-colors hover:text-anthracite"
+            >
+              Resources <ChevronDown className="h-3.5 w-3.5" />
+            </button>
+            <div className="invisible absolute right-0 top-full w-52 translate-y-1 rounded-[12px] border border-divider bg-warm-white p-2 opacity-0 shadow-[0_20px_60px_-20px_rgba(20,18,16,0.25)] transition-all duration-150 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+              {RESOURCES.map((r) => (
+                <Link
+                  key={r.href}
+                  href={r.href}
+                  className="block rounded-[6px] px-3.5 py-2.5 text-sm font-medium text-anthracite transition-colors hover:bg-recessed"
+                >
+                  {r.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </nav>
+
+        {/* CTA + mobile toggle */}
+        <div className="flex items-center gap-2">
+          <Button size="sm" className="hidden sm:inline-flex" asChild>
+            <Link href="/scorecard" data-analytics="nav_readiness_score">
+              Get your readiness score
+            </Link>
+          </Button>
           <button
             type="button"
-            aria-label="Close navigation overlay"
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in"
-            onClick={() => setSidebarOpen(false)}
-          />
-
-          {/* Sidebar panel */}
-          <div
-            className="absolute left-0 top-0 bottom-0 w-full max-w-[480px] bg-forge-black border-r border-divider-dark overflow-y-auto"
-            style={{ animation: 'slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1)' }}
+            onClick={() => setOpen(true)}
+            className="inline-flex h-10 w-10 items-center justify-center text-anthracite lg:hidden"
+            aria-label="Open menu"
           >
-            {/* Sidebar header */}
-            <div className="flex items-center justify-between px-5 sm:px-8 py-5 border-b border-divider-dark">
-              <Link
-                href="/"
-                onClick={() => setSidebarOpen(false)}
-                className="text-lg font-semibold text-bone"
+            <Menu className="h-5 w-5" />
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile drawer */}
+      {open && (
+        <div className="fixed inset-0 z-[60] lg:hidden" role="dialog" aria-modal="true">
+          <div
+            className="absolute inset-0 bg-anthracite/40 backdrop-blur-sm"
+            onClick={() => setOpen(false)}
+            onKeyDown={(e) => e.key === 'Escape' && setOpen(false)}
+          />
+          <div className="absolute inset-y-0 right-0 w-full max-w-sm overflow-y-auto border-l border-divider bg-parchment p-6">
+            <div className="flex items-center justify-between">
+              <span
+                className="text-lg text-anthracite"
+                style={{ fontFamily: 'var(--font-display)', fontWeight: 600 }}
               >
-                ClearForge
-              </Link>
+                ClearForge<span className="metric text-sm text-brass">.ai</span>
+              </span>
               <button
                 type="button"
-                onClick={() => setSidebarOpen(false)}
-                className="h-10 w-10 inline-flex items-center justify-center text-stone hover:text-bone transition-colors"
+                onClick={() => setOpen(false)}
+                className="inline-flex h-10 w-10 items-center justify-center text-warm-gray"
                 aria-label="Close menu"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            {/* Navigation sections */}
-            <div className="px-5 sm:px-8 py-6 space-y-8">
-              {NAV_SECTIONS.map((section) => (
-                <div key={section.title}>
-                  <h3 className="text-xs font-semibold uppercase text-stone mb-4">
-                    {section.title}
-                  </h3>
-                  <ul className="space-y-1">
-                    {section.links.map((link) => (
-                      <li key={link.href}>
-                        <Link
-                          href={link.href}
-                          onClick={() => setSidebarOpen(false)}
-                          className="group flex items-center justify-between min-h-[44px] py-2.5 text-[15px] text-bone/80 hover:text-bone hover:pl-2 transition-all duration-200"
-                        >
-                          {link.label}
-                          <ChevronRight className="h-4 w-4 text-stone opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+            <p className="overline mt-8">Products</p>
+            <div className="mt-3 space-y-1">
+              {PRODUCTS.map((p) => (
+                <Link
+                  key={p.href + p.tag}
+                  href={p.href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-[6px] px-3 py-2.5 hover:bg-recessed"
+                >
+                  <span className="block text-[15px] font-semibold text-anthracite">{p.label}</span>
+                  <span className="mt-0.5 block text-xs text-warm-gray">{p.desc}</span>
+                </Link>
               ))}
             </div>
 
-            {/* Sidebar CTA */}
-            <div className="px-5 sm:px-8 py-6 border-t border-divider-dark">
-              <Button className="w-full" size="lg" asChild>
-                <Link href="/contact" onClick={() => setSidebarOpen(false)}>
-                  Schedule Executive Briefing <ArrowRight className="ml-2 h-4 w-4" />
+            <p className="overline mt-7">Explore</p>
+            <div className="mt-3 space-y-1">
+              {[...TOP_LINKS, ...RESOURCES].map((l) => (
+                <Link
+                  key={l.href + l.label}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-[6px] px-3 py-2.5 text-[15px] font-medium text-anthracite hover:bg-recessed"
+                >
+                  {l.label}
                 </Link>
-              </Button>
-              <p className="mt-3 text-xs text-stone text-center">
-                Strategy, design, implementation, adoption, and benefits realization
-              </p>
+              ))}
             </div>
 
-            {/* Sidebar footer */}
-            <div className="px-5 sm:px-8 py-6 border-t border-divider-dark">
-              <div className="space-y-3">
-                <a
-                  href="mailto:james@clearforge.ai"
-                  className="block text-sm text-stone hover:text-bone transition-colors"
-                >
-                  james@clearforge.ai
-                </a>
-                <p className="text-xs text-stone/60">
-                  Based in Southeast Michigan · Serving clients nationally
-                </p>
-              </div>
-            </div>
+            <Button size="lg" className="mt-8 w-full" asChild>
+              <Link href="/scorecard" onClick={() => setOpen(false)}>
+                Get your readiness score <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+            <p className="metric mt-3 text-center text-[11px] text-warm-gray">
+              Free · ~4 minutes · benchmarked
+            </p>
           </div>
         </div>
       )}
-
-      {/* Slide-in animation */}
-      <style jsx global>{`
-        @keyframes slideInLeft {
-          from { transform: translateX(-100%); }
-          to { transform: translateX(0); }
-        }
-      `}</style>
-    </>
+    </header>
   );
 }
