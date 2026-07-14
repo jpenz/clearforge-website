@@ -50,6 +50,19 @@ export function AdoptionGap() {
             </div>
           ))}
         </StaggerReveal>
+
+        {/* The Adoption Mile™ bar */}
+        <SectionReveal animation="fade-up" className="mt-12">
+          <div className="flex flex-col items-baseline gap-2 rounded-[12px] border border-brass/40 bg-parchment px-6 py-5 sm:flex-row sm:gap-4">
+            <span className="metric text-[11px] uppercase tracking-[0.16em] text-brass">
+              The Adoption Mile™
+            </span>
+            <p className="text-body-sm text-anthracite">
+              <span className="metric text-brass">{adoptionGap.bar.stat}</span>{' '}
+              {adoptionGap.bar.label}
+            </p>
+          </div>
+        </SectionReveal>
       </div>
     </section>
   );

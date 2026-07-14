@@ -20,11 +20,15 @@ export const hero = {
 };
 
 // ── The Adoption Gap — the problem beat (why us, before what we sell) ───
+// Research-validated: "AI adoption gap" + "last mile" carry the most market
+// currency (IBM 2026 CEO study; HBR/Forbes 2026). McKinsey's $3-of-change-
+// per-$1-of-model anchor is the pricing ammo. The named method (Bain
+// Results Delivery® move): The Adoption Mile™, stitched through every SKU.
 export const adoptionGap = {
-  eyebrow: 'The problem',
+  eyebrow: 'The AI adoption gap',
   headlineLead: "AI doesn't fail in the build. It fails at",
   headlineAccent: 'adoption',
-  lede: 'Most firms can stand up a pilot. Almost nobody staffs the last mile — the training, playbooks, and operating cadence that change how people actually work. That is the part we never skip.',
+  lede: 'Most firms can stand up a pilot. Almost nobody staffs the last mile — so we productized it. The Adoption Mile™ runs inside every engagement: a named operator, weekly cadence, and an adoption scoreboard until your team runs it without us. McKinsey now advises $3 of change work per $1 of model build. We budget for it; most vendors hope.',
   stats: [
     {
       value: '79% → 11%',
@@ -54,6 +58,12 @@ export const adoptionGap = {
       counter: 'We baseline on day one and track every dollar through launch and beyond.',
     },
   ],
+  // The behavior bar The Adoption Mile™ builds to (measured on the scoreboard).
+  bar: {
+    stat: '70%',
+    label:
+      'weekly-active usage — the adoption bar we build to by day 90, tracked in the open on your scoreboard.',
+  },
 };
 
 // The live agent in the hero (browser-chrome frame). Card copy only —
