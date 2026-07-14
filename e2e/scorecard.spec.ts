@@ -55,7 +55,7 @@ test.describe('AI Readiness Scorecard', () => {
     }
 
     // Next button should appear or progress should advance
-    const nextBtn = page.getByRole('button', { name: /next|continue/i });
+    const nextBtn = page.getByRole('button', { name: /see my diagnostic readout|next|continue/i }).first();
     const hasNext = await nextBtn.isVisible().catch(() => false);
     if (hasNext) {
       await nextBtn.click();
@@ -68,6 +68,7 @@ test.describe('AI Readiness Scorecard', () => {
   test('complete scorecard flow — all pillars → results page', async ({ page }) => {
     await page.goto('/scorecard');
     await page.waitForLoadState('networkidle');
+    await page.waitForSelector('button[aria-label*="out of 5"]', { timeout: 15000 });
 
     // Keep answering questions until we reach results or run out of pages
     let iterations = 0;
@@ -92,19 +93,16 @@ test.describe('AI Readiness Scorecard', () => {
       }
 
       // Try clicking Next if it exists
-      const nextBtn = page.getByRole('button', { name: /next|continue/i });
+      const nextBtn = page.getByRole('button', { name: /see my diagnostic readout|next|continue/i }).first();
       const hasNext = await nextBtn.isVisible().catch(() => false);
       if (hasNext) {
         await nextBtn.click();
         await page.waitForTimeout(300);
       }
 
-      // Check if we've reached results
-      const onResults =
-        page.url().includes('/results') ||
-        (await page.getByText(/your score|your readiness|composite score/i).isVisible().catch(() => false));
-
-      if (onResults) break;
+      // Check if we've reached results (URL only — text probes collide with
+      // the header's "Get your readiness score" CTA)
+      if (page.url().includes('/results')) break;
     }
 
     // We should have made progress (at least past the first pillar)
