@@ -80,12 +80,7 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-10">
         {/* Brand */}
         <Link href="/" className="flex items-baseline gap-0.5">
-          <span
-            className="text-xl text-anthracite"
-            style={{ fontFamily: 'var(--font-display)', fontWeight: 600 }}
-          >
-            ClearForge
-          </span>
+          <span className="font-display text-xl font-semibold text-anthracite">ClearForge</span>
           <span className="metric text-sm text-brass">.ai</span>
         </Link>
 
@@ -178,10 +173,7 @@ export function Header() {
           />
           <div className="absolute inset-y-0 right-0 w-full max-w-sm overflow-y-auto border-l border-divider bg-parchment p-6">
             <div className="flex items-center justify-between">
-              <span
-                className="text-lg text-anthracite"
-                style={{ fontFamily: 'var(--font-display)', fontWeight: 600 }}
-              >
+              <span className="font-display text-lg font-semibold text-anthracite">
                 ClearForge<span className="metric text-sm text-brass">.ai</span>
               </span>
               <button

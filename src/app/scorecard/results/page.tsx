@@ -127,10 +127,10 @@ export default function ScorecardResultsPage() {
         <div className="text-center px-6">
           <h1 className="text-display text-anthracite">No diagnostic found.</h1>
           <p className="mt-4 text-body-lg text-warm-gray">
-            Run the ClearForge Diagnostic first so the readout can be built from your answers.
+            Take the scorecard first so the readout can be built from your answers.
           </p>
           <Button className="mt-8" asChild>
-            <Link href="/scorecard">Run Diagnostic</Link>
+            <Link href="/scorecard">Take the scorecard</Link>
           </Button>
         </div>
       </section>
@@ -363,7 +363,7 @@ export default function ScorecardResultsPage() {
               Book a 30-min intro <ArrowRight className="ml-2 h-4 w-4" />
             </BookCallButton>
             <Button variant="secondary" size="lg" asChild>
-              <Link href="/discover">Generate AI Value Map</Link>
+              <Link href="/discover">Map the Workflow</Link>
             </Button>
           </div>
         </div>

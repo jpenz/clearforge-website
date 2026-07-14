@@ -377,7 +377,12 @@ export default function CybersecurityBlueprintPage() {
                 <p className="font-mono text-xs uppercase tracking-widest text-brass">
                   CrowdStrike source trail
                 </p>
-                <table className="mt-6 w-full min-w-[820px] border-collapse">
+                <table className="mt-6 w-full min-w-[680px] table-fixed border-collapse">
+                  <colgroup>
+                    <col className="w-[38%]" />
+                    <col className="w-[27%]" />
+                    <col className="w-[35%]" />
+                  </colgroup>
                   <thead>
                     <tr className="border-b border-divider">
                       <th className="py-4 pr-6 text-left font-mono text-xs uppercase tracking-widest text-warm-gray">
@@ -394,7 +399,9 @@ export default function CybersecurityBlueprintPage() {
                   <tbody>
                     {crowdstrikeSourceTrail.map((source) => (
                       <tr key={source.claim} className="border-b border-divider">
-                        <td className="py-5 pr-6 text-body-sm text-anthracite">{source.claim}</td>
+                        <td className="break-words py-5 pr-6 text-body-sm text-anthracite">
+                          {source.claim}
+                        </td>
                         <td className="py-5 pr-6 text-body-sm">
                           <a
                             href={source.href}
@@ -406,7 +413,9 @@ export default function CybersecurityBlueprintPage() {
                             <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                           </a>
                         </td>
-                        <td className="py-5 text-body-sm text-warm-gray">{source.usedFor}</td>
+                        <td className="break-words py-5 text-body-sm text-warm-gray">
+                          {source.usedFor}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -499,9 +508,12 @@ export default function CybersecurityBlueprintPage() {
                     Example operating analytics
                   </p>
                   <h3 className="mt-4 text-h2 text-bone">Lead signals found month over month.</h3>
-                  <div className="mt-8 flex h-52 items-end gap-3 border-b border-divider-dark pb-3">
+                  <div className="mt-8 flex h-52 gap-3 border-b border-divider-dark pb-3">
                     {leadSignalTrend.map((item) => (
-                      <div key={item.month} className="flex flex-1 flex-col items-center gap-3">
+                      <div
+                        key={item.month}
+                        className="flex h-full flex-1 flex-col items-center justify-end gap-3"
+                      >
                         <div
                           className="w-full bg-brass-light/80"
                           style={{

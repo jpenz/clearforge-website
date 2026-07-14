@@ -54,8 +54,7 @@ export function ScrubMarquee({ text, className }: { text: string; className?: st
           <span
             key={i}
             aria-hidden={i === 1}
-            className="mr-[4vw] shrink-0 text-[8vw] font-bold uppercase tracking-tight text-bone/[0.05] lg:text-[6vw]"
-            style={{ fontFamily: 'var(--font-display)' }}
+            className="mr-[4vw] shrink-0 text-[8vw] font-bold uppercase tracking-tight text-bone/[0.05] lg:text-[6vw] font-display"
           >
             {text}
           </span>

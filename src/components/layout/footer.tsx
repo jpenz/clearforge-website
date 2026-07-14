@@ -77,10 +77,7 @@ export function Footer() {
       <div className="mx-auto max-w-[1400px] px-4 py-12 sm:px-6 lg:px-10 lg:py-16">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="space-y-5 lg:col-span-4">
-            <span
-              className="text-xl text-bone"
-              style={{ fontFamily: 'var(--font-display)', fontWeight: 600 }}
-            >
+            <span className="font-display text-xl font-semibold text-bone">
               ClearForge<span className="metric text-sm text-brass-light">.ai</span>
             </span>
             <p className="max-w-xs text-sm leading-relaxed text-stone">

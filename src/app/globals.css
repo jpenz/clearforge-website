@@ -141,6 +141,13 @@ h3, h4, h5, h6 {
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--color-brass);
+  /* Tailwind's `overline` utility shares this class name and was adding
+     text-decoration-line: overline — a rule that repeats on every wrapped
+     line. Keep the (now signature) top rule as a single border instead. */
+  text-decoration-line: none;
+  display: inline-block;
+  border-top: 1px solid color-mix(in srgb, currentColor 60%, transparent);
+  padding-top: 6px;
 }
 
 /* ── Data voice — DM Mono everywhere numbers live ── */

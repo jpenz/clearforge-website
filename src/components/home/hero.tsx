@@ -34,16 +34,7 @@ export function Hero() {
         {/* Left — value prop, white on dark */}
         <div>
           <p className="overline">{hero.eyebrow}</p>
-          <h1
-            className="mt-6 text-bone"
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(3rem, 6.6vw, 5.6rem)',
-              lineHeight: 1.02,
-              letterSpacing: '-0.015em',
-              fontWeight: 500,
-            }}
-          >
+          <h1 className="mt-6 font-display text-[clamp(3rem,6.6vw,5.6rem)] font-medium leading-[1.02] tracking-[-0.015em] text-bone">
             {hero.headlineLead} <span className="display-accent">{hero.headlineAccent}</span>.
           </h1>
           <p className="mt-6 max-w-xl text-body-lg text-stone">{hero.sub}</p>
@@ -58,7 +49,9 @@ export function Hero() {
               data-analytics="home_hero_secondary"
               className="link-underline inline-flex items-center gap-2 text-sm font-medium text-stone transition-colors hover:text-bone"
             >
-              {hero.secondaryCta.label} <ArrowRight className="h-4 w-4" />
+              <span className="whitespace-nowrap">
+                {hero.secondaryCta.label} <ArrowRight className="inline h-4 w-4" />
+              </span>
             </Link>
           </div>
         </div>

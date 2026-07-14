@@ -102,10 +102,7 @@ export default function ServicesPage() {
         <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
           <FadeIn>
             <p className="overline">How We Work</p>
-            <h1
-              className="mt-6 text-display max-w-3xl text-bone"
-              style={{ fontFamily: 'var(--font-display)' }}
-            >
+            <h1 className="mt-6 text-display max-w-3xl text-bone font-display">
               Custom AI, built around how your business actually runs.
             </h1>
           </FadeIn>

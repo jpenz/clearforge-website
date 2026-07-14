@@ -319,7 +319,7 @@ export const blueprints: Blueprint[] = [
     relatedLinks: [
       { label: 'Customer Service Use Case', href: '/use-cases/ai-customer-service-excellence' },
       { label: 'Performance Improvement', href: '/services/performance-improvement' },
-      { label: 'Run Diagnostic', href: '/scorecard' },
+      { label: 'Take the scorecard', href: '/scorecard' },
     ],
   },
   {
@@ -595,7 +595,7 @@ export const blueprints: Blueprint[] = [
     relatedLinks: [
       { label: 'Knowledge Work Use Case', href: '/use-cases/ai-knowledge-work-automation' },
       { label: 'Custom AI Agents', href: '/services/custom-ai-agents' },
-      { label: 'Run Diagnostic', href: '/scorecard' },
+      { label: 'Take the scorecard', href: '/scorecard' },
     ],
   },
 ];

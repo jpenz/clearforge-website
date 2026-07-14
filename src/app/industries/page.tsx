@@ -72,10 +72,7 @@ export default function IndustriesIndexPage() {
         <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
           <FadeIn>
             <p className="overline">Industries</p>
-            <h1
-              className="mt-6 text-display max-w-4xl text-bone"
-              style={{ fontFamily: 'var(--font-display)' }}
-            >
+            <h1 className="mt-6 text-display max-w-4xl text-bone font-display">
               Production AI for every operating value chain.
             </h1>
           </FadeIn>
@@ -101,9 +98,7 @@ export default function IndustriesIndexPage() {
                     <p className="overline">
                       {String(ci + 1).padStart(2, '0')} · {category}
                     </p>
-                    <h2 className="mt-4 text-h1" style={{ fontFamily: 'var(--font-display)' }}>
-                      {category}
-                    </h2>
+                    <h2 className="mt-4 text-h1 font-display">{category}</h2>
                   </div>
 
                   <Stagger className="lg:col-span-8 mt-8 lg:mt-0" stagger={0.06}>
@@ -120,10 +115,7 @@ export default function IndustriesIndexPage() {
                           >
                             <div className="lg:flex lg:items-baseline lg:justify-between gap-8">
                               <div className="flex-1 min-w-0">
-                                <h3
-                                  className="text-h3 group-hover:text-brass transition-colors"
-                                  style={{ fontFamily: 'var(--font-display)' }}
-                                >
+                                <h3 className="text-h3 group-hover:text-brass transition-colors font-display">
                                   {ind.name}
                                 </h3>
                                 <p className="mt-2 text-body text-warm-gray max-w-xl">
@@ -174,7 +166,7 @@ export default function IndustriesIndexPage() {
               <div className="mt-8 flex flex-wrap gap-4">
                 <Button size="lg" asChild>
                   <Link href="/discover">
-                    Generate My Custom Value Chain <ArrowRight className="ml-2 h-4 w-4" />
+                    Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
                 <BookCallButton size="lg" variant="secondary" analytics="industries_book_call">
@@ -189,7 +181,7 @@ export default function IndustriesIndexPage() {
       {/* — Final CTA — */}
       <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone" style={{ fontFamily: 'var(--font-display)' }}>
+          <h2 className="text-display text-bone font-display">
             Where would AI move your P&amp;L first?
           </h2>
           <p className="mt-6 text-body-lg text-stone">
@@ -199,7 +191,7 @@ export default function IndustriesIndexPage() {
           <div className="mt-10">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Generate My AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
+                Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>
