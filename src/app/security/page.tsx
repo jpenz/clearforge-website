@@ -176,7 +176,7 @@ export default function SecurityPage() {
             Seriously — we would rather answer the hard questions on day one. Or write to{' '}
             <a
               href="mailto:james@clearforge.ai"
-              className="text-brass-light transition-colors hover:text-bone"
+              className="text-brass-light underline decoration-brass-light/40 underline-offset-4 transition-colors hover:text-bone"
             >
               james@clearforge.ai
             </a>{' '}

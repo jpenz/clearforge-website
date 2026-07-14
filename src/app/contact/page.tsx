@@ -224,7 +224,7 @@ export default function ContactPage() {
                       Skip the form —{' '}
                       <a
                         href="#book"
-                        className="text-brass hover:text-brass-hover transition-colors"
+                        className="text-brass underline decoration-brass/40 underline-offset-4 hover:text-brass-hover transition-colors"
                       >
                         grab a time on the calendar above
                       </a>{' '}

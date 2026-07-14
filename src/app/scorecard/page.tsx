@@ -30,7 +30,7 @@ export default function ScorecardPage() {
               ['03', 'Map the first build path'],
             ].map(([step, label]) => (
               <div key={step} className="bg-forge-black/70 p-4">
-                <p className="metric text-xs text-brass">{step}</p>
+                <p className="metric text-xs text-brass-light">{step}</p>
                 <p className="mt-1 text-sm font-semibold text-bone">{label}</p>
               </div>
             ))}

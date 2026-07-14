@@ -213,7 +213,7 @@ export default function HowWeWorkPage() {
                 the work lands on whoever was free. Here, the person who scopes your workflow is the
                 person who builds it, ships it, and sits in your weekly through The Adoption Mile™.
                 You can{' '}
-                <Link href="/about" className="text-brass transition-colors hover:text-brass-hover">
+                <Link href="/about" className="text-brass underline decoration-brass/40 underline-offset-4 transition-colors hover:text-brass-hover">
                   meet him before you sign anything
                 </Link>
                 .

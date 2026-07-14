@@ -1324,7 +1324,7 @@ export default function DiscoverPage() {
                 { metric: 'Email', label: 'Results delivered' },
               ].map((item) => (
                 <div key={item.label}>
-                  <span className="metric text-lg text-brass">{item.metric}</span>
+                  <span className="metric text-lg text-brass-light">{item.metric}</span>
                   <p className="mt-1 text-xs text-stone">{item.label}</p>
                 </div>
               ))}

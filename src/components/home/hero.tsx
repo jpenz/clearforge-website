@@ -23,7 +23,7 @@ export function Hero() {
         priority
         fetchPriority="high"
         sizes="100vw"
-        quality={72}
+        quality={65}
         className="pointer-events-none object-cover"
       />
       {/* Legibility gradients — left-weighted like Bain */}
