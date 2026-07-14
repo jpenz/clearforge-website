@@ -1,14 +1,11 @@
 import type { Metadata } from 'next';
-import { JetBrains_Mono } from 'next/font/google';
-import { GeistSans } from 'geist/font/sans';
+import { DM_Mono, Hanken_Grotesk, Newsreader } from 'next/font/google';
 import { AnalyticsTracker } from '@/components/analytics/analytics-tracker';
 import { GoogleAnalytics } from '@/components/analytics/google-analytics';
 import { PlausibleAnalytics } from '@/components/analytics/plausible-analytics';
 import { Footer } from '@/components/layout/footer';
 import { ForgeBar } from '@/components/layout/forge-bar';
 import { Header } from '@/components/layout/header';
-import { LenisProvider } from '@/components/layout/lenis-provider';
-import { PremiumCursor } from '@/components/layout/premium-cursor';
 import { RouteScrollRestoration } from '@/components/layout/route-scroll-restoration';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import {
@@ -23,11 +20,29 @@ import {
 } from '@/lib/metadata';
 import './globals.css';
 
-// V9 rebrand: all-sans. Geist for display + body, JetBrains Mono for numerals.
-const jetbrainsMono = JetBrains_Mono({
+// V11 tri-stack: Newsreader serif display (sharp editorial, italic accent
+// words — the McKinsey/Financier register, not a display-wonk face) ·
+// Hanken Grotesk body/UI · DM Mono for data, eyebrows, and SKU tags.
+// NOTE: css var name kept as --font-fraunces from the prior stack to avoid
+// churning every font-family reference; it now resolves to Newsreader.
+const serifDisplay = Newsreader({
+  subsets: ['latin'],
+  axes: ['opsz'],
+  style: ['normal', 'italic'],
+  variable: '--font-fraunces',
+  display: 'swap',
+});
+
+const hanken = Hanken_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-hanken',
+  display: 'swap',
+});
+
+const dmMono = DM_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
-  variable: '--font-jetbrains-mono',
+  variable: '--font-dm-mono',
   display: 'swap',
 });
 
@@ -68,7 +83,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <link rel="dns-prefetch" href="https://api.perplexity.ai" />
         <link rel="preconnect" href="https://api.anthropic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${GeistSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <body
+        className={`${serifDisplay.variable} ${hanken.variable} ${dmMono.variable} font-sans antialiased`}
+      >
         <JsonLdScript
           data={[
             organizationJsonLd,
@@ -84,7 +101,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         {plausibleDomain ? <PlausibleAnalytics domain={plausibleDomain} /> : null}
         <AnalyticsTracker />
         <RouteScrollRestoration />
-        <PremiumCursor />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-brass focus:text-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold"
@@ -92,11 +108,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           Skip to main content
         </a>
         <Header />
-        <LenisProvider>
-          <main id="main-content">{children}</main>
-          <Footer />
-          <ForgeBar />
-        </LenisProvider>
+        <main id="main-content">{children}</main>
+        <Footer />
+        <ForgeBar />
       </body>
     </html>
   );

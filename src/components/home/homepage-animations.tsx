@@ -1,192 +1,65 @@
-'use client';
-
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { type ReactNode, useRef } from 'react';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-const prefersReducedMotion = () =>
-  typeof window !== 'undefined' &&
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+import type { ReactNode } from 'react';
 
 /**
- * Premium animation wrappers for the homepage.
- * Per frontend-design + video-to-website skills:
- * - 4+ animation types, never consecutive repeats
- * - Staggered reveals: label → heading → body → CTA
- * - At least 1 pinned section
- * - Direction variety
- * All wrappers respect prefers-reduced-motion (no animation runs).
+ * V11 "crisp" pass — these wrappers used to hide content at opacity 0 until
+ * GSAP ScrollTrigger fired, which read as blank/slow (and occasionally never
+ * fired at all). Bain/McKinsey render content instantly; so do we now.
+ *
+ * The component APIs are preserved so no call site changes, but they are
+ * plain server-rendered containers: zero JS, zero hidden content, zero
+ * scroll-jank. If a subtle entrance is ever wanted, use CSS scroll-driven
+ * animations (compositor-thread, content visible by default) — never
+ * opacity-0-until-trigger.
  */
 
 type AnimType = 'fade-up' | 'slide-left' | 'slide-right' | 'scale-up' | 'clip-reveal';
 
-interface SectionRevealProps {
+export function SectionReveal({
+  children,
+  className,
+}: {
   children: ReactNode;
-  animation: AnimType;
+  animation?: AnimType;
   className?: string;
+}) {
+  return <div className={className}>{children}</div>;
 }
 
-/** Scroll-triggered section with varied entrance animations */
-export function SectionReveal({ children, animation, className }: SectionRevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    if (typeof window === 'undefined') return;
-    if (prefersReducedMotion()) return;
-    const el = ref.current;
-    if (!el) return;
-
-    const configs: Record<AnimType, { from: gsap.TweenVars }> = {
-      'fade-up': { from: { opacity: 0, y: 50 } },
-      'slide-left': { from: { opacity: 0, x: -80 } },
-      'slide-right': { from: { opacity: 0, x: 80 } },
-      'scale-up': { from: { opacity: 0, scale: 0.9 } },
-      'clip-reveal': { from: { opacity: 0, clipPath: 'inset(100% 0% 0% 0%)' } },
-    };
-
-    const config = configs[animation];
-
-    gsap.fromTo(el, config.from, {
-      opacity: 1,
-      y: 0,
-      x: 0,
-      scale: 1,
-      clipPath: 'inset(0% 0% 0% 0%)',
-      duration: 0.8,
-      ease: 'power3.out',
-      immediateRender: false,
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-        once: true,
-      },
-    });
-  }, { scope: ref });
-
-  return <div ref={ref} className={className}>{children}</div>;
+export function StaggerReveal({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return <div className={className}>{children}</div>;
 }
 
-/** Staggered reveal: children animate in sequence with delay */
-export function StaggerReveal({ children, className }: { children: ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    if (typeof window === 'undefined') return;
-    if (prefersReducedMotion()) return;
-    const el = ref.current;
-    if (!el) return;
-
-    const items = el.querySelectorAll(':scope > *');
-    gsap.fromTo(items,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.12,
-        ease: 'power3.out',
-        immediateRender: false,
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-          once: true,
-        },
-      }
-    );
-  }, { scope: ref });
-
-  return <div ref={ref} className={className}>{children}</div>;
+export function PinnedSection({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return <div className={className}>{children}</div>;
 }
 
-/** Pinned section: pins in place while children animate internally */
-export function PinnedSection({ children, className }: { children: ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    if (typeof window === 'undefined' || window.innerWidth < 768) return;
-    if (prefersReducedMotion()) return;
-    const section = ref.current;
-    const content = contentRef.current;
-    if (!section || !content) return;
-
-    const items = content.querySelectorAll('.pin-item');
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: 'top top',
-        end: '+=150%',
-        pin: true,
-        scrub: 0.5,
-        anticipatePin: 1,
-      },
-    });
-
-    // Stagger reveal each pin-item.
-    // immediateRender: false keeps items visible until timeline reaches them.
-    items.forEach((item, i) => {
-      tl.fromTo(item,
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 0.3, ease: 'power3.out', immediateRender: false },
-        i * 0.2
-      );
-    });
-  }, { scope: ref });
-
-  return (
-    <div ref={ref} className={className}>
-      <div ref={contentRef}>{children}</div>
-    </div>
-  );
-}
-
-/** Horizontal scrub marquee — text moves with scroll, not time */
+/** Time-based CSS marquee (was scroll-scrubbed GSAP). */
 export function ScrubMarquee({ text, className }: { text: string; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    if (typeof window === 'undefined') return;
-    if (prefersReducedMotion()) return;
-    const track = trackRef.current;
-    const container = ref.current;
-    if (!track || !container) return;
-
-    gsap.fromTo(track,
-      { xPercent: 0 },
-      {
-        xPercent: -50,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: container,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-        },
-      }
-    );
-  }, { scope: ref });
-
   return (
-    <div ref={ref} className={`overflow-hidden ${className || ''}`}>
-      <div ref={trackRef} className="flex whitespace-nowrap will-change-transform">
-        <span className="text-[10vw] sm:text-[8vw] lg:text-[6vw] font-bold uppercase tracking-tight text-bone/[0.05] shrink-0 mr-[4vw]" style={{ fontFamily: 'var(--font-display)' }}>
-          {text}
-        </span>
-        <span className="text-[10vw] sm:text-[8vw] lg:text-[6vw] font-bold uppercase tracking-tight text-bone/[0.05] shrink-0 mr-[4vw]" style={{ fontFamily: 'var(--font-display)' }}>
-          {text}
-        </span>
-        <span className="text-[10vw] sm:text-[8vw] lg:text-[6vw] font-bold uppercase tracking-tight text-bone/[0.05] shrink-0 mr-[4vw]" style={{ fontFamily: 'var(--font-display)' }}>
-          {text}
-        </span>
+    <div className={`overflow-hidden ${className || ''}`}>
+      <div className="animate-marquee flex w-max whitespace-nowrap">
+        {[0, 1].map((i) => (
+          <span
+            key={i}
+            aria-hidden={i === 1}
+            className="mr-[4vw] shrink-0 text-[8vw] font-bold uppercase tracking-tight text-bone/[0.05] lg:text-[6vw]"
+            style={{ fontFamily: 'var(--font-display)' }}
+          >
+            {text}
+          </span>
+        ))}
       </div>
     </div>
   );

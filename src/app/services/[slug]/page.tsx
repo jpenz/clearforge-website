@@ -1,6 +1,7 @@
 import { ArrowRight, CheckCircle2, Target, Users } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { BookCallButton } from '@/components/booking/book-call';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Button } from '@/components/ui/button';
 import { getServiceBySlug, services } from '@/data/services';
@@ -236,11 +237,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 })}
               </div>
               <div className="mt-10 flex flex-wrap gap-4">
-                <Button size="lg" asChild>
-                  <Link href="/contact">
-                    Book a 15-Min Diagnostic Call <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
+                <BookCallButton size="lg" analytics="service_detail_book_call">
+                  Book a 30-min intro <ArrowRight className="ml-2 h-4 w-4" />
+                </BookCallButton>
                 <Button size="lg" variant="secondary" asChild>
                   <Link href="/discover">Generate AI Value Map</Link>
                 </Button>
