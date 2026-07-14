@@ -10,13 +10,50 @@
 
 // ── Hero ────────────────────────────────────────────────────────────────
 export const hero = {
-  eyebrow: 'AI strategy · build · operations — for mid-market & PE',
+  eyebrow: 'AI strategy · build · adoption — for mid-market & PE',
   // Rendered as: "AI that actually <em>ships</em>."
   headlineLead: 'AI that actually',
   headlineAccent: 'ships',
-  sub: 'ClearForge finds your highest-value workflows, builds production AI, and proves the ROI — in 10–14 weeks, with pricing you can see.',
+  sub: 'We find your highest-value workflows, build production AI, and get your teams to actually use it — in 10–14 weeks, with pricing you can see.',
   primaryCta: { label: 'Get your readiness score', href: '/scorecard' },
   secondaryCta: { label: 'See engagements & pricing', href: '/pricing' },
+};
+
+// ── The Adoption Gap — the problem beat (why us, before what we sell) ───
+export const adoptionGap = {
+  eyebrow: 'The problem',
+  headlineLead: "AI doesn't fail in the build. It fails at",
+  headlineAccent: 'adoption',
+  lede: 'Most firms can stand up a pilot. Almost nobody staffs the last mile — the training, playbooks, and operating cadence that change how people actually work. That is the part we never skip.',
+  stats: [
+    {
+      value: '79% → 11%',
+      label: 'companies claiming AI adoption vs. running agents in production',
+    },
+    { value: '~70%', label: 'of transformations fail on people, not technology' },
+    {
+      value: '89%',
+      label: 'of ClearForge projects reach production — adoption is staffed, not hoped for',
+    },
+  ],
+  failures: [
+    {
+      k: 'Pilot purgatory',
+      pain: 'POCs launch without production criteria, so nothing ever counts as "live."',
+      counter: 'We define "live" up front and build to it — go/no-go criteria in week one.',
+    },
+    {
+      k: 'The adoption gap',
+      pain: 'Builders leave; teams quietly revert to the old way within a quarter.',
+      counter:
+        'A named operator runs your training, playbooks, and weekly cadence until the numbers move — the way we ran SightForge for a $4B industrial sales org.',
+    },
+    {
+      k: 'The benefits void',
+      pain: 'Nobody baselines KPIs, so nobody can prove the system paid for itself.',
+      counter: 'We baseline on day one and track every dollar through launch and beyond.',
+    },
+  ],
 };
 
 // The live agent in the hero (browser-chrome frame). Card copy only —
@@ -114,7 +151,7 @@ export const charcoal = {
   headlineLead: 'Built by operators who',
   headlineAccent: 'ship',
   headlineTail: '.',
-  copy: 'ClearForge was founded by James Penz — 15 years across Bain, EY, and Capgemini, including Bain’s AI Automation practice. The person who scopes your engagement is the person who builds it. Senior operators only, named on every proposal.',
+  copy: 'ClearForge was founded by James Penz — 15 years across Bain, EY, and Capgemini, including Bain’s AI Automation practice. The person who scopes your engagement builds it — and stays through adoption until your team runs it without us. Senior operators only, named on every proposal.',
   stats: [
     { value: '89%', label: 'projects reach production — industry median is 16%' },
     { value: '10–14 wk', label: 'kickoff to live production system' },

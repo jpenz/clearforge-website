@@ -1,3 +1,4 @@
+import { AdoptionGap } from '@/components/home/adoption-gap';
 import { CaseEvidence } from '@/components/home/case-evidence';
 import { CharcoalBand } from '@/components/home/charcoal-band';
 import { ForgeSystem } from '@/components/home/forge-system';
@@ -25,6 +26,7 @@ export default function Home() {
     <>
       <Hero />
       <TrustMarquee />
+      <AdoptionGap />
       <ForgeSystem />
       <MethodLadder />
       <CaseEvidence />
