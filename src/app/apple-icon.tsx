@@ -17,7 +17,15 @@ export default function AppleIcon() {
         borderRadius: '36px',
       }}
     >
-      <svg viewBox="0 0 32 32" fill="none" width="120" height="120">
+      <svg
+        viewBox="0 0 32 32"
+        fill="none"
+        width="120"
+        height="120"
+        role="img"
+        aria-label="ClearForge"
+      >
+        <title>ClearForge</title>
         <path d="M8 22V10l4-2v16l-4-2Z" fill="#7A97FF" opacity="0.9" />
         <path d="M14 20V12l4-2v12l-4-2Z" fill="#7A97FF" opacity="0.7" />
         <path d="M20 18V14l4-2v8l-4-2Z" fill="#7A97FF" opacity="0.5" />

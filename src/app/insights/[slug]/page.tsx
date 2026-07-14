@@ -65,7 +65,7 @@ function renderMarkdownBlocks(markdown: string) {
                 <tr key={cells.join('|')} className="border-b border-divider align-top">
                   {cells.map((cell, ci) => (
                     <td
-                      key={`${cell}-${ci}`}
+                      key={`${header[ci] ?? 'col'}-${cell}`}
                       className={`py-3 pr-6 text-body-sm leading-relaxed ${ci === 0 ? 'font-medium text-anthracite' : 'text-warm-gray'}`}
                     >
                       {cleanInlineText(cell)}

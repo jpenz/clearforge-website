@@ -65,8 +65,13 @@ export function Header() {
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    if (open) window.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKey);
     };
   }, [open]);
 
@@ -166,10 +171,11 @@ export function Header() {
       {/* Mobile drawer */}
       {open && (
         <div className="fixed inset-0 z-[60] lg:hidden" role="dialog" aria-modal="true">
-          <div
-            className="absolute inset-0 bg-anthracite/40 backdrop-blur-sm"
+          <button
+            type="button"
+            aria-label="Close menu"
+            className="absolute inset-0 cursor-default bg-anthracite/40 backdrop-blur-sm"
             onClick={() => setOpen(false)}
-            onKeyDown={(e) => e.key === 'Escape' && setOpen(false)}
           />
           <div className="absolute inset-y-0 right-0 w-full max-w-sm overflow-y-auto border-l border-divider bg-parchment p-6">
             <div className="flex items-center justify-between">
