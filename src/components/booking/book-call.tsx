@@ -1,25 +1,34 @@
 'use client';
 
-import Cal, { getCalApi } from '@calcom/embed-react';
+import type { getCalApi } from '@calcom/embed-react';
 import { ArrowRight } from 'lucide-react';
-import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
+import { useCallback, useEffect, useRef } from 'react';
 import { Button, type ButtonProps } from '@/components/ui/button';
+
+const Cal = dynamic(() => import('@calcom/embed-react'), { ssr: false });
 
 /**
  * Cal.com booking — the journey's highest-impact conversion fix (embedded
  * scheduling lifts request-to-book >50%; first responder wins ~78% of deals).
  * Meeting location: Microsoft Teams (enabled as the Cal.com event default,
  * confirmed 2026-07-14).
+ *
+ * Perf contract: BookCallButton loads Cal's third-party embed JS on INTENT
+ * (hover/focus preload, click opens) — never on page load. Only
+ * BookingInline (/contact) loads it eagerly, because that page IS intent.
  */
 
 export const CAL_LINK = 'james-penz/30min';
 const CAL_NAMESPACE = '30min';
 const BRAND = '#1F4CDB';
 
-function useCalUi() {
-  useEffect(() => {
-    (async () => {
-      const cal = await getCalApi({ namespace: CAL_NAMESPACE });
+let calReady: Promise<Awaited<ReturnType<typeof getCalApi>>> | null = null;
+
+function loadCal() {
+  calReady ??= import('@calcom/embed-react')
+    .then((m) => m.getCalApi({ namespace: CAL_NAMESPACE }))
+    .then((cal) => {
       cal('ui', {
         theme: 'light',
         cssVarsPerTheme: {
@@ -29,13 +38,16 @@ function useCalUi() {
         hideEventTypeDetails: false,
         layout: 'month_view',
       });
-    })();
-  }, []);
+      return cal;
+    });
+  return calReady;
 }
 
-/** Inline calendar — for /contact. Renders the month view in-page. */
+/** Inline calendar — for /contact. Eager: this page is booking intent. */
 export function BookingInline({ className }: { className?: string }) {
-  useCalUi();
+  useEffect(() => {
+    void loadCal();
+  }, []);
   return (
     <div className={className}>
       <Cal
@@ -48,19 +60,38 @@ export function BookingInline({ className }: { className?: string }) {
   );
 }
 
-/** Popup trigger — drop-in wherever a "book a call" CTA lives. */
+/** Popup trigger — loads the embed on hover/focus, opens on click. */
 export function BookCallButton({
   children,
   analytics,
   ...buttonProps
 }: ButtonProps & { analytics?: string }) {
-  useCalUi();
+  const opening = useRef(false);
+
+  const preload = useCallback(() => {
+    void loadCal();
+  }, []);
+
+  const open = useCallback(async () => {
+    if (opening.current) return;
+    opening.current = true;
+    try {
+      const cal = await loadCal();
+      cal('modal', {
+        calLink: CAL_LINK,
+        config: { layout: 'month_view', theme: 'light' },
+      });
+    } finally {
+      opening.current = false;
+    }
+  }, []);
+
   return (
     <Button
       {...buttonProps}
-      data-cal-namespace={CAL_NAMESPACE}
-      data-cal-link={CAL_LINK}
-      data-cal-config='{"layout":"month_view","theme":"light"}'
+      onPointerEnter={preload}
+      onFocus={preload}
+      onClick={open}
       data-analytics={analytics}
     >
       {children ?? (
