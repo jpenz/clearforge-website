@@ -1406,7 +1406,7 @@ Variation drivers within the band:
 - Adoption support depth (training, change management)
 
 ### Tier 3: Enterprise AI Program ($500K-$2M+)
-Multi-quarter programs covering strategy, build, governance, change management, and adoption across multiple workflows or business units. Typical buyers: Fortune 500. Typical providers: McKinsey, BCG, Bain, Accenture, Deloitte.
+Multi-quarter programs covering strategy, build, governance, change management, and adoption across multiple workflows or business units. Typical buyers: Fortune 500. Typical providers: the global strategy houses and systems integrators.
 
 These programs deliver value but often take 12-24 months and require dedicated client-side program management. They're rarely the right fit for $25M-$500M companies.
 
@@ -1438,7 +1438,7 @@ ClearForge benchmark: **Forge Scale, $5K-$15K/month**, scoped to engagement inte
 ClearForge benchmark: **<90 days to first production measurement review** on Sprint engagements.
 
 ## Why Pricing Transparency Matters in 2026
-Many B2B services buyers prefer upfront pricing. Yet major firms — McKinsey, BCG, Bain, Slalom — publish no pricing on their websites. Buyers are forced into discovery calls just to learn whether a firm is in their budget range.
+Many B2B services buyers prefer upfront pricing. Yet most major consulting firms publish no pricing on their websites. Buyers are forced into discovery calls just to learn whether a firm is in their budget range.
 
 This is changing. Mid-market AI consulting firms increasingly publish their tier ranges directly on pricing pages. The shift mirrors what happened in SaaS pricing transparency a decade ago: firms that publish pricing capture the buyer who has already self-qualified, while firms that hide pricing only see leads from buyers willing to invest the time. The latter group is shrinking.
 
@@ -1505,7 +1505,7 @@ For a mid-market company starting AI in 2026, expect to invest **$15K for a cred
       {
         question: 'Why do most AI consulting firms hide their pricing?',
         answer:
-          'Most large consulting firms (McKinsey, BCG, Bain, Slalom) hide pricing because their engagements are highly customized and average ticket sizes vary widely. The downside is friction: buyers must spend time in discovery before they know whether the firm fits their budget range.',
+          'Most large consulting firms hide pricing because their engagements are highly customized and average ticket sizes vary widely. The downside is friction: buyers must spend time in discovery before they know whether the firm fits their budget range.',
       },
       {
         question: 'What should a fixed-fee AI Diagnostic include?',
@@ -1619,7 +1619,7 @@ ClearForge's Forge Diagnostic ($15K, 4 weeks) includes all six. If 3+ measurable
 ## Free Tools to Use Right Now
 - **ClearForge Diagnostic** (clearforge.ai/scorecard) — 10-question, workflow-specific, takes about 4 minutes, produces a build-readiness readout and roadmap recommendation.
 - **Forge Intelligence** (clearforge.ai/discover) — analyzes your company website to generate AI use cases and value-chain mapping.
-- **MIT/BCG AI Maturity Index** — academic framework, useful for board-level conversation.
+- **Academic AI maturity indexes** — university-affiliated frameworks, useful for board-level conversation.
 
 ## Bottom Line
 An AI readiness assessment is useful only when it changes the build decision. Free diagnostics are sufficient for self-education and board alignment. A paid Diagnostic ($10K-$25K) is warranted when meaningful budget is on the line. The practical test is simple: can you name the workflow, owner, baseline, data path, controls, and adoption cadence before engineering starts?`,
