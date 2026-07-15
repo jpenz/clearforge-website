@@ -181,7 +181,7 @@ export default function PricingPage() {
                 price.
               </h2>
               <p className="mt-6 max-w-xl text-body-lg text-stone">
-                McKinsey&apos;s rule of thumb: for every $1 spent on models, plan $3 on adoption.
+                The industry&apos;s own math: for every $1 spent on models, plan $3 on adoption.
                 Most firms bill the $1 and leave. We scope the $3 in — a named operator on your
                 team, a weekly working cadence, and a scoreboard everyone can see.
               </p>
