@@ -43,8 +43,12 @@ const fieldGuideSlugs = [
 ];
 
 export default function InsightsPage() {
-  const featured = insights[0];
-  const rest = insights.slice(1);
+  const byDate = [...insights].sort(
+    (a, b) =>
+      new Date(b.dateModified ?? b.date).getTime() - new Date(a.dateModified ?? a.date).getTime(),
+  );
+  const featured = byDate[0];
+  const rest = byDate.slice(1);
   const fieldGuides = fieldGuideSlugs
     .map((slug) => insights.find((insight) => insight.slug === slug))
     .filter((insight): insight is (typeof insights)[number] => Boolean(insight));
@@ -159,14 +163,17 @@ export default function InsightsPage() {
               >
                 <div className="lg:grid lg:grid-cols-12 lg:gap-12">
                   <div className="lg:col-span-8">
-                    <div className="flex items-center gap-4">
-                      <span className="text-body-sm font-medium text-brass">
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+                      <span className="whitespace-nowrap text-body-sm font-medium text-brass">
                         {article.category}
                       </span>
-                      <time className="text-body-sm text-warm-gray" dateTime={article.date}>
+                      <time
+                        className="whitespace-nowrap text-body-sm text-warm-gray"
+                        dateTime={article.date}
+                      >
                         {formatDate(article.date)}
                       </time>
-                      <span className="text-body-sm text-warm-gray">
+                      <span className="whitespace-nowrap text-body-sm text-warm-gray">
                         {article.readingTime} min read
                       </span>
                     </div>
@@ -204,11 +211,11 @@ export default function InsightsPage() {
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
               <Link href="/scorecard">
-                Run Diagnostic <ArrowRight className="ml-2 h-4 w-4" />
+                Take the scorecard <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>
-              <Link href="/discover">Generate AI Value Map</Link>
+              <Link href="/discover">Map the Workflow</Link>
             </Button>
           </div>
         </div>

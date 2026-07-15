@@ -29,7 +29,58 @@ function renderMarkdownBlocks(markdown: string) {
   const paragraphLines: string[] = [];
   let listItems: string[] = [];
   let listType: 'ordered' | 'unordered' | null = null;
+  let tableLines: string[] = [];
   let blockIndex = 0;
+
+  const flushTable = () => {
+    if (tableLines.length === 0) return;
+    const rows = tableLines
+      .map((line) =>
+        line
+          .replace(/^\|/, '')
+          .replace(/\|$/, '')
+          .split('|')
+          .map((cell) => cell.trim()),
+      )
+      .filter((cells) => !cells.every((c) => /^:?-{2,}:?$/.test(c)));
+    const [header, ...body] = rows;
+    if (header) {
+      blocks.push(
+        <div key={`table-${blockIndex}`} className="my-8 overflow-x-auto">
+          <table className="w-full min-w-[560px] border-collapse text-left">
+            <thead>
+              <tr className="border-b-2 border-anthracite/20">
+                {header.map((cell) => (
+                  <th
+                    key={cell}
+                    className="py-3 pr-6 text-xs font-semibold uppercase tracking-[0.08em] text-anthracite"
+                  >
+                    {cleanInlineText(cell)}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {body.map((cells) => (
+                <tr key={cells.join('|')} className="border-b border-divider align-top">
+                  {cells.map((cell, ci) => (
+                    <td
+                      key={`${header[ci] ?? 'col'}-${cell}`}
+                      className={`py-3 pr-6 text-body-sm leading-relaxed ${ci === 0 ? 'font-medium text-anthracite' : 'text-warm-gray'}`}
+                    >
+                      {cleanInlineText(cell)}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>,
+      );
+      blockIndex += 1;
+    }
+    tableLines = [];
+  };
 
   const flushParagraph = () => {
     if (paragraphLines.length === 0) return;
@@ -49,7 +100,7 @@ function renderMarkdownBlocks(markdown: string) {
     blocks.push(
       <ListTag
         key={`list-${blockIndex}`}
-        className="my-6 space-y-3 pl-6 text-body text-warm-gray leading-relaxed"
+        className={`my-6 space-y-3 pl-6 text-body text-warm-gray leading-relaxed ${listType === 'ordered' ? 'list-decimal' : 'list-disc'} marker:text-brass`}
       >
         {listItems.map((item) => (
           <li key={item}>{cleanInlineText(item)}</li>
@@ -63,6 +114,14 @@ function renderMarkdownBlocks(markdown: string) {
 
   for (const line of markdown.split('\n')) {
     const trimmed = line.trim();
+
+    if (trimmed.startsWith('|')) {
+      flushParagraph();
+      flushList();
+      tableLines.push(trimmed);
+      continue;
+    }
+    flushTable();
 
     if (!trimmed) {
       flushParagraph();
@@ -109,6 +168,7 @@ function renderMarkdownBlocks(markdown: string) {
 
   flushParagraph();
   flushList();
+  flushTable();
 
   return blocks;
 }
@@ -140,19 +200,21 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
 
   const related = insight.relatedSlugs.map((s) => getInsight(s)).filter(Boolean);
 
-  /* Split the markdown body into sections by ## headings */
-  const sections = insight.body
-    .split(/^## /m)
-    .filter(Boolean)
-    .map((section, index) => {
-      const lines = section.split('\n');
-      const heading = lines[0]?.trim() || `Section ${index + 1}`;
-      return {
-        id: `${slugifyHeading(heading)}-${index + 1}`,
-        heading,
-        body: lines.slice(1).join('\n').trim(),
-      };
-    });
+  /* Split the markdown body into sections by ## headings. Anything BEFORE
+     the first ## is the article lede — rendering it as a section turned the
+     TL;DR paragraph into a giant fake heading (and a TOC entry). */
+  const bodyStartsWithHeading = /^## /.test(insight.body.trimStart());
+  const rawPieces = insight.body.split(/^## /m).filter(Boolean);
+  const intro = bodyStartsWithHeading ? '' : (rawPieces.shift() ?? '').trim();
+  const sections = rawPieces.map((section, index) => {
+    const lines = section.split('\n');
+    const heading = lines[0]?.trim() || `Section ${index + 1}`;
+    return {
+      id: `${slugifyHeading(heading)}-${index + 1}`,
+      heading,
+      body: lines.slice(1).join('\n').trim(),
+    };
+  });
 
   /* Schema.org structured data for AEO/GEO citation lift */
   const articleLd = articleJsonLd({
@@ -179,12 +241,16 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
       {/* ── Hero ── */}
       <section className="dark-section py-32 lg:py-48">
         <div className="mx-auto max-w-3xl px-6 lg:px-10">
-          <div className="flex items-center gap-4">
-            <span className="text-body-sm font-medium text-brass">{insight.category}</span>
-            <time className="text-body-sm text-stone" dateTime={insight.date}>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <span className="whitespace-nowrap text-body-sm font-medium text-brass-light">
+              {insight.category}
+            </span>
+            <time className="whitespace-nowrap text-body-sm text-stone" dateTime={insight.date}>
               {formatDate(insight.date)}
             </time>
-            <span className="text-body-sm text-stone">{insight.readingTime} min read</span>
+            <span className="whitespace-nowrap text-body-sm text-stone">
+              {insight.readingTime} min read
+            </span>
           </div>
           <h1 className="mt-6 text-display text-bone">{insight.title}</h1>
           <p className="mt-6 text-body-lg text-stone">{insight.excerpt}</p>
@@ -242,6 +308,7 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
       <section className="bg-parchment py-24 lg:py-40">
         <div className="mx-auto max-w-3xl px-6 lg:px-10">
           <div className="prose-forge space-y-12">
+            {intro && <div className="space-y-4">{renderMarkdownBlocks(intro)}</div>}
             {sections.map((section) => (
               <div key={section.id}>
                 <h2 id={section.id} className="scroll-mt-28 text-h2 mb-6">
@@ -260,21 +327,15 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
           <div className="mx-auto max-w-3xl px-6 lg:px-10">
             <p className="overline">FAQ</p>
             <h2 className="mt-6 text-display">Common questions.</h2>
-            <div className="mt-12 grid gap-3">
+            <div className="mt-12">
               {insight.faqs.map((faq, i) => (
-                <details
-                  key={faq.question}
-                  open={i === 0}
-                  className="group border border-divider bg-warm-white p-5"
-                >
-                  <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-h4">
-                    <span>{faq.question}</span>
-                    <span className="mt-1 text-brass transition-transform group-open:rotate-45">
-                      +
-                    </span>
-                  </summary>
-                  <p className="mt-4 text-body text-warm-gray">{faq.answer}</p>
-                </details>
+                <div key={faq.question}>
+                  <div className="py-8">
+                    <h3 className="text-h4">{faq.question}</h3>
+                    <p className="mt-3 text-body text-warm-gray">{faq.answer}</p>
+                  </div>
+                  {i < insight.faqs.length - 1 && <div className="h-px bg-divider" />}
+                </div>
               ))}
             </div>
           </div>
@@ -295,7 +356,7 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
                     className="group block border-t border-divider py-8 transition-colors hover:bg-parchment"
                   >
                     <span className="text-body-sm font-medium text-brass">{r.category}</span>
-                    <h3 className="mt-2 text-h3 group-hover:text-brass transition-colors">
+                    <h3 className="mt-2 font-display text-[1.4rem] font-medium leading-snug tracking-[-0.01em] transition-colors group-hover:text-brass">
                       {r.title}
                     </h3>
                     <p className="mt-2 text-body text-warm-gray">{r.excerpt}</p>
@@ -307,21 +368,21 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
         </section>
       )}
 
-      {/* ── CTA ── */}
-      <section className="dark-section py-24 lg:py-40">
+      {/* ── CTA ── light band; the global footer band supplies the dark close */}
+      <section className="border-t border-divider bg-recessed py-20 lg:py-28">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">Ready to test this against your workflow?</h2>
-          <p className="mt-6 text-body-lg text-stone">
-            Run the diagnostic, then map where the value sits before you commit to a build.
+          <h2 className="text-display">Ready to test this against your workflow?</h2>
+          <p className="mt-6 text-body-lg text-warm-gray">
+            Take the scorecard, then map where the value sits before you commit to a build.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
               <Link href="/scorecard">
-                Run Diagnostic <ArrowRight className="ml-2 h-4 w-4" />
+                Take the scorecard <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline-light" asChild>
-              <Link href="/discover">Generate AI Value Map</Link>
+            <Button size="lg" variant="secondary" asChild>
+              <Link href="/discover">Map the Workflow</Link>
             </Button>
           </div>
         </div>

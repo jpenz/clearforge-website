@@ -3,6 +3,11 @@
 Working agreement for both AI coding agents (Claude, Codex) and humans contributing to this repo.
 Read this before opening a PR.
 
+> **All agents and contributors (Claude, Codex, humans): read `CLAUDE.md` first.**
+> It is the source of truth for the V11 design register, motion doctrine, canonical
+> CTA labels, CSS traps, and the QA gate. Older doctrine in commit history or design
+> docs is superseded by it.
+
 ---
 
 ## Branch protection

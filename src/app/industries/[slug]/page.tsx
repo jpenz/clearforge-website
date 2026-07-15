@@ -149,11 +149,12 @@ const TYPE_LABEL: Record<ActivityType, string> = {
   copilot: 'Copilot',
 };
 
+// Dark-section badges: light accent + stone (cobalt/warm-gray fail contrast on navy)
 const TYPE_BADGE_CLASS: Record<ActivityType, string> = {
-  automation: 'border-divider text-warm-gray',
-  agent: 'border-brass/40 text-brass',
-  model: 'border-divider text-warm-gray',
-  copilot: 'border-divider text-warm-gray',
+  automation: 'border-divider-dark text-stone',
+  agent: 'border-brass-light/50 text-brass-light',
+  model: 'border-divider-dark text-stone',
+  copilot: 'border-divider-dark text-stone',
 };
 
 function compactMetaDescription(text: string, maxChars = 155): string {
@@ -178,9 +179,7 @@ function ValueChainFunctionRow({ fn, index }: { fn: ValueChainFunction; index: n
             <span className="metric text-sm text-brass">{String(index + 1).padStart(2, '0')}</span>
             <Icon className="h-4 w-4 text-brass" />
           </div>
-          <h3 className="mt-3 text-h2 text-bone" style={{ fontFamily: 'var(--font-display)' }}>
-            {fn.function}
-          </h3>
+          <h3 className="mt-3 text-h2 text-bone font-display">{fn.function}</h3>
           <p className="mt-4 text-body text-stone max-w-md">{fn.description}</p>
         </div>
 
@@ -191,7 +190,7 @@ function ValueChainFunctionRow({ fn, index }: { fn: ValueChainFunction; index: n
                 <div className="flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-2 lg:gap-6">
                   <h4 className="text-body-lg text-bone font-medium">{act.name}</h4>
                   <span
-                    className={`shrink-0 inline-flex items-center text-[10px] uppercase border px-2 py-1 ${TYPE_BADGE_CLASS[act.type]}`}
+                    className={`shrink-0 self-start inline-flex items-center whitespace-nowrap text-[10px] uppercase tracking-[0.1em] border px-2 py-1 lg:self-auto ${TYPE_BADGE_CLASS[act.type]}`}
                   >
                     {TYPE_LABEL[act.type]}
                   </span>
@@ -247,11 +246,11 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               playsInline
               preload="metadata"
               poster="/images/abstract-network.webp"
-              className="absolute inset-0 w-full h-full object-cover opacity-55"
+              className="absolute inset-0 h-full w-full scale-110 object-cover opacity-40 blur-[10px] saturate-50"
             >
               <source src={industry.videoBackground} type="video/mp4" />
             </video>
-            <div className="absolute inset-0 bg-gradient-to-t from-forge-black via-forge-black/50 to-forge-black/60" />
+            <div className="absolute inset-0 bg-gradient-to-t from-forge-black via-forge-black/60 to-forge-black/70" />
           </div>
         ) : (
           <>
@@ -272,10 +271,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             <div className="lg:col-span-7">
               <FadeIn>
                 <p className="overline">{industry.category}</p>
-                <h1
-                  className="mt-6 text-display max-w-3xl text-bone"
-                  style={{ fontFamily: 'var(--font-display)' }}
-                >
+                <h1 className="mt-6 text-display max-w-3xl text-bone font-display">
                   AI Agents &amp; Automation for {industry.name}
                 </h1>
               </FadeIn>
@@ -285,7 +281,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                 <div className="mt-10">
                   <Button size="lg" asChild>
                     <Link href="/discover">
-                      Get a Custom Value Chain <ArrowRight className="ml-2 h-4 w-4" />
+                      Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
                 </div>
@@ -316,7 +312,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
 
       {/* ── Jump-link strip — Slalom pattern, premium consulting standard ── */}
       <div className="bg-warm-white border-b border-divider sticky top-14 z-30 backdrop-blur-sm">
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 py-3 overflow-x-auto">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 py-3 overflow-x-auto [mask-image:linear-gradient(90deg,black_85%,transparent)] lg:[mask-image:none]">
           <nav className="flex items-center gap-x-6 sm:gap-x-8 text-[11px] uppercase text-warm-gray whitespace-nowrap">
             <span className="text-anthracite font-semibold">Jump to:</span>
             <a href="#overview" className="hover:text-brass transition-colors">
@@ -371,10 +367,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
           <div className="lg:grid lg:grid-cols-12 lg:gap-16 lg:items-end">
             <div className="lg:col-span-7">
               <p className="overline">{industry.shortName} Value Chain</p>
-              <h2
-                className="mt-6 text-display text-bone"
-                style={{ fontFamily: 'var(--font-display)' }}
-              >
+              <h2 className="mt-6 text-display text-bone font-display">
                 The first places to look for AI value.
               </h2>
               <p className="mt-6 max-w-2xl text-body-lg text-stone">
@@ -408,11 +401,13 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
 
             {remainingFunctions.length > 0 && (
               <details className="group border-t border-divider-dark pt-10">
-                <summary className="flex cursor-pointer list-none flex-col gap-4 border border-divider-dark bg-bone/[0.04] p-6 transition-colors hover:bg-bone/[0.08] sm:flex-row sm:items-center sm:justify-between">
+                <summary className="flex cursor-pointer list-none items-start justify-between gap-4 border border-divider-dark bg-bone/[0.04] p-6 transition-colors hover:bg-bone/[0.08] sm:items-center">
                   <span>
                     <span className="overline text-[10px] text-brass-light">Full Value Chain</span>
                     <span className="mt-2 block text-h3 text-bone">
-                      View {remainingFunctions.length} more functions and every activity
+                      View {remainingFunctions.length} more{' '}
+                      {remainingFunctions.length === 1 ? 'function' : 'functions'} and every
+                      activity
                     </span>
                   </span>
                   <span className="text-sm font-semibold text-brass-light transition-transform group-open:rotate-45">
@@ -447,15 +442,12 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                 <div className="flex flex-1 flex-col">
                   <h3 className="text-h3">{ch.title}</h3>
                   <p className="mt-3 text-body text-warm-gray max-w-lg">{ch.description}</p>
-                  <div className="mt-5 flex items-baseline gap-3 flex-wrap">
-                    <span
-                      className="metric text-2xl text-anthracite"
-                      style={{ fontFamily: 'var(--font-jetbrains-mono, monospace)' }}
-                    >
-                      {ch.metric}
-                    </span>
-                    <span className="text-xs text-warm-gray leading-snug">{ch.metricLabel}</span>
-                  </div>
+                  {ch.metric && (
+                    <div className="mt-5 flex items-baseline gap-3 flex-wrap">
+                      <span className="metric text-2xl text-anthracite">{ch.metric}</span>
+                      <span className="text-xs text-warm-gray leading-snug">{ch.metricLabel}</span>
+                    </div>
+                  )}
                 </div>
               </StaggerItem>
             ))}
@@ -476,7 +468,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             </div>
             <div className="mt-12 lg:col-span-7 lg:mt-0">
               <p className="text-body-lg text-warm-gray">{industry.forgeApplication}</p>
-              <div className="mt-10 grid grid-cols-3 gap-8 border-t border-divider pt-8">
+              <div className="mt-10 grid grid-cols-1 gap-6 border-t border-divider pt-8 sm:grid-cols-3 sm:gap-8">
                 <div>
                   <p className="metric-lg text-brass">4 wks</p>
                   <p className="mt-2 text-body-sm text-warm-gray">Forge Diagnostic</p>
@@ -518,10 +510,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               className="group block mt-6 lg:grid lg:grid-cols-12 lg:gap-12"
             >
               <div className="lg:col-span-8">
-                <h3
-                  className="text-h2 group-hover:text-brass transition-colors"
-                  style={{ fontFamily: 'var(--font-display)' }}
-                >
+                <h3 className="text-h2 group-hover:text-brass transition-colors font-display">
                   {caseStudy.title}
                 </h3>
                 <p className="mt-4 text-body-lg text-warm-gray max-w-2xl">{caseStudy.excerpt}</p>
@@ -553,7 +542,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
         className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40 scroll-mt-24"
       >
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone" style={{ fontFamily: 'var(--font-display)' }}>
+          <h2 className="text-display text-bone font-display">
             Get a custom value chain for your business.
           </h2>
           <p className="mt-6 text-body-lg text-stone">
@@ -563,7 +552,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Generate My Custom Value Chain <ArrowRight className="ml-2 h-4 w-4" />
+                Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <BookCallButton size="lg" variant="outline-light" analytics="industry_detail_book_call">

@@ -37,7 +37,9 @@ const columns = [
     title: 'Firm',
     links: [
       { href: '/about', label: 'About' },
+      { href: '/how-we-work', label: 'How we work' },
       { href: '/pricing', label: 'Pricing' },
+      { href: '/security', label: 'Security' },
       { href: '/contact', label: 'Contact' },
     ],
   },
@@ -75,10 +77,7 @@ export function Footer() {
       <div className="mx-auto max-w-[1400px] px-4 py-12 sm:px-6 lg:px-10 lg:py-16">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="space-y-5 lg:col-span-4">
-            <span
-              className="text-xl text-bone"
-              style={{ fontFamily: 'var(--font-display)', fontWeight: 600 }}
-            >
+            <span className="font-display text-xl font-semibold text-bone">
               ClearForge<span className="metric text-sm text-brass-light">.ai</span>
             </span>
             <p className="max-w-xs text-sm leading-relaxed text-stone">
@@ -116,7 +115,7 @@ export function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-divider-dark pt-7 sm:flex-row">
-          <p className="metric text-[11px] text-stone">
+          <p className="metric text-center text-[11px] leading-relaxed text-stone sm:text-left">
             © {new Date().getFullYear()} ClearForge AI · Sterling Heights, MI · All rights reserved
           </p>
           <div className="flex gap-6">

@@ -47,6 +47,7 @@ export function ProgressBar({ currentStep, completedSteps }: ProgressBarProps) {
       {/* Progress bar */}
       <div
         role="progressbar"
+        aria-label="Diagnostic progress"
         aria-valuenow={Math.round(progress)}
         aria-valuemin={0}
         aria-valuemax={100}

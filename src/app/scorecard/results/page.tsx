@@ -127,10 +127,10 @@ export default function ScorecardResultsPage() {
         <div className="text-center px-6">
           <h1 className="text-display text-anthracite">No diagnostic found.</h1>
           <p className="mt-4 text-body-lg text-warm-gray">
-            Run the ClearForge Diagnostic first so the readout can be built from your answers.
+            Take the scorecard first so the readout can be built from your answers.
           </p>
           <Button className="mt-8" asChild>
-            <Link href="/scorecard">Run Diagnostic</Link>
+            <Link href="/scorecard">Take the scorecard</Link>
           </Button>
         </div>
       </section>
@@ -294,7 +294,7 @@ export default function ScorecardResultsPage() {
             {result.pillarScores.map((ps) => (
               <div
                 key={ps.key}
-                className={`border p-4 sm:p-6 ${ps.key === result.weakestPillar ? 'border-error/30 bg-error/5' : ps.key === result.strongestPillar ? 'border-success/30 bg-success/5' : 'border-divider bg-surface'}`}
+                className={`border p-4 sm:p-6 ${ps.key === result.weakestPillar ? 'border-anthracite/40 bg-anthracite/[0.04]' : ps.key === result.strongestPillar ? 'border-brass/40 bg-brass/5' : 'border-divider bg-surface'}`}
               >
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-sm font-bold text-anthracite">{ps.name}</h3>
@@ -302,7 +302,7 @@ export default function ScorecardResultsPage() {
                 </div>
                 <PillarBar
                   percentage={ps.percentage}
-                  color={ps.key === result.weakestPillar ? 'bg-error' : 'bg-brass'}
+                  color={ps.key === result.weakestPillar ? 'bg-anthracite' : 'bg-brass'}
                 />
               </div>
             ))}
@@ -363,7 +363,7 @@ export default function ScorecardResultsPage() {
               Book a 30-min intro <ArrowRight className="ml-2 h-4 w-4" />
             </BookCallButton>
             <Button variant="secondary" size="lg" asChild>
-              <Link href="/discover">Generate AI Value Map</Link>
+              <Link href="/discover">Map the Workflow</Link>
             </Button>
           </div>
         </div>

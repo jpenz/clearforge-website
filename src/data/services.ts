@@ -109,7 +109,7 @@ export const services: Service[] = [
     outcomes: [
       {
         value: 'Baseline',
-        label: 'Cost Of Drag',
+        label: 'Cost of Drag',
         description: 'Cycle time, rework, expedite cost, and manual coordination quantified',
       },
       {
@@ -220,7 +220,7 @@ export const services: Service[] = [
     tagline:
       'Strategy, engineering, integration, and governance for agents built around your workflows.',
     description:
-      'We design and build custom AI agents for complex, multi-step work across sales, operations, finance, service, and knowledge workflows. Not chatbots or generic copilots - working systems that integrate with your tools, escalate to people, and improve with use.',
+      'We design and build custom AI agents for complex, multi-step work across sales, operations, finance, service, and knowledge workflows. Not chatbots or generic copilots — working systems that integrate with your tools, escalate to people, and improve with use.',
     icon: 'Bot',
     heroBg: '/images/abstract-network.webp',
     idealClient:

@@ -60,7 +60,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             playsInline
             preload="metadata"
             poster={service.heroBg}
-            className="absolute inset-0 w-full h-full object-cover opacity-55"
+            className="absolute inset-0 h-full w-full scale-110 object-cover opacity-40 blur-[10px] saturate-50"
           >
             <source src={`/videos/${slug}.mp4`} type="video/mp4" />
           </video>
@@ -72,21 +72,18 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             {/* Left: headline copy + CTA */}
             <div className="lg:col-span-7">
               <p className="overline">{service.title}</p>
-              <h1
-                className="mt-6 text-display max-w-3xl text-bone"
-                style={{ fontFamily: 'var(--font-display)' }}
-              >
+              <h1 className="mt-6 text-display max-w-3xl text-bone font-display">
                 {service.tagline}
               </h1>
               <p className="mt-6 max-w-xl text-body-lg text-stone">{service.description}</p>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Button size="lg" asChild>
                   <Link href="/contact">
-                    Book a Diagnostic Call <ArrowRight className="ml-2 h-4 w-4" />
+                    Book a 30-min intro <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline-light" asChild>
-                  <Link href="/discover">Generate AI Value Map</Link>
+                  <Link href="/discover">Map the Workflow</Link>
                 </Button>
               </div>
             </div>
@@ -113,8 +110,14 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           <h2 className="mt-6 text-display max-w-2xl">What this looks like in practice.</h2>
           <div className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4">
             {service.outcomes.map((o) => (
-              <div key={o.label} className="border-t border-divider pt-6">
-                <p className="metric text-[2rem] font-medium leading-none text-brass sm:text-[2.4rem] lg:text-[2.75rem]">
+              <div key={o.label} className="min-w-0 border-t border-divider pt-6">
+                <p
+                  className={`metric break-words font-medium leading-none text-brass ${
+                    o.value.length > 6
+                      ? 'text-[1.35rem] sm:text-[1.6rem] lg:text-[2rem]'
+                      : 'text-[2rem] sm:text-[2.4rem] lg:text-[2.75rem]'
+                  }`}
+                >
                   {o.value}
                 </p>
                 <p className="mt-3 text-body font-semibold text-anthracite">{o.label}</p>
@@ -174,10 +177,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <p className="overline">How It Works</p>
-          <h2
-            className="mt-6 text-display max-w-3xl text-bone"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
+          <h2 className="mt-6 text-display max-w-3xl text-bone font-display">
             From selected workflow to operating cadence.
           </h2>
 
@@ -241,7 +241,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                   Book a 30-min intro <ArrowRight className="ml-2 h-4 w-4" />
                 </BookCallButton>
                 <Button size="lg" variant="secondary" asChild>
-                  <Link href="/discover">Generate AI Value Map</Link>
+                  <Link href="/discover">Map the Workflow</Link>
                 </Button>
               </div>
             </div>

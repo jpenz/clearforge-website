@@ -28,6 +28,7 @@ export interface IndustryChallenge {
 
 export type IndustryCategory =
   | 'Industrials'
+  | 'Professional Services'
   | 'Financial Services'
   | 'Healthcare & Life Sciences'
   | 'Technology & Telecom'
@@ -933,7 +934,7 @@ export const industries: Industry[] = [
   // PRIVATE EQUITY
   {
     slug: 'private-equity',
-    name: 'Private Equity Portfolio',
+    name: 'Private Equity',
     shortName: 'Private Equity',
     category: 'Financial Services',
     hero: 'Deploy repeatable AI value-creation plays across portfolio companies with tighter execution control.',
@@ -1573,7 +1574,7 @@ export const industries: Industry[] = [
     slug: 'wholesale-distribution',
     name: 'Wholesale & Distribution',
     shortName: 'Distribution',
-    category: 'Real Assets',
+    category: 'Industrials',
     hero: 'Convert decades of transaction data into pricing power, working-capital efficiency, and sales productivity.',
     oneLiner:
       'AI agents in pricing, sales, and warehouse — built for SKU-heavy, asset-heavy distributors.',
@@ -1772,8 +1773,8 @@ export const industries: Industry[] = [
         title: 'Service-Level Variability',
         description:
           'On-time-ship and order accuracy vary by branch. Customers feel it, and large accounts notice.',
-        metric: '$10T+',
-        metricLabel: 'Global market',
+        metric: '',
+        metricLabel: '',
       },
     ],
     forgeApplication:
@@ -1994,7 +1995,7 @@ export const industries: Industry[] = [
     slug: 'professional-services',
     name: 'Professional Services',
     shortName: 'Professional Services',
-    category: 'Public & Social Sector',
+    category: 'Professional Services',
     hero: 'Lift utilization, accelerate proposals, and scale expertise without scaling headcount.',
     oneLiner:
       'AI agents across the entire delivery lifecycle for consulting, accounting, legal, engineering, and architecture firms.',
@@ -2193,8 +2194,8 @@ export const industries: Industry[] = [
         title: 'Knowledge Diffusion',
         description:
           'Expertise lives in partner heads. New hires take 12-24 months to become productive.',
-        metric: '$6T',
-        metricLabel: 'Global market',
+        metric: '',
+        metricLabel: '',
       },
     ],
     forgeApplication:
@@ -2403,8 +2404,8 @@ export const industries: Industry[] = [
         title: 'Decision Speed',
         description:
           'Acquisitions, leasing, and capital-markets cycles all run on weeks-of-document-review timelines that AI compresses to days.',
-        metric: '$330T',
-        metricLabel: 'Global market',
+        metric: '',
+        metricLabel: '',
       },
     ],
     forgeApplication:
@@ -2613,8 +2614,8 @@ export const industries: Industry[] = [
         title: 'Document Burden',
         description:
           'RFIs, submittals, change orders, and dailies consume superintendent and PM time that could go to execution.',
-        metric: '$13T',
-        metricLabel: 'Global market',
+        metric: '',
+        metricLabel: '',
       },
     ],
     forgeApplication:
@@ -2824,8 +2825,8 @@ export const industries: Industry[] = [
         title: 'Retailer Pressure',
         description:
           'Retailer concentration squeezes margin. Without granular RGM, mid-cap CPGs cede pricing to bigger competitors.',
-        metric: '$13T',
-        metricLabel: 'Global market',
+        metric: '',
+        metricLabel: '',
       },
     ],
     forgeApplication:
@@ -3359,8 +3360,8 @@ export const industries: Industry[] = [
         title: 'Loyalty Erosion',
         description:
           'OTAs erode brand-direct demand. Better guest segmentation supports direct relationships.',
-        metric: '$11T',
-        metricLabel: 'Global market',
+        metric: '',
+        metricLabel: '',
       },
     ],
     forgeApplication:
@@ -3537,8 +3538,8 @@ export const industries: Industry[] = [
         title: 'Field-Productivity Variance',
         description:
           'Tech productivity varies widely. AI-supported dispatch + copilot is one of the largest levers.',
-        metric: '$1.7T',
-        metricLabel: 'Global market',
+        metric: '',
+        metricLabel: '',
       },
     ],
     forgeApplication:
@@ -3714,8 +3715,8 @@ export const industries: Industry[] = [
         title: 'Quality + Warranty',
         description:
           'Field-quality issues drive warranty cost and brand erosion. Faster triage cuts both.',
-        metric: '$3T',
-        metricLabel: 'Global market',
+        metric: '',
+        metricLabel: '',
       },
     ],
     forgeApplication:
@@ -3922,6 +3923,7 @@ export function getIndustriesByCategory(): Record<IndustryCategory, Industry[]> 
 
 export const industryCategories: IndustryCategory[] = [
   'Industrials',
+  'Professional Services',
   'Financial Services',
   'Healthcare & Life Sciences',
   'Technology & Telecom',

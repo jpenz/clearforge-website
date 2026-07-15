@@ -45,3 +45,4 @@ pnpm-debug.log*
 *.swp
 *.swo
 cf-screenshots.js
+test-results/

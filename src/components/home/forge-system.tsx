@@ -128,7 +128,7 @@ function SkuVisual({ id }: { id: string }) {
         {[
           { t: 'Sales Intelligence Command', o: 'z-30 top-0 left-0 right-6' },
           { t: 'Service Quality Command Center', o: 'z-20 top-7 left-3 right-3 opacity-80' },
-          { t: 'Exception Control Tower', o: 'z-10 top-14 left-6 right-0 opacity-60' },
+          { t: 'Exception Control Tower', o: 'z-10 top-14 left-6 right-0 opacity-75' },
         ].map((c) => (
           <div
             key={c.t}

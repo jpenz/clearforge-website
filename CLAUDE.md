@@ -1,190 +1,185 @@
 # CLAUDE.md — ClearForge.ai Marketing Site
 
 > Read this before touching any code. Run `npm run build` after every change.
+> This file is the source of truth for HOW to work here — it overrides older
+> doctrine you may find in commit history or design docs.
 
 ---
 
 ## What This Is
 
-Marketing + lead generation site for ClearForge AI, an AI transformation consulting firm.
-Showcases services, case studies, pricing, the Forge Intelligence™ AI agent, and the AI Readiness Scorecard.
+Marketing + lead-generation site for ClearForge AI, an AI strategy/build/adoption firm
+for mid-market & PE (James Penz, ex-Bain AI & Automation practice).
 
-**Production URL:** https://clearforge.ai
+**Production URL:** https://clearforge.ai (Vercel auto-deploys `main`)
 **Repo:** https://github.com/jpenz/clearforge-website
-**Business:** ClearForge AI (James Penz, ex-Bain AI Automation practice)
-**Current version:** V9.0 — signal-blue + all-sans rebrand, new homepage with embedded live Forge Intelligence agent hero (`/api/hero-analyze`)
+**Current version:** V11 (Wave 1 live, tag `v11.1`; Wave 2 on PR #11)
+
+---
+
+## Working Discipline (Karpathy rules, adopted 2026-07-14)
+
+1. **Think before coding.** State assumptions explicitly; when the evidence is
+   ambiguous, MEASURE (computed styles, probes, curl) before "fixing." Wrong
+   assumptions here have shipped invisible-text bugs.
+2. **Simplicity first.** Minimum code that solves the problem. No speculative
+   features, no premature abstraction. If it could be half the size, cut it.
+3. **Surgical changes.** Touch only what the task needs. Match surrounding
+   style. Never mass-reformat (Biome debt is quarantined — see CI). Clean up
+   only orphans your change created.
+4. **Goal-driven execution.** Define success criteria, then loop until verified:
+   `typecheck → build → vitest → e2e → browser/crawler proof`. A change without
+   verification is not done.
 
 ---
 
 ## Stack
 
-- Next.js 16 App Router · React 19 · TypeScript 5 (strict: true)
-- Tailwind CSS v4
-- GSAP + @gsap/react (hero parallax, scrub marquees, section reveals, text reveals)
-- Lenis (smooth scroll)
-- Framer Motion (legacy — still present in a few utility components)
-- Radix UI primitives
-- Zod v4 for form validation
-- Anthropic + Perplexity APIs for Forge Intelligence discovery agent
+- Next.js 16 App Router · React 19 · TypeScript 5 (strict) · Tailwind CSS v4 (`@theme inline`)
+- GSAP present but nearly retired (see Motion Doctrine) · Radix primitives · Zod v4
+- Anthropic + Perplexity APIs (Forge Intelligence agents) · Supabase (leads) · Resend (contact email)
+- Cal.com booking embed (`@calcom/embed-react`)
+- Tests: Vitest (unit) + Playwright (`e2e/`, run `PLAYWRIGHT_BASE_URL=http://localhost:3008 npx playwright test`)
 - Deploy: Vercel
 
 ---
 
-## Design System — V8 Editorial (NOT Linear/Vercel dark SaaS)
+## Design System — V11 (navy/cobalt/serif — NOT the old V8 editorial-ember or V9 signal-blue)
 
-The site is an **editorial typographic layout** in the tradition of McKinsey, Bain, and print-first magazines — **not** a dark SaaS site. There are no card containers; ruled lines and whitespace do the structural work.
+Cool paper, navy ink, ONE electric cobalt accent, serif display. See
+`tasks/prd-v11-site-modernization.md` for the full spec.
 
-### Colors (actual values — see `src/app/globals.css`)
+### Tokens (`src/app/globals.css` — legacy NAMES kept, values remapped; do NOT rename tokens)
 
 ```css
-/* Core palette */
---color-forge-black: #0A0F1E;   /* dark-section bg */
---color-parchment:   #F8F8F6;   /* light-section bg */
---color-surface:     #FFFFFF;   /* raised surfaces */
---color-recessed:    #F0F0ED;   /* recessed sections */
---color-anthracite:  #141428;   /* primary text on light */
---color-warm-gray:   #4A4A62;   /* secondary text on light */
---color-bone:        #EAEAF2;   /* text on dark */
---color-stone:       #9090A8;   /* secondary text on dark */
-
-/* Accent — SIGNAL BLUE as of V9 (token still named "brass" for
-   historical reasons — do NOT rename, it resolves everywhere).
-   --color-success stays green (#047857) for semantic check marks. */
---color-brass:       #0E5DC2;   /* primary accent (signal blue), WCAG AA */
---color-brass-hover: #0A4A9C;   /* hover state */
---color-brass-light: #4D8DE8;   /* on dark sections */
-
-/* Borders */
---color-divider:      #C8C8D2;  /* on light */
---color-divider-dark: #232940;  /* on dark */
+--color-forge-black: #081826;  /* deep navy — dark sections (NOT black) */
+--color-parchment:   #F8F7F4;  /* cool paper — light sections */
+--color-anthracite:  #0B1B2B;  /* navy ink — text on light */
+--color-warm-gray:   #46525E;  /* slate — secondary on light */
+--color-bone:        #EDF1F4;  /* text on navy */
+--color-stone:       #8D9AA6;  /* secondary on navy */
+--color-brass:       #1F4CDB;  /* THE accent (electric cobalt) */
+--color-brass-hover: #1638A8;
+--color-brass-light: #7A97FF;  /* accent ON DARK — cobalt fails contrast on navy */
+--color-divider:     #E1E1DB;  --color-divider-dark: #1C3040;
 ```
 
-### Typography
+### Typography — tri-font
 
-- **ALL-SANS as of V9.** Display + body: **Geist** (`geist` pkg → `var(--font-geist-sans)`, mapped to `--font-sans` / `--font-display`). Instrument Serif + DM Sans were removed.
-- **Metrics / mono:** JetBrains Mono (via `var(--font-jetbrains-mono)`)
-- Sans display headings are weight 600 + tight negative tracking (−0.02 to −0.035em); never weight 400 (looks flabby in sans)
-- Overline: uppercase, tracking-widest, 10–12px
-- All color + text combinations verified WCAG AA
+- **Display:** Newsreader serif (~550 weight, never ultra-bold), css var still named
+  `--font-fraunces`. One italic cobalt accent phrase per display headline (`.display-accent`).
+- **Body:** Hanken Grotesk. **Data/overlines:** DM Mono, uppercase, tracked.
+- Type scale classes: `.text-display-xl/.text-display/.text-h1…h4`, `.overline`, `.metric*`.
 
-### Layout rules
+### Hard-won CSS rules (violating these has shipped real bugs)
 
-- **Ruled lines, not cards** — `border-t border-divider` between list items, not boxed containers
-- Full-width sections alternating `bg-parchment` / `dark-section` / `bg-recessed`
-- Asymmetric `lg:grid-cols-12` layouts, typography-first
-- Max container width: `max-w-[1400px]`
-- Whitespace is a load-bearing design element — respect the generous padding (`py-20 sm:py-32 lg:py-40`)
+- **Never put `color` on bare element selectors** in globals — unlayered CSS beats ALL
+  Tailwind utilities; headings become un-recolorable (navy-on-navy /discover bug).
+- **Never reference theme tokens via inline `style={{...var(--font-display)...}}`** —
+  `@theme inline` vars don't exist at runtime; the style silently falls back to body
+  sans (this broke serif on 10 files incl. the hero). Use utilities (`font-display`).
+- **Never name a custom class after a Tailwind utility** (`.overline` collided with the
+  `overline` text-decoration utility).
+- **On dark surfaces**: `text-brass-light` + `border-brass-light/50`, secondary `text-stone`.
+  `text-brass`/`text-warm-gray` on navy fail WCAG.
+- Percentage-height chart bars need `h-full … justify-end` columns (`items-end` on the
+  row collapses them to 0).
 
-### Animation rules (enforced by premium-site-builder skill)
+### Layout & register
 
-- Uses 5 distinct GSAP entrance types: `fade-up`, `slide-left`, `slide-right`, `scale-up`, `clip-reveal`
-- **Never** repeat the same animation on consecutive sections
-- Hero video background: Veo 3 ambient loop at `public/videos/hero-ambient.mp4`, desktop+tablet only, static fallback on mobile
-- Marquee is **scroll-scrubbed**, not time-based
-- Hero parallax: subtle y-translate via ScrollTrigger scrub
+- Editorial ruled lines + whitespace; cards ONLY for product-UI objects and max ONE
+  bento per page. Asymmetric 12-col grids, `max-w-[1400px]`.
+- Cinematic dark hero + light interior; ONE extra dark band per page (credibility/CTA).
+- Product-as-hero: the homepage hero card IS the live agent (`/api/hero-analyze`).
+- A number in every viewport, tied to a named thing; numbers always DM Mono.
+
+### Motion Doctrine (V11 — reverses V7/V8 rules you may find elsewhere)
+
+- **Content renders instantly. Native scroll. No Lenis, no custom cursor, no
+  opacity-0-until-ScrollTrigger reveals, no pinned/scrubbed sections.** A client called
+  the old scroll-theater build "very lazy"; removing it fixed it.
+- Motion as moments only: `MetricCounter` count-ups, one CSS marquee, hover states, the
+  agent card's own state changes. `prefers-reduced-motion` respected.
+- Reveal wrappers (`ui/animate.tsx`, `home/homepage-animations.tsx`) are inert server
+  passthroughs — keep their APIs; do not re-arm them casually.
+- Background videos must be normalized (`scale-110 blur-[10px] saturate-50..85
+  opacity-40` + gradient) — several contain baked-in text/off-palette hues.
+
+---
+
+## Conversion System
+
+- **Cal.com `james-penz/30min` is the primary conversion.** `src/components/booking/book-call.tsx`:
+  `BookingInline` (on /contact) + `BookCallButton` (popup everywhere else).
+- **Canonical CTA labels — do not invent variants** (drift was a 10-finding QA cluster):
+  booking = **"Book a 30-min intro"** · agent = **"Map the Workflow"** (→ /discover) ·
+  assessment = **"Take the scorecard"** (→ /scorecard).
+- CSP in `next.config.ts` allows app.cal.com/cal.com/api.cal.com — required for the embed.
+
+## Editorial Rules
+
+- **Never invent metrics.** If a stat is irrelevant or unsourced, render nothing.
+- **No real client names** (anonymized: "$180M industrial manufacturer"). James's real
+  caseload is confidential.
+- The 70% weekly-active adoption bar is publishable; the **"or we keep working free"
+  guarantee and any "Adoption Rescue" SKU are PARKED — owner-only decisions, do not ship.**
+- Insights articles: markdown body; `## ` splits sections; pre-`##` text = lede; tables
+  supported. Don't fake reading times.
 
 ---
 
 ## Commands
 
 ```bash
-npm run dev          # dev server (currently running on :3001 via tailscale)
-npm run build        # MUST pass — run after every change
-npm run lint         # biome check
+npm run dev          # dev on :3007 — pass env explicitly:
+                     # ANTHROPIC_API_KEY=... PERPLEXITY_API_KEY=... npx next dev -p 3007
+npm run build        # MUST pass (92 routes)
 npm run typecheck    # tsc --noEmit
+npx vitest run       # 170 unit tests
+npx next start -p 3008                                   # prod-mode server for QA
+PLAYWRIGHT_BASE_URL=http://localhost:3008 npx playwright test   # 164 e2e
 ```
 
-Local dev with API keys requires explicit env var passing for Turbopack:
-`ANTHROPIC_API_KEY=xxx PERPLEXITY_API_KEY=xxx npx next dev -p 3001`
+- Local `.env.local` has an EMPTY `RESEND_API_KEY` → /api/contact 503s locally by
+  design; production has the key and works.
 
----
+## QA Gate (before calling anything "done")
 
-## Core Features
+Run the pipeline in `~/.claude/skills/premium-site-builder/QA_PIPELINE.md`:
+prod-build crawl (console/overflow/broken links/images + screenshots both viewports) →
+journey scripts (booking, scorecard flow, forms — ONE labeled test submission max) →
+axe-core WCAG AA (zero serious/critical on our DOM; exclude the Cal iframe) → e2e green.
 
-### Forge Intelligence™ AI Agent (`/discover`)
-3-phase UX: URL input → Perplexity company research → Claude Sonnet 4.6 CLOSER-framework conversation → PDF report.
-API routes: `/api/discover`, `/api/discover/research`, `/api/discover/report`.
+## CI (GitHub Actions)
 
-### The Forge Method™ (the service framework)
-1. **Forge Diagnostic™** — 4 weeks, from $15K
-2. **Forge Sprint™** — 10–14 weeks, $75K–$200K
-3. **Forge Scale™** — ongoing, $5K–$15K/mo
-
-**Guarantee:** If Forge Diagnostic doesn't identify 3 actionable AI opportunities with clear ROI, full refund.
-
-### AI Readiness Scorecard (`/scorecard`)
-18-question assessment across 5 pillars, outputs 0–100 score.
-1. Data Maturity (30%)
-2. Team Capability (25%)
-3. Process Clarity (20%)
-4. Technology Infrastructure (15%)
-5. Leadership Alignment (10%)
-
-Tier: Starter / Developing / Advanced / Leader.
-
-### 64 routes total
-Homepage, Services hub + 4 service pages, Case Studies + case detail, About, Contact, Pricing, Discover, Scorecard + Results, **17 Industry pages via /industries/[slug]** (data-driven from `src/data/industries-value-chains.ts`), Insights hub + 13 articles, Privacy, Terms.
-
-### Industry value-chain system (V8.20)
-- `src/data/industries-value-chains.ts` — 17 industries × 4-5 functions × 3-4 activities per function = ~300 addressable activities
-- Each activity has: name, AI impact description, type (agent/automation/model/copilot), quantified business impact
-- Single dynamic `/industries/[slug]/page.tsx` template renders all 17
-- `/industries` hub groups by 10 categories (Industrials, FS, Healthcare, Tech, Consumer, Real Assets, Mobility, Travel, Energy, Public Sector)
-
-### SEO + AEO/GEO optimization (V8.21, V8.24)
-- Schema.org structured data: `ProfessionalService` (org), `Service` + `OfferCatalog` (industries — every value chain function/activity becomes indexable JSON-LD), `Article`/`BlogPosting`, `FAQPage`, `BreadcrumbList`, `CollectionPage`
-- robots.txt explicitly opts in major AI crawlers (GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot, Google-Extended) — research showed 35.67x citation lift from schema markup
-- 3 AEO pillar articles authored by James Penz (E-E-A-T): `ai-consulting-cost`, `ai-readiness-assessment-guide`, `fractional-caio-vs-full-time`
-
-### Ad strategy as code (V8.23)
-- `src/data/ad-strategy.ts` — 5 keyword clusters, 8 concrete campaigns across LinkedIn (70%) / Google (20%) / Meta (10%), positioning angles, buyer language to mirror
-
----
-
-## Performance Targets
-
-- Lighthouse: **95+** on all pages
-- LCP < 2.5s
-- Server Components for all marketing pages
-- Client components only where GSAP / hero video / interactive forms are needed
-- Dynamic import: Recharts (scorecard), heavy client-only components
+TypeScript, Vitest, TruffleHog, Semgrep must be green. **Biome and npm audit are
+pre-existing red on main** (legacy debt + Supabase transitive `ws`) — add no NEW
+violations; do not mass-fix.
 
 ---
 
 ## What NOT To Do
 
-- ❌ **No dark SaaS aesthetic** — this is editorial, not Linear/Vercel. Read the V8 design notes before styling.
-- ❌ **No cards / boxed containers** — ruled lines and whitespace only
-- ❌ **No serif, no Inter, no system-ui** — Geist (display+body) + JetBrains Mono (metrics) only, as of V9
-- ❌ **No stock photography** — photoreal people in offices are banned. Abstract editorial imagery (hand-drawn diagrams, data-viz, atmospheric particle fields) only.
-- ❌ **No client names in case studies** — anonymized only ("$180M industrial manufacturer")
-- ❌ **No `'use client'` on pages** — only on components that genuinely need it (GSAP, hero video)
-- ✅ **Signal blue (#0E5DC2) is the brand accent** as of V9 — use `text-brass`/`bg-brass` (token name retained). Keep `--color-success` green for check marks.
-- ❌ **Never break the scorecard flow** — test the full 18-question path after any scorecard change
-- ❌ **Never land an orphaned asset** — if a PNG goes into `/public`, it must be referenced from source the same commit
+- ❌ Reintroduce Lenis / scroll-hiding reveals / pinned sections (see Motion Doctrine)
+- ❌ New colors, second accents, gradients-as-decoration, or renaming legacy tokens
+- ❌ `color` on bare element selectors; inline-style theme-var references
+- ❌ Cards/boxes for text content (product-UI objects + one bento only)
+- ❌ Stock photography of people; imagery = AI-generated renders (KIE Nano Banana Pro)
+- ❌ Invented metrics, real client names, the parked guarantee language
+- ❌ CTA label variants beyond the three canonical labels
+- ❌ Breaking the scorecard flow (e2e covers it — keep specs updated WITH the UI)
+- ❌ `'use client'` on pages; client components only where interaction demands it
 
----
+## Version History (condensed)
 
-## Version History
-
-- **V9.0** — Brand + homepage redesign (from Claude-design handoff, `design_handoff/`). (1) Site-wide reskin: accent emerald→signal blue `#0E5DC2`; all-sans (Geist display+body, dropped Instrument Serif + DM Sans), headings retuned to weight 600. (2) New homepage architecture: Hero → Objections → ProductionGap → Engagements → Operators → SelectedWork → CredibilityBand → FinalCTA (one component each under `components/home/`, copy in `data/homepage.ts`). (3) Hero is an embedded live **Forge Intelligence agent** — visitor enters their URL, `/api/hero-analyze` fetches the homepage + one Claude call → a flagship diagnostic thesis (gap → build → ambition → benefit → directional evidence) + 2 more plays → CTA into `/discover`. Rate-limited, honest staged loading, graceful fallback. Retired: hero-scroll, forge-method-diagram, gsap-text-reveal.
-- **V8.24** — AEO pillar articles (cost, readiness, fractional CAIO) authored by James Penz, Article+FAQPage JSON-LD on insights, CTA language lift ("Schedule a Discussion" → "Book a 15-Min Diagnostic Call" — research-backed 35% conv lift), trust line credentials prepended
-- **V8.23** — Ad strategy data file (5 keyword clusters, 8 campaigns, channel allocation 70% LinkedIn / 20% Google / 10% Meta, ownable positioning angles)
-- **V8.22** — Homepage industries surface (12 of 17), research-backed trust line ("industry: 16%", "80% stuck in pilot")
-- **V8.21** — Comprehensive SEO + structured data layer (ProfessionalService schema, Service+OfferCatalog on industries, BreadcrumbList, FAQPage, CollectionPage; robots.txt allows AI crawlers; data-driven sitemap)
-- **V8.20** — 17-industry value-chain system + dynamic [slug] template + /industries hub. 64 static pages now (was 49)
-- **V8.19** — McKinsey-grade editorial audit: anonymized case-study slug, "0 → Recurring" hero metric, fixed Industries footer IA, killed "pilot purgatory" homepage hero, atmospheric Contact hero
-- **V8.18** — Fixed GSAP opacity bug + atmospheric hero bgs across all top-level pages
-- **V8.17** — Seedance 2 video backgrounds on use case pages, scroll-driven hero (reverted)
-- **V8.16** — Industry page hero overhaul (matches service page editorial pattern)
-- **V8.15** — Service detail page editorial polish (fixed wrapping bug)
-- **V8.14** — Hero LCP perf (1.1s → 0.7s desktop)
-- **V8.5** — Wired orphaned Forge Method diagram into homepage, added atmospheric abstract bgs, fixed hero video opacity, deleted 30+ dead assets, rewrote this CLAUDE.md to match reality
-- **V8.4** — Veo 3 AI-generated hero video background, updated KIE.ai API reference
-- **V8.3** — Excalidraw Forge Method diagram generated (but not wired, fixed in V8.5)
-- **V8.2** — premium-site-builder skill compliance (5 animation types, scroll-scrub marquee, pinned section)
-- **V8.1** — DM Sans, 6.5rem hero, ken burns, horizontal marquee, frontend-design skill compliance
-- **V8.0** — Editorial redesign: no cards, ruled lines, typography-first
-- **V7.4** — McKinsey-level GSAP scroll experience + premium interactions
-- **V7.3** — Mobile responsive, scroll animations, PDF reports, Lighthouse polish
-- **V7.2** — Research-backed zero-base redesign with CLOSER framework + Forge Intelligence AI agent
+- **V11** (2026-07) — clean-slate rebrand: navy/cobalt/Newsreader tri-font register,
+  cinematic HDR hero + live agent card, native scroll + instant content, Cal.com booking
+  as primary conversion, founder-led /about (real headshot), Adoption Mile™ pricing band,
+  /how-we-work + /security pages, full-site QA sweep (69 findings root-caused: serif
+  restoration, case-study rebuild, ghost-video normalization, insights table renderer,
+  CTA canonicalization). Waves gated by owner preview; tags v11.1+.
+- **V9–V10** (2026-06/07) — signal-blue all-sans rebrand + agent-hero homepage (superseded).
+- **V8.x** (2026-04/05) — editorial redesign era: 17-industry value chains, SEO/AEO layer
+  (schema.org + AI-crawler opt-in), scorecard, insights library, perf work. Data files and
+  routes from this era remain the content backbone.
+- **V7** — original CLOSER-framework site with Forge Intelligence agent.

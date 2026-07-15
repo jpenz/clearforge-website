@@ -66,11 +66,11 @@ export default function BlueprintsPage() {
           <div className="mt-10 flex flex-wrap gap-4">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Generate AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
+                Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>
-              <Link href="/contact">Book a Diagnostic Call</Link>
+              <Link href="/contact">Book a 30-min intro</Link>
             </Button>
           </div>
         </div>
@@ -170,10 +170,10 @@ export default function BlueprintsPage() {
               </div>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Button size="lg" asChild>
-                  <Link href="/scorecard">Run Diagnostic</Link>
+                  <Link href="/scorecard">Take the scorecard</Link>
                 </Button>
                 <Button size="lg" variant="outline-light" asChild>
-                  <Link href="/contact">Book a Diagnostic Call</Link>
+                  <Link href="/contact">Book a 30-min intro</Link>
                 </Button>
               </div>
             </div>

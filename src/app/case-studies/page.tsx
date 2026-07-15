@@ -53,10 +53,7 @@ export default function CaseStudiesPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-forge-black via-forge-black/80 to-forge-black/40 pointer-events-none" />
         <div className="relative mx-auto max-w-[1200px] px-6 lg:px-10">
           <p className="overline">Case Studies</p>
-          <h1
-            className="mt-6 text-display max-w-3xl text-bone"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
+          <h1 className="mt-6 text-display max-w-3xl text-bone font-display">
             Proof from work that shipped.
           </h1>
           <p className="mt-6 max-w-xl text-body-lg text-stone">
@@ -90,10 +87,7 @@ export default function CaseStudiesPage() {
                   <div className="py-10 sm:py-12 lg:py-14 flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-6">
                     <div className="flex-1 min-w-0">
                       <span className="overline text-[10px]">{cs.industry}</span>
-                      <h3
-                        className="mt-3 text-h2 group-hover:text-brass transition-colors duration-300"
-                        style={{ fontFamily: 'var(--font-display)' }}
-                      >
+                      <h3 className="mt-3 text-h2 group-hover:text-brass transition-colors duration-300 font-display">
                         {cs.title}
                       </h3>
                       <p className="mt-3 text-body-sm text-warm-gray max-w-xl">
@@ -130,7 +124,7 @@ export default function CaseStudiesPage() {
           <div className="mt-10">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Map My First Build <ArrowRight className="ml-2 h-4 w-4" />
+                Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>

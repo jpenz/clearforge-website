@@ -56,8 +56,8 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
           imageAlt=""
           priority
           storageKey={`clearforge:use-case:${useCase.slug}:motion-paused`}
-          imageClassName="opacity-50"
-          videoClassName="opacity-[0.52]"
+          imageClassName="scale-110 opacity-40 blur-[14px] saturate-[0.85]"
+          videoClassName="scale-110 opacity-[0.42] blur-[14px] saturate-[0.85]"
           controlClassName="top-24 right-4 lg:top-auto lg:right-8 lg:bottom-8"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,15,30,0.96)_0%,rgba(10,15,30,0.78)_48%,rgba(10,15,30,0.42)_100%)] pointer-events-none" />
@@ -71,7 +71,7 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
             <div className="mt-10 flex flex-wrap gap-4">
               <Button size="lg" asChild>
                 <Link href="/discover">
-                  Map My First Build <ArrowRight className="ml-2 h-4 w-4" />
+                  Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline-light" asChild>
@@ -249,7 +249,7 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
               <p className="overline">FAQ</p>
               <h2 className="mt-6 text-display">Questions buyers ask first.</h2>
             </div>
-            <div className="mt-12 grid gap-4 lg:col-span-8 lg:mt-0 lg:grid-cols-2">
+            <div className="mt-12 grid items-start gap-4 lg:col-span-8 lg:mt-0 lg:grid-cols-2">
               {useCase.faqs.map((faq, index) => (
                 <details
                   key={faq.question}
@@ -270,20 +270,20 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-      <section className="dark-section noise-texture py-24 lg:py-40">
+      <section className="border-t border-divider bg-recessed py-20 lg:py-28">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">Find where this belongs in your company.</h2>
-          <p className="mt-6 text-body-lg text-stone">
+          <h2 className="text-display">Find where this belongs in your company.</h2>
+          <p className="mt-6 text-body-lg text-warm-gray">
             The fastest path is choosing one workflow worth fixing, building the controls around it,
             and training your team into the new cadence.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Map My First Build <ArrowRight className="ml-2 h-4 w-4" />
+                Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline-light" asChild>
+            <Button size="lg" variant="secondary" asChild>
               <Link href="/use-cases">View All Use Cases</Link>
             </Button>
           </div>

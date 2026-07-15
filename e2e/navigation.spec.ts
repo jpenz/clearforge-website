@@ -49,21 +49,18 @@ test.describe('Page Loads — No Errors', () => {
 });
 
 test.describe('Navigation flows', () => {
-  test('clicking Capabilities nav link goes to /services', async ({ page }, testInfo) => {
+  test('Products dropdown links to Forge Intelligence (/discover)', async ({ page }, testInfo) => {
     test.skip(testInfo.project.name === 'mobile', 'Desktop nav is replaced by the mobile menu.');
 
     await page.goto('/');
     await page.waitForLoadState('networkidle');
 
-    const capabilitiesLink = page
-      .getByRole('navigation', { name: /main navigation/i })
-      .getByRole('link', { name: /^capabilities$/i })
-      .first();
-
-    await Promise.all([page.waitForURL('**/services'), capabilitiesLink.click()]);
+    await page.getByRole('button', { name: 'Products' }).click();
+    const intel = page.getByRole('link', { name: /forge intelligence/i }).first();
+    await Promise.all([page.waitForURL('**/discover'), intel.click()]);
   });
 
-  test('mobile menu links to the services page', async ({ page }, testInfo) => {
+  test('mobile menu links to the how-we-work page', async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== 'mobile', 'Mobile menu is only visible on small screens.');
 
     await page.goto('/');
@@ -73,7 +70,7 @@ test.describe('Navigation flows', () => {
     const menu = page.getByRole('dialog');
     await expect(menu).toBeVisible();
 
-    await Promise.all([page.waitForURL('**/services'), menu.getByRole('link', { name: /how we work/i }).click()]);
+    await Promise.all([page.waitForURL('**/how-we-work'), menu.getByRole('link', { name: /how we work/i }).click()]);
   });
 
   test('primary CTA points to a valid destination', async ({ page }) => {

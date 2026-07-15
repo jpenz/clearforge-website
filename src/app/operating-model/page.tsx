@@ -162,7 +162,7 @@ export default function OperatingModelPage() {
         ]}
       />
       <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-44">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(207,163,101,0.16),transparent_28%),linear-gradient(135deg,rgba(10,12,12,0.9),rgba(10,12,12,1))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(122,151,255,0.13),transparent_32%)]" />
         <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="grid gap-14 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-7">
@@ -177,7 +177,7 @@ export default function OperatingModelPage() {
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <Button size="lg" asChild>
                   <Link href="/discover" data-analytics="operating_model_hero_value_map">
-                    Generate AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
+                    Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline-light" asChild>
@@ -395,12 +395,12 @@ export default function OperatingModelPage() {
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Button size="lg" asChild>
               <Link href="/discover" data-analytics="operating_model_bottom_value_map">
-                Generate AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
+                Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>
               <Link href="/contact" data-analytics="operating_model_bottom_contact">
-                Book a Diagnostic Call
+                Book a 30-min intro
               </Link>
             </Button>
           </div>

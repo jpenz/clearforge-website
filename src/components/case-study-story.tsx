@@ -1,17 +1,7 @@
-'use client';
-
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { useRef } from 'react';
 import { MetricCounter } from '@/components/home/metric-counter';
 import { Button } from '@/components/ui/button';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 interface CaseStudyStoryProps {
   industry: string;
@@ -42,13 +32,11 @@ interface CaseStudyStoryProps {
 }
 
 /**
- * Scroll-driven cinematic case study.
- *
- * 4 Acts:
- * 1. THE PROBLEM — pinned, text reveals line-by-line, cost counter climbs
- * 2. THE INTERVENTION — horizontal scroll timeline showing Forge Method phases
- * 3. THE RESULTS — staggered metric counters with before/after energy
- * 4. THE IMPACT — full-bleed client quote with line reveal
+ * Case study in four acts: problem → intervention → results → impact.
+ * Server-rendered, instant content (the V11 doctrine): the old GSAP pinned
+ * horizontal timeline caused page overflow, a clipped final card, and a
+ * ~970px pin-spacer dead band in any static render — replaced with a plain
+ * responsive grid. Counters (motion-as-moments) are the only client bits.
  */
 export function CaseStudyStory({
   industry,
@@ -65,95 +53,6 @@ export function CaseStudyStory({
   quoteAttribution,
   compoundResult,
 }: CaseStudyStoryProps) {
-  const act1Ref = useRef<HTMLDivElement>(null);
-  const act1TextRef = useRef<HTMLDivElement>(null);
-  const act2Ref = useRef<HTMLDivElement>(null);
-  const timelineTrackRef = useRef<HTMLDivElement>(null);
-  const timelineLineRef = useRef<HTMLDivElement>(null);
-  const act4Ref = useRef<HTMLDivElement>(null);
-  const quoteWordsRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      if (typeof window === 'undefined' || window.innerWidth < 768) return;
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      // ACT 1: Soft stagger reveal on page load (no pinning — pinning felt wrong
-      // for B2B consulting, same reason we reverted the home hero in V8.18).
-      // immediateRender: false so content stays visible if animation never fires.
-      const act1Text = act1TextRef.current;
-      if (act1Text && !prefersReduced) {
-        const lines = act1Text.querySelectorAll('.reveal-line');
-        gsap.fromTo(
-          lines,
-          { opacity: 0, y: 20 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: 'power3.out',
-            stagger: 0.08,
-            immediateRender: false,
-          },
-        );
-      }
-
-      // ACT 2: Horizontal scroll timeline
-      const act2 = act2Ref.current;
-      const track = timelineTrackRef.current;
-      const line = timelineLineRef.current;
-      if (act2 && track && line) {
-        const totalWidth = track.scrollWidth - window.innerWidth;
-        gsap.to(track, {
-          x: -totalWidth,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: act2,
-            start: 'top top',
-            end: `+=${totalWidth}`,
-            pin: true,
-            scrub: 0.5,
-          },
-        });
-        // Line fill
-        gsap.to(line, {
-          scaleX: 1,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: act2,
-            start: 'top top',
-            end: `+=${totalWidth}`,
-            scrub: 0.5,
-          },
-        });
-      }
-
-      // ACT 4: Quote word-by-word reveal.
-      // immediateRender: false keeps words visible until ScrollTrigger fires.
-      const act4 = act4Ref.current;
-      const quoteEl = quoteWordsRef.current;
-      if (act4 && quoteEl && !prefersReduced) {
-        const words = quoteEl.querySelectorAll('.quote-word');
-        gsap.fromTo(
-          words,
-          { opacity: 0.15 },
-          {
-            opacity: 1,
-            stagger: 0.05,
-            immediateRender: false,
-            scrollTrigger: {
-              trigger: act4,
-              start: 'top 60%',
-              end: 'center center',
-              scrub: true,
-            },
-          },
-        );
-      }
-    },
-    { scope: act1Ref },
-  );
-
   const challengeSentences = challenge.split('. ');
   const maxLeadVolume = proofDashboard?.leadVolume
     ? Math.max(...proofDashboard.leadVolume.map((point) => point.value))
@@ -162,29 +61,19 @@ export function CaseStudyStory({
     ? Math.max(...proofDashboard.pipelineStages.map((point) => point.value))
     : 0;
 
-  let quoteOffset = 0;
-  const quoteWords = quote.split(' ').map((word) => {
-    const key = `${quoteOffset}-${word}`;
-    quoteOffset += word.length + 1;
-    return { key, word };
-  });
-
   return (
     <>
       {/* ═══ ACT 1: THE PROBLEM ═══ */}
-      <section
-        ref={act1Ref}
-        className="dark-section noise-texture relative min-h-screen overflow-hidden"
-      >
-        <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10 py-20 sm:py-32 lg:py-0 lg:min-h-screen lg:flex lg:items-center">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+      <section className="dark-section noise-texture relative overflow-hidden">
+        <div className="relative z-10 mx-auto max-w-[1400px] px-4 py-24 sm:px-6 sm:py-32 lg:flex lg:min-h-[88svh] lg:items-center lg:px-10 lg:py-0">
+          <div className="items-center lg:grid lg:grid-cols-12 lg:gap-16">
             {/* Left: The challenge */}
-            <div ref={act1TextRef} className="lg:col-span-7">
-              <p className="overline reveal-line">{industry}</p>
-              <h1 className="mt-6 text-display-xl text-bone reveal-line">{title}</h1>
+            <div className="lg:col-span-7">
+              <p className="overline">{industry}</p>
+              <h1 className="mt-6 text-display-xl text-bone">{title}</h1>
               <div className="mt-8 space-y-4">
                 {challengeSentences.map((sentence, i) => (
-                  <p key={sentence} className="text-body-lg text-stone reveal-line">
+                  <p key={sentence} className="text-body-lg text-stone">
                     {sentence}
                     {i < challengeSentences.length - 1 ? '.' : ''}
                   </p>
@@ -193,87 +82,35 @@ export function CaseStudyStory({
             </div>
 
             {/* Right: The cost */}
-            <div className="lg:col-span-5 mt-12 lg:mt-0 text-center lg:text-right">
-              <MetricCounter value={challengeMetric} className="metric-xl text-error" />
+            <div className="mt-12 text-center lg:col-span-5 lg:mt-0 lg:text-right">
+              <MetricCounter value={challengeMetric} className="metric-xl text-brass-light" />
               <p className="mt-3 text-body text-stone">{challengeMetricLabel}</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ═══ ACT 2: THE INTERVENTION — Horizontal scroll (desktop) / Vertical stack (mobile) ═══ */}
-      {/* Desktop: horizontal scroll with GSAP */}
-      <section
-        ref={act2Ref}
-        className="bg-parchment overflow-hidden hidden md:block"
-        style={{ height: '100vh' }}
-      >
-        <div className="h-full flex flex-col justify-center">
-          {/* Section header */}
-          <div className="mx-auto max-w-[1400px] px-6 lg:px-10 mb-12">
-            <p className="overline">The Forge Method™ Applied</p>
-            <h2 className="mt-4 text-display">From constraint to operating cadence.</h2>
-          </div>
-
-          {/* Timeline line */}
-          <div className="mx-auto max-w-[1400px] px-6 lg:px-10 mb-8">
-            <div className="h-0.5 bg-divider relative">
-              <div
-                ref={timelineLineRef}
-                className="absolute inset-y-0 left-0 bg-brass origin-left"
-                style={{ transform: 'scaleX(0)' }}
-              />
-            </div>
-          </div>
-
-          {/* Horizontal track */}
-          <div ref={timelineTrackRef} className="flex gap-12 px-10 will-change-transform">
-            {phases.map((phase, i) => (
-              <div key={phase.title} className="shrink-0 w-[400px] lg:w-[500px]">
-                <div className="border border-divider bg-surface p-8 h-full">
-                  <span className="metric text-sm text-brass">
-                    Phase {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span className="text-xs text-warm-gray ml-3 uppercase">{phase.duration}</span>
-                  <h3 className="mt-4 text-h3">{phase.title}</h3>
-                  <p className="mt-4 text-body text-warm-gray">{phase.description}</p>
-                </div>
-              </div>
-            ))}
-
-            {/* Final card: results preview */}
-            <div className="shrink-0 w-[400px] lg:w-[500px]">
-              <div className="border-2 border-brass bg-brass/5 p-8 h-full flex flex-col justify-center">
-                <span className="metric text-sm text-brass">Results</span>
-                <h3 className="mt-4 text-h3">Keep scrolling to see what happened.</h3>
-                <p className="mt-2 text-body text-warm-gray">The measured outcomes follow.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Mobile: vertical stack fallback */}
-      <section className="bg-parchment py-16 md:hidden">
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
+      {/* ═══ ACT 2: THE INTERVENTION ═══ */}
+      <section className="bg-parchment py-16 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <p className="overline">The Forge Method™ Applied</p>
-          <h2 className="mt-4 text-display">From constraint to operating cadence.</h2>
+          <h2 className="mt-4 text-display max-w-2xl">From constraint to operating cadence.</h2>
 
-          <div className="mt-10 space-y-4">
+          <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {phases.map((phase, i) => (
-              <div key={phase.title} className="border border-divider bg-surface p-5">
+              <div key={phase.title} className="border border-divider bg-surface p-6 sm:p-8">
                 <span className="metric text-sm text-brass">
                   Phase {String(i + 1).padStart(2, '0')}
                 </span>
-                <span className="text-xs text-warm-gray ml-3 uppercase">{phase.duration}</span>
-                <h3 className="mt-3 text-h3">{phase.title}</h3>
-                <p className="mt-3 text-body text-warm-gray">{phase.description}</p>
+                <span className="ml-3 text-xs uppercase text-warm-gray">{phase.duration}</span>
+                <h3 className="mt-4 text-h3">{phase.title}</h3>
+                <p className="mt-4 text-body text-warm-gray">{phase.description}</p>
               </div>
             ))}
 
-            <div className="border-2 border-brass bg-brass/5 p-5">
+            <div className="flex flex-col justify-center border-2 border-brass bg-brass/5 p-6 sm:p-8">
               <span className="metric text-sm text-brass">Results</span>
-              <h3 className="mt-3 text-h3">Keep scrolling to see what happened.</h3>
+              <h3 className="mt-4 text-h3">What happened next.</h3>
               <p className="mt-2 text-body text-warm-gray">The measured outcomes follow.</p>
             </div>
           </div>
@@ -286,16 +123,14 @@ export function CaseStudyStory({
           <p className="overline text-center">The Results</p>
           <h2 className="mt-4 text-display text-bone text-center">Measured outcomes.</h2>
 
-          <div className="mt-12 sm:mt-16 grid grid-cols-2 gap-4 sm:gap-8 lg:grid-cols-4 lg:gap-12">
-            {outcomes.map((outcome, i) => (
-              <div
-                key={outcome.description}
-                className="text-center"
-                style={{ animationDelay: `${i * 0.15}s` }}
-              >
+          <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 sm:mt-16 sm:gap-x-8 lg:grid-cols-4 lg:gap-x-12">
+            {outcomes.map((outcome) => (
+              <div key={outcome.description} className="min-w-0 text-center">
                 <MetricCounter
                   value={outcome.metric}
-                  className="metric-xl text-brass-light"
+                  className={`${
+                    outcome.metric.length > 7 ? 'metric-lg' : 'metric-xl'
+                  } block break-words text-brass-light [text-wrap:balance]`}
                   duration={2.5}
                 />
                 <p className="mt-4 text-body-sm text-stone">{outcome.description}</p>
@@ -465,25 +300,14 @@ export function CaseStudyStory({
         </section>
       )}
 
-      {/* ═══ ACT 4: THE IMPACT — Quote reveal ═══ */}
-      <section ref={act4Ref} className="bg-parchment py-16 sm:py-24 lg:py-40">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10 text-center">
-          <span className="block text-[50px] sm:text-[80px] leading-none text-brass/20" aria-hidden>
+      {/* ═══ ACT 4: THE IMPACT ═══ */}
+      <section className="bg-parchment py-16 sm:py-24 lg:py-40">
+        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-10">
+          <span className="block text-[50px] leading-none text-brass/20 sm:text-[80px]" aria-hidden>
             &ldquo;
           </span>
 
-          <div ref={quoteWordsRef} className="mt-4">
-            <p
-              className="text-h1 text-anthracite leading-snug"
-              style={{ fontFamily: 'var(--font-display)' }}
-            >
-              {quoteWords.map(({ key, word }) => (
-                <span key={key} className="quote-word inline-block mr-[0.3em]">
-                  {word}
-                </span>
-              ))}
-            </p>
-          </div>
+          <p className="mt-4 text-h1 leading-snug text-anthracite">{quote}</p>
 
           <p className="mt-8 text-body text-warm-gray">{quoteAttribution}</p>
 
@@ -497,19 +321,19 @@ export function CaseStudyStory({
       </section>
 
       {/* ═══ CTA ═══ */}
-      <section className="dark-section py-16 sm:py-20 lg:py-28">
-        <div className="mx-auto max-w-2xl px-4 sm:px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">Want results like these?</h2>
-          <p className="mt-4 text-body-lg text-stone">
+      <section className="border-t border-divider bg-recessed py-16 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-10">
+          <h2 className="text-display">Want results like these?</h2>
+          <p className="mt-4 text-body-lg text-warm-gray">
             Every engagement starts with understanding your business. Not a pitch.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Generate My AI Value Map <ArrowRight className="ml-2 h-4 w-4" />
+                Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline-light" asChild>
+            <Button size="lg" variant="secondary" asChild>
               <Link href="/case-studies">See More Case Studies</Link>
             </Button>
           </div>

@@ -47,6 +47,11 @@ const faqs = [
       'We do not stop at recommendations. The same senior team that diagnoses the workflow engineers the release, trains the owner, and sets the operating review cadence.',
   },
   {
+    question: 'What happens after launch — will our team actually use it?',
+    answer:
+      'Every Forge Sprint ends with The Adoption Mile™: a named operator on your team, a weekly working cadence with ours, and a live adoption scoreboard. The bar we build to is 70% weekly-active usage by day 90. Forge Scale keeps that rhythm going if you want us to stay.',
+  },
+  {
     question: 'What is the payment structure?',
     answer:
       'Diagnostic and Sprint are billed 50% upfront, 50% on completion. Operations is billed monthly. We are flexible on structure for larger engagements — the goal is to align incentives around results.',
@@ -82,11 +87,8 @@ export default function PricingPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-forge-black via-forge-black/80 to-forge-black/40 pointer-events-none" />
         <div className="relative mx-auto max-w-[1200px] px-6 lg:px-10">
           <p className="overline">Pricing</p>
-          <h1
-            className="mt-6 text-display max-w-3xl text-bone"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            Transparent investment. No surprises.
+          <h1 className="mt-6 text-display max-w-3xl text-bone">
+            Transparent investment. <span className="display-accent">No surprises.</span>
           </h1>
           <p className="mt-6 max-w-xl text-body-lg text-stone">
             Every engagement is scoped around a named workflow, a baseline, an owner, and a review
@@ -121,12 +123,7 @@ export default function PricingPage() {
                         {product.name}
                       </h3>
                       <div className="mt-4 flex items-baseline gap-2">
-                        <span
-                          className="metric text-3xl text-anthracite"
-                          style={{ fontFamily: 'var(--font-jetbrains-mono, monospace)' }}
-                        >
-                          {product.price}
-                        </span>
+                        <span className="metric text-3xl text-anthracite">{product.price}</span>
                         <span className="text-body-sm text-warm-gray">{product.period}</span>
                       </div>
                       <p className="mt-1 text-body-sm text-warm-gray">{product.timeline}</p>
@@ -170,6 +167,46 @@ export default function PricingPage() {
             ))}
           </Stagger>
           <div className="border-t border-divider" />
+        </div>
+      </section>
+
+      {/* — The Adoption Mile — why the Sprint price includes the last mile — */}
+      <section className="dark-section noise-texture relative overflow-hidden py-20 lg:py-28">
+        <div className="relative mx-auto max-w-[1200px] px-6 lg:px-10">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-20">
+            <div className="lg:col-span-6">
+              <p className="overline">Built Into Every Sprint</p>
+              <h2 className="mt-6 text-display text-bone">
+                The Adoption Mile<span className="align-super text-[0.5em]">™</span> is in the
+                price.
+              </h2>
+              <p className="mt-6 max-w-xl text-body-lg text-stone">
+                McKinsey&apos;s rule of thumb: for every $1 spent on models, plan $3 on adoption.
+                Most firms bill the $1 and leave. We scope the $3 in — a named operator on your
+                team, a weekly working cadence, and a scoreboard everyone can see.
+              </p>
+            </div>
+            <div className="mt-12 flex flex-col justify-center gap-6 lg:col-span-6 lg:mt-0 lg:border-l lg:border-divider-dark lg:pl-14">
+              <div className="border-b border-divider-dark pb-5">
+                <p className="metric-lg text-brass-light">70%</p>
+                <p className="mt-2 text-body-sm text-stone">
+                  Weekly-active usage — the adoption bar we build to by day 90
+                </p>
+              </div>
+              <div className="border-b border-divider-dark pb-5">
+                <p className="metric-lg text-brass-light">Weekly</p>
+                <p className="mt-2 text-body-sm text-stone">
+                  Working cadence with your operator until usage holds
+                </p>
+              </div>
+              <div>
+                <p className="metric-lg text-brass-light">$3 : $1</p>
+                <p className="mt-2 text-body-sm text-stone">
+                  Adoption-to-model spend the market leaders plan for — already in our scope
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

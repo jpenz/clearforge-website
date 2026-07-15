@@ -107,7 +107,7 @@ export default function UseCasesPage() {
           <div className="mt-10 flex flex-wrap gap-4">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Map My First Build <ArrowRight className="ml-2 h-4 w-4" />
+                Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline-light" asChild>
@@ -187,7 +187,7 @@ export default function UseCasesPage() {
                 {valueStages.map((stage, index) => (
                   <div
                     key={stage.label}
-                    className="relative border-b border-divider p-6 last:border-b-0 lg:border-r lg:border-b-0 lg:last:border-r-0"
+                    className="relative border-b border-divider p-6 last:border-b-0 lg:border-r lg:border-b-0 lg:pb-12 lg:last:border-r-0"
                   >
                     <div className="flex items-center justify-between gap-4">
                       <p className="overline text-[10px]">{stage.label}</p>
@@ -200,7 +200,10 @@ export default function UseCasesPage() {
                       {stage.detail}
                     </p>
                     {index < valueStages.length - 1 ? (
-                      <ArrowRight className="absolute right-5 bottom-5 hidden h-4 w-4 text-brass lg:block" />
+                      <ArrowRight
+                        className="absolute right-5 bottom-5 hidden h-4 w-4 text-brass lg:block"
+                        aria-hidden="true"
+                      />
                     ) : null}
                   </div>
                 ))}
@@ -217,17 +220,17 @@ export default function UseCasesPage() {
         </div>
       </section>
 
-      <section className="dark-section noise-texture py-24 lg:py-40">
+      <section className="border-t border-divider bg-recessed py-20 lg:py-28">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">Find the first AI build worth shipping.</h2>
-          <p className="mt-6 text-body-lg text-stone">
+          <h2 className="text-display">Find the first AI build worth shipping.</h2>
+          <p className="mt-6 text-body-lg text-warm-gray">
             Start with the work already slowing the business down. We will map the growth, speed,
             quality, service, and margin opportunities worth building first.
           </p>
           <div className="mt-10">
             <Button size="lg" asChild>
               <Link href="/discover">
-                Map My First Build <ArrowRight className="ml-2 h-4 w-4" />
+                Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>

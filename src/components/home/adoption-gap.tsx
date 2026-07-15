@@ -29,7 +29,7 @@ export function AdoptionGap() {
         <StaggerReveal className="mt-12 grid gap-6 border-y border-divider py-7 sm:grid-cols-3">
           {adoptionGap.stats.map((s) => (
             <div key={s.label} className="flex items-baseline gap-3 sm:block">
-              <MetricCounter value={s.value} className="metric-lg text-brass" />
+              <MetricCounter value={s.value} className="metric-lg whitespace-nowrap text-brass" />
               <p className="mt-0 text-body-sm text-warm-gray sm:mt-2">{s.label}</p>
             </div>
           ))}
