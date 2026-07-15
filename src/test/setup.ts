@@ -45,34 +45,5 @@ vi.mock('next/link', () => ({
   },
 }));
 
-// ── Animation mocks (GSAP) ────────────────────────────────────
-// Framer Motion removed in V8.12 — scorecard ported to CSS transitions.
-
-vi.mock('@gsap/react', () => ({
-  useGSAP: vi.fn((fn: () => void) => fn()),
-}));
-
-vi.mock('gsap', () => ({
-  default: {
-    to: vi.fn(),
-    from: vi.fn(),
-    fromTo: vi.fn(),
-    set: vi.fn(),
-    timeline: vi.fn(() => ({
-      to: vi.fn().mockReturnThis(),
-      from: vi.fn().mockReturnThis(),
-      fromTo: vi.fn().mockReturnThis(),
-    })),
-    registerPlugin: vi.fn(),
-    context: vi.fn((_fn: () => void) => ({ revert: vi.fn(), kill: vi.fn() })),
-  },
-  ScrollTrigger: { refresh: vi.fn(), update: vi.fn() },
-}));
-
-vi.mock('lenis', () => ({
-  default: vi.fn().mockImplementation(() => ({
-    on: vi.fn(),
-    raf: vi.fn(),
-    destroy: vi.fn(),
-  })),
-}));
+// Animation-library mocks removed 2026-07-14 — gsap/lenis/framer-motion
+// are no longer dependencies (motion is CSS + IntersectionObserver/rAF).

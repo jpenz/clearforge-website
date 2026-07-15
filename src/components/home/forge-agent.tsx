@@ -2,23 +2,17 @@
 
 import { ArrowRight, Loader2, RotateCcw } from 'lucide-react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { heroAgent } from '@/data/homepage';
 
 /**
  * Forge Intelligence™ — the live agent, framed as product UI in browser
- * chrome (V11 "product as hero object"). Visitor enters their URL; the card
- * transforms in place: prompt → honest staged analyzing → diagnostic thesis.
- * Backend: /api/hero-analyze (SSRF-safe, rate-limited). Deep run lives on
- * /discover.
+ * chrome. Visitor enters their URL; the card transforms in place. The API
+ * streams NDJSON: real progress events ({t:'p'}), partial field snapshots
+ * as the model writes ({t:'f'}), then the validated result ({t:'d'}).
+ * No fake timers anywhere — every line shown is work actually happening.
  */
-
-const LOADING_STAGES = [
-  'Reading your homepage…',
-  'Mapping your value chain…',
-  'Drafting your priority play…',
-];
 
 type Priority = {
   title: string;
@@ -36,31 +30,30 @@ type Analysis = {
   more: string[];
   domain: string;
 };
+type PartialFields = Record<string, string>;
 type Status = 'idle' | 'loading' | 'done' | 'error';
+
+function Pending({ width = 'w-3/4' }: { width?: string }) {
+  return <span className={`inline-block h-3.5 ${width} animate-pulse rounded bg-divider`} />;
+}
 
 export function ForgeAgent() {
   const [url, setUrl] = useState('');
   const [status, setStatus] = useState<Status>('idle');
   const [result, setResult] = useState<Analysis | null>(null);
+  const [partial, setPartial] = useState<PartialFields>({});
+  const [progress, setProgress] = useState<string[]>([]);
   const [errorMsg, setErrorMsg] = useState('');
-  const [stage, setStage] = useState(0);
-
-  useEffect(() => {
-    if (status !== 'loading') {
-      setStage(0);
-      return;
-    }
-    const id = setInterval(() => {
-      setStage((s) => Math.min(s + 1, LOADING_STAGES.length - 1));
-    }, 3200);
-    return () => clearInterval(id);
-  }, [status]);
+  const runId = useRef(0);
 
   async function analyze(e: React.FormEvent) {
     e.preventDefault();
     if (!url.trim() || status === 'loading') return;
+    const run = ++runId.current;
     setStatus('loading');
     setResult(null);
+    setPartial({});
+    setProgress([]);
     setErrorMsg('');
     try {
       const res = await fetch('/api/hero-analyze', {
@@ -68,28 +61,71 @@ export function ForgeAgent() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: url.trim() }),
       });
-      const data = await res.json();
-      if (res.status === 400 && data.invalid) {
-        setStatus('error');
-        setErrorMsg('Enter a valid company website, e.g. acme.com');
-        return;
-      }
-      if (!res.ok || data.fallback || !data.readinessBand) {
+
+      const contentType = res.headers.get('content-type') ?? '';
+      if (!res.ok || !contentType.includes('ndjson') || !res.body) {
+        const data = await res.json().catch(() => ({}));
+        if (res.status === 400 && data.invalid) {
+          setStatus('error');
+          setErrorMsg('Enter a valid company website, e.g. acme.com');
+          return;
+        }
         setStatus('error');
         setErrorMsg('');
         return;
       }
-      setResult(data as Analysis);
-      setStatus('done');
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let tail = '';
+      let finished = false;
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        tail += decoder.decode(value, { stream: true });
+        const lines = tail.split('\n');
+        tail = lines.pop() ?? '';
+        for (const line of lines) {
+          if (!line.trim() || runId.current !== run) continue;
+          let evt: { t: string; label?: string; data?: unknown };
+          try {
+            evt = JSON.parse(line);
+          } catch {
+            continue;
+          }
+          if (evt.t === 'p' && evt.label) {
+            setProgress((prev) => [...prev, evt.label as string]);
+          } else if (evt.t === 'f' && evt.data) {
+            setPartial(evt.data as PartialFields);
+          } else if (evt.t === 'd' && evt.data) {
+            setResult(evt.data as Analysis);
+            setStatus('done');
+            finished = true;
+          } else if (evt.t === 'e') {
+            setStatus('error');
+            setErrorMsg('');
+            finished = true;
+          }
+        }
+      }
+      if (!finished && runId.current === run) {
+        setStatus('error');
+        setErrorMsg('');
+      }
     } catch {
-      setStatus('error');
-      setErrorMsg('');
+      if (runId.current === run) {
+        setStatus('error');
+        setErrorMsg('');
+      }
     }
   }
 
   function reset() {
+    runId.current++;
     setStatus('idle');
     setResult(null);
+    setPartial({});
+    setProgress([]);
     setErrorMsg('');
   }
 
@@ -98,6 +134,19 @@ export function ForgeAgent() {
       .trim()
       .replace(/^https?:\/\//i, '')
       .replace(/\/.*$/, '') || 'your site';
+
+  const streaming = status === 'loading' && Object.keys(partial).length > 0;
+  const band = result?.readinessBand ?? partial.readinessBand;
+  const company = result?.company ?? partial.company;
+  const industry = result?.industry ?? partial.industry;
+  const thesis: Array<{ k: string; v?: string }> = [
+    { k: 'The gap', v: result?.priority.painpoint ?? partial.painpoint },
+    { k: "What we'd build", v: result?.priority.intervention ?? partial.intervention },
+    { k: 'The ambition', v: result?.priority.futureState ?? partial.futureState },
+  ];
+  const benefit = result?.priority.benefit ?? partial.benefit;
+  const evidence = result?.priority.evidence ?? partial.evidence;
+  const title = result?.priority.title ?? partial.title;
 
   return (
     <div className="browser-chrome w-full" aria-live="polite" aria-busy={status === 'loading'}>
@@ -109,7 +158,7 @@ export function ForgeAgent() {
         <span className="browser-chrome__url">{heroAgent.url}</span>
         <span className="ml-auto flex items-center gap-1.5">
           <span
-            className={`h-1.5 w-1.5 rounded-full bg-[var(--color-ember-vivid)] ${status === 'loading' ? 'animate-pulse' : ''}`}
+            className={`h-1.5 w-1.5 rounded-full bg-brass ${status === 'loading' ? 'animate-pulse' : ''}`}
             aria-hidden="true"
           />
           <span className="metric text-[10px] uppercase tracking-[0.14em] text-warm-gray">
@@ -124,8 +173,10 @@ export function ForgeAgent() {
           <span className="metric text-[11px] uppercase tracking-[0.14em] text-brass">
             {heroAgent.name}
           </span>
-          {status === 'done' && result && (
-            <span className="metric text-[11px] text-warm-gray">{result.domain}</span>
+          {(status === 'done' || streaming) && (
+            <span className="metric text-[11px] text-warm-gray">
+              {result?.domain ?? domainLabel}
+            </span>
           )}
         </div>
 
@@ -155,74 +206,89 @@ export function ForgeAgent() {
           </form>
         )}
 
-        {/* LOADING — honest staged labels over real latency */}
-        {status === 'loading' && (
-          <div className="py-10 text-center">
-            <Loader2 className="mx-auto h-7 w-7 animate-spin text-brass" />
-            <p className="mt-4 text-body text-anthracite">Analyzing {domainLabel}…</p>
-            <p className="metric mt-1.5 text-xs text-brass">{LOADING_STAGES[stage]}</p>
-            <div className="mt-4 flex items-center justify-center gap-1.5">
-              {LOADING_STAGES.map((label, i) => (
-                <span
+        {/* WORKING — real progress stream, no fake timers */}
+        {status === 'loading' && !streaming && (
+          <div className="py-8">
+            <div className="flex items-center gap-2.5">
+              <Loader2 className="h-4 w-4 animate-spin text-brass" />
+              <p className="text-body-sm text-anthracite">Analyzing {domainLabel}</p>
+            </div>
+            <div className="mt-4 space-y-1.5 border-l border-divider pl-3.5">
+              {progress.slice(-4).map((label, i, arr) => (
+                <p
                   key={label}
-                  className={`h-1 w-6 rounded-full transition-colors ${i <= stage ? 'bg-brass' : 'bg-divider'}`}
-                  aria-hidden="true"
-                />
+                  className={`metric text-[11px] leading-relaxed ${
+                    i === arr.length - 1 ? 'text-brass' : 'text-warm-gray'
+                  }`}
+                >
+                  {label}
+                </p>
               ))}
+              {progress.length === 0 && (
+                <p className="metric text-[11px] text-warm-gray">Connecting…</p>
+              )}
             </div>
           </div>
         )}
 
-        {/* DONE — diagnostic thesis */}
-        {status === 'done' && result && (
+        {/* STREAMING + DONE — the thesis, filling in as it's written */}
+        {(streaming || (status === 'done' && result)) && (
           <div className="mt-3">
-            <span className="metric text-3xl text-anthracite sm:text-4xl">
-              {result.readinessBand}
-            </span>
+            {band ? (
+              <span className="metric text-3xl text-anthracite sm:text-4xl">{band}</span>
+            ) : (
+              <Pending width="w-32" />
+            )}
             <p className="mt-1.5 text-body-sm text-warm-gray">
-              Estimated AI-readiness · <span className="text-anthracite">{result.company}</span>
-              {result.industry ? ` · ${result.industry}` : ''}
+              Estimated AI-readiness
+              {company ? (
+                <>
+                  {' · '}
+                  <span className="text-anthracite">{company}</span>
+                </>
+              ) : null}
+              {industry ? ` · ${industry}` : ''}
             </p>
 
             <div className="mt-4 border-t border-divider pt-4">
               <p className="metric text-[11px] uppercase tracking-[0.14em] text-brass">
                 Priority play
               </p>
-              <p className="mt-1.5 text-h4 text-anthracite">{result.priority.title}</p>
+              <p className="mt-1.5 text-h4 text-anthracite">{title ?? <Pending width="w-2/3" />}</p>
               <dl className="mt-3 space-y-2.5">
-                {[
-                  { k: 'The gap', v: result.priority.painpoint },
-                  { k: "What we'd build", v: result.priority.intervention },
-                  { k: 'The ambition', v: result.priority.futureState },
-                ].map((row) => (
+                {thesis.map((row) => (
                   <div key={row.k}>
                     <dt className="metric text-[10px] uppercase tracking-[0.12em] text-warm-gray">
                       {row.k}
                     </dt>
-                    <dd className="mt-0.5 text-body-sm text-anthracite">{row.v}</dd>
+                    <dd className="mt-0.5 text-body-sm text-anthracite">{row.v ?? <Pending />}</dd>
                   </div>
                 ))}
               </dl>
               <div className="mt-3.5 border-l-2 border-brass pl-3">
-                <p className="text-body-sm font-semibold text-brass">{result.priority.benefit}</p>
-                <p className="mt-1 text-xs text-warm-gray">{result.priority.evidence}</p>
+                <p className="text-body-sm font-semibold text-brass">
+                  {benefit ?? <Pending width="w-1/2" />}
+                </p>
+                {evidence && <p className="mt-1 text-xs text-warm-gray">{evidence}</p>}
               </div>
             </div>
 
-            <div className="mt-5 border-t border-divider pt-4">
-              <Button size="default" className="w-full" asChild>
-                <Link href="/discover" data-analytics="home_hero_agent_full_report">
-                  Get the full thesis &amp; cited report <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <button
-                type="button"
-                onClick={reset}
-                className="mt-2.5 inline-flex w-full items-center justify-center gap-1.5 text-xs text-warm-gray transition-colors hover:text-anthracite"
-              >
-                <RotateCcw className="h-3 w-3" /> Analyze another site
-              </button>
-            </div>
+            {status === 'done' && (
+              <div className="mt-5 border-t border-divider pt-4">
+                <Button size="default" className="w-full" asChild>
+                  <Link href="/discover" data-analytics="home_hero_agent_full_report">
+                    Get the full thesis &amp; cited report <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+                <button
+                  type="button"
+                  onClick={reset}
+                  className="mt-2.5 inline-flex w-full items-center justify-center gap-1.5 text-xs text-warm-gray transition-colors hover:text-anthracite"
+                >
+                  <RotateCcw className="h-3 w-3" /> Analyze another site
+                </button>
+              </div>
+            )}
           </div>
         )}
 

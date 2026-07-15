@@ -69,7 +69,9 @@ export function BookCallButton({
   const opening = useRef(false);
 
   const preload = useCallback(() => {
-    void loadCal();
+    void loadCal().then((cal) => {
+      cal('preload', { calLink: CAL_LINK });
+    });
   }, []);
 
   const open = useCallback(async () => {
