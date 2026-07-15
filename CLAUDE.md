@@ -36,7 +36,7 @@ for mid-market & PE (James Penz, ex-Bain AI & Automation practice).
 ## Stack
 
 - Next.js 16 App Router · React 19 · TypeScript 5 (strict) · Tailwind CSS v4 (`@theme inline`)
-- GSAP present but nearly retired (see Motion Doctrine) · Radix primitives · Zod v4
+- No animation libraries — motion is CSS + IntersectionObserver/rAF (see Motion Doctrine) · Radix primitives · Zod v4
 - Anthropic + Perplexity APIs (Forge Intelligence agents) · Supabase (leads) · Resend (contact email)
 - Cal.com booking embed (`@calcom/embed-react`)
 - Tests: Vitest (unit) + Playwright (`e2e/`, run `PLAYWRIGHT_BASE_URL=http://localhost:3008 npx playwright test`)
