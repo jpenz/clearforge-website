@@ -1,13 +1,6 @@
 'use client';
 
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useRef } from 'react';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { useEffect, useRef } from 'react';
 
 interface MetricCounterProps {
   value: string;
@@ -16,7 +9,10 @@ interface MetricCounterProps {
 }
 
 /**
- * Scroll-triggered counter. Handles: "1,250" "98%" "$4.2M" "12x" "500+" "3.5T" "<90"
+ * Scroll-triggered count-up. Handles: "1,250" "98%" "$4.2M" "12x" "500+"
+ * "3.5T" "<90" "79% → 11%". IntersectionObserver + rAF — replaced the GSAP
+ * implementation, which was the only thing pulling the whole GSAP engine
+ * (~116KB) into the sitewide bundle.
  */
 export function MetricCounter({
   value,
@@ -25,85 +21,63 @@ export function MetricCounter({
 }: MetricCounterProps) {
   const spanRef = useRef<HTMLSpanElement>(null);
 
-  useGSAP(
-    () => {
-      if (typeof window === 'undefined') return;
-      const el = spanRef.current;
-      if (!el) return;
+  useEffect(() => {
+    const el = spanRef.current;
+    if (!el) return;
 
-      const match = value.match(/^([<>$]?)([\d,.]+)(.*)/);
-      if (!match) {
-        el.textContent = value;
-        return;
-      }
+    const match = value.match(/^([<>$]?)([\d,.]+)(.*)/);
+    el.textContent = value;
+    if (!match) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-      const prefix = match[1] || '';
-      const numStr = match[2];
-      const suffix = match[3] || '';
-      const cleanNum = numStr.replace(/,/g, '');
-      const target = parseFloat(cleanNum);
-      const hasCommas = numStr.includes(',');
-      const decimalPlaces = cleanNum.includes('.') ? cleanNum.split('.')[1].length : 0;
-      const proxy = { val: 0 };
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefix = match[1] || '';
+    const numStr = match[2];
+    const suffix = match[3] || '';
+    const cleanNum = numStr.replace(/,/g, '');
+    const target = parseFloat(cleanNum);
+    const hasCommas = numStr.includes(',');
+    const decimalPlaces = cleanNum.includes('.') ? cleanNum.split('.')[1].length : 0;
 
-      el.textContent = value;
+    let raf = 0;
+    const render = (val: number) => {
+      const formatted =
+        decimalPlaces > 0
+          ? val.toFixed(decimalPlaces)
+          : hasCommas
+            ? Math.round(val).toLocaleString()
+            : String(Math.round(val));
+      el.textContent = prefix + formatted + suffix;
+    };
 
-      if (prefersReducedMotion) {
-        return;
-      }
+    const animate = () => {
+      const t0 = performance.now();
+      const ms = duration * 1000;
+      const tick = (now: number) => {
+        const p = Math.min((now - t0) / ms, 1);
+        const eased = 1 - (1 - p) ** 4; // power4.out
+        render(target * eased);
+        if (p < 1) raf = requestAnimationFrame(tick);
+        else el.textContent = value;
+      };
+      raf = requestAnimationFrame(tick);
+    };
 
-      const renderValue = () => {
-        let formatted: string;
-        if (decimalPlaces > 0) {
-          formatted = proxy.val.toFixed(decimalPlaces);
-        } else {
-          const rounded = Math.round(proxy.val);
-          formatted = hasCommas ? rounded.toLocaleString() : String(rounded);
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          io.disconnect();
+          animate();
         }
-        el.textContent = prefix + formatted + suffix;
-      };
+      },
+      { rootMargin: '0px 0px -10% 0px' },
+    );
+    io.observe(el);
 
-      const animateCounter = () => {
-        proxy.val = 0;
-        renderValue();
-
-        gsap.to(proxy, {
-          val: target,
-          duration,
-          ease: 'power4.out',
-          snap: { val: decimalPlaces > 0 ? 1 / 10 ** decimalPlaces : 1 },
-          onUpdate: renderValue,
-          onComplete() {
-            // Subtle oxide glow that fades out after the value settles.
-            gsap.fromTo(
-              el,
-              { textShadow: '0 0 30px rgba(215,138,104,0.28)' },
-              { textShadow: '0 0 0px rgba(215,138,104,0)', duration: 1, ease: 'power2.out' },
-            );
-          },
-        });
-      };
-
-      // Container scale entrance
-      gsap.fromTo(
-        el,
-        { scale: 0.85 },
-        {
-          scale: 1,
-          duration: 0.8,
-          ease: 'back.out(1.7)',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 90%',
-            toggleActions: 'play none none none',
-            onEnter: animateCounter,
-          },
-        },
-      );
-    },
-    { scope: spanRef, dependencies: [value, duration] },
-  );
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, [value, duration]);
 
   return (
     <span ref={spanRef} className={className}>
