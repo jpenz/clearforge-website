@@ -9,7 +9,7 @@
  * Covers:
  *  - completionPercentage() — question answer progress calculation
  *  - maturityLabel()        — human-readable level labels
- *  - maturityColor()        — teal-toned CSS hex colors per level
+ *  - maturityColor()        — cobalt-family CSS hex colors per level
  *  - validateBusinessContext() — required-field validation, email format,
  *                                challenge min-length, optional website URL
  */
@@ -155,9 +155,9 @@ describe('maturityColor', () => {
     expect(color).toMatch(/^#[0-9A-Fa-f]{6}$/);
   });
 
-  it('returns the signal-blue fallback (#4D8DE8) for unknown levels', () => {
-    expect(maturityColor('Unknown')).toBe('#4D8DE8');
-    expect(maturityColor('')).toBe('#4D8DE8');
+  it('returns the cobalt fallback (#1F4CDB) for unknown levels', () => {
+    expect(maturityColor('Unknown')).toBe('#1F4CDB');
+    expect(maturityColor('')).toBe('#1F4CDB');
   });
 
   // Levels produce distinct colors to visually differentiate maturity
@@ -170,12 +170,12 @@ describe('maturityColor', () => {
 
   // Lower maturity (Foundation) should be a muted/grey tone
   it('Foundation has a subdued slate color', () => {
-    expect(maturityColor('Foundation')).toBe('#475569');
+    expect(maturityColor('Foundation')).toBe('#46525E');
   });
 
   // Leader should be the vibrant signal-blue brand color
   it('Leader has the vibrant signal-blue brand color', () => {
-    expect(maturityColor('Leader')).toBe('#4D8DE8');
+    expect(maturityColor('Leader')).toBe('#7A97FF');
   });
 });
 

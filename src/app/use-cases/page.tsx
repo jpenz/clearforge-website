@@ -208,10 +208,24 @@ export default function UseCasesPage() {
                   </div>
                 ))}
               </div>
-              <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                {['Business trigger', 'Human review', 'Field feedback'].map((control) => (
-                  <div key={control} className="border-t border-divider pt-4">
-                    <p className="text-sm font-semibold text-anthracite">{control}</p>
+              <div className="mt-6 grid gap-x-8 gap-y-4 sm:grid-cols-3">
+                {[
+                  {
+                    label: 'Business trigger',
+                    desc: 'Every build starts from a named revenue, cost, or risk event — never a technology looking for a home.',
+                  },
+                  {
+                    label: 'Human review',
+                    desc: 'Consequential actions pass through approval gates your team defines before anything ships downstream.',
+                  },
+                  {
+                    label: 'Field feedback',
+                    desc: 'Operator corrections feed the next tuning cycle, so the system improves in production.',
+                  },
+                ].map((control) => (
+                  <div key={control.label} className="border-t border-divider pt-4">
+                    <p className="text-sm font-semibold text-anthracite">{control.label}</p>
+                    <p className="mt-2 text-body-sm text-warm-gray">{control.desc}</p>
                   </div>
                 ))}
               </div>

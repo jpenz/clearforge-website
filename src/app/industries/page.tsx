@@ -92,12 +92,10 @@ export default function IndustriesIndexPage() {
           {industryCategories
             .filter((cat) => grouped[cat] && grouped[cat].length > 0)
             .map((category, ci) => (
-              <div key={category} className={ci === 0 ? '' : 'mt-24 lg:mt-32'}>
+              <div key={category} className={ci === 0 ? '' : 'mt-14 lg:mt-20'}>
                 <div className="lg:grid lg:grid-cols-12 lg:gap-12 lg:items-baseline border-t border-divider pt-10">
                   <div className="lg:col-span-4">
-                    <p className="overline">
-                      {String(ci + 1).padStart(2, '0')} · {category}
-                    </p>
+                    <p className="overline">{String(ci + 1).padStart(2, '0')} · Sector</p>
                     <h2 className="mt-4 text-h1 font-display">{category}</h2>
                   </div>
 
@@ -123,14 +121,11 @@ export default function IndustriesIndexPage() {
                                 </p>
                               </div>
                               <div className="mt-3 lg:mt-0 flex items-baseline gap-6 shrink-0">
-                                <div className="text-right">
-                                  <span
-                                    className="metric text-base text-warm-gray"
-                                    style={{ fontFamily: 'var(--font-jetbrains-mono, monospace)' }}
-                                  >
+                                <div className="text-left lg:text-right">
+                                  <span className="metric text-base text-warm-gray">
                                     {totalCount} activities
                                   </span>
-                                  <p className="text-[10px] text-warm-gray uppercase mt-0.5">
+                                  <p className="mt-0.5 text-[10px] uppercase text-warm-gray">
                                     {ind.valueChain.length} functions
                                   </p>
                                 </div>

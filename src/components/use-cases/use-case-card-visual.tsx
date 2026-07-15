@@ -9,14 +9,14 @@ const toneStyles: Record<OperatorTone, { dot: string; bar: string; badge: string
     badge: 'border-emerald-300/25 bg-emerald-300/10 text-emerald-100',
   },
   blue: {
-    dot: 'bg-sky-300',
-    bar: 'bg-sky-300',
-    badge: 'border-sky-300/25 bg-sky-300/10 text-sky-100',
+    dot: 'bg-indigo-300',
+    bar: 'bg-indigo-300',
+    badge: 'border-indigo-300/25 bg-indigo-300/10 text-sky-100',
   },
   amber: {
-    dot: 'bg-amber-300',
-    bar: 'bg-amber-300',
-    badge: 'border-amber-300/25 bg-amber-300/10 text-amber-100',
+    dot: 'bg-indigo-300',
+    bar: 'bg-indigo-300',
+    badge: 'border-indigo-300/25 bg-indigo-300/10 text-indigo-100',
   },
   red: {
     dot: 'bg-rose-300',
