@@ -8,8 +8,8 @@ import { Button, type ButtonProps } from '@/components/ui/button';
 /**
  * Cal.com booking — the journey's highest-impact conversion fix (embedded
  * scheduling lifts request-to-book >50%; first responder wins ~78% of deals).
- * Meeting location comes from the Cal.com event settings (currently Cal
- * Video; connect Teams under Cal → Apps to switch — no code change needed).
+ * Meeting location: Microsoft Teams (enabled as the Cal.com event default,
+ * confirmed 2026-07-14).
  */
 
 export const CAL_LINK = 'james-penz/30min';

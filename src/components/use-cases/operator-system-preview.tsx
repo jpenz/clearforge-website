@@ -34,16 +34,16 @@ const toneStyles: Record<
     panel: 'border-emerald-300/20 bg-emerald-400/10',
   },
   blue: {
-    badge: 'border-sky-300/25 bg-sky-400/10 text-sky-200',
-    dot: 'bg-sky-300',
-    line: 'bg-sky-300',
-    panel: 'border-sky-300/20 bg-sky-400/10',
+    badge: 'border-indigo-300/25 bg-indigo-400/10 text-indigo-200',
+    dot: 'bg-indigo-300',
+    line: 'bg-indigo-300',
+    panel: 'border-indigo-300/20 bg-indigo-400/10',
   },
   amber: {
-    badge: 'border-amber-300/25 bg-amber-300/10 text-amber-200',
-    dot: 'bg-amber-300',
-    line: 'bg-amber-300',
-    panel: 'border-amber-300/20 bg-amber-300/10',
+    badge: 'border-indigo-300/25 bg-indigo-300/10 text-indigo-200',
+    dot: 'bg-indigo-300',
+    line: 'bg-indigo-300',
+    panel: 'border-indigo-300/20 bg-indigo-300/10',
   },
   red: {
     badge: 'border-rose-300/25 bg-rose-400/10 text-rose-200',
@@ -196,7 +196,7 @@ function LeadVolumeChart({
                   title={`${item.found} leads found`}
                 />
                 <span
-                  className="w-3 rounded-t-sm bg-sky-300"
+                  className="w-3 rounded-t-sm bg-indigo-300"
                   style={{ height: `${validatedHeight}%` }}
                   title={`${item.validated} validated`}
                 />
@@ -217,7 +217,7 @@ function LeadVolumeChart({
       <div className="mt-4 flex flex-wrap gap-3 text-[11px] text-stone">
         {[
           ['Found', 'bg-stone/35'],
-          ['Validated', 'bg-sky-300'],
+          ['Validated', 'bg-indigo-300'],
           ['Qualified', 'bg-emerald-300'],
         ].map(([label, swatch]) => (
           <span key={label} className="flex items-center gap-1.5">
@@ -357,7 +357,7 @@ export function OperatorSystemPreview({
               <div className="flex items-center gap-3">
                 <div className="flex gap-1.5" aria-hidden="true">
                   <span className="h-2.5 w-2.5 rounded-full bg-rose-300/70" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-amber-300/70" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-indigo-300/70" />
                   <span className="h-2.5 w-2.5 rounded-full bg-emerald-300/70" />
                 </div>
                 <div>
@@ -379,7 +379,7 @@ export function OperatorSystemPreview({
               </div>
 
               {view.analytics ? (
-                <div className="mt-6 grid items-start gap-5 xl:grid-cols-[1.12fr_0.88fr]">
+                <div className="mt-6 hidden items-start gap-5 md:grid xl:grid-cols-[1.12fr_0.88fr]">
                   <LeadVolumeChart data={view.analytics.leadVolume} />
                   <TeamPerformancePanel data={view.analytics.teamPerformance} />
                 </div>
@@ -415,14 +415,16 @@ export function OperatorSystemPreview({
                       <span className="md:col-span-2">Stage</span>
                       <span className="md:col-span-3">Next Action</span>
                     </div>
-                    {visibleOpportunities.map((opportunity) => (
-                      <OpportunityRow key={opportunity.name} opportunity={opportunity} />
+                    {visibleOpportunities.map((opportunity, index) => (
+                      <div key={opportunity.name} className={index >= 2 ? 'hidden md:block' : ''}>
+                        <OpportunityRow opportunity={opportunity} />
+                      </div>
                     ))}
                   </div>
                 </div>
 
                 {isCompact ? null : (
-                  <div className="grid gap-5">
+                  <div className="hidden gap-5 md:grid">
                     <div className="border border-bone/10 bg-bone/5 p-4">
                       <div className="flex items-center gap-2">
                         <CalendarCheck className="h-4 w-4 text-brass-light" />
@@ -438,15 +440,15 @@ export function OperatorSystemPreview({
                       </div>
                     </div>
 
-                    <div className="border border-amber-300/20 bg-amber-300/10 p-4">
+                    <div className="border border-indigo-300/20 bg-indigo-300/10 p-4">
                       <div className="flex items-center gap-2">
-                        <AlertTriangle className="h-4 w-4 text-amber-200" />
+                        <AlertTriangle className="h-4 w-4 text-indigo-200" />
                         <p className="text-sm font-semibold text-bone">Intelligence Gaps</p>
                       </div>
                       <div className="mt-4 space-y-3">
                         {view.intelligenceGaps.map((gap) => (
                           <div key={gap} className="flex gap-3">
-                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-200" />
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-200" />
                             <p className="text-xs leading-relaxed text-stone">{gap}</p>
                           </div>
                         ))}

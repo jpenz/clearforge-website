@@ -29,11 +29,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
   // Headline outcome displayed in the hero as a visual anchor.
   const heroStat = service.outcomes[0];
+  // Category summary — deliberately NOT verbatim repeats of the grid items
   const deliverableGroups = [
-    { label: 'Scope', value: service.deliverables[0] },
-    { label: 'System', value: service.deliverables[2] },
-    { label: 'Adoption', value: service.deliverables[5] },
-  ].filter((item) => item.value);
+    { label: 'Scope', value: 'The workflow, owner, and thresholds we build against' },
+    { label: 'System', value: 'The production build — integrations, controls, audit trail' },
+    { label: 'Adoption', value: 'The cadence that makes it stick — training, reviews, scoreboard' },
+  ];
   const breadcrumbLd = breadcrumbJsonLd([
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
@@ -108,8 +109,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
           <p className="overline">Expected Outcomes</p>
           <h2 className="mt-6 text-display max-w-2xl">What this looks like in practice.</h2>
-          <div className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4">
-            {service.outcomes.map((o) => (
+          <div className="mt-16 grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-3">
+            {service.outcomes.slice(1).map((o) => (
               <div key={o.label} className="min-w-0 border-t border-divider pt-6">
                 <p
                   className={`metric break-words font-medium leading-none text-brass ${

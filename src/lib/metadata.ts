@@ -106,7 +106,7 @@ export const organizationJsonLd = {
     '@type': 'Person',
     name: 'James Penz',
     jobTitle: 'Founder & Managing Partner',
-    sameAs: ['https://www.linkedin.com/in/jamesrpenz/'],
+    sameAs: ['https://www.linkedin.com/in/jamespenz/'],
   },
   contactPoint: {
     '@type': 'ContactPoint',
@@ -152,7 +152,7 @@ export const founderPersonJsonLd = {
   name: 'James Penz',
   jobTitle: 'Founder & Managing Partner',
   url: `${siteUrl}/about`,
-  sameAs: ['https://www.linkedin.com/in/jamesrpenz/'],
+  sameAs: ['https://www.linkedin.com/in/jamespenz/'],
   worksFor: {
     '@type': 'ProfessionalService',
     '@id': `${siteUrl}/#organization`,

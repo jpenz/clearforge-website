@@ -119,6 +119,14 @@ export function Footer() {
             © {new Date().getFullYear()} ClearForge AI · Sterling Heights, MI · All rights reserved
           </p>
           <div className="flex gap-6">
+            <a
+              href="https://www.linkedin.com/in/jamespenz/"
+              target="_blank"
+              rel="noreferrer"
+              className="metric text-[11px] text-stone transition-colors hover:text-bone"
+            >
+              LinkedIn
+            </a>
             <Link
               href="/privacy"
               className="metric text-[11px] text-stone transition-colors hover:text-bone"
