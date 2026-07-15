@@ -41,6 +41,8 @@ const columns = [
       { href: '/pricing', label: 'Pricing' },
       { href: '/security', label: 'Security' },
       { href: '/contact', label: 'Contact' },
+      { href: '/privacy', label: 'Privacy policy' },
+      { href: '/terms', label: 'Terms of service' },
     ],
   },
 ];
