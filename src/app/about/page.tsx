@@ -93,6 +93,14 @@ export default function AboutPage() {
               <p className="metric mt-4 text-[11px] uppercase tracking-[0.14em] text-warm-gray">
                 James Penz · Founder &amp; Managing Partner
               </p>
+              <a
+                href="https://www.linkedin.com/in/jamespenz/"
+                target="_blank"
+                rel="noreferrer"
+                className="metric mt-2 inline-block text-[11px] uppercase tracking-[0.14em] text-brass underline decoration-brass/40 underline-offset-4 transition-colors hover:text-brass-hover"
+              >
+                Connect on LinkedIn
+              </a>
             </div>
 
             <div className="lg:col-span-7">

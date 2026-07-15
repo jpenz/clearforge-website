@@ -155,9 +155,9 @@ export default function ContactPage() {
               <p className="overline">Step 1 — Pick a Time</p>
               <h2 className="mt-6 text-h1">Book the 30-minute intro.</h2>
               <p className="mt-5 text-body text-warm-gray">
-                Direct with James — the calendar invite and video link land in your inbox the moment
-                you book. Bring the one workflow that should run faster, cleaner, or with less
-                manual coordination.
+                Direct with James — a Microsoft Teams invite lands in your inbox the moment you
+                book. Bring the one workflow that should run faster, cleaner, or with less manual
+                coordination.
               </p>
               <ol className="mt-8 space-y-3 border-t border-divider pt-6">
                 {expectations.map((item, i) => (
@@ -228,7 +228,7 @@ export default function ContactPage() {
                       >
                         grab a time on the calendar above
                       </a>{' '}
-                      and the invite is sent instantly.
+                      and the Teams invite is sent instantly.
                     </p>
                   </div>
                 </div>
