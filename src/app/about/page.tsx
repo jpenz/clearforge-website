@@ -101,6 +101,14 @@ export default function AboutPage() {
               >
                 Connect on LinkedIn
               </a>
+              <a
+                href="https://jamespenz.com"
+                target="_blank"
+                rel="noreferrer"
+                className="metric mt-2 ml-4 inline-block text-[11px] uppercase tracking-[0.14em] text-brass underline decoration-brass/40 underline-offset-4 transition-colors hover:text-brass-hover"
+              >
+                jamespenz.com
+              </a>
             </div>
 
             <div className="lg:col-span-7">
