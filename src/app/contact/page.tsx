@@ -90,6 +90,7 @@ export default function ContactPage() {
       setIsSubmitting(false);
       return;
     }
+    trackEvent('generate_lead', { method: 'contact_form' });
     setSubmitted(true);
   }
 

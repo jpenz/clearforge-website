@@ -7,7 +7,7 @@ import { services } from '@/data/services';
 import { useCases } from '@/data/use-cases';
 
 const siteUrl = 'https://clearforge.ai';
-const contentLastModified = new Date('2026-05-05T00:00:00.000Z');
+const contentLastModified = new Date('2026-07-15T00:00:00.000Z');
 
 function stableDate(date: string) {
   return new Date(`${date}T00:00:00.000Z`);
