@@ -249,21 +249,15 @@ export default async function UseCaseDetailPage({ params }: { params: Promise<{ 
               <p className="overline">FAQ</p>
               <h2 className="mt-6 text-display">Questions buyers ask first.</h2>
             </div>
-            <div className="mt-12 grid items-start gap-4 lg:col-span-8 lg:mt-0 lg:grid-cols-2">
+            <div className="mt-12 lg:col-span-8 lg:mt-0">
               {useCase.faqs.map((faq, index) => (
-                <details
-                  key={faq.question}
-                  className="group border border-divider bg-warm-white p-6"
-                  open={index === 0}
-                >
-                  <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
-                    <span className="text-h4">{faq.question}</span>
-                    <span className="mt-1 text-brass transition-transform group-open:rotate-45">
-                      +
-                    </span>
-                  </summary>
-                  <p className="mt-4 text-body-sm leading-relaxed text-warm-gray">{faq.answer}</p>
-                </details>
+                <div key={faq.question}>
+                  <div className="py-7">
+                    <h3 className="text-h4">{faq.question}</h3>
+                    <p className="mt-3 text-body leading-relaxed text-warm-gray">{faq.answer}</p>
+                  </div>
+                  {index < useCase.faqs.length - 1 && <div className="h-px bg-divider" />}
+                </div>
               ))}
             </div>
           </div>
