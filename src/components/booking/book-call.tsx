@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useRef } from 'react';
 import { Button, type ButtonProps } from '@/components/ui/button';
+import { trackEvent } from '@/lib/analytics';
 
 const Cal = dynamic(() => import('@calcom/embed-react'), { ssr: false });
 
@@ -29,6 +30,12 @@ function loadCal() {
   calReady ??= import('@calcom/embed-react')
     .then((m) => m.getCalApi({ namespace: CAL_NAMESPACE }))
     .then((cal) => {
+      cal('on', {
+        action: 'bookingSuccessful',
+        callback: () => {
+          trackEvent('generate_lead', { method: 'cal_booking' });
+        },
+      });
       cal('ui', {
         theme: 'light',
         cssVarsPerTheme: {

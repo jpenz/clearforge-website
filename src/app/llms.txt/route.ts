@@ -6,7 +6,7 @@ import { services } from '@/data/services';
 import { useCases } from '@/data/use-cases';
 
 const siteUrl = 'https://clearforge.ai';
-const contentUpdated = '2026-05-05';
+const contentUpdated = '2026-07-15';
 
 function section(title: string, lines: string[]) {
   return [`## ${title}`, ...lines].join('\n');
@@ -72,6 +72,21 @@ export function GET() {
         'Services',
         `${siteUrl}/services`,
         'commercial capabilities and engagement architecture.',
+      ),
+      pageLine(
+        'How We Work',
+        `${siteUrl}/how-we-work`,
+        'the engagement arc: 4-week diagnostic, 10-14 week production sprint, 90-day adoption cadence.',
+      ),
+      pageLine(
+        'Security & Data Handling',
+        `${siteUrl}/security`,
+        'least-privilege access, your-environment-first builds, no model training on client data.',
+      ),
+      pageLine(
+        'Pricing',
+        `${siteUrl}/pricing`,
+        'published tiers: $15K diagnostic, $75K-$200K sprint, $5K-$15K/month operations.',
       ),
       pageLine(
         'Use Cases',

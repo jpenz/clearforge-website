@@ -87,15 +87,18 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         className={`${serifDisplay.variable} ${hanken.variable} ${dmMono.variable} font-sans antialiased`}
       >
         <JsonLdScript
-          data={[
-            organizationJsonLd,
-            founderPersonJsonLd,
-            websiteJsonLd,
-            siteNavigationJsonLd,
-            aiTransformationOfferCatalogJsonLd,
-            clearForgeMethodJsonLd,
-            clearForgeProfilePageJsonLd,
-          ]}
+          data={{
+            '@context': 'https://schema.org',
+            '@graph': [
+              organizationJsonLd,
+              founderPersonJsonLd,
+              websiteJsonLd,
+              siteNavigationJsonLd,
+              aiTransformationOfferCatalogJsonLd,
+              clearForgeMethodJsonLd,
+              clearForgeProfilePageJsonLd,
+            ].map(({ '@context': _ctx, ...node }) => node),
+          }}
         />
         {ga4MeasurementId ? <GoogleAnalytics measurementId={ga4MeasurementId} /> : null}
         {plausibleDomain ? <PlausibleAnalytics domain={plausibleDomain} /> : null}
