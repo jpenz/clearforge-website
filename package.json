@@ -23,7 +23,8 @@
     "video:hero:clean": "node scripts/generate-clean-hero-loop.mjs",
     "video:hero:dry-run": "node scripts/generate-hero-video.mjs generate --dry-run",
     "video:hero:status": "node scripts/generate-hero-video.mjs status",
-    "media:check": "node scripts/check-media-budget.mjs"
+    "media:check": "node scripts/check-media-budget.mjs",
+    "eval:agent": "node scripts/eval-hero.mjs"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",

@@ -136,9 +136,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             <div className="lg:col-span-4">
               <p className="overline">Deliverables</p>
               <h2 className="mt-6 text-display">What you get.</h2>
-              <div className="mt-8 grid gap-px overflow-hidden border border-divider bg-divider">
+              <div className="mt-8">
                 {deliverableGroups.map((item) => (
-                  <div key={item.label} className="bg-parchment p-5">
+                  <div key={item.label} className="border-t border-divider py-5">
                     <p className="overline text-[10px] text-brass">{item.label}</p>
                     <p className="mt-2 text-body-sm font-medium text-anthracite">{item.value}</p>
                   </div>
@@ -146,26 +146,13 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               </div>
             </div>
             <div className="mt-12 lg:col-span-8 lg:mt-0">
-              <div className="grid gap-px overflow-hidden border border-divider bg-divider sm:grid-cols-2">
+              <div className="grid gap-x-12 border-t border-divider sm:grid-cols-2">
                 {service.deliverables.map((d, i) => (
-                  <div key={d} className="bg-parchment p-6">
-                    <div className="flex items-center justify-between gap-4">
-                      <span
-                        className="text-brass"
-                        style={{
-                          fontFamily: 'var(--font-jetbrains-mono, monospace)',
-                          fontSize: '0.875rem',
-                          fontVariantNumeric: 'tabular-nums',
-                          lineHeight: 1,
-                        }}
-                      >
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                      <CheckCircle2 className="h-4 w-4 shrink-0 text-brass" />
-                    </div>
-                    <p className="mt-6 text-body-sm font-medium leading-relaxed text-anthracite">
-                      {d}
-                    </p>
+                  <div key={d} className="flex items-start gap-4 border-b border-divider py-5">
+                    <span className="metric text-sm leading-relaxed text-brass">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <p className="text-body-sm font-medium leading-relaxed text-anthracite">{d}</p>
                   </div>
                 ))}
               </div>

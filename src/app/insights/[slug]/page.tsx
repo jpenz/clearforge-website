@@ -96,14 +96,23 @@ function renderMarkdownBlocks(markdown: string) {
   const flushList = () => {
     if (listItems.length === 0 || !listType) return;
 
-    const ListTag = listType === 'ordered' ? 'ol' : 'ul';
+    const ordered = listType === 'ordered';
+    const ListTag = ordered ? 'ol' : 'ul';
     blocks.push(
       <ListTag
         key={`list-${blockIndex}`}
-        className={`my-6 space-y-3 pl-6 text-body text-warm-gray leading-relaxed ${listType === 'ordered' ? 'list-decimal' : 'list-disc'} marker:text-brass`}
+        className="my-7 list-none space-y-3.5 border-l border-divider pl-0 text-body text-warm-gray"
       >
-        {listItems.map((item) => (
-          <li key={item}>{cleanInlineText(item)}</li>
+        {listItems.map((item, li) => (
+          <li key={item} className="flex items-start gap-3.5 pl-5">
+            <span
+              aria-hidden="true"
+              className="metric mt-0.5 shrink-0 select-none text-[13px] leading-relaxed text-brass"
+            >
+              {ordered ? String(li + 1).padStart(2, '0') : '—'}
+            </span>
+            <span className="leading-relaxed">{cleanInlineText(item)}</span>
+          </li>
         ))}
       </ListTag>,
     );
@@ -283,12 +292,12 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
                   plain-English answer.
                 </p>
               </div>
-              <div className="grid gap-px overflow-hidden border border-divider bg-divider sm:grid-cols-2">
+              <div className="sm:columns-2 sm:gap-10">
                 {sections.slice(0, 6).map((section, index) => (
                   <Link
                     key={section.id}
                     href={`#${section.id}`}
-                    className="group flex min-h-20 gap-4 bg-warm-white p-4 transition-colors hover:bg-parchment"
+                    className="group flex items-baseline gap-4 border-t border-divider py-3.5 transition-colors hover:text-brass sm:break-inside-avoid"
                   >
                     <span className="metric text-xs text-brass">
                       {String(index + 1).padStart(2, '0')}

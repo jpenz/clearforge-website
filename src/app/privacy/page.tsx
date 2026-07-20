@@ -44,10 +44,13 @@ export default function PrivacyPage() {
               <strong className="text-anthracite">AI diagnostic tools.</strong> When you enter a
               company website address into Forge Intelligence™ (on our homepage or at /discover), we
               fetch publicly available pages from that address and process the extracted text with
-              AI model providers to generate your diagnostic. We store the inputs you provide (the
-              URL and, for the full report, your name, work email, and company) together with the
-              generated output so we can deliver the report and follow up. We do not fetch anything
-              behind a login, and we apply rate limits to prevent abuse.
+              AI model providers to generate your diagnostic.
+            </p>
+            <p className="mt-4 text-body text-warm-gray">
+              We store the inputs you provide — the URL and, for the full report, your name, work
+              email, and company — together with the generated output, so we can deliver the report
+              and follow up. We never fetch anything behind a login, and we rate-limit the tools to
+              prevent abuse.
             </p>
           </div>
 
@@ -67,7 +70,12 @@ export default function PrivacyPage() {
                 'Google Analytics and Plausible — website analytics',
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-body text-warm-gray">
-                  <span className="mt-2 block h-1.5 w-1.5 shrink-0 rounded-full bg-brass" />
+                  <span
+                    aria-hidden="true"
+                    className="metric mt-0.5 shrink-0 select-none text-[13px] text-brass"
+                  >
+                    —
+                  </span>
                   {item}
                 </li>
               ))}
@@ -106,7 +114,12 @@ export default function PrivacyPage() {
                 'To protect our rights, privacy, safety, or property',
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-body text-warm-gray">
-                  <span className="mt-2 block h-1.5 w-1.5 shrink-0 rounded-full bg-brass" />
+                  <span
+                    aria-hidden="true"
+                    className="metric mt-0.5 shrink-0 select-none text-[13px] text-brass"
+                  >
+                    —
+                  </span>
                   {item}
                 </li>
               ))}
