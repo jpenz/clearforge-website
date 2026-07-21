@@ -24,7 +24,9 @@
     "video:hero:dry-run": "node scripts/generate-hero-video.mjs generate --dry-run",
     "video:hero:status": "node scripts/generate-hero-video.mjs status",
     "media:check": "node scripts/check-media-budget.mjs",
-    "eval:agent": "node scripts/eval-hero.mjs"
+    "eval:agent": "node scripts/eval-hero.mjs",
+    "aeo:monitor": "node scripts/aeo-monitor.mjs",
+    "aeo:indexnow": "node scripts/indexnow-ping.mjs"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",
