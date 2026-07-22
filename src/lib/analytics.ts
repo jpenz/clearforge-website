@@ -164,7 +164,17 @@ export function trackEvent(name: string, properties: AnalyticsProperties = {}) {
   window.dataLayer = window.dataLayer ?? [];
   window.dataLayer.push(payload);
 
-  window.gtag?.('event', name, {
+  // Self-healing gtag: if the inline snippet's window.gtag is unavailable
+  // (observed in production), define it exactly as Google's snippet does.
+  // The GA4 library consumes arguments-object pushes from dataLayer either way.
+  if (typeof window.gtag !== 'function') {
+    window.gtag = function gtag() {
+      window.dataLayer = window.dataLayer ?? [];
+      // biome-ignore lint/style/noArguments: gtag protocol requires the Arguments object
+      (window.dataLayer as unknown[]).push(arguments);
+    };
+  }
+  window.gtag('event', name, {
     event_id: eventId,
     page_path: pagePath,
     ...attribution,
