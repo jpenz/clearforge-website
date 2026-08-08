@@ -36,8 +36,8 @@ export const adoptionGap = {
     },
     { value: '~70%', label: 'of transformations fail on people, not technology' },
     {
-      value: '89%',
-      label: 'of ClearForge projects reach production — adoption is staffed, not hoped for',
+      value: '70%',
+      label: 'weekly-active usage — the adoption bar we build to by day 90',
     },
   ],
   failures: [
@@ -81,7 +81,7 @@ export const heroAgent = {
 export const marqueeItems = [
   { stat: '1,181', label: 'qualified opportunities · $4B industrial conglomerate' },
   { stat: '99.8%', label: 'product-capability match rate · sales intelligence platform' },
-  { stat: '89%', label: 'of ClearForge projects reach production' },
+  { stat: '10-14 wks', label: 'from kickoff to a live production system' },
   { stat: '<90 days', label: 'to first measured ROI · median engagement' },
   { stat: '631+', label: 'AI sales playbooks generated · industrial client' },
   { stat: '17', label: 'industry value chains mapped · 300+ activities' },
@@ -111,7 +111,7 @@ export const skus = [
     id: 'scorecard',
     tag: 'FORGE-SCORE',
     name: 'Forge Scorecard™',
-    desc: 'A 20-question production-readiness score across five pillars. Benchmarked against operators at your scale — realistic, not flattering.',
+    desc: 'A 10-question production-readiness score across five pillars. Benchmarked against operators at your scale — realistic, not flattering.',
     stat: '0–100',
     statLabel: 'readiness score',
     href: '/scorecard',
@@ -163,7 +163,7 @@ export const charcoal = {
   headlineTail: '.',
   copy: 'ClearForge was founded by James Penz — 15 years across Bain, EY, and Capgemini, including Bain’s AI Automation practice. The person who scopes your engagement builds it — and stays through adoption until your team runs it without us. Senior operators only, named on every proposal.',
   stats: [
-    { value: '89%', label: 'projects reach production — industry median is 16%' },
+    { value: '$15K', label: 'fixed-price diagnostic, published before you call' },
     { value: '10–14 wk', label: 'kickoff to live production system' },
     { value: '3', label: 'engagement tiers, prices published' },
   ],

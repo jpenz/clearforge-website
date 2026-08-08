@@ -603,3 +603,13 @@ export const blueprints: Blueprint[] = [
 export function getBlueprintBySlug(slug: string) {
   return blueprints.find((blueprint) => blueprint.slug === slug);
 }
+
+/**
+ * Blueprints safe for public surfaces. The cybersecurity blueprint is an
+ * individually-targeted artifact (noIndex) and must never appear in the
+ * public library, sitemap, or llms.txt. Every public call site consumes
+ * THIS constant so a future artifact cannot leak by omission.
+ */
+export const publicBlueprints = blueprints.filter(
+  (blueprint) => blueprint.slug !== 'cybersecurity-technology-company',
+);

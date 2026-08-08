@@ -44,7 +44,7 @@ export function ForgeSystem() {
                   data-analytics="home_band_intelligence"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-brass transition-colors hover:text-brass-hover"
                 >
-                  Map the Workflow — free, no signup
+                  Map the Workflow, free to run
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -72,7 +72,7 @@ export function ForgeSystem() {
                   data-analytics="home_band_scorecard"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-brass transition-colors hover:text-brass-hover"
                 >
-                  Take the scorecard — free, no signup
+                  Take the scorecard, free and no signup
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>

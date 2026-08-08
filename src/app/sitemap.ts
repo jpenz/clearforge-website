@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { blueprints } from '@/data/blueprints';
+import { publicBlueprints } from '@/data/blueprints';
 import { caseStudies } from '@/data/case-studies';
 import { industries } from '@/data/industries-value-chains';
 import { insights } from '@/data/insights';
@@ -126,9 +126,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.83,
   }));
 
-  const blueprintPages: MetadataRoute.Sitemap = blueprints
-    .filter((blueprint) => blueprint.slug !== 'cybersecurity-technology-company')
-    .map((blueprint) => ({
+  const blueprintPages: MetadataRoute.Sitemap = publicBlueprints.map((blueprint) => ({
       url: `${siteUrl}${blueprint.href}`,
       lastModified: contentLastModified,
       changeFrequency: 'monthly',

@@ -164,9 +164,10 @@ export function trackEvent(name: string, properties: AnalyticsProperties = {}) {
   window.dataLayer = window.dataLayer ?? [];
   window.dataLayer.push(payload);
 
-  // Self-healing gtag: if the inline snippet's window.gtag is unavailable
-  // (observed in production), define it exactly as Google's snippet does.
-  // The GA4 library consumes arguments-object pushes from dataLayer either way.
+  // Self-healing gtag (defence in depth). Root cause of the original outage
+  // was a trailing newline in the GA4 env var making the inline snippet a
+  // SyntaxError; that is fixed at the source and guarded in the component.
+  // This fallback keeps conversions flowing if the snippet ever fails again.
   if (typeof window.gtag !== 'function') {
     window.gtag = function gtag() {
       window.dataLayer = window.dataLayer ?? [];

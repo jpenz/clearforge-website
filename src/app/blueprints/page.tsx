@@ -2,7 +2,7 @@ import { ArrowRight, CheckCircle2, FileText, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Button } from '@/components/ui/button';
-import { blueprints } from '@/data/blueprints';
+import { publicBlueprints } from '@/data/blueprints';
 import { breadcrumbJsonLd, createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
@@ -31,14 +31,12 @@ const collectionLd = {
   url: 'https://clearforge.ai/blueprints',
   description:
     'Example AI operating-system builds, composite scenarios, and role proposals from ClearForge.',
-  hasPart: blueprints
-    .filter((blueprint) => blueprint.slug !== 'cybersecurity-technology-company')
-    .map((blueprint) => ({
+  hasPart: publicBlueprints.map((blueprint) => ({
       '@type': 'Service',
       name: blueprint.title,
       url: `https://clearforge.ai${blueprint.href}`,
-      description: blueprint.description,
-    })),
+    description: blueprint.description,
+  })),
 };
 
 export default function BlueprintsPage() {
@@ -101,7 +99,7 @@ export default function BlueprintsPage() {
           </h2>
 
           <div className="mt-14 grid gap-px overflow-hidden border border-divider bg-divider lg:grid-cols-2">
-            {blueprints.map((blueprint) => (
+            {publicBlueprints.map((blueprint) => (
               <Link
                 key={blueprint.slug}
                 href={blueprint.href}

@@ -59,7 +59,7 @@ export function Footer() {
               Sixty seconds to your first <span className="display-accent">play</span>.
             </h2>
             <p className="mt-4 text-body-lg text-stone">
-              Run Forge Intelligence™ on your own website — free, no signup.
+              Run Forge Intelligence™ on your own website. Free, results sent to your inbox.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">

@@ -22,7 +22,7 @@ const PRODUCTS = [
     href: '/scorecard',
     tag: 'FORGE-SCORE',
     label: 'Forge Scorecard™',
-    desc: '20-question production-readiness score across five pillars.',
+    desc: '10-question production-readiness score across five pillars.',
   },
   {
     href: '/blueprints',

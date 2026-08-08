@@ -255,7 +255,7 @@ export default function ScorecardResultsPage() {
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10 text-center">
           {submitted && (
             <div className="mb-6 inline-flex items-center gap-2 border border-brass/20 bg-brass/10 px-4 py-2 text-sm text-brass-light">
-              <CheckCircle className="h-4 w-4" /> Results sent to {email}
+              <CheckCircle className="h-4 w-4" /> Readout unlocked for {email}
             </div>
           )}
           <p className="overline">ClearForge Research · AI Build-Readiness Report</p>
