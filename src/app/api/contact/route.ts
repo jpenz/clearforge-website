@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { isRateLimited } from '@/lib/rate-limit';
 import { logServerError } from '@/lib/server-logger';
 import { saveContactLead } from '@/lib/supabase';
 
@@ -7,22 +8,6 @@ function getResendClient(): Resend | null {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return null;
   return new Resend(apiKey);
-}
-
-// Rate limiter
-const rateLimit = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT_MAX = 5;
-const RATE_LIMIT_WINDOW = 60 * 60 * 1000;
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const entry = rateLimit.get(ip);
-  if (!entry || now > entry.resetAt) {
-    rateLimit.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
-    return false;
-  }
-  entry.count++;
-  return entry.count > RATE_LIMIT_MAX;
 }
 
 function sanitize(str: string): string {
@@ -46,11 +31,7 @@ function isValidEmail(email: string): boolean {
 
 export async function POST(req: NextRequest) {
   try {
-    const ip =
-      req.headers.get('x-forwarded-for')?.split(',')[0] ||
-      req.headers.get('x-real-ip') ||
-      'unknown';
-    if (isRateLimited(ip)) {
+    if (isRateLimited(req.headers, 'contact-form', 5, 60 * 60 * 1000)) {
       return NextResponse.json(
         { error: 'Too many submissions. Please try again later.' },
         { status: 429 },

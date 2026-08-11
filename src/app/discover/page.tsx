@@ -507,7 +507,7 @@ export default function DiscoverPage() {
     setSavedDraft(null);
     setPhase(draft.phase && draft.phase !== 'researching' ? draft.phase : 'url');
     trackEvent('ai_value_map_draft_resumed', {
-      company: draft.companyName || 'unknown',
+      has_company: Boolean(draft.companyName),
       has_brief: Boolean(draft.ambitionBrief),
       message_count: draft.messages?.length ?? 0,
     });
@@ -540,8 +540,7 @@ export default function DiscoverPage() {
 
     trackEvent('ai_value_map_started', {
       mode: 'website',
-      domain: trimmedUrl,
-      company: trimmedCompany,
+      has_company: Boolean(trimmedCompany),
       has_email: true,
     });
     setPhase('researching');
@@ -641,7 +640,7 @@ export default function DiscoverPage() {
     trackEvent('ai_value_chain_reviewed', {
       must_have_count: must.length,
       curious_count: curious.length,
-      company: valueChain.companyName,
+      has_company: Boolean(valueChain.companyName),
     });
 
     const summary =
@@ -738,7 +737,7 @@ export default function DiscoverPage() {
     if (!reportEmail.trim() || !reportCompany.trim()) return;
 
     trackEvent('ai_value_map_report_requested', {
-      company: reportCompany.trim() || valueChain?.companyName || intelligence?.domain || 'unknown',
+      has_company: Boolean(reportCompany.trim() || valueChain?.companyName || intelligence?.domain),
       message_count: messages.filter((m) => m.role !== 'system').length,
       source,
     });

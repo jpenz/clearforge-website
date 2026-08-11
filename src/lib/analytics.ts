@@ -170,7 +170,7 @@ export function trackEvent(name: string, properties: AnalyticsProperties = {}) {
   if (typeof window.gtag !== 'function') {
     window.gtag = function gtag() {
       window.dataLayer = window.dataLayer ?? [];
-      // biome-ignore lint/style/noArguments: gtag protocol requires the Arguments object
+      // biome-ignore lint/complexity/noArguments: gtag protocol requires the Arguments object
       (window.dataLayer as unknown[]).push(arguments);
     };
   }

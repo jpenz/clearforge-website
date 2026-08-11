@@ -50,6 +50,7 @@ const securityHeaders = [
       "frame-src 'self' https://app.cal.com https://cal.com",
       "frame-ancestors 'self'",
       "base-uri 'self'",
+      "object-src 'none'",
       "form-action 'self'",
     ].join("; "),
   },
