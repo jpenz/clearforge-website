@@ -20,9 +20,11 @@ CREATE TABLE IF NOT EXISTS analytics_events (
 -- Enable RLS
 ALTER TABLE analytics_events ENABLE ROW LEVEL SECURITY;
 
--- Allow service role full access (API routes use service role key)
-CREATE POLICY "service_role_all" ON analytics_events
-  FOR ALL USING (true) WITH CHECK (true);
+-- The public website uses the server-side service role client for writes.
+-- Service-role requests bypass RLS, so do not add an open policy here: an
+-- `USING (true)` policy could expose analytics records to anon/authenticated roles.
+DROP POLICY IF EXISTS "service_role_all" ON analytics_events;
+REVOKE ALL ON TABLE analytics_events FROM anon, authenticated;
 
 -- Indexes for funnel, campaign, and page-performance analysis
 CREATE INDEX IF NOT EXISTS idx_analytics_events_event_name ON analytics_events(event_name);

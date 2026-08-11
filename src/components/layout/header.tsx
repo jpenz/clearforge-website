@@ -13,6 +13,12 @@ import { cn } from '@/lib/utils';
 
 const PRODUCTS = [
   {
+    href: '/revenue-ops',
+    tag: 'SAMUEL-OS',
+    label: 'Samuel Revenue OS™',
+    desc: 'Evidence-first opportunity command center — safe interactive demo.',
+  },
+  {
     href: '/discover',
     tag: 'FORGE-INTEL',
     label: 'Forge Intelligence™',

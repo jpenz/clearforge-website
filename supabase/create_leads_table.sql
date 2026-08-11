@@ -26,9 +26,11 @@ CREATE TABLE IF NOT EXISTS assessment_leads (
 -- Enable RLS
 ALTER TABLE assessment_leads ENABLE ROW LEVEL SECURITY;
 
--- Allow service role full access (API routes use service role key)
-CREATE POLICY "service_role_all" ON assessment_leads
-  FOR ALL USING (true) WITH CHECK (true);
+-- The public website uses the server-side service role client for writes.
+-- Service-role requests bypass RLS, so do not add an open policy here: an
+-- `USING (true)` policy could expose prospect PII to anon/authenticated roles.
+DROP POLICY IF EXISTS "service_role_all" ON assessment_leads;
+REVOKE ALL ON TABLE assessment_leads FROM anon, authenticated;
 
 -- Indexes for common queries
 CREATE INDEX IF NOT EXISTS idx_assessment_leads_email ON assessment_leads(email);

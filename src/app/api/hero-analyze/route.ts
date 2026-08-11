@@ -1,7 +1,12 @@
 import { NextResponse } from 'next/server';
 import { buildHeroPrompt, snapshotFields } from '@/lib/hero-agent';
 import { isRateLimited } from '@/lib/rate-limit';
-import { getCompanyDomain, normalizePublicCompanyUrl } from '@/lib/url-safety';
+import {
+  getCompanyDomain,
+  normalizePublicCompanyUrl,
+  resolvePublicRedirectUrl,
+} from '@/lib/url-safety';
+import { resolvesToPublicAddresses } from '@/lib/url-safety.server';
 
 /**
  * POST /api/hero-analyze — STREAMING (NDJSON).
@@ -16,10 +21,10 @@ import { getCompanyDomain, normalizePublicCompanyUrl } from '@/lib/url-safety';
  * the client's existing error paths keep working.
  *
  * Guardrails (public, unauthenticated surface): shared per-IP rate limit,
- * SSRF-safe URL normalization (blocks private/metadata hosts), fetched site
- * text treated as UNTRUSTED (prompt-injection guard lives in
- * buildHeroPrompt), 4s site-fetch timeout, capped input size, 25s model
- * timeout, graceful fallback.
+ * SSRF-safe URL normalization (blocks private/metadata hosts), manual and
+ * revalidated redirect handling, fetched site text treated as UNTRUSTED
+ * (prompt-injection guard lives in buildHeroPrompt), 4s site-fetch timeout,
+ * capped remote payload, 25s model timeout, graceful fallback.
  */
 
 interface HeroPriority {
@@ -51,6 +56,120 @@ function stripHtml(html: string): string {
 }
 
 const clip = (v: unknown, n: number) => String(v ?? '').slice(0, n);
+
+const HERO_SITE_FETCH_TIMEOUT_MS = 4_000;
+const MAX_HERO_SITE_BYTES = 512 * 1024;
+const MAX_HERO_REDIRECTS = 2;
+const REDIRECT_STATUS_CODES = new Set([301, 302, 303, 307, 308]);
+
+function exceedsDeclaredByteLimit(headers: Headers, maxBytes: number): boolean {
+  const contentLength = headers.get('content-length');
+  if (!contentLength) return false;
+
+  const length = Number(contentLength);
+  return Number.isInteger(length) && length > maxBytes;
+}
+
+function hasReadableTextContent(headers: Headers): boolean {
+  const contentType = headers.get('content-type');
+  if (!contentType) return true;
+
+  const mediaType = contentType.split(';', 1)[0]?.trim().toLowerCase();
+  return (
+    mediaType === 'text/html' ||
+    mediaType === 'application/xhtml+xml' ||
+    mediaType?.startsWith('text/') === true
+  );
+}
+
+async function readResponseTextWithinLimit(
+  response: Response,
+  maxBytes: number,
+): Promise<string | null> {
+  if (exceedsDeclaredByteLimit(response.headers, maxBytes)) return null;
+  if (!response.body) return '';
+
+  const reader = response.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let totalBytes = 0;
+
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      totalBytes += value.byteLength;
+      if (totalBytes > maxBytes) {
+        await reader.cancel();
+        return null;
+      }
+      chunks.push(value);
+    }
+  } finally {
+    reader.releaseLock();
+  }
+
+  const body = new Uint8Array(totalBytes);
+  let offset = 0;
+  for (const chunk of chunks) {
+    body.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+
+  return new TextDecoder().decode(body);
+}
+
+/**
+ * Fetches a small public page without allowing fetch to follow unvalidated
+ * redirects. This is exported for focused, network-free unit coverage.
+ */
+export async function fetchPublicCompanyPage(
+  initialUrl: URL,
+  fetcher: typeof fetch = fetch,
+  resolveHostname: (hostname: string) => Promise<boolean> = resolvesToPublicAddresses,
+): Promise<string> {
+  let currentUrl = initialUrl;
+
+  for (let redirectCount = 0; redirectCount <= MAX_HERO_REDIRECTS; redirectCount += 1) {
+    if (!(await resolveHostname(currentUrl.hostname))) return '';
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), HERO_SITE_FETCH_TIMEOUT_MS);
+    let response: Response;
+
+    try {
+      response = await fetcher(currentUrl.href, {
+        signal: controller.signal,
+        headers: { 'User-Agent': 'ClearForge-Hero-Analyzer/1.0 (+https://clearforge.ai)' },
+        redirect: 'manual',
+      });
+    } catch {
+      return '';
+    } finally {
+      clearTimeout(timeout);
+    }
+
+    if (REDIRECT_STATUS_CODES.has(response.status)) {
+      if (redirectCount === MAX_HERO_REDIRECTS) return '';
+
+      const nextUrl = resolvePublicRedirectUrl(currentUrl, response.headers.get('location'));
+      if (!nextUrl) return '';
+
+      currentUrl = nextUrl;
+      continue;
+    }
+
+    if (!response.ok || !hasReadableTextContent(response.headers)) return '';
+
+    try {
+      return (await readResponseTextWithinLimit(response, MAX_HERO_SITE_BYTES)) ?? '';
+    } catch {
+      return '';
+    }
+  }
+
+  return '';
+}
 
 export async function POST(request: Request) {
   if (isRateLimited(request.headers, 'hero-analyze', 5, 60_000)) {
@@ -89,17 +208,7 @@ export async function POST(request: Request) {
 
         let siteText = '';
         try {
-          const fetchController = new AbortController();
-          const timeout = setTimeout(() => fetchController.abort(), 4000);
-          const res = await fetch(safeUrl.href, {
-            signal: fetchController.signal,
-            headers: { 'User-Agent': 'ClearForge-Hero-Analyzer/1.0 (+https://clearforge.ai)' },
-            redirect: 'follow',
-          });
-          clearTimeout(timeout);
-          if (res.ok) {
-            siteText = stripHtml(await res.text());
-          }
+          siteText = stripHtml(await fetchPublicCompanyPage(safeUrl));
         } catch {
           /* unreachable site — Claude infers from the domain */
         }
