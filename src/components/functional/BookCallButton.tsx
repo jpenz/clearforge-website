@@ -1,8 +1,7 @@
 "use client";
 
-import { getCalApi } from "@calcom/embed-react";
-import { useEffect } from "react";
-import { CAL_LINK, CAL_NAMESPACE, CTA_LABEL } from "@/data/site";
+import { CAL_NAMESPACE, CTA_LABEL } from "@/data/site";
+import { openCalModal, preloadCal } from "@/lib/cal";
 import { cn } from "@/lib/utils";
 
 type Variant = "solid" | "outline" | "link" | "quiet";
@@ -32,25 +31,25 @@ const isBoxed = (variant: Variant) => variant === "solid" || variant === "outlin
 /**
  * The canonical booking button. Opens the Cal.com scheduling modal.
  * Label is always exactly "Book a 30-min intro".
+ *
+ * Cal's embed JS loads on intent (hover/focus/touch), never on page load;
+ * the click opens the modal programmatically. bookingSuccessful fires the
+ * generate_lead conversion (wired once, in lib/cal).
  */
 export function BookCallButton({
   variant = "solid",
   size = "sm",
   className,
 }: BookCallButtonProps) {
-  useEffect(() => {
-    void (async () => {
-      const cal = await getCalApi({ namespace: CAL_NAMESPACE });
-      cal("ui", { theme: "light", layout: "month_view" });
-    })();
-  }, []);
+  const preload = () => preloadCal(CAL_NAMESPACE);
 
   return (
     <button
       type="button"
-      data-cal-namespace={CAL_NAMESPACE}
-      data-cal-link={CAL_LINK}
-      data-cal-config='{"layout":"month_view","theme":"light"}'
+      onMouseEnter={preload}
+      onFocus={preload}
+      onTouchStart={preload}
+      onClick={() => openCalModal(CAL_NAMESPACE)}
       className={cn(
         "inline-block cursor-pointer text-center font-semibold transition-colors",
         isBoxed(variant) && sizeClasses[size],

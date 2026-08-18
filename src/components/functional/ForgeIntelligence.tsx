@@ -23,7 +23,7 @@ const SAMPLES = [
  * Streams a detailed analysis from /api/hero-analyze.
  */
 export function ForgeIntelligence() {
-  const { status, target, progress, fields, run } =
+  const { status, target, progress, fields, run, live } =
     useAnalysisStream("detailed");
   const [input, setInput] = useState("");
 
@@ -51,7 +51,7 @@ export function ForgeIntelligence() {
           </span>
         </div>
         <span className="text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase">
-          Illustrative
+          {live ? "Live analysis" : "Illustrative"}
         </span>
       </div>
 
@@ -222,9 +222,11 @@ export function ForgeIntelligence() {
                     <span className="text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase">
                       {row.label}
                     </span>
-                    <span className="text-[11px] tracking-[0.14em] text-ink/60 uppercase">
-                      Illustrative
-                    </span>
+                    {!live && (
+                      <span className="text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+                        Illustrative
+                      </span>
+                    )}
                   </div>
                   <p className="tnum text-[14px] leading-relaxed text-ink/80">
                     {value}

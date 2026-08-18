@@ -50,7 +50,7 @@ const SAMPLE_READOUT: Array<{
  * streaming, done, and error states from the /api/hero-analyze stream.
  */
 export function HeroAgent() {
-  const { status, target, progress, fields, run } = useAnalysisStream("brief");
+  const { status, target, progress, fields, live, run } = useAnalysisStream("brief");
   const [input, setInput] = useState("");
 
   return (
@@ -193,7 +193,7 @@ export function HeroAgent() {
                       className={`text-right font-medium ${row.numeric ? "tnum" : ""}`}
                     >
                       {value}
-                      {row.illustrative && (
+                      {row.illustrative && !live && (
                         <span className="ml-1 text-[10px] font-normal tracking-[0.1em] text-ink/60 uppercase">
                           illustrative
                         </span>

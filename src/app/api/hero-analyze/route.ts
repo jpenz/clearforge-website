@@ -1,10 +1,14 @@
 import { streamAnalysis, type AnalysisMode } from "@/lib/analysis";
+import { isRateLimited } from "@/lib/rate-limit";
 
 /**
  * NDJSON streaming endpoint behind the HeroAgent card and /discover.
  * Emits progress lines, then analysis fields one at a time, then done.
  */
 export async function POST(request: Request) {
+  if (isRateLimited(request.headers, "hero-analyze", 5, 60_000)) {
+    return Response.json({ error: "Too many requests" }, { status: 429 });
+  }
   let target = "yourcompany.com";
   let mode: AnalysisMode = "brief";
   try {

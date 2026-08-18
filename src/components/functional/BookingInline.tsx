@@ -1,8 +1,9 @@
 "use client";
 
-import Cal, { getCalApi } from "@calcom/embed-react";
+import Cal from "@calcom/embed-react";
 import { useEffect, useState } from "react";
 import { CAL_INLINE_NAMESPACE, CAL_LINK } from "@/data/site";
+import { loadCal } from "@/lib/cal";
 
 const WEEKDAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
@@ -19,7 +20,7 @@ export function BookingInline() {
     const markReady = () => {
       if (mounted) setReady(true);
     };
-    void getCalApi({ namespace: CAL_INLINE_NAMESPACE }).then((api) => {
+    void loadCal(CAL_INLINE_NAMESPACE).then((api) => {
       api("on", { action: "linkReady", callback: markReady });
     });
     // Never trap the surface behind the skeleton if the embed stalls.

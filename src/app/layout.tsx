@@ -37,6 +37,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
+  const gaId = (process.env.NEXT_PUBLIC_GA_ID ?? process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID ?? "").trim();
   return (
     <html lang="en" className={`${bodoni.variable} ${hanken.variable} h-full`}>
       <body className="flex min-h-full flex-col">
@@ -44,9 +45,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main className="flex-1">{children}</main>
         <Footer />
       </body>
-      {process.env.NEXT_PUBLIC_GA_ID && (
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-      )}
+      {gaId && <GoogleAnalytics gaId={gaId} />}
     </html>
   );
 }

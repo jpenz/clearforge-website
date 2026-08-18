@@ -19,6 +19,7 @@ export function useAnalysisStream(mode: AnalysisMode = "brief") {
   const [target, setTarget] = useState("yourcompany.com");
   const [progress, setProgress] = useState<string[]>([]);
   const [fields, setFields] = useState<Record<string, string>>({});
+  const [live, setLive] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => () => abortRef.current?.abort(), []);
@@ -33,6 +34,7 @@ export function useAnalysisStream(mode: AnalysisMode = "brief") {
       setTarget(nextTarget);
       setProgress([]);
       setFields({});
+      setLive(false);
       setStatus("running");
 
       try {
@@ -60,6 +62,8 @@ export function useAnalysisStream(mode: AnalysisMode = "brief") {
             const event = JSON.parse(line) as AnalysisEvent;
             if (event.type === "progress") {
               setProgress((prev) => [...prev, event.label]);
+            } else if (event.type === "mode") {
+              setLive(event.value === "live");
             } else if (event.type === "field") {
               setStatus("streaming");
               setFields((prev) => ({ ...prev, [event.key]: event.value }));
@@ -79,5 +83,5 @@ export function useAnalysisStream(mode: AnalysisMode = "brief") {
     [mode],
   );
 
-  return { status, target, progress, fields, run };
+  return { status, target, progress, fields, live, run };
 }

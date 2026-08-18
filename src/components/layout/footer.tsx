@@ -51,7 +51,21 @@ export function Footer() {
           ))}
         </div>
         <div className="mt-12 flex flex-col gap-2 border-t border-hairline pt-5 text-[12px] text-ink/60 md:flex-row md:items-center md:justify-between">
-          <p className="tnum">© 2026 {SITE_NAME}</p>
+          <p className="tnum">
+            © 2026 {SITE_NAME}
+            <span aria-hidden="true" className="px-2">
+              ·
+            </span>
+            <Link href="/privacy" className="hover:text-ink">
+              Privacy
+            </Link>
+            <span aria-hidden="true" className="px-2">
+              ·
+            </span>
+            <Link href="/terms" className="hover:text-ink">
+              Terms
+            </Link>
+          </p>
           <p className="tnum">
             10 to 14 weeks from kickoff to a live production system
           </p>
