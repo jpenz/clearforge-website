@@ -26,8 +26,8 @@ const SECURITY_HEADERS = [
       process.env.NODE_ENV === "production"
         ? "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com https://cal.com"
         : "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://app.cal.com https://cal.com",
-      "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://region1.google-analytics.com https://app.cal.com https://api.cal.com https://cal.com",
-      "img-src 'self' data: blob: https://*.supabase.co https://www.google-analytics.com https://app.cal.com https://cal.com",
+      "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com https://app.cal.com https://api.cal.com https://cal.com",
+      "img-src 'self' data: blob: https://*.supabase.co https://www.google-analytics.com https://www.googletagmanager.com https://app.cal.com https://cal.com",
       "frame-src 'self' https://app.cal.com https://cal.com",
       "frame-ancestors 'self'",
       "base-uri 'self'",

@@ -74,8 +74,8 @@ export function ArticleBody({ blocks }: { blocks: ArticleBlock[] }) {
             );
           case "table":
             return (
-              <div key={index} className="mx-auto mt-10 max-w-[900px]">
-                <table className="w-full border-collapse text-left">
+              <div key={index} className="mx-auto mt-10 max-w-[900px] overflow-x-auto">
+                <table className="w-full min-w-[560px] border-collapse text-left md:min-w-0">
                   <caption className="sr-only">{block.caption}</caption>
                   <thead>
                     <tr className="border-y border-ink">
