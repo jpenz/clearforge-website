@@ -1,0 +1,28 @@
+# ClearForge
+
+> ClearForge builds AI systems your team actually uses. Founder-led AI consulting and build firm for mid-market companies ($20M to $500M revenue) and PE operating teams. Founder: James Penz, formerly of Bain's AI and Automation practice, with earlier work at EY and Capgemini. Prices are published. The deliverable is the working system, not a report.
+
+## Published pricing
+
+- Forge Diagnostic: $15K fixed price, 2 weeks. Where every engagement starts.
+- Eval and Reliability Audit: $15K fixed price, 2 weeks, for AI systems a company already built (eval harness, reliability gates, a fix plan).
+- Forge Sprint: from $75K, typical range $75K to $200K+, 10 to 14 weeks from kickoff to a live production system. Every Sprint ships with an eval harness and reliability gates as a named deliverable.
+- Forge Scale: $5K to $15K per month (the Adoption Mile: named operator, weekly working cadence, live adoption scoreboard). Top tier is a Fractional Chief AI Officer engagement, from $15K per month.
+- Forge Run: $2.5K to $7.5K per system per month, managed agent operations after a build (monitoring, production evals, SLAs, model upgrades).
+- PE Portfolio Pack: portfolio AI scan, Diagnostic multipack, sponsor-level adoption scoreboard. Pricing scoped with the sponsor.
+
+## The standard
+
+- 70 percent weekly-active adoption bar by day 90.
+- 10 to 14 weeks from kickoff to a live production system.
+
+## Pages
+
+- [Services](https://clearforge.ai/services): The catalog as a journey: Diagnose, Build, Adopt, Run.
+- [Pricing](https://clearforge.ai/pricing): Every published price, plus why pricing is public.
+- [Proof](https://clearforge.ai/proof): Case studies with real numbers, anonymized clients.
+- [Insights](https://clearforge.ai/insights): Long reads on AI systems, adoption, and what they cost.
+- [About](https://clearforge.ai/about): Founder-led. One standard.
+- [Book a 30-min intro](https://clearforge.ai/contact): Inline scheduling.
+- [Forge Intelligence](https://clearforge.ai/discover): Free AI workflow-mapping tool.
+- [Scorecard](https://clearforge.ai/scorecard): Free AI readiness scorecard, 10 questions across 5 pillars.
