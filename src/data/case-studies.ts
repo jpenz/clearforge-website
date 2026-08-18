@@ -49,7 +49,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     letter: "A",
     client: "A $4B industrial conglomerate",
     summary:
-      "1,181 qualified opportunities across 3 divisions in 6 months. Monthly volume ramped 32x, from 19 to 613. 631+ generated sales playbooks.",
+      "1,181 qualified opportunities across 3 divisions in 6 months, at a 99.8% match rate to real product capabilities. Monthly volume ramped 32x, from 19 to 613. 631+ generated sales playbooks.",
     metrics: [
       { value: "1,181", label: "Qualified opportunities" },
       { value: "3", label: "Divisions" },
@@ -87,10 +87,10 @@ export const CASE_STUDIES: CaseStudy[] = [
       {
         label: "The situation",
         figure: "$4B",
-        figureLabel: "Industrial conglomerate, 3 divisions",
+        figureLabel: "Industrial conglomerate, 16 divisions, 70+ facilities",
         paragraphs: [
-          "A $4B industrial conglomerate ran three divisions. Each division found and qualified opportunities its own way. There was no shared method to spot work that crossed division lines.",
-          "Pipeline depended on individual effort. The company needed one system that all three divisions could use.",
+          "A $4B industrial conglomerate ran 16 divisions across 70+ facilities. Sales teams worked in silos with no shared market intelligence. Prospecting was manual and untethered from what the company could actually make. Cross-sell opportunities between divisions were invisible.",
+          "Leadership had no unified view of where capital projects were happening or where the white space was. Pipeline depended on individual effort. The company needed one system, and chose three divisions to run it first.",
         ],
       },
       {
@@ -99,7 +99,8 @@ export const CASE_STUDIES: CaseStudy[] = [
         figureLabel: "Weeks from kickoff to production",
         paragraphs: [
           "ClearForge built an AI system for opportunity identification and qualification. It went from kickoff to a live production system in 10 to 14 weeks.",
-          "The system shipped with an eval harness and reliability gates. Outputs were checked against a test set before release. All three divisions worked from the same system.",
+          "The system watched capital projects and industrial demand signals across 20+ states, matched each opportunity to the company's actual product lines and territories, and generated a rep-ready playbook for each account. Sales feedback on every playbook fed back into the scoring.",
+          "It shipped with an eval harness and reliability gates. Outputs were checked against a test set before release. All three divisions worked from the same system.",
         ],
       },
       {
@@ -107,7 +108,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         figure: "6",
         figureLabel: "Months of measured output",
         paragraphs: [
-          "The system found 1,181 qualified opportunities across 3 divisions in 6 months. Monthly volume ramped 32x, from 19 to 613.",
+          "The system found 1,181 qualified opportunities across 3 divisions in 6 months, at a 99.8% match rate to the client's actual product capabilities. Monthly volume ramped 32x, from 19 to 613, as the scoring calibrated.",
           "It also generated 631+ sales playbooks, one for each account the teams pursued.",
         ],
       },
@@ -123,6 +124,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     resultsTable: [
       { metric: "Qualified opportunities", value: "1,181" },
+      { metric: "Match rate to actual product capabilities", value: "99.8%" },
       { metric: "Monthly volume, start", value: "19" },
       { metric: "Monthly volume, after ramp", value: "613" },
       { metric: "Ramp multiple", value: "32x", accent: true },
@@ -170,8 +172,8 @@ export const CASE_STUDIES: CaseStudy[] = [
         figure: "0",
         figureLabel: "Commercial accounts at the start",
         paragraphs: [
-          "A home and commercial services firm served its residential base well. Its commercial pipeline did not exist. There was no target list and no method for working one.",
-          "The firm needed a way to find commercial accounts and turn them into recurring work.",
+          "A home and commercial services firm had run for more than two decades on referrals and reputation. No website, no search presence, no structured outreach. As legacy customers churned, revenue eroded, and there was no pipeline to replace it.",
+          "Its commercial pipeline did not exist. There was no target list and no method for working one. The firm needed a way to find commercial accounts and turn them into recurring work.",
         ],
       },
       {
@@ -180,7 +182,8 @@ export const CASE_STUDIES: CaseStudy[] = [
         figureLabel: "Weeks from kickoff to production",
         paragraphs: [
           "ClearForge built an AI system to identify commercial targets and support outreach through a four-stage funnel. It went from kickoff to a live production system in 10 to 14 weeks.",
-          "The system shipped with an eval harness and reliability gates. Outputs were checked against a test set before release.",
+          "The system qualified inbound and outbound opportunities, ran coordinated outreach and follow-up, and prepped every call. The owner worked the pipeline from one weekly view: leads, quotes, follow-ups, and account expansion.",
+          "It shipped with an eval harness and reliability gates. Outputs were checked against a test set before release.",
         ],
       },
       {
@@ -189,6 +192,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         figureLabel: "Recurring accounts won",
         paragraphs: [
           "The commercial pipeline was rebuilt from zero. The funnel: 42 targets identified, 31 contacted, 18 quoted, 7 recurring accounts won.",
+          "Recurring commercial maintenance contracts replaced one-off referral dependency. The documented pipeline also made the business easier for a buyer to diligence.",
         ],
       },
       {
@@ -213,7 +217,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     letter: "C",
     client: "A PE operating team",
     summary:
-      "Ran a portfolio-wide AI diagnostic and left with a prioritized execution plan.",
+      "Ran a portfolio-wide AI diagnostic: 3 companies assessed on one model, 8 priority plays selected, a 12-month execution plan.",
     metrics: [],
     scopeTag: "Portfolio-wide",
     headline: "A PE operating team needed a portfolio view of AI.",
@@ -247,18 +251,20 @@ export const CASE_STUDIES: CaseStudy[] = [
       {
         label: "What was run",
         figure: "3",
-        figureLabel: "Components: scan, multipack, scoreboard",
+        figureLabel: "Portfolio companies assessed on one model",
         paragraphs: [
           "The team ran the PE Portfolio Pack: a portfolio AI scan, a Diagnostic multipack across portfolio companies, and a sponsor-level adoption scoreboard.",
+          "Three portfolio companies were assessed with the same diagnostic model, scored on value pools, readiness, execution risk, and speed to value. For the first time the opportunities were comparable across companies.",
           "Each Forge Diagnostic runs 2 weeks at a fixed price and ends with a decision the sponsor can price.",
         ],
       },
       {
         label: "Results",
-        figure: "1",
-        figureLabel: "Prioritized execution plan",
+        figure: "8",
+        figureLabel: "Priority plays selected for rollout",
         paragraphs: [
           "The operating team left with a prioritized execution plan across the portfolio: which companies to start with and which workflows to build first.",
+          "Eight priority plays made the cut, sequenced into a 12-month plan with 30, 90, and 180-day checkpoints. Each play has a named owner and a KPI cadence. The playbook was built to be reused on future portfolio companies, not consumed once.",
         ],
       },
     ],

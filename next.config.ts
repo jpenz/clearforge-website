@@ -32,6 +32,28 @@ const nextConfig: NextConfig = {
       { source: "/scorecard/results", destination: "/scorecard", permanent: true },
       { source: "/tools", destination: "/discover", permanent: true },
       { source: "/forge-intelligence", destination: "/discover", permanent: true },
+      // Legacy V11 library URLs (indexed in GSC) onto their V12 homes
+      { source: "/case-studies", destination: "/proof", permanent: true },
+      {
+        source: "/case-studies/industrial-manufacturer",
+        destination: "/proof/industrial-conglomerate",
+        permanent: true,
+      },
+      {
+        source: "/case-studies/home-services-turnaround",
+        destination: "/proof/services-firm",
+        permanent: true,
+      },
+      {
+        source: "/case-studies/pe-portfolio-diagnostic-plan",
+        destination: "/proof/pe-portfolio-diagnostic",
+        permanent: true,
+      },
+      { source: "/blueprints", destination: "/proof", permanent: true },
+      { source: "/blueprints/:slug", destination: "/proof", permanent: true },
+      { source: "/services/:slug", destination: "/services", permanent: true },
+      { source: "/use-cases/:slug", destination: "/services", permanent: true },
+      { source: "/security", destination: "/services", permanent: true },
     ];
   },
 };

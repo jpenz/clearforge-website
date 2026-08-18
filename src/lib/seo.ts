@@ -15,6 +15,7 @@ export function organizationJsonLd() {
     founder: {
       "@type": "Person",
       name: "James Penz",
+      sameAs: ["https://www.linkedin.com/in/jamespenz/"],
     },
   };
 }
