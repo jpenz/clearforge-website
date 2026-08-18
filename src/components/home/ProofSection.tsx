@@ -29,11 +29,11 @@ export function ProofSection() {
           <p className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">
             Case {caseA.letter}
           </p>
-          <h3 className="mt-3 text-[19px] leading-snug font-semibold md:text-[21px]">
+          <h2 className="mt-3 text-[19px] leading-snug font-semibold md:text-[21px]">
             <Link href={`/proof/${caseA.slug}`} className="hover:text-cobalt">
               {caseA.client}
             </Link>
-          </h3>
+          </h2>
         </div>
         <div className="grid divide-y divide-hairline md:grid-cols-5 md:divide-x md:divide-y-0">
           {caseA.metrics.map((metric) => (

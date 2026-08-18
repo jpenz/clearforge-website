@@ -116,9 +116,9 @@ export function EngagementsSection() {
               <p className="tnum text-[12px] tracking-[0.18em] text-ink/60 uppercase">
                 {engagement.index} / {engagement.product}
               </p>
-              <h3 className="font-display mt-2 text-[28px] md:text-[34px]">
+              <h2 className="font-display mt-2 text-[28px] md:text-[34px]">
                 {engagement.stage}
-              </h3>
+              </h2>
               <PriceFigure price={engagement.price} />
               <p className="tnum mt-3 text-[12px] tracking-[0.14em] text-ink/60 uppercase">
                 {engagement.meta}
