@@ -74,6 +74,12 @@ const nextConfig: NextConfig = {
       { source: "/services/:slug", destination: "/services", permanent: true },
       { source: "/use-cases/:slug", destination: "/services", permanent: true },
       { source: "/security", destination: "/services", permanent: true },
+      {
+        // V12 preview slug that was consolidated onto the indexed legacy slug
+        source: "/industries/industrial-manufacturing",
+        destination: "/industries/manufacturing",
+        permanent: true,
+      },
     ];
   },
 };

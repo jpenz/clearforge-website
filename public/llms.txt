@@ -26,3 +26,5 @@
 - [Book a 30-min intro](https://clearforge.ai/contact): Inline scheduling.
 - [Forge Intelligence](https://clearforge.ai/discover): Free AI workflow-mapping tool.
 - [Scorecard](https://clearforge.ai/scorecard): Free AI readiness scorecard, 10 questions across 5 pillars.
+- [Industries](https://clearforge.ai/industries): 20 industry workflow patterns, each with the system we would build first and labeled benchmark ranges.
+- [Privacy](https://clearforge.ai/privacy) and [Terms](https://clearforge.ai/terms): Plain-language policies.
