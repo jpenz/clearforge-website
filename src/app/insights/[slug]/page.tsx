@@ -1,401 +1,120 @@
-import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import type { ReactNode } from 'react';
-import { JsonLdScript } from '@/components/seo/json-ld-script';
-import { Button } from '@/components/ui/button';
-import { formatDate, insights } from '@/data/insights';
-import { articleJsonLd, breadcrumbJsonLd, createMetadata, faqJsonLd } from '@/lib/metadata';
-
-function getInsight(slug: string) {
-  return insights.find((i) => i.slug === slug);
-}
-
-function cleanInlineText(text: string) {
-  return text.replace(/\*\*/g, '');
-}
-
-function slugifyHeading(heading: string) {
-  return (
-    heading
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-|-$/g, '') || 'section'
-  );
-}
-
-function renderMarkdownBlocks(markdown: string) {
-  const blocks: ReactNode[] = [];
-  const paragraphLines: string[] = [];
-  let listItems: string[] = [];
-  let listType: 'ordered' | 'unordered' | null = null;
-  let tableLines: string[] = [];
-  let blockIndex = 0;
-
-  const flushTable = () => {
-    if (tableLines.length === 0) return;
-    const rows = tableLines
-      .map((line) =>
-        line
-          .replace(/^\|/, '')
-          .replace(/\|$/, '')
-          .split('|')
-          .map((cell) => cell.trim()),
-      )
-      .filter((cells) => !cells.every((c) => /^:?-{2,}:?$/.test(c)));
-    const [header, ...body] = rows;
-    if (header) {
-      blocks.push(
-        <div key={`table-${blockIndex}`} className="my-8 overflow-x-auto">
-          <table className="w-full min-w-[560px] border-collapse text-left">
-            <thead>
-              <tr className="border-b-2 border-anthracite/20">
-                {header.map((cell) => (
-                  <th
-                    key={cell}
-                    className="py-3 pr-6 text-xs font-semibold uppercase tracking-[0.08em] text-anthracite"
-                  >
-                    {cleanInlineText(cell)}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {body.map((cells) => (
-                <tr key={cells.join('|')} className="border-b border-divider align-top">
-                  {cells.map((cell, ci) => (
-                    <td
-                      key={`${header[ci] ?? 'col'}-${cell}`}
-                      className={`py-3 pr-6 text-body-sm leading-relaxed ${ci === 0 ? 'font-medium text-anthracite' : 'text-warm-gray'}`}
-                    >
-                      {cleanInlineText(cell)}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>,
-      );
-      blockIndex += 1;
-    }
-    tableLines = [];
-  };
-
-  const flushParagraph = () => {
-    if (paragraphLines.length === 0) return;
-    blocks.push(
-      <p key={`p-${blockIndex}`} className="text-body text-warm-gray mb-4 leading-relaxed">
-        {cleanInlineText(paragraphLines.join(' '))}
-      </p>,
-    );
-    blockIndex += 1;
-    paragraphLines.length = 0;
-  };
-
-  const flushList = () => {
-    if (listItems.length === 0 || !listType) return;
-
-    const ordered = listType === 'ordered';
-    const ListTag = ordered ? 'ol' : 'ul';
-    blocks.push(
-      <ListTag
-        key={`list-${blockIndex}`}
-        className="my-7 list-none space-y-3.5 border-l border-divider pl-0 text-body text-warm-gray"
-      >
-        {listItems.map((item, li) => (
-          <li key={item} className="flex items-start gap-3.5 pl-5">
-            <span
-              aria-hidden="true"
-              className="metric mt-0.5 shrink-0 select-none text-[13px] leading-relaxed text-brass"
-            >
-              {ordered ? String(li + 1).padStart(2, '0') : '—'}
-            </span>
-            <span className="leading-relaxed">{cleanInlineText(item)}</span>
-          </li>
-        ))}
-      </ListTag>,
-    );
-    blockIndex += 1;
-    listItems = [];
-    listType = null;
-  };
-
-  for (const line of markdown.split('\n')) {
-    const trimmed = line.trim();
-
-    if (trimmed.startsWith('|')) {
-      flushParagraph();
-      flushList();
-      tableLines.push(trimmed);
-      continue;
-    }
-    flushTable();
-
-    if (!trimmed) {
-      flushParagraph();
-      flushList();
-      continue;
-    }
-
-    if (trimmed.startsWith('### ')) {
-      flushParagraph();
-      flushList();
-      blocks.push(
-        <h3 key={`h3-${blockIndex}`} className="text-h3 mt-8 mb-4">
-          {cleanInlineText(trimmed.slice(4))}
-        </h3>,
-      );
-      blockIndex += 1;
-      continue;
-    }
-
-    const orderedMatch = trimmed.match(/^\d+\.\s+(.*)$/);
-    if (orderedMatch) {
-      flushParagraph();
-      if (listType !== 'ordered') {
-        flushList();
-        listType = 'ordered';
-      }
-      listItems.push(orderedMatch[1] ?? '');
-      continue;
-    }
-
-    if (trimmed.startsWith('- ')) {
-      flushParagraph();
-      if (listType !== 'unordered') {
-        flushList();
-        listType = 'unordered';
-      }
-      listItems.push(trimmed.slice(2));
-      continue;
-    }
-
-    flushList();
-    paragraphLines.push(trimmed);
-  }
-
-  flushParagraph();
-  flushList();
-  flushTable();
-
-  return blocks;
-}
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { PageFrame } from "@/components/ui/PageFrame";
+import { SectionBand } from "@/components/ui/SectionBand";
+import { ArticleBody } from "@/components/ui/ArticleBody";
+import { BookCallButton } from "@/components/functional/BookCallButton";
+import { ARTICLES, getArticle, getReadNext } from "@/data/insights";
 
 export function generateStaticParams() {
-  return insights.map((i) => ({ slug: i.slug }));
+  return ARTICLES.map(({ slug }) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: PageProps<"/insights/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const insight = getInsight(slug);
-  if (!insight) return {};
-  return createMetadata({
-    title: insight.seo.title,
-    description: insight.seo.description,
-    path: `/insights/${slug}`,
-    keywords: insight.seo.keywords,
-    type: 'article',
-    publishedTime: insight.date,
-    modifiedTime: insight.dateModified ?? insight.date,
-    authors: [insight.author.name],
-  });
+  const article = getArticle(slug);
+  if (!article) return {};
+  return {
+    title: `${article.title} ${article.titleEmphasis ?? ""}`.trim(),
+    description: article.standfirst,
+  };
 }
 
-export default async function InsightDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ArticlePage({
+  params,
+}: PageProps<"/insights/[slug]">) {
   const { slug } = await params;
-  const insight = getInsight(slug);
-  if (!insight) notFound();
+  const article = getArticle(slug);
+  if (!article) notFound();
 
-  const related = insight.relatedSlugs.map((s) => getInsight(s)).filter(Boolean);
-
-  /* Split the markdown body into sections by ## headings. Anything BEFORE
-     the first ## is the article lede — rendering it as a section turned the
-     TL;DR paragraph into a giant fake heading (and a TOC entry). */
-  const bodyStartsWithHeading = /^## /.test(insight.body.trimStart());
-  const rawPieces = insight.body.split(/^## /m).filter(Boolean);
-  const intro = bodyStartsWithHeading ? '' : (rawPieces.shift() ?? '').trim();
-  const sections = rawPieces.map((section, index) => {
-    const lines = section.split('\n');
-    const heading = lines[0]?.trim() || `Section ${index + 1}`;
-    return {
-      id: `${slugifyHeading(heading)}-${index + 1}`,
-      heading,
-      body: lines.slice(1).join('\n').trim(),
-    };
-  });
-
-  /* Schema.org structured data for AEO/GEO citation lift */
-  const articleLd = articleJsonLd({
-    title: insight.title,
-    description: insight.excerpt,
-    slug: insight.slug,
-    date: insight.date,
-    author: insight.author.name,
-    keywords: insight.seo.keywords,
-    section: insight.category,
-  });
-  const breadcrumbLd = breadcrumbJsonLd([
-    { name: 'Home', path: '/' },
-    { name: 'Insights', path: '/insights' },
-    { name: insight.title, path: `/insights/${insight.slug}` },
-  ]);
-  const faqLd = insight.faqs.length > 0 ? faqJsonLd(insight.faqs) : null;
+  const readNext = getReadNext(article.slug);
 
   return (
     <>
-      <JsonLdScript data={articleLd} />
-      <JsonLdScript data={breadcrumbLd} />
-      {faqLd && <JsonLdScript data={faqLd} />}
-      {/* ── Hero ── */}
-      <section className="dark-section py-32 lg:py-48">
-        <div className="mx-auto max-w-3xl px-6 lg:px-10">
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-            <span className="whitespace-nowrap text-body-sm font-medium text-brass-light">
-              {insight.category}
-            </span>
-            <time className="whitespace-nowrap text-body-sm text-stone" dateTime={insight.date}>
-              {formatDate(insight.date)}
-            </time>
-            <span className="whitespace-nowrap text-body-sm text-stone">
-              {insight.readingTime} min read
-            </span>
-          </div>
-          <h1 className="mt-6 text-display text-bone">{insight.title}</h1>
-          <p className="mt-6 text-body-lg text-stone">{insight.excerpt}</p>
-          <div className="mt-8 flex items-center gap-4 border-t border-bone/20 pt-8">
-            <div>
-              <p className="text-body-sm font-medium text-bone">{insight.author.name}</p>
-              <p className="text-body-sm text-stone">{insight.author.role}</p>
-            </div>
-          </div>
-          <div className="mt-6 border-t border-bone/15 pt-5">
-            <p className="text-body-sm leading-relaxed text-stone">
-              Editorial standard: ClearForge insights separate original operating frameworks from
-              externally sourced claims. We avoid unsupported ROI, savings, payback, and benchmark
-              claims unless the evidence is visible.
-            </p>
-          </div>
+      {/* Label band */}
+      <PageFrame aria-label="Article context">
+        <div className="flex items-center justify-between gap-4 px-5 py-5 md:px-10">
+          <span className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">
+            <Link href="/insights" className="hover:text-cobalt">
+              Insights
+            </Link>{" "}
+            / {article.topic}
+          </span>
+          <span className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">
+            By James Penz
+          </span>
         </div>
-      </section>
+      </PageFrame>
 
-      {/* ── Article Roadmap ── */}
-      {sections.length > 0 && (
-        <section className="border-y border-divider bg-warm-white py-12 lg:py-16">
-          <div className="mx-auto max-w-4xl px-6 lg:px-10">
-            <div className="grid gap-8 lg:grid-cols-[0.36fr_0.64fr] lg:items-start">
-              <div>
-                <p className="overline">In This Brief</p>
-                <h2 className="mt-4 text-h3">Use the article like an operating memo.</h2>
-                <p className="mt-3 text-body-sm leading-relaxed text-warm-gray">
-                  Start with the section closest to your decision, then use the FAQ for the
-                  plain-English answer.
-                </p>
-              </div>
-              <div className="sm:columns-2 sm:gap-10">
-                {sections.slice(0, 6).map((section, index) => (
-                  <Link
-                    key={section.id}
-                    href={`#${section.id}`}
-                    className="group flex items-baseline gap-4 border-t border-divider py-3.5 transition-colors hover:text-brass sm:break-inside-avoid"
-                  >
-                    <span className="metric text-xs text-brass">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <span className="text-sm font-semibold leading-snug text-anthracite transition-colors group-hover:text-brass">
-                      {section.heading}
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── Body ── */}
-      <section className="bg-parchment py-24 lg:py-40">
-        <div className="mx-auto max-w-3xl px-6 lg:px-10">
-          <div className="prose-forge space-y-12">
-            {intro && <div className="space-y-4">{renderMarkdownBlocks(intro)}</div>}
-            {sections.map((section) => (
-              <div key={section.id}>
-                <h2 id={section.id} className="scroll-mt-28 text-h2 mb-6">
-                  {section.heading}
-                </h2>
-                {renderMarkdownBlocks(section.body)}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── FAQ ── */}
-      {insight.faqs.length > 0 && (
-        <section className="border-t border-divider bg-parchment py-24 lg:py-40">
-          <div className="mx-auto max-w-3xl px-6 lg:px-10">
-            <p className="overline">FAQ</p>
-            <h2 className="mt-6 text-display">Common questions.</h2>
-            <div className="mt-12">
-              {insight.faqs.map((faq, i) => (
-                <div key={faq.question}>
-                  <div className="py-8">
-                    <h3 className="text-h4">{faq.question}</h3>
-                    <p className="mt-3 text-body text-warm-gray">{faq.answer}</p>
-                  </div>
-                  {i < insight.faqs.length - 1 && <div className="h-px bg-divider" />}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── Related Articles ── */}
-      {related.length > 0 && (
-        <section className="bg-warm-white py-24 lg:py-40">
-          <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-            <p className="overline">Related Reading</p>
-            <div className="mt-12 grid gap-0">
-              {related.map((r) =>
-                r ? (
-                  <Link
-                    key={r.slug}
-                    href={`/insights/${r.slug}`}
-                    className="group block border-t border-divider py-8 transition-colors hover:bg-parchment"
-                  >
-                    <span className="text-body-sm font-medium text-brass">{r.category}</span>
-                    <h3 className="mt-2 font-display text-[1.4rem] font-medium leading-snug tracking-[-0.01em] transition-colors group-hover:text-brass">
-                      {r.title}
-                    </h3>
-                    <p className="mt-2 text-body text-warm-gray">{r.excerpt}</p>
-                  </Link>
-                ) : null,
-              )}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── CTA ── light band; the global footer band supplies the dark close */}
-      <section className="border-t border-divider bg-recessed py-20 lg:py-28">
-        <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display">Ready to test this against your workflow?</h2>
-          <p className="mt-6 text-body-lg text-warm-gray">
-            Take the scorecard, then map where the value sits before you commit to a build.
+      {/* Title block */}
+      <PageFrame aria-label="Article title">
+        <div className="flex flex-col items-center px-5 pt-12 pb-10 text-center md:px-10 md:pt-20 md:pb-16">
+          <h1 className="font-display tnum max-w-[18ch] text-[38px] leading-[1.08] font-medium tracking-[-0.01em] md:text-[64px] md:leading-[1.06]">
+            {article.title}{" "}
+            {article.titleEmphasis && (
+              <em className="text-cobalt italic">{article.titleEmphasis}</em>
+            )}
+          </h1>
+          <p className="mt-6 max-w-[42ch] text-[18px] leading-[1.55] text-ink/80 md:mt-7 md:text-[21px]">
+            {article.standfirst}
           </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Button size="lg" asChild>
-              <Link href="/scorecard">
-                Take the scorecard <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button size="lg" variant="secondary" asChild>
-              <Link href="/discover">Map the Workflow</Link>
-            </Button>
-          </div>
+          <p className="mt-7 text-[11px] tracking-[0.18em] text-ink/60 uppercase md:mt-9">
+            James Penz · Founder
+          </p>
         </div>
-      </section>
+      </PageFrame>
+
+      {/* Body */}
+      <article className="mx-auto max-w-[1360px] border-b border-hairline md:border-x">
+        <ArticleBody blocks={article.blocks} />
+      </article>
+
+      {/* Read next */}
+      <PageFrame aria-label="Read next">
+        <SectionBand left="Read next" right={`${readNext.length} articles`} />
+        {readNext.map((next, index) => (
+          <Link
+            key={next.slug}
+            href={`/insights/${next.slug}`}
+            className={`group flex flex-col justify-between gap-3 px-5 py-6 md:flex-row md:items-baseline md:gap-8 md:px-10 md:py-7 ${
+              index < readNext.length - 1 ? "border-b border-hairline" : ""
+            }`}
+          >
+            <span className="flex items-baseline gap-4 md:gap-6">
+              <span className="tnum shrink-0 text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+                0{index + 1}
+              </span>
+              <span className="tnum text-[17px] leading-snug font-semibold transition-colors group-hover:text-cobalt motion-reduce:transition-none md:text-[19px]">
+                {next.title} {next.titleEmphasis}
+              </span>
+            </span>
+            <span className="text-[15px] font-semibold whitespace-nowrap text-cobalt">
+              Read{" "}
+              <span
+                aria-hidden="true"
+                className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
+              >
+                →
+              </span>
+            </span>
+          </Link>
+        ))}
+      </PageFrame>
+
+      {/* Closing booking strip */}
+      <PageFrame bottomRule={false} aria-label="Next step">
+        <SectionBand left="Next step" right="Fixed price · 2 weeks" />
+        <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+          <h2 className="font-display text-[30px] leading-[1.1] font-medium md:text-[40px]">
+            Start with the <span className="tnum">$15K</span>{" "}
+            <em className="text-cobalt italic">Diagnostic.</em>
+          </h2>
+          <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />
+        </div>
+      </PageFrame>
     </>
   );
 }

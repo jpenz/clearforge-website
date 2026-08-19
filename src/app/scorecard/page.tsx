@@ -1,48 +1,58 @@
-'use client';
+import type { Metadata } from "next";
+import { PageFrame } from "@/components/ui/PageFrame";
+import { SectionBand } from "@/components/ui/SectionBand";
+import { BookCallButton } from "@/components/functional/BookCallButton";
+import { ScorecardFlow } from "@/components/functional/ScorecardFlow";
 
-import dynamic from 'next/dynamic';
-
-const ScorecardForm = dynamic(
-  () => import('@/components/scorecard/scorecard-form').then((m) => ({ default: m.ScorecardForm })),
-  { ssr: false },
-);
+export const metadata: Metadata = {
+  title: "AI Readiness Scorecard",
+  description:
+    "10 questions on a 1 to 5 scale across 5 pillars. A scored readout of your AI readiness at the end. Free, about three minutes.",
+};
 
 export default function ScorecardPage() {
   return (
     <>
-      <section className="dark-section pt-24 pb-10 sm:pt-32 sm:pb-14 lg:pt-40 lg:pb-20">
-        <div className="mx-auto grid max-w-[1100px] gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_0.72fr] lg:items-end lg:px-10">
-          <div>
-            <p className="overline">ClearForge Diagnostic</p>
-            <h1 className="mt-6 text-display text-bone">
-              Is your first AI workflow ready to build?
-            </h1>
-            <p className="mt-4 text-body-lg text-stone">
-              Ten questions across value case, workflow, data path, controls, and adoption cadence.
-              The readout shows where a build would stall and what ClearForge would inspect first.
-            </p>
-          </div>
-
-          <div className="grid gap-px overflow-hidden border border-divider-dark bg-divider-dark sm:grid-cols-3 lg:grid-cols-1">
-            {[
-              ['01', 'Select one workflow'],
-              ['02', 'Expose the weakest pillar'],
-              ['03', 'Map the first build path'],
-            ].map(([step, label]) => (
-              <div key={step} className="bg-forge-black/70 p-4">
-                <p className="metric text-xs text-brass-light">{step}</p>
-                <p className="mt-1 text-sm font-semibold text-bone">{label}</p>
-              </div>
-            ))}
-          </div>
+      {/* Label band */}
+      <PageFrame aria-label="Scorecard introduction">
+        <div className="flex items-center justify-between gap-4 px-5 py-5 md:px-10">
+          <span className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">
+            Free tool
+          </span>
+          <span className="tnum text-[11px] tracking-[0.18em] text-ink/60 uppercase">
+            AI readiness scorecard · 10 questions
+          </span>
         </div>
-      </section>
+      </PageFrame>
 
-      <section className="bg-parchment pb-16 sm:pb-24 lg:pb-32">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10">
-          <ScorecardForm />
+      {/* ScorecardFlow */}
+      <PageFrame aria-label="Scorecard">
+        <div className="px-5 py-8 md:px-10 md:py-12">
+          <ScorecardFlow />
         </div>
-      </section>
+      </PageFrame>
+
+      {/* Reassurance band */}
+      <PageFrame aria-label="About the scorecard">
+        <div className="px-5 py-5 md:px-10 md:py-6">
+          <p className="tnum text-[14px] text-ink/70">
+            Ten questions. About three minutes. Results scored across five
+            pillars.
+          </p>
+        </div>
+      </PageFrame>
+
+      {/* Closing booking strip */}
+      <PageFrame bottomRule={false} aria-label="Next step">
+        <SectionBand left="Next step" right="Fixed price · 2 weeks" />
+        <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+          <h2 className="font-display text-[30px] leading-[1.1] font-medium md:text-[40px]">
+            Start with the <span className="tnum">$15K</span>{" "}
+            <em className="text-cobalt italic">Diagnostic.</em>
+          </h2>
+          <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />
+        </div>
+      </PageFrame>
     </>
   );
 }

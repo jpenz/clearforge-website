@@ -1,433 +1,139 @@
 @import "tailwindcss";
 
 /*
- * V11 DESIGN SYSTEM — institutional register (McKinsey/Bain-class).
- * Cool paper + deep navy ink + ONE electric cobalt accent. Tri-font stack:
- * Newsreader (sharp editorial serif display, italic accent words — the css
- * var is still named --font-fraunces to avoid churn) · Hanken Grotesk
- * (body/UI) · DM Mono (data, eyebrows, SKU tags).
- * No gradients. 1px hairlines. 6/12px radii. One deep-navy band per page.
- *
- * Legacy token NAMES are kept (parchment/anthracite/brass/…) mapped to V11
- * values so every existing page re-skins instantly; new code may use either.
- */
-
+  ClearForge V12 design tokens. Single source of truth.
+  Swiss Hairline system: ghost-white canvas, 1px ink hairlines,
+  vivid cobalt as the only accent. Zero radius, zero shadows.
+  Spec: clearforge-v12.ds
+*/
 @theme inline {
-  /* ── Surfaces — institutional: cool near-white, deep-navy dark band ── */
-  --color-parchment: #F8F7F4;   /* paper */
-  --color-warm-white: #FFFFFF;
-  --color-surface: #FFFFFF;
-  --color-recessed: #EFEEE9;    /* deep paper */
-  --color-forge-black: #081826; /* deep navy — the one dark band */
+  /* Typography */
+  --font-display: var(--font-bodoni), "Bodoni Moda", serif;
+  --font-sans: var(--font-hanken), "Hanken Grotesk", sans-serif;
 
-  /* ── Text ── */
-  --color-anthracite: #0B1B2B;  /* navy ink */
-  --color-warm-gray: #46525E;   /* slate ink-2 */
-  --color-bone: #EDF1F4;        /* text on navy */
-  --color-stone: #8D9AA6;       /* secondary on navy */
+  /* Palette */
+  --color-cobalt: #2454ff;
+  --color-cobalt-press: #1a41d8;
+  --color-ink: #010b13;
+  --color-ghost: #f8f8ff;
+  --color-hairline: rgba(1, 11, 19, 0.12);
+  --color-hairline-faint: rgba(1, 11, 19, 0.07);
+  --color-hairline-strong: rgba(1, 11, 19, 0.3);
 
-  /* ── Accent — ELECTRIC COBALT (the single accent, McKinsey-class) ── */
-  --color-brass: #1F4CDB;       /* text + button bg, AA on paper & under white */
-  --color-brass-hover: #1638A8;
-  --color-brass-light: #7A97FF; /* accent on navy */
-  --color-ember-vivid: #2251FF; /* large graphics / display numerals only */
+  /* Motion */
+  --animate-progress-stepped: cf-bar 2.5s steps(8, end) forwards;
 
-  /* ── Hairlines ── */
-  --color-divider: #E1E1DB;
-  --color-divider-dark: #1C3040;
-
-  /* ── Semantic ── */
-  --color-success: #1F7A4D;
-  --color-error: #B91C1C;
-
-  /* ── Fonts — V11 tri-stack ── */
-  --font-sans: var(--font-hanken);
-  --font-display: var(--font-fraunces);
-  --font-mono: var(--font-dm-mono);
-  /* Legacy aliases — stragglers re-templated in Wave 3 */
-  --font-geist-sans: var(--font-hanken);
-  --font-jetbrains-mono: var(--font-dm-mono);
-
-  /* ── Radii tokens (Attentive pair) ── */
-  --radius-tight: 6px;
-  --radius-loose: 12px;
+  @keyframes cf-bar {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
 }
 
-:root {
-  color-scheme: light;
+@layer base {
+  html {
+    height: 100%;
+  }
+
+  body {
+    background: var(--color-ghost);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  summary:focus-visible {
+    outline: 2px solid var(--color-cobalt);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--color-cobalt);
+    color: #fff;
+  }
 }
 
-html {
-  text-rendering: optimizeLegibility;
-  overflow-x: hidden;
-  scroll-padding-top: 5rem;
+@layer components {
+  /* Stepped cobalt progress bar over a hairline track */
+  .cf-progress-bar {
+    animation: var(--animate-progress-stepped);
+  }
+
+  /* Native details/summary FAQ: + rotates to x when open */
+  details.faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-plus {
+    transition: transform 200ms linear;
+  }
+
+  details[open] > summary .faq-plus {
+    transform: rotate(45deg);
+  }
+
+  /* Per-pillar score bar: fills to --w in 8 steps */
+  .cf-pillar-bar {
+    width: var(--w);
+    animation: cf-pillar-fill 2500ms steps(8, end) both;
+  }
+
+  @keyframes cf-pillar-fill {
+    from {
+      width: 0%;
+    }
+    to {
+      width: var(--w);
+    }
+  }
+
+  /* Loading skeleton pulse (inline booking calendar) */
+  .cf-skeleton {
+    animation: cf-skeleton-pulse 1.6s ease-in-out infinite;
+  }
+
+  @keyframes cf-skeleton-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.45;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cf-progress-bar {
+      animation: none;
+      width: 100%;
+    }
+
+    .cf-pillar-bar {
+      animation: none;
+      width: var(--w);
+    }
+
+    .faq-plus {
+      transition: none;
+    }
+
+    .cf-skeleton {
+      animation: none;
+    }
+  }
 }
 
-body {
-  font-family: var(--font-hanken), system-ui, -apple-system, sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--color-anthracite);
-  background: var(--color-parchment);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-}
-
-/* ── Headings — Fraunces at medium weight, never ultra-bold ──
-   No `color` here: headings inherit body ink (or .dark-section bone), so
-   text-* utilities stay able to recolor them (unlayered element rules
-   would otherwise beat Tailwind's layered utilities everywhere). */
-h1, h2 {
-  font-family: var(--font-fraunces), Georgia, serif;
-  line-height: 1.04;
-  letter-spacing: -0.015em;
-  font-weight: 550;
-}
-
-h3, h4, h5, h6 {
-  font-family: var(--font-hanken), system-ui, sans-serif;
-  font-weight: 600;
-  line-height: 1.28;
-  letter-spacing: -0.01em;
-}
-
-/* ── Display scale — serif display, big + tight ── */
-.text-display-xl {
-  text-wrap: balance;
-  font-family: var(--font-fraunces), Georgia, serif;
-  font-size: clamp(2.75rem, 6.5vw, 5rem);
-  line-height: 1.0;
-  letter-spacing: -0.02em;
-  font-weight: 550;
-}
-.text-display {
-  text-wrap: balance;
-  font-family: var(--font-fraunces), Georgia, serif;
-  font-size: clamp(2.15rem, 5vw, 3.65rem);
-  line-height: 1.04;
-  letter-spacing: -0.018em;
-  font-weight: 550;
-}
-.text-h1 {
-  text-wrap: balance;
-  font-family: var(--font-fraunces), Georgia, serif;
-  font-size: clamp(1.8rem, 4vw, 2.85rem);
-  line-height: 1.06;
-  letter-spacing: -0.015em;
-  font-weight: 550;
-}
-.text-h2 {
-  font-family: var(--font-fraunces), Georgia, serif;
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
-  line-height: 1.1;
-  letter-spacing: -0.012em;
-  font-weight: 550;
-}
-.text-h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); line-height: 1.25; font-weight: 600; }
-.text-h4 { font-size: clamp(1.125rem, 2vw, 1.375rem); line-height: 1.32; font-weight: 600; }
-.text-body-lg { font-size: 1.125rem; line-height: 1.6; }
-.text-body { font-size: 1rem; line-height: 1.65; }
-.text-body-sm { font-size: 0.875rem; line-height: 1.6; }
-
-/* Italic accent word inside a display headline */
-.display-accent {
-  font-style: italic;
-  color: var(--color-brass);
-}
-
-/* ── Eyebrow — DM Mono, the engineering voice ── */
-.overline {
-  font-family: var(--font-dm-mono), monospace;
-  font-size: 0.72rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--color-brass);
-  /* Tailwind's `overline` utility shares this class name and was adding
-     text-decoration-line: overline — a rule that repeats on every wrapped
-     line. Keep the (now signature) top rule as a single border instead. */
-  text-decoration-line: none;
-  display: inline-block;
-  border-top: 1px solid color-mix(in srgb, currentColor 60%, transparent);
-  padding-top: 6px;
-}
-
-/* ── Data voice — DM Mono everywhere numbers live ── */
-.metric {
-  font-family: var(--font-dm-mono), monospace;
+/* Tabular figures: every number is a first-class visual citizen */
+@utility tnum {
+  font-feature-settings: "tnum" 1;
   font-variant-numeric: tabular-nums;
-}
-.metric-xl {
-  font-family: var(--font-dm-mono), monospace;
-  font-size: clamp(2rem, 6vw, 4.5rem);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-}
-.metric-lg {
-  font-family: var(--font-dm-mono), monospace;
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-}
-
-/* ── The one dark band ── */
-.dark-section {
-  background: var(--color-forge-black);
-  color: var(--color-bone);
-}
-.dark-section h1, .dark-section h2, .dark-section h3,
-.dark-section h4, .dark-section h5, .dark-section h6 {
-  color: var(--color-bone);
-}
-.dark-section .overline { color: var(--color-brass-light); }
-.dark-section .display-accent { color: var(--color-brass-light); }
-
-/* ── Browser-chrome frame for product-UI objects ── */
-.browser-chrome {
-  border: 1px solid var(--color-divider);
-  border-radius: var(--radius-loose);
-  background: var(--color-surface);
-  overflow: hidden;
-  box-shadow: 0 1px 2px rgba(11, 27, 43, 0.05), 0 12px 40px -18px rgba(11, 27, 43, 0.16);
-}
-.browser-chrome__bar {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 0.85rem;
-  border-bottom: 1px solid var(--color-divider);
-  background: var(--color-recessed);
-}
-.browser-chrome__dot {
-  height: 0.55rem;
-  width: 0.55rem;
-  border-radius: 999px;
-  background: var(--color-divider);
-}
-.browser-chrome__url {
-  font-family: var(--font-dm-mono), monospace;
-  font-size: 0.68rem;
-  color: var(--color-warm-gray);
-  background: var(--color-parchment);
-  border: 1px solid var(--color-divider);
-  border-radius: 6px;
-  padding: 0.15rem 0.6rem;
-  margin-left: 0.35rem;
-}
-.browser-chrome--dark {
-  border-color: var(--color-divider-dark);
-  background: #0D2233;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 16px 48px -20px rgba(0, 0, 0, 0.5);
-}
-.browser-chrome--dark .browser-chrome__bar {
-  border-color: var(--color-divider-dark);
-  background: #0F2739;
-}
-.browser-chrome--dark .browser-chrome__dot { background: var(--color-divider-dark); }
-.browser-chrome--dark .browser-chrome__url {
-  color: var(--color-stone);
-  background: #081826;
-  border-color: var(--color-divider-dark);
-}
-
-/* ── Noise texture (kept, subtle) ── */
-.noise-texture { position: relative; }
-.noise-texture::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  pointer-events: none;
-  mix-blend-mode: overlay;
-}
-
-/* ── Dividers ── */
-.divider-accent {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-brass) 30%, var(--color-brass) 70%, transparent);
-  opacity: 0.3;
-}
-
-/* ── Entrance animations (CSS-first) ── */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-.animate-fade-in-up { animation: fadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both; }
-.animate-fade-in { animation: fadeIn 0.45s ease both; }
-.delay-1 { animation-delay: 0.08s; }
-.delay-2 { animation-delay: 0.16s; }
-.delay-3 { animation-delay: 0.24s; }
-.delay-4 { animation-delay: 0.32s; }
-.delay-5 { animation-delay: 0.40s; }
-
-/* ── Focus ── */
-*:focus-visible {
-  outline: 2px solid var(--color-brass);
-  outline-offset: 2px;
-}
-
-/* ── Selection ── */
-::selection {
-  background: rgba(34, 81, 255, 0.14);
-  color: var(--color-anthracite);
-}
-
-/* ── Scrollbar ── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--color-parchment); }
-::-webkit-scrollbar-thumb { background: var(--color-divider); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-warm-gray); }
-
-@media (prefers-reduced-motion: no-preference) {
-  html { scroll-behavior: smooth; }
-}
-
-/* ── Print ── */
-@media print {
-  .no-print { display: none !important; }
-  body { background: white; color: black; }
-  .dark-section { background: white; color: black; }
-  .dark-section h1, .dark-section h2, .dark-section h3,
-  .dark-section h4, .dark-section h5, .dark-section h6 { color: black; }
-  .print-report { border: none; background: white; padding: 0; }
-  .print-report h1, .print-report h2, .print-report h3 { color: black; }
-  .print-report p, .print-report li { color: #333; }
-}
-
-/* ── Marquee (CSS-only, motion-as-moments) ── */
-@keyframes marqueeScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.animate-marquee {
-  animation: marqueeScroll 38s linear infinite;
-}
-.animate-marquee:hover { animation-play-state: paused; }
-.marquee-mask {
-  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
-  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
-}
-
-/* ── Interactions ── */
-.card-hover {
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 50px -16px rgba(11, 27, 43, 0.14);
-}
-
-.img-zoom { overflow: hidden; }
-.img-zoom img, .img-zoom > div { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
-.group:hover .img-zoom img, .group:hover .img-zoom > div { transform: scale(1.06); }
-
-.link-underline { position: relative; display: inline-block; }
-.link-underline::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1.5px;
-  background: var(--color-brass);
-  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.link-underline:hover::after { width: 100%; }
-
-/* ── Premium cursor (kept; retoned to ember) ── */
-html.premium-cursor-enabled,
-html.premium-cursor-enabled * {
-  cursor: none !important;
-}
-html.premium-cursor-enabled input,
-html.premium-cursor-enabled textarea,
-html.premium-cursor-enabled select,
-html.premium-cursor-enabled [contenteditable="true"],
-html.premium-cursor-enabled [role="textbox"] {
-  cursor: auto !important;
-}
-@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .premium-cursor {
-    pointer-events: none;
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-  }
-  .premium-cursor__ring,
-  .premium-cursor__dot {
-    position: fixed;
-    left: 0;
-    top: 0;
-    border-radius: 999px;
-    pointer-events: none;
-    transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
-    will-change: transform, width, height, opacity, border-color, background-color;
-  }
-  .premium-cursor__ring {
-    height: 2.2rem;
-    width: 2.2rem;
-    border: 1px solid rgba(34, 81, 255, 0.5);
-    background: rgba(34, 81, 255, 0.02);
-    box-shadow: 0 0 0 1px rgba(11, 27, 43, 0.14);
-    opacity: 0.72;
-    transition:
-      height 180ms cubic-bezier(0.16, 1, 0.3, 1),
-      width 180ms cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 160ms ease,
-      border-color 160ms ease,
-      background-color 160ms ease;
-  }
-  .premium-cursor__dot {
-    height: 0.34rem;
-    width: 0.34rem;
-    background: var(--color-ember-vivid);
-    opacity: 0.9;
-    transition:
-      height 120ms ease,
-      width 120ms ease,
-      opacity 120ms ease,
-      background-color 120ms ease;
-  }
-  .premium-cursor.is-interactive .premium-cursor__ring {
-    height: 3rem;
-    width: 3rem;
-    border-color: rgba(31, 76, 219, 0.7);
-    background: rgba(31, 76, 219, 0.07);
-    opacity: 0.95;
-  }
-  .premium-cursor.is-interactive .premium-cursor__dot {
-    height: 0.42rem;
-    width: 0.42rem;
-    background: var(--color-brass);
-  }
-  .premium-cursor.is-pressed .premium-cursor__ring {
-    height: 1.7rem;
-    width: 1.7rem;
-    opacity: 0.86;
-  }
-  .premium-cursor.is-hidden .premium-cursor__ring,
-  .premium-cursor.is-hidden .premium-cursor__dot {
-    opacity: 0;
-  }
-}
-
-/* ── Reduced motion ── */
-@media (prefers-reduced-motion: reduce) {
-  .card-hover, .card-hover:hover { transform: none; transition: none; }
-  .img-zoom img, .img-zoom > div, .group:hover .img-zoom img { transform: none; transition: none; }
-  .link-underline::after { transition: none; }
-  .animate-fade-in-up, .animate-fade-in { animation: none; opacity: 1; }
-  .animate-marquee { animation: none; }
-  .premium-cursor { display: none; }
 }

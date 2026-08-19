@@ -1,21 +1,36 @@
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import Link from "next/link";
+import { PageFrame } from "@/components/ui/PageFrame";
+import { SectionBand } from "@/components/ui/SectionBand";
+import { BookCallButton } from "@/components/functional/BookCallButton";
 
 export default function NotFound() {
   return (
-    <section className="min-h-[60vh] flex items-center justify-center bg-parchment">
-      <div className="text-center px-6">
-        <span className="metric-xl text-brass/20">404</span>
-        <h1 className="text-display -mt-4">Page not found.</h1>
-        <p className="mt-4 text-body-lg text-warm-gray">
-          The page you&apos;re looking for doesn&apos;t exist.
+    <PageFrame bottomRule={false} aria-label="Page not found">
+      <SectionBand left="Error" right="404 · Page not found" />
+      <div className="px-5 pt-12 pb-16 md:px-10 md:pt-20 md:pb-24">
+        <p className="tnum text-[96px] leading-none font-light tracking-tight md:text-[160px]">
+          404
         </p>
-        <div className="mt-8">
-          <Button asChild>
-            <Link href="/">Go Home</Link>
-          </Button>
+        <h1 className="font-display mt-8 max-w-[24ch] text-[28px] leading-[1.15] font-medium md:text-[40px]">
+          This page does not exist.{" "}
+          <em className="text-cobalt italic">The rest of the site does.</em>
+        </h1>
+        <div className="mt-8 flex flex-wrap items-center gap-6">
+          <Link
+            href="/"
+            className="group text-[15px] font-semibold text-cobalt"
+          >
+            Back to the homepage{" "}
+            <span
+              aria-hidden="true"
+              className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
+            >
+              →
+            </span>
+          </Link>
+          <BookCallButton variant="quiet" />
         </div>
       </div>
-    </section>
+    </PageFrame>
   );
 }

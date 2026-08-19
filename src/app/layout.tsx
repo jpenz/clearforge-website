@@ -1,120 +1,51 @@
-import type { Metadata } from 'next';
-import { DM_Mono, Hanken_Grotesk, Newsreader } from 'next/font/google';
-import { AnalyticsTracker } from '@/components/analytics/analytics-tracker';
-import { GoogleAnalytics } from '@/components/analytics/google-analytics';
-import { PlausibleAnalytics } from '@/components/analytics/plausible-analytics';
-import { Footer } from '@/components/layout/footer';
-import { ForgeBar } from '@/components/layout/forge-bar';
-import { Header } from '@/components/layout/header';
-import { RouteScrollRestoration } from '@/components/layout/route-scroll-restoration';
-import { JsonLdScript } from '@/components/seo/json-ld-script';
-import {
-  aiTransformationOfferCatalogJsonLd,
-  clearForgeMethodJsonLd,
-  clearForgeProfilePageJsonLd,
-  coreKeywords,
-  founderPersonJsonLd,
-  organizationJsonLd,
-  siteNavigationJsonLd,
-  websiteJsonLd,
-} from '@/lib/metadata';
-import './globals.css';
+import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { Bodoni_Moda, Hanken_Grotesk } from "next/font/google";
+import "./globals.css";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/data/site";
 
-// V11 tri-stack: Newsreader serif display (sharp editorial, italic accent
-// words — the McKinsey/Financier register, not a display-wonk face) ·
-// Hanken Grotesk body/UI · DM Mono for data, eyebrows, and SKU tags.
-// NOTE: css var name kept as --font-fraunces from the prior stack to avoid
-// churning every font-family reference; it now resolves to Newsreader.
-const serifDisplay = Newsreader({
-  subsets: ['latin'],
-  axes: ['opsz'],
-  style: ['normal', 'italic'],
-  variable: '--font-fraunces',
-  display: 'swap',
+const bodoni = Bodoni_Moda({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
+  variable: "--font-bodoni",
 });
 
 const hanken = Hanken_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-hanken',
-  display: 'swap',
-});
-
-const dmMono = DM_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-dm-mono',
-  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-hanken",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://clearforge.ai'),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: 'ClearForge — AI Strategy & Execution for Mid-Market Companies',
-    template: '%s | ClearForge',
+    default: `${SITE_NAME} | ${SITE_TAGLINE}`,
+    template: `%s | ${SITE_NAME}`,
   },
   description:
-    'We find where AI drives growth, build the systems, and get your people to actually use them. Strategy through production — one partner, no handoffs.',
-  keywords: coreKeywords,
+    "Founder-led AI consulting and build firm for mid-market companies, $20M to $500M revenue, and PE operating teams. Engagements start with a $15K fixed-price diagnostic.",
   openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    siteName: 'ClearForge',
-    images: [
-      {
-        url: '/images/og-image.webp',
-        width: 1200,
-        height: 630,
-        alt: 'ClearForge — AI Strategy & Execution',
-      },
-    ],
+    type: "website",
+    siteName: SITE_NAME,
+    url: SITE_URL,
   },
-  twitter: { card: 'summary_large_image', images: ['/images/og-image.webp'] },
-  robots: { index: true, follow: true },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const ga4MeasurementId = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID;
-  const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
-
+export default function RootLayout({ children }: LayoutProps<"/">) {
+  const gaId = (process.env.NEXT_PUBLIC_GA_ID ?? process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID ?? "").trim();
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="dns-prefetch" href="https://api.anthropic.com" />
-        <link rel="dns-prefetch" href="https://api.perplexity.ai" />
-        <link rel="preconnect" href="https://api.anthropic.com" crossOrigin="anonymous" />
-      </head>
-      <body
-        className={`${serifDisplay.variable} ${hanken.variable} ${dmMono.variable} font-sans antialiased`}
-      >
-        <JsonLdScript
-          data={{
-            '@context': 'https://schema.org',
-            '@graph': [
-              organizationJsonLd,
-              founderPersonJsonLd,
-              websiteJsonLd,
-              siteNavigationJsonLd,
-              aiTransformationOfferCatalogJsonLd,
-              clearForgeMethodJsonLd,
-              clearForgeProfilePageJsonLd,
-            ].map(({ '@context': _ctx, ...node }) => node),
-          }}
-        />
-        {ga4MeasurementId ? <GoogleAnalytics measurementId={ga4MeasurementId} /> : null}
-        {plausibleDomain ? <PlausibleAnalytics domain={plausibleDomain} /> : null}
-        <AnalyticsTracker />
-        <RouteScrollRestoration />
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-brass focus:text-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold"
-        >
-          Skip to main content
-        </a>
+    <html lang="en" className={`${bodoni.variable} ${hanken.variable} h-full`}>
+      <body className="flex min-h-full flex-col">
         <Header />
-        <main id="main-content">{children}</main>
+        <main className="flex-1">{children}</main>
         <Footer />
-        <ForgeBar />
       </body>
+      {gaId && <GoogleAnalytics gaId={gaId} />}
     </html>
   );
 }

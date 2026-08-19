@@ -1,33 +1,19 @@
-import type { MetadataRoute } from 'next';
+import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/data/site";
 
-/**
- * robots.txt — allow major search bots and AI crawlers.
- * AI crawlers are opted in to enable citation in ChatGPT/Claude/Perplexity
- * answers, which now drive a meaningful share of B2B research traffic.
- */
+/** Everyone is welcome, AI crawlers explicitly included. */
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      { userAgent: 'Googlebot', allow: '/', disallow: ['/api/', '/_next/'] },
-      { userAgent: 'Bingbot', allow: '/', disallow: ['/api/', '/_next/'] },
-      { userAgent: 'DuckDuckBot', allow: '/', disallow: ['/api/', '/_next/'] },
-      { userAgent: 'GPTBot', allow: '/', disallow: ['/api/'] },
-      { userAgent: 'OAI-SearchBot', allow: '/', disallow: ['/api/'] },
-      { userAgent: 'ChatGPT-User', allow: '/', disallow: ['/api/'] },
-      { userAgent: 'ClaudeBot', allow: '/', disallow: ['/api/'] },
-      { userAgent: 'Claude-SearchBot', allow: '/', disallow: ['/api/'] },
-      { userAgent: 'Claude-User', allow: '/', disallow: ['/api/'] },
-      { userAgent: 'Claude-Web', allow: '/', disallow: ['/api/'] },
-      { userAgent: 'PerplexityBot', allow: '/', disallow: ['/api/'] },
-      { userAgent: 'Perplexity-User', allow: '/', disallow: ['/api/'] },
-      { userAgent: 'Google-Extended', allow: '/', disallow: ['/api/'] },
-      { userAgent: 'CCBot', allow: '/', disallow: ['/api/'] },
-      { userAgent: 'Applebot', allow: '/', disallow: ['/api/'] },
-      { userAgent: 'Applebot-Extended', allow: '/', disallow: ['/api/'] },
-      { userAgent: 'meta-externalagent', allow: '/', disallow: ['/api/'] },
-      { userAgent: '*', allow: '/', disallow: ['/api/', '/_next/'] },
+      { userAgent: "*", allow: "/" },
+      { userAgent: "GPTBot", allow: "/" },
+      { userAgent: "OAI-SearchBot", allow: "/" },
+      { userAgent: "ChatGPT-User", allow: "/" },
+      { userAgent: "ClaudeBot", allow: "/" },
+      { userAgent: "Claude-User", allow: "/" },
+      { userAgent: "PerplexityBot", allow: "/" },
+      { userAgent: "Google-Extended", allow: "/" },
     ],
-    sitemap: 'https://clearforge.ai/sitemap.xml',
-    host: 'https://clearforge.ai',
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }

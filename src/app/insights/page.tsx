@@ -1,225 +1,121 @@
-import { ArrowRight } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { JsonLdScript } from '@/components/seo/json-ld-script';
-import { Button } from '@/components/ui/button';
-import { formatDate, insights } from '@/data/insights';
-import { breadcrumbJsonLd, createMetadata } from '@/lib/metadata';
+import type { Metadata } from "next";
+import Link from "next/link";
+import { PageFrame } from "@/components/ui/PageFrame";
+import { SectionBand } from "@/components/ui/SectionBand";
+import { BookCallButton } from "@/components/functional/BookCallButton";
+import { ARTICLES } from "@/data/insights";
 
-export const metadata = createMetadata({
-  title: 'Insights — ClearForge',
+export const metadata: Metadata = {
+  title: "Insights",
   description:
-    'Practical thinking on AI strategy, performance improvement, and value creation from the ClearForge team.',
-  path: '/insights',
-});
-
-const collectionLd = {
-  '@context': 'https://schema.org',
-  '@type': 'CollectionPage',
-  name: 'ClearForge Field Library',
-  url: 'https://clearforge.ai/insights',
-  description:
-    'Executive briefs on AI strategy, workflow design, custom agent architecture, governance, adoption, and PE value creation.',
-  hasPart: insights.map((insight) => ({
-    '@type': 'BlogPosting',
-    headline: insight.title,
-    url: `https://clearforge.ai/insights/${insight.slug}`,
-    description: insight.excerpt,
-    datePublished: insight.date,
-    dateModified: insight.dateModified ?? insight.date,
-  })),
+    "Long reads on AI systems, adoption, and what they cost. Written by the founder. No filler.",
 };
 
-const breadcrumbLd = breadcrumbJsonLd([
-  { name: 'Home', path: '/' },
-  { name: 'Insights', path: '/insights' },
-]);
-
-const fieldGuideSlugs = [
-  'clearforge-ai-transformation-maturity-model',
-  'ai-pilots-operating-systems',
-  'custom-agent-stack-mid-market',
-  'pe-ai-ebitda-playbook',
-];
-
 export default function InsightsPage() {
-  const byDate = [...insights].sort(
-    (a, b) =>
-      new Date(b.dateModified ?? b.date).getTime() - new Date(a.dateModified ?? a.date).getTime(),
-  );
-  const featured = byDate[0];
-  const rest = byDate.slice(1);
-  const fieldGuides = fieldGuideSlugs
-    .map((slug) => insights.find((insight) => insight.slug === slug))
-    .filter((insight): insight is (typeof insights)[number] => Boolean(insight));
+  const featured = ARTICLES.find((article) => article.featured);
+  const rest = ARTICLES.filter((article) => !article.featured);
 
   return (
     <>
-      <JsonLdScript data={collectionLd} />
-      <JsonLdScript data={breadcrumbLd} />
-
-      {/* ── Hero with atmospheric bg ── */}
-      <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
-        <Image
-          src="/images/abstract-dataflow.webp"
-          alt=""
-          fill
-          sizes="100vw"
-          priority
-          className="object-cover opacity-[0.22] pointer-events-none"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-forge-black via-forge-black/80 to-forge-black/40 pointer-events-none" />
-        <div className="relative mx-auto max-w-[1200px] px-6 lg:px-10">
-          <p className="overline">ClearForge Field Library</p>
-          <h1 className="mt-6 text-display max-w-3xl text-bone">
-            Executive briefs for building AI that ships.
+      {/* Intro band */}
+      <PageFrame aria-label="Insights introduction">
+        <SectionBand left="Insights" right="Long-form, written by the founder" />
+        <div className="px-5 pt-10 pb-10 md:px-10 md:pt-16 md:pb-14">
+          <h1 className="font-display max-w-[24ch] text-[36px] leading-[1.1] font-medium tracking-[-0.01em] md:text-[56px] md:leading-[1.08]">
+            Notes from the build floor.{" "}
+            <em className="text-cobalt italic">What actually ships.</em>
           </h1>
-          <p className="mt-6 max-w-xl text-body-lg text-stone">
-            Strategy, workflow design, custom agent architecture, governance, and adoption guidance
-            for leaders who need AI to improve how the company actually runs.
+          <p className="mt-5 text-[16px] leading-relaxed text-ink/80">
+            Long reads on AI systems, adoption, and what they cost. No filler.
           </p>
         </div>
-      </section>
+      </PageFrame>
 
-      {/* ── Start Here ── */}
-      {fieldGuides.length > 0 && (
-        <section className="border-b border-divider bg-warm-white py-16 lg:py-24">
-          <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-            <div className="grid gap-10 lg:grid-cols-[0.42fr_0.58fr] lg:items-start">
-              <div>
-                <p className="overline">Start Here</p>
-                <h2 className="mt-4 text-h2">The shortest path through the library.</h2>
-                <p className="mt-4 text-body text-warm-gray">
-                  Four reads cover the operating model: maturity, pilot-to-production movement,
-                  custom stack design, and PE value creation.
-                </p>
-              </div>
-              <div className="grid gap-px overflow-hidden border border-divider bg-divider sm:grid-cols-2">
-                {fieldGuides.map((guide) => (
-                  <Link
-                    key={guide.slug}
-                    href={`/insights/${guide.slug}`}
-                    className="group bg-warm-white p-5 transition-colors hover:bg-parchment"
-                  >
-                    <span className="text-xs font-medium uppercase tracking-[0.16em] text-brass">
-                      {guide.category}
-                    </span>
-                    <h3 className="mt-3 text-h4 transition-colors group-hover:text-brass">
-                      {guide.title}
-                    </h3>
-                    <p className="mt-3 text-body-sm leading-relaxed text-warm-gray">
-                      {guide.excerpt}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── Featured Article ── */}
+      {/* Featured article */}
       {featured && (
-        <section className="bg-warm-white py-24 lg:py-40">
-          <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-            <p className="overline mb-10">Featured Brief</p>
-            <Link
-              href={`/insights/${featured.slug}`}
-              className="group block lg:grid lg:grid-cols-12 lg:gap-20"
-            >
-              <div className="lg:col-span-8">
-                <span className="text-body-sm font-medium text-brass">{featured.category}</span>
-                <h2 className="mt-4 text-display group-hover:text-brass transition-colors">
-                  {featured.title}
-                </h2>
-                <p className="mt-6 text-body-lg text-warm-gray">{featured.excerpt}</p>
-                <span className="mt-6 inline-flex items-center text-sm font-medium text-brass">
-                  Read article <ArrowRight className="ml-1 h-3.5 w-3.5" />
-                </span>
-              </div>
-              <div className="mt-8 lg:col-span-4 lg:mt-0 lg:flex lg:flex-col lg:justify-end">
-                <p className="text-body-sm text-warm-gray">{featured.author.name}</p>
-                <time className="text-body-sm text-warm-gray" dateTime={featured.date}>
-                  {formatDate(featured.date)}
-                </time>
-                <p className="text-body-sm text-warm-gray">{featured.readingTime} min read</p>
-              </div>
-            </Link>
+        <PageFrame aria-label="Featured article">
+          <div className="flex items-center justify-between gap-4 border-b border-hairline px-5 py-4 md:px-10">
+            <p className="text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase">
+              Featured · {featured.topic}
+            </p>
+            <span className="tnum text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+              Our own numbers
+            </span>
           </div>
-        </section>
+          <Link
+            href={`/insights/${featured.slug}`}
+            className="group grid items-end gap-6 px-5 py-10 md:grid-cols-[1fr_auto] md:gap-10 md:px-10 md:py-14"
+          >
+            <div>
+              <h2 className="font-display max-w-[32ch] text-[32px] leading-[1.1] font-medium transition-colors group-hover:text-cobalt motion-reduce:transition-none md:text-[44px]">
+                {featured.title} {featured.titleEmphasis}
+              </h2>
+              <p className="tnum mt-5 max-w-[64ch] text-[16px] leading-relaxed text-ink/80">
+                {featured.summary}
+              </p>
+            </div>
+            <span className="inline-block pb-1 text-[15px] font-semibold whitespace-nowrap text-cobalt">
+              Read the article{" "}
+              <span
+                aria-hidden="true"
+                className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
+              >
+                →
+              </span>
+            </span>
+          </Link>
+        </PageFrame>
       )}
 
-      {/* ── All Articles ── */}
-      <section className="bg-parchment py-24 lg:py-40">
-        <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-          <p className="overline">Library</p>
-
-          <div className="mt-12 grid gap-0">
-            {rest.map((article) => (
-              <Link
-                key={article.slug}
-                href={`/insights/${article.slug}`}
-                className="group block border-t border-divider py-10 transition-colors hover:bg-warm-white"
+      {/* The index */}
+      <PageFrame aria-label="Article index">
+        <SectionBand left="The index" right={`${rest.length} articles`} />
+        {rest.map((article, index) => (
+          <Link
+            key={article.slug}
+            href={`/insights/${article.slug}`}
+            className={`group grid items-center gap-4 px-5 py-8 md:grid-cols-[140px_1fr_auto] md:gap-10 md:px-10 md:py-10 ${
+              index < rest.length - 1 ? "border-b border-hairline" : ""
+            }`}
+          >
+            <span className="tnum text-[40px] leading-none font-light text-ink/60 md:text-[56px]">
+              0{index + 1}
+            </span>
+            <div>
+              <p className="text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase">
+                {article.topic}
+              </p>
+              <h3 className="tnum mt-2 text-[18px] leading-snug font-semibold transition-colors group-hover:text-cobalt motion-reduce:transition-none md:text-[20px]">
+                {article.title} {article.titleEmphasis}
+              </h3>
+              <p className="tnum mt-2 max-w-[68ch] text-[15px] leading-relaxed text-ink/70">
+                {article.summary}
+              </p>
+            </div>
+            <span className="inline-block text-[15px] font-semibold whitespace-nowrap text-cobalt">
+              Read{" "}
+              <span
+                aria-hidden="true"
+                className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
               >
-                <div className="lg:grid lg:grid-cols-12 lg:gap-12">
-                  <div className="lg:col-span-8">
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                      <span className="whitespace-nowrap text-body-sm font-medium text-brass">
-                        {article.category}
-                      </span>
-                      <time
-                        className="whitespace-nowrap text-body-sm text-warm-gray"
-                        dateTime={article.date}
-                      >
-                        {formatDate(article.date)}
-                      </time>
-                      <span className="whitespace-nowrap text-body-sm text-warm-gray">
-                        {article.readingTime} min read
-                      </span>
-                    </div>
-                    <h3 className="mt-3 text-h2 group-hover:text-brass transition-colors">
-                      {article.title}
-                    </h3>
-                    <p className="mt-3 text-body text-warm-gray max-w-2xl">{article.excerpt}</p>
-                  </div>
-                  <div className="mt-4 lg:col-span-4 lg:mt-0 lg:flex lg:items-end lg:justify-end">
-                    <span className="inline-flex items-center text-sm font-medium text-brass opacity-0 group-hover:opacity-100 transition-opacity">
-                      Read article <ArrowRight className="ml-1 h-3.5 w-3.5" />
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
+                →
+              </span>
+            </span>
+          </Link>
+        ))}
+      </PageFrame>
 
-            {rest.length === 0 && (
-              <div className="border-t border-divider pt-10">
-                <p className="text-body text-warm-gray">More articles coming soon.</p>
-              </div>
-            )}
-          </div>
+      {/* Closing booking strip */}
+      <PageFrame bottomRule={false} aria-label="Next step">
+        <SectionBand left="Next step" right="Fixed price · 2 weeks" />
+        <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+          <h2 className="font-display text-[30px] leading-[1.1] font-medium md:text-[40px]">
+            Start with the <span className="tnum">$15K</span>{" "}
+            <em className="text-cobalt italic">Diagnostic.</em>
+          </h2>
+          <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />
         </div>
-      </section>
-
-      {/* ── CTA ── */}
-      <section className="dark-section py-24 lg:py-40">
-        <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">Want to pressure-test one workflow?</h2>
-          <p className="mt-6 text-body-lg text-stone">
-            Bring the workflow you are considering. The diagnostic shows whether the value case,
-            data path, controls, and adoption cadence are ready for a build.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Button size="lg" asChild>
-              <Link href="/scorecard">
-                Take the scorecard <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline-light" asChild>
-              <Link href="/discover">Map the Workflow</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      </PageFrame>
     </>
   );
 }

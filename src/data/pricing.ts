@@ -1,125 +1,100 @@
 export interface PricingTier {
+  index?: string;
   name: string;
+  subtitle: string;
+  term: string;
   price: string;
-  period: string;
-  timeline: string;
-  description: string;
-  features: string[];
-  cta: string;
-  popular?: boolean;
+  priceDetail?: string;
+  /** Numeric price bounds in USD for structured data. Omitted when unpublished. */
+  minPrice?: number;
+  maxPrice?: number;
 }
 
-export interface FAQ {
-  question: string;
-  answer: string;
-}
-
-export const pricingTiers: PricingTier[] = [
+/** The published tiers ledger. One unnumbered row is deliberately unpriced. */
+export const PRICING_TIERS: PricingTier[] = [
   {
-    name: 'Forge Diagnostic™',
-    price: '$15K',
-    period: 'one-time',
-    timeline: '4 weeks',
-    description:
-      'A rapid diagnostic to assess AI readiness, choose the right workflow, and define the baseline before a build.',
-    features: [
-      'Stakeholder interviews with leadership and key operators',
-      'Process mapping of core workflows',
-      'Data quality and infrastructure assessment',
-      'Workflow selection and prioritization',
-      'Executive-ready build plan with assumptions and owner decisions',
-      'Baseline metrics for cycle time, cost, quality, or throughput',
-    ],
-    cta: 'Map the Workflow',
+    index: "01",
+    name: "Forge Diagnostic",
+    subtitle: "Where every engagement starts.",
+    term: "Fixed price · 2 weeks",
+    price: "$15K",
+    minPrice: 15000,
+    maxPrice: 15000,
   },
   {
-    name: 'Forge Sprint™',
-    price: '$75K–$200K',
-    period: 'one-time',
-    timeline: '10–14 weeks',
-    description:
-      'An intensive engagement to diagnose, build, deploy, and train the team around one production workflow.',
-    features: [
-      'Process mining and operational diagnostics',
-      'Priority workflow deep-dive with business case assumptions',
-      'Working production release for the selected workflow',
-      'Team training and knowledge transfer',
-      'Integration with existing tech stack',
-      '30-day post-launch support included',
-      'Baseline KPIs tracked from day one',
-    ],
-    cta: 'Map the Workflow',
-    popular: true,
+    index: "02",
+    name: "Eval and Reliability Audit",
+    subtitle:
+      "For AI systems you already built. An eval harness, reliability gates, a fix plan.",
+    term: "Fixed price · 2 weeks",
+    price: "$15K",
+    minPrice: 15000,
+    maxPrice: 15000,
   },
   {
-    name: 'Forge Scale™',
-    price: '$5K–$15K',
-    period: '/month',
-    timeline: 'Ongoing',
-    description:
-      'Ongoing AI operations for live workflows, adoption support, and measured improvement.',
-    features: [
-      '20+ hours of senior AI operator time per month',
-      'Agent updates and new workflow scopes as priorities change',
-      'Monthly review of live workflow performance',
-      'Weekly or biweekly working sessions with leadership',
-      'Priority support and rapid iteration',
-      'Quarterly value and adoption reviews',
-      'Reusable agent patterns documented for your team',
-    ],
-    cta: 'Map the Workflow',
+    index: "03",
+    name: "Forge Sprint",
+    subtitle:
+      "A live production system. Ships with an eval harness and reliability gates as a named deliverable.",
+    term: "10 to 14 weeks",
+    price: "from $75K",
+    priceDetail: "typical $75K to $200K+",
+    minPrice: 75000,
+  },
+  {
+    index: "04",
+    name: "Forge Scale",
+    subtitle:
+      "The Adoption Mile. The top tier is a Fractional Chief AI Officer engagement, from $15K per month.",
+    term: "Monthly",
+    price: "$5K to $15K",
+    priceDetail: "per month",
+    minPrice: 5000,
+    maxPrice: 15000,
+  },
+  {
+    index: "05",
+    name: "Forge Run",
+    subtitle:
+      "Managed agent operations after a build. Monitoring, production evals, SLAs, model upgrades.",
+    term: "Per system · Monthly",
+    price: "$2.5K to $7.5K",
+    priceDetail: "per system per month",
+    minPrice: 2500,
+    maxPrice: 7500,
   },
 ];
 
-export const faqs: FAQ[] = [
+export const UNPUBLISHED_TIER: PricingTier = {
+  name: "PE and multi-company platform work",
+  subtitle: "Scoped with the sponsor.",
+  term: "Portfolio scope",
+  price: "Not published",
+};
+
+export const FIRST_TWO_WEEKS = [
   {
-    question: 'How do I know which package is right for my business?',
-    answer:
-      "Start with the Forge Diagnostic if you're unsure where to begin. It gives you a clear picture of your current workflow, data readiness, owner decisions, and build plan in 4 weeks. If you already know the workflow to fix, a Forge Sprint gets you to a working release in 10-14 weeks. Forge Scale is for companies with live AI workflows that need ongoing operations.",
+    label: "Week 1",
+    title: "Map the workflow, size the opportunity",
+    description:
+      "We sit inside the workflow and put a number on what the manual steps cost.",
   },
   {
-    question: "What's included in the discovery call?",
-    answer:
-      "A 30-minute conversation where we learn about your business, current workflow, systems, and goals. We'll give you an honest assessment of whether AI can help and which engagement makes sense. No sales theater, no pressure - just a straightforward conversation.",
+    label: "Week 2",
+    title: "Prove viability, price the build",
+    description:
+      "We test the system against your real data and scope the Sprint.",
   },
   {
-    question: 'Do you work with companies of any size?',
-    answer:
-      'We focus on mid-market and growth-stage companies and PE portfolio companies. Our approach is designed for organizations large enough to benefit from AI but agile enough to move quickly.',
+    label: "Day 10 to 14",
+    title: "A decision you can price",
+    description:
+      "Build, fix, or stop. If you build, the Sprint is priced from $75K.",
   },
-  {
-    question: 'What industries do you serve?',
-    answer:
-      'We work across industries including manufacturing, professional services, B2B software, healthcare, and financial services. Our methodology is industry-agnostic — we focus on the business processes and data patterns that drive results.',
-  },
-  {
-    question: 'How quickly can we see results?',
-    answer:
-      'The Forge Diagnostic delivers a build plan in 4 weeks. Forge Sprints produce working releases in 10-14 weeks. We define baseline metrics before launch so results can be reviewed against actual workflow performance.',
-  },
-  {
-    question: 'Do you replace our existing tech stack?',
-    answer:
-      "No. We build on top of your existing tools and infrastructure. Our solutions integrate with your CRM, ERP, data warehouse, and other systems. We're additive, not disruptive.",
-  },
-  {
-    question: 'Who actually does the work?',
-    answer:
-      'Senior operators - the same people who scope your engagement are the ones who deliver it. You get experienced professionals with business, workflow, and AI engineering depth.',
-  },
-  {
-    question: 'What happens after the engagement ends?',
-    answer:
-      "Everything we build is yours. We include comprehensive documentation and team training so you can maintain and extend solutions independently. Many clients continue with a Retainer for ongoing development, but it's never required.",
-  },
-  {
-    question: 'Can you scope a custom engagement?',
-    answer:
-      "Absolutely. Our packages cover the most common needs, but we regularly design custom engagements for larger or more complex projects. Book a discovery call and we'll scope something that fits.",
-  },
-  {
-    question: "What's your payment structure?",
-    answer:
-      "Diagnostics and Sprints are billed 50% upfront, 50% on completion. Scale is billed monthly. We're flexible on structure for larger engagements - the goal is to align scope, owner decisions, and review cadence before work begins.",
-  },
+];
+
+export const ADOPTION_MILE_POINTS = [
+  "Named operator",
+  "Weekly working cadence",
+  "Live adoption scoreboard",
 ];

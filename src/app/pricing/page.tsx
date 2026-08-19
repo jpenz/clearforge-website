@@ -1,292 +1,269 @@
-import { ArrowRight, Check } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { BookCallButton } from '@/components/booking/book-call';
-import { JsonLdScript } from '@/components/seo/json-ld-script';
-import { Stagger, StaggerItem } from '@/components/ui/animate';
-import { Button } from '@/components/ui/button';
-import { forgeProducts } from '@/data/forge-products';
-import { breadcrumbJsonLd, createMetadata, faqJsonLd } from '@/lib/metadata';
+import type { Metadata } from "next";
+import { PageFrame } from "@/components/ui/PageFrame";
+import { SectionBand } from "@/components/ui/SectionBand";
+import { FaqAccordion } from "@/components/ui/FaqAccordion";
+import { BookCallButton } from "@/components/functional/BookCallButton";
+import {
+  ADOPTION_MILE_POINTS,
+  FIRST_TWO_WEEKS,
+  PRICING_TIERS,
+  UNPUBLISHED_TIER,
+} from "@/data/pricing";
+import { PRICING_FAQS } from "@/data/faqs";
+import { faqJsonLd, JsonLdScriptProps, pricingJsonLd } from "@/lib/seo";
 
-export const metadata = createMetadata({
-  title: 'Pricing — Transparent AI Build Investment | ClearForge',
+export const metadata: Metadata = {
+  title: "Pricing",
   description:
-    'Transparent pricing for the Forge Method. Forge Diagnostic ($15K), Forge Sprint ($75K-$200K), Forge Scale ($5K-$15K/mo). No surprises.',
-  path: '/pricing',
-});
+    "Published prices: Forge Diagnostic $15K fixed, Forge Sprint from $75K, Forge Scale $5K to $15K per month, Forge Run $2.5K to $7.5K per system per month.",
+};
 
-const faqs = [
-  {
-    question: 'How much does this actually cost?',
-    answer:
-      'Forge Diagnostic is $15K fixed. Forge Sprint ranges from $75K-$200K depending on complexity and scope. Forge Scale is $5K-$15K/month depending on the level of engagement. No hidden fees, no scope creep surprises.',
-  },
-  {
-    question: 'What is the timeline to see results?',
-    answer:
-      'Forge Diagnostic delivers a build plan in 4 weeks. Forge Sprint produces a working production system in 10-14 weeks. We set baseline metrics before launch so the review cadence can compare actual workflow performance after deployment.',
-  },
-  {
-    question: 'What if our data is not ready?',
-    answer:
-      'Most companies think their data is worse than it actually is. The Forge Diagnostic includes a data readiness assessment. If there are gaps, we identify them and build data preparation into the Sprint scope. You do not need perfect data to start.',
-  },
-  {
-    question: 'Is our company big enough for this?',
-    answer:
-      'We work with mid-market and growth-stage companies. If you have repeatable workflows, operating data, and a team owner who can adopt the new process, the Diagnostic will show whether a build is worth pursuing.',
-  },
-  {
-    question: 'Why not just buy DataRobot or Dataiku?',
-    answer:
-      'Platforms can help when you already have a data science team to build, validate, and maintain models. We build the workflow, integrate it with your systems, and train the operating team that will own it.',
-  },
-  {
-    question: 'How is this different from hiring a consultant?',
-    answer:
-      'We do not stop at recommendations. The same senior team that diagnoses the workflow engineers the release, trains the owner, and sets the operating review cadence.',
-  },
-  {
-    question: 'What happens after launch — will our team actually use it?',
-    answer:
-      'Every Forge Sprint ends with The Adoption Mile™: a named operator on your team, a weekly working cadence with ours, and a live adoption scoreboard. The bar we build to is 70% weekly-active usage by day 90. Forge Scale keeps that rhythm going if you want us to stay.',
-  },
-  {
-    question: 'What is the payment structure?',
-    answer:
-      'Diagnostic and Sprint are billed 50% upfront, 50% on completion. Operations is billed monthly. We are flexible on structure for larger engagements — the goal is to align incentives around results.',
-  },
-  {
-    question: 'Can you scope a custom engagement?',
-    answer:
-      'Yes. Our named products cover the most common needs, but we regularly design custom engagements for larger or more complex projects. Start with a discovery call and we will scope something that fits.',
-  },
-];
-
-const faqLd = faqJsonLd(faqs);
-const breadcrumbLd = breadcrumbJsonLd([
-  { name: 'Home', path: '/' },
-  { name: 'Pricing', path: '/pricing' },
-]);
+const ROW_GRID =
+  "lg:grid-cols-[64px_1fr_200px_240px_220px] lg:items-center lg:gap-0";
 
 export default function PricingPage() {
   return (
     <>
-      <JsonLdScript data={faqLd} />
-      <JsonLdScript data={breadcrumbLd} />
-      {/* — Hero with atmospheric bg — */}
-      <section className="dark-section noise-texture relative overflow-hidden py-32 lg:py-48">
-        <Image
-          src="/images/abstract-value-creation.webp"
-          alt=""
-          fill
-          sizes="100vw"
-          priority
-          className="object-cover opacity-[0.22] pointer-events-none"
+      <script {...JsonLdScriptProps(pricingJsonLd())} />
+      <script {...JsonLdScriptProps(faqJsonLd(PRICING_FAQS))} />
+      {/* Intro + why public */}
+      <PageFrame aria-label="Pricing introduction">
+        <SectionBand
+          left="Pricing"
+          right="Every price on this page is published"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-forge-black via-forge-black/80 to-forge-black/40 pointer-events-none" />
-        <div className="relative mx-auto max-w-[1200px] px-6 lg:px-10">
-          <p className="overline">Pricing</p>
-          <h1 className="mt-6 text-display max-w-3xl text-bone">
-            Transparent investment. <span className="display-accent">No surprises.</span>
-          </h1>
-          <p className="mt-6 max-w-xl text-body-lg text-stone">
-            Every engagement is scoped around a named workflow, a baseline, an owner, and a review
-            cadence for measured value after launch.
-          </p>
+        <div className="grid lg:grid-cols-[1fr_420px]">
+          <div className="border-hairline px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14 lg:border-r">
+            <h1 className="font-display max-w-[19ch] text-[36px] leading-[1.1] font-medium tracking-[-0.01em] md:text-[56px] md:leading-[1.08]">
+              The first step costs{" "}
+              <span className="tnum text-cobalt italic">$15K.</span> Everything
+              after it is on this page.
+            </h1>
+          </div>
+          <div className="flex flex-col justify-end border-t border-hairline px-5 py-8 md:px-10 md:py-14 lg:border-t-0">
+            <p className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">
+              Why our pricing is public
+            </p>
+            <p className="mt-4 text-[16px] leading-relaxed text-ink/80">
+              Buyers should not need a sales call to learn what getting started
+              costs. The numbers are below. The call is for scoping, not for
+              discovering the price.
+            </p>
+          </div>
         </div>
-      </section>
+      </PageFrame>
 
-      {/* — Tiers — editorial ruled-line — */}
-      <section className="bg-parchment py-24 lg:py-40">
-        <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-          <Stagger className="" stagger={0.12}>
-            {forgeProducts.map((product, i) => (
-              <StaggerItem key={product.name}>
-                <div
-                  className={`relative border-t border-divider py-12 lg:py-16 ${
-                    product.featured ? 'bg-brass/[0.03] -mx-6 px-6 lg:-mx-10 lg:px-10' : ''
-                  }`}
+      {/* The tiers ledger */}
+      <PageFrame aria-label="The tiers">
+        <SectionBand left="The tiers" right="5 engagements, published prices" />
+        <div
+          className={`hidden border-b border-hairline px-10 py-3 lg:grid ${ROW_GRID}`}
+          aria-hidden="true"
+        >
+          <span className="tnum text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+            No.
+          </span>
+          <span className="text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+            Engagement
+          </span>
+          <span className="text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+            Term
+          </span>
+          <span className="text-right text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+            Price
+          </span>
+          <span className="text-right text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+            Next step
+          </span>
+        </div>
+        {PRICING_TIERS.map((tier) => (
+          <div
+            key={tier.name}
+            className={`grid gap-3 border-b border-hairline px-5 py-6 transition-colors hover:bg-white md:px-10 md:py-8 ${ROW_GRID}`}
+          >
+            <span className="tnum text-[12px] text-ink/60">{tier.index}</span>
+            <div className="lg:pr-8">
+              <h3 className="text-[18px] leading-[1.35] font-semibold md:text-[19px]">
+                {tier.name}
+              </h3>
+              <p className="tnum mt-1.5 max-w-[52ch] text-[14px] leading-relaxed text-ink/70">
+                {tier.subtitle}
+              </p>
+            </div>
+            <span className="tnum text-[12px] tracking-[0.14em] text-ink/60 uppercase">
+              {tier.term}
+            </span>
+            <div className="lg:text-right">
+              <span className="tnum block text-[26px] font-semibold">
+                {tier.price}
+              </span>
+              {tier.priceDetail && (
+                <span className="tnum mt-0.5 block text-[12px] text-ink/60">
+                  {tier.priceDetail}
+                </span>
+              )}
+            </div>
+            <div className="flex lg:justify-end">
+              <BookCallButton size="md" className="whitespace-nowrap" />
+            </div>
+          </div>
+        ))}
+        {/* Unnumbered final row */}
+        <div
+          className={`grid gap-3 border-t border-hairline-strong bg-white px-5 py-6 md:px-10 md:py-8 ${ROW_GRID}`}
+        >
+          <span
+            aria-hidden="true"
+            className="inline-block size-[9px] bg-cobalt"
+          />
+          <div className="lg:pr-8">
+            <h3 className="text-[18px] leading-[1.35] font-semibold italic md:text-[19px]">
+              {UNPUBLISHED_TIER.name}
+            </h3>
+            <p className="mt-1.5 text-[14px] leading-relaxed text-ink/70">
+              {UNPUBLISHED_TIER.subtitle}
+            </p>
+          </div>
+          <span className="text-[12px] tracking-[0.14em] text-ink/60 uppercase">
+            {UNPUBLISHED_TIER.term}
+          </span>
+          <span className="text-[12px] tracking-[0.14em] text-ink/60 uppercase lg:text-right">
+            {UNPUBLISHED_TIER.price}
+          </span>
+          <div className="flex lg:justify-end">
+            <BookCallButton size="md" className="whitespace-nowrap" />
+          </div>
+        </div>
+      </PageFrame>
+
+      {/* The first two weeks */}
+      <PageFrame aria-label="The first two weeks">
+        <SectionBand
+          left="The first two weeks"
+          right="Forge Diagnostic · $15K fixed"
+        />
+        <div className="grid lg:grid-cols-[1fr_560px]">
+          <div className="flex flex-col border-b border-hairline px-5 py-10 md:px-10 md:py-14 lg:border-r lg:border-b-0">
+            <h2 className="font-display max-w-[16ch] text-[32px] leading-[1.1] font-medium md:text-[44px]">
+              What happens in the first{" "}
+              <span className="tnum text-cobalt italic">2 weeks</span>
+            </h2>
+            <p className="tnum mt-6 max-w-[46ch] text-[16px] leading-relaxed text-ink/80">
+              The Diagnostic is $15K, fixed price. It ends with a decision you
+              can price, not a report you file.
+            </p>
+            <div className="mt-auto pt-10">
+              <div className="flex max-w-[46ch] items-baseline justify-between gap-6 border-t border-hairline pt-4">
+                <span className="text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+                  Forge Diagnostic
+                </span>
+                <span className="tnum text-[14px] font-semibold">
+                  2 weeks · $15K fixed
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="px-5 py-10 md:px-10 md:py-14">
+            <ol className="border-t border-hairline">
+              {FIRST_TWO_WEEKS.map((step) => (
+                <li
+                  key={step.label}
+                  className="grid gap-2 border-b border-hairline py-6 md:grid-cols-[110px_1fr] md:gap-6"
                 >
-                  <div className="lg:grid lg:grid-cols-12 lg:gap-12">
-                    {/* Left: number, name, price, ideal for */}
-                    <div className="lg:col-span-5">
-                      <div className="flex items-center gap-3">
-                        <span className="metric text-sm text-brass">
-                          {String(i + 1).padStart(2, '0')}
-                        </span>
-                        {product.featured && (
-                          <span className="overline text-[10px]">Most chosen</span>
-                        )}
-                      </div>
-                      <h3 className="mt-3 font-display text-[1.75rem] leading-[1.08] sm:text-[2.25rem] lg:text-[2.75rem]">
-                        {product.name}
-                      </h3>
-                      <div className="mt-4 flex items-baseline gap-2">
-                        <span className="metric text-3xl text-anthracite">{product.price}</span>
-                        <span className="text-body-sm text-warm-gray">{product.period}</span>
-                      </div>
-                      <p className="mt-1 text-body-sm text-warm-gray">{product.timeline}</p>
-                      <p className="mt-6 text-body-sm text-warm-gray italic max-w-xs">
-                        {product.idealFor}
-                      </p>
-                    </div>
-
-                    {/* Right: description, what's included, CTA */}
-                    <div className="mt-8 lg:col-span-7 lg:mt-0">
-                      <p className="text-body-lg text-warm-gray">{product.description}</p>
-                      <p className="mt-8 text-xs font-semibold text-anthracite uppercase">
-                        What&apos;s Included
-                      </p>
-                      <ul className="mt-4 space-y-3">
-                        {product.whatsIncluded.map((item) => (
-                          <li
-                            key={item}
-                            className="flex items-start gap-3 text-body-sm text-anthracite"
-                          >
-                            <Check className="mt-0.5 h-4 w-4 shrink-0 text-brass" />
-                            <span className="flex-1 leading-relaxed">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="mt-8">
-                        <Button
-                          variant={product.featured ? 'default' : 'secondary'}
-                          size="lg"
-                          asChild
-                        >
-                          <Link href={product.href}>
-                            {product.cta} <ArrowRight className="ml-2 h-4 w-4" />
-                          </Link>
-                        </Button>
-                      </div>
-                    </div>
+                  <span className="tnum text-[11px] tracking-[0.14em] text-ink/60 uppercase md:pt-1">
+                    {step.label}
+                  </span>
+                  <div>
+                    <p className="text-[16px] font-semibold">{step.title}</p>
+                    <p className="tnum mt-1.5 text-[14px] leading-relaxed text-ink/70">
+                      {step.description}
+                    </p>
                   </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-          <div className="border-t border-divider" />
-        </div>
-      </section>
-
-      {/* — The Adoption Mile — why the Sprint price includes the last mile — */}
-      <section className="dark-section noise-texture relative overflow-hidden py-20 lg:py-28">
-        <div className="relative mx-auto max-w-[1200px] px-6 lg:px-10">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-20">
-            <div className="lg:col-span-6">
-              <p className="overline">Built Into Every Sprint</p>
-              <h2 className="mt-6 text-display text-bone">
-                The Adoption Mile<span className="align-super text-[0.5em]">™</span> is in the
-                price.
-              </h2>
-              <p className="mt-6 max-w-xl text-body-lg text-stone">
-                The industry&apos;s own math: for every $1 spent on models, plan $3 on adoption.
-                Most firms bill the $1 and leave. We scope the $3 in — a named operator on your
-                team, a weekly working cadence, and a scoreboard everyone can see.
-              </p>
-            </div>
-            <div className="mt-12 flex flex-col justify-center gap-6 lg:col-span-6 lg:mt-0 lg:border-l lg:border-divider-dark lg:pl-14">
-              <div className="border-b border-divider-dark pb-5">
-                <p className="metric-lg text-brass-light">70%</p>
-                <p className="mt-2 text-body-sm text-stone">
-                  Weekly-active usage — the adoption bar we build to by day 90
-                </p>
-              </div>
-              <div className="border-b border-divider-dark pb-5">
-                <p className="metric-lg text-brass-light">Weekly</p>
-                <p className="mt-2 text-body-sm text-stone">
-                  Working cadence with your operator until usage holds
-                </p>
-              </div>
-              <div>
-                <p className="metric-lg text-brass-light">$3 : $1</p>
-                <p className="mt-2 text-body-sm text-stone">
-                  Adoption-to-model spend the market leaders plan for — already in our scope
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* — Value Framing — */}
-      <section className="bg-recessed py-24 lg:py-40">
-        <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-20">
-            <div className="lg:col-span-5">
-              <p className="overline">Measured Value</p>
-              <h2 className="mt-6 text-display">Know what will be measured before you build.</h2>
-            </div>
-            <div className="mt-12 lg:col-span-7 lg:mt-0">
-              <p className="text-body-lg text-warm-gray">
-                We do not ask you to approve a build on vague upside. The Diagnostic documents the
-                workflow, current baseline, data gaps, owner decisions, and value assumptions. The
-                Sprint then tracks adoption and operating metrics against that baseline after
-                launch.
-              </p>
-              <div className="mt-10 grid grid-cols-3 gap-8 border-t border-divider pt-8">
-                <div>
-                  <p className="metric-lg text-brass">4 weeks</p>
-                  <p className="mt-2 text-body-sm text-warm-gray">Diagnostic build plan</p>
-                </div>
-                <div>
-                  <p className="metric-lg text-brass">10-14</p>
-                  <p className="mt-2 text-body-sm text-warm-gray">Weeks to production release</p>
-                </div>
-                <div>
-                  <p className="metric-lg text-brass">100%</p>
-                  <p className="mt-2 text-body-sm text-warm-gray">You own everything we build</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* — FAQ — */}
-      <section className="border-t border-divider bg-parchment py-24 lg:py-40">
-        <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-20">
-            <div className="lg:col-span-4">
-              <p className="overline">FAQ</p>
-              <h2 className="mt-6 text-display">Common questions.</h2>
-            </div>
-            <Stagger className="mt-12 lg:col-span-8 lg:mt-0" stagger={0.06}>
-              {faqs.map((faq, i) => (
-                <StaggerItem key={faq.question}>
-                  <div className="py-8">
-                    <h3 className="text-h4">{faq.question}</h3>
-                    <p className="mt-3 text-body text-warm-gray">{faq.answer}</p>
-                  </div>
-                  {i < faqs.length - 1 && <div className="h-px bg-divider" />}
-                </StaggerItem>
+                </li>
               ))}
-            </Stagger>
+            </ol>
           </div>
         </div>
-      </section>
+      </PageFrame>
 
-      {/* — CTA — */}
-      <section className="dark-section noise-texture relative overflow-hidden py-24 lg:py-40">
-        <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
-          <h2 className="text-display text-bone">Ready to inspect the workflow?</h2>
-          <p className="mt-6 text-body-lg text-stone">
-            The Forge Diagnostic gives you a clear build plan in four weeks. If the workflow,
-            baseline, or adoption path is not strong enough, we will tell you.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Button size="lg" asChild>
-              <Link href="/discover">
-                Map the Workflow <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <BookCallButton size="lg" variant="outline-light" analytics="pricing_book_call">
-              Book a 30-min intro
-            </BookCallButton>
+      {/* The Adoption Mile */}
+      <PageFrame aria-label="The Adoption Mile">
+        <SectionBand
+          left="The Adoption Mile"
+          right="Part of Forge Scale · $5K to $15K per month"
+        />
+        <div className="grid lg:grid-cols-[560px_1fr]">
+          <div className="flex items-baseline gap-6 border-b border-hairline px-5 py-10 md:px-10 md:py-14 lg:border-r lg:border-b-0">
+            <p className="font-display tnum text-[96px] leading-none font-medium md:text-[160px]">
+              70%
+            </p>
+            <p className="tnum text-[14px] leading-snug text-ink/70">
+              weekly-active adoption
+              <br />
+              by day 90
+            </p>
+          </div>
+          <div className="flex flex-col justify-center px-5 py-10 md:px-10 md:py-14">
+            <h2 className="font-display text-[28px] leading-[1.2] md:text-[34px]">
+              The Adoption Mile
+            </h2>
+            <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-ink/80">
+              A named operator. A weekly working cadence. A live adoption
+              scoreboard. The system is not done when it ships. It is done when
+              your team uses it.
+            </p>
+            <ul className="mt-6 border-t border-hairline text-[14px]">
+              {ADOPTION_MILE_POINTS.map((point) => (
+                <li
+                  key={point}
+                  className="flex items-center gap-3 border-b border-hairline py-3"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="inline-block size-[7px] shrink-0 bg-cobalt"
+                  />
+                  {point}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-      </section>
+      </PageFrame>
+
+      {/* FAQ */}
+      <PageFrame aria-label="Common questions">
+        <SectionBand left="Common questions" right="5 answers" />
+        <div className="grid lg:grid-cols-[420px_1fr]">
+          <div className="border-b border-hairline px-5 py-8 md:px-10 md:py-12 lg:border-r lg:border-b-0">
+            <h2 className="font-display max-w-[14ch] text-[28px] leading-[1.2] md:text-[34px]">
+              Questions buyers ask before the call.
+            </h2>
+            <p className="tnum mt-4 max-w-[34ch] text-[14px] leading-relaxed text-ink/70">
+              If yours is not here, the 30 minutes with the founder will cover
+              it.
+            </p>
+          </div>
+          <div className="px-5 py-8 md:px-10">
+            <FaqAccordion items={PRICING_FAQS} />
+          </div>
+        </div>
+      </PageFrame>
+
+      {/* Closing booking strip */}
+      <PageFrame bottomRule={false} aria-label="Book an intro">
+        <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-16 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+          <div>
+            <h2 className="font-display text-[32px] leading-[1.1] md:text-[44px]">
+              Start with the{" "}
+              <span className="tnum text-cobalt italic">$15K</span> Diagnostic.
+            </h2>
+            <p className="tnum mt-3 text-[14px] text-ink/70">
+              Fixed price. 2 weeks. Where every engagement starts.
+            </p>
+          </div>
+          <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />
+        </div>
+      </PageFrame>
     </>
   );
 }

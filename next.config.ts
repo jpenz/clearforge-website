@@ -1,134 +1,86 @@
 import type { NextConfig } from "next";
 
-const isProduction = process.env.NODE_ENV === "production";
-
-const securityHeaders = [
-  // Prevent clickjacking — no framing by third parties
-  {
-    key: "X-Frame-Options",
-    value: "SAMEORIGIN",
-  },
-  // Block MIME-type sniffing attacks
-  {
-    key: "X-Content-Type-Options",
-    value: "nosniff",
-  },
-  // Control referrer info sent to third-party sites
-  {
-    key: "Referrer-Policy",
-    value: "strict-origin-when-cross-origin",
-  },
-  // Force HTTPS for 2 years, include subdomains
+const SECURITY_HEADERS = [
+  // 2 years, ready for preload submission once the apex is verified
   {
     key: "Strict-Transport-Security",
     value: "max-age=63072000; includeSubDomains; preload",
   },
-  // Restrict browser features/APIs
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  // We embed Cal.com; nothing embeds us
+  { key: "X-Frame-Options", value: "SAMEORIGIN" },
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
+    value: "camera=(), microphone=(), geolocation=(), payment=()",
   },
-  // Content Security Policy — tightened for Next.js App Router + Supabase
   {
+    // Ported from the V11 config (proven against this exact Cal.com + GA
+    // stack in production). Nonce-based CSP stays a future upgrade; Next
+    // needs 'unsafe-inline' for hydration and styles.
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      // Next.js requires 'unsafe-inline' for styles; nonce-based CSP is a future upgrade
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
-      // Allow scripts from self + Next.js inline scripts (required for hydration)
-      // + Cal.com booking embed (app.cal.com serves the embed runtime)
-      isProduction
-        ? "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://plausible.io https://app.cal.com https://cal.com"
-        : "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://plausible.io https://app.cal.com https://cal.com",
-      // Browser code calls ClearForge APIs; LLM and email providers stay server-side.
-      // Cal.com embed talks to its API from the client.
-      "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://region1.google-analytics.com https://plausible.io https://app.cal.com https://api.cal.com https://cal.com",
-      // Images: self + data URIs + Supabase storage + Cal.com avatars
-      "img-src 'self' data: blob: https://*.supabase.co https://www.google-analytics.com https://app.cal.com https://cal.com",
-      // Cal.com booking iframe
+      process.env.NODE_ENV === "production"
+        ? "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com https://cal.com"
+        : "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://app.cal.com https://cal.com",
+      "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com https://app.cal.com https://api.cal.com https://cal.com",
+      "img-src 'self' data: blob: https://*.supabase.co https://www.google-analytics.com https://www.googletagmanager.com https://app.cal.com https://cal.com",
       "frame-src 'self' https://app.cal.com https://cal.com",
       "frame-ancestors 'self'",
       "base-uri 'self'",
       "form-action 'self'",
     ].join("; "),
   },
-  // Block XSS in older browsers
-  {
-    key: "X-XSS-Protection",
-    value: "1; mode=block",
-  },
 ];
 
 const nextConfig: NextConfig = {
   async headers() {
-    return [
-      {
-        // Apply security headers to all routes
-        source: "/(.*)",
-        headers: securityHeaders,
-      },
-    ];
+    return [{ source: "/(.*)", headers: SECURITY_HEADERS }];
   },
-
-  // Permanent redirects preserve SEO on renamed content.
   async redirects() {
+    // 301s for URLs consolidated in the V12 redesign (KOMBAI_BRIEF.md appendix)
     return [
+      { source: "/operating-model", destination: "/services", permanent: true },
+      { source: "/use-cases", destination: "/services", permanent: true },
+      { source: "/how-we-work", destination: "/services", permanent: true },
+      { source: "/private-equity", destination: "/services", permanent: true },
+      { source: "/pe", destination: "/services", permanent: true },
+      { source: "/quiz", destination: "/scorecard", permanent: true },
+      { source: "/scorecard/results", destination: "/scorecard", permanent: true },
+      { source: "/tools", destination: "/discover", permanent: true },
+      { source: "/forge-intelligence", destination: "/discover", permanent: true },
+      // Legacy V11 library URLs (indexed in GSC) onto their V12 homes
+      { source: "/case-studies", destination: "/proof", permanent: true },
       {
-        // V8.19 anonymized the case-study slug
-        source: "/case-studies/metro-detroit-services-company",
-        destination: "/case-studies/home-services-turnaround",
+        source: "/case-studies/industrial-manufacturer",
+        destination: "/proof/industrial-conglomerate",
         permanent: true,
       },
       {
-        source: "/assessment",
-        destination: "/scorecard",
+        source: "/case-studies/home-services-turnaround",
+        destination: "/proof/services-firm",
         permanent: true,
       },
       {
-        source: "/industries/logistics",
-        destination: "/industries/logistics-transportation",
+        source: "/case-studies/pe-portfolio-diagnostic-plan",
+        destination: "/proof/pe-portfolio-diagnostic",
         permanent: true,
       },
+      { source: "/blueprints", destination: "/proof", permanent: true },
+      { source: "/blueprints/:slug", destination: "/proof", permanent: true },
+      { source: "/services/:slug", destination: "/services", permanent: true },
+      { source: "/use-cases/:slug", destination: "/services", permanent: true },
+      { source: "/security", destination: "/services", permanent: true },
       {
-        source: "/industries/construction",
-        destination: "/industries/construction-engineering",
-        permanent: true,
-      },
-      {
-        source: "/industries/distribution",
-        destination: "/industries/wholesale-distribution",
-        permanent: true,
-      },
-      {
-        source: "/use-cases/ai-operations-efficiency-machine",
-        destination: "/use-cases/ai-operations-efficiency-system",
+        // V12 preview slug that was consolidated onto the indexed legacy slug
+        source: "/industries/industrial-manufacturing",
+        destination: "/industries/manufacturing",
         permanent: true,
       },
     ];
-  },
-
-  // Harden: prevent exposing Next.js version in response headers
-  poweredByHeader: false,
-
-  // Strict mode for React — catches double-render bugs in dev
-  reactStrictMode: true,
-
-  // Allow dev resources (HMR, /_next/image proxy, etc.) to be requested from
-  // these hosts. Without this Next.js 16 blocks them as cross-origin and the
-  // page partially loads on iPad / LAN devices.
-  allowedDevOrigins: [
-    "100.120.34.122", // tailscale (iPad)
-    "192.168.68.65",  // local LAN
-    "192.168.68.71",  // local LAN (alt)
-    "localhost",
-  ],
-
-  // Next.js 16 requires all non-default quality values to be whitelisted.
-  // 65 is used for decorative atmospheric bg images on industry hero sections.
-  images: {
-    formats: ["image/avif", "image/webp"],
-    qualities: [65, 75],
   },
 };
 

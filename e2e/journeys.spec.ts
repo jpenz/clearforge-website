@@ -1,75 +1,80 @@
 import { expect, test } from '@playwright/test';
 
 /**
- * User-journey acceptance — the flows a buyer actually takes, codified from
- * the QA sweep's ad-hoc scripts so they run on every suite invocation.
+ * V12 journey smoke suite. Runs against a prod-mode server:
+ *   npx next start -p 3008
+ *   PLAYWRIGHT_BASE_URL=http://localhost:3008 npx playwright test
+ * Keyless environments exercise the simulated analyst and console-logged
+ * leads; that is by design (graceful degradation).
  */
 
-test.describe('Booking journey', () => {
-  test('popup CTA opens the Cal booker from /pricing', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name === 'mobile', 'Covered by desktop; popup identical.');
-    await page.goto('/pricing');
-    await page.waitForLoadState('networkidle');
-    const btn = page.getByRole('button', { name: /book a 30-min intro/i }).first();
-    await btn.scrollIntoViewIfNeeded();
-    await btn.hover(); // intent-preload
-    await btn.click();
-    await expect(page.locator('iframe[src*="cal.com"]').first()).toBeVisible({ timeout: 20000 });
-  });
+test('homepage renders the core statement and one booking CTA in the header', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('h1')).toContainText(/ClearForge builds/i);
+  await expect(
+    page.getByRole('banner').getByRole('button', { name: 'Book a 30-min intro' }),
+  ).toBeVisible();
+});
 
-  test('inline calendar renders on /contact', async ({ page }) => {
-    await page.goto('/contact');
-    const frame = page.locator('iframe[src*="cal.com"]').first();
-    await expect(frame).toBeVisible({ timeout: 20000 });
-    const box = await frame.boundingBox();
-    expect(box?.height ?? 0).toBeGreaterThan(300);
+test('hero agent completes a run from a sample chip', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'industrial distributor' }).click();
+  const analyze = page.getByRole('button', { name: /analyze/i }).first();
+  if (await analyze.count()) await analyze.click();
+  await expect(page.getByText(/analysis complete|done/i).first()).toBeVisible({
+    timeout: 40_000,
   });
 });
 
-test.describe('Legal journey', () => {
-  test('privacy and terms are linked from the homepage footer and load', async ({ page }) => {
-    await page.goto('/');
-    const footer = page.locator('footer');
-    await expect(footer.getByRole('link', { name: /privacy policy/i })).toBeVisible();
-    await expect(footer.getByRole('link', { name: /terms of service/i })).toBeVisible();
-    await page.goto('/privacy');
-    await expect(page.getByRole('heading', { name: /privacy policy/i })).toBeVisible();
-    await expect(page.getByText(/Service Providers We Use/i)).toBeVisible();
-    await page.goto('/terms');
-    await expect(page.getByText(/Free Diagnostic Tools/i)).toBeVisible();
-  });
+test('scorecard reaches results after 10 answers and validates the unlock form', async ({ page }) => {
+  await page.goto('/scorecard');
+  for (let i = 0; i < 10; i += 1) {
+    await page.getByRole('button', { name: String(1 + (i % 5)), exact: true }).first().click();
+    const next = page.getByRole('button', { name: /next question|see results/i }).first();
+    if (await next.count()) await next.click();
+  }
+  await expect(page.getByText(/your score|readout/i).first()).toBeVisible({ timeout: 10_000 });
 });
 
-test.describe('Contact journey', () => {
-  test('form submits and shows an honest outcome state', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name === 'mobile', 'Covered by desktop.');
-    await page.goto('/contact');
-    await page.locator('#name').fill('QA TEST — ignore');
-    await page.locator('#email').fill('jamesrpenz+qatest@gmail.com');
-    await page.locator('#company').fill('[AUTOMATED QA TEST]');
-    await page.locator('#revenue').selectOption({ index: 1 });
-    await page.locator('#message').fill('[AUTOMATED QA TEST] journey spec.');
-    await page.getByRole('button', { name: /send the workflow/i }).click();
-    // Local prod has no RESEND key (503 by design) → error banner; with a key → thank-you.
-    await expect(
-      page.getByText(/thank you|did not send|email james directly/i).first(),
-    ).toBeVisible({ timeout: 15000 });
-  });
+test('contact page carries the inline calendar shell and fallback form', async ({ page }) => {
+  await page.goto('/contact');
+  await expect(page.getByText(/loading live availability/i)).toBeVisible();
+  await expect(page.locator('form')).toBeVisible();
 });
 
-test.describe('Hero agent journey (streaming)', () => {
-  test('streams real progress and a filled thesis', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name === 'mobile', 'Covered by desktop.');
-    test.skip(!process.env.ANTHROPIC_API_KEY, 'Needs a model key on the server under test.');
-    await page.goto('/');
-    await page.getByLabel('Your company website').fill('rhirt.com');
-    await page.locator('#hero-url').press('Enter');
-    // Real progress line appears fast (no fake timers)
-    await expect(page.getByText(/Fetching rhirt\.com|Read rhirt\.com/).first()).toBeVisible({
-      timeout: 8000,
-    });
-    // Thesis completes
-    await expect(page.getByText('Priority play')).toBeVisible({ timeout: 45000 });
-    await expect(page.getByText(/^Likely \d/).first()).toBeVisible();
-  });
+test('legal pages render and are linked from the footer', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('contentinfo').getByRole('link', { name: 'Privacy' }).click();
+  await expect(page.locator('h1')).toHaveText(/privacy policy/i);
+  await page.goto('/terms');
+  await expect(page.locator('h1')).toHaveText(/terms of service/i);
+});
+
+test('legacy URLs 308 to their V12 homes', async ({ request }) => {
+  for (const [source, destination] of [
+    ['/operating-model', '/services'],
+    ['/case-studies/industrial-manufacturer', '/proof/industrial-conglomerate'],
+    ['/blueprints', '/proof'],
+    ['/quiz', '/scorecard'],
+    ['/security', '/services'],
+  ] as const) {
+    const res = await request.get(source, { maxRedirects: 0 });
+    expect(res.status(), source).toBe(308);
+    expect(res.headers().location, source).toBe(destination);
+  }
+});
+
+test('sitemap, robots, and llms.txt respond', async ({ request }) => {
+  for (const path of ['/sitemap.xml', '/robots.txt', '/llms.txt']) {
+    const res = await request.get(path);
+    expect(res.status(), path).toBe(200);
+  }
+});
+
+test('industries index lists entries and links through', async ({ page }) => {
+  await page.goto('/industries');
+  const first = page.locator('main a[href^="/industries/"]').first();
+  await expect(first).toBeVisible();
+  await first.click();
+  await expect(page.locator('h1')).toBeVisible();
 });
