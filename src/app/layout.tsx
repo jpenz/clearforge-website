@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { Bodoni_Moda, Hanken_Grotesk } from "next/font/google";
+import { Hanken_Grotesk, Newsreader } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/data/site";
 
-const bodoni = Bodoni_Moda({
+// Display face: Newsreader (the brand's proven serif; Bodoni's hairline
+// strokes were hard to read at display sizes, owner call 2026-08-18).
+// Variable name kept so the token layer is untouched.
+const bodoni = Newsreader({
   subsets: ["latin"],
   style: ["normal", "italic"],
-  axes: ["opsz"],
   variable: "--font-bodoni",
 });
 

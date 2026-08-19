@@ -18,7 +18,7 @@ export function HeroSection() {
             </p>
           </div>
           <div className="grow px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14">
-            <h1 className="font-display max-w-[15ch] text-[40px] leading-[1.08] font-medium tracking-[-0.01em] md:text-[72px] md:leading-[1.05]">
+            <h1 className="font-display max-w-[15ch] text-[40px] leading-[1.12] font-medium tracking-[-0.01em] md:text-[72px] md:leading-[1.08]">
               ClearForge builds AI systems your team{" "}
               <em className="text-cobalt italic">actually uses.</em>
             </h1>

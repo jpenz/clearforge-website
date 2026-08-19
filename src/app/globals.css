@@ -8,7 +8,7 @@
 */
 @theme inline {
   /* Typography */
-  --font-display: var(--font-bodoni), "Bodoni Moda", serif;
+  --font-display: var(--font-bodoni), "Newsreader", serif;
   --font-sans: var(--font-hanken), "Hanken Grotesk", sans-serif;
 
   /* Palette */
@@ -136,4 +136,20 @@
 @utility tnum {
   font-feature-settings: "tnum" 1;
   font-variant-numeric: tabular-nums;
+}
+
+/* Cal.com modal host: the embed's host-level rule fails to size the
+   <cal-modal-box> element on this page (computed 0x0 absolute), so its
+   shadow-DOM backdrop has no area to paint and the dialog floats unframed.
+   Force full-viewport fixed geometry; the shadow DOM handles the rest. */
+cal-modal-box {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 9999 !important;
+  display: block;
+  /* The embed's shadow-DOM scrim does not paint here either; dim on the
+     host so the dialog reads as a modal instead of white-on-white. */
+  background: rgba(1, 11, 19, 0.55) !important;
 }
