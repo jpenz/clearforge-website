@@ -13,7 +13,15 @@ for mid-market & PE (James Penz, ex-Bain AI & Automation practice).
 
 **Production URL:** https://clearforge.ai (Vercel auto-deploys `main`)
 **Repo:** https://github.com/jpenz/clearforge-website
-**Current version:** V11 (Wave 1 live, tag `v11.1`; Wave 2 on PR #11)
+**Current version:** V12 (Kombai redesign, LIVE 2026-08-18 via PR #27)
+
+> ⚠️ V12 NOTE: the Design System section below describes V11 and is STALE for
+> visual work. V12 truth: tokens in `src/app/globals.css` (ghost/ink/cobalt
+> #2454ff/hairlines), display font Newsreader via `--font-bodoni` var (Bodoni
+> was swapped out for legibility 2026-08-18), body Hanken Grotesk, components
+> in `src/components/{layout,home,functional,ui}`, data in `src/data/`.
+> Conversion, editorial, QA, and CI sections below still bind. Cal modal host
+> needs the `cal-modal-box` rule in globals (embed host-sizing fails here).
 
 ---
 
