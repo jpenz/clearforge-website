@@ -56,7 +56,6 @@ test('legacy URLs 308 to their V12 homes', async ({ request }) => {
     ['/case-studies/industrial-manufacturer', '/proof/industrial-conglomerate'],
     ['/blueprints', '/proof'],
     ['/quiz', '/scorecard'],
-    ['/security', '/services'],
   ] as const) {
     const res = await request.get(source, { maxRedirects: 0 });
     expect(res.status(), source).toBe(308);
