@@ -168,8 +168,10 @@ export async function saveRfpFile(
   data: ArrayBuffer,
 ): Promise<string | null> {
   if (!supabaseAdmin) return null;
-  const safe = filename.replace(/[^a-zA-Z0-9._-]/g, "_").slice(-80);
-  const path = `${Date.now()}-${safe}`;
+  const extension = filename.includes(".")
+    ? `.${filename.split(".").pop()?.slice(0, 8)}`
+    : "";
+  const path = `${crypto.randomUUID()}${extension}`;
   const { error } = await supabaseAdmin.storage
     .from("rfps")
     .upload(path, data, { contentType, upsert: false });

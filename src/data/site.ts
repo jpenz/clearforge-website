@@ -58,6 +58,8 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     items: [
       { label: "About", href: "/about" },
       { label: "Engagements", href: "/pricing" },
+      { label: "Start a project", href: "/start" },
+      { label: "Security", href: "/security" },
       { label: "Contact", href: "/contact" },
     ],
   },

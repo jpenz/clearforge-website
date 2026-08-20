@@ -42,11 +42,14 @@ export function preloadCal(namespace: string): void {
   });
 }
 
-export function openCalModal(namespace: string): void {
+export function openCalModal(
+  namespace: string,
+  prefill?: { name?: string; email?: string },
+): void {
   void loadCal(namespace).then((cal) => {
     cal("modal", {
       calLink: CAL_LINK,
-      config: { layout: "month_view", theme: "light" },
+      config: { layout: "month_view", theme: "light", ...prefill },
     });
   });
 }

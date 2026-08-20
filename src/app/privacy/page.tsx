@@ -22,6 +22,7 @@ const SECTIONS: Array<{ heading: string; paragraphs: string[]; list?: string[] }
     paragraphs: [
       "When you enter a company website address into Forge Intelligence (on our homepage or at /discover), we fetch publicly available pages from that address and process the extracted text with AI model providers to generate your analysis.",
       "We store the inputs you provide together with the generated output, so we can deliver the result and follow up. We never fetch anything behind a login, and we rate-limit the tools to prevent abuse.",
+      "Files you attach to the contact or project forms (RFPs, briefs, process documents) are stored in a private bucket, renamed to random identifiers, used only to respond to you, and deleted when no longer required.",
     ],
   },
   {

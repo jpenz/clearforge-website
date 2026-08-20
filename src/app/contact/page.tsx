@@ -51,7 +51,7 @@ export default function ContactPage() {
 
       {/* Fallback form */}
       <PageFrame aria-label="Message form">
-        <SectionBand left="Prefer to write first?" right="4 fields · Fallback form" />
+        <SectionBand left="Prefer to write first?" right="Have a full brief or RFP? Use Start a project" />
         <div className="grid lg:grid-cols-[420px_1fr]">
           <div className="flex flex-col border-b border-hairline px-5 py-8 md:px-10 md:py-12 lg:border-r lg:border-b-0">
             <h2 className="font-display max-w-[14ch] text-[28px] leading-[1.2] font-medium md:text-[34px]">

@@ -25,8 +25,8 @@ export function ContactForm() {
           Message sent.
         </p>
         <p className="mt-2 max-w-[44ch] text-[14px] leading-relaxed text-ink/70">
-          Replies come from the founder. If it is time-sensitive, the calendar
-          above is faster.
+          You will hear from James within one business day. If it is
+          time-sensitive, the calendar above is faster.
         </p>
       </div>
     );
@@ -34,6 +34,14 @@ export function ContactForm() {
 
   return (
     <form action={formAction} className="bg-white">
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
       <div className="grid md:grid-cols-2">
         <div className="border-b border-hairline px-5 py-5 md:border-r md:px-8 md:py-6">
           <label className={labelClass} htmlFor="cf-name">

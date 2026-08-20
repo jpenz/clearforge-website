@@ -1,7 +1,10 @@
 "use server";
 
+import { headers } from "next/headers";
 import { saveLead, sendNotification } from "@/lib/leads";
+import { isRateLimited } from "@/lib/rate-limit";
 import { saveRfpFile } from "@/lib/supabase";
+import { validateUpload } from "@/lib/uploads";
 
 export interface FormState {
   status: "idle" | "success" | "error";
@@ -32,29 +35,26 @@ export async function sendContactMessage(
     return { status: "error", message: "That email does not look right." };
   }
 
-  const RFP_TYPES: Record<string, string> = {
-    "application/pdf": ".pdf",
-    "application/msword": ".doc",
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-      ".docx",
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
-      ".xlsx",
-    "application/vnd.openxmlformats-officedocument.presentationml.presentation":
-      ".pptx",
-  };
+  // Honeypot: bots fill the hidden field; humans never see it.
+  if (String(formData.get("website") ?? "").trim()) {
+    return { status: "success" };
+  }
+  if (isRateLimited(await headers(), "contact", 5, 60_000)) {
+    return { status: "error", message: "Too many messages. Try again shortly." };
+  }
+
   let rfpPath: string | null = null;
+  let rfpName = "";
   const rfp = formData.get("rfp");
   if (rfp instanceof File && rfp.size > 0) {
-    if (!RFP_TYPES[rfp.type]) {
-      return {
-        status: "error",
-        message: "Attach a PDF, Word, Excel, or PowerPoint file.",
-      };
-    }
-    if (rfp.size > 10 * 1024 * 1024) {
-      return { status: "error", message: "Files up to 10MB, please." };
-    }
-    rfpPath = await saveRfpFile(rfp.name, rfp.type, await rfp.arrayBuffer());
+    const checked = await validateUpload(rfp);
+    if (!checked.ok) return { status: "error", message: checked.reason };
+    rfpPath = await saveRfpFile(
+      checked.originalName,
+      checked.contentType,
+      checked.data,
+    );
+    rfpName = checked.originalName;
   }
 
   try {
@@ -68,7 +68,7 @@ export async function sendContactMessage(
     });
     await sendNotification(
       rfpPath ? "New contact message + RFP attached" : "New contact message",
-      `From: ${name} <${email}>\nCompany: ${company || "n/a"}${rfpPath ? `\nRFP in storage: rfps/${rfpPath}` : ""}\n\n${message}`,
+      `From: ${name} <${email}>\nCompany: ${company || "n/a"}${rfpPath ? `\nRFP "${rfpName}" in storage: rfps/${rfpPath}` : ""}\n\n${message}`,
     );
     return { status: "success" };
   } catch {
@@ -117,6 +117,84 @@ export async function unlockScoreReport(
     return {
       status: "error",
       message: "The report did not unlock. Retry in a moment.",
+    };
+  }
+}
+
+/** Three-step project-brief intake at /start. */
+export async function startProject(
+  _prev: FormState,
+  formData: FormData,
+): Promise<FormState> {
+  if (String(formData.get("website") ?? "").trim()) {
+    return { status: "success" };
+  }
+  if (isRateLimited(await headers(), "start-project", 5, 60_000)) {
+    return { status: "error", message: "Too many submissions. Try again shortly." };
+  }
+
+  const name = String(formData.get("name") ?? "").trim();
+  const email = String(formData.get("email") ?? "").trim();
+  const role = String(formData.get("role") ?? "").trim();
+  const company = String(formData.get("company") ?? "").trim();
+  const companyUrl = String(formData.get("companyUrl") ?? "").trim();
+  const needs = formData.getAll("needs").map(String).filter(Boolean);
+  const timeline = String(formData.get("timeline") ?? "").trim();
+  const success = String(formData.get("success") ?? "").trim();
+
+  if (!name || !email || !company) {
+    return {
+      status: "error",
+      message: "Name, work email, and company are required.",
+    };
+  }
+  if (!isValidEmail(email)) {
+    return { status: "error", message: "That email does not look right." };
+  }
+
+  let rfpPath: string | null = null;
+  let rfpName = "";
+  const rfp = formData.get("rfp");
+  if (rfp instanceof File && rfp.size > 0) {
+    const checked = await validateUpload(rfp);
+    if (!checked.ok) return { status: "error", message: checked.reason };
+    rfpPath = await saveRfpFile(
+      checked.originalName,
+      checked.contentType,
+      checked.data,
+    );
+    rfpName = checked.originalName;
+  }
+
+  const brief = [
+    `Needs: ${needs.join(", ") || "not specified"}`,
+    `Timeline: ${timeline || "not specified"}`,
+    companyUrl ? `Company URL: ${companyUrl}` : "",
+    role ? `Role: ${role}` : "",
+    "",
+    `What success looks like: ${success || "not specified"}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  try {
+    await saveLead({
+      type: "contact",
+      name,
+      email,
+      company,
+      message: brief,
+      payload: rfpPath ? { rfpPath } : undefined,
+    });
+    await sendNotification(
+      rfpPath ? "New project brief + file attached" : "New project brief",
+      `From: ${name} <${email}>\nCompany: ${company}${rfpPath ? `\nFile "${rfpName}" in storage: rfps/${rfpPath}` : ""}\n\n${brief}`,
+    );
+    return { status: "success" };
+  } catch {
+    return {
+      status: "error",
+      message: "The brief did not send. Retry, or book a call instead.",
     };
   }
 }
