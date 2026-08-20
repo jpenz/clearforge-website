@@ -25,12 +25,16 @@ export async function saveLead(lead: LeadRecord): Promise<void> {
   let storedId: string | null = null;
 
   if (lead.type === "contact") {
+    const rfpPath = lead.payload?.rfpPath;
+    const message = rfpPath
+      ? `${lead.message ?? ""}\n[RFP attached: rfps/${String(rfpPath)}]`
+      : (lead.message ?? "");
     storedId = await saveContactLead({
       name: lead.name,
       email: lead.email,
       company: lead.company ?? "",
-      message: lead.message ?? "",
-      source: "v12_contact",
+      message,
+      source: rfpPath ? "v12_contact_rfp" : "v12_contact",
     });
   } else {
     const payload = lead.payload ?? {};

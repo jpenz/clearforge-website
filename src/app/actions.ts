@@ -1,6 +1,7 @@
 "use server";
 
 import { saveLead, sendNotification } from "@/lib/leads";
+import { saveRfpFile } from "@/lib/supabase";
 
 export interface FormState {
   status: "idle" | "success" | "error";
@@ -31,11 +32,43 @@ export async function sendContactMessage(
     return { status: "error", message: "That email does not look right." };
   }
 
+  const RFP_TYPES: Record<string, string> = {
+    "application/pdf": ".pdf",
+    "application/msword": ".doc",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+      ".docx",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+      ".xlsx",
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+      ".pptx",
+  };
+  let rfpPath: string | null = null;
+  const rfp = formData.get("rfp");
+  if (rfp instanceof File && rfp.size > 0) {
+    if (!RFP_TYPES[rfp.type]) {
+      return {
+        status: "error",
+        message: "Attach a PDF, Word, Excel, or PowerPoint file.",
+      };
+    }
+    if (rfp.size > 10 * 1024 * 1024) {
+      return { status: "error", message: "Files up to 10MB, please." };
+    }
+    rfpPath = await saveRfpFile(rfp.name, rfp.type, await rfp.arrayBuffer());
+  }
+
   try {
-    await saveLead({ type: "contact", name, email, company, message });
+    await saveLead({
+      type: "contact",
+      name,
+      email,
+      company,
+      message,
+      payload: rfpPath ? { rfpPath } : undefined,
+    });
     await sendNotification(
-      "New contact message",
-      `From: ${name} <${email}>\nCompany: ${company || "n/a"}\n\n${message}`,
+      rfpPath ? "New contact message + RFP attached" : "New contact message",
+      `From: ${name} <${email}>\nCompany: ${company || "n/a"}${rfpPath ? `\nRFP in storage: rfps/${rfpPath}` : ""}\n\n${message}`,
     );
     return { status: "success" };
   } catch {

@@ -79,7 +79,7 @@ export function ContactForm() {
       </div>
       <div className="border-b border-hairline px-5 py-5 md:px-8 md:py-6">
         <label className={labelClass} htmlFor="cf-message">
-          Message
+          What do you need?
         </label>
         <textarea
           id="cf-message"
@@ -89,6 +89,21 @@ export function ContactForm() {
           placeholder="Which workflow should we look at?"
           className={`${inputClass} resize-none`}
         />
+          <div className="mt-5">
+            <label className={labelClass} htmlFor="cf-rfp">
+              Attach an RFP or brief{" "}
+              <span className="normal-case text-ink/45">
+                (optional · PDF, Word, Excel, PowerPoint · up to 10MB)
+              </span>
+            </label>
+            <input
+              id="cf-rfp"
+              name="rfp"
+              type="file"
+              accept=".pdf,.doc,.docx,.xlsx,.pptx"
+              className="w-full cursor-pointer border border-hairline-strong bg-white px-3 py-2 text-[13px] text-ink/70 file:mr-3 file:cursor-pointer file:border-0 file:bg-cobalt file:px-3 file:py-1.5 file:text-[12px] file:font-semibold file:text-white"
+            />
+          </div>
       </div>
       <div className="flex flex-col gap-4 px-5 py-5 md:flex-row md:items-center md:justify-between md:px-8">
         {state.status === "error" ? (

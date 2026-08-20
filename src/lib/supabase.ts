@@ -156,3 +156,22 @@ export async function saveDiscoverLead(lead: {
 
   return data?.id ?? null;
 }
+
+/**
+ * Store an uploaded RFP/brief in the private 'rfps' bucket.
+ * Returns the storage path, or null when storage is unavailable
+ * (keyless preview/local) so callers degrade gracefully.
+ */
+export async function saveRfpFile(
+  filename: string,
+  contentType: string,
+  data: ArrayBuffer,
+): Promise<string | null> {
+  if (!supabaseAdmin) return null;
+  const safe = filename.replace(/[^a-zA-Z0-9._-]/g, "_").slice(-80);
+  const path = `${Date.now()}-${safe}`;
+  const { error } = await supabaseAdmin.storage
+    .from("rfps")
+    .upload(path, data, { contentType, upsert: false });
+  return error ? null : path;
+}
