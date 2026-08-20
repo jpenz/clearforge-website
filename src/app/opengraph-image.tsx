@@ -102,7 +102,7 @@ export default async function OpenGraphImage() {
             }}
           >
             <div style={{ fontSize: 21, color: "rgba(1,11,19,0.7)" }}>
-              Forge Diagnostic · $15K fixed price · 2 weeks
+              Forge Diagnostic · Fixed fee · 2 weeks
             </div>
             <div style={{ fontSize: 21, color: "#2454ff" }}>clearforge.ai</div>
           </div>

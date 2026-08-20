@@ -13,9 +13,9 @@ import { PRICING_FAQS } from "@/data/faqs";
 import { faqJsonLd, JsonLdScriptProps, pricingJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Pricing",
+  title: "Engagements",
   description:
-    "Published prices: Forge Diagnostic $15K fixed, Forge Sprint from $75K, Forge Scale $5K to $15K per month, Forge Run $2.5K to $7.5K per system per month.",
+    "How ClearForge engagements work: a fixed-fee two-week diagnostic first, then a build sprint scoped before you commit, then adoption and managed operations retainers.",
 };
 
 const ROW_GRID =
@@ -29,25 +29,26 @@ export default function PricingPage() {
       {/* Intro + why public */}
       <PageFrame aria-label="Pricing introduction">
         <SectionBand
-          left="Pricing"
-          right="Every price on this page is published"
+          left="Engagements"
+          right="Scoped before you commit"
         />
-        <div className="grid lg:grid-cols-[1fr_420px]">
-          <div className="border-hairline px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14 lg:border-r">
+        <div className="cf-dark-band relative overflow-hidden grid lg:grid-cols-[1fr_420px]">
+          <div aria-hidden="true" className="cf-aurora-b" />
+          <div className="relative border-hairline-ghost px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14 lg:border-r">
             <h1 className="font-display max-w-[19ch] text-[36px] leading-[1.1] font-medium tracking-[-0.01em] md:text-[56px] md:leading-[1.08]">
-              The first step costs{" "}
-              <span className="tnum text-cobalt italic">$15K.</span> Everything
-              after it is on this page.
+              The first step is a{" "}
+              <span className="text-cobalt-bright italic">fixed-fee diagnostic.</span>{" "}
+              Everything after it is scoped there.
             </h1>
           </div>
-          <div className="flex flex-col justify-end border-t border-hairline px-5 py-8 md:px-10 md:py-14 lg:border-t-0">
-            <p className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">
-              Why our pricing is public
+          <div className="relative flex flex-col justify-end border-t border-hairline-ghost px-5 py-8 md:px-10 md:py-14 lg:border-t-0">
+            <p className="text-[11px] tracking-[0.18em] text-ghost/55 uppercase">
+              How pricing works
             </p>
-            <p className="mt-4 text-[16px] leading-relaxed text-ink/80">
-              Buyers should not need a sales call to learn what getting started
-              costs. The numbers are below. The call is for scoping, not for
-              discovering the price.
+            <p className="mt-4 text-[16px] leading-relaxed text-ghost/80">
+              The diagnostic is a fixed fee, agreed before we start. It ends
+              with a scoped, priced plan for the build. Nothing after it is
+              open-ended.
             </p>
           </div>
         </div>
@@ -55,7 +56,7 @@ export default function PricingPage() {
 
       {/* The tiers ledger */}
       <PageFrame aria-label="The tiers">
-        <SectionBand left="The tiers" right="5 engagements, published prices" />
+        <SectionBand left="The engagements" right="Six ways in" />
         <div
           className={`hidden border-b border-hairline px-10 py-3 lg:grid ${ROW_GRID}`}
           aria-hidden="true"
@@ -140,7 +141,7 @@ export default function PricingPage() {
       <PageFrame aria-label="The first two weeks">
         <SectionBand
           left="The first two weeks"
-          right="Forge Diagnostic · $15K fixed"
+          right="Forge Diagnostic · fixed fee"
         />
         <div className="grid lg:grid-cols-[1fr_560px]">
           <div className="flex flex-col border-b border-hairline px-5 py-10 md:px-10 md:py-14 lg:border-r lg:border-b-0">

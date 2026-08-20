@@ -32,14 +32,14 @@ export function faqJsonLd(faqs: Faq[]) {
   };
 }
 
-/** Offer/PriceSpecification for the published tiers, server-rendered. */
+/** OfferCatalog of named engagements (prices unpublished by owner decision 2026-08-20). */
 export function pricingJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "OfferCatalog",
     name: `${SITE_NAME} published pricing`,
     url: `${SITE_URL}/pricing`,
-    itemListElement: PRICING_TIERS.filter((tier) => tier.minPrice != null).map(
+    itemListElement: PRICING_TIERS.map(
       (tier) => ({
         "@type": "Offer",
         name: tier.name,

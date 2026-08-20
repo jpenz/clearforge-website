@@ -244,7 +244,7 @@ export function ForgeIntelligence() {
           {status === "done" && (
             <div className="flex items-center justify-between gap-6 px-4 py-5 md:px-8">
               <p className="text-[13px] text-ink/70">
-                Map complete. The $15K Diagnostic prices the next step.
+                Map complete. The fixed-fee Diagnostic prices the next step.
               </p>
               <BookCallButton size="md" className="shrink-0" />
             </div>

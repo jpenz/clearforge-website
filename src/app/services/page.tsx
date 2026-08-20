@@ -21,18 +21,23 @@ export default function ServicesPage() {
           left="Services"
           right="The journey: Diagnose, Build, Adopt, Run"
         />
-        <div className="grid lg:grid-cols-[1fr_420px]">
-          <div className="border-hairline px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14 lg:border-r">
+        <div className="cf-dark-band relative overflow-hidden grid lg:grid-cols-[1fr_420px]">
+          <div aria-hidden="true" className="cf-aurora-b" />
+          <div className="relative border-hairline-ghost px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14 lg:border-r">
             <h1 className="font-display max-w-[18ch] text-[38px] leading-[1.08] font-medium tracking-[-0.01em] md:text-[60px] md:leading-[1.05]">
               One catalog. Four stages.{" "}
-              <em className="text-cobalt italic">Every price published.</em>
+              <em className="text-cobalt-bright italic">
+                Scoped before you commit.
+              </em>
             </h1>
           </div>
-          <div className="flex flex-col border-t border-hairline lg:border-t-0">
-            <div className="flex grow items-center border-b border-hairline px-5 py-8 md:px-10 md:py-10">
-              <p className="tnum text-[16px] leading-relaxed text-ink/80">
+          <div className="relative flex flex-col border-t border-hairline-ghost lg:border-t-0">
+            <div className="flex grow items-center border-b border-hairline-ghost px-5 py-8 md:px-10 md:py-10">
+              <p className="text-[16px] leading-relaxed text-ghost/80">
                 Every engagement starts with a{" "}
-                <span className="font-semibold text-ink">$15K</span> diagnostic
+                <span className="font-semibold text-ghost">
+                  fixed-fee diagnostic
+                </span>{" "}
                 and ends with a system your team uses every week.
               </p>
             </div>
@@ -45,7 +50,7 @@ export default function ServicesPage() {
 
       {/* The journey */}
       <PageFrame aria-label="The journey">
-        <SectionBand left="The journey" right="4 stages · Start at $15K" />
+        <SectionBand left="The journey" right="4 stages · Fixed-fee start" />
         {SERVICE_STAGES.map((stage, stageIndex) => (
           <div
             key={stage.number}

@@ -17,14 +17,18 @@ export default function ContactPage() {
       {/* Intro band + title */}
       <PageFrame aria-label="Book an intro">
         <SectionBand left="Book" right="30 minutes · No preparation needed" />
-        <div className="px-5 pt-10 pb-10 md:px-10 md:pt-16 md:pb-14">
-          <h1 className="font-display text-[38px] leading-[1.1] font-medium tracking-[-0.01em] md:text-[56px] md:leading-[1.08]">
-            Book a <em className="tnum text-cobalt italic">30-min intro.</em>
-          </h1>
-          <p className="mt-5 max-w-[62ch] text-[16px] leading-relaxed text-ink/80">
-            Pick a time. We will look at one workflow together and tell you
-            what we would build.
-          </p>
+        <div className="cf-dark-band relative overflow-hidden">
+          <div aria-hidden="true" className="cf-aurora-b" />
+          <div className="relative px-5 pt-10 pb-10 md:px-10 md:pt-16 md:pb-14">
+            <h1 className="font-display text-[38px] leading-[1.1] font-medium tracking-[-0.01em] md:text-[56px] md:leading-[1.08]">
+              Book a{" "}
+              <em className="tnum text-cobalt-bright italic">30-min intro.</em>
+            </h1>
+            <p className="mt-5 max-w-[62ch] text-[16px] leading-relaxed text-ghost/80">
+              Pick a time. We will look at one workflow together and tell you
+              what we would build.
+            </p>
+          </div>
         </div>
       </PageFrame>
 
@@ -34,10 +38,10 @@ export default function ContactPage() {
           <div className="border border-ink bg-white">
             <div className="flex items-center justify-between border-b border-ink px-4 py-3 md:px-6">
               <span className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">
-                BookingInline · Embedded calendar · light theme
+                Pick a time · MS Teams · 30 minutes
               </span>
               <span className="text-[11px] tracking-[0.14em] text-ink/60 uppercase">
-                Month view
+                Live availability
               </span>
             </div>
             <BookingInline />
@@ -71,7 +75,7 @@ export default function ContactPage() {
         <SectionBand left="Next step" right="Fixed price · 2 weeks" />
         <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
           <h2 className="font-display text-[30px] leading-[1.1] font-medium md:text-[40px]">
-            Start with the <span className="tnum">$15K</span>{" "}
+            Start with the fixed-fee{" "}
             <em className="text-cobalt italic">Diagnostic.</em>
           </h2>
           <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />

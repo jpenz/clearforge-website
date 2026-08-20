@@ -160,8 +160,20 @@ cal-modal-box {
 
 /* Cinematic dark band: deep ink base; aurora blobs supply the light. */
 .cf-dark-band {
-  background: #04101c;
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(36, 84, 255, 0.08) 0%, transparent 140px),
+    #030b13;
   color: var(--color-ghost);
+}
+/* Film grain: inline SVG turbulence, the HDR texture pass. */
+.cf-dark-band::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* Aurora blobs: pre-blurred radial gradients, transform-only animation
@@ -178,12 +190,18 @@ cal-modal-box {
   height: 900px;
   left: -220px;
   top: -320px;
-  background: radial-gradient(
-    circle,
-    rgba(36, 84, 255, 0.32) 0%,
-    rgba(36, 84, 255, 0.1) 42%,
-    transparent 68%
-  );
+  background:
+    radial-gradient(
+      circle at 42% 38%,
+      rgba(122, 151, 255, 0.28) 0%,
+      transparent 18%
+    ),
+    radial-gradient(
+      circle,
+      rgba(36, 84, 255, 0.38) 0%,
+      rgba(36, 84, 255, 0.12) 42%,
+      transparent 68%
+    );
   animation: cf-drift-a 26s ease-in-out infinite alternate;
 }
 .cf-aurora-b {

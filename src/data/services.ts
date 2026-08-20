@@ -25,15 +25,15 @@ export const SERVICE_STAGES: ServiceStage[] = [
         name: "Forge Diagnostic",
         description:
           "Two weeks to map the workflow, size the opportunity, and prove the system is viable before you build.",
-        meta: "Fixed price · 2 weeks",
-        price: "$15K",
+        meta: "Fixed fee · 2 weeks",
+        price: "Agreed up front",
       },
       {
         name: "Eval and Reliability Audit",
         description:
           "For AI systems your company already built. Deliverables: an eval harness, reliability gates, a fix plan.",
-        meta: "Fixed price · 2 weeks",
-        price: "$15K",
+        meta: "Fixed fee · 2 weeks",
+        price: "Agreed up front",
       },
     ],
   },
@@ -46,8 +46,8 @@ export const SERVICE_STAGES: ServiceStage[] = [
         name: "Forge Sprint",
         description:
           "10 to 14 weeks from kickoff to a live production system. Every Sprint ships with an eval harness and reliability gates.",
-        meta: "Typical $75K to $200K+",
-        price: "from $75K",
+        meta: "Agreed before any build",
+        price: "Scoped in the Diagnostic",
       },
     ],
   },
@@ -62,14 +62,14 @@ export const SERVICE_STAGES: ServiceStage[] = [
         description:
           "The Adoption Mile: a named operator, a weekly working cadence, and a live adoption scoreboard.",
         meta: "Per month",
-        price: "$5K to $15K",
+        price: "Scoped to the system",
       },
       {
         name: "Fractional Chief AI Officer",
         description:
           "The top tier of Forge Scale. Standing AI leadership across the whole company.",
         meta: "Top tier · Per month",
-        price: "from $15K",
+        price: "Scoped to the engagement",
       },
     ],
   },
@@ -83,7 +83,7 @@ export const SERVICE_STAGES: ServiceStage[] = [
         description:
           "Monitoring, production evals, SLAs, and model upgrades for every system we built.",
         meta: "Per system · Per month",
-        price: "$2.5K to $7.5K",
+        price: "Scoped to the system",
       },
     ],
   },

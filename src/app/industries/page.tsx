@@ -60,10 +60,10 @@ export default function IndustriesIndexPage() {
       </PageFrame>
 
       <PageFrame bottomRule={false} aria-label="Next step">
-        <SectionBand left="Next step" right="Fixed price · 2 weeks" />
+        <SectionBand left="Next step" right="Fixed fee · 2 weeks" />
         <div className="flex flex-col gap-5 px-5 py-10 md:flex-row md:items-center md:justify-between md:px-10">
           <p className="max-w-xl text-[15px] leading-relaxed text-ink/70">
-            Not sure which pattern is yours? The $15K Diagnostic maps your
+            Not sure which pattern is yours? The fixed-fee Diagnostic maps your
             workflow in two weeks and prices the build before you commit.
           </p>
           <BookCallButton size="lg" />

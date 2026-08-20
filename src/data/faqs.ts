@@ -8,17 +8,17 @@ export const HOME_FAQS: Faq[] = [
   {
     question: "What does it cost to start?",
     answer:
-      "The Forge Diagnostic is $15K, fixed price. It runs 2 weeks and it is where every engagement starts.",
+      "Every engagement starts with the Forge Diagnostic: two weeks, one workflow, a fixed fee agreed up front.",
   },
   {
     question: "How long until a live system?",
     answer:
-      "The Forge Sprint takes 10 to 14 weeks from kickoff to a live production system. It is priced at $75K to $200K.",
+      "The Forge Sprint takes 10 to 14 weeks from kickoff to a live production system. It is scoped in the Diagnostic and agreed before any build.",
   },
   {
     question: "What is the Adoption Mile?",
     answer:
-      "Forge Scale, $5K to $15K per month. You get a named operator, a weekly working cadence, and a live adoption scoreboard. The bar is 70 percent weekly-active adoption by day 90.",
+      "Forge Scale, a monthly retainer scoped to the system. You get a named operator, a weekly working cadence, and a live adoption scoreboard. The bar is 70 percent weekly-active adoption by day 90.",
   },
   {
     question: "Who is it for?",
@@ -37,26 +37,26 @@ export const PRICING_FAQS: Faq[] = [
   {
     question: "What does it cost to start?",
     answer:
-      "The Forge Diagnostic is $15K, fixed price. It runs 2 weeks and it is where every engagement starts.",
+      "Every engagement starts with the Forge Diagnostic: two weeks, one workflow, a fixed fee agreed up front.",
   },
   {
     question: "How long until a live system?",
     answer:
-      "The Forge Sprint runs 10 to 14 weeks from kickoff to a live production system. It is priced from $75K, with a typical range of $75K to $200K+.",
+      "The Forge Sprint runs 10 to 14 weeks from kickoff to a live production system. Pricing is scoped in the Diagnostic and agreed before any build.",
   },
   {
     question: "What is the Adoption Mile?",
     answer:
-      "Forge Scale, $5K to $15K per month. A named operator, a weekly working cadence, and a live adoption scoreboard. The bar is 70 percent weekly-active adoption by day 90.",
+      "Forge Scale, a monthly retainer scoped to the system. A named operator, a weekly working cadence, and a live adoption scoreboard. The bar is 70 percent weekly-active adoption by day 90.",
   },
   {
     question: "What does Forge Run cover?",
     answer:
-      "Managed agent operations after a build: monitoring, production evals, SLAs, and model upgrades. It is priced at $2.5K to $7.5K per system per month.",
+      "Managed agent operations after a build: monitoring, production evals, SLAs, and model upgrades. It runs as a monthly operations retainer, scoped per system.",
   },
   {
-    question: "Is pricing really public?",
+    question: "How is pricing set?",
     answer:
-      "Yes. Every tier on this page carries its published price. The one exception is PE and multi-company platform work, which is scoped with the sponsor.",
+      "The Diagnostic is a fixed fee, agreed up front. Everything after it is scoped in the Diagnostic and agreed before any build. PE and multi-company platform work is scoped with the sponsor.",
   },
 ];

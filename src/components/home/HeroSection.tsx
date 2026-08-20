@@ -39,10 +39,11 @@ export function HeroSection() {
               >
                 <p className="max-w-[44ch] text-[16px] leading-snug text-ghost/80">
                   Engagements start with a{" "}
-                  <span className="tnum font-semibold text-ghost">$15K</span>{" "}
-                  fixed-price diagnostic.{" "}
+                  <span className="font-semibold text-ghost">
+                    fixed-fee diagnostic.
+                  </span>{" "}
                   <span className="tnum font-semibold text-ghost">
-                    2 weeks.
+                    Two weeks, one workflow.
                   </span>
                 </p>
               </div>

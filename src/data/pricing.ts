@@ -16,8 +16,8 @@ export const PRICING_TIERS: PricingTier[] = [
     index: "01",
     name: "Forge Diagnostic",
     subtitle: "Where every engagement starts.",
-    term: "Fixed price · 2 weeks",
-    price: "$15K",
+    term: "Fixed fee · 2 weeks",
+    price: "Fixed fee",
     minPrice: 15000,
     maxPrice: 15000,
   },
@@ -26,8 +26,8 @@ export const PRICING_TIERS: PricingTier[] = [
     name: "Eval and Reliability Audit",
     subtitle:
       "For AI systems you already built. An eval harness, reliability gates, a fix plan.",
-    term: "Fixed price · 2 weeks",
-    price: "$15K",
+    term: "Fixed fee · 2 weeks",
+    price: "Fixed fee",
     minPrice: 15000,
     maxPrice: 15000,
   },
@@ -37,8 +37,7 @@ export const PRICING_TIERS: PricingTier[] = [
     subtitle:
       "A live production system. Ships with an eval harness and reliability gates as a named deliverable.",
     term: "10 to 14 weeks",
-    price: "from $75K",
-    priceDetail: "typical $75K to $200K+",
+    price: "Scoped in the Diagnostic",
     minPrice: 75000,
   },
   {
@@ -47,9 +46,8 @@ export const PRICING_TIERS: PricingTier[] = [
     subtitle:
       "The Adoption Mile. The top tier is a Fractional Chief AI Officer engagement, from $15K per month.",
     term: "Monthly",
-    price: "$5K to $15K",
-    priceDetail: "per month",
-    minPrice: 5000,
+    price: "Monthly retainer",
+        minPrice: 5000,
     maxPrice: 15000,
   },
   {
@@ -58,7 +56,7 @@ export const PRICING_TIERS: PricingTier[] = [
     subtitle:
       "Managed agent operations after a build. Monitoring, production evals, SLAs, model upgrades.",
     term: "Per system · Monthly",
-    price: "$2.5K to $7.5K",
+    price: "Monthly, per system",
     priceDetail: "per system per month",
     minPrice: 2500,
     maxPrice: 7500,

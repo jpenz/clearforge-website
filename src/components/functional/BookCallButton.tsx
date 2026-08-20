@@ -14,7 +14,7 @@ interface BookCallButtonProps {
 }
 
 const variantClasses: Record<Variant, string> = {
-  solid: "bg-cobalt text-white hover:bg-cobalt-press",
+  solid: "bg-cobalt text-white transition-shadow hover:bg-cobalt-press hover:shadow-[0_6px_28px_rgba(36,84,255,0.45)]",
   outline: "border border-hairline-strong text-ink hover:border-ink",
   link: "text-cobalt underline underline-offset-4 hover:text-cobalt-press",
   quiet: "underline underline-offset-4 hover:text-cobalt",

@@ -19,12 +19,12 @@ const NEXT_STEPS = [
   {
     number: "02",
     title: "We scope it.",
-    text: "If the map shows a build, the $15K Diagnostic prices the next step.",
+    text: "If the map shows a build, the fixed-fee Diagnostic prices the next step.",
   },
   {
     number: "03",
     title: "You decide.",
-    text: "Every price after it is published.",
+    text: "Every price after it is scoped in the Diagnostic and agreed before any build.",
   },
 ];
 
@@ -58,7 +58,7 @@ export default function DiscoverPage() {
 
       {/* What happens next */}
       <PageFrame aria-label="What happens next">
-        <SectionBand left="What happens next" right="3 steps · Prices published" />
+        <SectionBand left="What happens next" right="3 steps · Priced before any build" />
         <div className="grid divide-y divide-hairline md:grid-cols-3 md:divide-x md:divide-y-0">
           {NEXT_STEPS.map((step) => (
             <div key={step.number} className="px-5 py-8 md:px-10 md:py-10">
@@ -78,10 +78,10 @@ export default function DiscoverPage() {
 
       {/* Closing booking strip */}
       <PageFrame bottomRule={false} aria-label="Next step">
-        <SectionBand left="Next step" right="Fixed price · 2 weeks" />
+        <SectionBand left="Next step" right="Fixed fee · 2 weeks" />
         <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
           <h2 className="font-display text-[30px] leading-[1.1] font-medium md:text-[40px]">
-            Start with the <span className="tnum">$15K</span>{" "}
+            Start with the fixed-fee{" "}
             <em className="text-cobalt italic">Diagnostic.</em>
           </h2>
           <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />

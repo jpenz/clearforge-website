@@ -31,12 +31,12 @@ const HOW_WE_WORK = [
   {
     step: "01 · Diagnose",
     sentence: "Diagnose before building.",
-    terms: "$15K, fixed, 2 weeks.",
+    terms: "Fixed fee, 2 weeks.",
   },
   {
     step: "02 · Build",
     sentence: "Build into production.",
-    terms: "Sprints from $75K.",
+    terms: "Sprints scoped in the Diagnostic.",
   },
   {
     step: "03 · Adopt",
@@ -67,8 +67,8 @@ export default function AboutPage() {
                 and stay through adoption until the team actually uses it.
               </p>
               <p className="text-[16px] leading-relaxed text-ink/80">
-                Prices are published. The deliverable is the working system,
-                not a report.
+                Pricing is scoped in the Diagnostic and agreed before any
+                build. The deliverable is the working system, not a report.
               </p>
             </div>
             <a
@@ -174,7 +174,7 @@ export default function AboutPage() {
 
       {/* How we work */}
       <PageFrame aria-label="How we work">
-        <SectionBand left="How we work" right="3 steps · Published prices" />
+        <SectionBand left="How we work" right="3 steps · Priced before any build" />
         <div className="grid divide-y divide-hairline md:grid-cols-3 md:divide-x md:divide-y-0">
           {HOW_WE_WORK.map((item) => (
             <div key={item.step} className="px-5 py-8 md:px-10 md:py-12">
@@ -196,10 +196,10 @@ export default function AboutPage() {
 
       {/* Closing booking strip */}
       <PageFrame bottomRule={false} aria-label="Next step">
-        <SectionBand left="Next step" right="Fixed price · 2 weeks" />
+        <SectionBand left="Next step" right="Fixed fee · 2 weeks" />
         <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
           <h2 className="font-display text-[30px] leading-[1.1] font-medium md:text-[40px]">
-            Start with the <span className="tnum">$15K</span>{" "}
+            Start with the fixed-fee{" "}
             <em className="text-cobalt italic">Diagnostic.</em>
           </h2>
           <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />

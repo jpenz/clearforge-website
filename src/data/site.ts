@@ -22,7 +22,7 @@ export interface NavItem {
 export const NAV_ITEMS: NavItem[] = [
   { label: "Services", href: "/services" },
   { label: "Proof", href: "/proof" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "Engagements", href: "/pricing" },
   { label: "Insights", href: "/insights" },
   { label: "About", href: "/about" },
 ];
@@ -57,7 +57,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     title: "Firm",
     items: [
       { label: "About", href: "/about" },
-      { label: "Pricing", href: "/pricing" },
+      { label: "Engagements", href: "/pricing" },
       { label: "Contact", href: "/contact" },
     ],
   },

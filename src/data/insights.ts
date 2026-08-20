@@ -31,18 +31,18 @@ export const ARTICLES: Article[] = [
   {
     slug: "what-ai-consulting-costs",
     topic: "Pricing",
-    title: "What AI consulting",
-    titleEmphasis: "actually costs.",
+    title: "How ClearForge",
+    titleEmphasis: "prices the work.",
     standfirst:
-      "Our prices are published. This is what they buy and what changes them.",
+      "No flat price list. A fixed-fee diagnostic first, and every build priced before it starts.",
     summary:
-      "Our own published numbers, explained. Diagnostic at $15K, Sprints from $75K, and what changes the price.",
+      "How our pricing works: a fixed-fee two-week diagnostic, a Sprint scoped there, and monthly retainers scoped to the system.",
     featured: true,
     blocks: [
       {
         type: "lead",
         content: [
-          "Buyers should not need a sales call to learn what getting started costs. So we publish our prices. This article walks through each tier, what it includes, and the factors that move an engagement up or down the range.",
+          "Buyers should not need a sales call to learn how an engagement is priced. So we publish the structure. This article walks through each tier, what it includes, and how its price is set.",
         ],
       },
       {
@@ -51,62 +51,53 @@ export const ARTICLES: Article[] = [
           "The entry point is fixed. The ",
           { text: "Forge Diagnostic", href: "/services" },
           " is ",
-          { text: "$15K,", bold: true, tnum: true },
-          " fixed price, and it takes 2 weeks. If your company already built an AI system, the Eval and Reliability Audit is the same shape: ",
-          { text: "$15K", bold: true, tnum: true },
-          " fixed, 2 weeks, applied to the system you have.",
+          { text: "a fixed fee, agreed up front,", bold: true },
+          " and it takes 2 weeks. If your company already built an AI system, the Eval and Reliability Audit is the same shape: a fixed fee, 2 weeks, applied to the system you have.",
         ],
       },
       {
         type: "paragraph",
         content: [
-          "Build work is where ranges appear. A Forge Sprint starts from ",
-          { text: "$75K.", bold: true, tnum: true },
-          " The typical range runs ",
-          { text: "$75K to $200K+.", tnum: true },
+          "Build work is scoped, not listed. A Forge Sprint is ",
+          { text: "scoped in the Diagnostic and agreed before any build.", bold: true },
           " Every Sprint ships with an eval harness and reliability gates as a named deliverable, not an add-on.",
         ],
       },
-      { type: "heading", text: "The published tiers" },
+      { type: "heading", text: "The tiers" },
       {
         type: "paragraph",
         content: [
-          "Five tiers, five prices. Diagnose and audit at fixed prices. Build in a range. Adopt and run priced monthly. The full ledger:",
+          "Five tiers. Diagnose and audit at a fixed fee. Build scoped in the Diagnostic. Adopt and run as monthly retainers. The full ledger:",
         ],
       },
       {
         type: "table",
-        caption: "Published pricing tiers with price and duration",
-        headers: ["Tier", "Price", "Duration"],
+        caption: "The tiers, how each is priced, and duration",
+        headers: ["Tier", "How it is priced", "Duration"],
         rows: [
-          ["Forge Diagnostic", "$15K fixed", "2 weeks"],
-          ["Eval and Reliability Audit", "$15K fixed", "2 weeks"],
-          ["Forge Sprint", "From $75K, typical $75K to $200K+", "10 to 14 weeks"],
-          ["Forge Scale", "$5K to $15K per month", "Ongoing"],
-          ["Forge Run", "$2.5K to $7.5K per system per month", "Ongoing"],
+          ["Forge Diagnostic", "Fixed fee, agreed up front", "2 weeks"],
+          ["Eval and Reliability Audit", "Fixed fee, agreed up front", "2 weeks"],
+          ["Forge Sprint", "Scoped in the Diagnostic", "10 to 14 weeks"],
+          ["Forge Scale", "Monthly retainer, scoped to the system", "Ongoing"],
+          ["Forge Run", "Monthly retainer, scoped per system", "Ongoing"],
         ],
       },
       {
         type: "paragraph",
         content: [
-          "Forge Scale runs the Adoption Mile: a named operator, a weekly working cadence, and a live adoption scoreboard, at ",
-          { text: "$5K to $15K per month.", tnum: true },
-          " The top tier is a Fractional Chief AI Officer engagement, from ",
-          { text: "$15K per month.", bold: true, tnum: true },
-          " After a build, Forge Run keeps the system in production for ",
-          { text: "$2.5K to $7.5K per system per month.", tnum: true },
+          "Forge Scale runs the Adoption Mile: a named operator, a weekly working cadence, and a live adoption scoreboard, on a monthly retainer scoped to the system. The top tier is a Fractional Chief AI Officer engagement. After a build, Forge Run keeps the system in production on a monthly operations retainer, scoped per system.",
         ],
       },
       {
         type: "pullquote",
-        text: "A price you can read is",
-        emphasis: "a decision you can make.",
+        text: "Price follows scope,",
+        emphasis: "and scope is set in the Diagnostic.",
       },
       { type: "heading", text: "What changes the price" },
       {
         type: "paragraph",
         content: [
-          "The Sprint range is wide because scope is wide. What stays constant is the deliverable. Every Sprint ships with the same named parts:",
+          "Sprint scope varies because workflows vary. What stays constant is the deliverable. Every Sprint ships with the same named parts:",
         ],
       },
       {
@@ -122,13 +113,19 @@ export const ARTICLES: Article[] = [
         content: [
           "The path from kickoff to a live production system runs 10 to 14 weeks. The full breakdown of each tier lives on ",
           { text: "the pricing page", href: "/pricing" },
-          " and is published in plain HTML, readable without a call.",
+          ".",
         ],
       },
       {
         type: "paragraph",
         content: [
-          "One number sits behind all of these prices. We build to a 70 percent weekly-active adoption bar by day 90. That is the standard the pricing pays for.",
+          "One number sits behind every tier. We build to a 70 percent weekly-active adoption bar by day 90. That is the standard the pricing pays for.",
+        ],
+      },
+      {
+        type: "paragraph",
+        content: [
+          "The starting point is always the same: two weeks, one workflow, a fixed fee agreed up front. Everything after it is scoped in the Diagnostic and agreed before any build.",
         ],
       },
     ],
@@ -159,9 +156,7 @@ export const ARTICLES: Article[] = [
       {
         type: "paragraph",
         content: [
-          "Adoption is run as its own phase, priced at ",
-          { text: "$5K to $15K per month", tnum: true },
-          " inside Forge Scale. It has three named parts:",
+          "Adoption is run as its own phase inside Forge Scale, on a monthly retainer scoped to the system. It has three named parts:",
         ],
       },
       {
@@ -188,7 +183,7 @@ export const ARTICLES: Article[] = [
         type: "paragraph",
         content: [
           "The bar also shapes what gets built. A system aimed at 70 percent weekly-active use has to fit the workflow the team already runs. That constraint is set during the ",
-          { text: "$15K Forge Diagnostic", href: "/pricing" },
+          { text: "Forge Diagnostic", href: "/pricing" },
           ", before a single build week is priced.",
         ],
       },
@@ -236,8 +231,8 @@ export const ARTICLES: Article[] = [
           "For AI systems your company already built, the ",
           { text: "Eval and Reliability Audit", href: "/services" },
           " applies the same machinery retroactively: ",
-          { text: "$15K", bold: true, tnum: true },
-          " fixed price, 2 weeks. You get an eval harness, reliability gates, and a fix plan for the system you have.",
+          { text: "a fixed fee,", bold: true },
+          " 2 weeks. You get an eval harness, reliability gates, and a fix plan for the system you have.",
         ],
       },
     ],
@@ -346,8 +341,7 @@ export const ARTICLES: Article[] = [
         content: [
           "Production day is the start of the Adoption Mile: a named operator, a weekly working cadence, and a live adoption scoreboard, built to the 70 percent weekly-active bar by day 90. After that, ",
           { text: "Forge Run", href: "/services" },
-          " keeps the system operating for ",
-          { text: "$2.5K to $7.5K per system per month.", tnum: true },
+          " keeps the system operating on a monthly retainer, scoped to the system.",
         ],
       },
     ],
@@ -357,15 +351,15 @@ export const ARTICLES: Article[] = [
     topic: "Diagnostics",
     title: "Two weeks, one workflow,",
     titleEmphasis: "a build decision.",
-    standfirst: "How the $15K Forge Diagnostic works.",
-    summary: "How the $15K Forge Diagnostic works.",
+    standfirst: "How the fixed-fee Forge Diagnostic works.",
+    summary: "How the fixed-fee Forge Diagnostic works.",
     blocks: [
       {
         type: "lead",
         content: [
-          "Every ClearForge engagement starts the same way: a Forge Diagnostic at ",
-          { text: "$15K,", bold: true, tnum: true },
-          " fixed price, 2 weeks. This article walks through what the two weeks contain and what you hold at the end.",
+          "Every ClearForge engagement starts the same way: a Forge Diagnostic, ",
+          { text: "a fixed fee agreed up front,", bold: true },
+          " 2 weeks. This article walks through what the two weeks contain and what you hold at the end.",
         ],
       },
       { type: "heading", text: "The two weeks" },
@@ -396,9 +390,7 @@ export const ARTICLES: Article[] = [
         content: [
           "A build decision with a price on it. If you build, the ",
           { text: "Forge Sprint", href: "/pricing" },
-          " is priced from ",
-          { text: "$75K", bold: true, tnum: true },
-          " and runs 10 to 14 weeks to a live production system. If the answer is stop, you spent $15K to avoid a build that would not have worked. Both outcomes are the product.",
+          " is priced there, before any build, and runs 10 to 14 weeks to a live production system. If the answer is stop, you spent a fixed diagnostic fee to avoid a build that would not have worked. Both outcomes are the product.",
         ],
       },
       {
@@ -752,7 +744,7 @@ export const ARTICLES: Article[] = [
         type: "paragraph",
         content: [
           "Choose one pilot that looked promising but stalled. Reframe it as an operating-system design problem. Map the workflow, owner, KPI, data path, controls, and adoption cadence before deciding whether to invest another dollar in technology. The ",
-          { text: "$15K Forge Diagnostic", href: "/services" },
+          { text: "Forge Diagnostic", href: "/services" },
           " does exactly this mapping in 2 weeks.",
         ],
       },
@@ -1135,7 +1127,7 @@ export const ARTICLES: Article[] = [
         type: "paragraph",
         content: [
           "Run an AI value-gap diagnostic across your top workflows and assign clear ownership for one high-value launch. If you need a structured path, start with the ",
-          { text: "$15K Forge Diagnostic", href: "/services" },
+          { text: "Forge Diagnostic", href: "/services" },
           ", then move directly into a build and managed operations cycle.",
         ],
       },
@@ -1954,8 +1946,7 @@ export const ARTICLES: Article[] = [
         content: [
           "A managed operations cadence retrains and tunes workflows based on live outcomes. This creates compounding intelligence and stronger performance each cycle. That is what ",
           { text: "Forge Run", href: "/services" },
-          " does after a build: monitoring, production evals, SLAs, and model upgrades, for ",
-          { text: "$2.5K to $7.5K per system per month.", tnum: true },
+          " does after a build: monitoring, production evals, SLAs, and model upgrades, on a monthly retainer scoped to the system.",
         ],
       },
       {
@@ -2235,9 +2226,9 @@ export const ARTICLES: Article[] = [
     title: "What AI consulting costs",
     titleEmphasis: "across the market.",
     standfirst:
-      "The 2026 price bands, what each buys, and what drives cost. Our own prices included.",
+      "The 2026 price bands, what each buys, and what drives cost. And where our tiers sit.",
     summary:
-      "Market bands in 2026: fixed-fee diagnostics, implementation sprints, enterprise programs, and managed operations. What drives price, and where our published tiers sit.",
+      "Market bands in 2026: fixed-fee diagnostics, implementation sprints, enterprise programs, and managed operations. What drives price, and where our tiers sit.",
     blocks: [
       {
         type: "lead",
@@ -2284,20 +2275,14 @@ export const ARTICLES: Article[] = [
           { text: "Fixed-fee diagnostic, $10K to $25K.", bold: true, tnum: true },
           " A bounded engagement, typically 2 to 6 weeks, that produces a prioritized roadmap, value sizing, a data-readiness read, and sequencing. The ClearForge version is the ",
           { text: "Forge Diagnostic", href: "/services" },
-          ": ",
-          { text: "$15K", bold: true, tnum: true },
-          " fixed price, 2 weeks, ending in a build decision you can price.",
+          ": a fixed fee agreed up front, 2 weeks, ending in a build decision you can price.",
         ],
       },
       {
         type: "paragraph",
         content: [
           { text: "Implementation sprint, $75K to $250K.", bold: true, tnum: true },
-          " A 10 to 14 week engagement that builds and deploys a working production AI system in one workflow, integrated with your existing systems. The ClearForge version is the Forge Sprint: from ",
-          { text: "$75K,", bold: true, tnum: true },
-          " typical ",
-          { text: "$75K to $200K+,", tnum: true },
-          " 10 to 14 weeks, scoped to one workflow with a named owner and baseline metric. Every Sprint ships with an eval harness and reliability gates.",
+          " A 10 to 14 week engagement that builds and deploys a working production AI system in one workflow, integrated with your existing systems. The ClearForge version is the Forge Sprint: scoped in the Diagnostic and agreed before any build, 10 to 14 weeks, one workflow with a named owner and baseline metric. Every Sprint ships with an eval harness and reliability gates.",
         ],
       },
       {
@@ -2311,11 +2296,7 @@ export const ARTICLES: Article[] = [
         type: "paragraph",
         content: [
           { text: "Managed AI operations, $5K to $25K per month.", bold: true, tnum: true },
-          " Ongoing engagement that runs AI systems on the client's behalf: monitoring, drift detection, exception handling, and optimization. The ClearForge versions: Forge Scale at ",
-          { text: "$5K to $15K per month", tnum: true },
-          " for the Adoption Mile, and Forge Run at ",
-          { text: "$2.5K to $7.5K per system per month", tnum: true },
-          " to keep a built system in production.",
+          " Ongoing engagement that runs AI systems on the client's behalf: monitoring, drift detection, exception handling, and optimization. The ClearForge versions: Forge Scale for the Adoption Mile and Forge Run to keep a built system in production, each a monthly retainer scoped to the system.",
         ],
       },
       { type: "heading", text: "What drives the price" },
@@ -2367,8 +2348,8 @@ export const ARTICLES: Article[] = [
       },
       {
         type: "pullquote",
-        text: "A price you have to call to learn",
-        emphasis: "is a price with a problem.",
+        text: "Price follows scope,",
+        emphasis: "and scope is set in the diagnostic.",
       },
       { type: "heading", text: "Why pricing transparency matters" },
       {
@@ -2380,9 +2361,9 @@ export const ARTICLES: Article[] = [
       {
         type: "paragraph",
         content: [
-          "This is changing. Mid-market AI consulting firms increasingly publish their tier ranges directly. The shift mirrors what happened in SaaS pricing a decade ago: firms that publish pricing capture the buyer who has already self-qualified. ",
-          { text: "Our pricing is published in full", href: "/pricing" },
-          ", readable without a call.",
+          "This is changing. Mid-market AI consulting firms increasingly publish their tier ranges directly. What matters most is that the pricing model is legible before you commit. ",
+          { text: "Ours is published as structure", href: "/pricing" },
+          ": a fixed-fee diagnostic first, with every build scoped there and agreed before any work starts.",
         ],
       },
       { type: "heading", text: "How to evaluate pricing quotes" },
@@ -2406,20 +2387,26 @@ export const ARTICLES: Article[] = [
       {
         type: "paragraph",
         content: [
-          "A $15K diagnostic should uncover a value backlog large enough to justify the next decision. A six-figure build should have a named workflow, baseline metric, owner, and business case before engineering begins.",
+          "A fixed-fee diagnostic should uncover a value backlog large enough to justify the next decision. A six-figure build should have a named workflow, baseline metric, owner, and business case before engineering begins.",
         ],
       },
       { type: "heading", text: "Bottom line" },
       {
         type: "paragraph",
         content: [
-          "For a mid-market company starting AI in 2026, expect to invest around ",
-          { text: "$15K", bold: true, tnum: true },
+          "For a mid-market company starting AI in 2026, expect to invest ",
+          { text: "$10K to $25K", tnum: true },
           " for a credible diagnostic and ",
           { text: "$100K to $200K", tnum: true },
           " for the first production system. Typical first-year all-in with managed operations runs ",
           { text: "$150K to $350K", tnum: true },
           " across the market. Demand pricing transparency, a fixed-fee phase 1, senior staffing, baseline metrics, and outcome-tied milestones.",
+        ],
+      },
+      {
+        type: "paragraph",
+        content: [
+          "At ClearForge, that phase 1 is the Forge Diagnostic: two weeks, one workflow, a fixed fee agreed up front. The build that follows is scoped there and agreed before any work starts.",
         ],
       },
     ],
@@ -2543,8 +2530,8 @@ export const ARTICLES: Article[] = [
           "The ",
           { text: "Forge Diagnostic", href: "/services" },
           " covers all six: ",
-          { text: "$15K", bold: true, tnum: true },
-          " fixed price, 2 weeks, ending in a decision you can price.",
+          { text: "a fixed fee agreed up front,", bold: true },
+          " 2 weeks, ending in a decision you can price.",
         ],
       },
       {
@@ -2695,11 +2682,7 @@ export const ARTICLES: Article[] = [
         content: [
           "The ClearForge version sits inside ",
           { text: "Forge Scale", href: "/services" },
-          ", priced ",
-          { text: "$5K to $15K per month.", tnum: true },
-          " The top tier is a Fractional Chief AI Officer engagement, from ",
-          { text: "$15K per month,", bold: true, tnum: true },
-          " and operating-level engagements include access to a delivery team, not just advice.",
+          ", a monthly retainer scoped to the engagement. The top tier is a Fractional Chief AI Officer engagement, and operating-level engagements include access to a delivery team, not just advice.",
         ],
       },
       { type: "heading", text: "When to hire fractional vs full-time" },

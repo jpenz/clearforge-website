@@ -15,8 +15,8 @@ const ENGAGEMENTS: Engagement[] = [
     index: "01",
     product: "Forge Diagnostic",
     stage: "Diagnose",
-    price: [{ text: "$15" }, { text: "K", unit: true }],
-    meta: "Fixed price · 2 weeks",
+    price: [{ text: "2" }, { text: "wks", unit: true }],
+    meta: "Fixed fee · one workflow",
     description:
       "Two weeks to map the workflow, size the opportunity, and prove the system is viable before you build.",
   },
@@ -25,13 +25,12 @@ const ENGAGEMENTS: Engagement[] = [
     product: "Forge Sprint",
     stage: "Build",
     price: [
-      { text: "$75" },
-      { text: "K", unit: true },
+      { text: "10" },
       { text: "to", connector: true },
-      { text: "$200" },
-      { text: "K", unit: true },
+      { text: "14" },
+      { text: "wks", unit: true },
     ],
-    meta: "10 to 14 weeks",
+    meta: "Scoped in the Diagnostic",
     description:
       "From kickoff to a live production system, built into the workflow your team already runs.",
   },
@@ -39,16 +38,10 @@ const ENGAGEMENTS: Engagement[] = [
     index: "03",
     product: "Forge Scale · Forge Run",
     stage: "Run",
-    price: [
-      { text: "$5" },
-      { text: "K", unit: true },
-      { text: "to", connector: true },
-      { text: "$15" },
-      { text: "K", unit: true },
-    ],
-    meta: "Per month · Adoption and operations",
+    price: [{ text: "70" }, { text: "%", unit: true }],
+    meta: "Weekly-active bar by day 90 · monthly",
     description:
-      "A named operator, a weekly working cadence, and a live adoption scoreboard. After the build, managed operations run $2.5K to $7.5K per system per month.",
+      "A named operator, a weekly working cadence, and a live adoption scoreboard. After the build, managed operations run as a monthly retainer, scoped to the system.",
   },
 ];
 
@@ -90,7 +83,7 @@ function PriceFigure({ price }: { price: Engagement["price"] }) {
 export function EngagementsSection() {
   return (
     <PageFrame id="services" aria-label="What you get">
-      <SectionBand left="What you get" right="Published prices, start at $15K" />
+      <SectionBand left="What you get" right="Diagnose · Build · Run" />
       <div className="relative">
         <div
           aria-hidden="true"

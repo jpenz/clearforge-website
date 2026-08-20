@@ -22,7 +22,7 @@ export async function generateMetadata({
   if (!industry) return {};
   return {
     title: `AI systems for ${industry.name}`,
-    description: `The workflow pattern we see in ${industry.name}, and what we would build for it. Engagements start with a $15K fixed-price diagnostic.`,
+    description: `The workflow pattern we see in ${industry.name}, and what we would build for it. Engagements start with a fixed-fee two-week diagnostic.`,
   };
 }
 
@@ -189,8 +189,8 @@ export default async function IndustryPage({
       <PageFrame aria-label="Starting point">
         <div className="grid items-baseline gap-4 px-5 py-8 md:grid-cols-[1fr_auto] md:gap-10 md:px-10 md:py-10">
           <p className="font-display tnum max-w-[44ch] text-[24px] leading-[1.35] font-medium md:text-[28px]">
-            Start where every engagement starts. The{" "}
-            <span className="tnum">$15K</span> Diagnostic maps this workflow{" "}
+            Start where every engagement starts. The fixed-fee Diagnostic maps
+            this workflow{" "}
             <em className="text-cobalt italic">{industry.locationNoun}</em> in
             2 weeks.
           </p>
@@ -202,10 +202,10 @@ export default async function IndustryPage({
 
       {/* Closing booking strip */}
       <PageFrame bottomRule={false} aria-label="Next step">
-        <SectionBand left="Next step" right="Fixed price · 2 weeks" />
+        <SectionBand left="Next step" right="Fixed fee · 2 weeks" />
         <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
           <h2 className="font-display text-[30px] leading-[1.1] font-medium md:text-[40px]">
-            Start with the <span className="tnum">$15K</span>{" "}
+            Start with the fixed-fee{" "}
             <em className="text-cobalt italic">Diagnostic.</em>
           </h2>
           <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />

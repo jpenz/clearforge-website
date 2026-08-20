@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    "Founder-led AI consulting and build firm for mid-market companies, $20M to $500M revenue, and PE operating teams. Engagements start with a $15K fixed-price diagnostic.",
+    "Founder-led AI consulting and build firm for mid-market companies, $20M to $500M revenue, and PE operating teams. Engagements start with a fixed-fee two-week diagnostic.",
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
