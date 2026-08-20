@@ -1,20 +1,22 @@
 import { PageFrame } from "@/components/ui/PageFrame";
 
 /**
- * Proof-by-name band: where the team comes from, and the tools we build
- * with. Styled text wordmarks (grayscale, quiet); nominative use only, and
- * the tools list stays FACTUAL (only what we actually deliver with). The
- * weekly stack-trends task proposes updates as PRs; owner approves by merge.
+ * Proof band: where the team comes from, and how we build. Research
+ * verdict 2026-08-20: elite firms signal named verifiable practices, not
+ * tool inventories (a raw tools list fails the "can nobody else say it"
+ * test). Every practice here is factual: evals are a named Sprint
+ * deliverable, 70% weekly-active is the adoption bar we build to, and the
+ * stack-trends-weekly task re-tests the stack every Tuesday. The stack
+ * stays as a quiet supporting line; updates arrive as PRs from that task.
  */
 const TEAM_FROM = ["Bain & Company", "EY", "Capgemini"];
-const TOOLS = [
-  "Claude by Anthropic",
-  "CellCog",
-  "n8n",
-  "Supabase",
-  "Microsoft",
-  "Vercel",
+const PRACTICES = [
+  "Evals ship with every sprint",
+  "Adoption is the metric: 70% weekly-active",
+  "Stack re-tested every week",
 ];
+const STACK_LINE =
+  "Built with Claude by Anthropic, CellCog, n8n, Supabase, Microsoft, and Vercel.";
 
 function Wordmark({ name }: { name: string }) {
   return (
@@ -40,13 +42,25 @@ export function LineageRow() {
         </div>
         <div className="cf-dots px-5 py-8 md:px-10">
           <p className="tnum text-[11px] tracking-[0.18em] text-ink/50 uppercase">
-            Tools we use
+            How we build
           </p>
-          <div className="mt-4 flex flex-wrap items-baseline gap-x-8 gap-y-3">
-            {TOOLS.map((name) => (
-              <Wordmark key={name} name={name} />
+          <ul className="mt-4 space-y-2">
+            {PRACTICES.map((practice) => (
+              <li
+                key={practice}
+                className="tnum flex items-baseline gap-3 text-[15px] font-medium text-ink/70 md:text-[16px]"
+              >
+                <span
+                  aria-hidden="true"
+                  className="inline-block size-[6px] shrink-0 translate-y-[-1px] bg-cobalt"
+                />
+                {practice}
+              </li>
             ))}
-          </div>
+          </ul>
+          <p className="mt-4 text-[12px] leading-relaxed text-ink/50">
+            {STACK_LINE}
+          </p>
         </div>
       </div>
     </PageFrame>
