@@ -1,4 +1,5 @@
 import { HeroSection } from "@/components/home/HeroSection";
+import { LineageRow } from "@/components/home/LineageRow";
 import { EngagementsSection } from "@/components/home/EngagementsSection";
 import { ProofSection } from "@/components/home/ProofSection";
 import { AdoptionBand } from "@/components/home/AdoptionBand";
@@ -13,6 +14,7 @@ export default function HomePage() {
       <script {...JsonLdScriptProps(organizationJsonLd())} />
       <script {...JsonLdScriptProps(faqJsonLd(HOME_FAQS))} />
       <HeroSection />
+      <LineageRow />
       <EngagementsSection />
       <ProofSection />
       <AdoptionBand />

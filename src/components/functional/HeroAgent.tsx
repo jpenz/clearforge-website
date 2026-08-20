@@ -54,7 +54,7 @@ export function HeroAgent() {
   const [input, setInput] = useState("");
 
   return (
-    <div className="border border-ink bg-white">
+    <div className="border border-ink bg-white text-ink">
       <div className="flex items-center justify-between border-b border-hairline px-5 py-3">
         <span className="text-[12px] font-semibold tracking-[0.14em] uppercase">
           Forge Intelligence preview

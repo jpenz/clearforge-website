@@ -19,6 +19,8 @@
   --color-hairline: rgba(1, 11, 19, 0.12);
   --color-hairline-faint: rgba(1, 11, 19, 0.07);
   --color-hairline-strong: rgba(1, 11, 19, 0.3);
+  --color-cobalt-bright: #7a97ff;
+  --color-hairline-ghost: rgba(248, 248, 255, 0.14);
 
   /* Motion */
   --animate-progress-stepped: cf-bar 2.5s steps(8, end) forwards;
@@ -152,4 +154,101 @@ cal-modal-box {
   /* The embed's shadow-DOM scrim does not paint here either; dim on the
      host so the dialog reads as a modal instead of white-on-white. */
   background: rgba(1, 11, 19, 0.55) !important;
+}
+
+/* ── Atmosphere layer (V12.1) ─────────────────────────────────────── */
+
+/* Cinematic dark band: deep ink base; aurora blobs supply the light. */
+.cf-dark-band {
+  background: #04101c;
+  color: var(--color-ghost);
+}
+
+/* Aurora blobs: pre-blurred radial gradients, transform-only animation
+   (compositor-friendly, no filter()). Cobalt family only. */
+.cf-aurora,
+.cf-aurora-b {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  will-change: transform;
+}
+.cf-aurora {
+  width: 900px;
+  height: 900px;
+  left: -220px;
+  top: -320px;
+  background: radial-gradient(
+    circle,
+    rgba(36, 84, 255, 0.32) 0%,
+    rgba(36, 84, 255, 0.1) 42%,
+    transparent 68%
+  );
+  animation: cf-drift-a 26s ease-in-out infinite alternate;
+}
+.cf-aurora-b {
+  width: 760px;
+  height: 760px;
+  right: -260px;
+  bottom: -380px;
+  background: radial-gradient(
+    circle,
+    rgba(122, 151, 255, 0.2) 0%,
+    rgba(36, 84, 255, 0.07) 45%,
+    transparent 70%
+  );
+  animation: cf-drift-b 34s ease-in-out infinite alternate;
+}
+@keyframes cf-drift-a {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(140px, 90px, 0) scale(1.12); }
+}
+@keyframes cf-drift-b {
+  from { transform: translate3d(0, 0, 0) scale(1.05); }
+  to { transform: translate3d(-120px, -70px, 0) scale(0.96); }
+}
+
+/* Dotted-grid texture for light bands. */
+.cf-dots {
+  background-image: radial-gradient(rgba(1, 11, 19, 0.10) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+/* Dotted texture for the dark band. */
+.cf-dots-ghost {
+  background-image: radial-gradient(rgba(248, 248, 255, 0.09) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Cobalt glow behind product-UI objects on dark. */
+.cf-glow {
+  box-shadow:
+    0 0 0 1px rgba(248, 248, 255, 0.08),
+    0 12px 60px rgba(36, 84, 255, 0.35),
+    0 2px 16px rgba(1, 11, 19, 0.5);
+}
+
+/* Load-time entrance stagger: pure CSS, once, fast. Content is never
+   hidden for long and never gated on scroll. */
+.cf-enter {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: cf-enter-in 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes cf-enter-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cf-aurora,
+  .cf-aurora-b {
+    animation: none;
+  }
+  .cf-enter {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
 }
