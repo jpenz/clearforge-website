@@ -44,7 +44,7 @@ export const PRICING_TIERS: PricingTier[] = [
     index: "04",
     name: "Forge Scale",
     subtitle:
-      "The Adoption Mile. The top tier is a Fractional Chief AI Officer engagement, from $15K per month.",
+      "The Adoption Mile. The top tier is a Fractional Chief AI Officer engagement.",
     term: "Monthly",
     price: "Monthly retainer",
         minPrice: 5000,
@@ -87,7 +87,7 @@ export const FIRST_TWO_WEEKS = [
     label: "Day 10 to 14",
     title: "A decision you can price",
     description:
-      "Build, fix, or stop. If you build, the Sprint is priced from $75K.",
+      "Build, fix, or stop. If you build, the Sprint arrives already priced.",
   },
 ];
 

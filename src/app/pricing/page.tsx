@@ -150,7 +150,7 @@ export default function PricingPage() {
               <span className="tnum text-cobalt italic">2 weeks</span>
             </h2>
             <p className="tnum mt-6 max-w-[46ch] text-[16px] leading-relaxed text-ink/80">
-              The Diagnostic is $15K, fixed price. It ends with a decision you
+              The Diagnostic is a fixed fee, agreed up front. It ends with a decision you
               can price, not a report you file.
             </p>
             <div className="mt-auto pt-10">
@@ -159,7 +159,7 @@ export default function PricingPage() {
                   Forge Diagnostic
                 </span>
                 <span className="tnum text-[14px] font-semibold">
-                  2 weeks · $15K fixed
+                  2 weeks · fixed fee
                 </span>
               </div>
             </div>
@@ -191,7 +191,7 @@ export default function PricingPage() {
       <PageFrame aria-label="The Adoption Mile">
         <SectionBand
           left="The Adoption Mile"
-          right="Part of Forge Scale · $5K to $15K per month"
+          right="The top tier of Forge Scale"
         />
         <div className="grid lg:grid-cols-[560px_1fr]">
           <div className="flex items-baseline gap-6 border-b border-hairline px-5 py-10 md:px-10 md:py-14 lg:border-r lg:border-b-0">
@@ -256,7 +256,7 @@ export default function PricingPage() {
           <div>
             <h2 className="font-display text-[32px] leading-[1.1] md:text-[44px]">
               Start with the{" "}
-              <span className="tnum text-cobalt italic">$15K</span> Diagnostic.
+              <span className="text-cobalt italic">fixed-fee</span> Diagnostic.
             </h2>
             <p className="tnum mt-3 text-[14px] text-ink/70">
               Fixed price. 2 weeks. Where every engagement starts.

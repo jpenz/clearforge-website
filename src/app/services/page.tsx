@@ -9,7 +9,7 @@ import { PE_PACK, SERVICE_STAGES } from "@/data/services";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "One catalog, four stages: Diagnose, Build, Adopt, Run. Every price published. Engagements start with a $15K fixed-price diagnostic.",
+    "One catalog, four stages: Diagnose, Build, Adopt, Run. Engagements start with a fixed-fee two-week diagnostic and are scoped before any build.",
 };
 
 export default function ServicesPage() {
@@ -174,7 +174,7 @@ export default function ServicesPage() {
       <BookingStrip
         headline={
           <>
-            The first step costs $15K.{" "}
+            The first step is a fixed fee.{" "}
             <em className="text-cobalt italic">2 weeks.</em>
           </>
         }

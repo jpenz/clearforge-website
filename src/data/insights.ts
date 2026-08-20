@@ -390,7 +390,7 @@ export const ARTICLES: Article[] = [
         content: [
           "A build decision with a price on it. If you build, the ",
           { text: "Forge Sprint", href: "/pricing" },
-          " is priced there, before any build, and runs 10 to 14 weeks to a live production system. If the answer is stop, you spent a fixed diagnostic fee to avoid a build that would not have worked. Both outcomes are the product.",
+          " is priced in the Diagnostic, before any build, and runs 10 to 14 weeks to a live production system. If the answer is stop, you spent a fixed diagnostic fee to avoid a build that would not have worked. Both outcomes are the product.",
         ],
       },
       {
