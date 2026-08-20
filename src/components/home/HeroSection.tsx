@@ -29,7 +29,8 @@ export function HeroSection() {
                 style={{ "--d": "80ms" } as React.CSSProperties}
               >
                 ClearForge builds AI systems your team actually uses and your
-                P&L <em className="text-cobalt-bright italic">actually feels.</em>
+                bottom line{" "}
+                <em className="text-cobalt-bright italic">actually feels.</em>
               </h1>
             </div>
             <div className="grid border-t border-hairline-ghost md:grid-cols-[1fr_auto]">
