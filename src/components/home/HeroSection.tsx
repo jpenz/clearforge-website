@@ -28,8 +28,8 @@ export function HeroSection() {
                 className="cf-enter font-display max-w-[15ch] text-[40px] leading-[1.12] font-medium tracking-[-0.01em] md:text-[72px] md:leading-[1.08]"
                 style={{ "--d": "80ms" } as React.CSSProperties}
               >
-                ClearForge builds AI systems your team{" "}
-                <em className="text-cobalt-bright italic">actually uses.</em>
+                ClearForge builds AI systems your team actually uses and your
+                P&L <em className="text-cobalt-bright italic">actually feels.</em>
               </h1>
             </div>
             <div className="grid border-t border-hairline-ghost md:grid-cols-[1fr_auto]">
