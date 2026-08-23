@@ -37,6 +37,12 @@ const SECURITY_HEADERS = [
 ];
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // Server actions buffer the whole request body first. Default is 1MB,
+    // which silently rejects our 10MB RFP uploads. Raise to 12MB (10MB file
+    // plus form overhead) — this is also the hard DoS ceiling on any action.
+    serverActions: { bodySizeLimit: "12mb" },
+  },
   async headers() {
     return [{ source: "/(.*)", headers: SECURITY_HEADERS }];
   },

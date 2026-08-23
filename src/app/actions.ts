@@ -1,7 +1,7 @@
 "use server";
 
 import { headers } from "next/headers";
-import { saveLead, sendNotification } from "@/lib/leads";
+import { sanitizeLine, saveLead, sendNotification } from "@/lib/leads";
 import { isRateLimited } from "@/lib/rate-limit";
 import { saveRfpFile } from "@/lib/supabase";
 import { validateUpload } from "@/lib/uploads";
@@ -68,7 +68,7 @@ export async function sendContactMessage(
     });
     await sendNotification(
       rfpPath ? "New contact message + RFP attached" : "New contact message",
-      `From: ${name} <${email}>\nCompany: ${company || "n/a"}${rfpPath ? `\nRFP "${rfpName}" in storage: rfps/${rfpPath}` : ""}\n\n${message}`,
+      `From: ${sanitizeLine(name)} <${sanitizeLine(email)}>\nCompany: ${sanitizeLine(company) || "n/a"}${rfpPath ? `\nRFP "${sanitizeLine(rfpName)}" in storage: rfps/${rfpPath}` : ""}\n\n${message}`,
     );
     return { status: "success" };
   } catch {
@@ -84,6 +84,12 @@ export async function unlockScoreReport(
   _prev: FormState,
   formData: FormData,
 ): Promise<FormState> {
+  if (String(formData.get("website") ?? "").trim()) {
+    return { status: "success" };
+  }
+  if (isRateLimited(await headers(), "scorecard", 5, 60_000)) {
+    return { status: "error", message: "Too many submissions. Try again shortly." };
+  }
   const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
   const company = String(formData.get("company") ?? "").trim();
@@ -188,7 +194,7 @@ export async function startProject(
     });
     await sendNotification(
       rfpPath ? "New project brief + file attached" : "New project brief",
-      `From: ${name} <${email}>\nCompany: ${company}${rfpPath ? `\nFile "${rfpName}" in storage: rfps/${rfpPath}` : ""}\n\n${brief}`,
+      `From: ${sanitizeLine(name)} <${sanitizeLine(email)}>\nCompany: ${sanitizeLine(company)}${rfpPath ? `\nFile "${sanitizeLine(rfpName)}" in storage: rfps/${rfpPath}` : ""}\n\n${brief}`,
     );
     return { status: "success" };
   } catch {

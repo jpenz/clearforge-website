@@ -2,8 +2,13 @@ const buckets = new Map<string, { count: number; resetAt: number }>();
 let lastCleanupAt = 0;
 
 function getClientIp(headers: Headers): string {
+  // On Vercel x-real-ip is set by the platform to the true client IP and is
+  // not client-appendable; prefer it over x-forwarded-for, whose leftmost
+  // value a caller can spoof to rotate past the limit.
   return (
-    headers.get('x-forwarded-for')?.split(',')[0]?.trim() || headers.get('x-real-ip') || 'unknown'
+    headers.get('x-real-ip')?.trim() ||
+    headers.get('x-forwarded-for')?.split(',').pop()?.trim() ||
+    'unknown'
   );
 }
 

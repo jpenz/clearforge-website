@@ -14,7 +14,11 @@
  * fetch goes through normalizePublicCompanyUrl (blocks private hosts).
  */
 
-import { getCompanyDomain, normalizePublicCompanyUrl } from "@/lib/url-safety";
+import {
+  getCompanyDomain,
+  normalizePublicCompanyUrl,
+  resolvesToPublicIp,
+} from "@/lib/url-safety";
 
 export type AnalysisMode = "brief" | "detailed";
 
@@ -193,14 +197,52 @@ async function* realAnalysis(
   if (safeUrl) {
     yield { type: "progress", label: `Fetching ${domain}` };
     try {
-      const res = await fetch(safeUrl.href, {
-        signal: AbortSignal.timeout(4000),
-        headers: {
-          "User-Agent": "ClearForge-Analyzer/2.0 (+https://clearforge.ai)",
-        },
-        redirect: "follow",
-      });
-      if (res.ok) siteText = stripHtml(await res.text());
+      let current = safeUrl;
+      let res: Response | null = null;
+      // Follow redirects MANUALLY, re-validating every hop against the SSRF
+      // guard. Blind redirect:"follow" would let a public URL bounce to
+      // 169.254.169.254 or an internal host. Cap at 4 hops.
+      for (let hop = 0; hop < 4; hop += 1) {
+        // Reject if the hostname resolves to a private IP (DNS-based SSRF).
+        if (!(await resolvesToPublicIp(current.hostname))) break;
+        const r = await fetch(current.href, {
+          signal: AbortSignal.timeout(4000),
+          headers: {
+            "User-Agent": "ClearForge-Analyzer/2.0 (+https://clearforge.ai)",
+          },
+          redirect: "manual",
+        });
+        if (r.status >= 300 && r.status < 400) {
+          const location = r.headers.get("location");
+          if (!location) break;
+          const next = normalizePublicCompanyUrl(
+            new URL(location, current.href).href,
+          );
+          if (!next) break; // redirect target failed the guard: stop
+          current = next;
+          continue;
+        }
+        res = r;
+        break;
+      }
+      // Bound the body: read the stream up to 512KB so a huge or slow-drip
+      // response cannot exhaust function memory. stripHtml slices to 3000.
+      if (res?.ok && res.body) {
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        const MAX = 512 * 1024;
+        let raw = "";
+        for (;;) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          raw += decoder.decode(value, { stream: true });
+          if (raw.length >= MAX) {
+            await reader.cancel();
+            break;
+          }
+        }
+        siteText = stripHtml(raw);
+      }
     } catch {
       /* unreachable site: the model works from the identifier */
     }

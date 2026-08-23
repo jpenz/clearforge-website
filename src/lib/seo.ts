@@ -58,8 +58,16 @@ export function pricingJsonLd() {
 }
 
 export function JsonLdScriptProps(data: object) {
+  // Escape the sequences that could break out of the <script> element.
+  // Author-controlled data today, but this keeps it safe if dynamic values
+  // ever flow in (a "</script>" or "<!--" inside a string would otherwise
+  // terminate the tag).
+  const json = JSON.stringify(data)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026");
   return {
     type: "application/ld+json",
-    dangerouslySetInnerHTML: { __html: JSON.stringify(data) },
+    dangerouslySetInnerHTML: { __html: json },
   } as const;
 }

@@ -65,6 +65,11 @@ export async function saveLead(lead: LeadRecord): Promise<void> {
   }
 }
 
+/** Strip CR/LF and cap length so user fields cannot forge extra lines. */
+export function sanitizeLine(value: string, max = 200): string {
+  return value.replace(/[\r\n]+/g, " ").trim().slice(0, max);
+}
+
 export async function sendNotification(
   subject: string,
   text: string,
