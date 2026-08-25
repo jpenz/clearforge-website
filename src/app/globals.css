@@ -22,6 +22,21 @@
   --color-cobalt-bright: #7a97ff;
   --color-hairline-ghost: rgba(248, 248, 255, 0.14);
 
+  /* Legacy V11 tokens used ONLY by the Revenue Ops command center
+     (src/components/revenue-ops/). AA-validated values; no other
+     V12 surface references these names. */
+  --color-parchment: #f8f7f4;
+  --color-warm-white: #ffffff;
+  --color-recessed: #efeee9;
+  --color-anthracite: #0b1b2b;
+  --color-warm-gray: #46525e;
+  --color-stone: #8d9aa6;
+  --color-brass: #1f4cdb;
+  --color-brass-hover: #1638a8;
+  --color-divider: #e1e1db;
+  --color-success: #1f7a4d;
+  --color-error: #b91c1c;
+
   /* Motion */
   --animate-progress-stepped: cf-bar 2.5s steps(8, end) forwards;
 
