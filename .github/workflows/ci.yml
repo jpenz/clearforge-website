@@ -111,7 +111,9 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    needs: [typecheck, lint, unit-tests]
+    # lint (Biome) is quarantined pre-existing red on main (see CLAUDE.md);
+    # gating Build on it silently skipped Build/E2E/Lighthouse on every run.
+    needs: [typecheck, unit-tests]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
