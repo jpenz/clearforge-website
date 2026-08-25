@@ -18,6 +18,8 @@ jobs:
           node-version: '20'
           cache: 'npm'
       - run: npm ci
+      # Next.js typed routes: tsc needs the generated PageProps/LayoutProps globals
+      - run: npx next typegen
       - run: npx tsc --noEmit
 
   # ── 2. Biome Lint ────────────────────────────────────────────────────────────
