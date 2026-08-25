@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from 'react';
 
 interface CountUpProps {
   value: number;
@@ -16,21 +16,18 @@ interface CountUpProps {
  * without JS), then animates from zero on first view. Frozen under
  * prefers-reduced-motion.
  */
-export function CountUp({
-  value,
-  suffix = "",
-  format = true,
-  className,
-}: CountUpProps) {
+export function CountUp({ value, suffix = '', format = true, className }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const render = (n: number) =>
-    `${format ? n.toLocaleString("en-US") : String(n)}${suffix}`;
+  const render = useCallback(
+    (n: number) => `${format ? n.toLocaleString('en-US') : String(n)}${suffix}`,
+    [format, suffix],
+  );
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (!("IntersectionObserver" in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!('IntersectionObserver' in window)) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -41,7 +38,7 @@ export function CountUp({
           const duration = 1300;
           const tick = (now: number) => {
             const progress = Math.min(1, (now - start) / duration);
-            const eased = 1 - Math.pow(1 - progress, 3);
+            const eased = 1 - (1 - progress) ** 3;
             el.textContent = render(Math.round(value * eased));
             if (progress < 1) requestAnimationFrame(tick);
           };
@@ -52,8 +49,7 @@ export function CountUp({
     );
     observer.observe(el);
     return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value, suffix, format]);
+  }, [value, render]);
 
   return (
     <span ref={ref} className={className}>

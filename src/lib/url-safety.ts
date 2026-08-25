@@ -23,14 +23,14 @@ const PRIVATE_HOST_PATTERNS = [
  * letters and no normal dotted-quad shape, treat it as suspicious.
  */
 function isEncodedIpLiteral(hostname: string): boolean {
-  const h = hostname.replace(/^\[|\]$/g, "");
+  const h = hostname.replace(/^\[|\]$/g, '');
   if (/^0x[0-9a-f]+$/i.test(h)) return true; // whole-host hex
   if (/^0[0-7]+$/.test(h)) return true; // whole-host octal
   if (/^\d{8,10}$/.test(h)) return true; // 32-bit decimal
   if (/^\d+(\.\d+){0,2}$/.test(h)) return true; // short-form dotted (1.1, 0.1)
   // Per-octet octal/hex inside a dotted quad: 0177.0.0.1, 0x7f.0.0.1
-  if (h.includes(".")) {
-    const octets = h.split(".");
+  if (h.includes('.')) {
+    const octets = h.split('.');
     if (octets.some((o) => /^0x[0-9a-f]+$/i.test(o) || /^0[0-7]+$/.test(o))) {
       return true;
     }

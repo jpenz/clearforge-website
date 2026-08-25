@@ -1,28 +1,27 @@
-"use client";
+'use client';
 
-import { useActionState, useRef, useState } from "react";
-import { startProject, type FormState } from "@/app/actions";
-import { CAL_NAMESPACE } from "@/data/site";
-import { openCalModal, preloadCal } from "@/lib/cal";
+import { useActionState, useRef, useState } from 'react';
+import { type FormState, startProject } from '@/app/actions';
+import { CAL_NAMESPACE } from '@/data/site';
+import { openCalModal, preloadCal } from '@/lib/cal';
 
-const INITIAL: FormState = { status: "idle" };
+const INITIAL: FormState = { status: 'idle' };
 
 const NEED_CHIPS = [
-  "Diagnose a workflow",
-  "Build an AI system",
-  "Fix an AI we already built",
-  "Adoption help",
-  "Managed operations",
-  "PE portfolio work",
-  "Not sure yet",
+  'Diagnose a workflow',
+  'Build an AI system',
+  'Fix an AI we already built',
+  'Adoption help',
+  'Managed operations',
+  'PE portfolio work',
+  'Not sure yet',
 ];
 
-const TIMELINES = ["Immediate", "This quarter", "This year", "Not sure"];
+const TIMELINES = ['Immediate', 'This quarter', 'This year', 'Not sure'];
 
-const labelClass =
-  "mb-2.5 block text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase";
+const labelClass = 'mb-2.5 block text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase';
 const inputClass =
-  "w-full border border-hairline-strong bg-white px-3 py-2.5 text-[14px] placeholder:text-ink/45";
+  'w-full border border-hairline-strong bg-white px-3 py-2.5 text-[14px] placeholder:text-ink/45';
 
 /**
  * Three-step project-brief intake. Step 1 costs zero typing (chips +
@@ -34,10 +33,10 @@ export function StartFlow() {
   const [state, formAction, pending] = useActionState(startProject, INITIAL);
   const [step, setStep] = useState(1);
   const [needs, setNeeds] = useState<string[]>([]);
-  const [timeline, setTimeline] = useState("");
-  const contactRef = useRef({ name: "", email: "" });
+  const [timeline, setTimeline] = useState('');
+  const contactRef = useRef({ name: '', email: '' });
 
-  if (state.status === "success") {
+  if (state.status === 'success') {
     return (
       <div className="px-5 py-14 md:px-10">
         <p className="flex items-center gap-3 text-[18px] font-semibold">
@@ -45,9 +44,8 @@ export function StartFlow() {
           Brief received.
         </p>
         <p className="mt-3 max-w-[52ch] text-[15px] leading-relaxed text-ink/70">
-          You will hear from James within one business day. If it is
-          time-sensitive, grab a slot now and we will have read your brief
-          before the call.
+          You will hear from James within one business day. If it is time-sensitive, grab a slot now
+          and we will have read your brief before the call.
         </p>
         <button
           type="button"
@@ -79,8 +77,8 @@ export function StartFlow() {
       onSubmit={(e) => {
         const fd = new FormData(e.currentTarget);
         contactRef.current = {
-          name: String(fd.get("name") ?? ""),
-          email: String(fd.get("email") ?? ""),
+          name: String(fd.get('name') ?? ''),
+          email: String(fd.get('email') ?? ''),
         };
       }}
       className="px-5 py-10 md:px-10"
@@ -100,8 +98,8 @@ export function StartFlow() {
       ))}
       <input type="hidden" name="timeline" value={timeline} />
 
-      <div className={step === 1 ? "" : "hidden"}>
-        {stepLabel(1, "What do you need?")}
+      <div className={step === 1 ? '' : 'hidden'}>
+        {stepLabel(1, 'What do you need?')}
         <div className="mt-5 flex flex-wrap gap-2.5">
           {NEED_CHIPS.map((chip) => {
             const on = needs.includes(chip);
@@ -111,14 +109,12 @@ export function StartFlow() {
                 type="button"
                 aria-pressed={on}
                 onClick={() =>
-                  setNeeds((prev) =>
-                    on ? prev.filter((c) => c !== chip) : [...prev, chip],
-                  )
+                  setNeeds((prev) => (on ? prev.filter((c) => c !== chip) : [...prev, chip]))
                 }
                 className={`cursor-pointer border px-4 py-2.5 text-[13px] font-medium transition-colors ${
                   on
-                    ? "border-cobalt bg-cobalt text-white"
-                    : "border-hairline-strong hover:border-ink"
+                    ? 'border-cobalt bg-cobalt text-white'
+                    : 'border-hairline-strong hover:border-ink'
                 }`}
               >
                 {chip}
@@ -153,8 +149,8 @@ export function StartFlow() {
         </button>
       </div>
 
-      <div className={step === 2 ? "" : "hidden"}>
-        {stepLabel(2, "Context")}
+      <div className={step === 2 ? '' : 'hidden'}>
+        {stepLabel(2, 'Context')}
         <div className="mt-5 grid gap-5 md:grid-cols-2">
           <div>
             <label className={labelClass} htmlFor="sf-company">
@@ -171,8 +167,7 @@ export function StartFlow() {
           </div>
           <div>
             <label className={labelClass} htmlFor="sf-url">
-              Company website{" "}
-              <span className="normal-case text-ink/45">(optional)</span>
+              Company website <span className="normal-case text-ink/45">(optional)</span>
             </label>
             <input
               id="sf-url"
@@ -199,7 +194,7 @@ export function StartFlow() {
         </div>
         <div className="mt-5">
           <label className={labelClass} htmlFor="sf-rfp">
-            Have an RFP, process doc, or data sample?{" "}
+            Have an RFP, process doc, or data sample?{' '}
             <span className="normal-case text-ink/45">
               (optional · PDF, Word, Excel, PowerPoint · up to 10MB)
             </span>
@@ -230,8 +225,8 @@ export function StartFlow() {
         </div>
       </div>
 
-      <div className={step === 3 ? "" : "hidden"}>
-        {stepLabel(3, "Where do we reply?")}
+      <div className={step === 3 ? '' : 'hidden'}>
+        {stepLabel(3, 'Where do we reply?')}
         <div className="mt-5 grid gap-5 md:grid-cols-3">
           <div>
             <label className={labelClass} htmlFor="sf-name">
@@ -273,10 +268,8 @@ export function StartFlow() {
             />
           </div>
         </div>
-        {state.status === "error" && (
-          <p className="mt-4 text-[13px] font-medium text-cobalt-press">
-            {state.message}
-          </p>
+        {state.status === 'error' && (
+          <p className="mt-4 text-[13px] font-medium text-cobalt-press">{state.message}</p>
         )}
         <div className="mt-8 flex items-center gap-4">
           <button
@@ -291,12 +284,11 @@ export function StartFlow() {
             disabled={pending}
             className="cursor-pointer bg-cobalt px-7 py-3 text-[14px] font-semibold text-white hover:bg-cobalt-press disabled:opacity-60"
           >
-            {pending ? "Sending" : "Send the brief"}
+            {pending ? 'Sending' : 'Send the brief'}
           </button>
         </div>
         <p className="mt-4 text-[12px] leading-relaxed text-ink/50">
-          You will hear from James within one business day. Submitting agrees
-          to the{" "}
+          You will hear from James within one business day. Submitting agrees to the{' '}
           <a href="/privacy" className="underline underline-offset-2">
             privacy policy
           </a>

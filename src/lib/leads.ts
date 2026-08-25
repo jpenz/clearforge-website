@@ -10,10 +10,10 @@
  * The exported interface is consumed by src/app/actions.ts; keep it stable.
  */
 
-import { saveAssessmentLead, saveContactLead } from "@/lib/supabase";
+import { saveAssessmentLead, saveContactLead } from '@/lib/supabase';
 
 export interface LeadRecord {
-  type: "contact" | "scorecard";
+  type: 'contact' | 'scorecard';
   name: string;
   email: string;
   company?: string;
@@ -24,17 +24,17 @@ export interface LeadRecord {
 export async function saveLead(lead: LeadRecord): Promise<void> {
   let storedId: string | null = null;
 
-  if (lead.type === "contact") {
+  if (lead.type === 'contact') {
     const rfpPath = lead.payload?.rfpPath;
     const message = rfpPath
-      ? `${lead.message ?? ""}\n[RFP attached: rfps/${String(rfpPath)}]`
-      : (lead.message ?? "");
+      ? `${lead.message ?? ''}\n[RFP attached: rfps/${String(rfpPath)}]`
+      : (lead.message ?? '');
     storedId = await saveContactLead({
       name: lead.name,
       email: lead.email,
-      company: lead.company ?? "",
+      company: lead.company ?? '',
       message,
-      source: rfpPath ? "v12_contact_rfp" : "v12_contact",
+      source: rfpPath ? 'v12_contact_rfp' : 'v12_contact',
     });
   } else {
     const payload = lead.payload ?? {};
@@ -42,50 +42,51 @@ export async function saveLead(lead: LeadRecord): Promise<void> {
     storedId = await saveAssessmentLead({
       name: lead.name,
       email: lead.email,
-      company: lead.company ?? "",
-      role: "",
-      industry: "",
-      challenge: "",
+      company: lead.company ?? '',
+      role: '',
+      industry: '',
+      challenge: '',
       composite_score: Number.isFinite(score) ? score : 0,
-      maturity_level: String(payload.maturityLevel ?? ""),
+      maturity_level: String(payload.maturityLevel ?? ''),
       pillar_scores: (payload.pillarScores as Record<string, number>) ?? {},
       suggested_solutions: [],
-      suggested_engagement: "",
-      closer_report: "",
-      company_research: "",
-      industry_best_in_class: "",
-      source: "v12_scorecard",
+      suggested_engagement: '',
+      closer_report: '',
+      company_research: '',
+      industry_best_in_class: '',
+      source: 'v12_scorecard',
     });
   }
 
   if (!storedId) {
     // No Supabase env (preview/local) or insert failure: keep the graceful
     // contract and leave an operator trail either way.
-    console.info("[lead:unstored]", JSON.stringify(lead));
+    // biome-ignore lint/suspicious/noConsole: deliberate operator trail when the lead cannot be stored
+    console.info('[lead:unstored]', JSON.stringify(lead));
   }
 }
 
 /** Strip CR/LF and cap length so user fields cannot forge extra lines. */
 export function sanitizeLine(value: string, max = 200): string {
-  return value.replace(/[\r\n]+/g, " ").trim().slice(0, max);
+  return value
+    .replace(/[\r\n]+/g, ' ')
+    .trim()
+    .slice(0, max);
 }
 
-export async function sendNotification(
-  subject: string,
-  text: string,
-): Promise<void> {
+export async function sendNotification(subject: string, text: string): Promise<void> {
   const key = process.env.RESEND_API_KEY;
   if (!key) return;
-  const to = process.env.RESEND_TO_EMAIL ?? "james@clearforge.ai";
+  const to = process.env.RESEND_TO_EMAIL ?? 'james@clearforge.ai';
   try {
-    await fetch("https://api.resend.com/emails", {
-      method: "POST",
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
       headers: {
         Authorization: `Bearer ${key}`,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: "ClearForge <website@clearforge.ai>",
+        from: 'ClearForge <website@clearforge.ai>',
         to: [to],
         subject,
         text,

@@ -168,12 +168,15 @@ export async function saveRfpFile(
   data: ArrayBuffer,
 ): Promise<string | null> {
   if (!supabaseAdmin) return null;
-  const rawExt = filename.includes(".") ? filename.split(".").pop() ?? "" : "";
-  const cleanExt = rawExt.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 8);
-  const extension = cleanExt ? `.${cleanExt}` : "";
+  const rawExt = filename.includes('.') ? (filename.split('.').pop() ?? '') : '';
+  const cleanExt = rawExt
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '')
+    .slice(0, 8);
+  const extension = cleanExt ? `.${cleanExt}` : '';
   const path = `${crypto.randomUUID()}${extension}`;
   const { error } = await supabaseAdmin.storage
-    .from("rfps")
+    .from('rfps')
     .upload(path, data, { contentType, upsert: false });
   return error ? null : path;
 }

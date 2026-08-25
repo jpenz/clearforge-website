@@ -1,34 +1,34 @@
-import { PageFrame } from "@/components/ui/PageFrame";
-import { SectionBand } from "@/components/ui/SectionBand";
-import { FaqAccordion } from "@/components/ui/FaqAccordion";
-import { BookCallButton } from "@/components/functional/BookCallButton";
-import { HOME_FAQS } from "@/data/faqs";
+import { BookCallButton } from '@/components/functional/BookCallButton';
+import { FaqAccordion } from '@/components/ui/FaqAccordion';
+import { PageFrame } from '@/components/ui/PageFrame';
+import { SectionBand } from '@/components/ui/SectionBand';
+import { HOME_FAQS } from '@/data/faqs';
 
 const PRICE_ROWS = [
   {
-    label: "Forge Diagnostic",
-    description: "Fixed fee, 2 weeks",
-    price: "The first step",
+    label: 'Forge Diagnostic',
+    description: 'Fixed fee, 2 weeks',
+    price: 'The first step',
   },
   {
-    label: "Eval and Reliability Audit",
-    description: "For AI systems you already built",
-    price: "Fixed fee, 2 weeks",
+    label: 'Eval and Reliability Audit',
+    description: 'For AI systems you already built',
+    price: 'Fixed fee, 2 weeks',
   },
   {
-    label: "Forge Sprint",
-    description: "10 to 14 weeks to a live system",
-    price: "Scoped in the Diagnostic",
+    label: 'Forge Sprint',
+    description: '10 to 14 weeks to a live system',
+    price: 'Scoped in the Diagnostic',
   },
   {
-    label: "Forge Scale",
-    description: "The Adoption Mile",
-    price: "Monthly retainer",
+    label: 'Forge Scale',
+    description: 'The Adoption Mile',
+    price: 'Monthly retainer',
   },
   {
-    label: "Forge Run",
-    description: "Managed operations",
-    price: "Monthly, per system",
+    label: 'Forge Run',
+    description: 'Managed operations',
+    price: 'Monthly, per system',
   },
 ];
 
@@ -44,8 +44,8 @@ export function PricingBookingSection() {
         <div className="border-hairline lg:border-r">
           <div className="border-b border-hairline px-5 pt-8 pb-8 md:px-10 md:pt-12 md:pb-10">
             <h2 className="font-display max-w-[22ch] text-[30px] leading-[1.1] md:text-[44px]">
-              The first step is a fixed-fee diagnostic. Everything after it
-              is scoped before you commit.
+              The first step is a fixed-fee diagnostic. Everything after it is scoped before you
+              commit.
             </h2>
             <div className="mt-8 border-t border-hairline text-[14px]">
               {PRICE_ROWS.map((row) => (
@@ -57,9 +57,7 @@ export function PricingBookingSection() {
                     {row.label}
                   </span>
                   <span className="tnum text-ink/70">{row.description}</span>
-                  <span className="tnum text-[16px] font-semibold">
-                    {row.price}
-                  </span>
+                  <span className="tnum text-[16px] font-semibold">{row.price}</span>
                 </div>
               ))}
             </div>
@@ -73,9 +71,7 @@ export function PricingBookingSection() {
         </div>
 
         <div className="flex flex-col border-t border-hairline px-5 py-8 md:px-10 md:py-12 lg:border-t-0">
-          <p className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">
-            Book
-          </p>
+          <p className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">Book</p>
           <h3 className="font-display mt-3 max-w-[16ch] text-[28px] leading-tight md:text-[32px]">
             30 minutes with the founder.
           </h3>
@@ -95,7 +91,7 @@ export function PricingBookingSection() {
             </li>
           </ul>
           <p className="mt-6 text-[13px] text-ink/60">
-            Prefer a calendar view first?{" "}
+            Prefer a calendar view first?{' '}
             <a href="/contact" className="text-cobalt underline underline-offset-4">
               Pick a time on the booking page.
             </a>

@@ -1,6 +1,6 @@
-import type { getCalApi } from "@calcom/embed-react";
-import { sendGAEvent } from "@next/third-parties/google";
-import { CAL_LINK } from "@/data/site";
+import type { getCalApi } from '@calcom/embed-react';
+import { sendGAEvent } from '@next/third-parties/google';
+import { CAL_LINK } from '@/data/site';
 
 /**
  * Shared Cal.com loader. Perf contract (carried over from V11): the embed's
@@ -19,16 +19,16 @@ const instances = new Map<string, Promise<CalApi>>();
 export function loadCal(namespace: string): Promise<CalApi> {
   let instance = instances.get(namespace);
   if (!instance) {
-    instance = import("@calcom/embed-react")
+    instance = import('@calcom/embed-react')
       .then((m) => m.getCalApi({ namespace }))
       .then((cal) => {
-        cal("on", {
-          action: "bookingSuccessful",
+        cal('on', {
+          action: 'bookingSuccessful',
           callback: () => {
-            sendGAEvent("event", "generate_lead", { method: "cal_booking" });
+            sendGAEvent('event', 'generate_lead', { method: 'cal_booking' });
           },
         });
-        cal("ui", { theme: "light", layout: "month_view" });
+        cal('ui', { theme: 'light', layout: 'month_view' });
         return cal;
       });
     instances.set(namespace, instance);
@@ -38,18 +38,15 @@ export function loadCal(namespace: string): Promise<CalApi> {
 
 export function preloadCal(namespace: string): void {
   void loadCal(namespace).then((cal) => {
-    cal("preload", { calLink: CAL_LINK });
+    cal('preload', { calLink: CAL_LINK });
   });
 }
 
-export function openCalModal(
-  namespace: string,
-  prefill?: { name?: string; email?: string },
-): void {
+export function openCalModal(namespace: string, prefill?: { name?: string; email?: string }): void {
   void loadCal(namespace).then((cal) => {
-    cal("modal", {
+    cal('modal', {
       calLink: CAL_LINK,
-      config: { layout: "month_view", theme: "light", ...prefill },
+      config: { layout: 'month_view', theme: 'light', ...prefill },
     });
   });
 }
