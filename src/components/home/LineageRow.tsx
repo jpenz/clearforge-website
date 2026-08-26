@@ -8,6 +8,9 @@ import { PageFrame } from "@/components/ui/PageFrame";
  * deliverable, 70% weekly-active is the adoption bar we build to, and the
  * stack-trends-weekly task re-tests the stack every Tuesday. The stack
  * stays as a quiet supporting line; updates arrive as PRs from that task.
+ * Named tools are the ones a mid-market buyer recognizes; specialized
+ * research tooling is described by capability rather than brand (2026-08-26
+ * owner call, after a public-footprint check).
  */
 const TEAM_FROM = ["Bain & Company", "EY", "Capgemini"];
 const PRACTICES = [
@@ -16,7 +19,7 @@ const PRACTICES = [
   "Stack re-tested every week",
 ];
 const STACK_LINE =
-  "Built with Claude by Anthropic, CellCog, n8n, Supabase, Microsoft, and Vercel.";
+  "Built with Claude by Anthropic, n8n, Supabase, Microsoft, and Vercel, plus specialized research agents.";
 
 function Wordmark({ name }: { name: string }) {
   return (
