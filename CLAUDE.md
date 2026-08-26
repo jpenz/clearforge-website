@@ -13,15 +13,11 @@ for mid-market & PE (James Penz, ex-Bain AI & Automation practice).
 
 **Production URL:** https://clearforge.ai (Vercel auto-deploys `main`)
 **Repo:** https://github.com/jpenz/clearforge-website
-**Current version:** V12 (Kombai redesign, LIVE 2026-08-18 via PR #27)
+**Current version:** V12.1 (Kombai redesign LIVE 2026-08-18 via PR #27, plus
+the atmosphere/HDR pass, de-pricing, /start intake, and security hardening)
 
-> ⚠️ V12 NOTE: the Design System section below describes V11 and is STALE for
-> visual work. V12 truth: tokens in `src/app/globals.css` (ghost/ink/cobalt
-> #2454ff/hairlines), display font Newsreader via `--font-bodoni` var (Bodoni
-> was swapped out for legibility 2026-08-18), body Hanken Grotesk, components
-> in `src/components/{layout,home,functional,ui}`, data in `src/data/`.
-> Conversion, editorial, QA, and CI sections below still bind. Cal modal host
-> needs the `cal-modal-box` rule in globals (embed host-sizing fails here).
+Components in `src/components/{layout,home,functional,ui}`, content in
+`src/data/`, integrations in `src/lib/`.
 
 ---
 
@@ -52,66 +48,73 @@ for mid-market & PE (James Penz, ex-Bain AI & Automation practice).
 
 ---
 
-## Design System — V11 (navy/cobalt/serif — NOT the old V8 editorial-ember or V9 signal-blue)
+## Design System — V12.1 (current, live)
 
-Cool paper, navy ink, ONE electric cobalt accent, serif display. See
-`tasks/prd-v11-site-modernization.md` for the full spec.
+Swiss-hairline editorial system on a ghost-white canvas, ONE cobalt accent,
+serif display, plus a cinematic dark "atmosphere" layer.
 
-### Tokens (`src/app/globals.css` — legacy NAMES kept, values remapped; do NOT rename tokens)
+### Tokens (`src/app/globals.css` — the single source of truth)
 
 ```css
---color-forge-black: #081826;  /* deep navy — dark sections (NOT black) */
---color-parchment:   #F8F7F4;  /* cool paper — light sections */
---color-anthracite:  #0B1B2B;  /* navy ink — text on light */
---color-warm-gray:   #46525E;  /* slate — secondary on light */
---color-bone:        #EDF1F4;  /* text on navy */
---color-stone:       #8D9AA6;  /* secondary on navy */
---color-brass:       #1F4CDB;  /* THE accent (electric cobalt) */
---color-brass-hover: #1638A8;
---color-brass-light: #7A97FF;  /* accent ON DARK — cobalt fails contrast on navy */
---color-divider:     #E1E1DB;  --color-divider-dark: #1C3040;
+--color-cobalt:        #2454ff;  /* THE accent */
+--color-cobalt-press:  #1a41d8;
+--color-cobalt-bright: #7a97ff;  /* accent ON DARK (cobalt fails contrast there) */
+--color-ink:           #010b13;  /* text on light */
+--color-ghost:         #f8f8ff;  /* canvas + text on dark */
+--color-hairline:      rgba(1,11,19,.12);   /* + -faint .07, -strong .3 */
+--color-hairline-ghost: rgba(248,248,255,.14); /* hairlines on dark */
 ```
 
-### Typography — tri-font
+### Typography — tri-register
 
-- **Display:** Newsreader serif (~550 weight, never ultra-bold), css var still named
-  `--font-fraunces`. One italic cobalt accent phrase per display headline (`.display-accent`).
-- **Body:** Hanken Grotesk. **Data/overlines:** DM Mono, uppercase, tracked.
-- Type scale classes: `.text-display-xl/.text-display/.text-h1…h4`, `.overline`, `.metric*`.
+- **Display:** Newsreader serif, loaded via the `--font-bodoni` CSS var (name
+  kept from the Bodoni original, swapped 2026-08-18 for legibility). One
+  italic accent phrase per headline: `text-cobalt` on light,
+  `text-cobalt-bright` on dark.
+- **Body:** Hanken Grotesk. **Data/labels/eyebrows:** `.tnum` tabular figures,
+  uppercase, tracked.
 
-### Hard-won CSS rules (violating these has shipped real bugs)
+### Atmosphere layer (V12.1)
 
-- **Never put `color` on bare element selectors** in globals — unlayered CSS beats ALL
-  Tailwind utilities; headings become un-recolorable (navy-on-navy /discover bug).
-- **Never reference theme tokens via inline `style={{...var(--font-display)...}}`** —
-  `@theme inline` vars don't exist at runtime; the style silently falls back to body
-  sans (this broke serif on 10 files incl. the hero). Use utilities (`font-display`).
-- **Never name a custom class after a Tailwind utility** (`.overline` collided with the
-  `overline` text-decoration utility).
-- **On dark surfaces**: `text-brass-light` + `border-brass-light/50`, secondary `text-stone`.
-  `text-brass`/`text-warm-gray` on navy fail WCAG.
-- Percentage-height chart bars need `h-full … justify-end` columns (`items-end` on the
-  row collapses them to 0).
+- `.cf-dark-band` — cinematic navy-black band (gradient + `#030b13`) with a
+  film-grain `::after` (inline SVG turbulence).
+- `.cf-aurora` / `.cf-aurora-b` — pre-blurred radial gradients, transform-only
+  drift animation (compositor-friendly, no `filter()`).
+- `.cf-glow` — cobalt glow for product-UI objects sitting on dark.
+- `.cf-dots` / `.cf-dots-ghost` — dotted-grid texture.
+- `.cf-enter` — one-time load stagger via `--d` delay var.
+- All of it disabled under `prefers-reduced-motion`.
+
+### Hard-won CSS rules (each one shipped a real bug)
+
+- **Never put `color` on bare element selectors** in globals — unlayered CSS
+  beats ALL Tailwind utilities (navy-on-navy heading bug).
+- **Never reference theme tokens via inline `style={{...var(--font-x)...}}`** —
+  `@theme inline` vars do not exist at runtime; it silently falls back to
+  body sans. Use utilities (`font-display`).
+- **Never name a custom class after a Tailwind utility** (`.overline` collided
+  with the `overline` text-decoration utility).
+- **A white card inside `.cf-dark-band` must reset its own color** (`text-ink`)
+  or it inherits ghost text and washes out.
+- **Cal.com modal needs the `cal-modal-box` host rule** in globals (the embed
+  fails to size its own host here, so the dialog renders unframed).
+- Percentage-height chart bars need `h-full … justify-end` columns.
 
 ### Layout & register
 
-- Editorial ruled lines + whitespace; cards ONLY for product-UI objects and max ONE
-  bento per page. Asymmetric 12-col grids, `max-w-[1400px]`.
-- Cinematic dark hero + light interior; ONE extra dark band per page (credibility/CTA).
-- Product-as-hero: the homepage hero card IS the live agent (`/api/hero-analyze`).
-- A number in every viewport, tied to a named thing; numbers always DM Mono.
+- Hairline `PageFrame` (max-w-1360) + `SectionBand` headers are the structural
+  primitives. Editorial rules and whitespace over boxes.
+- Dark bands bookend the site: hero + footer, plus dark title blocks on
+  /services, /pricing, /contact, /start.
+- Cards ONLY for product-UI objects (the live agent card, the scorecard).
+- A number in every viewport, tied to a named thing; numbers always `.tnum`.
 
-### Motion Doctrine (V11 — reverses V7/V8 rules you may find elsewhere)
+### Motion Doctrine
 
 - **Content renders instantly. Native scroll. No Lenis, no custom cursor, no
-  opacity-0-until-ScrollTrigger reveals, no pinned/scrubbed sections.** A client called
-  the old scroll-theater build "very lazy"; removing it fixed it.
-- Motion as moments only: `MetricCounter` count-ups, one CSS marquee, hover states, the
-  agent card's own state changes. `prefers-reduced-motion` respected.
-- Reveal wrappers (`ui/animate.tsx`, `home/homepage-animations.tsx`) are inert server
-  passthroughs — keep their APIs; do not re-arm them casually.
-- Background videos must be normalized (`scale-110 blur-[10px] saturate-50..85
-  opacity-40` + gradient) — several contain baked-in text/off-palette hues.
+  opacity-0-until-ScrollTrigger reveals, no pinned/scrubbed sections.**
+- Motion as moments: the `.cf-enter` load stagger, `CountUp`, hover states,
+  the live agent card's own state changes. CSS-first, no animation libraries.
 
 ---
 
@@ -126,6 +129,11 @@ Cool paper, navy ink, ONE electric cobalt accent, serif display. See
 
 ## Editorial Rules
 
+- **No published prices** (owner decision 2026-08-20). Vocabulary: "fixed-fee
+  two-week diagnostic", "scoped in the Diagnostic before you commit", "monthly
+  retainer". Numeric bounds stay in `src/data/pricing.ts` for a one-commit
+  flip-back if that reverses.
+- **No em dashes in any public-facing copy.**
 - **Never invent metrics.** If a stat is irrelevant or unsourced, render nothing.
 - **No real client names** (anonymized: "$180M industrial manufacturer"). James's real
   caseload is confidential.
