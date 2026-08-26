@@ -120,8 +120,13 @@ serif display, plus a cinematic dark "atmosphere" layer.
 
 ## Conversion System
 
-- **Cal.com `james-penz/30min` is the primary conversion.** `src/components/booking/book-call.tsx`:
-  `BookingInline` (on /contact) + `BookCallButton` (popup everywhere else).
+- **Cal.com `james-penz/30min` is the primary conversion.** Loader in
+  `src/lib/cal.ts` (embed JS loads on INTENT: hover/focus/touch preload, click
+  opens; `bookingSuccessful` fires the `generate_lead` GA4 event once).
+  `src/components/functional/BookCallButton.tsx` (modal, everywhere) +
+  `BookingInline.tsx` (eager inline calendar, /contact only).
+- **`/start`** is the project-brief intake (3 steps, optional hardened file
+  upload); its confirmation opens the Cal modal with name/email prefilled.
 - **Canonical CTA labels — do not invent variants** (drift was a 10-finding QA cluster):
   booking = **"Book a 30-min intro"** · agent = **"Map the Workflow"** (→ /discover) ·
   assessment = **"Take the scorecard"** (→ /scorecard).
@@ -149,15 +154,18 @@ serif display, plus a cinematic dark "atmosphere" layer.
 ```bash
 npm run dev          # dev on :3007 — pass env explicitly:
                      # ANTHROPIC_API_KEY=... PERPLEXITY_API_KEY=... npx next dev -p 3007
-npm run build        # MUST pass (92 routes)
+npm run build        # MUST pass (68 routes)
 npm run typecheck    # tsc --noEmit
-npx vitest run       # 170 unit tests
+npx vitest run       # 16 unit tests (incl. 7 SSRF-guard tests)
 npx next start -p 3008                                   # prod-mode server for QA
-PLAYWRIGHT_BASE_URL=http://localhost:3008 npx playwright test   # 164 e2e
+PLAYWRIGHT_BASE_URL=http://localhost:3008 npx playwright test   # 16 e2e
 ```
 
-- Local `.env.local` has an EMPTY `RESEND_API_KEY` → /api/contact 503s locally by
-  design; production has the key and works.
+- Local `.env.local` has an EMPTY `RESEND_API_KEY` by design.
+- **`NEXT_PUBLIC_*` vars inline at BUILD time even in server code**: to exercise
+  Supabase/Resend integrations locally you must rebuild with the vars present
+  (`set -a; source <(vercel env pull ...); set -a; npm run build`), or the
+  graceful fallback reports success while persisting nothing.
 
 ## QA Gate (before calling anything "done")
 
@@ -165,6 +173,25 @@ Run the pipeline in `~/.claude/skills/premium-site-builder/QA_PIPELINE.md`:
 prod-build crawl (console/overflow/broken links/images + screenshots both viewports) →
 journey scripts (booking, scorecard flow, forms — ONE labeled test submission max) →
 axe-core WCAG AA (zero serious/critical on our DOM; exclude the Cal iframe) → e2e green.
+
+## Security (hardened 2026-08-20 — do not regress)
+
+- **SSRF** (`src/lib/url-safety.ts` + `analysis.ts`): manual redirect following
+  with per-hop re-validation, 512KB streamed body cap, DNS resolution rejecting
+  private IPs, and a literal denylist covering encoded IP forms, IPv6
+  link-local/ULA/mapped, cloud metadata, CGNAT, `.local`/`.internal`, and
+  `user:pass@`. 7 unit tests lock it. NEVER use `redirect: "follow"` here.
+- **Every unauthenticated server action** (`src/app/actions.ts`) needs BOTH a
+  honeypot (`website` field) and `isRateLimited(await headers(), ...)`. All
+  three have them; adding a fourth action means adding both.
+- Rate limiting reads `x-real-ip` (platform-set), not the spoofable leftmost
+  `x-forwarded-for`.
+- Uploads: `src/lib/uploads.ts` (allowlist + size check BEFORE `arrayBuffer()`
+  + magic-byte verification), UUID storage names, private Supabase bucket.
+  `serverActions.bodySizeLimit` is set in `next.config.ts` — uploads break
+  silently without it.
+- JSON-LD escapes `< > &` before injection (`src/lib/seo.ts`).
+- Full checklist: `~/.claude/skills/premium-site-builder/QA_PIPELINE.md`.
 
 ## CI (GitHub Actions)
 
