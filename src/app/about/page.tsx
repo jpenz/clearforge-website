@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { BookCallButton } from '@/components/functional/BookCallButton';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
+import { founderJsonLd, JsonLdScriptProps } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -48,6 +49,7 @@ const HOW_WE_WORK = [
 export default function AboutPage() {
   return (
     <>
+      <script {...JsonLdScriptProps(founderJsonLd())} />
       {/* Title block + founder headshot */}
       <PageFrame aria-label="About ClearForge">
         <SectionBand left="About" right="Founder-led · Founded by James Penz" />

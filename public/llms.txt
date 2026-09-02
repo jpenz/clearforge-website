@@ -26,5 +26,7 @@
 - [Book a 30-min intro](https://clearforge.ai/contact): Inline scheduling.
 - [Forge Intelligence](https://clearforge.ai/discover): Free AI workflow-mapping tool.
 - [Scorecard](https://clearforge.ai/scorecard): Free AI readiness scorecard, 10 questions across 5 pillars.
+- [Private equity](https://clearforge.ai/private-equity): AI across a PE portfolio. One diagnostic model across companies, systems built where they pay, weekly-active adoption reported to the sponsor. Includes the PE Portfolio Pack and a sponsor FAQ.
+- [Security](https://clearforge.ai/security): Data handling, named subprocessors, no training on your data, DPA on request.
 - [Industries](https://clearforge.ai/industries): 20 industry workflow patterns, each with the system we would build first and labeled benchmark ranges.
 - [Privacy](https://clearforge.ai/privacy) and [Terms](https://clearforge.ai/terms): Plain-language policies.

@@ -32,24 +32,26 @@ export function faqJsonLd(faqs: Faq[]) {
   };
 }
 
-/** OfferCatalog of named engagements (prices unpublished by owner decision 2026-08-20). */
+/**
+ * OfferCatalog of named engagements. Prices are deliberately absent:
+ * unpublished by owner decision 2026-08-20, so no price may appear in
+ * structured data either.
+ */
 export function pricingJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': 'OfferCatalog',
-    name: `${SITE_NAME} published pricing`,
+    name: `${SITE_NAME} engagements`,
     url: `${SITE_URL}/pricing`,
     itemListElement: PRICING_TIERS.map((tier) => ({
       '@type': 'Offer',
       name: tier.name,
       description: tier.subtitle,
-      priceCurrency: 'USD',
-      priceSpecification: {
-        '@type': 'PriceSpecification',
-        priceCurrency: 'USD',
-        minPrice: tier.minPrice,
-        ...(tier.maxPrice != null ? { maxPrice: tier.maxPrice } : {}),
-      },
+      // No price fields: pricing is scoped in the Diagnostic and is not
+      // published, so the schema must not advertise a number the page does
+      // not show. Emitting one would put a figure into AI answers and search
+      // results that no visitor can verify on the site.
+      availability: 'https://schema.org/InStock',
       seller: { '@id': `${SITE_URL}/#organization` },
     })),
   };
@@ -68,4 +70,60 @@ export function JsonLdScriptProps(data: object) {
     type: 'application/ld+json',
     dangerouslySetInnerHTML: { __html: json },
   } as const;
+}
+
+/**
+ * Founder entity. For a founder-led firm the person IS the brand, so a
+ * standalone Person node with credentials gives answer engines something to
+ * attribute expertise to when they summarize "who is ClearForge".
+ */
+export function founderJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${SITE_URL}/#founder`,
+    name: 'James Penz',
+    jobTitle: 'Founder',
+    description:
+      "Founder of ClearForge. Previously in Bain and Company's AI and Automation practice, with earlier work at EY and Capgemini. Builds AI systems into mid-market and PE-backed operations.",
+    url: `${SITE_URL}/about`,
+    sameAs: ['https://www.linkedin.com/in/jamespenz/'],
+    worksFor: { '@id': `${SITE_URL}/#organization` },
+    knowsAbout: [
+      'AI strategy',
+      'AI implementation',
+      'AI adoption',
+      'Agentic AI systems',
+      'Private equity value creation',
+      'Mid-market operations',
+    ],
+  };
+}
+
+/**
+ * Service catalog for /services. Names each engagement as a distinct Service
+ * so an answer engine can cite what we actually sell, not infer it from prose.
+ */
+export function servicesJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `${SITE_NAME} services`,
+    url: `${SITE_URL}/services`,
+    itemListElement: PRICING_TIERS.map((tier, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Service',
+        name: tier.name,
+        description: tier.subtitle,
+        provider: { '@id': `${SITE_URL}/#organization` },
+        areaServed: 'US',
+        audience: {
+          '@type': 'BusinessAudience',
+          name: 'Mid-market companies and private equity operating teams',
+        },
+      },
+    })),
+  };
 }

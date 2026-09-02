@@ -60,3 +60,42 @@ export const PRICING_FAQS: Faq[] = [
       'The Diagnostic is a fixed fee, agreed up front. Everything after it is scoped in the Diagnostic and agreed before any build. PE and multi-company platform work is scoped with the sponsor.',
   },
 ];
+
+/**
+ * Private-equity FAQ. Written as direct answers to the questions a sponsor
+ * or operating partner actually asks, so answer engines can quote a whole
+ * response rather than stitching one from prose.
+ */
+export const PE_FAQS: Faq[] = [
+  {
+    question:
+      'How do you work across a portfolio without running a separate engagement for every company?',
+    answer:
+      'One diagnostic model, run across the companies you choose. Each portfolio company gets the same two-week diagnostic on the same scoring model, so the outputs are comparable. The sponsor gets a ranked view of where AI is worth funding first instead of a stack of unrelated reports.',
+  },
+  {
+    question: 'What does a portfolio AI scan actually produce?',
+    answer:
+      'A ranked list of workflows worth building across the portfolio, the companies where each play applies, an estimate of what it takes to build, and a sequence. In a recent portfolio engagement that was 3 companies assessed on one model, 8 priority plays selected, and a 12-month execution plan.',
+  },
+  {
+    question: 'How do you measure whether portfolio companies actually adopt what gets built?',
+    answer:
+      'Weekly-active usage, reported to the sponsor. The bar is 70 percent of the intended users active weekly by day 90. It is tracked on a live adoption scoreboard so the operating team sees which companies are using their systems and which are not, without asking management for a status update.',
+  },
+  {
+    question: 'How fast can one portfolio company get to a live system?',
+    answer:
+      'Two weeks for the diagnostic, then 10 to 14 weeks from kickoff to a system running in production inside the workflow the team already uses. The diagnostic prices and scopes the build before anyone commits to it.',
+  },
+  {
+    question: 'Do you work with the management team or around them?',
+    answer:
+      'With them. The system is built into the workflow the operating team already runs, and adoption is the metric we are graded on, so a build that management will not use is a failed build. The sponsor gets visibility; the company gets the working system.',
+  },
+  {
+    question: 'How is portfolio work priced?',
+    answer:
+      'Scoped with the sponsor. Single-company work starts with a fixed-fee diagnostic that prices the build before you commit. Portfolio work is scoped against the number of companies and the depth of the scan.',
+  },
+];

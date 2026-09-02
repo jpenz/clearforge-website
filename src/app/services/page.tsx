@@ -5,6 +5,7 @@ import { BookingStrip } from '@/components/ui/BookingStrip';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
 import { PE_PACK, SERVICE_STAGES } from '@/data/services';
+import { JsonLdScriptProps, servicesJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Services',
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <>
+      <script {...JsonLdScriptProps(servicesJsonLd())} />
       {/* Intro band */}
       <PageFrame aria-label="Services introduction">
         <SectionBand left="Services" right="The journey: Diagnose, Build, Adopt, Run" />
@@ -131,6 +133,12 @@ export default function ServicesPage() {
               ))}
             </div>
             <p className="mt-8 text-[15px] text-ghost/85">{PE_PACK.priceNote}</p>
+            <Link
+              href="/private-equity"
+              className="mt-5 inline-block text-[14px] font-semibold text-cobalt underline underline-offset-4"
+            >
+              How portfolio work runs
+            </Link>
             <BookCallButton size="lg" className="mt-8" />
           </div>
           <div className="flex flex-col justify-between border-t border-[rgba(248,248,255,0.18)] px-5 py-10 md:px-10 md:py-14 lg:border-t-0">
