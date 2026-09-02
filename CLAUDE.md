@@ -195,9 +195,10 @@ axe-core WCAG AA (zero serious/critical on our DOM; exclude the Cal iframe) → 
 
 ## CI (GitHub Actions)
 
-TypeScript, Vitest, TruffleHog, Semgrep must be green. **Biome and npm audit are
-pre-existing red on main** (legacy debt + Supabase transitive `ws`) — add no NEW
-violations; do not mass-fix.
+ALL checks must be green: TypeScript, Biome, Vitest, npm audit, TruffleHog,
+Semgrep, Build, Playwright E2E, Bundle Size. The legacy Biome/audit debt was
+cleared 2026-08-25 (chore/enterprise-debt-cleanup) — keep it at zero. The
+TypeScript job runs `next typegen` before `tsc`; Build gates on lint again.
 
 ---
 

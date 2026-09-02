@@ -1,4 +1,4 @@
-import { PageFrame } from "@/components/ui/PageFrame";
+import { PageFrame } from '@/components/ui/PageFrame';
 
 /**
  * Proof band: where the team comes from, and how we build. Research
@@ -12,14 +12,14 @@ import { PageFrame } from "@/components/ui/PageFrame";
  * research tooling is described by capability rather than brand (2026-08-26
  * owner call, after a public-footprint check).
  */
-const TEAM_FROM = ["Bain & Company", "EY", "Capgemini"];
+const TEAM_FROM = ['Bain & Company', 'EY', 'Capgemini'];
 const PRACTICES = [
-  "Evals ship with every sprint",
-  "Adoption is the metric: 70% weekly-active",
-  "Stack re-tested every week",
+  'Evals ship with every sprint',
+  'Adoption is the metric: 70% weekly-active',
+  'Stack re-tested every week',
 ];
 const STACK_LINE =
-  "Built with Claude by Anthropic, n8n, Supabase, Microsoft, and Vercel, plus specialized research agents.";
+  'Built with Claude by Anthropic, n8n, Supabase, Microsoft, and Vercel, plus specialized research agents.';
 
 function Wordmark({ name }: { name: string }) {
   return (
@@ -44,9 +44,7 @@ export function LineageRow() {
           </div>
         </div>
         <div className="cf-dots px-5 py-8 md:px-10">
-          <p className="tnum text-[11px] tracking-[0.18em] text-ink/50 uppercase">
-            How we build
-          </p>
+          <p className="tnum text-[11px] tracking-[0.18em] text-ink/50 uppercase">How we build</p>
           <ul className="mt-4 space-y-2">
             {PRACTICES.map((practice) => (
               <li
@@ -61,9 +59,7 @@ export function LineageRow() {
               </li>
             ))}
           </ul>
-          <p className="mt-4 text-[12px] leading-relaxed text-ink/50">
-            {STACK_LINE}
-          </p>
+          <p className="mt-4 text-[12px] leading-relaxed text-ink/50">{STACK_LINE}</p>
         </div>
       </div>
     </PageFrame>

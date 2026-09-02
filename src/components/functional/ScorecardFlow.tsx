@@ -1,21 +1,15 @@
-"use client";
+'use client';
 
-import { useMemo, useState } from "react";
-import {
-  PILLARS,
-  QUESTIONS,
-  scoreAnswers,
-} from "@/data/scorecard";
-import { ScoreResults } from "@/components/functional/ScoreResults";
+import { useMemo, useState } from 'react';
+import { ScoreResults } from '@/components/functional/ScoreResults';
+import { PILLARS, QUESTIONS, scoreAnswers } from '@/data/scorecard';
 
 /**
  * The 10-question scorecard: 1 to 5 scale across 5 pillars with progress,
  * then the scored results readout in place.
  */
 export function ScorecardFlow() {
-  const [answers, setAnswers] = useState<Array<number | null>>(
-    Array(QUESTIONS.length).fill(null),
-  );
+  const [answers, setAnswers] = useState<Array<number | null>>(Array(QUESTIONS.length).fill(null));
   const [current, setCurrent] = useState(0);
   const [complete, setComplete] = useState(false);
 
@@ -40,13 +34,11 @@ export function ScorecardFlow() {
   }
 
   const pillarState = (pillarIndex: number) => {
-    if (pillarIndex === question.pillarIndex) return "current";
+    if (pillarIndex === question.pillarIndex) return 'current';
     const questionIndexes = QUESTIONS.map((q, i) =>
       q.pillarIndex === pillarIndex ? i : null,
     ).filter((i): i is number => i != null);
-    return questionIndexes.every((i) => answers[i] != null)
-      ? "done"
-      : "upcoming";
+    return questionIndexes.every((i) => answers[i] != null) ? 'done' : 'upcoming';
   };
 
   return (
@@ -99,27 +91,25 @@ export function ScorecardFlow() {
               const state = pillarState(index);
               return (
                 <li key={item.name} className="flex items-center gap-3">
-                  <span className="tnum w-5 text-[11px] text-ink/60">
-                    0{index + 1}
-                  </span>
+                  <span className="tnum w-5 text-[11px] text-ink/60">0{index + 1}</span>
                   <span
                     aria-hidden="true"
                     className={`inline-block size-[9px] shrink-0 ${
-                      state === "done"
-                        ? "bg-cobalt"
-                        : state === "current"
-                          ? "border-2 border-cobalt"
-                          : "border border-hairline-strong"
+                      state === 'done'
+                        ? 'bg-cobalt'
+                        : state === 'current'
+                          ? 'border-2 border-cobalt'
+                          : 'border border-hairline-strong'
                     }`}
                   />
                   <span
-                    aria-current={state === "current" ? "step" : undefined}
+                    aria-current={state === 'current' ? 'step' : undefined}
                     className={`text-[14px] ${
-                      state === "current"
-                        ? "font-semibold text-ink"
-                        : state === "done"
-                          ? "text-ink/70"
-                          : "text-ink/60"
+                      state === 'current'
+                        ? 'font-semibold text-ink'
+                        : state === 'done'
+                          ? 'text-ink/70'
+                          : 'text-ink/60'
                     }`}
                   >
                     {item.name}
@@ -135,8 +125,7 @@ export function ScorecardFlow() {
             <h2 className="font-display max-w-[26ch] text-[28px] leading-[1.25] font-medium md:text-[34px]">
               {question.text}
             </h2>
-            <div
-              role="group"
+            <fieldset
               aria-label="Rate from 1 to 5"
               className="mt-8 flex flex-wrap gap-3 md:mt-11 md:gap-4"
             >
@@ -156,8 +145,8 @@ export function ScorecardFlow() {
                     }
                     className={`tnum size-14 cursor-pointer text-[18px] transition-colors ${
                       selected
-                        ? "bg-cobalt font-semibold text-white hover:bg-cobalt-press"
-                        : "border border-hairline-strong font-medium hover:border-ink"
+                        ? 'bg-cobalt font-semibold text-white hover:bg-cobalt-press'
+                        : 'border border-hairline-strong font-medium hover:border-ink'
                     }`}
                   >
                     {value}
@@ -175,7 +164,7 @@ export function ScorecardFlow() {
                 }
                 return button;
               })}
-            </div>
+            </fieldset>
           </div>
           <div className="flex items-center justify-end gap-4 border-t border-hairline px-4 py-5 md:gap-6 md:px-10">
             <button
@@ -198,7 +187,7 @@ export function ScorecardFlow() {
               }}
               className="cursor-pointer bg-cobalt px-6 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-cobalt-press disabled:opacity-40"
             >
-              {isLast ? "See results" : "Next question"}
+              {isLast ? 'See results' : 'Next question'}
             </button>
           </div>
         </div>

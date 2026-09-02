@@ -1,57 +1,49 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useAnalysisStream } from "@/hooks/useAnalysisStream";
-import { DETAILED_PROGRESS_STEPS } from "@/lib/analysis";
-import { BookCallButton } from "@/components/functional/BookCallButton";
+import { useState } from 'react';
+import { BookCallButton } from '@/components/functional/BookCallButton';
+import { useAnalysisStream } from '@/hooks/useAnalysisStream';
+import { DETAILED_PROGRESS_STEPS } from '@/lib/analysis';
 
 const FIELD_ROWS: Array<{ key: string; label: string }> = [
-  { key: "workflow", label: "Workflow identified" },
-  { key: "handoffs", label: "Manual handoffs" },
-  { key: "fits", label: "Where an AI system fits" },
-  { key: "measure", label: "What we would measure" },
+  { key: 'workflow', label: 'Workflow identified' },
+  { key: 'handoffs', label: 'Manual handoffs' },
+  { key: 'fits', label: 'Where an AI system fits' },
+  { key: 'measure', label: 'What we would measure' },
 ];
 
-const SAMPLES = [
-  "Industrial manufacturer",
-  "Commercial services firm",
-  "PE portfolio company",
-];
+const SAMPLES = ['Industrial manufacturer', 'Commercial services firm', 'PE portfolio company'];
 
 /**
  * The full-page free workflow-mapping instrument on /discover.
  * Streams a detailed analysis from /api/hero-analyze.
  */
 export function ForgeIntelligence() {
-  const { status, target, progress, fields, run, live } =
-    useAnalysisStream("detailed");
-  const [input, setInput] = useState("");
+  const { status, target, progress, fields, run, live } = useAnalysisStream('detailed');
+  const [input, setInput] = useState('');
 
-  const running = status === "running" || status === "streaming";
+  const running = status === 'running' || status === 'streaming';
   const statusTag =
-    status === "idle"
-      ? "Ready"
-      : status === "done"
-        ? "Complete"
-        : status === "error"
-          ? "Stopped"
-          : "Running";
+    status === 'idle'
+      ? 'Ready'
+      : status === 'done'
+        ? 'Complete'
+        : status === 'error'
+          ? 'Stopped'
+          : 'Running';
 
   return (
     <div className="border border-ink bg-white">
       {/* Instrument header strip */}
       <div className="flex items-center justify-between border-b border-ink px-4 py-3.5 md:px-6">
         <div className="flex items-center gap-3">
-          <span
-            aria-hidden="true"
-            className="inline-block size-[7px] bg-cobalt"
-          />
+          <span aria-hidden="true" className="inline-block size-[7px] bg-cobalt" />
           <span className="text-[11px] font-medium tracking-[0.18em] text-ink/60 uppercase">
             ForgeIntelligence · Streaming analysis
           </span>
         </div>
         <span className="text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase">
-          {live ? "Live analysis" : "Illustrative"}
+          {live ? 'Live analysis' : 'Illustrative'}
         </span>
       </div>
 
@@ -117,7 +109,7 @@ export function ForgeIntelligence() {
             </span>
             <span
               className={`text-[11px] font-medium tracking-[0.14em] uppercase ${
-                status === "error" ? "text-ink" : "text-cobalt"
+                status === 'error' ? 'text-ink' : 'text-cobalt'
               }`}
             >
               {statusTag}
@@ -125,18 +117,13 @@ export function ForgeIntelligence() {
           </div>
           <div className="flex flex-col gap-5 px-4 py-6 md:px-6">
             <div className="relative mb-1 h-[2px] bg-hairline">
-              {running && (
-                <span className="cf-progress-bar absolute inset-y-0 left-0 bg-cobalt" />
-              )}
-              {status === "done" && (
-                <span className="absolute inset-y-0 left-0 w-full bg-cobalt" />
-              )}
+              {running && <span className="cf-progress-bar absolute inset-y-0 left-0 bg-cobalt" />}
+              {status === 'done' && <span className="absolute inset-y-0 left-0 w-full bg-cobalt" />}
             </div>
             {DETAILED_PROGRESS_STEPS.map((step, index) => {
               const arrived = index < progress.length;
-              const isActive =
-                arrived && index === progress.length - 1 && running;
-              if (!arrived && status === "idle") {
+              const isActive = arrived && index === progress.length - 1 && running;
+              if (!arrived && status === 'idle') {
                 return (
                   <div key={step} className="flex items-center gap-3">
                     <span
@@ -150,14 +137,9 @@ export function ForgeIntelligence() {
               if (!arrived) return null;
               return (
                 <div key={step} className="flex items-center gap-3">
+                  <span aria-hidden="true" className="inline-block size-[7px] shrink-0 bg-cobalt" />
                   <span
-                    aria-hidden="true"
-                    className="inline-block size-[7px] shrink-0 bg-cobalt"
-                  />
-                  <span
-                    className={`text-[14px] ${
-                      isActive ? "font-semibold text-ink" : "text-ink/80"
-                    }`}
+                    className={`text-[14px] ${isActive ? 'font-semibold text-ink' : 'text-ink/80'}`}
                   >
                     {step}
                   </span>
@@ -179,16 +161,15 @@ export function ForgeIntelligence() {
 
         {/* Analysis fields */}
         <div className="flex min-h-[280px] flex-col divide-y divide-hairline">
-          {status === "idle" && (
+          {status === 'idle' && (
             <div className="flex grow items-center px-4 py-8 md:px-8">
               <p className="max-w-[46ch] text-[14px] leading-relaxed text-ink/60">
-                The map renders here. Paste your company URL or pick a sample,
-                and the agent will name the workflow, the manual handoffs, and
-                where an AI system fits.
+                The map renders here. Paste your company URL or pick a sample, and the agent will
+                name the workflow, the manual handoffs, and where an AI system fits.
               </p>
             </div>
           )}
-          {status === "error" && (
+          {status === 'error' && (
             <div className="flex grow flex-col justify-center px-4 py-8 md:px-8">
               <div className="border-l-2 border-ink pl-4">
                 <p className="text-[15px] leading-relaxed font-medium">
@@ -210,9 +191,7 @@ export function ForgeIntelligence() {
               </div>
             </div>
           )}
-          {(status === "running" ||
-            status === "streaming" ||
-            status === "done") &&
+          {(status === 'running' || status === 'streaming' || status === 'done') &&
             FIELD_ROWS.map((row) => {
               const value = fields[row.key];
               if (!value) return null;
@@ -228,20 +207,16 @@ export function ForgeIntelligence() {
                       </span>
                     )}
                   </div>
-                  <p className="tnum text-[14px] leading-relaxed text-ink/80">
-                    {value}
-                  </p>
+                  <p className="tnum text-[14px] leading-relaxed text-ink/80">{value}</p>
                 </div>
               );
             })}
-          {status === "running" && progress.length > 0 && (
+          {status === 'running' && progress.length > 0 && (
             <div className="flex grow items-center px-4 py-5 md:px-8">
-              <p className="tnum text-[13px] text-ink/60">
-                Analyzing {target}…
-              </p>
+              <p className="tnum text-[13px] text-ink/60">Analyzing {target}…</p>
             </div>
           )}
-          {status === "done" && (
+          {status === 'done' && (
             <div className="flex items-center justify-between gap-6 px-4 py-5 md:px-8">
               <p className="text-[13px] text-ink/70">
                 Map complete. The fixed-fee Diagnostic prices the next step.

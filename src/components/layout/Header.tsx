@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { NavLinks } from "@/components/layout/NavLinks";
-import { BookCallButton } from "@/components/functional/BookCallButton";
-import { SITE_NAME } from "@/data/site";
+import Link from 'next/link';
+import { BookCallButton } from '@/components/functional/BookCallButton';
+import { NavLinks } from '@/components/layout/NavLinks';
+import { SITE_NAME } from '@/data/site';
 
 /**
  * White bar with a 1px solid ink bottom rule. Five links plus one button,
@@ -14,15 +14,9 @@ export function Header() {
     <header className="border-b border-ink bg-white">
       <div className="mx-auto max-w-[1360px] px-5 md:px-8">
         <div className="flex h-14 items-center justify-between md:h-16">
-          <Link
-            href="/"
-            className="flex items-center gap-2.5"
-            aria-label={`${SITE_NAME} home`}
-          >
+          <Link href="/" className="flex items-center gap-2.5" aria-label={`${SITE_NAME} home`}>
             <span aria-hidden="true" className="inline-block size-3.5 bg-cobalt" />
-            <span className="text-[17px] font-semibold tracking-tight">
-              {SITE_NAME}
-            </span>
+            <span className="text-[17px] font-semibold tracking-tight">{SITE_NAME}</span>
           </Link>
           <nav
             aria-label="Primary"

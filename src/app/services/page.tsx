@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { PageFrame } from "@/components/ui/PageFrame";
-import { SectionBand } from "@/components/ui/SectionBand";
-import { BookingStrip } from "@/components/ui/BookingStrip";
-import { BookCallButton } from "@/components/functional/BookCallButton";
-import { PE_PACK, SERVICE_STAGES } from "@/data/services";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { BookCallButton } from '@/components/functional/BookCallButton';
+import { BookingStrip } from '@/components/ui/BookingStrip';
+import { PageFrame } from '@/components/ui/PageFrame';
+import { SectionBand } from '@/components/ui/SectionBand';
+import { PE_PACK, SERVICE_STAGES } from '@/data/services';
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: 'Services',
   description:
-    "One catalog, four stages: Diagnose, Build, Adopt, Run. Engagements start with a fixed-fee two-week diagnostic and are scoped before any build.",
+    'One catalog, four stages: Diagnose, Build, Adopt, Run. Engagements start with a fixed-fee two-week diagnostic and are scoped before any build.',
 };
 
 export default function ServicesPage() {
@@ -17,28 +17,21 @@ export default function ServicesPage() {
     <>
       {/* Intro band */}
       <PageFrame aria-label="Services introduction">
-        <SectionBand
-          left="Services"
-          right="The journey: Diagnose, Build, Adopt, Run"
-        />
+        <SectionBand left="Services" right="The journey: Diagnose, Build, Adopt, Run" />
         <div className="cf-dark-band relative overflow-hidden grid lg:grid-cols-[1fr_420px]">
           <div aria-hidden="true" className="cf-aurora-b" />
           <div className="relative border-hairline-ghost px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14 lg:border-r">
             <h1 className="font-display max-w-[18ch] text-[38px] leading-[1.08] font-medium tracking-[-0.01em] md:text-[60px] md:leading-[1.05]">
-              One catalog. Four stages.{" "}
-              <em className="text-cobalt-bright italic">
-                Scoped before you commit.
-              </em>
+              One catalog. Four stages.{' '}
+              <em className="text-cobalt-bright italic">Scoped before you commit.</em>
             </h1>
           </div>
           <div className="relative flex flex-col border-t border-hairline-ghost lg:border-t-0">
             <div className="flex grow items-center border-b border-hairline-ghost px-5 py-8 md:px-10 md:py-10">
               <p className="text-[16px] leading-relaxed text-ghost/80">
-                Every engagement starts with a{" "}
-                <span className="font-semibold text-ghost">
-                  fixed-fee diagnostic
-                </span>{" "}
-                and ends with a system your team uses every week.
+                Every engagement starts with a{' '}
+                <span className="font-semibold text-ghost">fixed-fee diagnostic</span> and ends with
+                a system your team uses every week.
               </p>
             </div>
             <div className="px-5 py-6 md:px-10 md:py-8">
@@ -55,17 +48,12 @@ export default function ServicesPage() {
           <div
             key={stage.number}
             className={`grid lg:grid-cols-[420px_1fr] ${
-              stageIndex < SERVICE_STAGES.length - 1
-                ? "border-b border-hairline"
-                : ""
+              stageIndex < SERVICE_STAGES.length - 1 ? 'border-b border-hairline' : ''
             }`}
           >
             <div className="border-b border-hairline px-5 py-8 md:px-10 md:py-12 lg:border-r lg:border-b-0">
               <p className="tnum flex items-center gap-3 text-[12px] tracking-[0.18em] text-ink/60 uppercase">
-                <span
-                  aria-hidden="true"
-                  className="inline-block size-[7px] bg-cobalt"
-                />
+                <span aria-hidden="true" className="inline-block size-[7px] bg-cobalt" />
                 Stage {stage.number}
               </p>
               <h2 className="font-display mt-3 text-[34px] leading-[1.1] font-medium md:text-[44px]">
@@ -79,7 +67,7 @@ export default function ServicesPage() {
                   href={stage.link.href}
                   className="group mt-6 inline-block text-[14px] font-semibold text-cobalt"
                 >
-                  {stage.link.label}{" "}
+                  {stage.link.label}{' '}
                   <span
                     aria-hidden="true"
                     className="inline-block transition-transform group-hover:translate-x-1"
@@ -94,15 +82,11 @@ export default function ServicesPage() {
                 <div
                   key={offering.name}
                   className={`grid gap-2 px-5 py-6 md:gap-6 md:px-10 md:py-8 lg:grid-cols-[1fr_210px_140px] ${
-                    offeringIndex < stage.offerings.length - 1
-                      ? "border-b border-hairline"
-                      : ""
+                    offeringIndex < stage.offerings.length - 1 ? 'border-b border-hairline' : ''
                   }`}
                 >
                   <div>
-                    <h3 className="text-[17px] font-semibold">
-                      {offering.name}
-                    </h3>
+                    <h3 className="text-[17px] font-semibold">{offering.name}</h3>
                     <p className="tnum mt-2 max-w-[52ch] text-[14px] leading-relaxed text-ink/70">
                       {offering.description}
                     </p>
@@ -141,16 +125,12 @@ export default function ServicesPage() {
                   key={point}
                   className="grid grid-cols-[40px_1fr] gap-4 border-b border-[rgba(248,248,255,0.18)] py-4"
                 >
-                  <span className="tnum pt-0.5 text-[13px] text-ghost/60">
-                    0{index + 1}
-                  </span>
+                  <span className="tnum pt-0.5 text-[13px] text-ghost/60">0{index + 1}</span>
                   <p className="text-[15px] text-ghost/85">{point}</p>
                 </div>
               ))}
             </div>
-            <p className="mt-8 text-[15px] text-ghost/85">
-              {PE_PACK.priceNote}
-            </p>
+            <p className="mt-8 text-[15px] text-ghost/85">{PE_PACK.priceNote}</p>
             <BookCallButton size="lg" className="mt-8" />
           </div>
           <div className="flex flex-col justify-between border-t border-[rgba(248,248,255,0.18)] px-5 py-10 md:px-10 md:py-14 lg:border-t-0">
@@ -159,9 +139,7 @@ export default function ServicesPage() {
               <span className="align-top text-[40px] md:text-[52px]">%</span>
             </p>
             <div className="mt-10">
-              <p className="tnum text-[15px] leading-relaxed text-ghost/85">
-                {PE_PACK.stat.text}
-              </p>
+              <p className="tnum text-[15px] leading-relaxed text-ghost/85">{PE_PACK.stat.text}</p>
               <p className="mt-4 text-[12px] tracking-[0.14em] text-ghost/60 uppercase">
                 {PE_PACK.stat.source}
               </p>
@@ -174,8 +152,7 @@ export default function ServicesPage() {
       <BookingStrip
         headline={
           <>
-            The first step is a fixed fee.{" "}
-            <em className="text-cobalt italic">2 weeks.</em>
+            The first step is a fixed fee. <em className="text-cobalt italic">2 weeks.</em>
           </>
         }
       />

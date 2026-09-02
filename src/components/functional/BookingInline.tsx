@@ -1,11 +1,17 @@
-"use client";
+'use client';
 
-import Cal from "@calcom/embed-react";
-import { useEffect, useState } from "react";
-import { CAL_INLINE_NAMESPACE, CAL_LINK } from "@/data/site";
-import { loadCal } from "@/lib/cal";
+import Cal from '@calcom/embed-react';
+import { useEffect, useState } from 'react';
+import { CAL_INLINE_NAMESPACE, CAL_LINK } from '@/data/site';
+import { loadCal } from '@/lib/cal';
 
-const WEEKDAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+/* 5x7 skeleton grid: stable per-cell keys with a column-staggered delay. */
+const SKELETON_CELLS = Array.from({ length: 35 }, (_, i) => ({
+  key: `cell-${Math.floor(i / 7)}-${i % 7}`,
+  delay: (i % 7) * 90,
+}));
+
+const WEEKDAYS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
 /**
  * The embedded month-view calendar. Roughly 600px tall, light theme.
@@ -21,7 +27,7 @@ export function BookingInline() {
       if (mounted) setReady(true);
     };
     void loadCal(CAL_INLINE_NAMESPACE).then((api) => {
-      api("on", { action: "linkReady", callback: markReady });
+      api('on', { action: 'linkReady', callback: markReady });
     });
     // Never trap the surface behind the skeleton if the embed stalls.
     const fallback = setTimeout(markReady, 12000);
@@ -36,14 +42,14 @@ export function BookingInline() {
       <Cal
         namespace={CAL_INLINE_NAMESPACE}
         calLink={CAL_LINK}
-        style={{ width: "100%", height: "600px" }}
-        config={{ layout: "month_view", theme: "light" }}
+        style={{ width: '100%', height: '600px' }}
+        config={{ layout: 'month_view', theme: 'light' }}
       />
       {/* Hairline calendar skeleton, in the design language */}
       <div
         aria-hidden="true"
         className={`absolute inset-0 flex flex-col bg-white p-5 transition-opacity duration-300 motion-reduce:transition-none ${
-          ready ? "pointer-events-none opacity-0" : "opacity-100"
+          ready ? 'pointer-events-none opacity-0' : 'opacity-100'
         }`}
       >
         <div className="flex items-center justify-between pb-4">
@@ -59,14 +65,11 @@ export function BookingInline() {
           ))}
         </div>
         <div className="grid grow grid-cols-7 grid-rows-5 border-t border-l border-hairline-faint">
-          {Array.from({ length: 35 }, (_, index) => (
-            <div
-              key={index}
-              className="border-r border-b border-hairline-faint p-2"
-            >
+          {SKELETON_CELLS.map((delayMs) => (
+            <div key={delayMs.key} className="border-r border-b border-hairline-faint p-2">
               <span
                 className="cf-skeleton inline-block h-2 w-4 bg-ink/10"
-                style={{ animationDelay: `${(index % 7) * 90}ms` }}
+                style={{ animationDelay: `${delayMs.delay}ms` }}
               />
             </div>
           ))}

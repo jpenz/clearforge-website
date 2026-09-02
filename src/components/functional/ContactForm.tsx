@@ -1,23 +1,19 @@
-"use client";
+'use client';
 
-import { useActionState } from "react";
-import { sendContactMessage, type FormState } from "@/app/actions";
+import { useActionState } from 'react';
+import { type FormState, sendContactMessage } from '@/app/actions';
 
-const INITIAL: FormState = { status: "idle" };
+const INITIAL: FormState = { status: 'idle' };
 
-const labelClass =
-  "mb-2.5 block text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase";
+const labelClass = 'mb-2.5 block text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase';
 const inputClass =
-  "w-full border border-hairline-strong bg-white px-3 py-2.5 text-[14px] placeholder:text-ink/45";
+  'w-full border border-hairline-strong bg-white px-3 py-2.5 text-[14px] placeholder:text-ink/45';
 
 /** Short fallback message form below the inline calendar. */
 export function ContactForm() {
-  const [state, formAction, pending] = useActionState(
-    sendContactMessage,
-    INITIAL,
-  );
+  const [state, formAction, pending] = useActionState(sendContactMessage, INITIAL);
 
-  if (state.status === "success") {
+  if (state.status === 'success') {
     return (
       <div className="flex h-full flex-col justify-center bg-white px-6 py-12 md:px-8">
         <p className="flex items-center gap-3 text-[16px] font-semibold">
@@ -25,8 +21,8 @@ export function ContactForm() {
           Message sent.
         </p>
         <p className="mt-2 max-w-[44ch] text-[14px] leading-relaxed text-ink/70">
-          You will hear from James within one business day. If it is
-          time-sensitive, the calendar above is faster.
+          You will hear from James within one business day. If it is time-sensitive, the calendar
+          above is faster.
         </p>
       </div>
     );
@@ -97,24 +93,24 @@ export function ContactForm() {
           placeholder="Which workflow should we look at?"
           className={`${inputClass} resize-none`}
         />
-          <div className="mt-5">
-            <label className={labelClass} htmlFor="cf-rfp">
-              Attach an RFP or brief{" "}
-              <span className="normal-case text-ink/45">
-                (optional · PDF, Word, Excel, PowerPoint · up to 10MB)
-              </span>
-            </label>
-            <input
-              id="cf-rfp"
-              name="rfp"
-              type="file"
-              accept=".pdf,.doc,.docx,.xlsx,.pptx"
-              className="w-full cursor-pointer border border-hairline-strong bg-white px-3 py-2 text-[13px] text-ink/70 file:mr-3 file:cursor-pointer file:border-0 file:bg-cobalt file:px-3 file:py-1.5 file:text-[12px] file:font-semibold file:text-white"
-            />
-          </div>
+        <div className="mt-5">
+          <label className={labelClass} htmlFor="cf-rfp">
+            Attach an RFP or brief{' '}
+            <span className="normal-case text-ink/45">
+              (optional · PDF, Word, Excel, PowerPoint · up to 10MB)
+            </span>
+          </label>
+          <input
+            id="cf-rfp"
+            name="rfp"
+            type="file"
+            accept=".pdf,.doc,.docx,.xlsx,.pptx"
+            className="w-full cursor-pointer border border-hairline-strong bg-white px-3 py-2 text-[13px] text-ink/70 file:mr-3 file:cursor-pointer file:border-0 file:bg-cobalt file:px-3 file:py-1.5 file:text-[12px] file:font-semibold file:text-white"
+          />
+        </div>
       </div>
       <div className="flex flex-col gap-4 px-5 py-5 md:flex-row md:items-center md:justify-between md:px-8">
-        {state.status === "error" ? (
+        {state.status === 'error' ? (
           <p role="alert" className="border-l-2 border-ink pl-3 text-[13px] text-ink/80">
             {state.message}
           </p>
@@ -126,7 +122,7 @@ export function ContactForm() {
           disabled={pending}
           className="cursor-pointer self-end bg-cobalt px-6 py-3 text-[14px] font-semibold text-white transition-colors hover:bg-cobalt-press disabled:opacity-40"
         >
-          {pending ? "Sending…" : "Send message"}
+          {pending ? 'Sending…' : 'Send message'}
         </button>
       </div>
     </form>
