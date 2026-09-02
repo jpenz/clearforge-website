@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useAnalysisStream } from "@/hooks/useAnalysisStream";
-import { BookCallButton } from "@/components/functional/BookCallButton";
+import { useState } from 'react';
+import { BookCallButton } from '@/components/functional/BookCallButton';
+import { useAnalysisStream } from '@/hooks/useAnalysisStream';
 
 const FIELD_ROWS: Array<{
   key: string;
@@ -10,28 +10,28 @@ const FIELD_ROWS: Array<{
   illustrative: boolean;
   numeric: boolean;
 }> = [
-  { key: "workflow", label: "Workflow", illustrative: true, numeric: false },
+  { key: 'workflow', label: 'Workflow', illustrative: true, numeric: false },
   {
-    key: "manualSteps",
-    label: "Manual steps found",
+    key: 'manualSteps',
+    label: 'Manual steps found',
     illustrative: true,
     numeric: true,
   },
   {
-    key: "candidate",
-    label: "Candidate AI system",
+    key: 'candidate',
+    label: 'Candidate AI system',
     illustrative: true,
     numeric: false,
   },
   {
-    key: "window",
-    label: "Estimated build window",
+    key: 'window',
+    label: 'Estimated build window',
     illustrative: false,
     numeric: true,
   },
 ];
 
-const SAMPLES = ["industrial distributor", "services firm", "PE portfolio co"];
+const SAMPLES = ['industrial distributor', 'services firm', 'PE portfolio co'];
 
 /** The idle-state sample readout. Labeled illustrative as a whole. */
 const SAMPLE_READOUT: Array<{
@@ -39,10 +39,10 @@ const SAMPLE_READOUT: Array<{
   value: string;
   numeric?: boolean;
 }> = [
-  { label: "Workflow", value: "Inbound quote to order" },
-  { label: "Manual steps found", value: "14", numeric: true },
-  { label: "Candidate AI system", value: "Quote desk agent" },
-  { label: "Estimated build window", value: "10 to 14 weeks", numeric: true },
+  { label: 'Workflow', value: 'Inbound quote to order' },
+  { label: 'Manual steps found', value: '14', numeric: true },
+  { label: 'Candidate AI system', value: 'Quote desk agent' },
+  { label: 'Estimated build window', value: '10 to 14 weeks', numeric: true },
 ];
 
 /**
@@ -50,8 +50,8 @@ const SAMPLE_READOUT: Array<{
  * streaming, done, and error states from the /api/hero-analyze stream.
  */
 export function HeroAgent() {
-  const { status, target, progress, fields, live, run } = useAnalysisStream("brief");
-  const [input, setInput] = useState("");
+  const { status, target, progress, fields, live, run } = useAnalysisStream('brief');
+  const [input, setInput] = useState('');
 
   return (
     <div className="border border-ink bg-white text-ink">
@@ -61,7 +61,7 @@ export function HeroAgent() {
         </span>
         <span
           className={`tnum text-[11px] tracking-[0.14em] uppercase ${
-            status === "error" ? "text-ink" : "text-cobalt"
+            status === 'error' ? 'text-ink' : 'text-cobalt'
           }`}
           aria-live="polite"
         >
@@ -70,7 +70,7 @@ export function HeroAgent() {
       </div>
 
       <div className="relative min-h-[318px]" aria-live="polite">
-        {status === "idle" && (
+        {status === 'idle' && (
           <form
             className="px-5 py-6"
             onSubmit={(event) => {
@@ -130,23 +130,21 @@ export function HeroAgent() {
                     <dt className="shrink-0 text-[10px] tracking-[0.14em] text-ink/60 uppercase">
                       {row.label}
                     </dt>
-                    <dd
-                      className={`text-right font-medium ${row.numeric ? "tnum" : ""}`}
-                    >
+                    <dd className={`text-right font-medium ${row.numeric ? 'tnum' : ''}`}>
                       {row.value}
                     </dd>
                   </div>
                 ))}
               </dl>
               <p className="mt-3 text-[12px] leading-relaxed text-ink/60">
-                Maps one revenue workflow, finds the manual steps, and names a
-                candidate AI system. Free. Runs in under a minute.
+                Maps one revenue workflow, finds the manual steps, and names a candidate AI system.
+                Free. Runs in under a minute.
               </p>
             </div>
           </form>
         )}
 
-        {status === "running" && (
+        {status === 'running' && (
           <div className="px-5 py-6">
             <div className="relative mb-6 h-px bg-hairline">
               <div className="cf-progress-bar absolute top-0 left-0 h-[2px] bg-cobalt" />
@@ -157,10 +155,7 @@ export function HeroAgent() {
             <ul className="space-y-3 text-[14px]">
               {progress.map((step) => (
                 <li key={step} className="flex items-center gap-3">
-                  <span
-                    aria-hidden="true"
-                    className="inline-block size-[7px] bg-cobalt"
-                  />
+                  <span aria-hidden="true" className="inline-block size-[7px] bg-cobalt" />
                   {step}
                 </li>
               ))}
@@ -168,10 +163,10 @@ export function HeroAgent() {
           </div>
         )}
 
-        {(status === "streaming" || status === "done") && (
+        {(status === 'streaming' || status === 'done') && (
           <div className="px-5 py-6">
             <p className="mb-4 text-[11px] tracking-[0.14em] text-ink/60 uppercase">
-              {status === "done" ? "Analysis complete" : "Analysis streaming"}
+              {status === 'done' ? 'Analysis complete' : 'Analysis streaming'}
             </p>
             <dl className="text-[14px]">
               {FIELD_ROWS.map((row, index) => {
@@ -181,17 +176,15 @@ export function HeroAgent() {
                   <div
                     key={row.key}
                     className={`flex items-baseline justify-between gap-4 py-2.5 ${
-                      index < FIELD_ROWS.length - 1 || status === "done"
-                        ? "border-b border-hairline"
-                        : ""
+                      index < FIELD_ROWS.length - 1 || status === 'done'
+                        ? 'border-b border-hairline'
+                        : ''
                     }`}
                   >
                     <dt className="shrink-0 text-[11px] tracking-[0.14em] text-ink/60 uppercase">
                       {row.label}
                     </dt>
-                    <dd
-                      className={`text-right font-medium ${row.numeric ? "tnum" : ""}`}
-                    >
+                    <dd className={`text-right font-medium ${row.numeric ? 'tnum' : ''}`}>
                       {value}
                       {row.illustrative && !live && (
                         <span className="ml-1 text-[10px] font-normal tracking-[0.1em] text-ink/60 uppercase">
@@ -203,11 +196,11 @@ export function HeroAgent() {
                 );
               })}
             </dl>
-            {status === "done" && <BookCallButton size="md" className="mt-5" />}
+            {status === 'done' && <BookCallButton size="md" className="mt-5" />}
           </div>
         )}
 
-        {status === "error" && (
+        {status === 'error' && (
           <div className="px-5 py-6">
             <div className="mt-2 border-l-2 border-ink pl-4">
               <p className="max-w-[38ch] text-[15px] leading-relaxed font-medium">

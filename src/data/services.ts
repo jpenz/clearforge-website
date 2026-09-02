@@ -16,74 +16,74 @@ export interface ServiceStage {
 /** The catalog as a journey: Diagnose, Build, Adopt, Run. */
 export const SERVICE_STAGES: ServiceStage[] = [
   {
-    number: "01",
-    name: "Diagnose",
-    description: "Map the workflow, prove viability, price the build.",
-    link: { label: "Map the Workflow", href: "/discover" },
+    number: '01',
+    name: 'Diagnose',
+    description: 'Map the workflow, prove viability, price the build.',
+    link: { label: 'Map the Workflow', href: '/discover' },
     offerings: [
       {
-        name: "Forge Diagnostic",
+        name: 'Forge Diagnostic',
         description:
-          "Two weeks to map the workflow, size the opportunity, and prove the system is viable before you build.",
-        meta: "Fixed fee · 2 weeks",
-        price: "Agreed up front",
+          'Two weeks to map the workflow, size the opportunity, and prove the system is viable before you build.',
+        meta: 'Fixed fee · 2 weeks',
+        price: 'Agreed up front',
       },
       {
-        name: "Eval and Reliability Audit",
+        name: 'Eval and Reliability Audit',
         description:
-          "For AI systems your company already built. Deliverables: an eval harness, reliability gates, a fix plan.",
-        meta: "Fixed fee · 2 weeks",
-        price: "Agreed up front",
+          'For AI systems your company already built. Deliverables: an eval harness, reliability gates, a fix plan.',
+        meta: 'Fixed fee · 2 weeks',
+        price: 'Agreed up front',
       },
     ],
   },
   {
-    number: "02",
-    name: "Build",
-    description: "Kickoff to a live production system in 10 to 14 weeks.",
+    number: '02',
+    name: 'Build',
+    description: 'Kickoff to a live production system in 10 to 14 weeks.',
     offerings: [
       {
-        name: "Forge Sprint",
+        name: 'Forge Sprint',
         description:
-          "10 to 14 weeks from kickoff to a live production system. Every Sprint ships with an eval harness and reliability gates.",
-        meta: "Agreed before any build",
-        price: "Scoped in the Diagnostic",
+          '10 to 14 weeks from kickoff to a live production system. Every Sprint ships with an eval harness and reliability gates.',
+        meta: 'Agreed before any build',
+        price: 'Scoped in the Diagnostic',
       },
     ],
   },
   {
-    number: "03",
-    name: "Adopt",
-    description: "The bar: 70 percent weekly-active adoption by day 90.",
-    link: { label: "Take the scorecard", href: "/scorecard" },
+    number: '03',
+    name: 'Adopt',
+    description: 'The bar: 70 percent weekly-active adoption by day 90.',
+    link: { label: 'Take the scorecard', href: '/scorecard' },
     offerings: [
       {
-        name: "Forge Scale",
+        name: 'Forge Scale',
         description:
-          "The Adoption Mile: a named operator, a weekly working cadence, and a live adoption scoreboard.",
-        meta: "Per month",
-        price: "Scoped to the system",
+          'The Adoption Mile: a named operator, a weekly working cadence, and a live adoption scoreboard.',
+        meta: 'Per month',
+        price: 'Scoped to the system',
       },
       {
-        name: "Fractional Chief AI Officer",
+        name: 'Fractional Chief AI Officer',
         description:
-          "The top tier of Forge Scale. Standing AI leadership across the whole company.",
-        meta: "Top tier · Per month",
-        price: "Scoped to the engagement",
+          'The top tier of Forge Scale. Standing AI leadership across the whole company.',
+        meta: 'Top tier · Per month',
+        price: 'Scoped to the engagement',
       },
     ],
   },
   {
-    number: "04",
-    name: "Run",
-    description: "Managed agent operations after a build.",
+    number: '04',
+    name: 'Run',
+    description: 'Managed agent operations after a build.',
     offerings: [
       {
-        name: "Forge Run",
+        name: 'Forge Run',
         description:
-          "Monitoring, production evals, SLAs, and model upgrades for every system we built.",
-        meta: "Per system · Per month",
-        price: "Scoped to the system",
+          'Monitoring, production evals, SLAs, and model upgrades for every system we built.',
+        meta: 'Per system · Per month',
+        price: 'Scoped to the system',
       },
     ],
   },
@@ -91,16 +91,16 @@ export const SERVICE_STAGES: ServiceStage[] = [
 
 /** PE Portfolio Pack: deliberately unpriced, scoped with the sponsor. */
 export const PE_PACK = {
-  title: "PE Portfolio Pack",
+  title: 'PE Portfolio Pack',
   points: [
-    "Portfolio AI scan",
-    "Diagnostic multipack across portfolio companies",
-    "Sponsor-level adoption scoreboard",
+    'Portfolio AI scan',
+    'Diagnostic multipack across portfolio companies',
+    'Sponsor-level adoption scoreboard',
   ],
-  priceNote: "Pricing: scoped with the sponsor.",
+  priceNote: 'Pricing: scoped with the sponsor.',
   stat: {
-    value: "98",
+    value: '98',
     text: "Accordion's May 2026 survey of 150 PE operating partners found 98 percent of sponsors have mandated AI adoption while only about half of portfolio companies are actively implementing.",
-    source: "Source: accordion.com/the-pe-ai-adoption-benchmark",
+    source: 'Source: accordion.com/the-pe-ai-adoption-benchmark',
   },
 };

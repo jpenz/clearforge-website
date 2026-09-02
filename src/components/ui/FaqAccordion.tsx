@@ -1,4 +1,4 @@
-import type { Faq } from "@/data/faqs";
+import type { Faq } from '@/data/faqs';
 
 interface FaqAccordionProps {
   items: Faq[];

@@ -1,30 +1,30 @@
-import type { Metadata } from "next";
-import { PageFrame } from "@/components/ui/PageFrame";
-import { SectionBand } from "@/components/ui/SectionBand";
-import { BookCallButton } from "@/components/functional/BookCallButton";
-import { ForgeIntelligence } from "@/components/functional/ForgeIntelligence";
+import type { Metadata } from 'next';
+import { BookCallButton } from '@/components/functional/BookCallButton';
+import { ForgeIntelligence } from '@/components/functional/ForgeIntelligence';
+import { PageFrame } from '@/components/ui/PageFrame';
+import { SectionBand } from '@/components/ui/SectionBand';
 
 export const metadata: Metadata = {
-  title: "Forge Intelligence",
+  title: 'Forge Intelligence',
   description:
-    "The free AI workflow-mapping tool. Paste your company URL. The agent maps one workflow and shows what an AI system would do there. Free, no account.",
+    'The free AI workflow-mapping tool. Paste your company URL. The agent maps one workflow and shows what an AI system would do there. Free, no account.',
 };
 
 const NEXT_STEPS = [
   {
-    number: "01",
-    title: "You get the map.",
-    text: "A one-page workflow map, yours to keep.",
+    number: '01',
+    title: 'You get the map.',
+    text: 'A one-page workflow map, yours to keep.',
   },
   {
-    number: "02",
-    title: "We scope it.",
-    text: "If the map shows a build, the fixed-fee Diagnostic prices the next step.",
+    number: '02',
+    title: 'We scope it.',
+    text: 'If the map shows a build, the fixed-fee Diagnostic prices the next step.',
   },
   {
-    number: "03",
-    title: "You decide.",
-    text: "Every price after it is scoped in the Diagnostic and agreed before any build.",
+    number: '03',
+    title: 'You decide.',
+    text: 'Every price after it is scoped in the Diagnostic and agreed before any build.',
   },
 ];
 
@@ -33,18 +33,14 @@ export default function DiscoverPage() {
     <>
       {/* Label band + title block */}
       <PageFrame aria-label="Forge Intelligence introduction">
-        <SectionBand
-          left="Free tool"
-          right="Forge Intelligence · Workflow mapping"
-        />
+        <SectionBand left="Free tool" right="Forge Intelligence · Workflow mapping" />
         <div className="px-5 pt-10 pb-10 md:px-10 md:pt-16 md:pb-14">
           <h1 className="font-display max-w-[22ch] text-[36px] leading-[1.1] font-medium tracking-[-0.01em] md:text-[56px] md:leading-[1.08]">
-            Map the workflow{" "}
-            <em className="text-cobalt italic">before you buy anything.</em>
+            Map the workflow <em className="text-cobalt italic">before you buy anything.</em>
           </h1>
           <p className="mt-5 max-w-[62ch] text-[16px] leading-relaxed text-ink/80">
-            Paste your company URL. The agent maps one workflow and shows what
-            an AI system would do there. Free, no account.
+            Paste your company URL. The agent maps one workflow and shows what an AI system would do
+            there. Free, no account.
           </p>
         </div>
       </PageFrame>
@@ -68,9 +64,7 @@ export default function DiscoverPage() {
               <h2 className="mt-4 text-[18px] leading-[1.4] font-semibold md:text-[19px]">
                 {step.title}
               </h2>
-              <p className="tnum mt-2 text-[14px] leading-relaxed text-ink/70">
-                {step.text}
-              </p>
+              <p className="tnum mt-2 text-[14px] leading-relaxed text-ink/70">{step.text}</p>
             </div>
           ))}
         </div>
@@ -81,8 +75,7 @@ export default function DiscoverPage() {
         <SectionBand left="Next step" right="Fixed fee · 2 weeks" />
         <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
           <h2 className="font-display text-[30px] leading-[1.1] font-medium md:text-[40px]">
-            Start with the fixed-fee{" "}
-            <em className="text-cobalt italic">Diagnostic.</em>
+            Start with the fixed-fee <em className="text-cobalt italic">Diagnostic.</em>
           </h2>
           <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />
         </div>

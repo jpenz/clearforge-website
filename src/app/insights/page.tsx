@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { PageFrame } from "@/components/ui/PageFrame";
-import { SectionBand } from "@/components/ui/SectionBand";
-import { BookCallButton } from "@/components/functional/BookCallButton";
-import { ARTICLES } from "@/data/insights";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { BookCallButton } from '@/components/functional/BookCallButton';
+import { PageFrame } from '@/components/ui/PageFrame';
+import { SectionBand } from '@/components/ui/SectionBand';
+import { ARTICLES } from '@/data/insights';
 
 export const metadata: Metadata = {
-  title: "Insights",
+  title: 'Insights',
   description:
-    "Long reads on AI systems, adoption, and what they cost. Written by the founder. No filler.",
+    'Long reads on AI systems, adoption, and what they cost. Written by the founder. No filler.',
 };
 
 export default function InsightsPage() {
@@ -22,8 +22,7 @@ export default function InsightsPage() {
         <SectionBand left="Insights" right="Long-form, written by the founder" />
         <div className="px-5 pt-10 pb-10 md:px-10 md:pt-16 md:pb-14">
           <h1 className="font-display max-w-[24ch] text-[36px] leading-[1.1] font-medium tracking-[-0.01em] md:text-[56px] md:leading-[1.08]">
-            Notes from the build floor.{" "}
-            <em className="text-cobalt italic">What actually ships.</em>
+            Notes from the build floor. <em className="text-cobalt italic">What actually ships.</em>
           </h1>
           <p className="mt-5 text-[16px] leading-relaxed text-ink/80">
             Long reads on AI systems, adoption, and what they cost. No filler.
@@ -55,7 +54,7 @@ export default function InsightsPage() {
               </p>
             </div>
             <span className="inline-block pb-1 text-[15px] font-semibold whitespace-nowrap text-cobalt">
-              Read the article{" "}
+              Read the article{' '}
               <span
                 aria-hidden="true"
                 className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
@@ -75,7 +74,7 @@ export default function InsightsPage() {
             key={article.slug}
             href={`/insights/${article.slug}`}
             className={`group grid items-center gap-4 px-5 py-8 md:grid-cols-[140px_1fr_auto] md:gap-10 md:px-10 md:py-10 ${
-              index < rest.length - 1 ? "border-b border-hairline" : ""
+              index < rest.length - 1 ? 'border-b border-hairline' : ''
             }`}
           >
             <span className="tnum text-[40px] leading-none font-light text-ink/60 md:text-[56px]">
@@ -93,7 +92,7 @@ export default function InsightsPage() {
               </p>
             </div>
             <span className="inline-block text-[15px] font-semibold whitespace-nowrap text-cobalt">
-              Read{" "}
+              Read{' '}
               <span
                 aria-hidden="true"
                 className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
@@ -110,8 +109,7 @@ export default function InsightsPage() {
         <SectionBand left="Next step" right="Fixed price · 2 weeks" />
         <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
           <h2 className="font-display text-[30px] leading-[1.1] font-medium md:text-[40px]">
-            Start with the fixed-fee{" "}
-            <em className="text-cobalt italic">Diagnostic.</em>
+            Start with the fixed-fee <em className="text-cobalt italic">Diagnostic.</em>
           </h2>
           <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />
         </div>
