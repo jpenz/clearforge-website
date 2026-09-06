@@ -33,14 +33,15 @@ export default function ProofPage() {
         <Plate src="/renders/proof-threads.jpg" position="88% 45%" overlay="strong-right" />
         <div aria-hidden="true" className="cf-aurora-b" />
         <Container gutter="cells" className="relative">
-          <SectionBand tone="dark" left="Proof" right="Real numbers · Anonymized clients" />
+          <SectionBand tone="dark" left="Proof" right="Client-approved · Anonymized" />
           <div className="grid lg:grid-cols-[2fr_1fr]">
             <div className="border-hairline-ghost px-5 pt-10 pb-10 md:px-10 md:pt-16 md:pb-14 lg:border-r">
               <h1 className="font-display max-w-[22ch] text-balance text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
                 The numbers are the <em className="text-cobalt-bright italic">case study.</em>
               </h1>
-              <p className="mt-5 text-[16px] leading-relaxed text-ghost/80">
-                Client names are anonymized. The results are not.
+              <p className="mt-5 max-w-[52ch] text-[16px] leading-relaxed text-ghost/80">
+                Client names are anonymized and every figure below is client-approved. The figures
+                count what the systems produced: pipeline, playbooks, accounts won.
               </p>
             </div>
             <div className="flex flex-col justify-end border-t border-hairline-ghost px-5 py-8 md:px-10 md:py-14 lg:border-t-0">
@@ -63,14 +64,16 @@ export default function ProofPage() {
           <span className="tnum text-[12px] tracking-[0.14em] text-ink/70 uppercase">6 months</span>
         </div>
         <div className="grid lg:grid-cols-[2fr_1fr]">
-          <div className="flex flex-col border-b border-hairline px-5 py-8 md:px-10 md:py-12 lg:border-r lg:border-b-0">
+          <div className="relative flex flex-col border-b border-hairline px-5 py-8 transition-colors hover:bg-white md:px-10 md:py-12 lg:border-r lg:border-b-0">
             <Stat size="lg" value={primary.value} label={primary.label} />
             <div className="mt-auto pt-8">
-              <ArrowLink href={`/proof/${caseA.slug}`}>Read the case study</ArrowLink>
+              <ArrowLink href={`/proof/${caseA.slug}`} className="after:absolute after:inset-0">
+                Read the case study
+              </ArrowLink>
             </div>
           </div>
           <div className="flex flex-col">
-            <div className="border-b border-hairline px-5 py-4 md:px-8">
+            <div className="border-b border-hairline px-5 py-4 md:px-10">
               <span className="text-[12px] tracking-[0.16em] text-ink/70 uppercase">
                 Secondary figures
               </span>
@@ -78,7 +81,7 @@ export default function ProofPage() {
             {secondary.map((metric, index) => (
               <div
                 key={metric.label}
-                className={`flex grow flex-col justify-center px-5 py-6 md:px-8 md:py-8 ${
+                className={`flex grow flex-col justify-center px-5 py-6 md:px-10 md:py-8 ${
                   index < secondary.length - 1 ? 'border-b border-hairline' : ''
                 }`}
               >
@@ -89,39 +92,51 @@ export default function ProofPage() {
         </div>
       </PageFrame>
 
-      {/* Case B */}
-      <PageFrame aria-label="Case B">
-        <div className="flex items-center justify-between gap-4 border-b border-hairline px-5 py-4 md:px-10">
-          <p className="text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase">
+      {/* Case B: the page's one dark room, so the corridor between the hero
+          and the footer is broken where the funnel is */}
+      <PageFrame aria-label="Case B" tone="dark">
+        <div className="flex flex-col items-start gap-1 border-b border-hairline-ghost px-5 py-4 md:flex-row md:items-center md:justify-between md:gap-4 md:px-10">
+          <p className="text-[12px] font-medium tracking-[0.14em] text-ghost uppercase">
             Case B · Home and commercial services firm
           </p>
-          <span className="tnum text-[12px] tracking-[0.14em] text-ink/70 uppercase">
+          <span className="tnum text-[12px] tracking-[0.14em] text-ghost uppercase">
             {caseB.scopeTag}
           </span>
         </div>
         <div className="grid lg:grid-cols-[1fr_2fr]">
-          <div className="flex flex-col border-b border-hairline px-5 py-8 md:px-10 md:py-12 lg:border-r lg:border-b-0">
+          <div className="relative flex flex-col border-b border-hairline-ghost px-5 py-8 md:px-10 md:py-12 lg:border-r lg:border-b-0">
             <h2 className="font-display max-w-[16ch] text-balance text-[28px] leading-[1.2] font-medium md:text-[34px]">
               Commercial pipeline rebuilt from zero.
             </h2>
             <div className="mt-auto pt-8">
-              <ArrowLink href={`/proof/${caseB.slug}`}>Read the case study</ArrowLink>
+              <ArrowLink
+                href={`/proof/${caseB.slug}`}
+                tone="dark"
+                className="after:absolute after:inset-0"
+              >
+                Read the case study
+              </ArrowLink>
             </div>
           </div>
-          <div className="grid md:grid-cols-4 md:divide-x md:divide-hairline">
+          <div className="grid md:grid-cols-4 md:divide-x md:divide-hairline-ghost">
             {FUNNEL.map((item) => (
               <div
                 key={item.stage}
-                className="flex flex-col justify-between gap-6 border-b border-hairline px-5 py-6 md:gap-8 md:border-b-0 md:px-7 md:py-12"
+                className="flex flex-col justify-between gap-6 border-b border-hairline-ghost px-5 py-6 md:gap-8 md:border-b-0 md:px-8 md:py-12"
               >
-                <p className="tnum text-[12px] tracking-[0.14em] text-ink/70 uppercase">
+                <p className="tnum text-[12px] tracking-[0.14em] text-ghost uppercase">
                   {item.stage}
                 </p>
                 <div>
-                  <Stat value={String(item.value)} label={item.label} accent={item.accent} />
-                  <div aria-hidden="true" className="mt-4 h-[3px] w-full bg-hairline">
+                  <Stat
+                    tone="dark"
+                    value={String(item.value)}
+                    label={item.label}
+                    accent={item.accent}
+                  />
+                  <div aria-hidden="true" className="mt-4 h-[3px] w-full bg-ghost/15">
                     <div
-                      className={`h-full ${item.accent ? 'bg-cobalt' : 'bg-ink'}`}
+                      className={`h-full ${item.accent ? 'bg-cobalt-bright' : 'bg-ghost'}`}
                       style={{ width: `${(item.value / FUNNEL[0].value) * 100}%` }}
                     />
                   </div>
@@ -143,19 +158,21 @@ export default function ProofPage() {
           </span>
         </div>
         <div className="grid lg:grid-cols-[2fr_1fr]">
-          <div className="flex flex-col border-b border-hairline px-5 py-8 md:px-10 md:py-12 lg:border-r lg:border-b-0">
+          <div className="relative flex flex-col border-b border-hairline px-5 py-8 transition-colors hover:bg-white md:px-10 md:py-12 lg:border-r lg:border-b-0">
             <p className="font-display max-w-[30ch] text-balance text-[28px] leading-[1.3] font-medium md:text-[34px]">
               {caseC.headline} <em className="text-cobalt italic">{caseC.headlineEmphasis}</em>
             </p>
             <div className="mt-auto pt-8">
-              <ArrowLink href={`/proof/${caseC.slug}`}>Read the case study</ArrowLink>
+              <ArrowLink href={`/proof/${caseC.slug}`} className="after:absolute after:inset-0">
+                Read the case study
+              </ArrowLink>
             </div>
           </div>
           <div className="grid grid-cols-3 lg:grid-cols-1">
             {caseC.metrics.map((metric, index) => (
               <div
                 key={metric.label}
-                className={`px-5 py-6 md:px-8 lg:py-6 ${
+                className={`px-5 py-6 md:px-10 lg:py-6 ${
                   index > 0 ? 'lg:border-t lg:border-hairline' : ''
                 }`}
               >
@@ -167,9 +184,9 @@ export default function ProofPage() {
       </PageFrame>
 
       {/* Build patterns */}
-      <PageFrame id="build-patterns" aria-label="Build patterns">
-        <SectionBand left="Build patterns" right="Illustrative names, not delivered systems" />
-        <div className="grid md:grid-cols-2">
+      <PageFrame id="build-patterns" aria-label="Illustrative build patterns">
+        <SectionBand left="Illustrative patterns" right="Names only · Not delivered systems" />
+        <div className="cf-dots grid md:grid-cols-2">
           {BLUEPRINTS.map((blueprint, index) => (
             <div
               key={blueprint.name}

@@ -61,7 +61,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         format: true,
         label: 'Qualified opportunities across 3 divisions in 6 months',
       },
-      { value: '19 to 613', label: 'Monthly volume, first month to sixth' },
+      { value: '613', count: 613, label: 'Monthly volume in month six, from 19 in month one' },
       { value: '631', count: 631, label: 'Generated sales playbooks, at least' },
     ],
     scopeTag: '6 months · 3 divisions',
@@ -78,8 +78,9 @@ export const CASE_STUDIES: CaseStudy[] = [
         label: 'Qualified opportunities across 3 divisions in 6 months',
       },
       {
-        display: '19 to 613',
-        label: 'Monthly volume, first month to sixth',
+        display: '613',
+        count: 613,
+        label: 'Monthly volume in month six, from 19 in month one',
       },
       {
         display: '631',
