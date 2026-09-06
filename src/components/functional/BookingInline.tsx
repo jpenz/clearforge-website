@@ -59,7 +59,7 @@ export function BookingInline() {
             <span className="cf-skeleton size-6 border border-hairline" />
           </div>
         </div>
-        <div className="grid grid-cols-7 pb-2 text-center text-[10px] tracking-[0.14em] text-ink/40 uppercase">
+        <div className="grid grid-cols-7 pb-2 text-center text-[12px] tracking-[0.14em] text-ink/40 uppercase">
           {WEEKDAYS.map((day) => (
             <span key={day}>{day}</span>
           ))}
@@ -74,7 +74,7 @@ export function BookingInline() {
             </div>
           ))}
         </div>
-        <p className="pt-4 text-center text-[10px] tracking-[0.16em] text-ink/40 uppercase">
+        <p className="pt-4 text-center text-[12px] tracking-[0.16em] text-ink/40 uppercase">
           Loading live availability
         </p>
       </div>

@@ -16,8 +16,8 @@ export default function ScorecardPage() {
       {/* Label band */}
       <PageFrame aria-label="Scorecard introduction">
         <div className="flex items-center justify-between gap-4 px-5 py-5 md:px-10">
-          <span className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">Free tool</span>
-          <span className="tnum text-[11px] tracking-[0.18em] text-ink/60 uppercase">
+          <span className="text-[12px] tracking-[0.18em] text-ink/70 uppercase">Free tool</span>
+          <span className="tnum text-[12px] tracking-[0.18em] text-ink/70 uppercase">
             AI readiness scorecard · 10 questions
           </span>
         </div>

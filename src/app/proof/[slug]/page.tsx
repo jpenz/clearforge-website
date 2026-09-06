@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { BookCallButton } from '@/components/functional/BookCallButton';
+import { ArrowLink } from '@/components/ui/ArrowLink';
 import { CountUp } from '@/components/ui/CountUp';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
@@ -36,7 +37,7 @@ export default async function CaseStudyPage({ params }: PageProps<'/proof/[slug]
         <div className="flex items-center justify-between gap-4 border-b border-hairline px-5 py-5 md:px-10">
           <nav
             aria-label="Breadcrumb"
-            className="text-[11px] tracking-[0.18em] text-ink/60 uppercase"
+            className="text-[12px] tracking-[0.18em] text-ink/70 uppercase"
           >
             <Link href="/proof" className="hover:text-cobalt">
               Proof
@@ -46,7 +47,7 @@ export default async function CaseStudyPage({ params }: PageProps<'/proof/[slug]
               Case {study.letter}
             </span>
           </nav>
-          <span className="tnum text-[11px] tracking-[0.18em] text-ink/60 uppercase">
+          <span className="tnum text-[12px] tracking-[0.18em] text-ink/70 uppercase">
             {study.scopeTag}
           </span>
         </div>
@@ -90,10 +91,10 @@ export default async function CaseStudyPage({ params }: PageProps<'/proof/[slug]
         <PageFrame key={section.label} aria-label={section.label}>
           <div className="grid lg:grid-cols-[320px_1fr]">
             <div className="border-b border-hairline px-5 py-8 md:px-10 md:py-12 lg:border-r lg:border-b-0">
-              <p className="tnum text-[11px] tracking-[0.18em] text-ink/60 uppercase">
+              <p className="tnum text-[12px] tracking-[0.18em] text-ink/70 uppercase">
                 0{index + 1} / 0{sectionCount}
               </p>
-              <p className="mt-2 text-[11px] font-medium tracking-[0.18em] text-ink uppercase">
+              <p className="mt-2 text-[12px] font-medium tracking-[0.18em] text-ink uppercase">
                 {section.label}
               </p>
               <p className="tnum mt-6 text-[40px] leading-none font-light md:mt-10">
@@ -119,13 +120,13 @@ export default async function CaseStudyPage({ params }: PageProps<'/proof/[slug]
                     <tr className="border-b border-hairline">
                       <th
                         scope="col"
-                        className="px-5 py-3 text-[11px] font-medium tracking-[0.14em] text-ink/70 uppercase md:px-10"
+                        className="px-5 py-3 text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase md:px-10"
                       >
                         Metric
                       </th>
                       <th
                         scope="col"
-                        className="px-5 py-3 text-right text-[11px] font-medium tracking-[0.14em] text-ink/70 uppercase md:px-10"
+                        className="px-5 py-3 text-right text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase md:px-10"
                       >
                         Value
                       </th>
@@ -157,7 +158,7 @@ export default async function CaseStudyPage({ params }: PageProps<'/proof/[slug]
 
       {/* More proof */}
       <PageFrame aria-label="More proof">
-        <SectionBand left="More proof" right={`${others.length} more case studies`} />
+        <SectionBand left="More proof" right="The other case studies" />
         {others.map((other, index) => (
           <div
             key={other.slug}
@@ -171,18 +172,9 @@ export default async function CaseStudyPage({ params }: PageProps<'/proof/[slug]
             <p className="tnum max-w-[62ch] text-[15px] leading-relaxed text-ink/80">
               {other.summary}
             </p>
-            <Link
-              href={`/proof/${other.slug}`}
-              className="group text-[14px] font-semibold whitespace-nowrap text-cobalt"
-            >
-              Read the case study{' '}
-              <span
-                aria-hidden="true"
-                className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
-              >
-                →
-              </span>
-            </Link>
+            <ArrowLink href={`/proof/${other.slug}`} size="sm" className="whitespace-nowrap">
+              Read the case study
+            </ArrowLink>
           </div>
         ))}
       </PageFrame>

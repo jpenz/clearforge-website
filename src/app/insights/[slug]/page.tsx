@@ -36,13 +36,13 @@ export default async function ArticlePage({ params }: PageProps<'/insights/[slug
       {/* Label band */}
       <PageFrame aria-label="Article context">
         <div className="flex items-center justify-between gap-4 px-5 py-5 md:px-10">
-          <span className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">
+          <span className="text-[12px] tracking-[0.18em] text-ink/70 uppercase">
             <Link href="/insights" className="hover:text-cobalt">
               Insights
             </Link>{' '}
             / {article.topic}
           </span>
-          <span className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">By James Penz</span>
+          <span className="text-[12px] tracking-[0.18em] text-ink/70 uppercase">By James Penz</span>
         </div>
       </PageFrame>
 
@@ -58,7 +58,7 @@ export default async function ArticlePage({ params }: PageProps<'/insights/[slug
           <p className="mt-6 max-w-[42ch] text-[18px] leading-[1.55] text-ink/80 md:mt-7 md:text-[21px]">
             {article.standfirst}
           </p>
-          <p className="mt-7 text-[11px] tracking-[0.18em] text-ink/60 uppercase md:mt-9">
+          <p className="mt-7 text-[12px] tracking-[0.18em] text-ink/70 uppercase md:mt-9">
             James Penz · Founder
           </p>
         </div>
@@ -83,7 +83,7 @@ export default async function ArticlePage({ params }: PageProps<'/insights/[slug
             }`}
           >
             <span className="flex items-baseline gap-4 md:gap-6">
-              <span className="tnum shrink-0 text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+              <span className="tnum shrink-0 text-[12px] tracking-[0.14em] text-ink/70 uppercase">
                 0{index + 1}
               </span>
               <span className="tnum text-[17px] leading-snug font-semibold transition-colors group-hover:text-cobalt motion-reduce:transition-none md:text-[19px]">

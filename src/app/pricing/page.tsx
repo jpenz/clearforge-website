@@ -31,7 +31,7 @@ export default function PricingPage() {
         <div aria-hidden="true" className="cf-aurora-b" />
         <Container gutter="cells" className="relative">
           <SectionBand tone="dark" left="Engagements" right="Scoped before you commit" />
-          <div className="grid lg:grid-cols-[1fr_420px]">
+          <div className="grid lg:grid-cols-[2fr_1fr]">
             <div className="border-hairline-ghost px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14 lg:border-r">
               <h1 className="font-display max-w-[19ch] text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
                 The first step is a{' '}
@@ -40,7 +40,7 @@ export default function PricingPage() {
               </h1>
             </div>
             <div className="flex flex-col justify-end border-t border-hairline-ghost px-5 py-8 md:px-10 md:py-14 lg:border-t-0">
-              <p className="text-[11px] tracking-[0.18em] text-ghost/55 uppercase">
+              <p className="text-[12px] tracking-[0.18em] text-ghost/70 uppercase">
                 How pricing works
               </p>
               <p className="mt-4 text-[16px] leading-relaxed text-ghost/80">
@@ -54,18 +54,18 @@ export default function PricingPage() {
 
       {/* The tiers ledger */}
       <PageFrame aria-label="The tiers">
-        <SectionBand left="The engagements" right="Six ways in" />
+        <SectionBand left="The engagements" right="One catalog" />
         <div
           className={`hidden border-b border-hairline px-10 py-3 lg:grid ${ROW_GRID}`}
           aria-hidden="true"
         >
-          <span className="tnum text-[11px] tracking-[0.14em] text-ink/60 uppercase">No.</span>
-          <span className="text-[11px] tracking-[0.14em] text-ink/60 uppercase">Engagement</span>
-          <span className="text-[11px] tracking-[0.14em] text-ink/60 uppercase">Term</span>
-          <span className="text-right text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+          <span className="tnum text-[12px] tracking-[0.14em] text-ink/70 uppercase">No.</span>
+          <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">Engagement</span>
+          <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">Term</span>
+          <span className="text-right text-[12px] tracking-[0.14em] text-ink/70 uppercase">
             Price
           </span>
-          <span className="text-right text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+          <span className="text-right text-[12px] tracking-[0.14em] text-ink/70 uppercase">
             Next step
           </span>
         </div>
@@ -83,7 +83,7 @@ export default function PricingPage() {
                 {tier.subtitle}
               </p>
             </div>
-            <span className="tnum text-[12px] tracking-[0.14em] text-ink/60 uppercase">
+            <span className="tnum text-[12px] tracking-[0.14em] text-ink/70 uppercase">
               {tier.term}
             </span>
             <div className="lg:text-right">
@@ -112,10 +112,10 @@ export default function PricingPage() {
               {UNPUBLISHED_TIER.subtitle}
             </p>
           </div>
-          <span className="text-[12px] tracking-[0.14em] text-ink/60 uppercase">
+          <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">
             {UNPUBLISHED_TIER.term}
           </span>
-          <span className="text-[12px] tracking-[0.14em] text-ink/60 uppercase lg:text-right">
+          <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase lg:text-right">
             {UNPUBLISHED_TIER.price}
           </span>
           <div className="flex lg:justify-end">
@@ -127,7 +127,7 @@ export default function PricingPage() {
       {/* The first two weeks */}
       <PageFrame aria-label="The first two weeks">
         <SectionBand left="The first two weeks" right="Forge Diagnostic · fixed fee" />
-        <div className="grid lg:grid-cols-[1fr_560px]">
+        <div className="grid lg:grid-cols-2">
           <div className="flex flex-col border-b border-hairline px-5 py-10 md:px-10 md:py-14 lg:border-r lg:border-b-0">
             <h2 className="font-display max-w-[16ch] text-[clamp(30px,3vw,56px)] leading-[1.1] font-medium">
               What happens in the first <span className="tnum text-cobalt italic">2 weeks</span>
@@ -138,7 +138,7 @@ export default function PricingPage() {
             </p>
             <div className="mt-auto pt-10">
               <div className="flex max-w-[46ch] items-baseline justify-between gap-6 border-t border-hairline pt-4">
-                <span className="text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+                <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">
                   Forge Diagnostic
                 </span>
                 <span className="tnum text-[14px] font-semibold">2 weeks · fixed fee</span>
@@ -152,7 +152,7 @@ export default function PricingPage() {
                   key={step.label}
                   className="grid gap-2 border-b border-hairline py-6 md:grid-cols-[110px_1fr] md:gap-6"
                 >
-                  <span className="tnum text-[11px] tracking-[0.14em] text-ink/60 uppercase md:pt-1">
+                  <span className="tnum text-[12px] tracking-[0.14em] text-ink/70 uppercase md:pt-1">
                     {step.label}
                   </span>
                   <div>
@@ -171,7 +171,7 @@ export default function PricingPage() {
       {/* The Adoption Mile */}
       <PageFrame aria-label="The Adoption Mile">
         <SectionBand left="The Adoption Mile" right="The top tier of Forge Scale" />
-        <div className="grid lg:grid-cols-[560px_1fr]">
+        <div className="grid lg:grid-cols-2">
           <div className="flex items-baseline gap-6 border-b border-hairline px-5 py-10 md:px-10 md:py-14 lg:border-r lg:border-b-0">
             <p className="font-display tnum text-[clamp(96px,9vw,176px)] leading-none font-medium">
               70%
@@ -204,8 +204,8 @@ export default function PricingPage() {
 
       {/* FAQ */}
       <PageFrame aria-label="Common questions">
-        <SectionBand left="Common questions" right="5 answers" />
-        <div className="grid lg:grid-cols-[420px_1fr]">
+        <SectionBand left="Common questions" right="Before the call" />
+        <div className="grid lg:grid-cols-[1fr_2fr]">
           <div className="border-b border-hairline px-5 py-8 md:px-10 md:py-12 lg:border-r lg:border-b-0">
             <h2 className="font-display max-w-[14ch] text-[28px] leading-[1.2] md:text-[34px]">
               Questions buyers ask before the call.

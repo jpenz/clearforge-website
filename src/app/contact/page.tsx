@@ -36,10 +36,10 @@ export default function ContactPage() {
         <div className="px-5 py-8 md:px-10 md:py-12">
           <div className="border border-ink bg-white">
             <div className="flex items-center justify-between border-b border-ink px-4 py-3 md:px-6">
-              <span className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">
+              <span className="text-[12px] tracking-[0.18em] text-ink/70 uppercase">
                 Pick a time · MS Teams · 30 minutes
               </span>
-              <span className="text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+              <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">
                 Live availability
               </span>
             </div>

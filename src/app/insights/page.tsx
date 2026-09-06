@@ -37,7 +37,7 @@ export default function InsightsPage() {
             <p className="text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase">
               Featured · {featured.topic}
             </p>
-            <span className="tnum text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+            <span className="tnum text-[12px] tracking-[0.14em] text-ink/70 uppercase">
               Our own numbers
             </span>
           </div>
@@ -81,7 +81,7 @@ export default function InsightsPage() {
               0{index + 1}
             </span>
             <div>
-              <p className="text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase">
+              <p className="text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase">
                 {article.topic}
               </p>
               <h3 className="tnum mt-2 text-[18px] leading-snug font-semibold transition-colors group-hover:text-cobalt motion-reduce:transition-none md:text-[20px]">

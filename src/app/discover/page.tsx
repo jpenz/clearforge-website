@@ -52,13 +52,13 @@ export default function DiscoverPage() {
         </div>
       </PageFrame>
 
-      {/* What happens next */}
-      <PageFrame aria-label="What happens next">
-        <SectionBand left="What happens next" right="3 steps · Priced before any build" />
+      {/* After the map: what happens next, not the engagement */}
+      <PageFrame aria-label="After the map">
+        <SectionBand left="After the map" right="Yours to keep · Priced before any build" />
         <div className="grid divide-y divide-hairline md:grid-cols-3 md:divide-x md:divide-y-0">
           {NEXT_STEPS.map((step) => (
             <div key={step.number} className="px-5 py-8 md:px-10 md:py-10">
-              <p className="tnum text-[11px] tracking-[0.18em] text-ink/60 uppercase">
+              <p className="tnum text-[12px] tracking-[0.18em] text-ink/70 uppercase">
                 {step.number}
               </p>
               <h2 className="mt-4 text-[18px] leading-[1.4] font-semibold md:text-[19px]">
