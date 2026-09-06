@@ -9,7 +9,7 @@ import { Plate } from '@/components/ui/Plate';
  */
 export function AdoptionBand() {
   return (
-    <section aria-label="The adoption bar" className="cf-dark-band overflow-hidden text-ghost">
+    <section aria-label="The adoption bar" className="cf-dark-band overflow-clip text-ghost">
       <Plate src="/renders/adoption-field.jpg" position="50% 60%" />
       <div aria-hidden="true" className="cf-aurora-b" />
       <div aria-hidden="true" className="cf-sweep" />

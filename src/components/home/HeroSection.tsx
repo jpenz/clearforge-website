@@ -16,7 +16,7 @@ import { Plate } from '@/components/ui/Plate';
  */
 export function HeroSection() {
   return (
-    <section aria-label="Introduction" className="cf-dark-band overflow-hidden">
+    <section aria-label="Introduction" className="cf-dark-band overflow-clip">
       <Plate src="/renders/hero-forge.jpg" priority position="72% 50%" />
       <div aria-hidden="true" className="cf-aurora" />
       <div aria-hidden="true" className="cf-aurora-b" />

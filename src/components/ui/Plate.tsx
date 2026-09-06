@@ -46,7 +46,7 @@ export function Plate({
   return (
     <div
       aria-hidden={alt === '' || undefined}
-      className={cn('pointer-events-none absolute inset-0 overflow-hidden', className)}
+      className={cn('pointer-events-none absolute inset-0 overflow-clip', className)}
     >
       <div className="cf-plate-parallax absolute inset-x-0 top-[-6%] h-[112%]">
         <Image

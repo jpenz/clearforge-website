@@ -50,7 +50,7 @@ export default function PrivateEquityPage() {
       <script {...JsonLdScriptProps(faqJsonLd(PE_FAQS))} />
 
       {/* Hero: full-bleed dark title block (pe-monoliths.jpg plate) */}
-      <section aria-label="AI for private equity" className="cf-dark-band overflow-hidden">
+      <section aria-label="AI for private equity" className="cf-dark-band overflow-clip">
         <Plate src="/renders/pe-monoliths.jpg" position="55% 50%" />
         <div aria-hidden="true" className="cf-aurora-b" />
         <Container gutter="cells" className="relative">

@@ -25,7 +25,7 @@ export function ProofSection() {
 
       {/* Case A: the image card beside the five-stat rail */}
       <div className="grid border-b border-hairline lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
-        <article className="cf-image-card group relative flex min-h-[440px] flex-col justify-end overflow-hidden bg-[#030b13] text-ghost lg:min-h-[560px]">
+        <article className="cf-image-card group relative flex min-h-[440px] flex-col justify-end overflow-clip bg-[#030b13] text-ghost lg:min-h-[560px]">
           <Plate
             src="/renders/proof-threads.jpg"
             overlay="soft"
