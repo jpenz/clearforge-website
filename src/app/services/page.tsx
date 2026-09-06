@@ -21,7 +21,7 @@ export default function ServicesPage() {
       <script {...JsonLdScriptProps(servicesJsonLd())} />
       {/* Intro band: full-bleed dark title block (services-anvil.jpg plate) */}
       <section aria-label="Services introduction" className="cf-dark-band overflow-clip">
-        <Plate src="/renders/services-anvil.jpg" position="62% 50%" />
+        <Plate src="/renders/services-anvil.jpg" position="62% 15%" overlay="strong-right" />
         <div aria-hidden="true" className="cf-aurora-b" />
         <Container gutter="cells" className="relative">
           <SectionBand

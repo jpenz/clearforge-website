@@ -296,6 +296,21 @@ cal-modal-box {
   to { transform: translate3d(22%, 0, 0); }
 }
 
+/* Luminous core for dark bands that carry no plate (the footer): a
+   brighter top-right bloom over the band's own highlight, so both dark
+   bookends share one HDR core. Static gradient. */
+.cf-core {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 46% 85% at 90% 0%,
+    rgba(122, 151, 255, 0.42) 0%,
+    rgba(36, 84, 255, 0.2) 30%,
+    transparent 65%
+  );
+}
+
 /* Dotted-grid texture for light bands. */
 .cf-dots {
   background-image: radial-gradient(rgba(1, 11, 19, 0.10) 1px, transparent 1px);
@@ -352,7 +367,7 @@ cal-modal-box {
 /* Plate legibility overlay (V13 Move 3). The left-heavy scrim keeps ghost
    text on the dark left at contrast while the render blooms on the right;
    the bottom vignette returns the band's edge to #030b13. Below lg the
-   text spans the whole width, so the scrim goes uniform and stronger. */
+   text spans the whole width, so the scrim goes flat and stronger. */
 .cf-plate-overlay {
   background:
     linear-gradient(180deg, transparent 55%, #030b13 100%),
@@ -368,8 +383,21 @@ cal-modal-box {
   .cf-plate-overlay {
     background:
       linear-gradient(180deg, transparent 55%, #030b13 100%),
-      linear-gradient(90deg, rgba(3, 11, 19, 0.9) 0%, rgba(3, 11, 19, 0.8) 100%);
+      linear-gradient(rgba(3, 11, 19, 0.92), rgba(3, 11, 19, 0.92));
   }
+}
+/* Shadow pool for plates that carry text in a right-hand column (the
+   hero label row, the services and PE title blocks): a soft dark ellipse
+   behind the column so 11 to 15px ghost text clears 4.5:1 on the
+   render's bright zone, while the bloom above and beside it stays lit.
+   Static gradient, no compositor cost. */
+.cf-plate-pool {
+  background: radial-gradient(
+    ellipse 30% 70% at 78% 55%,
+    rgba(3, 11, 19, 0.82) 0%,
+    rgba(3, 11, 19, 0.6) 40%,
+    transparent 72%
+  );
 }
 /* Image cards: the text sits at the foot, so the scrim is bottom-heavy
    and the render stays visible above it. */

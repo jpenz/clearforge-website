@@ -6,12 +6,16 @@ import { FOOTER_COLUMNS, SITE_NAME, SITE_TAGLINE } from '@/data/site';
 /**
  * The columned footer, dark bookend of every page: brand block, four
  * sitemap columns (the only nav path to /discover), and a numbers bar.
- * V13: full-bleed cinematic band (HDR core from .cf-dark-band, aurora).
+ * V13: full-bleed cinematic band with the luminous top-right core
+ * (.cf-core over the band's own highlight), the aurora, and the slow
+ * light sweep, so both dark bookends carry the same HDR core.
  */
 export function Footer() {
   return (
     <footer className="cf-dark-band overflow-hidden">
+      <div aria-hidden="true" className="cf-core" />
       <div aria-hidden="true" className="cf-aurora-b" />
+      <div aria-hidden="true" className="cf-sweep" />
       <Container className="relative py-12 md:py-16">
         <div className="grid gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-[minmax(0,1.4fr)_repeat(4,minmax(0,1fr))]">
           <div className="max-w-[320px] md:col-span-2 lg:col-span-1">
@@ -30,7 +34,7 @@ export function Footer() {
           </div>
           {FOOTER_COLUMNS.map((column) => (
             <nav key={column.title} aria-label={`Footer: ${column.title}`}>
-              <p className="text-[11px] tracking-[0.18em] text-ghost/55 uppercase">
+              <p className="text-[11px] tracking-[0.18em] text-ghost/70 uppercase">
                 {column.title}
               </p>
               <ul className="mt-4 space-y-2.5 text-[13px] font-medium">
@@ -45,7 +49,7 @@ export function Footer() {
             </nav>
           ))}
         </div>
-        <div className="mt-12 flex flex-col gap-2 border-t border-hairline-ghost pt-5 text-[12px] text-ghost/55 md:flex-row md:items-center md:justify-between">
+        <div className="mt-12 flex flex-col gap-2 border-t border-hairline-ghost pt-5 text-[12px] text-ghost/65 md:flex-row md:items-center md:justify-between">
           <p className="tnum">
             © 2026 {SITE_NAME}
             <span aria-hidden="true" className="px-2">

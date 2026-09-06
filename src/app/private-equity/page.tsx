@@ -51,7 +51,7 @@ export default function PrivateEquityPage() {
 
       {/* Hero: full-bleed dark title block (pe-monoliths.jpg plate) */}
       <section aria-label="AI for private equity" className="cf-dark-band overflow-clip">
-        <Plate src="/renders/pe-monoliths.jpg" position="55% 50%" />
+        <Plate src="/renders/pe-monoliths.jpg" position="55% 50%" overlay="strong-right" />
         <div aria-hidden="true" className="cf-aurora-b" />
         <Container gutter="cells" className="relative">
           <SectionBand tone="dark" left="Private equity" right="Portfolio-wide - Sponsor-visible" />
@@ -67,7 +67,7 @@ export default function PrivateEquityPage() {
               </p>
             </div>
             <div className="flex flex-col justify-end px-5 py-8 md:px-10 md:py-14">
-              <p className="text-[11px] tracking-[0.18em] text-ghost/55 uppercase">Start here</p>
+              <p className="text-[11px] tracking-[0.18em] text-ghost/75 uppercase">Start here</p>
               <p className="mt-4 text-[15px] leading-relaxed text-ghost/80">
                 Thirty minutes with the founder. Bring one portfolio company and we will map where a
                 system would pay first.
