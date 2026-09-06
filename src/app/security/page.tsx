@@ -6,14 +6,14 @@ import { SectionBand } from '@/components/ui/SectionBand';
 export const metadata: Metadata = {
   title: 'Security',
   description:
-    'How ClearForge handles your data: named subprocessors, no training on your data, private storage, and an honest posture stated plainly.',
+    'How ClearForge handles your data: named subprocessors, no training on your data, private storage, and the certifications we do and do not hold.',
 };
 
 const SECTIONS: Array<{ heading: string; paragraphs: string[]; list?: string[] }> = [
   {
-    heading: 'The honest posture',
+    heading: 'Certifications and practices',
     paragraphs: [
-      'ClearForge is a founder-led firm. We do not hold a SOC 2 certification today and we will not imply otherwise. What we do hold is a short, real list of practices, stated below so your security review can start from facts.',
+      'ClearForge is a founder-led firm. We do not hold a SOC 2 certification today. The practices below are what we do hold, stated so your security review can start from facts.',
     ],
   },
   {
@@ -53,7 +53,7 @@ export default function SecurityPage() {
   return (
     <>
       <PageFrame aria-label="Security">
-        <SectionBand left="Security" right="Stated plainly" />
+        <SectionBand left="Security" right="Last reviewed September 2026" />
         <div className="px-5 py-10 md:px-10 md:py-14">
           <h1 className="font-display text-[clamp(28px,4vw,44px)] leading-tight">
             Security and data handling
@@ -61,6 +61,9 @@ export default function SecurityPage() {
           <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-ink/70">
             What we store, where it goes, and what we never do. Written for the person running
             vendor diligence.
+          </p>
+          <p className="tnum mt-4 text-[12px] tracking-[0.14em] text-ink/70 uppercase">
+            Last reviewed: September 2026
           </p>
         </div>
       </PageFrame>

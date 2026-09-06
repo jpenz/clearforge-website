@@ -10,7 +10,6 @@ import { SectionBand } from '@/components/ui/SectionBand';
 import { Stat } from '@/components/ui/Stat';
 import { CASE_STUDIES } from '@/data/case-studies';
 import { PE_FAQS } from '@/data/faqs';
-import { PE_PACK } from '@/data/services';
 import { faqJsonLd, JsonLdScriptProps } from '@/lib/seo';
 
 export const metadata: Metadata = {
@@ -59,7 +58,11 @@ export default function PrivateEquityPage() {
         <Plate src="/renders/pe-monoliths.jpg" position="55% 50%" overlay="strong-right" />
         <div aria-hidden="true" className="cf-aurora-b" />
         <Container gutter="cells" className="relative">
-          <SectionBand tone="dark" left="Private equity" right="Portfolio-wide · Sponsor-visible" />
+          <SectionBand
+            tone="dark"
+            left="Private equity"
+            right={'Portfolio\u2011wide · Sponsor\u2011visible'}
+          />
           <div className="grid lg:grid-cols-[2fr_1fr]">
             <div className="border-hairline-ghost px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14 lg:border-r">
               <h1 className="font-display max-w-[20ch] text-balance text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
@@ -72,7 +75,7 @@ export default function PrivateEquityPage() {
               </p>
             </div>
             <div className="flex flex-col justify-end px-5 py-8 md:px-10 md:py-14">
-              <p className="text-[12px] tracking-[0.16em] text-ghost/75 uppercase">Start here</p>
+              <p className="text-[12px] tracking-[0.16em] text-ghost uppercase">Start here</p>
               <p className="mt-4 text-[15px] leading-relaxed text-ghost/80">
                 Thirty minutes with the founder. Bring one portfolio company and we will map where a
                 system would pay first.
@@ -90,7 +93,7 @@ export default function PrivateEquityPage() {
           {SEQUENCE.map((item) => (
             <div
               key={item.step}
-              className="border-b border-hairline px-5 py-8 md:px-8 md:odd:border-r lg:border-r lg:border-b-0 lg:last:border-r-0"
+              className="border-b border-hairline px-5 py-8 md:px-10 md:odd:border-r lg:border-r lg:border-b-0 lg:last:border-r-0"
             >
               <p className="tnum text-[12px] tracking-[0.16em] text-cobalt uppercase">
                 {item.step}
@@ -110,12 +113,9 @@ export default function PrivateEquityPage() {
             <GapPair tone="dark" eyebrow={false} />
           </div>
           <div className="flex flex-col justify-center px-5 py-10 md:px-10 md:py-14">
-            <p className="tnum max-w-[62ch] text-[17px] leading-relaxed text-ghost/85">
-              {PE_PACK.stat.text}
-            </p>
-            <p className="mt-6 max-w-[62ch] text-[16px] leading-relaxed text-ghost/75">
-              The mandate is not the constraint. Execution inside the operating companies is. That
-              is the gap this work closes.
+            <p className="max-w-[54ch] text-[17px] leading-relaxed text-ghost/85">
+              The mandate is already in place across the industry. Execution inside the operating
+              companies is where it stalls. That is the gap this work closes.
             </p>
           </div>
         </div>
@@ -123,9 +123,9 @@ export default function PrivateEquityPage() {
 
       {/* Proof: Case C, the same three scope figures /proof shows */}
       <PageFrame aria-label="Portfolio proof">
-        <SectionBand left="Proof" right="Scope · Anonymized client" />
+        <SectionBand left="Scope of the engagement" right="Anonymized client" />
         <div className="grid lg:grid-cols-[2fr_1fr]">
-          <div className="flex flex-col border-b border-hairline px-5 py-10 md:px-10 lg:border-r lg:border-b-0">
+          <div className="relative flex flex-col border-b border-hairline px-5 py-10 transition-colors hover:bg-white md:px-10 lg:border-r lg:border-b-0">
             <p className="tnum text-[12px] tracking-[0.16em] text-ink/70 uppercase">
               Case C · A PE operating team
             </p>
@@ -133,7 +133,11 @@ export default function PrivateEquityPage() {
               {caseC.headline} <em className="text-cobalt italic">{caseC.headlineEmphasis}</em>
             </h2>
             <div className="mt-auto pt-6">
-              <ArrowLink href={`/proof/${caseC.slug}`} size="sm">
+              <ArrowLink
+                href={`/proof/${caseC.slug}`}
+                size="sm"
+                className="after:absolute after:inset-0"
+              >
                 Read the case study
               </ArrowLink>
             </div>
@@ -142,7 +146,7 @@ export default function PrivateEquityPage() {
             {caseC.metrics.map((metric, index) => (
               <div
                 key={metric.label}
-                className={`px-5 py-6 md:px-8 ${index > 0 ? 'lg:border-t lg:border-hairline' : ''}`}
+                className={`px-5 py-6 md:px-10 ${index > 0 ? 'lg:border-t lg:border-hairline' : ''}`}
               >
                 <Stat size="sm" value={metric.value} label={metric.label} />
               </div>

@@ -174,7 +174,7 @@ export function StartFlow() {
         ref={headingRef}
         tabIndex={-1}
         aria-live="polite"
-        className="tnum mt-8 text-[18px] leading-snug font-semibold outline-none"
+        className="tnum mt-8 scroll-mt-[190px] text-[18px] leading-snug font-semibold outline-none md:scroll-mt-[132px]"
       >
         Step {step} of 3 · {current.title}
         {step === 1 && (

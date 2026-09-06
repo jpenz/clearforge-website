@@ -35,12 +35,14 @@ export default function PricingPage() {
             <div className="border-hairline-ghost px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14 lg:border-r">
               <h1 className="font-display max-w-[19ch] text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
                 The first step is a{' '}
-                <span className="text-cobalt-bright italic">fixed-fee diagnostic.</span> Everything
-                after it is scoped there.
+                <span className="text-cobalt-bright italic">
+                  <span className="whitespace-nowrap">fixed-fee</span> diagnostic.
+                </span>{' '}
+                Everything after it is scoped there.
               </h1>
             </div>
             <div className="flex flex-col justify-end border-t border-hairline-ghost px-5 py-8 md:px-10 md:py-14 lg:border-t-0">
-              <p className="text-[12px] tracking-[0.18em] text-ghost/70 uppercase">
+              <p className="text-[12px] tracking-[0.18em] text-ghost uppercase">
                 How pricing works
               </p>
               <p className="mt-4 text-[16px] leading-relaxed text-ghost/80">
@@ -63,7 +65,7 @@ export default function PricingPage() {
           <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">Engagement</span>
           <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">Term</span>
           <span className="text-right text-[12px] tracking-[0.14em] text-ink/70 uppercase">
-            Price
+            Fee basis
           </span>
           <span className="text-right text-[12px] tracking-[0.14em] text-ink/70 uppercase">
             Next step

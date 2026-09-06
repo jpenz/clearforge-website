@@ -5,7 +5,6 @@ import { ArrowLink } from '@/components/ui/ArrowLink';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
 import { Stat } from '@/components/ui/Stat';
-import { SERVICE_STAGES } from '@/data/services';
 import { FOUNDER_EMAIL, FOUNDER_LINKEDIN } from '@/data/site';
 import { founderJsonLd, JsonLdScriptProps } from '@/lib/seo';
 
@@ -33,21 +32,13 @@ const BACKGROUND = [
   },
 ];
 
-/** The terms of each stage, from the catalog. Never a price. */
-const STAGE_TERMS: Record<string, string> = {
-  '01': 'Fixed fee, 2 weeks.',
-  '02': 'Scoped in the Diagnostic.',
-  '03': 'The Adoption Mile.',
-  '04': 'Monthly, per system.',
-};
-
 export default function AboutPage() {
   return (
     <>
       <script {...JsonLdScriptProps(founderJsonLd())} />
       {/* Title block + founder headshot */}
       <PageFrame aria-label="About ClearForge">
-        <SectionBand left="About" right="Founder-led · Founded by James Penz" />
+        <SectionBand left="About" right="Founder led · Founded by James Penz" />
         <div className="grid lg:grid-cols-2">
           <div className="flex flex-col border-b border-hairline px-5 pt-10 pb-10 md:px-10 md:pt-16 md:pb-16 lg:border-r lg:border-b-0">
             <h1 className="font-display max-w-[16ch] text-balance text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
@@ -56,13 +47,12 @@ export default function AboutPage() {
             </h1>
             <div className="mt-8 max-w-[52ch] space-y-5 md:mt-10">
               <p className="tnum text-[16px] leading-relaxed text-ink/80">
-                Mid-market companies and PE operating teams get AI advice as reports. ClearForge
-                exists to do the other thing. We design an AI system for a specific workflow, build
-                it into production, and stay through adoption until the team actually uses it.
+                ClearForge designs an AI system for a specific workflow, builds it into production,
+                and stays through adoption until the team uses it every week.
               </p>
               <p className="text-[16px] leading-relaxed text-ink/80">
-                Pricing is scoped in the Diagnostic and agreed before any build. The deliverable is
-                the working system, not a report.
+                Pricing is scoped in the Diagnostic and agreed before any build. The diagnostic ends
+                in a priced build plan. The engagement ends in a working system.
               </p>
             </div>
             <div className="mt-auto pt-8 md:pt-10">
@@ -115,7 +105,7 @@ export default function AboutPage() {
 
       {/* Background ledger */}
       <PageFrame aria-label="Background">
-        <SectionBand left="Background" right="Enterprise practice" />
+        <SectionBand left="Background" right="Enterprise practice · Verify on LinkedIn" />
         {BACKGROUND.map((row, index) => (
           <div
             key={row.title}
@@ -168,30 +158,13 @@ export default function AboutPage() {
         </div>
       </PageFrame>
 
-      {/* How we work: the catalog's four stages, the same names as /services */}
-      <PageFrame aria-label="How we work">
-        <SectionBand left="How we work" right="Priced before any build" />
-        <div className="grid divide-y divide-hairline md:grid-cols-2 md:divide-x md:divide-y-0 lg:grid-cols-4">
-          {SERVICE_STAGES.map((stage) => (
-            <div key={stage.number} className="px-5 py-8 md:px-8 md:py-12">
-              <span className="tnum flex items-center gap-2.5 text-[12px] tracking-[0.14em] text-ink/70 uppercase">
-                <span aria-hidden="true" className="inline-block size-[7px] bg-cobalt" />
-                {stage.number} · {stage.name}
-              </span>
-              <p className="tnum mt-5 text-[17px] leading-[1.5] font-medium md:text-[19px]">
-                {stage.conclusion} <span className="text-ink/70">{STAGE_TERMS[stage.number]}</span>
-              </p>
-            </div>
-          ))}
-        </div>
-      </PageFrame>
-
       {/* Closing booking strip */}
       <PageFrame bottomRule={false} aria-label="Next step">
         <SectionBand left="Next step" right="Fixed fee · 2 weeks" />
         <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
           <h2 className="font-display text-balance text-[clamp(30px,3vw,56px)] leading-[1.1] font-medium">
-            Start with the fixed-fee <em className="text-cobalt italic">Diagnostic.</em>
+            Start with the <span className="whitespace-nowrap">fixed-fee</span>{' '}
+            <em className="text-cobalt italic">Diagnostic.</em>
           </h2>
           <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />
         </div>

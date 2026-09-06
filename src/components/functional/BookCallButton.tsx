@@ -34,6 +34,35 @@ const isBoxed = (variant: Variant) => variant === 'solid' || variant === 'outlin
 const SETTLE_MS = 800;
 
 /**
+ * The Cal embed mounts <cal-modal-box> on the body with no dialog role and
+ * never moves focus into it, so a keyboard reader stayed on the page behind
+ * an open modal. Name it, focus it, and hand focus back to the button that
+ * opened it when it goes away. Returns a teardown for the watcher.
+ */
+function adoptCalModal(returnTo: HTMLElement | null): (() => void) | undefined {
+  const box = document.querySelector('cal-modal-box');
+  if (!(box instanceof HTMLElement)) return undefined;
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.setAttribute('aria-label', CTA_LABEL);
+  box.setAttribute('tabindex', '-1');
+  box.focus();
+  const observer = new MutationObserver(() => {
+    const gone = !document.body.contains(box) || window.getComputedStyle(box).display === 'none';
+    if (!gone) return;
+    observer.disconnect();
+    returnTo?.focus();
+  });
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['style', 'class', 'hidden'],
+  });
+  return () => observer.disconnect();
+}
+
+/**
  * The canonical booking button. Opens the Cal.com scheduling modal.
  * Label is always exactly "Book a 30-min intro".
  *
@@ -47,11 +76,14 @@ const SETTLE_MS = 800;
 export function BookCallButton({ variant = 'solid', size = 'sm', className }: BookCallButtonProps) {
   const [opening, setOpening] = useState(false);
   const timer = useRef<number | null>(null);
+  const button = useRef<HTMLButtonElement>(null);
+  const teardown = useRef<(() => void) | undefined>(undefined);
   const preload = () => preloadCal(CAL_NAMESPACE);
 
   useEffect(
     () => () => {
       if (timer.current != null) window.clearTimeout(timer.current);
+      teardown.current?.();
     },
     [],
   );
@@ -60,13 +92,19 @@ export function BookCallButton({ variant = 'solid', size = 'sm', className }: Bo
     if (opening) return;
     setOpening(true);
     openCalModal(CAL_NAMESPACE).finally(() => {
-      timer.current = window.setTimeout(() => setOpening(false), SETTLE_MS);
+      timer.current = window.setTimeout(() => {
+        setOpening(false);
+        teardown.current?.();
+        teardown.current = adoptCalModal(button.current);
+      }, SETTLE_MS);
     });
   };
 
   return (
     <button
+      ref={button}
       type="button"
+      aria-haspopup="dialog"
       aria-busy={opening || undefined}
       onMouseEnter={preload}
       onFocus={preload}
