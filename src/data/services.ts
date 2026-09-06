@@ -1,10 +1,12 @@
 export interface ServiceOffering {
   name: string;
   description: string;
-  /** The pricing basis, as an eyebrow: fixed fee, scoped in the Diagnostic, retainer. */
-  meta: string;
-  /** The one real variable per row: the term or cadence. Never a price. */
-  price: string;
+  /** How long it runs. Duration only, never a billing cadence. */
+  term: string;
+  /** How it is billed. Never a price. */
+  feeBasis: string;
+  /** When the fee basis needs a qualifier, one short line. */
+  feeNote?: string;
 }
 
 /** Anchor id for a service offering, so footer links land on the row. */
@@ -37,15 +39,17 @@ export const SERVICE_STAGES: ServiceStage[] = [
         name: 'Forge Diagnostic',
         description:
           'Two weeks to map the workflow, size the opportunity, and prove the system is viable before you build.',
-        meta: 'Fixed fee · Agreed up front',
-        price: '2 weeks',
+        term: '2 weeks',
+        feeBasis: 'Fixed fee',
+        feeNote: 'Agreed up front.',
       },
       {
         name: 'Eval and Reliability Audit',
         description:
           'For AI systems your company already built. Deliverables: an eval harness, reliability gates, a fix plan.',
-        meta: 'Fixed fee · Agreed up front',
-        price: '2 weeks',
+        term: '2 weeks',
+        feeBasis: 'Fixed fee',
+        feeNote: 'Agreed up front.',
       },
     ],
   },
@@ -59,8 +63,9 @@ export const SERVICE_STAGES: ServiceStage[] = [
         name: 'Forge Sprint',
         description:
           '10 to 14 weeks from kickoff to a live production system. Every Sprint ships with an eval harness and reliability gates.',
-        meta: 'Scoped in the Diagnostic · Agreed before any build',
-        price: '10 to 14 weeks',
+        term: '10 to 14 weeks',
+        feeBasis: 'Scoped in the Diagnostic',
+        feeNote: 'Agreed before any build.',
       },
     ],
   },
@@ -68,22 +73,24 @@ export const SERVICE_STAGES: ServiceStage[] = [
     number: '03',
     name: 'Adopt',
     conclusion: 'The team uses it every week, or the work is not done.',
-    description: 'The target: 70 percent weekly-active adoption by day 90.',
+    description: 'A named operator, a weekly working cadence, a live adoption scoreboard.',
     link: { label: 'Take the scorecard', href: '/scorecard' },
     offerings: [
       {
         name: 'Forge Scale',
         description:
           'The Adoption Mile: a named operator, a weekly working cadence, and a live adoption scoreboard.',
-        meta: 'Monthly retainer · Scoped to the system',
-        price: 'Per month',
+        term: 'Ongoing',
+        feeBasis: 'Monthly retainer',
+        feeNote: 'Scoped to the system.',
       },
       {
         name: 'Fractional Chief AI Officer',
         description:
           'The top tier of Forge Scale. Standing AI leadership across the whole company.',
-        meta: 'Top tier · Scoped to the engagement',
-        price: 'Per month',
+        term: 'Ongoing',
+        feeBasis: 'Monthly retainer',
+        feeNote: 'Top tier, scoped to the engagement.',
       },
     ],
   },
@@ -97,8 +104,9 @@ export const SERVICE_STAGES: ServiceStage[] = [
         name: 'Forge Run',
         description:
           'Monitoring, production evals, SLAs, and model upgrades for every system we built.',
-        meta: 'Monthly retainer · Scoped to the system',
-        price: 'Per system, per month',
+        term: 'Ongoing',
+        feeBasis: 'Monthly retainer',
+        feeNote: 'Per system, after the build.',
       },
     ],
   },

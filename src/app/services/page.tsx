@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { BookCallButton } from '@/components/functional/BookCallButton';
 import { ArrowLink } from '@/components/ui/ArrowLink';
-import { BookingStrip } from '@/components/ui/BookingStrip';
 import { Container } from '@/components/ui/Container';
 import { GapPair } from '@/components/ui/GapPair';
 import { PageFrame } from '@/components/ui/PageFrame';
@@ -22,27 +21,26 @@ export default function ServicesPage() {
       <script {...JsonLdScriptProps(servicesJsonLd())} />
       {/* Intro band: full-bleed dark title block (services-anvil.jpg plate) */}
       <section aria-label="Services introduction" className="cf-dark-band overflow-clip">
-        <Plate src="/renders/services-anvil.jpg" position="60% 62%" overlay="strong-right" />
+        <Plate src="/renders/services-anvil.jpg" position="55% 40%" overlay="strong-right" />
         <div aria-hidden="true" className="cf-aurora-b" />
         <Container gutter="cells" className="relative">
           <SectionBand
             tone="dark"
             left="Services"
-            right="The journey: Diagnose, Build, Adopt, Run"
+            right="One catalog · Four stages · Scoped before you commit"
           />
           <div className="grid lg:grid-cols-[2fr_1fr]">
             <div className="border-hairline-ghost px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14 lg:border-r">
-              <h1 className="font-display max-w-[18ch] text-balance text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
-                One catalog. Four stages. Scoped{' '}
-                <em className="text-cobalt-bright italic">before you commit.</em>
+              <h1 className="font-display max-w-[20ch] text-balance text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
+                Every engagement starts with a <span className="whitespace-nowrap">fixed-fee</span>{' '}
+                diagnostic and ends with a system your team{' '}
+                <em className="text-cobalt-bright italic">uses every week.</em>
               </h1>
             </div>
             <div className="flex flex-col border-t border-hairline-ghost lg:border-t-0">
               <div className="flex grow items-center border-b border-hairline-ghost px-5 py-8 md:px-10 md:py-10">
-                <p className="text-[16px] leading-relaxed text-ghost/80">
-                  Every engagement starts with a{' '}
-                  <span className="font-semibold text-ghost">fixed-fee diagnostic</span> and ends
-                  with a system your team uses every week.
+                <p className="text-[16px] leading-relaxed text-ghost/85">
+                  Diagnose, Build, Adopt, Run. Four stages, one catalog, priced before any build.
                 </p>
               </div>
               <div className="px-5 py-6 md:px-10 md:py-8">
@@ -59,7 +57,7 @@ export default function ServicesPage() {
         {SERVICE_STAGES.map((stage, stageIndex) => (
           <div
             key={stage.number}
-            className={`grid lg:grid-cols-[1fr_2fr] ${
+            className={`grid lg:grid-cols-[1fr_2fr] ${stageIndex % 2 === 1 ? 'cf-dots' : ''} ${
               stageIndex < SERVICE_STAGES.length - 1 ? 'border-b border-hairline' : ''
             }`}
           >
@@ -71,9 +69,6 @@ export default function ServicesPage() {
               <h2 className="font-display mt-3 max-w-[18ch] text-balance text-[clamp(26px,2.2vw,40px)] leading-[1.15] font-medium">
                 {stage.conclusion}
               </h2>
-              <p className="tnum mt-4 max-w-[32ch] text-[15px] leading-relaxed text-ink/70">
-                {stage.description}
-              </p>
               {stage.link && (
                 <div className="mt-6">
                   <p className="text-[12px] tracking-[0.16em] text-ink/70 uppercase">Free tool</p>
@@ -88,22 +83,25 @@ export default function ServicesPage() {
                 <div
                   key={offering.name}
                   id={offeringId(offering.name)}
-                  className={`grid gap-2 px-5 py-6 md:gap-6 md:px-10 md:py-8 lg:grid-cols-[1fr_240px_160px] ${
+                  className={`grid gap-3 px-5 py-6 md:gap-6 md:px-10 md:py-8 lg:grid-cols-[1fr_180px_180px] ${
                     offeringIndex < stage.offerings.length - 1 ? 'border-b border-hairline' : ''
                   }`}
                 >
                   <div>
-                    <h3 className="text-[17px] font-semibold">{offering.name}</h3>
+                    <h3 className="text-[18px] font-semibold">{offering.name}</h3>
                     <p className="tnum mt-2 max-w-[52ch] text-[14px] leading-relaxed text-ink/70">
                       {offering.description}
                     </p>
                   </div>
-                  <p className="tnum text-[12px] tracking-[0.14em] text-ink/70 uppercase lg:pt-1.5">
-                    {offering.meta}
-                  </p>
-                  <p className="tnum text-[18px] font-semibold lg:pt-0.5 lg:text-right">
-                    {offering.price}
-                  </p>
+                  <div>
+                    <p className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">Term</p>
+                    <p className="tnum mt-1 text-[18px] font-semibold">{offering.term}</p>
+                  </div>
+                  <div>
+                    <p className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">Fee basis</p>
+                    <p className="tnum mt-1 text-[18px] font-semibold">{offering.feeBasis}</p>
+                    <p className="mt-1 text-[14px] leading-snug text-ink/70">{offering.feeNote}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -140,21 +138,21 @@ export default function ServicesPage() {
           </div>
           <div className="flex flex-col justify-center border-t border-hairline-ghost px-5 py-10 md:px-10 md:py-14 lg:border-t-0">
             <GapPair tone="dark" />
-            <p className="tnum mt-8 max-w-[62ch] text-[15px] leading-relaxed text-ghost/85">
-              {PE_PACK.stat.text}
-            </p>
           </div>
         </div>
       </PageFrame>
 
-      {/* Closing strip */}
-      <BookingStrip
-        headline={
-          <>
-            The first step is a fixed fee. <em className="text-cobalt italic">2 weeks.</em>
-          </>
-        }
-      />
+      {/* Closing room */}
+      <PageFrame bottomRule={false} aria-label="Next step">
+        <SectionBand left="Next step" right="Fixed fee · 2 weeks" />
+        <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+          <h2 className="font-display text-balance text-[clamp(30px,3vw,56px)] leading-[1.1] font-medium">
+            Start with the <span className="whitespace-nowrap">fixed-fee</span>{' '}
+            <em className="text-cobalt italic">Diagnostic.</em>
+          </h2>
+          <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />
+        </div>
+      </PageFrame>
     </>
   );
 }
