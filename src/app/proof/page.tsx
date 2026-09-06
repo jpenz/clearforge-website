@@ -210,7 +210,8 @@ export default function ProofPage() {
         <SectionBand left="Next step" right="Fixed fee · 2 weeks" />
         <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
           <h2 className="font-display text-balance text-[clamp(30px,3vw,56px)] leading-[1.1] font-medium">
-            Start with the fixed-fee <em className="text-cobalt italic">Diagnostic.</em>
+            Start with the <span className="whitespace-nowrap">fixed-fee</span>{' '}
+            <em className="text-cobalt italic">Diagnostic.</em>
           </h2>
           <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />
         </div>
