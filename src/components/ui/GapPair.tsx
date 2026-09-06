@@ -24,7 +24,7 @@ export function GapPair({ tone = 'light', eyebrow = true, className }: GapPairPr
         <p
           className={cn(
             'text-[12px] tracking-[0.16em] uppercase',
-            dark ? 'text-ghost/70' : 'text-ink/70',
+            dark ? 'text-ghost/80' : 'text-ink/70',
           )}
         >
           Third-party research
@@ -33,40 +33,45 @@ export function GapPair({ tone = 'light', eyebrow = true, className }: GapPairPr
       <dl className={cn('space-y-6', eyebrow && 'mt-5')}>
         {pair.map((row, index) => {
           const accent = index === pair.length - 1;
+          // A <dl> may only hold dt/dd groups, optionally wrapped in ONE div
+          // (axe definition-list / dlitem). The row is that div, laid out as a
+          // grid: figure and label on one baseline, the bar as a second,
+          // decorative dd spanning both columns.
           return (
-            <div key={row.label}>
-              <div className="flex items-baseline gap-3">
-                <dt
-                  className={cn(
-                    'tnum text-[clamp(44px,3.6vw,64px)] leading-none font-light tracking-tight',
-                    accent && (dark ? 'text-cobalt-bright' : 'text-cobalt'),
-                  )}
-                >
-                  {row.approximate && (
-                    <span
-                      className={cn(
-                        'mr-2 text-[14px] font-normal tracking-normal',
-                        dark ? 'text-ghost/70' : 'text-ink/70',
-                      )}
-                    >
-                      about
-                    </span>
-                  )}
-                  {row.value}
-                  <span className="align-top text-[0.5em]">%</span>
-                </dt>
-                <dd
-                  className={cn(
-                    'tnum text-[14px] leading-snug',
-                    dark ? 'text-ghost/80' : 'text-ink/75',
-                  )}
-                >
-                  {row.label}
-                </dd>
-              </div>
-              <div
+            <div key={row.label} className="grid grid-cols-[auto_1fr] items-baseline gap-x-3">
+              <dt
+                className={cn(
+                  'tnum text-[clamp(44px,3.6vw,64px)] leading-none font-light tracking-tight',
+                  accent && (dark ? 'text-cobalt-bright' : 'text-cobalt'),
+                )}
+              >
+                {row.approximate && (
+                  <span
+                    className={cn(
+                      'mr-2 text-[14px] font-normal tracking-normal',
+                      dark ? 'text-ghost/70' : 'text-ink/70',
+                    )}
+                  >
+                    about
+                  </span>
+                )}
+                {row.value}
+                <span className="align-top text-[0.5em]">%</span>
+              </dt>
+              <dd
+                className={cn(
+                  'tnum text-[14px] leading-snug',
+                  dark ? 'text-ghost/80' : 'text-ink/75',
+                )}
+              >
+                {row.label}
+              </dd>
+              <dd
                 aria-hidden="true"
-                className={cn('mt-3 h-[6px] w-full', dark ? 'bg-ghost/12' : 'bg-hairline')}
+                className={cn(
+                  'col-span-2 mt-3 h-[6px] w-full',
+                  dark ? 'bg-ghost/12' : 'bg-hairline',
+                )}
               >
                 <div
                   className={cn(
@@ -81,7 +86,7 @@ export function GapPair({ tone = 'light', eyebrow = true, className }: GapPairPr
                   )}
                   style={{ width: `${row.value}%` }}
                 />
-              </div>
+              </dd>
             </div>
           );
         })}
