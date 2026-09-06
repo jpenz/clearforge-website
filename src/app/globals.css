@@ -206,6 +206,22 @@ cal-modal-box {
   color: var(--color-ghost);
   box-shadow: 0 32px 64px -32px rgba(1, 11, 19, 0.55);
 }
+/* Below md the text columns span the full width, so the corner core sits
+   under 12 to 14px ghost labels; it is dimmed there so they keep 4.5:1. */
+@media (max-width: 767px) {
+  .cf-dark-band {
+    background:
+      linear-gradient(180deg, transparent 55%, #030b13 100%),
+      radial-gradient(
+        ellipse 55% 75% at 82% 0%,
+        rgba(122, 151, 255, 0.3) 0%,
+        rgba(36, 84, 255, 0.12) 22%,
+        transparent 60%
+      ),
+      linear-gradient(180deg, rgba(36, 84, 255, 0.08) 0%, transparent 140px),
+      #030b13;
+  }
+}
 /* Specular top edge. */
 .cf-dark-band::before {
   content: "";
@@ -371,6 +387,7 @@ cal-modal-box {
    text spans the whole width, so the scrim goes flat and stronger. */
 .cf-plate-overlay {
   background:
+    linear-gradient(180deg, rgba(3, 11, 19, 0.9) 0, rgba(3, 11, 19, 0.62) 90px, transparent 220px),
     linear-gradient(180deg, transparent 55%, #030b13 100%),
     linear-gradient(
       90deg,
@@ -383,6 +400,7 @@ cal-modal-box {
 @media (max-width: 1023px) {
   .cf-plate-overlay {
     background:
+      linear-gradient(180deg, rgba(3, 11, 19, 0.9) 0, rgba(3, 11, 19, 0.62) 90px, transparent 220px),
       linear-gradient(180deg, transparent 55%, #030b13 100%),
       linear-gradient(rgba(3, 11, 19, 0.92), rgba(3, 11, 19, 0.92));
   }
@@ -398,6 +416,17 @@ cal-modal-box {
     rgba(3, 11, 19, 0.82) 0%,
     rgba(3, 11, 19, 0.6) 40%,
     transparent 72%
+  );
+}
+/* The same pool for a text column beside a display numeral (the adoption
+   band): the field render's brightest light points sit mid-plate, under
+   the 22px statement, so the pool clears them to 4.5:1. */
+.cf-plate-pool-mid {
+  background: radial-gradient(
+    ellipse 42% 68% at 46% 56%,
+    rgba(3, 11, 19, 0.86) 0%,
+    rgba(3, 11, 19, 0.62) 45%,
+    transparent 76%
   );
 }
 /* Image cards: the text sits at the foot, so the scrim is bottom-heavy

@@ -37,7 +37,7 @@ export function SectionBand({ left, right, className, tone = 'light' }: SectionB
         <span
           className={cn(
             'tnum text-right text-[12px] tracking-[0.16em] uppercase',
-            dark ? 'text-ghost/70' : 'text-ink/70',
+            dark ? 'text-ghost/80' : 'text-ink/70',
           )}
         >
           {right}

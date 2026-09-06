@@ -16,6 +16,7 @@ export function AdoptionBand() {
   return (
     <section aria-label="The adoption target" className="cf-dark-band overflow-clip text-ghost">
       <Plate src="/renders/adoption-field.jpg" position="50% 100%" />
+      <div aria-hidden="true" className="cf-plate-pool-mid pointer-events-none absolute inset-0" />
       <div aria-hidden="true" className="cf-aurora-b" />
       <div aria-hidden="true" className="cf-sweep" />
       <Container gutter="cells" className="relative">
