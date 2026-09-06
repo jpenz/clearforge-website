@@ -65,7 +65,14 @@ export default function ProofPage() {
         </div>
         <div className="grid lg:grid-cols-[2fr_1fr]">
           <div className="relative flex flex-col border-b border-hairline px-5 py-8 transition-colors hover:bg-white md:px-10 md:py-12 lg:border-r lg:border-b-0">
-            <Stat size="lg" value={primary.value} label={primary.label} />
+            <div className="grid gap-8 xl:grid-cols-[auto_1fr] xl:items-end xl:gap-14">
+              <Stat size="lg" value={primary.value} label={primary.label} />
+              {/* The setup only: the numeral beside it already carries the
+                  result, so the emphasis clause would restate 1,181. */}
+              <p className="font-display max-w-[26ch] text-balance text-[26px] leading-[1.3] font-medium xl:pb-2">
+                {caseA.headline}
+              </p>
+            </div>
             <div className="mt-auto pt-8">
               <ArrowLink href={`/proof/${caseA.slug}`} className="after:absolute after:inset-0">
                 Read the case study
@@ -159,7 +166,7 @@ export default function ProofPage() {
         </div>
         <div className="grid lg:grid-cols-[2fr_1fr]">
           <div className="relative flex flex-col border-b border-hairline px-5 py-8 transition-colors hover:bg-white md:px-10 md:py-12 lg:border-r lg:border-b-0">
-            <p className="font-display max-w-[30ch] text-balance text-[28px] leading-[1.3] font-medium md:text-[32px]">
+            <p className="font-display max-w-[30ch] text-balance text-[28px] leading-[1.3] font-medium md:text-[32px] xl:max-w-[44ch] xl:text-[38px]">
               {caseC.headline} <em className="text-cobalt italic">{caseC.headlineEmphasis}</em>
             </p>
             <div className="mt-auto pt-8">
