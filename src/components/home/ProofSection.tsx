@@ -29,12 +29,12 @@ export function ProofSection() {
             sizes="(min-width: 1024px) 66vw, 100vw"
           />
           <div className="relative px-5 py-8 md:px-10 md:py-10">
-            <p className="tnum text-[12px] tracking-[0.16em] text-ghost/70 uppercase">
+            <p className="tnum text-[12px] tracking-[0.16em] text-ghost uppercase">
               Case {caseA.letter} · {caseA.scopeTag}
             </p>
             <h2 className="font-display mt-4 max-w-[22ch] text-balance text-[clamp(28px,2.6vw,48px)] leading-[1.1] font-medium">
               {caseA.headline}{' '}
-              <em className="text-cobalt-bright italic">{caseA.headlineEmphasis}</em>
+              <em className="text-cobalt-bright italic">The system found the opportunities.</em>
             </h2>
             <Link
               href={`/proof/${caseA.slug}`}
@@ -51,12 +51,12 @@ export function ProofSection() {
           </div>
         </article>
         <div className="flex flex-col lg:border-l lg:border-hairline">
-          <div className="grow border-b border-hairline px-5 py-8 md:px-8 md:py-10">
+          <div className="grow border-b border-hairline px-5 py-8 md:px-10 md:py-10">
             <Stat size="lg" value={primary.value} label={primary.label} />
           </div>
           <div className="grid grid-cols-2 divide-x divide-hairline">
             {secondary.map((metric) => (
-              <div key={metric.label} className="px-5 py-6 md:px-8 md:py-8">
+              <div key={metric.label} className="px-5 py-6 md:px-10 md:py-8">
                 <Stat size="sm" value={metric.value} label={metric.label} />
               </div>
             ))}
@@ -66,13 +66,17 @@ export function ProofSection() {
 
       {/* Case B: one line, then the way to the rest */}
       <div className="grid lg:grid-cols-[1fr_2fr]">
-        <div className="border-b border-hairline px-5 py-4 md:px-10 md:py-6 lg:border-r lg:border-b-0">
+        <div className="relative border-b border-hairline px-5 py-4 transition-colors hover:bg-white md:px-10 md:py-6 lg:border-r lg:border-b-0">
           <p className="text-[12px] tracking-[0.16em] text-ink/70 uppercase">Case {caseB.letter}</p>
-          <ArrowLink href={`/proof/${caseB.slug}`} size="sm" className="mt-1">
+          <ArrowLink
+            href={`/proof/${caseB.slug}`}
+            size="sm"
+            className="mt-1 after:absolute after:inset-0"
+          >
             {caseB.client}
           </ArrowLink>
         </div>
-        <div className="flex flex-col gap-4 px-5 py-4 md:flex-row md:items-center md:justify-between md:gap-8 md:px-8 md:py-6">
+        <div className="flex flex-col gap-4 px-5 py-4 md:flex-row md:items-center md:justify-between md:gap-8 md:px-10 md:py-6">
           <p className="tnum max-w-[68ch] text-[15px] text-ink/80">
             Commercial pipeline rebuilt from zero.{' '}
             <span className="font-semibold text-ink">42</span> targets identified,{' '}

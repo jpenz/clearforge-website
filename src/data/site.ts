@@ -71,8 +71,8 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: 'Free tools',
     items: [
-      { label: 'Forge Intelligence', href: '/discover' },
-      { label: 'AI readiness scorecard', href: '/scorecard' },
+      { label: 'Map the Workflow', href: '/discover' },
+      { label: 'Take the scorecard', href: '/scorecard' },
     ],
   },
 ];

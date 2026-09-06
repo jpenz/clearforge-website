@@ -28,7 +28,7 @@ export function HeroSection() {
         <div className="grid grow gap-y-12 pt-10 pb-12 md:pt-14 md:pb-16 lg:grid-cols-[58fr_42fr] lg:gap-x-12 lg:pt-16 xl:gap-x-20">
           {/* Left: the core statement */}
           <div className="flex flex-col justify-center">
-            <p className="cf-enter text-[12px] tracking-[0.16em] text-ghost/75 uppercase">
+            <p className="cf-enter text-[12px] tracking-[0.16em] text-ghost uppercase">
               Founder-led AI consulting and build
             </p>
             <h1
@@ -43,7 +43,9 @@ export function HeroSection() {
               style={{ '--d': '180ms' } as React.CSSProperties}
             >
               Engagements start with a{' '}
-              <span className="font-semibold text-ghost">fixed-fee diagnostic.</span>{' '}
+              <span className="font-semibold text-ghost">
+                <span className="whitespace-nowrap">fixed-fee</span> diagnostic.
+              </span>{' '}
               <span className="tnum font-semibold text-ghost">Two weeks, one workflow.</span>
             </p>
             <p
@@ -60,17 +62,13 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right: the free tool, floating on the band */}
+          {/* Right: the free tool, floating on the band. No founder caption
+              here: the lineage band answers it 110px below, inside the first
+              viewport at 1920. */}
           <div className="flex flex-col lg:self-end lg:pt-24">
             <div className="cf-enter cf-glow" style={{ '--d': '380ms' } as React.CSSProperties}>
               <HeroAgent />
             </div>
-            <p
-              className="cf-enter pt-4 text-[12px] leading-relaxed text-ghost/75"
-              style={{ '--d': '440ms' } as React.CSSProperties}
-            >
-              Founder James Penz. Background: Bain AI and Automation practice, EY, Capgemini.
-            </p>
           </div>
         </div>
       </Container>

@@ -5,8 +5,9 @@ import { PageFrame } from '@/components/ui/PageFrame';
  * verdict 2026-08-20: elite firms signal named verifiable practices, not
  * tool inventories (a raw tools list fails the "can nobody else say it"
  * test). Every practice here is factual: evals are a named Sprint
- * deliverable and 70% weekly-active by day 90 is the adoption target every
- * build is held to. The stack stays as a quiet supporting line. Named tools
+ * deliverable and adoption is the metric every build is graded on. The 70
+ * percent target is stated once, on the adoption plate, so this band does
+ * not restate it two screens early. The stack stays as a quiet supporting line. Named tools
  * are the ones a mid-market buyer recognizes; specialized research tooling
  * is described by capability rather than brand (2026-08-26 owner call,
  * after a public-footprint check). The strip names one founder, so its
@@ -15,7 +16,8 @@ import { PageFrame } from '@/components/ui/PageFrame';
 const TEAM_FROM = ['Bain & Company', 'EY', 'Capgemini'];
 const PRACTICES = [
   'Evals ship with every sprint',
-  'Adoption is the metric: 70% weekly-active by day 90 is the target',
+  'Adoption is the metric we are graded on',
+  'The deliverable is a running system, not a report',
 ];
 const STACK_LINE =
   'Built with Claude by Anthropic, n8n, Supabase, Microsoft, and Vercel, plus specialized research agents.';

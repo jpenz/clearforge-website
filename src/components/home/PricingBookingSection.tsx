@@ -1,10 +1,12 @@
 import Image from 'next/image';
 import { BookCallButton } from '@/components/functional/BookCallButton';
-import { FaqAccordion } from '@/components/ui/FaqAccordion';
 import { PageFrame } from '@/components/ui/PageFrame';
-import { HOME_FAQS } from '@/data/faqs';
 
-/** Label, the pricing basis, then the one real variable per row: the term. */
+/**
+ * Label, how it is billed, then how long it runs. The two were one column
+ * before, so "2 weeks" and "Monthly" answered different questions on one
+ * alignment; the term column now holds durations only.
+ */
 const PRICE_ROWS = [
   { label: 'Forge Diagnostic', description: 'Fixed fee, the first step', term: '2 weeks' },
   {
@@ -13,11 +15,15 @@ const PRICE_ROWS = [
     term: '2 weeks',
   },
   { label: 'Forge Sprint', description: 'Scoped in the Diagnostic', term: '10 to 14 weeks' },
-  { label: 'Forge Scale', description: 'The Adoption Mile, a retainer', term: 'Monthly' },
+  {
+    label: 'Forge Scale',
+    description: 'Adoption retainer, monthly, weekly cadence',
+    term: 'Ongoing',
+  },
   {
     label: 'Forge Run',
-    description: 'Managed operations, a retainer',
-    term: 'Monthly, per system',
+    description: 'Managed operations, monthly per system',
+    term: 'Ongoing',
   },
 ];
 
@@ -28,24 +34,35 @@ const EXPECT = [
 ];
 
 /**
- * Beat (e): the engagement ledger plus the booking column, with the FAQ
- * accordion below for AI-search visibility. The band opens on the display
- * statement, not a label rail. The booking column carries the founder
- * (photo, name, lineage) so the reader meets the person before the
- * commitment, and it is sticky within the band so it never leaves an
- * empty cell beside the accordion.
+ * Beat (f): the engagement ledger plus the booking column. This is the last
+ * room on the page, so the commitment is the last thing read; the FAQ that
+ * used to trail it now sits in its own band above. The band opens on the
+ * display statement, not a label rail, and the booking column carries the
+ * founder (photo, name, lineage) so the reader meets the person before the
+ * commitment.
  */
 export function PricingBookingSection() {
   return (
     <PageFrame id="book" aria-label="Engagement and booking" bottomRule={false}>
       <div className="grid lg:grid-cols-[2fr_1fr]">
         <div className="border-hairline lg:border-r">
-          <div className="border-b border-hairline px-5 pt-8 pb-8 md:px-10 md:pt-12 md:pb-10">
-            <h2 className="font-display max-w-[22ch] text-balance text-[clamp(30px,3vw,56px)] leading-[1.08]">
-              The first step is a fixed-fee diagnostic. Everything after it is scoped before you
-              commit.
+          <div className="px-5 pt-8 pb-8 md:px-10 md:pt-12 md:pb-10">
+            <h2 className="font-display max-w-[24ch] text-balance text-[clamp(30px,3vw,56px)] leading-[1.08]">
+              The first step is a <span className="whitespace-nowrap">fixed-fee</span> diagnostic.
+              Everything after it is scoped before you commit.
             </h2>
-            <div className="mt-8 border-t border-hairline text-[14px]">
+            <div className="mt-8 border-t border-hairline">
+              <div className="grid gap-1 border-b border-hairline py-3 md:grid-cols-[200px_1fr_auto] md:gap-4">
+                <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">
+                  Engagement
+                </span>
+                <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">
+                  Fee basis
+                </span>
+                <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase md:text-right">
+                  Term
+                </span>
+              </div>
               {PRICE_ROWS.map((row) => (
                 <div
                   key={row.label}
@@ -54,21 +71,15 @@ export function PricingBookingSection() {
                   <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">
                     {row.label}
                   </span>
-                  <span className="tnum text-ink/70">{row.description}</span>
-                  <span className="tnum text-[16px] font-semibold">{row.term}</span>
+                  <span className="tnum text-[14px] text-ink/70">{row.description}</span>
+                  <span className="tnum text-[16px] font-semibold md:text-right">{row.term}</span>
                 </div>
               ))}
             </div>
           </div>
-          <div className="px-5 py-8 md:px-10">
-            <p className="mb-2 text-[12px] tracking-[0.16em] text-ink/70 uppercase">
-              Common questions
-            </p>
-            <FaqAccordion items={HOME_FAQS} />
-          </div>
         </div>
 
-        <div className="flex flex-col border-t border-hairline px-5 py-8 md:px-10 md:py-12 lg:sticky lg:top-24 lg:self-start lg:border-t-0">
+        <div className="flex flex-col border-t border-hairline px-5 py-8 md:px-10 md:py-12 lg:border-t-0">
           <p className="text-[12px] tracking-[0.16em] text-ink/70 uppercase">Book</p>
           <h3 className="font-display mt-3 max-w-[16ch] text-balance text-[28px] leading-tight md:text-[32px]">
             30 minutes with the founder.
@@ -86,7 +97,7 @@ export function PricingBookingSection() {
             </div>
             <div>
               <p className="text-[15px] font-semibold">James Penz</p>
-              <p className="mt-1 text-[13px] leading-snug text-ink/70">
+              <p className="mt-1 text-[14px] leading-snug text-ink/70">
                 Founder. Bain AI and Automation practice, EY, Capgemini.
               </p>
             </div>
@@ -100,7 +111,7 @@ export function PricingBookingSection() {
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-[13px] text-ink/70">
+          <p className="mt-6 text-[14px] text-ink/70">
             Prefer a calendar view first?{' '}
             <a href="/contact" className="text-cobalt underline underline-offset-4">
               Pick a time on the contact page.

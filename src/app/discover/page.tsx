@@ -5,7 +5,7 @@ import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
 
 export const metadata: Metadata = {
-  title: 'Forge Intelligence',
+  title: 'Map the Workflow',
   description:
     'The free AI workflow-mapping tool. Paste your company URL. The agent maps one workflow and shows what an AI system would do there. Free, no account.',
 };
@@ -32,8 +32,8 @@ export default function DiscoverPage() {
   return (
     <>
       {/* Label band + title block */}
-      <PageFrame aria-label="Forge Intelligence introduction">
-        <SectionBand left="Free tool" right="Forge Intelligence · Workflow mapping" />
+      <PageFrame aria-label="Map the Workflow introduction">
+        <SectionBand left="Free tool" right="Map the Workflow · One workflow, mapped" />
         <div className="px-5 pt-10 pb-10 md:px-10 md:pt-16 md:pb-14">
           <h1 className="font-display max-w-[22ch] text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
             Map the workflow <em className="text-cobalt italic">before you buy anything.</em>

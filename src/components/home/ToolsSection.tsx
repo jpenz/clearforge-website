@@ -6,8 +6,7 @@ const TOOLS = [
   {
     title: 'Map the Workflow',
     href: '/discover',
-    description:
-      'Forge Intelligence reads your site, maps one revenue workflow, and flags the manual steps. Free.',
+    description: 'Reads your site, maps one revenue workflow, and flags the manual steps. Free.',
   },
   {
     title: 'Take the scorecard',

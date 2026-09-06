@@ -9,7 +9,10 @@ const legalLink =
 /**
  * The columned footer, dark bookend of every page: brand block, four
  * sitemap columns (the only nav path to /discover), and a legal line that
- * carries the founder's email so every page has a contact line.
+ * carries the founder's email so every page has a contact line. The two
+ * engagement numbers that used to sit here were the fifth and sixth
+ * printing of the same figures on one route, so the footer states none of
+ * them: it is a sitemap and a contact line.
  * V13: full-bleed cinematic band with the luminous top-right core
  * (.cf-core over the band's own highlight), the aurora, and the slow
  * light sweep, so both dark bookends carry the same HDR core.
@@ -30,10 +33,6 @@ export function Footer() {
             <p className="mt-4 text-[14px] leading-relaxed text-ghost/70">
               {SITE_TAGLINE}. Founder-led, for mid-market companies and PE operating teams.
             </p>
-            <p className="tnum mt-3 text-[14px] leading-relaxed text-ghost/70">
-              Engagements start with a <span className="font-semibold text-ghost">fixed-fee</span>{' '}
-              diagnostic.
-            </p>
             <BookCallButton size="md" className="mt-6" />
           </div>
           {FOOTER_COLUMNS.map((column) => (
@@ -53,7 +52,7 @@ export function Footer() {
             </nav>
           ))}
         </div>
-        <div className="mt-12 flex flex-col gap-2 border-t border-hairline-ghost pt-5 text-[12px] text-ghost/65 md:flex-row md:items-center md:justify-between">
+        <div className="mt-12 flex flex-col gap-2 border-t border-hairline-ghost pt-5 text-[12px] text-ghost/70 md:flex-row md:items-center md:justify-between">
           <p className="tnum">
             © 2026 {SITE_NAME}
             <span aria-hidden="true" className="px-2">
@@ -75,7 +74,6 @@ export function Footer() {
               Terms
             </Link>
           </p>
-          <p className="tnum">10 to 14 weeks from kickoff to a live production system</p>
         </div>
       </Container>
     </footer>

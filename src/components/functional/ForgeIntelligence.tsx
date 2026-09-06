@@ -39,7 +39,7 @@ export function ForgeIntelligence() {
         <div className="flex items-center gap-3">
           <span aria-hidden="true" className="inline-block size-[7px] bg-cobalt" />
           <span className="text-[12px] font-medium tracking-[0.18em] text-ink/70 uppercase">
-            Forge Intelligence · Streaming analysis
+            Map the Workflow · Streaming analysis
           </span>
         </div>
         <span className="text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase">
