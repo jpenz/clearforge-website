@@ -53,8 +53,9 @@
 @layer base {
   html {
     height: 100%;
-    /* The header is sticky: anchor targets land below it (two tiers at mobile). */
-    scroll-padding-top: 7rem;
+    /* The header is sticky: anchor targets land below it. At mobile it is
+       two tiers and the link row wraps, so the clearance is taller there. */
+    scroll-padding-top: 8.75rem;
   }
 
   @media (min-width: 768px) {
@@ -327,6 +328,20 @@ cal-modal-box {
   );
 }
 
+/* Below md the text columns span the full width and the h1 runs under the
+   top-right bloom, so the core is dimmed there (the same treatment the dark
+   band already gives its own highlight). */
+@media (max-width: 767px) {
+  .cf-core {
+    background: radial-gradient(
+      ellipse 46% 85% at 90% 0%,
+      rgba(122, 151, 255, 0.2) 0%,
+      rgba(36, 84, 255, 0.1) 30%,
+      transparent 65%
+    );
+  }
+}
+
 /* Dotted-grid texture for light bands. */
 .cf-dots {
   background-image: radial-gradient(rgba(1, 11, 19, 0.10) 1px, transparent 1px);
@@ -387,22 +402,27 @@ cal-modal-box {
    text spans the whole width, so the scrim goes flat and stronger. */
 .cf-plate-overlay {
   background:
-    linear-gradient(180deg, rgba(3, 11, 19, 0.9) 0, rgba(3, 11, 19, 0.62) 90px, transparent 220px),
+    linear-gradient(180deg, rgba(3, 11, 19, 0.94) 0, rgba(3, 11, 19, 0.8) 130px, transparent 265px),
     linear-gradient(180deg, transparent 55%, #030b13 100%),
     linear-gradient(
       90deg,
       rgba(3, 11, 19, 0.96) 0%,
       rgba(3, 11, 19, 0.82) 38%,
-      rgba(3, 11, 19, 0.35) 70%,
-      rgba(3, 11, 19, 0.15) 100%
+      rgba(3, 11, 19, 0.2) 70%,
+      rgba(3, 11, 19, 0.05) 100%
     );
 }
 @media (max-width: 1023px) {
   .cf-plate-overlay {
     background:
-      linear-gradient(180deg, rgba(3, 11, 19, 0.9) 0, rgba(3, 11, 19, 0.62) 90px, transparent 220px),
+      linear-gradient(180deg, rgba(3, 11, 19, 0.94) 0, rgba(3, 11, 19, 0.8) 110px, transparent 240px),
       linear-gradient(180deg, transparent 55%, #030b13 100%),
-      linear-gradient(rgba(3, 11, 19, 0.92), rgba(3, 11, 19, 0.92));
+      linear-gradient(
+        180deg,
+        rgba(3, 11, 19, 0.78) 0%,
+        rgba(3, 11, 19, 0.9) 40%,
+        rgba(3, 11, 19, 0.94) 100%
+      );
   }
 }
 /* Shadow pool for plates that carry text in a right-hand column (the
@@ -413,8 +433,8 @@ cal-modal-box {
 .cf-plate-pool {
   background: radial-gradient(
     ellipse 30% 70% at 78% 55%,
-    rgba(3, 11, 19, 0.82) 0%,
-    rgba(3, 11, 19, 0.6) 40%,
+    rgba(3, 11, 19, 0.6) 0%,
+    rgba(3, 11, 19, 0.42) 40%,
     transparent 72%
   );
 }
