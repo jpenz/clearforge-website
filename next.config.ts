@@ -37,6 +37,10 @@ const SECURITY_HEADERS = [
 ];
 
 const nextConfig: NextConfig = {
+  images: {
+    qualities: [60, 72, 85],
+    formats: ["image/avif", "image/webp"],
+  },
   experimental: {
     // Server actions buffer the whole request body first. Default is 1MB,
     // which silently rejects our 10MB RFP uploads. Raise to 12MB (10MB file

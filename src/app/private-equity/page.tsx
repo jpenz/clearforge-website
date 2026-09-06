@@ -4,6 +4,7 @@ import { BookCallButton } from '@/components/functional/BookCallButton';
 import { Container } from '@/components/ui/Container';
 import { FaqAccordion } from '@/components/ui/FaqAccordion';
 import { PageFrame } from '@/components/ui/PageFrame';
+import { Plate } from '@/components/ui/Plate';
 import { SectionBand } from '@/components/ui/SectionBand';
 import { PE_FAQS } from '@/data/faqs';
 import { PE_PACK } from '@/data/services';
@@ -50,7 +51,7 @@ export default function PrivateEquityPage() {
 
       {/* Hero: full-bleed dark title block (pe-monoliths.jpg plate) */}
       <section aria-label="AI for private equity" className="cf-dark-band overflow-hidden">
-        {/* Plate slot: next/image back plate + legibility overlay go here, before the aurora. */}
+        <Plate src="/renders/pe-monoliths.jpg" position="55% 50%" />
         <div aria-hidden="true" className="cf-aurora-b" />
         <Container gutter="cells" className="relative">
           <SectionBand tone="dark" left="Private equity" right="Portfolio-wide - Sponsor-visible" />

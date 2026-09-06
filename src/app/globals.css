@@ -349,6 +349,42 @@ cal-modal-box {
   to { transform: translateY(6%); }
 }
 
+/* Plate legibility overlay (V13 Move 3). The left-heavy scrim keeps ghost
+   text on the dark left at contrast while the render blooms on the right;
+   the bottom vignette returns the band's edge to #030b13. Below lg the
+   text spans the whole width, so the scrim goes uniform and stronger. */
+.cf-plate-overlay {
+  background:
+    linear-gradient(180deg, transparent 55%, #030b13 100%),
+    linear-gradient(
+      90deg,
+      rgba(3, 11, 19, 0.96) 0%,
+      rgba(3, 11, 19, 0.82) 38%,
+      rgba(3, 11, 19, 0.35) 70%,
+      rgba(3, 11, 19, 0.15) 100%
+    );
+}
+@media (max-width: 1023px) {
+  .cf-plate-overlay {
+    background:
+      linear-gradient(180deg, transparent 55%, #030b13 100%),
+      linear-gradient(90deg, rgba(3, 11, 19, 0.9) 0%, rgba(3, 11, 19, 0.8) 100%);
+  }
+}
+/* Image cards: the text sits at the foot, so the scrim is bottom-heavy
+   and the render stays visible above it. */
+.cf-plate-overlay-soft {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3, 11, 19, 0.18) 0%,
+      rgba(3, 11, 19, 0.32) 38%,
+      rgba(3, 11, 19, 0.9) 72%,
+      rgba(3, 11, 19, 0.97) 100%
+    ),
+    linear-gradient(90deg, rgba(3, 11, 19, 0.4) 0%, transparent 55%);
+}
+
 /* Image cards: a slow scale on hover, 700ms, one curve. Apply
    .cf-image-card to the card and let the plate be its <img>. */
 .cf-image-card img {

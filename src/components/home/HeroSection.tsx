@@ -1,6 +1,7 @@
 import { BookCallButton } from '@/components/functional/BookCallButton';
 import { HeroAgent } from '@/components/functional/HeroAgent';
 import { Container } from '@/components/ui/Container';
+import { Plate } from '@/components/ui/Plate';
 
 /**
  * Beat (a): the core statement plus the live agent card as proof of craft.
@@ -8,14 +9,15 @@ import { Container } from '@/components/ui/Container';
  * light sweep, all CSS) that fills the first viewport at lg and up. The
  * left 58 percent carries eyebrow, statement, diagnostic line, and the
  * booking button; the agent card floats on the right with the cobalt
- * glow, offset down so the band shows above it. The back plate
- * (public/renders/hero-forge.jpg) drops in at the marked slot. Entrance
- * is a one-time load stagger; reduced motion renders everything instantly.
+ * glow, offset down so the plate shows above it. The back plate
+ * (public/renders/hero-forge.jpg) is the LCP image: preloaded, fetched at
+ * high priority, right-weighted under the legibility scrim. Entrance is a
+ * one-time load stagger; reduced motion renders everything instantly.
  */
 export function HeroSection() {
   return (
     <section aria-label="Introduction" className="cf-dark-band overflow-hidden">
-      {/* Plate slot: next/image back plate + legibility overlay go here, before the aurora. */}
+      <Plate src="/renders/hero-forge.jpg" priority position="72% 50%" />
       <div aria-hidden="true" className="cf-aurora" />
       <div aria-hidden="true" className="cf-aurora-b" />
       <div aria-hidden="true" className="cf-sweep" />

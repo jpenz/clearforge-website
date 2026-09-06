@@ -4,6 +4,7 @@ import { BookCallButton } from '@/components/functional/BookCallButton';
 import { BookingStrip } from '@/components/ui/BookingStrip';
 import { Container } from '@/components/ui/Container';
 import { PageFrame } from '@/components/ui/PageFrame';
+import { Plate } from '@/components/ui/Plate';
 import { SectionBand } from '@/components/ui/SectionBand';
 import { PE_PACK, SERVICE_STAGES } from '@/data/services';
 import { JsonLdScriptProps, servicesJsonLd } from '@/lib/seo';
@@ -20,7 +21,7 @@ export default function ServicesPage() {
       <script {...JsonLdScriptProps(servicesJsonLd())} />
       {/* Intro band: full-bleed dark title block (services-anvil.jpg plate) */}
       <section aria-label="Services introduction" className="cf-dark-band overflow-hidden">
-        {/* Plate slot: next/image back plate + legibility overlay go here, before the aurora. */}
+        <Plate src="/renders/services-anvil.jpg" position="62% 50%" />
         <div aria-hidden="true" className="cf-aurora-b" />
         <Container gutter="cells" className="relative">
           <SectionBand

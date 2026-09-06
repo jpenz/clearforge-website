@@ -1,16 +1,16 @@
 import { Container } from '@/components/ui/Container';
 import { CountUp } from '@/components/ui/CountUp';
+import { Plate } from '@/components/ui/Plate';
 
 /**
  * The adoption bar: the canvas inverts to the cinematic band (HDR core,
  * aurora, one slow light sweep) and the 70 percent scales with the
- * viewport. The back plate (public/renders/adoption-field.jpg) drops in
- * at the marked slot.
+ * viewport, over the adoption-field back plate.
  */
 export function AdoptionBand() {
   return (
     <section aria-label="The adoption bar" className="cf-dark-band overflow-hidden text-ghost">
-      {/* Plate slot: next/image back plate + legibility overlay go here, before the aurora. */}
+      <Plate src="/renders/adoption-field.jpg" position="50% 60%" />
       <div aria-hidden="true" className="cf-aurora-b" />
       <div aria-hidden="true" className="cf-sweep" />
       <Container gutter="cells" className="relative">

@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import { PageFrame } from '@/components/ui/PageFrame';
+import { Plate } from '@/components/ui/Plate';
 import { CASE_STUDIES } from '@/data/case-studies';
 
 /**
- * Beat (c): one featured case study with its real numbers,
- * plus a one-line second case and the link to the rest.
+ * Beat (c): one featured case study as an image card (serif headline over
+ * the proof-threads render, whole card clickable) beside a rail of its
+ * five real numbers, plus a one-line second case and the link to the rest.
  */
 export function ProofSection() {
   const [caseA, caseB] = CASE_STUDIES;
@@ -21,26 +23,47 @@ export function ProofSection() {
         </Link>
       </div>
 
-      {/* Case A: the featured study */}
-      <div className="grid border-b border-hairline lg:grid-cols-[300px_1fr]">
-        <div className="border-b border-hairline px-5 py-6 md:px-10 md:py-10 lg:border-r lg:border-b-0">
-          <p className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">Case {caseA.letter}</p>
-          <h2 className="mt-3 text-[19px] leading-snug font-semibold md:text-[21px]">
-            <Link href={`/proof/${caseA.slug}`} className="hover:text-cobalt">
-              {caseA.client}
+      {/* Case A: the image card beside the five-stat rail */}
+      <div className="grid border-b border-hairline lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+        <article className="cf-image-card group relative flex min-h-[440px] flex-col justify-end overflow-hidden bg-[#030b13] text-ghost lg:min-h-[560px]">
+          <Plate
+            src="/renders/proof-threads.jpg"
+            overlay="soft"
+            position="60% 50%"
+            sizes="(min-width: 1024px) 60vw, 100vw"
+          />
+          <div className="relative px-5 py-8 md:px-10 md:py-10">
+            <p className="tnum text-[11px] tracking-[0.18em] text-ghost/70 uppercase">
+              Case {caseA.letter} · {caseA.scopeTag}
+            </p>
+            <h2 className="font-display mt-4 max-w-[22ch] text-[clamp(28px,2.6vw,48px)] leading-[1.1] font-medium">
+              {caseA.headline}{' '}
+              <em className="text-cobalt-bright italic">{caseA.headlineEmphasis}</em>
+            </h2>
+            <Link
+              href={`/proof/${caseA.slug}`}
+              className="mt-6 inline-flex items-center gap-2 text-[14px] font-semibold text-ghost after:absolute after:inset-0 focus-visible:outline-cobalt-bright"
+            >
+              Read the case study
+              <span
+                aria-hidden="true"
+                className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
+              >
+                →
+              </span>
             </Link>
-          </h2>
-        </div>
-        <div className="grid divide-y divide-hairline md:grid-cols-5 md:divide-x md:divide-y-0">
+          </div>
+        </article>
+        <div className="flex flex-col divide-y divide-hairline lg:border-l lg:border-hairline">
           {caseA.metrics.map((metric) => (
             <div
               key={metric.label}
-              className="flex items-baseline justify-between gap-3 px-5 py-4 md:flex-col md:items-stretch md:justify-between md:px-6 md:py-10"
+              className="flex grow items-baseline justify-between gap-4 px-5 py-4 md:px-10 md:py-5"
             >
-              <p className="tnum text-[28px] leading-none font-light md:text-[44px]">
+              <p className="tnum text-[28px] leading-none font-light md:text-[clamp(36px,2.6vw,48px)]">
                 {metric.value}
               </p>
-              <p className="tnum text-[11px] tracking-[0.14em] text-ink/60 uppercase md:mt-5">
+              <p className="tnum text-right text-[11px] tracking-[0.14em] text-ink/60 uppercase">
                 {metric.label}
               </p>
             </div>
