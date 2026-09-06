@@ -86,16 +86,18 @@ export default function AboutPage() {
           </div>
           <div className="flex flex-col items-center justify-center px-5 py-8 md:px-10 md:py-10">
             <div className="w-full max-w-[460px]">
-              {/* Founder headshot: the real photo, not a render (people never appear in the render set) */}
-              <div className="relative h-[420px] overflow-hidden border border-hairline bg-white md:h-[560px]">
+              {/* Founder headshot: the real photo V11 shipped, restored 2026-09-05
+                  after the V12 graft dropped the file and left slot text live.
+                  People never appear in the render set. */}
+              <div className="relative aspect-[4/5] overflow-hidden border border-hairline bg-white">
                 <Image
                   src="/images/james-penz.jpg"
                   alt="James Penz, founder of ClearForge"
                   fill
                   priority
-                  sizes="(max-width: 480px) 100vw, 460px"
+                  sizes="(max-width: 1024px) 100vw, 460px"
                   quality={72}
-                  className="object-cover"
+                  className="object-cover object-top"
                 />
                 <span aria-hidden="true" className="absolute top-0 left-0 h-px w-6 bg-cobalt" />
                 <span aria-hidden="true" className="absolute top-0 left-0 h-6 w-px bg-cobalt" />
