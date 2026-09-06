@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { BookCallButton } from '@/components/functional/BookCallButton';
+import { Container } from '@/components/ui/Container';
 import { FaqAccordion } from '@/components/ui/FaqAccordion';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
@@ -25,29 +26,31 @@ export default function PricingPage() {
     <>
       <script {...JsonLdScriptProps(pricingJsonLd())} />
       <script {...JsonLdScriptProps(faqJsonLd(PRICING_FAQS))} />
-      {/* Intro + why public */}
-      <PageFrame aria-label="Pricing introduction">
-        <SectionBand left="Engagements" right="Scoped before you commit" />
-        <div className="cf-dark-band relative overflow-hidden grid lg:grid-cols-[1fr_420px]">
-          <div aria-hidden="true" className="cf-aurora-b" />
-          <div className="relative border-hairline-ghost px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14 lg:border-r">
-            <h1 className="font-display max-w-[19ch] text-[36px] leading-[1.1] font-medium tracking-[-0.01em] md:text-[56px] md:leading-[1.08]">
-              The first step is a{' '}
-              <span className="text-cobalt-bright italic">fixed-fee diagnostic.</span> Everything
-              after it is scoped there.
-            </h1>
+      {/* Intro: full-bleed dark title block */}
+      <section aria-label="Pricing introduction" className="cf-dark-band overflow-hidden">
+        <div aria-hidden="true" className="cf-aurora-b" />
+        <Container gutter="cells" className="relative">
+          <SectionBand tone="dark" left="Engagements" right="Scoped before you commit" />
+          <div className="grid lg:grid-cols-[1fr_420px]">
+            <div className="border-hairline-ghost px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14 lg:border-r">
+              <h1 className="font-display max-w-[19ch] text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
+                The first step is a{' '}
+                <span className="text-cobalt-bright italic">fixed-fee diagnostic.</span> Everything
+                after it is scoped there.
+              </h1>
+            </div>
+            <div className="flex flex-col justify-end border-t border-hairline-ghost px-5 py-8 md:px-10 md:py-14 lg:border-t-0">
+              <p className="text-[11px] tracking-[0.18em] text-ghost/55 uppercase">
+                How pricing works
+              </p>
+              <p className="mt-4 text-[16px] leading-relaxed text-ghost/80">
+                The diagnostic is a fixed fee, agreed before we start. It ends with a scoped, priced
+                plan for the build. Nothing after it is open-ended.
+              </p>
+            </div>
           </div>
-          <div className="relative flex flex-col justify-end border-t border-hairline-ghost px-5 py-8 md:px-10 md:py-14 lg:border-t-0">
-            <p className="text-[11px] tracking-[0.18em] text-ghost/55 uppercase">
-              How pricing works
-            </p>
-            <p className="mt-4 text-[16px] leading-relaxed text-ghost/80">
-              The diagnostic is a fixed fee, agreed before we start. It ends with a scoped, priced
-              plan for the build. Nothing after it is open-ended.
-            </p>
-          </div>
-        </div>
-      </PageFrame>
+        </Container>
+      </section>
 
       {/* The tiers ledger */}
       <PageFrame aria-label="The tiers">
@@ -126,7 +129,7 @@ export default function PricingPage() {
         <SectionBand left="The first two weeks" right="Forge Diagnostic · fixed fee" />
         <div className="grid lg:grid-cols-[1fr_560px]">
           <div className="flex flex-col border-b border-hairline px-5 py-10 md:px-10 md:py-14 lg:border-r lg:border-b-0">
-            <h2 className="font-display max-w-[16ch] text-[32px] leading-[1.1] font-medium md:text-[44px]">
+            <h2 className="font-display max-w-[16ch] text-[clamp(30px,3vw,56px)] leading-[1.1] font-medium">
               What happens in the first <span className="tnum text-cobalt italic">2 weeks</span>
             </h2>
             <p className="tnum mt-6 max-w-[46ch] text-[16px] leading-relaxed text-ink/80">
@@ -170,7 +173,7 @@ export default function PricingPage() {
         <SectionBand left="The Adoption Mile" right="The top tier of Forge Scale" />
         <div className="grid lg:grid-cols-[560px_1fr]">
           <div className="flex items-baseline gap-6 border-b border-hairline px-5 py-10 md:px-10 md:py-14 lg:border-r lg:border-b-0">
-            <p className="font-display tnum text-[96px] leading-none font-medium md:text-[160px]">
+            <p className="font-display tnum text-[clamp(96px,9vw,176px)] leading-none font-medium">
               70%
             </p>
             <p className="tnum text-[14px] leading-snug text-ink/70">
@@ -180,7 +183,7 @@ export default function PricingPage() {
             </p>
           </div>
           <div className="flex flex-col justify-center px-5 py-10 md:px-10 md:py-14">
-            <h2 className="font-display text-[28px] leading-[1.2] md:text-[34px]">
+            <h2 className="font-display text-[clamp(30px,3vw,56px)] leading-[1.1]">
               The Adoption Mile
             </h2>
             <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-ink/80">
@@ -221,7 +224,7 @@ export default function PricingPage() {
       <PageFrame bottomRule={false} aria-label="Book an intro">
         <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-16 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
           <div>
-            <h2 className="font-display text-[32px] leading-[1.1] md:text-[44px]">
+            <h2 className="font-display text-[clamp(30px,3vw,56px)] leading-[1.1]">
               Start with the <span className="text-cobalt italic">fixed-fee</span> Diagnostic.
             </h2>
             <p className="tnum mt-3 text-[14px] text-ink/70">

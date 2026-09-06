@@ -35,7 +35,7 @@ export default function DiscoverPage() {
       <PageFrame aria-label="Forge Intelligence introduction">
         <SectionBand left="Free tool" right="Forge Intelligence · Workflow mapping" />
         <div className="px-5 pt-10 pb-10 md:px-10 md:pt-16 md:pb-14">
-          <h1 className="font-display max-w-[22ch] text-[36px] leading-[1.1] font-medium tracking-[-0.01em] md:text-[56px] md:leading-[1.08]">
+          <h1 className="font-display max-w-[22ch] text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
             Map the workflow <em className="text-cobalt italic">before you buy anything.</em>
           </h1>
           <p className="mt-5 max-w-[62ch] text-[16px] leading-relaxed text-ink/80">
@@ -74,7 +74,7 @@ export default function DiscoverPage() {
       <PageFrame bottomRule={false} aria-label="Next step">
         <SectionBand left="Next step" right="Fixed fee · 2 weeks" />
         <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
-          <h2 className="font-display text-[30px] leading-[1.1] font-medium md:text-[40px]">
+          <h2 className="font-display text-[clamp(30px,3vw,56px)] leading-[1.1] font-medium">
             Start with the fixed-fee <em className="text-cobalt italic">Diagnostic.</em>
           </h2>
           <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />

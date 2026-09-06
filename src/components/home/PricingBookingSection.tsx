@@ -43,7 +43,7 @@ export function PricingBookingSection() {
       <div className="grid lg:grid-cols-[1fr_460px]">
         <div className="border-hairline lg:border-r">
           <div className="border-b border-hairline px-5 pt-8 pb-8 md:px-10 md:pt-12 md:pb-10">
-            <h2 className="font-display max-w-[22ch] text-[30px] leading-[1.1] md:text-[44px]">
+            <h2 className="font-display max-w-[22ch] text-[clamp(30px,3vw,56px)] leading-[1.08]">
               The first step is a fixed-fee diagnostic. Everything after it is scoped before you
               commit.
             </h2>

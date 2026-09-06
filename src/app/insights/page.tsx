@@ -21,7 +21,7 @@ export default function InsightsPage() {
       <PageFrame aria-label="Insights introduction">
         <SectionBand left="Insights" right="Long-form, written by the founder" />
         <div className="px-5 pt-10 pb-10 md:px-10 md:pt-16 md:pb-14">
-          <h1 className="font-display max-w-[24ch] text-[36px] leading-[1.1] font-medium tracking-[-0.01em] md:text-[56px] md:leading-[1.08]">
+          <h1 className="font-display max-w-[24ch] text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
             Notes from the build floor. <em className="text-cobalt italic">What actually ships.</em>
           </h1>
           <p className="mt-5 text-[16px] leading-relaxed text-ink/80">
@@ -46,7 +46,7 @@ export default function InsightsPage() {
             className="group grid items-end gap-6 px-5 py-10 md:grid-cols-[1fr_auto] md:gap-10 md:px-10 md:py-14"
           >
             <div>
-              <h2 className="font-display max-w-[32ch] text-[32px] leading-[1.1] font-medium transition-colors group-hover:text-cobalt motion-reduce:transition-none md:text-[44px]">
+              <h2 className="font-display max-w-[32ch] text-[clamp(30px,3vw,56px)] leading-[1.1] font-medium transition-colors group-hover:text-cobalt motion-reduce:transition-none">
                 {featured.title} {featured.titleEmphasis}
               </h2>
               <p className="tnum mt-5 max-w-[64ch] text-[16px] leading-relaxed text-ink/80">
@@ -108,7 +108,7 @@ export default function InsightsPage() {
       <PageFrame bottomRule={false} aria-label="Next step">
         <SectionBand left="Next step" right="Fixed price · 2 weeks" />
         <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
-          <h2 className="font-display text-[30px] leading-[1.1] font-medium md:text-[40px]">
+          <h2 className="font-display text-[clamp(30px,3vw,56px)] leading-[1.1] font-medium">
             Start with the fixed-fee <em className="text-cobalt italic">Diagnostic.</em>
           </h2>
           <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />

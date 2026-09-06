@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { BookCallButton } from '@/components/functional/BookCallButton';
 import { BookingInline } from '@/components/functional/BookingInline';
 import { ContactForm } from '@/components/functional/ContactForm';
+import { Container } from '@/components/ui/Container';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
 
@@ -14,21 +15,21 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      {/* Intro band + title */}
-      <PageFrame aria-label="Book an intro">
-        <SectionBand left="Book" right="30 minutes · No preparation needed" />
-        <div className="cf-dark-band relative overflow-hidden">
-          <div aria-hidden="true" className="cf-aurora-b" />
-          <div className="relative px-5 pt-10 pb-10 md:px-10 md:pt-16 md:pb-14">
-            <h1 className="font-display text-[38px] leading-[1.1] font-medium tracking-[-0.01em] md:text-[56px] md:leading-[1.08]">
+      {/* Intro: full-bleed dark title block */}
+      <section aria-label="Book an intro" className="cf-dark-band overflow-hidden">
+        <div aria-hidden="true" className="cf-aurora-b" />
+        <Container gutter="cells" className="relative">
+          <SectionBand tone="dark" left="Book" right="30 minutes · No preparation needed" />
+          <div className="px-5 pt-10 pb-10 md:px-10 md:pt-16 md:pb-14">
+            <h1 className="font-display text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
               Book a <em className="tnum text-cobalt-bright italic">30-min intro.</em>
             </h1>
             <p className="mt-5 max-w-[62ch] text-[16px] leading-relaxed text-ghost/80">
               Pick a time. We will look at one workflow together and tell you what we would build.
             </p>
           </div>
-        </div>
-      </PageFrame>
+        </Container>
+      </section>
 
       {/* BookingInline: the embedded calendar is the primary surface */}
       <PageFrame id="booking" aria-label="Scheduling calendar">
@@ -73,7 +74,7 @@ export default function ContactPage() {
       <PageFrame bottomRule={false} aria-label="Next step">
         <SectionBand left="Next step" right="Fixed price · 2 weeks" />
         <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
-          <h2 className="font-display text-[30px] leading-[1.1] font-medium md:text-[40px]">
+          <h2 className="font-display text-[clamp(30px,3vw,56px)] leading-[1.1] font-medium">
             Start with the fixed-fee <em className="text-cobalt italic">Diagnostic.</em>
           </h2>
           <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />

@@ -17,7 +17,8 @@ const TOOLS = [
 ];
 
 /**
- * Beat (d): try before you call. One compact row linking the two free tools.
+ * Beat (d): try before you call. Two product-tool cards; the whole cell is
+ * the link and glows cobalt on hover (700ms, one curve).
  */
 export function ToolsSection() {
   return (
@@ -25,17 +26,25 @@ export function ToolsSection() {
       <SectionBand left="Try before you call" right="2 free tools" />
       <div className="grid divide-y divide-hairline md:grid-cols-2 md:divide-x md:divide-y-0">
         {TOOLS.map((tool) => (
-          <div key={tool.href} className="px-5 py-8 md:px-10 md:py-12">
+          <Link
+            key={tool.href}
+            href={tool.href}
+            className="cf-tool-glow group block px-5 py-8 md:px-10 md:py-12"
+          >
             <p className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">Free tool</p>
-            <Link href={tool.href} className="group mt-3 inline-block">
-              <span className="text-[20px] leading-snug font-semibold tracking-[-0.01em] transition-colors group-hover:text-cobalt md:text-[22px]">
-                {tool.title} <span aria-hidden="true">→</span>
+            <p className="mt-3 text-[clamp(20px,1.4vw,26px)] leading-snug font-semibold tracking-[-0.01em] transition-colors group-hover:text-cobalt">
+              {tool.title}{' '}
+              <span
+                aria-hidden="true"
+                className="inline-block transition-transform duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:translate-x-1 motion-reduce:transition-none"
+              >
+                →
               </span>
-            </Link>
+            </p>
             <p className="tnum mt-3 max-w-[46ch] text-[15px] leading-relaxed text-ink/75">
               {tool.description}
             </p>
-          </div>
+          </Link>
         ))}
       </div>
     </PageFrame>

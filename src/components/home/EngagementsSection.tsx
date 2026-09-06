@@ -48,21 +48,18 @@ const ENGAGEMENTS: Engagement[] = [
 
 function PriceFigure({ price }: { price: Engagement['price'] }) {
   return (
-    <p className="tnum mt-5 text-[56px] leading-none font-light tracking-tight md:text-[84px]">
+    <p className="tnum mt-5 text-[clamp(56px,4.6vw,88px)] leading-none font-light tracking-tight">
       {price.map((part) => {
         if (part.unit) {
           return (
-            <span key={`u-${part.text}`} className="align-top text-[26px] md:text-[38px]">
+            <span key={`u-${part.text}`} className="align-top text-[0.45em]">
               {part.text}
             </span>
           );
         }
         if (part.connector) {
           return (
-            <span
-              key={`c-${part.text}`}
-              className="text-[22px] font-normal text-ink/60 md:text-[30px]"
-            >
+            <span key={`c-${part.text}`} className="text-[0.36em] font-normal text-ink/60">
               {' '}
               {part.text}{' '}
             </span>
@@ -79,6 +76,7 @@ function PriceFigure({ price }: { price: Engagement['price'] }) {
  * the whole offer is visible in one view, with the stage metric as the hero
  * figure. Replaces the earlier full-height alternating layout, which spent
  * roughly three screen-heights on three short paragraphs and carried no CTA.
+ * V13: the watermark numerals are cobalt light at 6 percent, not ink at 4.5.
  */
 export function EngagementsSection() {
   return (
@@ -93,7 +91,7 @@ export function EngagementsSection() {
             <span
               aria-hidden="true"
               data-num={engagement.index}
-              className="font-display tnum pointer-events-none absolute -top-2 right-2 text-[150px] leading-none text-ink/[0.045] select-none before:content-[attr(data-num)]"
+              className="font-display tnum pointer-events-none absolute -top-2 right-2 text-[clamp(150px,9vw,190px)] leading-none text-cobalt/6 select-none before:content-[attr(data-num)]"
             />
             <div className="relative">
               <p className="tnum text-[12px] tracking-[0.18em] text-ink/60 uppercase">

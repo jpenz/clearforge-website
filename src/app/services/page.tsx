@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { BookCallButton } from '@/components/functional/BookCallButton';
 import { BookingStrip } from '@/components/ui/BookingStrip';
+import { Container } from '@/components/ui/Container';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
 import { PE_PACK, SERVICE_STAGES } from '@/data/services';
@@ -17,31 +18,38 @@ export default function ServicesPage() {
   return (
     <>
       <script {...JsonLdScriptProps(servicesJsonLd())} />
-      {/* Intro band */}
-      <PageFrame aria-label="Services introduction">
-        <SectionBand left="Services" right="The journey: Diagnose, Build, Adopt, Run" />
-        <div className="cf-dark-band relative overflow-hidden grid lg:grid-cols-[1fr_420px]">
-          <div aria-hidden="true" className="cf-aurora-b" />
-          <div className="relative border-hairline-ghost px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14 lg:border-r">
-            <h1 className="font-display max-w-[18ch] text-[38px] leading-[1.08] font-medium tracking-[-0.01em] md:text-[60px] md:leading-[1.05]">
-              One catalog. Four stages.{' '}
-              <em className="text-cobalt-bright italic">Scoped before you commit.</em>
-            </h1>
-          </div>
-          <div className="relative flex flex-col border-t border-hairline-ghost lg:border-t-0">
-            <div className="flex grow items-center border-b border-hairline-ghost px-5 py-8 md:px-10 md:py-10">
-              <p className="text-[16px] leading-relaxed text-ghost/80">
-                Every engagement starts with a{' '}
-                <span className="font-semibold text-ghost">fixed-fee diagnostic</span> and ends with
-                a system your team uses every week.
-              </p>
+      {/* Intro band: full-bleed dark title block (services-anvil.jpg plate) */}
+      <section aria-label="Services introduction" className="cf-dark-band overflow-hidden">
+        {/* Plate slot: next/image back plate + legibility overlay go here, before the aurora. */}
+        <div aria-hidden="true" className="cf-aurora-b" />
+        <Container gutter="cells" className="relative">
+          <SectionBand
+            tone="dark"
+            left="Services"
+            right="The journey: Diagnose, Build, Adopt, Run"
+          />
+          <div className="grid lg:grid-cols-[1fr_420px]">
+            <div className="border-hairline-ghost px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14 lg:border-r">
+              <h1 className="font-display max-w-[18ch] text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
+                One catalog. Four stages.{' '}
+                <em className="text-cobalt-bright italic">Scoped before you commit.</em>
+              </h1>
             </div>
-            <div className="px-5 py-6 md:px-10 md:py-8">
-              <BookCallButton size="lg" />
+            <div className="flex flex-col border-t border-hairline-ghost lg:border-t-0">
+              <div className="flex grow items-center border-b border-hairline-ghost px-5 py-8 md:px-10 md:py-10">
+                <p className="text-[16px] leading-relaxed text-ghost/80">
+                  Every engagement starts with a{' '}
+                  <span className="font-semibold text-ghost">fixed-fee diagnostic</span> and ends
+                  with a system your team uses every week.
+                </p>
+              </div>
+              <div className="px-5 py-6 md:px-10 md:py-8">
+                <BookCallButton size="lg" />
+              </div>
             </div>
           </div>
-        </div>
-      </PageFrame>
+        </Container>
+      </section>
 
       {/* The journey */}
       <PageFrame aria-label="The journey">
@@ -58,7 +66,7 @@ export default function ServicesPage() {
                 <span aria-hidden="true" className="inline-block size-[7px] bg-cobalt" />
                 Stage {stage.number}
               </p>
-              <h2 className="font-display mt-3 text-[34px] leading-[1.1] font-medium md:text-[44px]">
+              <h2 className="font-display mt-3 text-[clamp(30px,3vw,56px)] leading-[1.1] font-medium">
                 {stage.name}
               </h2>
               <p className="tnum mt-4 max-w-[32ch] text-[15px] leading-relaxed text-ink/70">
@@ -107,7 +115,7 @@ export default function ServicesPage() {
       </PageFrame>
 
       {/* PE Portfolio Pack */}
-      <PageFrame aria-label="For sponsors" className="bg-ink text-ghost">
+      <PageFrame aria-label="For sponsors" tone="dark">
         <div className="flex items-center justify-between gap-4 border-b border-[rgba(248,248,255,0.18)] px-5 py-5 md:px-10">
           <span className="text-[11px] tracking-[0.18em] text-ghost/60 uppercase">
             For sponsors
@@ -118,7 +126,7 @@ export default function ServicesPage() {
         </div>
         <div className="grid lg:grid-cols-[1fr_440px]">
           <div className="border-[rgba(248,248,255,0.18)] px-5 py-10 md:px-10 md:py-14 lg:border-r">
-            <h2 className="font-display text-[34px] leading-[1.1] font-medium md:text-[44px]">
+            <h2 className="font-display text-[clamp(30px,3vw,56px)] leading-[1.1] font-medium">
               {PE_PACK.title}
             </h2>
             <div className="mt-8 max-w-[560px] border-t border-[rgba(248,248,255,0.18)]">
@@ -142,9 +150,9 @@ export default function ServicesPage() {
             <BookCallButton size="lg" className="mt-8" />
           </div>
           <div className="flex flex-col justify-between border-t border-[rgba(248,248,255,0.18)] px-5 py-10 md:px-10 md:py-14 lg:border-t-0">
-            <p className="font-display tnum text-[96px] leading-none font-medium md:text-[130px]">
+            <p className="font-display tnum text-[clamp(96px,8vw,150px)] leading-none font-medium">
               {PE_PACK.stat.value}
-              <span className="align-top text-[40px] md:text-[52px]">%</span>
+              <span className="align-top text-[0.4em]">%</span>
             </p>
             <div className="mt-10">
               <p className="tnum text-[15px] leading-relaxed text-ghost/85">{PE_PACK.stat.text}</p>

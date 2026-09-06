@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { BookCallButton } from '@/components/functional/BookCallButton';
+import { Container } from '@/components/ui/Container';
 import { FaqAccordion } from '@/components/ui/FaqAccordion';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
@@ -47,14 +48,15 @@ export default function PrivateEquityPage() {
     <>
       <script {...JsonLdScriptProps(faqJsonLd(PE_FAQS))} />
 
-      {/* Hero */}
-      <PageFrame aria-label="AI for private equity">
-        <SectionBand left="Private equity" right="Portfolio-wide - Sponsor-visible" />
-        <div className="cf-dark-band relative overflow-hidden">
-          <div aria-hidden="true" className="cf-aurora-b" />
-          <div className="relative grid lg:grid-cols-[1fr_420px]">
+      {/* Hero: full-bleed dark title block (pe-monoliths.jpg plate) */}
+      <section aria-label="AI for private equity" className="cf-dark-band overflow-hidden">
+        {/* Plate slot: next/image back plate + legibility overlay go here, before the aurora. */}
+        <div aria-hidden="true" className="cf-aurora-b" />
+        <Container gutter="cells" className="relative">
+          <SectionBand tone="dark" left="Private equity" right="Portfolio-wide - Sponsor-visible" />
+          <div className="grid lg:grid-cols-[1fr_420px]">
             <div className="border-hairline-ghost px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14 lg:border-r">
-              <h1 className="font-display max-w-[20ch] text-[38px] leading-[1.08] font-medium tracking-[-0.01em] md:text-[58px] md:leading-[1.05]">
+              <h1 className="font-display max-w-[20ch] text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
                 AI across the portfolio,{' '}
                 <em className="text-cobalt-bright italic">not a pilot graveyard.</em>
               </h1>
@@ -63,7 +65,7 @@ export default function PrivateEquityPage() {
                 and weekly-active adoption reported back to the operating team.
               </p>
             </div>
-            <div className="relative flex flex-col justify-end px-5 py-8 md:px-10 md:py-14">
+            <div className="flex flex-col justify-end px-5 py-8 md:px-10 md:py-14">
               <p className="text-[11px] tracking-[0.18em] text-ghost/55 uppercase">Start here</p>
               <p className="mt-4 text-[15px] leading-relaxed text-ghost/80">
                 Thirty minutes with the founder. Bring one portfolio company and we will map where a
@@ -72,17 +74,17 @@ export default function PrivateEquityPage() {
               <BookCallButton size="lg" className="mt-6 self-start" />
             </div>
           </div>
-        </div>
-      </PageFrame>
+        </Container>
+      </section>
 
       {/* The sponsor gap: the sourced, citable anchor */}
       <PageFrame aria-label="The sponsor gap">
         <SectionBand left="The gap" right="Third-party research" />
         <div className="grid lg:grid-cols-[380px_1fr]">
           <div className="flex items-center border-b border-hairline px-5 py-10 md:px-10 lg:border-r lg:border-b-0">
-            <p className="font-display text-[86px] leading-none md:text-[110px]">
+            <p className="font-display text-[clamp(86px,7vw,130px)] leading-none">
               {PE_PACK.stat.value}
-              <span className="align-top text-[38px] md:text-[46px]">%</span>
+              <span className="align-top text-[0.42em]">%</span>
             </p>
           </div>
           <div className="px-5 py-10 md:px-10">
@@ -127,7 +129,7 @@ export default function PrivateEquityPage() {
             <p className="tnum text-[11px] tracking-[0.18em] text-ink/50 uppercase">
               Case C - a PE operating team
             </p>
-            <h2 className="font-display mt-3 max-w-[24ch] text-[28px] leading-tight md:text-[34px]">
+            <h2 className="font-display mt-3 max-w-[24ch] text-[clamp(30px,3vw,56px)] leading-[1.1]">
               A portfolio-wide AI diagnostic. They left with{' '}
               <em className="text-cobalt italic">a prioritized execution plan.</em>
             </h2>
@@ -189,7 +191,7 @@ export default function PrivateEquityPage() {
       <PageFrame bottomRule={false} aria-label="Next step">
         <SectionBand left="Next step" right="30 minutes - no preparation" />
         <div className="flex flex-col gap-5 px-5 py-10 md:flex-row md:items-center md:justify-between md:px-10">
-          <p className="font-display max-w-[30ch] text-[26px] leading-tight md:text-[32px]">
+          <p className="font-display max-w-[30ch] text-[clamp(30px,3vw,56px)] leading-[1.1]">
             Bring one portfolio company.{' '}
             <em className="text-cobalt italic">We will map it live.</em>
           </p>

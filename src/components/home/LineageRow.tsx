@@ -33,7 +33,7 @@ export function LineageRow() {
   return (
     <PageFrame aria-label="Practice lineage and toolchain">
       <div className="grid md:grid-cols-2">
-        <div className="cf-dots border-b border-hairline px-5 py-8 md:border-r md:border-b-0 md:px-10">
+        <div className="cf-dots border-b border-hairline px-5 py-6 md:border-r md:border-b-0 md:px-10 md:py-7">
           <p className="tnum text-[11px] tracking-[0.18em] text-ink/50 uppercase">
             Our team comes from
           </p>
@@ -43,7 +43,7 @@ export function LineageRow() {
             ))}
           </div>
         </div>
-        <div className="cf-dots px-5 py-8 md:px-10">
+        <div className="cf-dots px-5 py-6 md:px-10 md:py-7">
           <p className="tnum text-[11px] tracking-[0.18em] text-ink/50 uppercase">How we build</p>
           <ul className="mt-4 space-y-2">
             {PRACTICES.map((practice) => (

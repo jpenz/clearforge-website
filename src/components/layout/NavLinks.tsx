@@ -5,7 +5,10 @@ import { usePathname } from 'next/navigation';
 import { NAV_ITEMS } from '@/data/site';
 import { cn } from '@/lib/utils';
 
-/** The five primary links with an active-route underline cue. */
+/**
+ * The five primary links with an active-route underline cue. The header
+ * is dark, so the accent is cobalt-bright (cobalt fails contrast on ink).
+ */
 export function NavLinks() {
   const pathname = usePathname();
 
@@ -21,8 +24,8 @@ export function NavLinks() {
             className={cn(
               'py-2.5 transition-colors',
               active
-                ? 'font-semibold text-cobalt underline decoration-2 underline-offset-8'
-                : 'hover:text-cobalt',
+                ? 'font-semibold text-cobalt-bright underline decoration-2 underline-offset-8'
+                : 'text-ghost/75 hover:text-cobalt-bright',
             )}
           >
             {item.label}

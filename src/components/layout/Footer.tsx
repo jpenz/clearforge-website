@@ -1,16 +1,18 @@
 import Link from 'next/link';
 import { BookCallButton } from '@/components/functional/BookCallButton';
+import { Container } from '@/components/ui/Container';
 import { FOOTER_COLUMNS, SITE_NAME, SITE_TAGLINE } from '@/data/site';
 
 /**
  * The columned footer, dark bookend of every page: brand block, four
  * sitemap columns (the only nav path to /discover), and a numbers bar.
+ * V13: full-bleed cinematic band (HDR core from .cf-dark-band, aurora).
  */
 export function Footer() {
   return (
-    <footer className="cf-dark-band relative overflow-hidden border-t border-ink">
+    <footer className="cf-dark-band overflow-hidden">
       <div aria-hidden="true" className="cf-aurora-b" />
-      <div className="relative mx-auto max-w-[1360px] px-5 py-12 md:px-8 md:py-16">
+      <Container className="relative py-12 md:py-16">
         <div className="grid gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-[minmax(0,1.4fr)_repeat(4,minmax(0,1fr))]">
           <div className="max-w-[320px] md:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2.5">
@@ -34,7 +36,7 @@ export function Footer() {
               <ul className="mt-4 space-y-2.5 text-[13px] font-medium">
                 {column.items.map((item) => (
                   <li key={item.label}>
-                    <Link href={item.href} className="transition-colors hover:text-cobalt">
+                    <Link href={item.href} className="transition-colors hover:text-cobalt-bright">
                       {item.label}
                     </Link>
                   </li>
@@ -61,7 +63,7 @@ export function Footer() {
           </p>
           <p className="tnum">10 to 14 weeks from kickoff to a live production system</p>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

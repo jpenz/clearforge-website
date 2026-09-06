@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { StartFlow } from '@/components/functional/StartFlow';
+import { Container } from '@/components/ui/Container';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
 
@@ -12,12 +13,17 @@ export const metadata: Metadata = {
 export default function StartPage() {
   return (
     <>
-      <PageFrame aria-label="Start a project">
-        <SectionBand left="Start" right="About sixty seconds · Reply within one business day" />
-        <div className="cf-dark-band relative overflow-hidden">
-          <div aria-hidden="true" className="cf-aurora-b" />
-          <div className="relative px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-12">
-            <h1 className="font-display text-[38px] leading-[1.1] font-medium tracking-[-0.01em] md:text-[56px] md:leading-[1.08]">
+      {/* Intro: full-bleed dark title block */}
+      <section aria-label="Start a project" className="cf-dark-band overflow-hidden">
+        <div aria-hidden="true" className="cf-aurora-b" />
+        <Container gutter="cells" className="relative">
+          <SectionBand
+            tone="dark"
+            left="Start"
+            right="About sixty seconds · Reply within one business day"
+          />
+          <div className="px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-12">
+            <h1 className="font-display text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
               Tell us what you <em className="text-cobalt-bright italic">need.</em>
             </h1>
             <p className="mt-5 max-w-[62ch] text-[16px] leading-relaxed text-ghost/80">
@@ -25,8 +31,8 @@ export default function StartPage() {
               before anyone gets on a call.
             </p>
           </div>
-        </div>
-      </PageFrame>
+        </Container>
+      </section>
 
       <PageFrame bottomRule={false} aria-label="Project brief form">
         <StartFlow />

@@ -53,6 +53,14 @@
 @layer base {
   html {
     height: 100%;
+    /* The header is sticky: anchor targets land below it (two tiers at mobile). */
+    scroll-padding-top: 7rem;
+  }
+
+  @media (min-width: 768px) {
+    html {
+      scroll-padding-top: 4.5rem;
+    }
   }
 
   body {
@@ -171,15 +179,43 @@ cal-modal-box {
   background: rgba(1, 11, 19, 0.55) !important;
 }
 
-/* ── Atmosphere layer (V12.1) ─────────────────────────────────────── */
+/* ── Atmosphere layer (V13: high dynamic range) ───────────────────── */
 
-/* Cinematic dark band: deep ink base; aurora blobs supply the light. */
+/* Light canvas: not flat. A barely visible top-down gradient gives each
+   band a lit top edge; dark bands cast a shadow onto the band below. */
+.cf-light-band {
+  background: linear-gradient(180deg, #ffffff 0%, #f8f8ff 100%);
+}
+
+/* Cinematic dark band: deep ink base, a luminous top-right core, a bottom
+   vignette, and a one-pixel specular top edge. All static gradients, so
+   it costs the compositor nothing; the aurora supplies the motion. */
 .cf-dark-band {
   position: relative;
+  z-index: 1;
   background:
+    linear-gradient(180deg, transparent 55%, #030b13 100%),
+    radial-gradient(
+      ellipse 55% 75% at 82% 0%,
+      rgba(122, 151, 255, 0.55) 0%,
+      rgba(36, 84, 255, 0.22) 22%,
+      transparent 60%
+    ),
     linear-gradient(180deg, rgba(36, 84, 255, 0.08) 0%, transparent 140px),
     #030b13;
   color: var(--color-ghost);
+  box-shadow: 0 32px 64px -32px rgba(1, 11, 19, 0.55);
+}
+/* Specular top edge. */
+.cf-dark-band::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  pointer-events: none;
+  background: rgba(248, 248, 255, 0.18);
 }
 /* Film grain: inline SVG turbulence, the HDR texture pass. */
 .cf-dark-band::after {
@@ -192,13 +228,17 @@ cal-modal-box {
 }
 
 /* Aurora blobs: pre-blurred radial gradients, transform-only animation
-   (compositor-friendly, no filter()). Cobalt family only. */
+   (compositor-friendly, no filter()). Cobalt family only, bright cores. */
 .cf-aurora,
-.cf-aurora-b {
+.cf-aurora-b,
+.cf-sweep {
   position: absolute;
-  border-radius: 9999px;
   pointer-events: none;
   will-change: transform;
+}
+.cf-aurora,
+.cf-aurora-b {
+  border-radius: 9999px;
 }
 .cf-aurora {
   width: 900px;
@@ -208,13 +248,13 @@ cal-modal-box {
   background:
     radial-gradient(
       circle at 42% 38%,
-      rgba(122, 151, 255, 0.28) 0%,
+      rgba(122, 151, 255, 0.5) 0%,
       transparent 18%
     ),
     radial-gradient(
       circle,
-      rgba(36, 84, 255, 0.38) 0%,
-      rgba(36, 84, 255, 0.12) 42%,
+      rgba(36, 84, 255, 0.5) 0%,
+      rgba(36, 84, 255, 0.14) 42%,
       transparent 68%
     );
   animation: cf-drift-a 26s ease-in-out infinite alternate;
@@ -226,11 +266,22 @@ cal-modal-box {
   bottom: -380px;
   background: radial-gradient(
     circle,
-    rgba(122, 151, 255, 0.2) 0%,
-    rgba(36, 84, 255, 0.07) 45%,
+    rgba(122, 151, 255, 0.45) 0%,
+    rgba(36, 84, 255, 0.1) 45%,
     transparent 70%
   );
   animation: cf-drift-b 34s ease-in-out infinite alternate;
+}
+/* One slow diagonal light sweep across the band. */
+.cf-sweep {
+  inset: -20% -40%;
+  background: linear-gradient(
+    112deg,
+    transparent 38%,
+    rgba(122, 151, 255, 0.12) 50%,
+    transparent 62%
+  );
+  animation: cf-sweep 28s ease-in-out infinite alternate;
 }
 @keyframes cf-drift-a {
   from { transform: translate3d(0, 0, 0) scale(1); }
@@ -239,6 +290,10 @@ cal-modal-box {
 @keyframes cf-drift-b {
   from { transform: translate3d(0, 0, 0) scale(1.05); }
   to { transform: translate3d(-120px, -70px, 0) scale(0.96); }
+}
+@keyframes cf-sweep {
+  from { transform: translate3d(-22%, 0, 0); }
+  to { transform: translate3d(22%, 0, 0); }
 }
 
 /* Dotted-grid texture for light bands. */
@@ -260,6 +315,49 @@ cal-modal-box {
     0 2px 16px rgba(1, 11, 19, 0.5);
 }
 
+/* Cobalt glow on hover for the free-tool cards: slow, one curve. */
+.cf-tool-glow {
+  transition:
+    box-shadow 700ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    background-color 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.cf-tool-glow:hover,
+.cf-tool-glow:focus-visible {
+  background-color: #ffffff;
+  box-shadow:
+    inset 0 0 0 1px rgba(36, 84, 255, 0.45),
+    0 24px 64px -28px rgba(36, 84, 255, 0.55);
+}
+
+/* ── Scroll feel (V13 Move 4): background plates only ─────────────── */
+
+/* Plate parallax: the plate is sized 112% tall (top -6%) and translates
+   from -6% to 6% as its band crosses the viewport, so edges never show.
+   Scroll-driven CSS only: no JS, never hides content; browsers without
+   animation-timeline render the plate static. */
+.cf-plate-parallax {
+  will-change: transform;
+}
+@supports (animation-timeline: view()) {
+  .cf-plate-parallax {
+    animation: cf-plate-drift linear both;
+    animation-timeline: view();
+  }
+}
+@keyframes cf-plate-drift {
+  from { transform: translateY(-6%); }
+  to { transform: translateY(6%); }
+}
+
+/* Image cards: a slow scale on hover, 700ms, one curve. Apply
+   .cf-image-card to the card and let the plate be its <img>. */
+.cf-image-card img {
+  transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.cf-image-card:hover img {
+  transform: scale(1.04);
+}
+
 /* Load-time entrance stagger: pure CSS, once, fast. Content is never
    hidden for long and never gated on scroll. */
 .cf-enter {
@@ -276,8 +374,22 @@ cal-modal-box {
 }
 @media (prefers-reduced-motion: reduce) {
   .cf-aurora,
-  .cf-aurora-b {
+  .cf-aurora-b,
+  .cf-sweep {
     animation: none;
+  }
+  .cf-plate-parallax {
+    animation: none;
+    transform: none;
+  }
+  .cf-image-card img {
+    transition: none;
+  }
+  .cf-image-card:hover img {
+    transform: none;
+  }
+  .cf-tool-glow {
+    transition: none;
   }
   .cf-enter {
     opacity: 1;
