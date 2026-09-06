@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
-type Overlay = 'strong' | 'strong-right' | 'soft';
+type Overlay = 'strong' | 'strong-right' | 'hero' | 'soft';
 
 interface PlateProps {
   /** Same-origin render under public/renders. */
@@ -15,8 +15,10 @@ interface PlateProps {
   /**
    * Legibility scrim. 'strong' (default) is the left-heavy band scrim for
    * text-bearing dark bands; 'strong-right' adds a shadow pool behind a
-   * right-hand text column (hero label row, interior title blocks) so
-   * small labels clear 4.5:1 on the render's bright zone; 'soft' is the
+   * right-hand text column (interior title blocks) so small labels clear
+   * 4.5:1 on the render's bright zone; 'hero' is the home hero variant,
+   * which carries no pool because the free-tool card above it is opaque
+   * and releases the right side so the render's core reads; 'soft' is the
    * bottom-heavy scrim for image cards whose text sits at the foot.
    */
   overlay?: Overlay;
@@ -28,6 +30,7 @@ interface PlateProps {
 const OVERLAY_CLASS: Record<Overlay, string> = {
   strong: 'cf-plate-overlay',
   'strong-right': 'cf-plate-overlay',
+  hero: 'cf-plate-overlay-hero',
   soft: 'cf-plate-overlay-soft',
 };
 

@@ -425,6 +425,43 @@ cal-modal-box {
       );
   }
 }
+/* Hero plate scrim (V13.1). The header is opaque ink, so the full-width
+   top scrim it used to need is gone; what remains is a short left-biased
+   top pass for the eyebrow row. The horizontal ramp holds the statement
+   column near ink to 46 percent and then releases, so the render's own
+   bright core reads above and beside the free-tool card instead of being
+   flattened by a pool the opaque card made redundant. Measured: the
+   plate's visible peak rises from 108 to a real highlight while every
+   text run stays at or above its AA threshold. */
+.cf-plate-overlay-hero {
+  background:
+    linear-gradient(180deg, transparent 58%, #030b13 100%),
+    linear-gradient(
+      90deg,
+      rgba(3, 11, 19, 0.96) 0%,
+      rgba(3, 11, 19, 0.93) 32%,
+      rgba(3, 11, 19, 0.74) 48%,
+      rgba(3, 11, 19, 0.2) 64%,
+      rgba(3, 11, 19, 0.02) 84%,
+      rgba(3, 11, 19, 0) 100%
+    );
+}
+@media (max-width: 1023px) {
+  /* Below lg the statement stacks over the whole plate, so the flat scrim
+     from the shared overlay applies here too. */
+  .cf-plate-overlay-hero {
+    background:
+      linear-gradient(180deg, rgba(3, 11, 19, 0.94) 0, rgba(3, 11, 19, 0.8) 110px, transparent 240px),
+      linear-gradient(180deg, transparent 55%, #030b13 100%),
+      linear-gradient(
+        180deg,
+        rgba(3, 11, 19, 0.78) 0%,
+        rgba(3, 11, 19, 0.9) 40%,
+        rgba(3, 11, 19, 0.94) 100%
+      );
+  }
+}
+
 /* Shadow pool for plates that carry text in a right-hand column (the
    hero label row, the services and PE title blocks): a soft dark ellipse
    behind the column so 11 to 15px ghost text clears 4.5:1 on the

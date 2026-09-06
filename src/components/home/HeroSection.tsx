@@ -21,7 +21,7 @@ import { Plate } from '@/components/ui/Plate';
 export function HeroSection() {
   return (
     <section aria-label="Introduction" className="cf-dark-band overflow-clip">
-      <Plate src="/renders/hero-forge.jpg" priority position="72% 50%" overlay="strong-right" />
+      <Plate src="/renders/hero-forge.jpg" priority position="72% 50%" overlay="hero" />
       <div aria-hidden="true" className="cf-aurora-b" />
       <div aria-hidden="true" className="cf-sweep" />
       <Container className="relative flex flex-col lg:min-h-[min(82svh,1000px)]">
