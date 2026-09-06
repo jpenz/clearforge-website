@@ -393,7 +393,7 @@ export const ARTICLES: Article[] = [
         content: [
           'Not sure which workflow to start with? ',
           { text: 'Map the Workflow', href: '/discover' },
-          ' with Map the Workflow, free, before you book anything.',
+          ', free, before you book anything.',
         ],
       },
     ],
