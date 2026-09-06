@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { BookCallButton } from '@/components/functional/BookCallButton';
 import { type AnalysisStatus, useAnalysisStream } from '@/hooks/useAnalysisStream';
 
@@ -31,7 +31,12 @@ const FIELD_ROWS: Array<{
   },
 ];
 
-const SAMPLES = ['industrial distributor', 'services firm', 'PE portfolio co'];
+/** The sample chips. `example` is how the readout names the run afterwards. */
+const SAMPLES: Array<{ chip: string; example: string }> = [
+  { chip: 'industrial distributor', example: 'an industrial distributor' },
+  { chip: 'services firm', example: 'a services firm' },
+  { chip: 'PE portfolio co', example: 'a PE portfolio company' },
+];
 
 /** The idle-state sample readout: one worked example, labelled as such. */
 const SAMPLE_READOUT: Array<{
@@ -45,44 +50,64 @@ const SAMPLE_READOUT: Array<{
   { label: 'Estimated build window', value: '10 to 14 weeks', numeric: true },
 ];
 
-/** Reader words for the tool's state; nothing is shown while idle. */
-const STATUS_WORDS: Record<Exclude<AnalysisStatus, 'idle'>, string> = {
-  running: 'Reading site',
-  streaming: 'Writing readout',
-  done: 'Complete',
-  error: 'Did not complete',
-};
-
 const HOST_PATTERN = /^(https?:\/\/)?(www\.)?([a-z0-9-]+\.)+[a-z]{2,}(\/\S*)?$/i;
 
 const secondaryButton =
-  'cursor-pointer text-[13px] font-semibold text-cobalt transition-colors hover:text-cobalt-press';
+  'cursor-pointer text-[14px] font-semibold text-cobalt transition-colors hover:text-cobalt-press';
 
 /**
  * The free tool in the hero: one name (Map the Workflow), the purpose
  * stated before the field, a URL that must look like a host before it
  * runs, and a way back from every state (cancel while running, try
- * another company when done or failed). Drives idle, running, streaming,
- * done, and error states from the /api/hero-analyze stream.
+ * another company when done or failed).
+ *
+ * The status line reports the MODE, not just the state. The stream falls
+ * back to a simulated profile whenever the model call fails, in production
+ * too, so "Complete" and "Analysis complete" are reserved for a live read
+ * of a typed site; a fallback says the site could not be read and a sample
+ * chip says it is an example, both before the reader reaches the rows.
  */
 export function HeroAgent() {
   const { status, target, progress, fields, live, run, reset } = useAnalysisStream('brief');
   const [input, setInput] = useState('');
   const [hint, setHint] = useState<string | null>(null);
+  const [sample, setSample] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  /** A sample chip is an example by definition; a typed run is an example
+   *  whenever the stream never reported live mode. */
+  const illustrative = sample !== null || !live;
+
+  const statusWord = (state: Exclude<AnalysisStatus, 'idle'>) => {
+    if (state === 'running') return sample ? 'Building an example' : 'Reading site';
+    if (state === 'streaming') return illustrative ? 'Writing example' : 'Writing readout';
+    if (state === 'done') return illustrative ? 'Example' : 'Complete';
+    return 'Did not complete';
+  };
+
+  const readoutHeader = () => {
+    if (sample) return `Example: ${sample} · illustrative`;
+    if (!illustrative) return status === 'done' ? 'Analysis complete' : 'Analysis streaming';
+    if (status === 'done') return `Could not read ${target}. Here is an illustrative readout.`;
+    return 'Illustrative readout';
+  };
 
   const submit = () => {
     const value = input.trim();
     if (!HOST_PATTERN.test(value)) {
       setHint('Enter a company website, like acme.com');
+      inputRef.current?.focus();
       return;
     }
     setHint(null);
+    setSample(null);
     void run(value);
   };
 
   const startOver = () => {
     setInput('');
     setHint(null);
+    setSample(null);
     reset();
   };
 
@@ -98,7 +123,7 @@ export function HeroAgent() {
           }`}
           aria-live="polite"
         >
-          {status === 'idle' ? '' : STATUS_WORDS[status]}
+          {status === 'idle' ? '' : statusWord(status)}
         </span>
       </div>
 
@@ -112,7 +137,7 @@ export function HeroAgent() {
               submit();
             }}
           >
-            <p className="mb-5 max-w-[46ch] text-[13px] leading-relaxed text-ink/70">
+            <p className="mb-5 max-w-[46ch] text-[14px] leading-relaxed text-ink/70">
               Maps one revenue workflow, finds the manual steps, and names a candidate AI system.
               Free. Runs in under a minute.
             </p>
@@ -124,6 +149,7 @@ export function HeroAgent() {
             </label>
             <div className="flex border border-ink focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-cobalt">
               <input
+                ref={inputRef}
                 id="hero-agent-url"
                 type="text"
                 inputMode="url"
@@ -141,28 +167,31 @@ export function HeroAgent() {
               />
               <button
                 type="submit"
-                className="cursor-pointer bg-ink px-4 text-[13px] font-semibold text-ghost transition-colors hover:bg-ink/85"
+                className="shrink-0 cursor-pointer bg-ink px-4 text-[14px] font-semibold text-ghost transition-colors hover:bg-ink/85"
               >
-                Analyze
+                Map the Workflow
               </button>
             </div>
-            {hint && (
-              <p id="hero-agent-hint" className="mt-2 text-[13px] font-medium text-cobalt-press">
-                {hint}
-              </p>
-            )}
+            <p id="hero-agent-hint" role="status" className="empty:hidden">
+              {hint && (
+                <span className="mt-2 block text-[14px] font-medium text-cobalt-press">{hint}</span>
+              )}
+            </p>
             <p className="mt-6 mb-2 text-[12px] tracking-[0.14em] text-ink/70 uppercase">
               Or try a sample
             </p>
             <div className="flex flex-wrap gap-2">
-              {SAMPLES.map((sample) => (
+              {SAMPLES.map((item) => (
                 <button
-                  key={sample}
+                  key={item.chip}
                   type="button"
-                  onClick={() => void run(sample)}
+                  onClick={() => {
+                    setSample(item.example);
+                    void run(item.chip);
+                  }}
                   className="cursor-pointer border border-hairline-strong px-3 py-1.5 text-[12px] transition-colors hover:border-ink"
                 >
-                  {sample}
+                  {item.chip}
                 </button>
               ))}
             </div>
@@ -171,7 +200,7 @@ export function HeroAgent() {
                 <span>Example: an industrial distributor</span>
                 <span className="tracking-[0.14em] uppercase">Illustrative</span>
               </div>
-              <dl className="border-t border-hairline text-[13px]">
+              <dl className="border-t border-hairline text-[14px]">
                 {SAMPLE_READOUT.map((row) => (
                   <div
                     key={row.label}
@@ -196,7 +225,7 @@ export function HeroAgent() {
               <div className="cf-progress-bar absolute top-0 left-0 h-[2px] bg-cobalt" />
             </div>
             <p className="tnum mb-4 text-[12px] tracking-[0.14em] text-ink/70 uppercase">
-              Reading {target}
+              {sample ? `Building an example: ${sample}` : `Reading ${target}`}
             </p>
             <ul className="space-y-3 text-[14px]">
               {progress.map((step) => (
@@ -214,8 +243,8 @@ export function HeroAgent() {
 
         {(status === 'streaming' || status === 'done') && (
           <div className="px-5 py-6">
-            <p className="mb-4 text-[12px] tracking-[0.14em] text-ink/70 uppercase">
-              {status === 'done' ? 'Analysis complete' : 'Analysis streaming'}
+            <p className="mb-4 max-w-[46ch] text-[12px] tracking-[0.14em] text-ink/70 uppercase">
+              {readoutHeader()}
             </p>
             <dl className="text-[14px]">
               {FIELD_ROWS.map((row, index) => {
@@ -235,7 +264,7 @@ export function HeroAgent() {
                     </dt>
                     <dd className={`text-right font-medium ${row.numeric ? 'tnum' : ''}`}>
                       {value}
-                      {row.illustrative && !live && (
+                      {row.illustrative && illustrative && (
                         <span className="ml-1 text-[12px] font-normal tracking-[0.1em] text-ink/70 uppercase">
                           illustrative
                         </span>

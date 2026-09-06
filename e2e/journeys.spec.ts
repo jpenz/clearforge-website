@@ -19,9 +19,9 @@ test('homepage renders the core statement and one booking CTA in the header', as
 test('hero agent completes a run from a sample chip', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'industrial distributor' }).click();
-  const analyze = page.getByRole('button', { name: /analyze/i }).first();
-  if (await analyze.count()) await analyze.click();
-  await expect(page.getByText(/analysis complete|done/i).first()).toBeVisible({
+  // A sample chip is an example by definition, so the readout names it as one
+  // instead of reporting "Analysis complete" (V13 fix round).
+  await expect(page.getByText(/example: an industrial distributor/i).first()).toBeVisible({
     timeout: 40_000,
   });
 });
