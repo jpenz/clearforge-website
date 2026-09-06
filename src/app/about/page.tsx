@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { BookCallButton } from '@/components/functional/BookCallButton';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
@@ -85,13 +86,17 @@ export default function AboutPage() {
           </div>
           <div className="flex flex-col items-center justify-center px-5 py-8 md:px-10 md:py-10">
             <div className="w-full max-w-[460px]">
-              {/* FounderHeadshot slot: real photo supplied by the team */}
-              <div className="relative flex h-[420px] items-center justify-center border border-hairline bg-white md:h-[560px]">
-                <span aria-hidden="true" className="absolute top-0 left-0 h-px w-6 bg-cobalt" />
-                <span aria-hidden="true" className="absolute top-0 left-0 h-6 w-px bg-cobalt" />
-                <p className="px-10 text-center text-[11px] leading-[1.8] tracking-[0.14em] text-ink/60 uppercase">
-                  Founder headshot · James Penz · real photo supplied
-                </p>
+              {/* Founder headshot: the real photo V11 shipped, restored 2026-09-05
+                  after the V12 graft dropped the file and left slot text live. */}
+              <div className="relative aspect-[4/5] overflow-hidden border border-hairline bg-white">
+                <Image
+                  src="/images/james-penz.jpg"
+                  alt="James Penz, founder of ClearForge"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 460px"
+                  className="object-cover object-top"
+                />
               </div>
               <div className="flex items-center justify-between border-x border-b border-hairline px-4 py-3">
                 <span className="text-[13px] font-semibold">James Penz · Founder</span>
