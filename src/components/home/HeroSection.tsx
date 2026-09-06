@@ -39,7 +39,7 @@ export function HeroSection() {
               <em className="text-cobalt-bright italic">actually feels.</em>
             </h1>
             <p
-              className="cf-enter mt-8 max-w-[44ch] text-[17px] leading-snug text-ghost/80 md:text-[18px] lg:max-w-none"
+              className="cf-enter mt-8 max-w-[44ch] text-[16px] leading-snug text-ghost/80 md:text-[18px] lg:max-w-none"
               style={{ '--d': '180ms' } as React.CSSProperties}
             >
               Engagements start with a{' '}

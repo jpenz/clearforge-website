@@ -105,7 +105,7 @@ export default function ProofPage() {
         </div>
         <div className="grid lg:grid-cols-[1fr_2fr]">
           <div className="relative flex flex-col border-b border-hairline-ghost px-5 py-8 md:px-10 md:py-12 lg:border-r lg:border-b-0">
-            <h2 className="font-display max-w-[16ch] text-balance text-[28px] leading-[1.2] font-medium md:text-[34px]">
+            <h2 className="font-display max-w-[16ch] text-balance text-[28px] leading-[1.2] font-medium md:text-[32px]">
               Commercial pipeline rebuilt from zero.
             </h2>
             <div className="mt-auto pt-8">
@@ -159,7 +159,7 @@ export default function ProofPage() {
         </div>
         <div className="grid lg:grid-cols-[2fr_1fr]">
           <div className="relative flex flex-col border-b border-hairline px-5 py-8 transition-colors hover:bg-white md:px-10 md:py-12 lg:border-r lg:border-b-0">
-            <p className="font-display max-w-[30ch] text-balance text-[28px] leading-[1.3] font-medium md:text-[34px]">
+            <p className="font-display max-w-[30ch] text-balance text-[28px] leading-[1.3] font-medium md:text-[32px]">
               {caseC.headline} <em className="text-cobalt italic">{caseC.headlineEmphasis}</em>
             </p>
             <div className="mt-auto pt-8">
@@ -199,7 +199,7 @@ export default function ProofPage() {
               }`}
             >
               <p className="text-[14px] font-semibold">{blueprint.name}</p>
-              <p className="mt-1 text-[13px] text-ink/70">{blueprint.description}</p>
+              <p className="mt-1 text-[14px] text-ink/70">{blueprint.description}</p>
             </div>
           ))}
         </div>

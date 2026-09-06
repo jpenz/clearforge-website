@@ -24,7 +24,7 @@ const variantClasses: Record<Variant, string> = {
 
 const sizeClasses: Record<Size, string> = {
   sm: 'px-5 py-2.5 text-[14px]',
-  md: 'px-5 py-2.5 text-[13px]',
+  md: 'px-5 py-2.5 text-[14px]',
   lg: 'px-7 py-4 text-[15px]',
 };
 
@@ -113,7 +113,7 @@ export function BookCallButton({ variant = 'solid', size = 'sm', className }: Bo
       className={cn(
         'inline-flex cursor-pointer items-center justify-center gap-2.5 text-center font-semibold transition-colors',
         isBoxed(variant) && sizeClasses[size],
-        !isBoxed(variant) && 'text-[13px]',
+        !isBoxed(variant) && 'text-[14px]',
         variantClasses[variant],
         className,
       )}

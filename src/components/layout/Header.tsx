@@ -22,7 +22,7 @@ export function Header() {
         <div className="flex h-14 items-center justify-between md:h-16">
           <Link href="/" className="flex items-center gap-2.5" aria-label={`${SITE_NAME} home`}>
             <span aria-hidden="true" className="inline-block size-3.5 bg-cobalt" />
-            <span className="text-[17px] font-semibold tracking-tight">{SITE_NAME}</span>
+            <span className="text-[16px] font-semibold tracking-tight">{SITE_NAME}</span>
           </Link>
           <nav
             aria-label="Primary"

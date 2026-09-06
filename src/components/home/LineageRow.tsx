@@ -24,7 +24,7 @@ const STACK_LINE =
 
 function Wordmark({ name }: { name: string }) {
   return (
-    <span className="text-[17px] font-semibold tracking-[-0.01em] whitespace-nowrap text-ink/70 transition-colors hover:text-ink md:text-[19px]">
+    <span className="text-[16px] font-semibold tracking-[-0.01em] whitespace-nowrap text-ink/70 transition-colors hover:text-ink md:text-[18px]">
       {name}
     </span>
   );

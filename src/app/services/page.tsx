@@ -39,7 +39,7 @@ export default function ServicesPage() {
             </div>
             <div className="flex flex-col border-t border-hairline-ghost lg:border-t-0">
               <div className="flex grow items-center border-b border-hairline-ghost px-5 py-8 md:px-10 md:py-10">
-                <p className="text-[16px] leading-relaxed text-ghost/85">
+                <p className="text-[16px] leading-relaxed text-ghost">
                   Diagnose, Build, Adopt, Run. Four stages, one catalog, priced before any build.
                 </p>
               </div>
@@ -66,7 +66,7 @@ export default function ServicesPage() {
                 <span aria-hidden="true" className="inline-block size-[7px] bg-cobalt" />
                 Stage {stage.number} · {stage.name}
               </p>
-              <h2 className="font-display mt-3 max-w-[18ch] text-balance text-[clamp(26px,2.2vw,40px)] leading-[1.15] font-medium">
+              <h2 className="font-display mt-3 max-w-[18ch] text-balance text-[clamp(28px,2.2vw,40px)] leading-[1.15] font-medium">
                 {stage.conclusion}
               </h2>
               {stage.link && (
@@ -123,7 +123,7 @@ export default function ServicesPage() {
                   key={point}
                   className="grid grid-cols-[40px_1fr] gap-4 border-b border-hairline-ghost py-4"
                 >
-                  <span className="tnum pt-0.5 text-[13px] text-ghost/70">0{index + 1}</span>
+                  <span className="tnum pt-0.5 text-[14px] text-ghost/70">0{index + 1}</span>
                   <p className="text-[15px] text-ghost/85">{point}</p>
                 </div>
               ))}

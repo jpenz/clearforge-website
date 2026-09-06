@@ -200,7 +200,7 @@ export function StartFlow() {
                       onClick={() =>
                         setNeeds((prev) => (on ? prev.filter((c) => c !== chip) : [...prev, chip]))
                       }
-                      className={`inline-flex cursor-pointer items-center gap-2 border px-4 py-2.5 text-[13px] font-medium transition-colors ${
+                      className={`inline-flex cursor-pointer items-center gap-2 border px-4 py-2.5 text-[14px] font-medium transition-colors ${
                         on
                           ? 'border-cobalt bg-cobalt text-white'
                           : 'border-hairline-strong hover:border-ink'
@@ -258,7 +258,7 @@ export function StartFlow() {
               className={inputClass}
             />
             {fieldError && (
-              <p id="sf-company-error" className="mt-2 text-[13px] font-medium text-cobalt-press">
+              <p id="sf-company-error" className="mt-2 text-[14px] font-medium text-cobalt-press">
                 {fieldError}
               </p>
             )}
@@ -302,7 +302,7 @@ export function StartFlow() {
             name="rfp"
             type="file"
             accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx"
-            className="w-full cursor-pointer border border-hairline-strong bg-white px-3 py-2 text-[13px] text-ink/70 file:mr-3 file:cursor-pointer file:border-0 file:bg-cobalt file:px-3 file:py-1.5 file:text-[12px] file:font-semibold file:text-white"
+            className="w-full cursor-pointer border border-hairline-strong bg-white px-3 py-2 text-[14px] text-ink/70 file:mr-3 file:cursor-pointer file:border-0 file:bg-cobalt file:px-3 file:py-1.5 file:text-[12px] file:font-semibold file:text-white"
           />
         </div>
         <div className="mt-8 flex flex-wrap gap-3">
@@ -362,7 +362,7 @@ export function StartFlow() {
           </div>
         </div>
         {state.status === 'error' && (
-          <p role="alert" className="mt-4 text-[13px] font-medium text-cobalt-press">
+          <p role="alert" className="mt-4 text-[14px] font-medium text-cobalt-press">
             {state.message}
           </p>
         )}

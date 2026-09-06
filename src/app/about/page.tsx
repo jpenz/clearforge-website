@@ -80,8 +80,8 @@ export default function AboutPage() {
                 <span aria-hidden="true" className="absolute top-0 left-0 h-6 w-px bg-cobalt" />
               </div>
               <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-x border-b border-hairline px-4 py-3">
-                <span className="text-[13px] font-semibold">James Penz · Founder</span>
-                <span className="flex items-center gap-4 text-[13px]">
+                <span className="text-[14px] font-semibold">James Penz · Founder</span>
+                <span className="flex items-center gap-4 text-[14px]">
                   <a
                     href={`mailto:${FOUNDER_EMAIL}`}
                     className="text-cobalt underline decoration-ink/30 underline-offset-4 hover:text-cobalt-press"
@@ -114,7 +114,7 @@ export default function AboutPage() {
             }`}
           >
             <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">{row.label}</span>
-            <h2 className="text-[18px] leading-[1.4] font-semibold md:text-[19px]">{row.title}</h2>
+            <h2 className="text-[18px] leading-[1.4] font-semibold md:text-[18px]">{row.title}</h2>
             <p className="text-[14px] leading-relaxed text-ink/70">{row.description}</p>
           </div>
         ))}

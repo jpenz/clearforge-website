@@ -40,7 +40,7 @@ export function Footer() {
               <p className="text-[12px] tracking-[0.16em] text-ghost/70 uppercase">
                 {column.title}
               </p>
-              <ul className="mt-4 space-y-2.5 text-[13px] font-medium">
+              <ul className="mt-4 space-y-2.5 text-[14px] font-medium">
                 {column.items.map((item) => (
                   <li key={item.label}>
                     <Link href={item.href} className="transition-colors hover:text-cobalt-bright">

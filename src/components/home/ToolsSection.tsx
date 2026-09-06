@@ -36,7 +36,7 @@ export function ToolsSection() {
             <p className="text-[12px] tracking-[0.16em] text-ink/70 uppercase">Free tool</p>
             <ArrowLink
               href={tool.href}
-              className="mt-3 text-[clamp(20px,1.4vw,26px)] leading-snug tracking-[-0.01em] after:absolute after:inset-0"
+              className="mt-3 text-[clamp(22px,1.5vw,28px)] leading-snug tracking-[-0.01em] after:absolute after:inset-0"
             >
               {tool.title}
             </ArrowLink>

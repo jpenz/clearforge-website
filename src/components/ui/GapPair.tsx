@@ -91,7 +91,7 @@ export function GapPair({ tone = 'light', eyebrow = true, className }: GapPairPr
           );
         })}
       </dl>
-      <p className={cn('tnum mt-5 text-[13px]', dark ? 'text-ghost/70' : 'text-ink/70')}>
+      <p className={cn('tnum mt-5 text-[14px]', dark ? 'text-ghost/70' : 'text-ink/70')}>
         Source:{' '}
         <a
           href={source.href}

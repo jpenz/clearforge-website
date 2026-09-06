@@ -98,7 +98,7 @@ export default function PrivateEquityPage() {
               <p className="tnum text-[12px] tracking-[0.16em] text-cobalt uppercase">
                 {item.step}
               </p>
-              <h2 className="font-display mt-3 text-[22px] md:text-[24px]">{item.name}</h2>
+              <h2 className="font-display mt-3 text-[22px] md:text-[28px]">{item.name}</h2>
               <p className="mt-3 text-[14px] leading-relaxed text-ink/75">{item.detail}</p>
             </div>
           ))}
@@ -113,7 +113,7 @@ export default function PrivateEquityPage() {
             <GapPair tone="dark" eyebrow={false} />
           </div>
           <div className="flex flex-col justify-center px-5 py-10 md:px-10 md:py-14">
-            <p className="max-w-[54ch] text-[17px] leading-relaxed text-ghost/85">
+            <p className="max-w-[54ch] text-[16px] leading-relaxed text-ghost/85">
               The mandate is already in place across the industry. Execution inside the operating
               companies is where it stalls. That is the gap this work closes.
             </p>

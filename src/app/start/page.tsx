@@ -33,7 +33,7 @@ export default function StartPage() {
             right="About sixty seconds · Reply within one business day"
           />
           <div className="px-5 pt-10 pb-12 md:px-10 md:pt-14 md:pb-16">
-            <div className="max-w-[900px]">
+            <div className="max-w-[1100px]">
               <h1 className="font-display text-balance text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
                 Tell us what you <em className="text-cobalt-bright italic">need.</em>
               </h1>
