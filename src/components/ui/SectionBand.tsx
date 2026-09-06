@@ -10,13 +10,13 @@ interface SectionBandProps {
 }
 
 /**
- * The hairline-bounded label strip that opens every section:
- * 11px uppercase 0.18em tracked labels, with a real number or link
- * pinned to the right side of the band.
+ * The hairline-bounded label strip that opens a section: the section name
+ * at 12px full ink on the left (it is the page's you-are-here on interior
+ * routes, so it is never the faintest text on the page), and a qualifying
+ * phrase or link at 12px ink/70 on the right.
  */
 export function SectionBand({ left, right, className, tone = 'light' }: SectionBandProps) {
   const dark = tone === 'dark';
-  const label = dark ? 'text-ghost/60' : 'text-ink/60';
   return (
     <div
       className={cn(
@@ -25,9 +25,21 @@ export function SectionBand({ left, right, className, tone = 'light' }: SectionB
         className,
       )}
     >
-      <span className={cn('text-[11px] tracking-[0.18em] uppercase', label)}>{left}</span>
+      <span
+        className={cn(
+          'text-[12px] font-semibold tracking-[0.16em] uppercase',
+          dark ? 'text-ghost' : 'text-ink',
+        )}
+      >
+        {left}
+      </span>
       {right != null && (
-        <span className={cn('tnum text-right text-[11px] tracking-[0.18em] uppercase', label)}>
+        <span
+          className={cn(
+            'tnum text-right text-[12px] tracking-[0.16em] uppercase',
+            dark ? 'text-ghost/70' : 'text-ink/70',
+          )}
+        >
           {right}
         </span>
       )}

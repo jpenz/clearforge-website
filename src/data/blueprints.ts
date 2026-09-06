@@ -3,7 +3,7 @@ export interface Blueprint {
   description: string;
 }
 
-/** Build patterns from past systems. Names are illustrative. */
+/** Build patterns we work from. The names are illustrative, not delivered systems; the band says so once. */
 export const BLUEPRINTS: Blueprint[] = [
   {
     name: 'Inbound quote to order',

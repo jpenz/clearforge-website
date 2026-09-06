@@ -1,11 +1,15 @@
 import Link from 'next/link';
 import { BookCallButton } from '@/components/functional/BookCallButton';
 import { Container } from '@/components/ui/Container';
-import { FOOTER_COLUMNS, SITE_NAME, SITE_TAGLINE } from '@/data/site';
+import { FOOTER_COLUMNS, FOUNDER_EMAIL, SITE_NAME, SITE_TAGLINE } from '@/data/site';
+
+const legalLink =
+  'underline decoration-ghost/40 underline-offset-4 transition-colors hover:text-ghost';
 
 /**
  * The columned footer, dark bookend of every page: brand block, four
- * sitemap columns (the only nav path to /discover), and a numbers bar.
+ * sitemap columns (the only nav path to /discover), and a legal line that
+ * carries the founder's email so every page has a contact line.
  * V13: full-bleed cinematic band with the luminous top-right core
  * (.cf-core over the band's own highlight), the aurora, and the slow
  * light sweep, so both dark bookends carry the same HDR core.
@@ -34,7 +38,7 @@ export function Footer() {
           </div>
           {FOOTER_COLUMNS.map((column) => (
             <nav key={column.title} aria-label={`Footer: ${column.title}`}>
-              <p className="text-[11px] tracking-[0.18em] text-ghost/70 uppercase">
+              <p className="text-[12px] tracking-[0.16em] text-ghost/70 uppercase">
                 {column.title}
               </p>
               <ul className="mt-4 space-y-2.5 text-[13px] font-medium">
@@ -55,13 +59,19 @@ export function Footer() {
             <span aria-hidden="true" className="px-2">
               ·
             </span>
-            <Link href="/privacy" className="hover:text-ghost">
+            <a href={`mailto:${FOUNDER_EMAIL}`} className={legalLink}>
+              {FOUNDER_EMAIL}
+            </a>
+            <span aria-hidden="true" className="px-2">
+              ·
+            </span>
+            <Link href="/privacy" className={legalLink}>
               Privacy
             </Link>
             <span aria-hidden="true" className="px-2">
               ·
             </span>
-            <Link href="/terms" className="hover:text-ghost">
+            <Link href="/terms" className={legalLink}>
               Terms
             </Link>
           </p>

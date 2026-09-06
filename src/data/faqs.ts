@@ -6,7 +6,7 @@ export interface Faq {
 /** Home page FAQ, kept short for AI-search visibility. */
 export const HOME_FAQS: Faq[] = [
   {
-    question: 'What does it cost to start?',
+    question: 'How does an engagement start, and how is the fee set?',
     answer:
       'Every engagement starts with the Forge Diagnostic: two weeks, one workflow, a fixed fee agreed up front.',
   },
@@ -35,7 +35,7 @@ export const HOME_FAQS: Faq[] = [
 /** Pricing page FAQ. */
 export const PRICING_FAQS: Faq[] = [
   {
-    question: 'What does it cost to start?',
+    question: 'How does an engagement start, and how is the fee set?',
     answer:
       'Every engagement starts with the Forge Diagnostic: two weeks, one workflow, a fixed fee agreed up front.',
   },

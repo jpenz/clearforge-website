@@ -42,8 +42,12 @@ export function preloadCal(namespace: string): void {
   });
 }
 
-export function openCalModal(namespace: string, prefill?: { name?: string; email?: string }): void {
-  void loadCal(namespace).then((cal) => {
+/** Resolves once the embed has loaded and the modal call has been made. */
+export function openCalModal(
+  namespace: string,
+  prefill?: { name?: string; email?: string },
+): Promise<void> {
+  return loadCal(namespace).then((cal) => {
     cal('modal', {
       calLink: CAL_LINK,
       config: { layout: 'month_view', theme: 'light', ...prefill },

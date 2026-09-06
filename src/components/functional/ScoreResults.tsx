@@ -6,7 +6,7 @@ import { PILLARS, type ScoreResult } from '@/data/scorecard';
 
 const INITIAL: FormState = { status: 'idle' };
 
-const labelClass = 'text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase';
+const labelClass = 'text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase';
 const inputClass =
   'border border-ink bg-white px-3 py-2.5 text-[14px] text-ink placeholder:text-ink/45';
 
@@ -26,12 +26,10 @@ export function ScoreResults({ result, onRetake }: ScoreResultsProps) {
     <div className="border border-ink bg-white">
       {/* Slot label band */}
       <div className="flex items-center justify-between border-b border-hairline px-4 py-3.5 md:px-6">
-        <span className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">
-          ScoreResults · Your readout
-        </span>
+        <span className="text-[12px] tracking-[0.18em] text-ink/70 uppercase">Your readout</span>
         <span className="flex items-center gap-2">
           <span aria-hidden="true" className="inline-block size-[7px] bg-cobalt" />
-          <span className="tnum text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+          <span className="tnum text-[12px] tracking-[0.14em] text-ink/70 uppercase">
             Readout complete
           </span>
         </span>
@@ -41,7 +39,7 @@ export function ScoreResults({ result, onRetake }: ScoreResultsProps) {
       <div className="grid lg:grid-cols-[480px_1fr]">
         <div className="flex flex-col border-b border-hairline lg:border-r lg:border-b-0">
           <div className="border-b border-hairline px-4 py-3 md:px-8">
-            <span className="text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+            <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">
               Overall readiness · Your score
             </span>
           </div>
@@ -69,8 +67,8 @@ export function ScoreResults({ result, onRetake }: ScoreResultsProps) {
 
         <div className="flex flex-col">
           <div className="flex items-center justify-between border-b border-hairline px-4 py-3 md:px-8">
-            <span className="text-[11px] tracking-[0.14em] text-ink/60 uppercase">Per pillar</span>
-            <span className="tnum text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+            <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">Per pillar</span>
+            <span className="tnum text-[12px] tracking-[0.14em] text-ink/70 uppercase">
               0 to 100
             </span>
           </div>
@@ -80,7 +78,7 @@ export function ScoreResults({ result, onRetake }: ScoreResultsProps) {
                 key={pillar.name}
                 className="flex grow items-center gap-3 px-4 py-4 md:gap-6 md:px-8"
               >
-                <span className="tnum w-6 shrink-0 text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+                <span className="tnum w-6 shrink-0 text-[12px] tracking-[0.14em] text-ink/70 uppercase">
                   0{index + 1}
                 </span>
                 <span className="w-[130px] shrink-0 text-[13px] font-medium md:w-[180px] md:text-[14px]">
@@ -104,10 +102,10 @@ export function ScoreResults({ result, onRetake }: ScoreResultsProps) {
       {/* Unlock form band */}
       <div className="border-t border-ink">
         <div className="flex items-center justify-between border-b border-hairline px-4 py-3.5 md:px-6">
-          <span className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">
+          <span className="text-[12px] tracking-[0.18em] text-ink/70 uppercase">
             Get the full readout
           </span>
-          <span className="tnum text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+          <span className="tnum text-[12px] tracking-[0.14em] text-ink/70 uppercase">
             3 fields · No newsletter
           </span>
         </div>

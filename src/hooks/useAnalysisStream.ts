@@ -8,6 +8,8 @@ export type AnalysisStatus = 'idle' | 'running' | 'streaming' | 'done' | 'error'
 /**
  * Client driver for the /api/hero-analyze NDJSON stream.
  * Shared by HeroAgent (brief) and ForgeIntelligence (detailed).
+ * `reset` aborts any run in flight and returns the tool to idle with the
+ * readout cleared, so a reader always has a way back and a cancel.
  */
 export function useAnalysisStream(mode: AnalysisMode = 'brief') {
   const [status, setStatus] = useState<AnalysisStatus>('idle');
@@ -18,6 +20,15 @@ export function useAnalysisStream(mode: AnalysisMode = 'brief') {
   const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => () => abortRef.current?.abort(), []);
+
+  const reset = useCallback(() => {
+    abortRef.current?.abort();
+    abortRef.current = null;
+    setProgress([]);
+    setFields({});
+    setLive(false);
+    setStatus('idle');
+  }, []);
 
   const run = useCallback(
     async (rawTarget: string) => {
@@ -78,5 +89,5 @@ export function useAnalysisStream(mode: AnalysisMode = 'brief') {
     [mode],
   );
 
-  return { status, target, progress, fields, live, run };
+  return { status, target, progress, fields, live, run, reset };
 }
