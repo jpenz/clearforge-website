@@ -3,26 +3,22 @@ import { CountUp } from '@/components/ui/CountUp';
 import { Plate } from '@/components/ui/Plate';
 
 /**
- * The adoption bar: the canvas inverts to the cinematic band (HDR core,
+ * The adoption target: the canvas inverts to the cinematic band (HDR core,
  * aurora, one slow light sweep) and the 70 percent scales with the
- * viewport, over the adoption-field back plate. At lg the band is at
- * least 600px deep so it reads as a dark plate between the light bands,
- * not a rule with a figure on it; the plate sits on its bottom crop so
- * the horizon glow rises above the numeral.
+ * viewport, over the adoption-field back plate. No label rail opens the
+ * band; the number is the opener, and its caption names it as the target
+ * every build is held to, never as a measurement. At lg the band is at
+ * least 600px deep so it reads as a dark plate between the light bands;
+ * the plate sits on its bottom crop so the horizon glow rises above the
+ * numeral.
  */
 export function AdoptionBand() {
   return (
-    <section aria-label="The adoption bar" className="cf-dark-band overflow-clip text-ghost">
+    <section aria-label="The adoption target" className="cf-dark-band overflow-clip text-ghost">
       <Plate src="/renders/adoption-field.jpg" position="50% 100%" />
       <div aria-hidden="true" className="cf-aurora-b" />
       <div aria-hidden="true" className="cf-sweep" />
       <Container gutter="cells" className="relative">
-        <div className="flex items-center justify-between gap-4 border-b border-[rgba(248,248,255,0.18)] px-5 py-5 md:px-10">
-          <span className="text-[11px] tracking-[0.18em] text-ghost/60 uppercase">
-            The bar every build is held to
-          </span>
-          <span className="tnum text-[11px] tracking-[0.18em] text-ghost/60 uppercase">Day 90</span>
-        </div>
         <div className="grid items-center gap-8 px-5 py-16 md:px-10 md:py-24 lg:min-h-[600px] lg:grid-cols-[auto_1fr] lg:gap-16">
           <p className="font-display tnum text-[clamp(110px,12.5vw,240px)] leading-[0.85] font-medium">
             <CountUp value={70} />
@@ -33,8 +29,8 @@ export function AdoptionBand() {
               Weekly-active adoption by day 90, tracked on a live adoption scoreboard. The system is
               done when your team uses it every week.
             </p>
-            <p className="tnum mt-5 text-[12px] tracking-[0.14em] text-ghost/70 uppercase">
-              Measured on every engagement
+            <p className="tnum mt-5 text-[12px] tracking-[0.16em] text-ghost/70 uppercase">
+              The target on every engagement · Day 90
             </p>
           </div>
         </div>

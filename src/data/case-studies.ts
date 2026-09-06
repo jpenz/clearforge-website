@@ -1,6 +1,9 @@
 export interface CaseMetric {
   value: string;
   label: string;
+  /** When present, the figure counts up on view. */
+  count?: number;
+  format?: boolean;
 }
 
 export interface GlanceFigure {
@@ -50,19 +53,23 @@ export const CASE_STUDIES: CaseStudy[] = [
     client: 'A $4B industrial conglomerate',
     summary:
       '1,181 qualified opportunities across 3 divisions in 6 months, at a 99.8% match rate to real product capabilities. Monthly volume ramped 32x, from 19 to 613. 631+ generated sales playbooks.',
+    /** The result first; the scope lives in its label, not in cells of its own. */
     metrics: [
-      { value: '1,181', label: 'Qualified opportunities' },
-      { value: '3', label: 'Divisions' },
-      { value: '6', label: 'Months' },
-      { value: '32x', label: 'Monthly ramp, 19 to 613' },
-      { value: '631+', label: 'Sales playbooks' },
+      {
+        value: '1,181',
+        count: 1181,
+        format: true,
+        label: 'Qualified opportunities across 3 divisions in 6 months',
+      },
+      { value: '19 to 613', label: 'Monthly volume, first month to sixth' },
+      { value: '631', count: 631, label: 'Generated sales playbooks, at least' },
     ],
     scopeTag: '6 months · 3 divisions',
     headline: 'A $4B industrial conglomerate needed pipeline.',
     headlineEmphasis: 'The system found 1,181 opportunities.',
     intro:
       'One AI system for opportunity identification and qualification, built into production and run across three divisions.',
-    glanceNote: '3 figures · All real, anonymized client',
+    glanceNote: 'All real, anonymized client',
     glance: [
       {
         display: '1,181',
@@ -71,16 +78,13 @@ export const CASE_STUDIES: CaseStudy[] = [
         label: 'Qualified opportunities across 3 divisions in 6 months',
       },
       {
-        display: '32x',
-        count: 32,
-        suffix: 'x',
-        label: 'Monthly volume ramp, from 19 to 613',
+        display: '19 to 613',
+        label: 'Monthly volume, first month to sixth',
       },
       {
-        display: '631+',
+        display: '631',
         count: 631,
-        suffix: '+',
-        label: 'Generated sales playbooks',
+        label: 'Generated sales playbooks, at least',
       },
     ],
     sections: [
@@ -143,12 +147,12 @@ export const CASE_STUDIES: CaseStudy[] = [
       { value: '18', label: 'Quoted' },
       { value: '7', label: 'Recurring accounts won' },
     ],
-    scopeTag: '4-stage funnel',
+    scopeTag: 'Four-stage funnel',
     headline: 'A home and commercial services firm had no commercial pipeline.',
     headlineEmphasis: 'It was rebuilt from zero.',
     intro:
       'One AI system for commercial target identification and outreach, worked through a four-stage funnel.',
-    glanceNote: '3 figures · All real, anonymized client',
+    glanceNote: 'All real, anonymized client',
     glance: [
       {
         display: '42',
@@ -218,7 +222,12 @@ export const CASE_STUDIES: CaseStudy[] = [
     client: 'A PE operating team',
     summary:
       'Ran a portfolio-wide AI diagnostic: 3 companies assessed on one model, 8 priority plays selected, a 12-month execution plan.',
-    metrics: [],
+    /** Scope, not outcomes: the same three figures on /proof and /private-equity. */
+    metrics: [
+      { value: '3', count: 3, label: 'Companies assessed on one model' },
+      { value: '8', count: 8, label: 'Priority plays selected' },
+      { value: '12', count: 12, label: 'Months in the execution plan' },
+    ],
     scopeTag: 'Portfolio-wide',
     headline: 'A PE operating team needed a portfolio view of AI.',
     headlineEmphasis: 'They left with a prioritized execution plan.',
