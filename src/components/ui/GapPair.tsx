@@ -4,6 +4,8 @@ import { cn } from '@/lib/utils';
 interface GapPairProps {
   /** 'dark' renders ghost bars and text for use on a dark band. */
   tone?: 'light' | 'dark';
+  /** 'lg' sets the figures at display scale, for a band the pair anchors. */
+  size?: 'md' | 'lg';
   /** Print the THIRD-PARTY RESEARCH eyebrow. Off when the band's own rail already says it. */
   eyebrow?: boolean;
   className?: string;
@@ -15,8 +17,9 @@ interface GapPairProps {
  * actually implementing, each as a proportional bar. One source, one
  * treatment, on /services and /private-equity.
  */
-export function GapPair({ tone = 'light', eyebrow = true, className }: GapPairProps) {
+export function GapPair({ tone = 'light', size = 'md', eyebrow = true, className }: GapPairProps) {
   const dark = tone === 'dark';
+  const figure = size === 'lg' ? 'text-[clamp(64px,8vw,140px)]' : 'text-[clamp(44px,3.6vw,64px)]';
   const { pair, source } = PE_PACK.stat;
   return (
     <div className={className}>
@@ -41,7 +44,8 @@ export function GapPair({ tone = 'light', eyebrow = true, className }: GapPairPr
             <div key={row.label} className="grid grid-cols-[auto_1fr] items-baseline gap-x-3">
               <dt
                 className={cn(
-                  'tnum text-[clamp(44px,3.6vw,64px)] leading-none font-light tracking-tight',
+                  'tnum leading-none font-light tracking-tight',
+                  figure,
                   accent && (dark ? 'text-cobalt-bright' : 'text-cobalt'),
                 )}
               >

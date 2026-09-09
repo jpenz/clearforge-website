@@ -129,19 +129,33 @@ export default function ProofPage() {
             {FUNNEL.map((item) => (
               <div
                 key={item.stage}
-                className="flex flex-col justify-between gap-6 border-b border-hairline-ghost px-5 py-6 md:gap-8 md:border-b-0 md:px-8 md:py-12"
+                className="flex flex-col justify-between gap-3 border-b border-hairline-ghost px-5 py-5 md:gap-8 md:border-b-0 md:px-8 md:py-12"
               >
-                <p className="tnum text-[12px] tracking-[0.14em] text-ghost uppercase">
-                  {item.stage}
-                </p>
+                {/* Below md the stage label and the figure share one row, so
+                    four stacked stages read as one funnel instead of four
+                    screens. The bar stays full width at every size. */}
+                <div className="flex items-baseline justify-between gap-4 md:block">
+                  <p className="tnum text-[12px] tracking-[0.14em] text-ghost uppercase">
+                    {item.stage}
+                  </p>
+                  <p
+                    className={`tnum text-[34px] leading-none font-light tracking-tight md:hidden ${
+                      item.accent ? 'text-cobalt-bright' : ''
+                    }`}
+                  >
+                    {item.value}
+                  </p>
+                </div>
                 <div>
+                  <p className="text-[14px] leading-snug text-ghost/70 md:hidden">{item.label}</p>
                   <Stat
                     tone="dark"
                     value={String(item.value)}
                     label={item.label}
                     accent={item.accent}
+                    className="hidden md:block"
                   />
-                  <div aria-hidden="true" className="mt-4 h-[3px] w-full bg-ghost/15">
+                  <div aria-hidden="true" className="mt-3 h-[3px] w-full bg-ghost/15 md:mt-4">
                     <div
                       className={`h-full ${item.accent ? 'bg-cobalt-bright' : 'bg-ghost'}`}
                       style={{ width: `${(item.value / FUNNEL[0].value) * 100}%` }}

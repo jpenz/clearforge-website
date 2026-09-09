@@ -486,6 +486,20 @@ cal-modal-box {
     transparent 76%
   );
 }
+/* Extra right-edge scrim for a plate whose right column carries small
+   labels. The shadow pool alone left the private-equity register's 12px
+   numerals at 2.5:1 over a lit monolith; this returns that column to ink
+   without touching the left two thirds, where the headline sits. */
+.cf-scrim-right {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(3, 11, 19, 0.18) 52%,
+    rgba(3, 11, 19, 0.74) 72%,
+    rgba(3, 11, 19, 0.88) 100%
+  );
+}
+
 /* Image cards: the text sits at the foot, so the scrim is bottom-heavy
    and the render stays visible above it. */
 .cf-plate-overlay-soft {
