@@ -47,8 +47,16 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="en" className={`${bodoni.variable} ${hanken.variable} h-full`}>
       <body className="flex min-h-full flex-col">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-cobalt focus:px-4 focus:py-2.5 focus:text-[14px] focus:font-semibold focus:text-white"
+        >
+          Skip to content
+        </a>
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="main" className="flex-1">
+          {children}
+        </main>
         <Footer />
       </body>
       {gaId && <GoogleAnalytics gaId={gaId} />}

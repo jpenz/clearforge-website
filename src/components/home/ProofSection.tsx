@@ -1,71 +1,92 @@
 import Link from 'next/link';
+import { ArrowLink } from '@/components/ui/ArrowLink';
 import { PageFrame } from '@/components/ui/PageFrame';
+import { Plate } from '@/components/ui/Plate';
+import { Stat } from '@/components/ui/Stat';
 import { CASE_STUDIES } from '@/data/case-studies';
 
 /**
- * Beat (c): one featured case study with its real numbers,
- * plus a one-line second case and the link to the rest.
+ * Beat (c): one featured case study as an image card (serif headline over
+ * the proof-threads render, whole card clickable) beside its numbers on
+ * the /proof hierarchy: the result at display size with its scope in the
+ * caption, then the two secondary figures smaller. No rail opens the band;
+ * the image card is the opener, and the link to the rest sits in the
+ * Case B row. Case B is one line with its funnel counts.
  */
 export function ProofSection() {
   const [caseA, caseB] = CASE_STUDIES;
+  const [primary, ...secondary] = caseA.metrics;
 
   return (
     <PageFrame id="proof" aria-label="Proof">
-      <div className="flex items-center justify-between gap-4 border-b border-hairline px-5 py-5 md:px-10">
-        <span className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">Featured proof</span>
-        <Link
-          href="/proof"
-          className="text-[13px] font-semibold text-cobalt underline-offset-4 hover:underline"
-        >
-          All case studies →
-        </Link>
-      </div>
-
-      {/* Case A: the featured study */}
-      <div className="grid border-b border-hairline lg:grid-cols-[300px_1fr]">
-        <div className="border-b border-hairline px-5 py-6 md:px-10 md:py-10 lg:border-r lg:border-b-0">
-          <p className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">Case {caseA.letter}</p>
-          <h2 className="mt-3 text-[19px] leading-snug font-semibold md:text-[21px]">
-            <Link href={`/proof/${caseA.slug}`} className="hover:text-cobalt">
-              {caseA.client}
-            </Link>
-          </h2>
-        </div>
-        <div className="grid divide-y divide-hairline md:grid-cols-5 md:divide-x md:divide-y-0">
-          {caseA.metrics.map((metric) => (
-            <div
-              key={metric.label}
-              className="flex items-baseline justify-between gap-3 px-5 py-4 md:flex-col md:items-stretch md:justify-between md:px-6 md:py-10"
+      {/* Case A: the image card beside the stat rail */}
+      <div className="grid border-b border-hairline lg:grid-cols-[2fr_1fr]">
+        <article className="cf-image-card group relative flex min-h-[440px] flex-col justify-end overflow-clip bg-[#030b13] text-ghost lg:min-h-[560px]">
+          <Plate
+            src="/renders/proof-threads.jpg"
+            overlay="soft"
+            position="60% 50%"
+            sizes="(min-width: 1024px) 66vw, 100vw"
+          />
+          <div className="relative px-5 py-8 md:px-10 md:py-10">
+            <p className="tnum text-[12px] tracking-[0.16em] text-ghost uppercase">
+              Case {caseA.letter} · {caseA.scopeTag}
+            </p>
+            <h2 className="font-display mt-4 max-w-[22ch] text-balance text-[clamp(28px,2.6vw,48px)] leading-[1.1] font-medium">
+              {caseA.headline}{' '}
+              <em className="text-cobalt-bright italic">The system found the opportunities.</em>
+            </h2>
+            <Link
+              href={`/proof/${caseA.slug}`}
+              className="mt-6 inline-flex items-center gap-2 text-[14px] font-semibold text-cobalt-bright after:absolute after:inset-0 hover:text-ghost focus-visible:outline-cobalt-bright"
             >
-              <p className="tnum text-[28px] leading-none font-light md:text-[44px]">
-                {metric.value}
-              </p>
-              <p className="tnum text-[11px] tracking-[0.14em] text-ink/60 uppercase md:mt-5">
-                {metric.label}
-              </p>
-            </div>
-          ))}
+              Read the case study
+              <span
+                aria-hidden="true"
+                className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
+              >
+                →
+              </span>
+            </Link>
+          </div>
+        </article>
+        <div className="flex flex-col lg:border-l lg:border-hairline">
+          <div className="grow border-b border-hairline px-5 py-8 md:px-10 md:py-10">
+            <Stat size="lg" value={primary.value} label={primary.label} />
+          </div>
+          <div className="grid grid-cols-2 divide-x divide-hairline">
+            {secondary.map((metric) => (
+              <div key={metric.label} className="px-5 py-6 md:px-10 md:py-8">
+                <Stat size="sm" value={metric.value} label={metric.label} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Case B: one line */}
-      <div className="grid lg:grid-cols-[300px_1fr]">
-        <div className="border-b border-hairline px-5 py-4 md:px-10 md:py-6 lg:border-r lg:border-b-0">
-          <p className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">Case {caseB.letter}</p>
-          <p className="mt-1 text-[15px] font-medium">
-            <Link href={`/proof/${caseB.slug}`} className="hover:text-cobalt">
-              {caseB.client}
-            </Link>
-          </p>
+      {/* Case B: one line, then the way to the rest */}
+      <div className="grid lg:grid-cols-[1fr_2fr]">
+        <div className="relative border-b border-hairline px-5 py-4 transition-colors hover:bg-white md:px-10 md:py-6 lg:border-r lg:border-b-0">
+          <p className="text-[12px] tracking-[0.16em] text-ink/70 uppercase">Case {caseB.letter}</p>
+          <ArrowLink
+            href={`/proof/${caseB.slug}`}
+            size="sm"
+            className="mt-1 after:absolute after:inset-0"
+          >
+            {caseB.client}
+          </ArrowLink>
         </div>
-        <div className="flex items-center px-5 py-4 md:px-8 md:py-6">
-          <p className="tnum text-[15px] text-ink/80">
+        <div className="flex flex-col gap-4 px-5 py-4 md:flex-row md:items-center md:justify-between md:gap-8 md:px-10 md:py-6">
+          <p className="tnum max-w-[68ch] text-[15px] text-ink/80">
             Commercial pipeline rebuilt from zero.{' '}
             <span className="font-semibold text-ink">42</span> targets identified,{' '}
             <span className="font-semibold text-ink">31</span> contacted,{' '}
             <span className="font-semibold text-ink">18</span> quoted,{' '}
             <span className="font-semibold text-ink">7</span> recurring accounts won.
           </p>
+          <ArrowLink href="/proof" size="sm" className="shrink-0 whitespace-nowrap">
+            All case studies
+          </ArrowLink>
         </div>
       </div>
     </PageFrame>

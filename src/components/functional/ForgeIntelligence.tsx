@@ -38,11 +38,11 @@ export function ForgeIntelligence() {
       <div className="flex items-center justify-between border-b border-ink px-4 py-3.5 md:px-6">
         <div className="flex items-center gap-3">
           <span aria-hidden="true" className="inline-block size-[7px] bg-cobalt" />
-          <span className="text-[11px] font-medium tracking-[0.18em] text-ink/60 uppercase">
-            ForgeIntelligence · Streaming analysis
+          <span className="text-[12px] font-medium tracking-[0.18em] text-ink/70 uppercase">
+            Map the Workflow · Streaming analysis
           </span>
         </div>
-        <span className="text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase">
+        <span className="text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase">
           {live ? 'Live analysis' : 'Illustrative'}
         </span>
       </div>
@@ -58,7 +58,7 @@ export function ForgeIntelligence() {
         >
           <div className="grow">
             <label
-              className="mb-2 block text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase"
+              className="mb-2 block text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase"
               htmlFor="company-url"
             >
               Company URL
@@ -79,11 +79,11 @@ export function ForgeIntelligence() {
             disabled={running}
             className="cursor-pointer bg-cobalt px-6 py-[11px] text-[14px] font-semibold whitespace-nowrap text-white transition-colors hover:bg-cobalt-press disabled:opacity-40"
           >
-            Map the workflow
+            Map the Workflow
           </button>
         </form>
         <div className="mt-4 flex flex-wrap items-center gap-3">
-          <span className="text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase">
+          <span className="text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase">
             Or try
           </span>
           {SAMPLES.map((sample) => (
@@ -104,11 +104,11 @@ export function ForgeIntelligence() {
         {/* Progress column */}
         <div className="border-b border-hairline lg:border-r lg:border-b-0">
           <div className="flex items-center justify-between border-b border-hairline px-4 py-3 md:px-6">
-            <span className="text-[11px] font-medium tracking-[0.18em] text-ink/60 uppercase">
+            <span className="text-[12px] font-medium tracking-[0.18em] text-ink/70 uppercase">
               Progress
             </span>
             <span
-              className={`text-[11px] font-medium tracking-[0.14em] uppercase ${
+              className={`text-[12px] font-medium tracking-[0.14em] uppercase ${
                 status === 'error' ? 'text-ink' : 'text-cobalt'
               }`}
             >
@@ -149,7 +149,7 @@ export function ForgeIntelligence() {
                       className="inline-block h-[16px] w-[9px] bg-cobalt motion-safe:animate-pulse"
                     />
                   ) : (
-                    <span className="ml-auto text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+                    <span className="ml-auto text-[12px] tracking-[0.14em] text-ink/70 uppercase">
                       Done
                     </span>
                   )}
@@ -198,11 +198,11 @@ export function ForgeIntelligence() {
               return (
                 <div key={row.key} className="px-4 py-5 md:px-8">
                   <div className="mb-1.5 flex items-baseline justify-between">
-                    <span className="text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase">
+                    <span className="text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase">
                       {row.label}
                     </span>
                     {!live && (
-                      <span className="text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+                      <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">
                         Illustrative
                       </span>
                     )}

@@ -63,9 +63,9 @@ export const PRICING_TIERS: PricingTier[] = [
 
 export const UNPUBLISHED_TIER: PricingTier = {
   name: 'PE and multi-company platform work',
-  subtitle: 'Scoped with the sponsor.',
+  subtitle: 'Diagnostics and builds across the portfolio companies you choose.',
   term: 'Portfolio scope',
-  price: 'Not published',
+  price: 'Scoped with the sponsor',
 };
 
 export const FIRST_TWO_WEEKS = [

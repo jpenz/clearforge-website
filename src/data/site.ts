@@ -11,6 +11,11 @@ export const CAL_NAMESPACE = 'clearforge-30min';
 /** Separate namespace so the inline calendar's ready event is its own. */
 export const CAL_INLINE_NAMESPACE = 'clearforge-30min-inline';
 
+/** The founder's public contact line (footer, /about, /security, legal pages). */
+export const FOUNDER_EMAIL = 'james@clearforge.ai';
+/** The founder's public profile, the one verifiable lineage link on the site. */
+export const FOUNDER_LINKEDIN = 'https://www.linkedin.com/in/jamespenz/';
+
 export interface NavItem {
   label: string;
   href: string;
@@ -31,24 +36,24 @@ export interface FooterColumn {
   items: NavItem[];
 }
 
-/** Footer sitemap. Carries the only nav path to /discover. */
+/** Footer sitemap. Carries the only nav path to /discover. Every service and proof link lands on its own anchor. */
 export const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: 'Services',
     items: [
-      { label: 'Forge Diagnostic', href: '/services' },
-      { label: 'Eval and Reliability Audit', href: '/services' },
-      { label: 'Forge Sprint', href: '/services' },
-      { label: 'Forge Scale', href: '/services' },
-      { label: 'Forge Run', href: '/services' },
-      { label: 'PE Portfolio Pack', href: '/services' },
+      { label: 'Forge Diagnostic', href: '/services#forge-diagnostic' },
+      { label: 'Eval and Reliability Audit', href: '/services#eval-and-reliability-audit' },
+      { label: 'Forge Sprint', href: '/services#forge-sprint' },
+      { label: 'Forge Scale', href: '/services#forge-scale' },
+      { label: 'Forge Run', href: '/services#forge-run' },
+      { label: 'PE Portfolio Pack', href: '/services#pe-portfolio-pack' },
     ],
   },
   {
     title: 'Proof',
     items: [
-      { label: 'Case studies', href: '/proof' },
-      { label: 'Blueprint library', href: '/proof' },
+      { label: 'Case studies', href: '/proof#case-studies' },
+      { label: 'Build patterns', href: '/proof#build-patterns' },
       { label: 'Insights', href: '/insights' },
     ],
   },
@@ -66,8 +71,8 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: 'Free tools',
     items: [
-      { label: 'Forge Intelligence', href: '/discover' },
-      { label: 'AI readiness scorecard', href: '/scorecard' },
+      { label: 'Map the Workflow', href: '/discover' },
+      { label: 'Take the scorecard', href: '/scorecard' },
     ],
   },
 ];

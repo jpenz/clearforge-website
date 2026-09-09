@@ -5,7 +5,7 @@ import { type FormState, sendContactMessage } from '@/app/actions';
 
 const INITIAL: FormState = { status: 'idle' };
 
-const labelClass = 'mb-2.5 block text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase';
+const labelClass = 'mb-2.5 block text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase';
 const inputClass =
   'w-full border border-hairline-strong bg-white px-3 py-2.5 text-[14px] placeholder:text-ink/45';
 

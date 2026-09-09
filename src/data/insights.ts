@@ -393,7 +393,7 @@ export const ARTICLES: Article[] = [
         content: [
           'Not sure which workflow to start with? ',
           { text: 'Map the Workflow', href: '/discover' },
-          ' with Forge Intelligence, free, before you book anything.',
+          ', free, before you book anything.',
         ],
       },
     ],
@@ -2521,7 +2521,7 @@ export const ARTICLES: Article[] = [
           'The ',
           { text: 'ClearForge scorecard', href: '/scorecard' },
           ' is a 10-question, workflow-specific readout that takes about four minutes. ',
-          { text: 'Forge Intelligence', href: '/discover' },
+          { text: 'Map the Workflow', href: '/discover' },
           ' analyzes your company website and maps the workflow we would build first. Academic maturity indexes are useful for board-level conversation.',
         ],
       },

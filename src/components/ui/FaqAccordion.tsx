@@ -23,7 +23,7 @@ export function FaqAccordion({ items, defaultOpenIndex = 0 }: FaqAccordionProps)
             <span className="text-[15px] font-semibold">{item.question}</span>
             <span
               aria-hidden="true"
-              className="faq-plus text-[20px] leading-none font-light text-cobalt"
+              className="faq-plus text-[22px] leading-none font-light text-cobalt"
             >
               +
             </span>

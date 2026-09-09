@@ -40,14 +40,14 @@ export default function IndustriesIndexPage() {
                   className="group flex items-baseline justify-between gap-4 px-5 py-5 transition-colors hover:bg-ghost md:px-10"
                 >
                   <span className="flex items-baseline gap-4">
-                    <span className="tnum text-[11px] text-ink/40">
+                    <span className="tnum text-[12px] text-ink/40">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                     <span className="text-[15px] font-medium group-hover:text-cobalt">
                       {industry.name}
                     </span>
                   </span>
-                  <span className="hidden text-[13px] text-ink/50 md:block">
+                  <span className="hidden text-[13px] text-ink/60 md:block">
                     {industry.system.name}
                   </span>
                 </Link>

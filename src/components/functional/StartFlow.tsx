@@ -1,40 +1,74 @@
 'use client';
 
-import { useActionState, useRef, useState } from 'react';
+import { useActionState, useEffect, useRef, useState } from 'react';
 import { type FormState, startProject } from '@/app/actions';
 import { CAL_NAMESPACE } from '@/data/site';
 import { openCalModal, preloadCal } from '@/lib/cal';
 
 const INITIAL: FormState = { status: 'idle' };
 
-const NEED_CHIPS = [
-  'Diagnose a workflow',
-  'Build an AI system',
-  'Fix an AI we already built',
-  'Adoption help',
-  'Managed operations',
-  'PE portfolio work',
-  'Not sure yet',
+const STEPS = [
+  { title: 'What do you need?', short: 'Need' },
+  { title: 'Context and files', short: 'Context and files' },
+  { title: 'Where do we reply?', short: 'Where to reply' },
+];
+
+/** The seven needs, chunked so the choice reads in threes. */
+const NEED_GROUPS = [
+  { title: 'New system', chips: ['Diagnose a workflow', 'Build an AI system'] },
+  {
+    title: 'Existing system',
+    chips: ['Audit an AI you already have', 'Adoption help', 'Managed operations'],
+  },
+  { title: 'Other', chips: ['PE portfolio work', 'Not sure yet'] },
 ];
 
 const TIMELINES = ['Immediate', 'This quarter', 'This year', 'Not sure'];
 
-const labelClass = 'mb-2.5 block text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase';
+const labelClass = 'mb-2.5 block text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase';
+const noteClass = 'normal-case text-ink/60';
 const inputClass =
   'w-full border border-hairline-strong bg-white px-3 py-2.5 text-[14px] placeholder:text-ink/45';
+const primaryButton =
+  'cursor-pointer bg-cobalt px-7 py-4 text-[15px] font-semibold text-white transition-colors hover:bg-cobalt-press disabled:opacity-60';
+const secondaryButton =
+  'cursor-pointer border border-hairline-strong px-6 py-4 text-[15px] font-medium hover:border-ink';
 
 /**
  * Three-step project-brief intake. Step 1 costs zero typing (chips +
- * timeline), step 2 is context + optional file, step 3 is contact. The
- * confirmation offers the calendar with name/email prefilled so nothing
- * is ever asked twice.
+ * timeline), step 2 is context + optional file, step 3 is contact. Each
+ * step validates its own required field before it advances, the step
+ * heading takes focus on every change and announces itself, and when the
+ * server names a missing field the flow jumps back to the step that holds
+ * it. The confirmation offers the calendar with name/email prefilled so
+ * nothing is ever asked twice. actions.ts is frozen; all validation here
+ * is client-side and the server stays the authority.
  */
 export function StartFlow() {
   const [state, formAction, pending] = useActionState(startProject, INITIAL);
   const [step, setStep] = useState(1);
   const [needs, setNeeds] = useState<string[]>([]);
   const [timeline, setTimeline] = useState('');
+  const [fieldError, setFieldError] = useState<string | null>(null);
   const contactRef = useRef({ name: '', email: '' });
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const companyRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+
+  // When the server names a field from an earlier step, go back to it and
+  // put focus on the field so the reader lands where the fix is.
+  useEffect(() => {
+    if (state.status !== 'error') return;
+    const missing = [
+      { ref: companyRef, step: 2 },
+      { ref: nameRef, step: 3 },
+      { ref: emailRef, step: 3 },
+    ].find((field) => !field.ref.current?.value.trim());
+    if (!missing) return;
+    setStep(missing.step);
+    window.setTimeout(() => missing.ref.current?.focus(), 0);
+  }, [state]);
 
   if (state.status === 'success') {
     return (
@@ -52,7 +86,7 @@ export function StartFlow() {
           onMouseEnter={() => preloadCal(CAL_NAMESPACE)}
           onFocus={() => preloadCal(CAL_NAMESPACE)}
           onClick={() =>
-            openCalModal(CAL_NAMESPACE, {
+            void openCalModal(CAL_NAMESPACE, {
               name: contactRef.current.name,
               email: contactRef.current.email,
             })
@@ -65,11 +99,23 @@ export function StartFlow() {
     );
   }
 
-  const stepLabel = (n: number, title: string) => (
-    <p className="tnum text-[11px] tracking-[0.18em] text-ink/50 uppercase">
-      Step {n} of 3 · {title}
-    </p>
-  );
+  /** Change step, then move focus to the step heading once it has re-rendered. */
+  const goTo = (next: number) => {
+    setFieldError(null);
+    setStep(next);
+    window.setTimeout(() => headingRef.current?.focus(), 0);
+  };
+
+  const nextFromContext = () => {
+    if (!companyRef.current?.value.trim()) {
+      setFieldError('Company is required.');
+      companyRef.current?.focus();
+      return;
+    }
+    goTo(3);
+  };
+
+  const current = STEPS[step - 1];
 
   return (
     <form
@@ -81,7 +127,7 @@ export function StartFlow() {
           email: String(fd.get('email') ?? ''),
         };
       }}
-      className="px-5 py-10 md:px-10"
+      className="px-5 py-8 md:px-10 md:py-10"
     >
       {/* Honeypot */}
       <input
@@ -98,29 +144,76 @@ export function StartFlow() {
       ))}
       <input type="hidden" name="timeline" value={timeline} />
 
-      <div className={step === 1 ? '' : 'hidden'}>
-        {stepLabel(1, 'What do you need?')}
-        <div className="mt-5 flex flex-wrap gap-2.5">
-          {NEED_CHIPS.map((chip) => {
-            const on = needs.includes(chip);
-            return (
-              <button
-                key={chip}
-                type="button"
-                aria-pressed={on}
-                onClick={() =>
-                  setNeeds((prev) => (on ? prev.filter((c) => c !== chip) : [...prev, chip]))
-                }
-                className={`cursor-pointer border px-4 py-2.5 text-[13px] font-medium transition-colors ${
-                  on
-                    ? 'border-cobalt bg-cobalt text-white'
-                    : 'border-hairline-strong hover:border-ink'
+      {/* Progress: three named segments */}
+      <ol aria-label="Steps" className="grid grid-cols-3 gap-2">
+        {STEPS.map((s, index) => {
+          const n = index + 1;
+          const done = n < step;
+          const active = n === step;
+          return (
+            <li key={s.short} aria-current={active ? 'step' : undefined}>
+              <span
+                aria-hidden="true"
+                className={`block h-[3px] w-full ${
+                  active ? 'bg-cobalt' : done ? 'bg-ink' : 'bg-hairline'
+                }`}
+              />
+              <span
+                className={`tnum mt-2 block text-[14px] ${
+                  active ? 'font-semibold text-ink' : 'text-ink/70'
                 }`}
               >
-                {chip}
-              </button>
-            );
-          })}
+                {s.short}
+              </span>
+            </li>
+          );
+        })}
+      </ol>
+
+      <h2
+        ref={headingRef}
+        tabIndex={-1}
+        aria-live="polite"
+        className="tnum mt-8 scroll-mt-[190px] text-[18px] leading-snug font-semibold outline-none md:scroll-mt-[132px]"
+      >
+        Step {step} of 3 · {current.title}
+        {step === 1 && (
+          <span className="ml-3 text-[14px] font-normal text-ink/70">Pick all that apply</span>
+        )}
+      </h2>
+
+      <div className={step === 1 ? '' : 'hidden'}>
+        <div className="mt-5 grid gap-5 md:grid-cols-3">
+          {NEED_GROUPS.map((group) => (
+            <fieldset key={group.title}>
+              <legend className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">
+                {group.title}
+              </legend>
+              <div className="mt-3 flex flex-wrap gap-2.5">
+                {group.chips.map((chip) => {
+                  const on = needs.includes(chip);
+                  return (
+                    <button
+                      key={chip}
+                      type="button"
+                      aria-pressed={on}
+                      onClick={() =>
+                        setNeeds((prev) => (on ? prev.filter((c) => c !== chip) : [...prev, chip]))
+                      }
+                      className={`inline-flex cursor-pointer items-center gap-2 border px-4 py-2.5 text-[14px] font-medium transition-colors ${
+                        on
+                          ? 'border-cobalt bg-cobalt text-white'
+                          : 'border-hairline-strong hover:border-ink'
+                      }`}
+                    >
+                      {on && <span aria-hidden="true">✓</span>}
+                      {chip}
+                    </button>
+                  );
+                })}
+              </div>
+            </fieldset>
+          ))}
         </div>
         <div className="mt-8 max-w-[280px]">
           <label className={labelClass} htmlFor="sf-timeline">
@@ -140,34 +233,39 @@ export function StartFlow() {
             ))}
           </select>
         </div>
-        <button
-          type="button"
-          onClick={() => setStep(2)}
-          className="mt-8 cursor-pointer bg-cobalt px-6 py-3 text-[14px] font-semibold text-white hover:bg-cobalt-press"
-        >
+        <button type="button" onClick={() => goTo(2)} className={`mt-8 ${primaryButton}`}>
           Next
         </button>
       </div>
 
       <div className={step === 2 ? '' : 'hidden'}>
-        {stepLabel(2, 'Context')}
         <div className="mt-5 grid gap-5 md:grid-cols-2">
           <div>
             <label className={labelClass} htmlFor="sf-company">
-              Company
+              Company <span className={noteClass}>(required)</span>
             </label>
             <input
+              ref={companyRef}
               id="sf-company"
               name="company"
               type="text"
+              required
+              aria-invalid={fieldError ? true : undefined}
+              aria-describedby={fieldError ? 'sf-company-error' : undefined}
               autoComplete="organization"
               placeholder="Yourcompany Inc."
+              onChange={() => fieldError && setFieldError(null)}
               className={inputClass}
             />
+            {fieldError && (
+              <p id="sf-company-error" className="mt-2 text-[14px] font-medium text-cobalt-press">
+                {fieldError}
+              </p>
+            )}
           </div>
           <div>
             <label className={labelClass} htmlFor="sf-url">
-              Company website <span className="normal-case text-ink/45">(optional)</span>
+              Company website <span className={noteClass}>(optional)</span>
             </label>
             <input
               id="sf-url"
@@ -195,7 +293,7 @@ export function StartFlow() {
         <div className="mt-5">
           <label className={labelClass} htmlFor="sf-rfp">
             Have an RFP, process doc, or data sample?{' '}
-            <span className="normal-case text-ink/45">
+            <span className={noteClass}>
               (optional · PDF, Word, Excel, PowerPoint · up to 10MB)
             </span>
           </label>
@@ -204,38 +302,31 @@ export function StartFlow() {
             name="rfp"
             type="file"
             accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx"
-            className="w-full cursor-pointer border border-hairline-strong bg-white px-3 py-2 text-[13px] text-ink/70 file:mr-3 file:cursor-pointer file:border-0 file:bg-cobalt file:px-3 file:py-1.5 file:text-[12px] file:font-semibold file:text-white"
+            className="w-full cursor-pointer border border-hairline-strong bg-white px-3 py-2 text-[14px] text-ink/70 file:mr-3 file:cursor-pointer file:border-0 file:bg-cobalt file:px-3 file:py-1.5 file:text-[12px] file:font-semibold file:text-white"
           />
         </div>
-        <div className="mt-8 flex gap-3">
-          <button
-            type="button"
-            onClick={() => setStep(1)}
-            className="cursor-pointer border border-hairline-strong px-6 py-3 text-[14px] font-medium hover:border-ink"
-          >
+        <div className="mt-8 flex flex-wrap gap-3">
+          <button type="button" onClick={() => goTo(1)} className={secondaryButton}>
             Back
           </button>
-          <button
-            type="button"
-            onClick={() => setStep(3)}
-            className="cursor-pointer bg-cobalt px-6 py-3 text-[14px] font-semibold text-white hover:bg-cobalt-press"
-          >
+          <button type="button" onClick={nextFromContext} className={primaryButton}>
             Next
           </button>
         </div>
       </div>
 
       <div className={step === 3 ? '' : 'hidden'}>
-        {stepLabel(3, 'Where do we reply?')}
         <div className="mt-5 grid gap-5 md:grid-cols-3">
           <div>
             <label className={labelClass} htmlFor="sf-name">
-              Name
+              Name <span className={noteClass}>(required)</span>
             </label>
             <input
+              ref={nameRef}
               id="sf-name"
               name="name"
               type="text"
+              required
               autoComplete="name"
               placeholder="Jane Doe"
               className={inputClass}
@@ -243,12 +334,14 @@ export function StartFlow() {
           </div>
           <div>
             <label className={labelClass} htmlFor="sf-email">
-              Work email
+              Work email <span className={noteClass}>(required)</span>
             </label>
             <input
+              ref={emailRef}
               id="sf-email"
               name="email"
               type="email"
+              required
               autoComplete="email"
               placeholder="jane@yourcompany.com"
               className={inputClass}
@@ -256,7 +349,7 @@ export function StartFlow() {
           </div>
           <div>
             <label className={labelClass} htmlFor="sf-role">
-              Role <span className="normal-case text-ink/45">(optional)</span>
+              Role <span className={noteClass}>(optional)</span>
             </label>
             <input
               id="sf-role"
@@ -269,25 +362,19 @@ export function StartFlow() {
           </div>
         </div>
         {state.status === 'error' && (
-          <p className="mt-4 text-[13px] font-medium text-cobalt-press">{state.message}</p>
+          <p role="alert" className="mt-4 text-[14px] font-medium text-cobalt-press">
+            {state.message}
+          </p>
         )}
-        <div className="mt-8 flex items-center gap-4">
-          <button
-            type="button"
-            onClick={() => setStep(2)}
-            className="cursor-pointer border border-hairline-strong px-6 py-3 text-[14px] font-medium hover:border-ink"
-          >
+        <div className="mt-8 flex flex-wrap items-center gap-3">
+          <button type="button" onClick={() => goTo(2)} className={secondaryButton}>
             Back
           </button>
-          <button
-            type="submit"
-            disabled={pending}
-            className="cursor-pointer bg-cobalt px-7 py-3 text-[14px] font-semibold text-white hover:bg-cobalt-press disabled:opacity-60"
-          >
+          <button type="submit" disabled={pending} className={primaryButton}>
             {pending ? 'Sending' : 'Send the brief'}
           </button>
         </div>
-        <p className="mt-4 text-[12px] leading-relaxed text-ink/50">
+        <p className="mt-4 max-w-[68ch] text-[12px] leading-relaxed text-ink/60">
           You will hear from James within one business day. Submitting agrees to the{' '}
           <a href="/privacy" className="underline underline-offset-2">
             privacy policy

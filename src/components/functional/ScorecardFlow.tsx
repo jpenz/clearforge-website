@@ -45,10 +45,10 @@ export function ScorecardFlow() {
     <div className="border border-ink bg-white">
       {/* Slot header strip */}
       <div className="flex items-center justify-between border-b border-ink px-4 py-3 md:px-6">
-        <span className="tnum text-[11px] font-medium tracking-[0.14em] text-ink/70 uppercase">
-          ScorecardFlow · Question {current + 1} of {QUESTIONS.length}
+        <span className="tnum text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase">
+          AI readiness scorecard · Question {current + 1} of {QUESTIONS.length}
         </span>
-        <span className="text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+        <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">
           Free · No account
         </span>
       </div>
@@ -56,10 +56,10 @@ export function ScorecardFlow() {
       {/* Progress */}
       <div className="border-b border-hairline px-4 py-5 md:px-6">
         <div className="mb-3 flex items-center justify-between">
-          <span className="tnum text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase">
+          <span className="tnum text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase">
             Question {current + 1} of {QUESTIONS.length}
           </span>
-          <span className="tnum text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase">
+          <span className="tnum text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase">
             Pillar {question.pillarIndex + 1} · {pillar.name}
           </span>
         </div>
@@ -82,7 +82,7 @@ export function ScorecardFlow() {
       <div className="grid lg:grid-cols-[300px_1fr]">
         <aside className="border-b border-hairline lg:border-r lg:border-b-0">
           <div className="border-b border-hairline px-4 py-3 md:px-6">
-            <span className="tnum text-[11px] tracking-[0.18em] text-ink/60 uppercase">
+            <span className="tnum text-[12px] tracking-[0.18em] text-ink/70 uppercase">
               5 pillars
             </span>
           </div>
@@ -91,7 +91,7 @@ export function ScorecardFlow() {
               const state = pillarState(index);
               return (
                 <li key={item.name} className="flex items-center gap-3">
-                  <span className="tnum w-5 text-[11px] text-ink/60">0{index + 1}</span>
+                  <span className="tnum w-5 text-[12px] text-ink/60">0{index + 1}</span>
                   <span
                     aria-hidden="true"
                     className={`inline-block size-[9px] shrink-0 ${

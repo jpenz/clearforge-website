@@ -1,83 +1,77 @@
 import { BookCallButton } from '@/components/functional/BookCallButton';
 import { HeroAgent } from '@/components/functional/HeroAgent';
-import { PageFrame } from '@/components/ui/PageFrame';
+import { Container } from '@/components/ui/Container';
+import { Plate } from '@/components/ui/Plate';
 
 /**
  * Beat (a): the core statement plus the live agent card as proof of craft.
- * V12.1 atmosphere: cinematic dark band (deep ink + drifting cobalt aurora,
- * CSS only), light editorial interior below. Entrance is a one-time load
- * stagger; reduced-motion renders everything instantly.
+ * V13: a full-bleed cinematic band (HDR core, one drifting aurora on the
+ * right, one slow light sweep, all CSS) that fills the first viewport at
+ * lg and up. The left 58 percent carries a five-word eyebrow, the
+ * statement, the one-line diagnostic statement, the one-line audience
+ * sentence, and the booking button over the plate's dark third (no aurora
+ * on the left: it lifted the eyebrow zone below 4.5:1); the free tool
+ * floats on the right with the cobalt glow, offset down so the plate
+ * shows above it, carrying its own single header (no instrument labels
+ * above it). The back plate (public/renders/hero-forge.jpg) is the LCP
+ * image: preloaded, fetched at high priority, right-weighted under the
+ * legibility scrim. Entrance is a one-time load stagger; reduced motion
+ * renders everything instantly.
  */
 export function HeroSection() {
   return (
-    <PageFrame aria-label="Introduction" className="border-none md:border-x-0">
-      <div className="cf-dark-band relative overflow-hidden">
-        <div aria-hidden="true" className="cf-aurora" />
-        <div aria-hidden="true" className="cf-aurora-b" />
-        <div className="relative grid lg:grid-cols-[1fr_500px]">
+    <section aria-label="Introduction" className="cf-dark-band overflow-clip">
+      <Plate src="/renders/hero-forge.jpg" priority position="72% 50%" overlay="hero" />
+      <div aria-hidden="true" className="cf-aurora-b" />
+      <div aria-hidden="true" className="cf-sweep" />
+      <Container className="relative flex flex-col lg:min-h-[min(82svh,1000px)]">
+        <div className="grid grow gap-y-12 pt-10 pb-12 md:pt-14 md:pb-16 lg:grid-cols-[58fr_42fr] lg:gap-x-12 lg:pt-16 xl:gap-x-20">
           {/* Left: the core statement */}
-          <div className="flex flex-col border-hairline-ghost lg:border-r">
-            <div className="cf-enter border-b border-hairline-ghost px-5 py-5 md:px-10">
-              <p className="tnum text-[12px] tracking-[0.14em] text-ghost/60 uppercase">
-                Founder-led AI consulting and build, for mid-market companies $20M to $500M and PE
-                operating teams
-              </p>
-            </div>
-            <div className="grow px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14">
-              <h1
-                className="cf-enter font-display max-w-[15ch] text-[40px] leading-[1.12] font-medium tracking-[-0.01em] md:text-[72px] md:leading-[1.08]"
-                style={{ '--d': '80ms' } as React.CSSProperties}
-              >
-                ClearForge builds AI systems your team actually uses and your bottom line{' '}
-                <em className="text-cobalt-bright italic">actually feels.</em>
-              </h1>
-            </div>
-            <div className="grid border-t border-hairline-ghost md:grid-cols-[1fr_auto]">
-              <div
-                className="cf-enter flex items-center border-hairline-ghost px-5 py-6 md:border-r md:px-10 md:py-8"
-                style={{ '--d': '180ms' } as React.CSSProperties}
-              >
-                <p className="max-w-[44ch] text-[16px] leading-snug text-ghost/80">
-                  Engagements start with a{' '}
-                  <span className="font-semibold text-ghost">fixed-fee diagnostic.</span>{' '}
-                  <span className="tnum font-semibold text-ghost">Two weeks, one workflow.</span>
-                </p>
-              </div>
-              <div
-                className="cf-enter flex items-center border-t border-hairline-ghost px-5 pt-5 pb-6 md:border-t-0 md:px-10 md:py-0"
-                style={{ '--d': '260ms' } as React.CSSProperties}
-              >
-                <BookCallButton size="lg" />
-              </div>
+          <div className="flex flex-col justify-center">
+            <p className="cf-enter text-[12px] tracking-[0.16em] text-ghost uppercase">
+              Founder-led AI consulting and build
+            </p>
+            <h1
+              className="cf-enter font-display mt-8 max-w-[15ch] text-[clamp(44px,5.4vw,104px)] leading-[1.02] font-medium tracking-[-0.01em] md:mt-10"
+              style={{ '--d': '80ms' } as React.CSSProperties}
+            >
+              ClearForge builds AI systems your team actually uses and your bottom line{' '}
+              <em className="text-cobalt-bright italic">actually feels.</em>
+            </h1>
+            <p
+              className="cf-enter mt-8 max-w-[44ch] text-[16px] leading-snug text-ghost/80 md:text-[18px] lg:max-w-none"
+              style={{ '--d': '180ms' } as React.CSSProperties}
+            >
+              Engagements start with a{' '}
+              <span className="font-semibold text-ghost">
+                <span className="whitespace-nowrap">fixed-fee</span> diagnostic.
+              </span>{' '}
+              <span className="tnum font-semibold text-ghost">Two weeks, one workflow.</span>
+            </p>
+            <p
+              className="cf-enter tnum mt-3 max-w-[60ch] text-[16px] leading-snug text-ghost/70"
+              style={{ '--d': '220ms' } as React.CSSProperties}
+            >
+              For mid-market companies $20M to $500M and PE operating teams.
+            </p>
+            <div
+              className="cf-enter mt-8 md:mt-10"
+              style={{ '--d': '260ms' } as React.CSSProperties}
+            >
+              <BookCallButton size="lg" />
             </div>
           </div>
 
-          {/* Right: Instrument 01, the live agent card */}
-          <div className="flex flex-col border-t border-hairline-ghost lg:border-t-0">
-            <div className="cf-enter flex items-center justify-between border-b border-hairline-ghost px-5 py-5 md:px-8">
-              <span className="tnum text-[11px] tracking-[0.18em] text-ghost/60 uppercase">
-                Instrument 01
-              </span>
-              <span className="text-[11px] tracking-[0.18em] text-cobalt-bright uppercase">
-                Live preview
-              </span>
-            </div>
-            <div
-              className="cf-enter flex grow flex-col p-5 md:p-8"
-              style={{ '--d': '320ms' } as React.CSSProperties}
-            >
-              <div className="cf-glow flex grow flex-col">
-                <HeroAgent />
-              </div>
-            </div>
-            <div className="border-t border-hairline-ghost px-5 py-5 md:px-8">
-              <p className="text-[12px] leading-relaxed text-ghost/60">
-                Founder James Penz. Background: Bain AI and Automation practice, EY, Capgemini.
-              </p>
+          {/* Right: the free tool, floating on the band. No founder caption
+              here: the lineage band answers it 110px below, inside the first
+              viewport at 1920. */}
+          <div className="flex flex-col lg:self-end lg:pt-24">
+            <div className="cf-enter cf-glow" style={{ '--d': '380ms' } as React.CSSProperties}>
+              <HeroAgent />
             </div>
           </div>
         </div>
-      </div>
-    </PageFrame>
+      </Container>
+    </section>
   );
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { BookCallButton } from '@/components/functional/BookCallButton';
+import { ArrowLink } from '@/components/ui/ArrowLink';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
 import { getIndustry, INDUSTRIES, INDUSTRY_DELIVERABLES } from '@/data/industries';
@@ -33,7 +33,7 @@ export default async function IndustryPage({ params }: PageProps<'/industries/[s
       <PageFrame aria-label="Industry introduction">
         <SectionBand left="Industry" right={industry.bandLabel} />
         <div className="px-5 pt-10 pb-10 md:px-10 md:pt-16 md:pb-14">
-          <h1 className="font-display max-w-[20ch] text-[36px] leading-[1.1] font-medium tracking-[-0.01em] md:text-[56px] md:leading-[1.08]">
+          <h1 className="font-display max-w-[20ch] text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
             AI systems for <em className="text-cobalt italic">{industry.name}.</em>
           </h1>
           <p className="mt-5 text-[16px] leading-relaxed text-ink/80">
@@ -44,7 +44,7 @@ export default async function IndustryPage({ params }: PageProps<'/industries/[s
 
       {/* Workflow pattern */}
       <PageFrame aria-label="The workflow pattern">
-        <SectionBand left="The workflow pattern" right="4 steps · Every handoff is manual" />
+        <SectionBand left="The workflow pattern" right="Every handoff is manual" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-hairline">
           {industry.workflowSteps.map((step, index, list) => (
             <div
@@ -74,7 +74,7 @@ export default async function IndustryPage({ params }: PageProps<'/industries/[s
 
       {/* What we would build */}
       <PageFrame aria-label="What we would build">
-        <SectionBand left="What we would build" right="4 named deliverables" />
+        <SectionBand left="What we would build" right="Named deliverables" />
         <div className="grid lg:grid-cols-[1fr_500px]">
           <div className="border-b border-hairline px-5 py-8 md:px-10 md:py-12 lg:border-r lg:border-b-0">
             <h2 className="font-display max-w-[22ch] text-[28px] leading-[1.2] font-medium md:text-[34px]">
@@ -90,7 +90,7 @@ export default async function IndustryPage({ params }: PageProps<'/industries/[s
           </div>
           <div className="flex flex-col">
             <div className="border-b border-hairline px-5 py-4 md:px-8">
-              <span className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">
+              <span className="text-[12px] tracking-[0.18em] text-ink/70 uppercase">
                 Named deliverables
               </span>
             </div>
@@ -116,7 +116,7 @@ export default async function IndustryPage({ params }: PageProps<'/industries/[s
 
       {/* Industry benchmark ranges */}
       <PageFrame aria-label="Industry benchmark ranges">
-        <SectionBand left="Industry ranges · Not ClearForge results" right="3 illustrative rows" />
+        <SectionBand left="Industry ranges · Not ClearForge results" right="Illustrative rows" />
         <ul aria-label="Industry benchmark ranges, illustrative">
           {industry.benchmarks.map((benchmark) => (
             <li
@@ -125,7 +125,7 @@ export default async function IndustryPage({ params }: PageProps<'/industries/[s
             >
               <p className="text-[15px] text-ink/80">{benchmark.label}</p>
               <p className="tnum text-[15px] font-semibold">{benchmark.value}</p>
-              <span className="text-[11px] tracking-[0.14em] text-ink/60 uppercase md:text-right">
+              <span className="text-[12px] tracking-[0.14em] text-ink/70 uppercase md:text-right">
                 Illustrative
               </span>
             </li>
@@ -136,18 +136,9 @@ export default async function IndustryPage({ params }: PageProps<'/industries/[s
             Ranges are industry observations for orientation. They are not ClearForge results. Our
             results live on the proof page.
           </p>
-          <Link
-            href="/proof"
-            className="group text-[14px] font-semibold whitespace-nowrap text-cobalt"
-          >
-            See the proof{' '}
-            <span
-              aria-hidden="true"
-              className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
-            >
-              →
-            </span>
-          </Link>
+          <ArrowLink href="/proof" size="sm" className="whitespace-nowrap">
+            See the proof
+          </ArrowLink>
         </div>
       </PageFrame>
 
@@ -158,7 +149,7 @@ export default async function IndustryPage({ params }: PageProps<'/industries/[s
             Start where every engagement starts. The fixed-fee Diagnostic maps this workflow{' '}
             <em className="text-cobalt italic">{industry.locationNoun}</em> in 2 weeks.
           </p>
-          <span className="tnum text-[11px] tracking-[0.18em] whitespace-nowrap text-ink/60 uppercase">
+          <span className="tnum text-[12px] tracking-[0.18em] whitespace-nowrap text-ink/70 uppercase">
             Starting point · Forge Diagnostic
           </span>
         </div>
@@ -168,7 +159,7 @@ export default async function IndustryPage({ params }: PageProps<'/industries/[s
       <PageFrame bottomRule={false} aria-label="Next step">
         <SectionBand left="Next step" right="Fixed fee · 2 weeks" />
         <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
-          <h2 className="font-display text-[30px] leading-[1.1] font-medium md:text-[40px]">
+          <h2 className="font-display text-[clamp(30px,3vw,56px)] leading-[1.1] font-medium">
             Start with the fixed-fee <em className="text-cobalt italic">Diagnostic.</em>
           </h2>
           <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />

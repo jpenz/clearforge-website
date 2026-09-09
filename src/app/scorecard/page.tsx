@@ -16,8 +16,8 @@ export default function ScorecardPage() {
       {/* Label band */}
       <PageFrame aria-label="Scorecard introduction">
         <div className="flex items-center justify-between gap-4 px-5 py-5 md:px-10">
-          <span className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">Free tool</span>
-          <span className="tnum text-[11px] tracking-[0.18em] text-ink/60 uppercase">
+          <span className="text-[12px] tracking-[0.18em] text-ink/70 uppercase">Free tool</span>
+          <span className="tnum text-[12px] tracking-[0.18em] text-ink/70 uppercase">
             AI readiness scorecard · 10 questions
           </span>
         </div>
@@ -43,7 +43,7 @@ export default function ScorecardPage() {
       <PageFrame bottomRule={false} aria-label="Next step">
         <SectionBand left="Next step" right="Fixed fee · 2 weeks" />
         <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
-          <h2 className="font-display text-[30px] leading-[1.1] font-medium md:text-[40px]">
+          <h2 className="font-display text-[clamp(30px,3vw,56px)] leading-[1.1] font-medium">
             Start with the fixed-fee <em className="text-cobalt italic">Diagnostic.</em>
           </h2>
           <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />

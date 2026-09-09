@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { BookCallButton } from '@/components/functional/BookCallButton';
 import { ArticleBody } from '@/components/ui/ArticleBody';
+import { Container } from '@/components/ui/Container';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
 import { ARTICLES, getArticle, getReadNext } from '@/data/insights';
@@ -35,20 +36,20 @@ export default async function ArticlePage({ params }: PageProps<'/insights/[slug
       {/* Label band */}
       <PageFrame aria-label="Article context">
         <div className="flex items-center justify-between gap-4 px-5 py-5 md:px-10">
-          <span className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">
+          <span className="text-[12px] tracking-[0.18em] text-ink/70 uppercase">
             <Link href="/insights" className="hover:text-cobalt">
               Insights
             </Link>{' '}
             / {article.topic}
           </span>
-          <span className="text-[11px] tracking-[0.18em] text-ink/60 uppercase">By James Penz</span>
+          <span className="text-[12px] tracking-[0.18em] text-ink/70 uppercase">By James Penz</span>
         </div>
       </PageFrame>
 
       {/* Title block */}
       <PageFrame aria-label="Article title">
         <div className="flex flex-col items-center px-5 pt-12 pb-10 text-center md:px-10 md:pt-20 md:pb-16">
-          <h1 className="font-display tnum max-w-[18ch] text-[38px] leading-[1.08] font-medium tracking-[-0.01em] md:text-[64px] md:leading-[1.06]">
+          <h1 className="font-display tnum max-w-[18ch] text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
             {article.title}{' '}
             {article.titleEmphasis && (
               <em className="text-cobalt italic">{article.titleEmphasis}</em>
@@ -57,15 +58,17 @@ export default async function ArticlePage({ params }: PageProps<'/insights/[slug
           <p className="mt-6 max-w-[42ch] text-[18px] leading-[1.55] text-ink/80 md:mt-7 md:text-[21px]">
             {article.standfirst}
           </p>
-          <p className="mt-7 text-[11px] tracking-[0.18em] text-ink/60 uppercase md:mt-9">
+          <p className="mt-7 text-[12px] tracking-[0.18em] text-ink/70 uppercase md:mt-9">
             James Penz · Founder
           </p>
         </div>
       </PageFrame>
 
       {/* Body */}
-      <article className="mx-auto max-w-[1360px] border-b border-hairline md:border-x">
-        <ArticleBody blocks={article.blocks} />
+      <article className="cf-light-band border-b border-hairline">
+        <Container gutter="cells">
+          <ArticleBody blocks={article.blocks} />
+        </Container>
       </article>
 
       {/* Read next */}
@@ -80,7 +83,7 @@ export default async function ArticlePage({ params }: PageProps<'/insights/[slug
             }`}
           >
             <span className="flex items-baseline gap-4 md:gap-6">
-              <span className="tnum shrink-0 text-[11px] tracking-[0.14em] text-ink/60 uppercase">
+              <span className="tnum shrink-0 text-[12px] tracking-[0.14em] text-ink/70 uppercase">
                 0{index + 1}
               </span>
               <span className="tnum text-[17px] leading-snug font-semibold transition-colors group-hover:text-cobalt motion-reduce:transition-none md:text-[19px]">
@@ -104,7 +107,7 @@ export default async function ArticlePage({ params }: PageProps<'/insights/[slug
       <PageFrame bottomRule={false} aria-label="Next step">
         <SectionBand left="Next step" right="Fixed price · 2 weeks" />
         <div className="flex flex-col items-start gap-8 px-5 py-10 md:px-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
-          <h2 className="font-display text-[30px] leading-[1.1] font-medium md:text-[40px]">
+          <h2 className="font-display text-[clamp(30px,3vw,56px)] leading-[1.1] font-medium">
             Start with the fixed-fee <em className="text-cobalt italic">Diagnostic.</em>
           </h2>
           <BookCallButton size="lg" className="shrink-0 whitespace-nowrap" />

@@ -93,7 +93,7 @@ export function ArticleBody({ blocks }: { blocks: ArticleBlock[] }) {
                         <th
                           key={header}
                           scope="col"
-                          className="py-3.5 pr-6 text-[11px] font-medium tracking-[0.14em] text-ink/60 uppercase"
+                          className="py-3.5 pr-6 text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase"
                         >
                           {header}
                         </th>

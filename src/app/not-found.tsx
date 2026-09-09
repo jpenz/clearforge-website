@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { BookCallButton } from '@/components/functional/BookCallButton';
+import { ArrowLink } from '@/components/ui/ArrowLink';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
 
@@ -16,15 +16,7 @@ export default function NotFound() {
           <em className="text-cobalt italic">The rest of the site does.</em>
         </h1>
         <div className="mt-8 flex flex-wrap items-center gap-6">
-          <Link href="/" className="group text-[15px] font-semibold text-cobalt">
-            Back to the homepage{' '}
-            <span
-              aria-hidden="true"
-              className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
-            >
-              →
-            </span>
-          </Link>
+          <ArrowLink href="/">Back to the homepage</ArrowLink>
           <BookCallButton variant="quiet" />
         </div>
       </div>
