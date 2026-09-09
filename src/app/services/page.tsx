@@ -57,53 +57,80 @@ export default function ServicesPage() {
         {SERVICE_STAGES.map((stage, stageIndex) => (
           <div
             key={stage.number}
-            className={`grid lg:grid-cols-[1fr_2fr] ${stageIndex % 2 === 1 ? 'cf-dots' : ''} ${
+            className={`${stageIndex % 2 === 1 ? 'cf-dots' : ''} ${
               stageIndex < SERVICE_STAGES.length - 1 ? 'border-b border-hairline' : ''
             }`}
           >
-            <div className="border-b border-hairline px-5 py-8 md:px-10 md:py-12 lg:border-r lg:border-b-0">
-              <p className="tnum flex items-center gap-3 text-[12px] tracking-[0.16em] text-ink/70 uppercase">
-                <span aria-hidden="true" className="inline-block size-[7px] bg-cobalt" />
-                Stage {stage.number} · {stage.name}
-              </p>
-              <h2 className="font-display mt-3 max-w-[18ch] text-balance text-[clamp(28px,2.2vw,40px)] leading-[1.15] font-medium">
-                {stage.conclusion}
-              </h2>
-              {stage.link && (
-                <div className="mt-6">
-                  <p className="text-[12px] tracking-[0.16em] text-ink/70 uppercase">Free tool</p>
-                  <ArrowLink href={stage.link.href} size="sm" className="mt-2">
-                    {stage.link.label}
-                  </ArrowLink>
+            {/* Below md the four stages read as one sequence on a cobalt rail:
+                a continuous 1px line with a filled station at each stage and
+                the stage's own duration riding the rail. At md and up the
+                rail disappears and the two-column journey layout returns. */}
+            <div className="relative pr-5 pl-11 md:p-0">
+              <span
+                aria-hidden="true"
+                className="absolute top-0 bottom-0 left-[27px] w-px bg-cobalt/30 md:hidden"
+              />
+              <div className="relative flex items-center pt-8 md:hidden">
+                <span
+                  aria-hidden="true"
+                  className="absolute -left-[20px] size-[9px] shrink-0 bg-cobalt"
+                />
+                <span className="tnum text-[12px] font-semibold tracking-[0.16em] text-ink uppercase">
+                  {stage.offerings[0].term}
+                </span>
+              </div>
+              <div className="grid lg:grid-cols-[1fr_2fr]">
+                <div className="border-b border-hairline py-8 md:px-10 md:py-12 lg:border-r lg:border-b-0">
+                  <p className="tnum flex items-center gap-3 text-[12px] tracking-[0.16em] text-ink/70 uppercase">
+                    <span aria-hidden="true" className="inline-block size-[7px] bg-cobalt" />
+                    Stage {stage.number} · {stage.name}
+                  </p>
+                  <h2 className="font-display mt-3 max-w-[18ch] text-balance text-[clamp(28px,2.2vw,40px)] leading-[1.15] font-medium">
+                    {stage.conclusion}
+                  </h2>
+                  {stage.link && (
+                    <div className="mt-6">
+                      <p className="text-[12px] tracking-[0.16em] text-ink/70 uppercase">
+                        Free tool
+                      </p>
+                      <ArrowLink href={stage.link.href} size="sm" className="mt-2">
+                        {stage.link.label}
+                      </ArrowLink>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-            <div>
-              {stage.offerings.map((offering, offeringIndex) => (
-                <div
-                  key={offering.name}
-                  id={offeringId(offering.name)}
-                  className={`grid gap-3 px-5 py-6 md:gap-6 md:px-10 md:py-8 lg:grid-cols-[1fr_180px_180px] ${
-                    offeringIndex < stage.offerings.length - 1 ? 'border-b border-hairline' : ''
-                  }`}
-                >
-                  <div>
-                    <h3 className="text-[18px] font-semibold">{offering.name}</h3>
-                    <p className="tnum mt-2 max-w-[52ch] text-[14px] leading-relaxed text-ink/70">
-                      {offering.description}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">Term</p>
-                    <p className="tnum mt-1 text-[18px] font-semibold">{offering.term}</p>
-                  </div>
-                  <div>
-                    <p className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">Fee basis</p>
-                    <p className="tnum mt-1 text-[18px] font-semibold">{offering.feeBasis}</p>
-                    <p className="mt-1 text-[14px] leading-snug text-ink/70">{offering.feeNote}</p>
-                  </div>
+                <div>
+                  {stage.offerings.map((offering, offeringIndex) => (
+                    <div
+                      key={offering.name}
+                      id={offeringId(offering.name)}
+                      className={`grid grid-cols-2 gap-3 py-6 md:gap-6 md:px-10 md:py-8 lg:grid-cols-[1fr_180px_180px] ${
+                        offeringIndex < stage.offerings.length - 1 ? 'border-b border-hairline' : ''
+                      }`}
+                    >
+                      <div className="col-span-2 lg:col-span-1">
+                        <h3 className="text-[18px] font-semibold">{offering.name}</h3>
+                        <p className="tnum mt-2 max-w-[52ch] text-[14px] leading-relaxed text-ink/70">
+                          {offering.description}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">Term</p>
+                        <p className="tnum mt-1 text-[18px] font-semibold">{offering.term}</p>
+                      </div>
+                      <div>
+                        <p className="text-[12px] tracking-[0.14em] text-ink/70 uppercase">
+                          Fee basis
+                        </p>
+                        <p className="tnum mt-1 text-[18px] font-semibold">{offering.feeBasis}</p>
+                        <p className="mt-1 text-[14px] leading-snug text-ink/70">
+                          {offering.feeNote}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         ))}

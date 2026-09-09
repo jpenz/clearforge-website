@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { BookCallButton } from '@/components/functional/BookCallButton';
+import { MobileNavTier } from '@/components/layout/MobileNavTier';
 import { NavLinks } from '@/components/layout/NavLinks';
 import { Container } from '@/components/ui/Container';
 import { SITE_NAME } from '@/data/site';
@@ -13,7 +14,9 @@ import { SITE_NAME } from '@/data/site';
  * cobalt button, a ghost hairline below. Six links plus one button,
  * complete at every width: at mobile the header is two tiers (brand + Book
  * button, then the six links wrapped over two rows, nothing clipped and
- * nothing behind a hamburger).
+ * nothing behind a hamburger). Below md the second tier collapses on
+ * scroll-down and returns on scroll-up, so the bar stops holding about 15
+ * percent of a phone viewport at all times.
  */
 export function Header() {
   return (
@@ -32,12 +35,7 @@ export function Header() {
           </nav>
           <BookCallButton size="sm" />
         </div>
-        <nav
-          aria-label="Primary"
-          className="flex flex-wrap items-center gap-x-6 gap-y-0 pb-2 text-[14px] font-medium md:hidden"
-        >
-          <NavLinks />
-        </nav>
+        <MobileNavTier />
       </Container>
     </header>
   );

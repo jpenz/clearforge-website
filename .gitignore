@@ -46,3 +46,8 @@ pnpm-debug.log*
 *.swo
 cf-screenshots.js
 test-results/
+
+# Kombai design canvas and handoff mockups: reference, never shipped
+.kombai/canvas/
+.kombai/handoff/
+.kombai-refs/
