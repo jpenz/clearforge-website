@@ -1,6 +1,6 @@
 # ClearForge
 
-> ClearForge builds AI systems your team actually uses. Founder-led AI consulting and build firm for mid-market companies ($20M to $500M revenue) and PE operating teams. Founder: James Penz, formerly of Bain's AI and Automation practice, with earlier work at EY and Capgemini. Pricing is scoped in a fixed-fee two-week diagnostic before any build. The deliverable is the working system, not a report.
+> ClearForge builds AI systems your team actually uses. Founder-led AI consulting and build firm for mid-market companies ($20M to $500M revenue) and PE operating teams. The practice background is Bain's AI and Automation practice, with earlier work at EY and Capgemini. Pricing is scoped in a fixed-fee two-week diagnostic before any build. The deliverable is the working system, not a report.
 
 ## Engagement model
 
@@ -30,3 +30,7 @@
 - [Security](https://clearforge.ai/security): Data handling, named subprocessors, no training on your data, DPA on request.
 - [Industries](https://clearforge.ai/industries): 20 industry workflow patterns, each with the system we would build first and labeled benchmark ranges.
 - [Privacy](https://clearforge.ai/privacy) and [Terms](https://clearforge.ai/terms): Plain-language policies.
+
+<!-- Founder identity is hidden (SHOW_FOUNDER_IDENTITY in src/data/site.ts,
+     2026-09-12). If that flag is turned back on, restore the founder
+     sentence in the summary above. See assets/founder/README.md. -->

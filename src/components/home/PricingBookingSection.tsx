@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { BookCallButton } from '@/components/functional/BookCallButton';
 import { PageFrame } from '@/components/ui/PageFrame';
+import { SHOW_FOUNDER_IDENTITY } from '@/data/site';
 
 /**
  * Label, how it is billed, then how long it runs. The two were one column
@@ -84,24 +85,30 @@ export function PricingBookingSection() {
           <h3 className="font-display mt-3 max-w-[16ch] text-balance text-[28px] leading-tight md:text-[32px]">
             30 minutes with the founder.
           </h3>
-          <div className="mt-6 flex items-center gap-4">
-            <div className="relative aspect-[4/5] w-[72px] shrink-0 overflow-hidden border border-hairline bg-white">
-              <Image
-                src="/images/james-penz.jpg"
-                alt="James Penz, founder of ClearForge"
-                fill
-                sizes="72px"
-                quality={72}
-                className="object-cover object-top"
-              />
+          {SHOW_FOUNDER_IDENTITY ? (
+            <div className="mt-6 flex items-center gap-4">
+              <div className="relative aspect-[4/5] w-[72px] shrink-0 overflow-hidden border border-hairline bg-white">
+                <Image
+                  src="/images/james-penz.jpg"
+                  alt="James Penz, founder of ClearForge"
+                  fill
+                  sizes="72px"
+                  quality={72}
+                  className="object-cover object-top"
+                />
+              </div>
+              <div>
+                <p className="text-[15px] font-semibold">James Penz</p>
+                <p className="mt-1 text-[14px] leading-snug text-ink/70">
+                  Founder. Bain AI and Automation practice, EY, Capgemini.
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="text-[15px] font-semibold">James Penz</p>
-              <p className="mt-1 text-[14px] leading-snug text-ink/70">
-                Founder. Bain AI and Automation practice, EY, Capgemini.
-              </p>
-            </div>
-          </div>
+          ) : (
+            <p className="mt-4 max-w-[34ch] text-[14px] leading-relaxed text-ink/70">
+              A practice background at Bain, EY and Capgemini, on one call about your workflow.
+            </p>
+          )}
           <BookCallButton size="lg" className="mt-6 self-start" />
           <ul className="mt-8 space-y-3 border-t border-hairline pt-6 text-[14px] leading-relaxed text-ink/70">
             {EXPECT.map((line) => (

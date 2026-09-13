@@ -78,8 +78,8 @@ export function StartFlow() {
           Brief received.
         </p>
         <p className="mt-3 max-w-[52ch] text-[15px] leading-relaxed text-ink/70">
-          You will hear from James within one business day. If it is time-sensitive, grab a slot now
-          and we will have read your brief before the call.
+          You will hear back within one business day. If it is time-sensitive, grab a slot now and
+          we will have read your brief before the call.
         </p>
         <button
           type="button"
@@ -375,7 +375,7 @@ export function StartFlow() {
           </button>
         </div>
         <p className="mt-4 max-w-[68ch] text-[12px] leading-relaxed text-ink/60">
-          You will hear from James within one business day. Submitting agrees to the{' '}
+          You will hear back within one business day. Submitting agrees to the{' '}
           <a href="/privacy" className="underline underline-offset-2">
             privacy policy
           </a>

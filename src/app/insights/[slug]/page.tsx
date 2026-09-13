@@ -7,6 +7,7 @@ import { Container } from '@/components/ui/Container';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
 import { ARTICLES, getArticle, getReadNext } from '@/data/insights';
+import { SHOW_FOUNDER_IDENTITY } from '@/data/site';
 
 export function generateStaticParams() {
   return ARTICLES.map(({ slug }) => ({ slug }));
@@ -42,7 +43,11 @@ export default async function ArticlePage({ params }: PageProps<'/insights/[slug
             </Link>{' '}
             / {article.topic}
           </span>
-          <span className="text-[12px] tracking-[0.18em] text-ink/70 uppercase">By James Penz</span>
+          {SHOW_FOUNDER_IDENTITY && (
+            <span className="text-[12px] tracking-[0.18em] text-ink/70 uppercase">
+              By James Penz
+            </span>
+          )}
         </div>
       </PageFrame>
 
@@ -58,9 +63,11 @@ export default async function ArticlePage({ params }: PageProps<'/insights/[slug
           <p className="mt-6 max-w-[42ch] text-[18px] leading-[1.55] text-ink/80 md:mt-7 md:text-[21px]">
             {article.standfirst}
           </p>
-          <p className="mt-7 text-[12px] tracking-[0.18em] text-ink/70 uppercase md:mt-9">
-            James Penz · Founder
-          </p>
+          {SHOW_FOUNDER_IDENTITY && (
+            <p className="mt-7 text-[12px] tracking-[0.18em] text-ink/70 uppercase md:mt-9">
+              James Penz · Founder
+            </p>
+          )}
         </div>
       </PageFrame>
 

@@ -5,6 +5,15 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://clearforge.
 /** The one canonical booking CTA label. Never vary it. */
 export const CTA_LABEL = 'Book a 30-min intro';
 
+/**
+ * Owner switch, 2026-09-12: hide the founder's personal identity (name,
+ * photo, LinkedIn, byline, Person schema) while keeping the firm's own
+ * positioning. Flip to true to bring all of it back in one commit; the
+ * headshot lives at assets/founder/james-penz.jpg and moves back into
+ * public/images/ when it does.
+ */
+export const SHOW_FOUNDER_IDENTITY = false;
+
 /** Cal.com event link, e.g. "james-penz/30min". */
 export const CAL_LINK = process.env.NEXT_PUBLIC_CALCOM_LINK ?? 'james-penz/30min';
 export const CAL_NAMESPACE = 'clearforge-30min';

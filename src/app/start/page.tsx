@@ -4,6 +4,7 @@ import { Container } from '@/components/ui/Container';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
 import { Stat } from '@/components/ui/Stat';
+import { SHOW_FOUNDER_IDENTITY } from '@/data/site';
 
 export const metadata: Metadata = {
   title: 'Start a project',
@@ -54,11 +55,11 @@ export default function StartPage() {
         <div className="grid lg:grid-cols-[2fr_1fr]">
           <div className="border-b border-hairline px-5 py-10 md:px-10 md:py-12 lg:border-r lg:border-b-0">
             <p className="font-display text-[clamp(26px,2.2vw,40px)] leading-[1.1] font-medium">
-              James Penz
+              {SHOW_FOUNDER_IDENTITY ? 'James Penz' : 'The founder reads it.'}
             </p>
             <p className="mt-3 max-w-[52ch] text-[16px] leading-relaxed text-ink/80">
-              Founder. Every brief is read before anyone gets on a call, and you hear back within
-              one business day.
+              {SHOW_FOUNDER_IDENTITY ? 'Founder. ' : ''}Every brief is read before anyone gets on a
+              call, and you hear back within one business day.
             </p>
           </div>
           <div className="grid grid-cols-2 divide-x divide-hairline">
