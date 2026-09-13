@@ -5,13 +5,14 @@ import { ArrowLink } from '@/components/ui/ArrowLink';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
 import { Stat } from '@/components/ui/Stat';
-import { FOUNDER_EMAIL, FOUNDER_LINKEDIN } from '@/data/site';
+import { FOUNDER_EMAIL, FOUNDER_LINKEDIN, SHOW_FOUNDER_IDENTITY } from '@/data/site';
 import { founderJsonLd, JsonLdScriptProps } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'About',
-  description:
-    "Founder-led. James Penz, formerly of Bain's AI and Automation practice, with earlier work at EY and Capgemini. ClearForge builds AI systems your team actually uses.",
+  description: SHOW_FOUNDER_IDENTITY
+    ? "Founder-led. James Penz, formerly of Bain's AI and Automation practice, with earlier work at EY and Capgemini. ClearForge builds AI systems your team actually uses."
+    : 'Founder-led AI consulting and build, from a practice background at Bain, EY and Capgemini. ClearForge builds AI systems your team actually uses.',
 };
 
 const BACKGROUND = [
@@ -35,77 +36,107 @@ const BACKGROUND = [
 export default function AboutPage() {
   return (
     <>
-      <script {...JsonLdScriptProps(founderJsonLd())} />
+      {SHOW_FOUNDER_IDENTITY && <script {...JsonLdScriptProps(founderJsonLd())} />}
       {/* Title block + founder headshot */}
       <PageFrame aria-label="About ClearForge">
-        <SectionBand left="About" right="Founder led · Founded by James Penz" />
+        <SectionBand
+          left="About"
+          right={SHOW_FOUNDER_IDENTITY ? 'Founder led · Founded by James Penz' : 'Founder led'}
+        />
+        {/* With the portrait hidden the title block would leave the right half
+            of the frame empty at 1440, so the statement and the body split
+            across the two columns the portrait used to close. */}
         <div className="grid lg:grid-cols-2">
-          <div className="flex flex-col border-b border-hairline px-5 pt-10 pb-10 md:px-10 md:pt-16 md:pb-16 lg:border-r lg:border-b-0">
+          <div
+            className={`flex flex-col px-5 pt-10 pb-10 md:px-10 md:pt-16 md:pb-16 ${
+              SHOW_FOUNDER_IDENTITY
+                ? 'border-b border-hairline lg:border-r lg:border-b-0'
+                : 'lg:border-r lg:border-hairline'
+            }`}
+          >
             <h1 className="font-display max-w-[16ch] text-balance text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
               One founder. One standard. Systems your team{' '}
               <em className="text-cobalt italic">actually uses.</em>
             </h1>
-            <div className="mt-8 max-w-[52ch] space-y-5 md:mt-10">
-              <p className="tnum text-[16px] leading-relaxed text-ink/80">
-                ClearForge designs an AI system for a specific workflow, builds it into production,
-                and stays through adoption until the team uses it every week.
-              </p>
-              <p className="text-[16px] leading-relaxed text-ink/80">
-                Pricing is scoped in the Diagnostic and agreed before any build. The diagnostic ends
-                in a priced build plan. The engagement ends in a working system.
-              </p>
-            </div>
+            {SHOW_FOUNDER_IDENTITY && (
+              <div className="mt-8 max-w-[52ch] space-y-5 md:mt-10">
+                <p className="tnum text-[16px] leading-relaxed text-ink/80">
+                  ClearForge designs an AI system for a specific workflow, builds it into
+                  production, and stays through adoption until the team uses it every week.
+                </p>
+                <p className="text-[16px] leading-relaxed text-ink/80">
+                  Pricing is scoped in the Diagnostic and agreed before any build. The diagnostic
+                  ends in a priced build plan. The engagement ends in a working system.
+                </p>
+              </div>
+            )}
             <div className="mt-auto pt-8 md:pt-10">
               <ArrowLink href="#standard" arrow="↓" size="sm">
                 See the standard we build to
               </ArrowLink>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center px-5 py-8 md:px-10 md:py-10">
-            <div className="w-full max-w-[460px]">
-              {/* Founder headshot: the real photo V11 shipped, restored 2026-09-05
-                  after the V12 graft dropped the file and left slot text live.
-                  People never appear in the render set. */}
-              <div className="relative aspect-[4/5] overflow-hidden border border-hairline bg-white">
-                <Image
-                  src="/images/james-penz.jpg"
-                  alt="James Penz, founder of ClearForge"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 460px"
-                  quality={72}
-                  className="object-cover object-top"
-                />
-                <span aria-hidden="true" className="absolute top-0 left-0 h-px w-6 bg-cobalt" />
-                <span aria-hidden="true" className="absolute top-0 left-0 h-6 w-px bg-cobalt" />
-              </div>
-              <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-x border-b border-hairline px-4 py-3">
-                <span className="text-[14px] font-semibold">James Penz · Founder</span>
-                <span className="flex items-center gap-4 text-[14px]">
-                  <a
-                    href={`mailto:${FOUNDER_EMAIL}`}
-                    className="text-cobalt underline decoration-ink/30 underline-offset-4 hover:text-cobalt-press"
-                  >
-                    {FOUNDER_EMAIL}
-                  </a>
-                  <a
-                    href={FOUNDER_LINKEDIN}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-cobalt underline decoration-ink/30 underline-offset-4 hover:text-cobalt-press"
-                  >
-                    LinkedIn
-                  </a>
-                </span>
+          {!SHOW_FOUNDER_IDENTITY && (
+            <div className="flex flex-col justify-center border-t border-hairline px-5 py-10 md:px-10 md:py-16 lg:border-t-0">
+              <div className="max-w-[46ch] space-y-5">
+                <p className="tnum text-[17px] leading-relaxed text-ink/80">
+                  ClearForge designs an AI system for a specific workflow, builds it into
+                  production, and stays through adoption until the team uses it every week.
+                </p>
+                <p className="text-[17px] leading-relaxed text-ink/80">
+                  Pricing is scoped in the Diagnostic and agreed before any build. The diagnostic
+                  ends in a priced build plan. The engagement ends in a working system.
+                </p>
               </div>
             </div>
-          </div>
+          )}
+          {SHOW_FOUNDER_IDENTITY && (
+            <div className="flex flex-col items-center justify-center px-5 py-8 md:px-10 md:py-10">
+              <div className="w-full max-w-[460px]">
+                {/* Founder headshot: the real photo V11 shipped, restored 2026-09-05
+                  after the V12 graft dropped the file and left slot text live.
+                  People never appear in the render set. */}
+                <div className="relative aspect-[4/5] overflow-hidden border border-hairline bg-white">
+                  <Image
+                    src="/images/james-penz.jpg"
+                    alt="James Penz, founder of ClearForge"
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 460px"
+                    quality={72}
+                    className="object-cover object-top"
+                  />
+                  <span aria-hidden="true" className="absolute top-0 left-0 h-px w-6 bg-cobalt" />
+                  <span aria-hidden="true" className="absolute top-0 left-0 h-6 w-px bg-cobalt" />
+                </div>
+                <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-x border-b border-hairline px-4 py-3">
+                  <span className="text-[14px] font-semibold">James Penz · Founder</span>
+                  <span className="flex items-center gap-4 text-[14px]">
+                    <a
+                      href={`mailto:${FOUNDER_EMAIL}`}
+                      className="text-cobalt underline decoration-ink/30 underline-offset-4 hover:text-cobalt-press"
+                    >
+                      {FOUNDER_EMAIL}
+                    </a>
+                    <a
+                      href={FOUNDER_LINKEDIN}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-cobalt underline decoration-ink/30 underline-offset-4 hover:text-cobalt-press"
+                    >
+                      LinkedIn
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </PageFrame>
 
       {/* Background ledger */}
       <PageFrame aria-label="Background">
-        <SectionBand left="Background" right="Enterprise practice · Verify on LinkedIn" />
+        <SectionBand left="Background" right="Enterprise practice" />
         {BACKGROUND.map((row, index) => (
           <div
             key={row.title}

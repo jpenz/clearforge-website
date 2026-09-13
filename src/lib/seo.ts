@@ -1,6 +1,6 @@
 import type { Faq } from '@/data/faqs';
 import { PRICING_TIERS } from '@/data/pricing';
-import { SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/data/site';
+import { SHOW_FOUNDER_IDENTITY, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/data/site';
 
 export function organizationJsonLd() {
   return {
@@ -12,11 +12,17 @@ export function organizationJsonLd() {
     slogan: SITE_TAGLINE,
     description:
       'Founder-led AI consulting and build firm for mid-market companies, $20M to $500M revenue, and PE operating teams.',
-    founder: {
-      '@type': 'Person',
-      name: 'James Penz',
-      sameAs: ['https://www.linkedin.com/in/jamespenz/'],
-    },
+    // The founder entity is omitted while the identity is hidden: structured
+    // data must never assert what the page does not show.
+    ...(SHOW_FOUNDER_IDENTITY
+      ? {
+          founder: {
+            '@type': 'Person',
+            name: 'James Penz',
+            sameAs: ['https://www.linkedin.com/in/jamespenz/'],
+          },
+        }
+      : {}),
   };
 }
 
@@ -76,6 +82,10 @@ export function JsonLdScriptProps(data: object) {
  * Founder entity. For a founder-led firm the person IS the brand, so a
  * standalone Person node with credentials gives answer engines something to
  * attribute expertise to when they summarize "who is ClearForge".
+ *
+ * Emit this ONLY when SHOW_FOUNDER_IDENTITY is true. Its single call site on
+ * /about is guarded, because structured data must never assert an identity
+ * the page itself does not show.
  */
 export function founderJsonLd() {
   return {

@@ -21,8 +21,8 @@ export function ContactForm() {
           Message sent.
         </p>
         <p className="mt-2 max-w-[44ch] text-[14px] leading-relaxed text-ink/70">
-          You will hear from James within one business day. If it is time-sensitive, the calendar
-          above is faster.
+          You will hear back within one business day. If it is time-sensitive, the calendar above is
+          faster.
         </p>
       </div>
     );
@@ -96,7 +96,7 @@ export function ContactForm() {
         <div className="mt-5">
           <label className={labelClass} htmlFor="cf-rfp">
             Attach an RFP or brief{' '}
-            <span className="normal-case text-ink/45">
+            <span className="normal-case text-ink/70">
               (optional · PDF, Word, Excel, PowerPoint · up to 10MB)
             </span>
           </label>
