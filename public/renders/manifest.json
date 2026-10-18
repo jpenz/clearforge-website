@@ -33,5 +33,19 @@
     "height": 1429,
     "bytes": 79212,
     "prompt": "Twelve tall dark glass monoliths on a navy plane in a grid, three of them glowing cobalt from within, thin reflections on the floor, camera at chest height looking across the grid. Deep navy-black void background, hex 030b13. Electric cobalt light, hex 2454ff, with soft periwinkle highlights, hex 7a97ff. Photoreal 3D render, volumetric light, high dynamic range, fine film grain, no text, no letters, no logos, no people, no hands, no faces, wide 16:9 composition. Deep navy-black void background, hex 030b13. Electric cobalt light, hex 2454ff, with soft periwinkle highlights, hex 7a97ff. Photoreal 3D render, volumetric light, high dynamic range, fine film grain, no text, no letters, no logos, no people, no hands, no faces, wide 16:9 composition."
+  },
+  {
+    "name": "value-columns.jpg",
+    "width": 2560,
+    "height": 1429,
+    "bytes": 195416,
+    "prompt": "A long row of slim dark glass columns of steadily rising height standing on a polished navy plane, receding diagonally from center toward the right edge; only the tallest column at the far right glows electric cobalt from within, its light blooming softly; thin crisp reflections on the floor; the left third of the frame is empty near-black void; camera low at floor height. Deep navy-black void background, hex 030b13. Electric cobalt light, hex 2454ff, with soft periwinkle highlights, hex 7a97ff. Photoreal 3D render, volumetric light, high dynamic range, fine film grain, no text, no letters, no numbers, no logos, no people, no hands, no faces, wide 16:9 composition. The background and all shadows must be nearly pure black-navy, never gray or hazy; keep the sky and empty areas very dark. Light is pure cobalt blue only, absolutely no purple, violet, lavender or magenta tint. Strong contrast, the glow blooms from a small bright core."
+  },
+  {
+    "name": "engineering-lattice.jpg",
+    "width": 2560,
+    "height": 1429,
+    "bytes": 214585,
+    "prompt": "A precise three-dimensional lattice of thin dark glass conduits joined at small polished nodes, like an engineered network of pipes floating in a void, in the right half of the frame; a few pulses of electric cobalt light travel along three of the paths and meet at one junction node that glows brightest; the rest of the lattice is dark glass catching faint rim light; the left third of the frame is empty near-black void; shallow depth of field. Deep navy-black void background, hex 030b13. Electric cobalt light, hex 2454ff, with soft periwinkle highlights, hex 7a97ff. Photoreal 3D render, volumetric light, high dynamic range, fine film grain, no text, no letters, no numbers, no logos, no people, no hands, no faces, wide 16:9 composition. The background and all shadows must be nearly pure black-navy, never gray or hazy; keep the sky and empty areas very dark. Light is pure cobalt blue only, absolutely no purple, violet, lavender or magenta tint. Strong contrast, the glow blooms from a small bright core."
   }
 ]

@@ -19,6 +19,8 @@
 ## Pages
 
 - [Services](https://clearforge.ai/services): The catalog as a journey: Diagnose, Build, Adopt, Run.
+- [Value and return](https://clearforge.ai/value): How AI opportunities are found and ranked: a valuation of the business, commercial and performance diligence, a business case per opportunity ranked by worth, cost and payback, and the scoreboard that measures adoption, quality and the business result after launch.
+- [Engineering standard](https://clearforge.ai/engineering): Forward-deployed engineers and the production practices in client systems, answered as five questions: will it keep running, can it touch our systems safely, does a person stay in control, how do you know it is right, and who watches it after launch.
 - [Engagements](https://clearforge.ai/pricing): How engagements work and what each includes.
 - [Proof](https://clearforge.ai/proof): Case studies with real numbers, anonymized clients.
 - [Insights](https://clearforge.ai/insights): Long reads on AI systems, adoption, and what they cost.

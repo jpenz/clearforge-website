@@ -23,6 +23,8 @@ export interface ServiceStage {
   conclusion: string;
   description: string;
   link?: { label: string; href: string };
+  /** The page that explains how this stage works. */
+  guide?: { label: string; href: string };
   offerings: ServiceOffering[];
 }
 
@@ -31,14 +33,15 @@ export const SERVICE_STAGES: ServiceStage[] = [
   {
     number: '01',
     name: 'Diagnose',
-    conclusion: 'Two weeks to prove the system is viable before you build.',
-    description: 'Map the workflow, prove viability, price the build.',
+    conclusion: 'Two weeks to find where AI pays and price the build before you commit.',
+    description: 'Find where AI pays, rank the business case, price the build.',
     link: { label: 'Map the Workflow', href: '/discover' },
+    guide: { label: 'How we find the value', href: '/value' },
     offerings: [
       {
         name: 'Forge Diagnostic',
         description:
-          'Two weeks to map the workflow, size the opportunity, and prove the system is viable before you build.',
+          'Two weeks of commercial and performance diligence to find where AI pays across the business, rank each business case, and map the one workflow worth building first.',
         term: '2 weeks',
         feeBasis: 'Fixed fee',
         feeNote: 'Agreed up front.',
@@ -58,6 +61,7 @@ export const SERVICE_STAGES: ServiceStage[] = [
     name: 'Build',
     conclusion: 'Kickoff to a live production system in 10 to 14 weeks.',
     description: 'Built into the workflow your team already runs.',
+    guide: { label: 'The engineering standard', href: '/engineering' },
     offerings: [
       {
         name: 'Forge Sprint',
@@ -74,6 +78,7 @@ export const SERVICE_STAGES: ServiceStage[] = [
     name: 'Adopt',
     conclusion: 'The team uses it every week, or the work is not done.',
     description: 'A named operator, a weekly working cadence, a live adoption scoreboard.',
+    guide: { label: 'How the return is measured', href: '/value#return' },
     link: { label: 'Take the scorecard', href: '/scorecard' },
     offerings: [
       {
@@ -99,6 +104,7 @@ export const SERVICE_STAGES: ServiceStage[] = [
     name: 'Run',
     conclusion: 'Monitored, evaluated, and upgraded after the build.',
     description: 'Managed agent operations for every system we built.',
+    guide: { label: 'How systems are watched', href: '/engineering#operate' },
     offerings: [
       {
         name: 'Forge Run',

@@ -1,6 +1,7 @@
 import { AdoptionBand } from '@/components/home/AdoptionBand';
 import { EngagementsSection } from '@/components/home/EngagementsSection';
 import { FaqSection } from '@/components/home/FaqSection';
+import { FoundationsBand } from '@/components/home/FoundationsBand';
 import { HeroSection } from '@/components/home/HeroSection';
 import { LineageRow } from '@/components/home/LineageRow';
 import { PricingBookingSection } from '@/components/home/PricingBookingSection';
@@ -17,6 +18,7 @@ export default function HomePage() {
       <HeroSection />
       <LineageRow />
       <EngagementsSection />
+      <FoundationsBand />
       <ProofSection />
       <AdoptionBand />
       <ToolsSection />

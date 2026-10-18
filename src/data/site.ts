@@ -63,6 +63,8 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     items: [
       { label: 'Case studies', href: '/proof#case-studies' },
       { label: 'Build patterns', href: '/proof#build-patterns' },
+      { label: 'Value and return', href: '/value' },
+      { label: 'Engineering standard', href: '/engineering' },
       { label: 'Insights', href: '/insights' },
     ],
   },

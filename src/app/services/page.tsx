@@ -88,6 +88,11 @@ export default function ServicesPage() {
                   <h2 className="font-display mt-3 max-w-[18ch] text-balance text-[clamp(28px,2.2vw,40px)] leading-[1.15] font-medium">
                     {stage.conclusion}
                   </h2>
+                  {stage.guide && (
+                    <ArrowLink href={stage.guide.href} size="sm" className="mt-6">
+                      {stage.guide.label}
+                    </ArrowLink>
+                  )}
                   {stage.link && (
                     <div className="mt-6">
                       <p className="text-[12px] tracking-[0.16em] text-ink/70 uppercase">
