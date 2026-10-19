@@ -10,7 +10,7 @@ import { expect, test } from '@playwright/test';
 
 test('homepage renders the core statement and one booking CTA in the header', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('h1')).toContainText(/ClearForge builds/i);
+  await expect(page.locator('h1')).toContainText(/jobs in your company that AI can do/i);
   await expect(
     page.getByRole('banner').getByRole('button', { name: 'Book a 30-min intro' }),
   ).toBeVisible();
@@ -76,4 +76,26 @@ test('industries index lists entries and links through', async ({ page }) => {
   await expect(first).toBeVisible();
   await first.click();
   await expect(page.locator('h1')).toBeVisible();
+});
+
+test('home tells the story in order: what, example, steps, trust, answers, start', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const order = await page
+    .locator('main section[aria-label]')
+    .evaluateAll((nodes) => nodes.map((node) => node.getAttribute('aria-label')));
+  expect(order).toEqual([
+    'Introduction',
+    'A real example',
+    'How it works',
+    'Why you can trust it',
+    'Straight answers',
+    'How to start',
+  ]);
+  // Product names and insider terms stay off the home page.
+  const text = await page.locator('main').innerText();
+  for (const term of ['Forge Sprint', 'Adoption Mile', 'diligence', 'mid-market', 'cadence']) {
+    expect(text).not.toContain(term);
+  }
 });

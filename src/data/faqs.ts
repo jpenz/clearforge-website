@@ -3,32 +3,42 @@ export interface Faq {
   answer: string;
 }
 
-/** Home page FAQ, kept short for AI-search visibility. */
+/**
+ * Home page FAQ: the five questions three first-time readers asked
+ * (cold-read test, 19 October 2026). Ownership follows the signed client
+ * terms: the client owns its data and every lead, report and brief the
+ * system makes for it; ClearForge keeps the software that makes them.
+ */
 export const HOME_FAQS: Faq[] = [
   {
-    question: 'How does an engagement start, and how is the fee set?',
+    question: 'What does it cost?',
     answer:
-      'Every engagement starts with the Forge Diagnostic: two weeks, one workflow, a fixed fee agreed up front.',
+      'Each step has one fixed price, agreed before it starts. We quote the two-week review on the first call, sized to your business. Building is priced at the end of those two weeks, so you know the full cost before you commit to it.',
   },
   {
-    question: 'How long until a live system?',
+    question: 'Can I stop after the first step?',
     answer:
-      'The Forge Sprint takes 10 to 14 weeks from kickoff to a live production system. It is scoped in the Diagnostic and agreed before any build.',
+      'Yes. Each step is its own decision, starting with a two-week review at one fixed price.',
   },
   {
-    question: 'What is the Adoption Mile?',
+    question: 'What do my people have to do?',
     answer:
-      'Forge Scale, a monthly retainer scoped to the system. You get a named operator, a weekly working cadence, and a live adoption scoreboard. The bar is 70 percent weekly-active adoption by day 90.',
+      'Show us how the work is done today, tell us what a good result looks like, and give feedback on what the AI produces. After launch, your team meets ours once a week until using it is part of the routine.',
   },
   {
-    question: 'Who is it for?',
+    question: 'What if you find nothing worth building?',
     answer:
-      'Mid-market companies with $20M to $500M in revenue, and PE operating teams working across a portfolio.',
+      'We tell you, and you keep everything we found. You still come away knowing where AI will and will not pay in your business.',
   },
   {
-    question: 'What is delivered?',
+    question: 'Who owns what you build?',
     answer:
-      'A live production system built into your workflow, then run through adoption until your team uses it every week.',
+      'You own your data and everything the system makes for you: the leads, reports and briefs. We own the software that makes them, and we run and update it for you. If you stop, you keep everything it made.',
+  },
+  {
+    question: 'Is my data safe?',
+    answer:
+      'Your data stays in your own systems wherever possible, and the AI companies we use do not use it to train their AI. What you share stays confidential. Our security page lists every service we use.',
   },
 ];
 

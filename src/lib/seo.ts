@@ -11,7 +11,7 @@ export function organizationJsonLd() {
     url: SITE_URL,
     slogan: SITE_TAGLINE,
     description:
-      'Founder-led AI consulting and build firm for mid-market companies, $20M to $500M revenue, and PE operating teams.',
+      'We find the jobs in your company that AI can do, build the AI to do them, and stay until your people use it. For companies with $20 million to $500 million in yearly sales, and the private equity firms that own them.',
     // The founder entity is omitted while the identity is hidden: structured
     // data must never assert what the page does not show.
     ...(SHOW_FOUNDER_IDENTITY

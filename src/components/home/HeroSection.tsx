@@ -29,30 +29,27 @@ export function HeroSection() {
           {/* Left: the core statement */}
           <div className="flex flex-col justify-center">
             <p className="cf-enter text-[12px] tracking-[0.16em] text-ghost uppercase">
-              Founder-led AI consulting and build
+              AI consulting and build
             </p>
             <h1
-              className="cf-enter font-display mt-8 max-w-[15ch] text-[clamp(44px,5.4vw,104px)] leading-[1.02] font-medium tracking-[-0.01em] md:mt-10"
+              className="cf-enter font-display mt-8 max-w-[19ch] text-balance text-[clamp(38px,4.3vw,82px)] leading-[1.05] font-medium tracking-[-0.01em] md:mt-10"
               style={{ '--d': '80ms' } as React.CSSProperties}
             >
-              ClearForge builds AI systems your team actually uses and your bottom line{' '}
-              <em className="text-cobalt-bright italic">actually feels.</em>
+              We find the jobs in your company that AI can do, build the AI to do them, and stay{' '}
+              <em className="text-cobalt-bright italic">until your people use it.</em>
             </h1>
             <p
               className="cf-enter mt-8 max-w-[44ch] text-[16px] leading-snug text-ghost/80 md:text-[18px] lg:max-w-none"
               style={{ '--d': '180ms' } as React.CSSProperties}
             >
-              Engagements start with a{' '}
-              <span className="font-semibold text-ghost">
-                <span className="whitespace-nowrap">fixed-fee</span> diagnostic.
-              </span>{' '}
-              <span className="tnum font-semibold text-ghost">Two weeks, one workflow.</span>
+              For companies with $20 million to $500 million in yearly sales, and the private equity
+              firms that own them.
             </p>
             <p
-              className="cf-enter tnum mt-3 max-w-[60ch] text-[16px] leading-snug text-ghost/70"
+              className="cf-enter tnum mt-3 max-w-[60ch] text-[16px] leading-snug font-semibold text-ghost md:text-[18px]"
               style={{ '--d': '220ms' } as React.CSSProperties}
             >
-              For mid-market companies $20M to $500M and PE operating teams.
+              It starts with a two-week review at one fixed price.
             </p>
             <div
               className="cf-enter mt-8 md:mt-10"
