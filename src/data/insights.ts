@@ -1975,42 +1975,230 @@ export const ARTICLES: Article[] = [
   {
     slug: 'pe-value-creation-with-ai',
     topic: 'Private equity',
-    title: 'PE value creation with AI:',
-    titleEmphasis: 'a practical playbook.',
+    title: 'AI value creation in private equity:',
+    titleEmphasis: 'find it, build it, prove it.',
     standfirst:
-      'How operating partners deploy repeatable AI value creation across portfolio companies.',
+      'How operating partners find where AI adds EBITDA in each portfolio company, get it built and used, and prove the gain.',
     summary:
-      'Assess opportunities with one framework, prioritize by value and delivery risk, and deploy proven patterns in sprints.',
+      'AI value creation in private equity, step by step: diligence that starts from earnings, a business case ranked by payback, systems built inside the company, adoption with a date on it, and a monthly scoreboard the operating team can compare across the portfolio.',
     blocks: [
       {
         type: 'lead',
         content: [
-          'PE firms can create outsize value from AI when initiatives are repeatable, KPI-linked, and managed at portfolio level.',
+          'AI value creation in private equity means finding the jobs inside each portfolio company where AI adds earnings, building the systems that do them, and proving the gain in the numbers the sponsor already tracks. The mandate is in place at most firms. The method is what is missing.',
         ],
       },
-      { type: 'heading', text: 'Portfolio-level approach' },
       {
         type: 'paragraph',
         content: [
-          'Assess opportunities across companies with one framework, prioritize by baseline value and delivery risk, and deploy proven patterns in sprints.',
+          "In Accordion's May 2026 survey of 150 PE operating partners, ",
+          { text: '98 percent', bold: true, tnum: true },
+          ' of sponsors had mandated AI adoption, while only about half of portfolio companies were actively implementing (',
+          {
+            text: 'Accordion, The PE AI Adoption Benchmark',
+            href: 'https://www.accordion.com/the-pe-ai-adoption-benchmark/',
+          },
+          '). The gap sits inside the companies: in which jobs to change first, who builds the change, and whether anyone uses it.',
         ],
       },
-      { type: 'heading', text: 'What works' },
+      { type: 'heading', text: 'Where AI adds EBITDA' },
+      {
+        type: 'paragraph',
+        content: [
+          'AI reaches earnings through three levers. Each one runs through specific jobs people do by hand today.',
+        ],
+      },
+      {
+        type: 'table',
+        caption:
+          'The three levers, with examples of jobs AI can take on in an industrial or services company',
+        headers: ['Lever', 'Example jobs', 'What moves'],
+        rows: [
+          [
+            'More revenue from the same team',
+            'Finding companies about to buy, drafting quotes, following up on every open quote',
+            'Win rate, quote speed, new accounts',
+          ],
+          [
+            'Lower cost to serve',
+            'Reading orders and invoices, answering routine customer questions, preparing reports',
+            'Hours per order, error rate',
+          ],
+          [
+            'Less cash tied up',
+            'Chasing overdue invoices, flagging slow-moving stock, catching billing errors',
+            'Days sales outstanding, inventory days',
+          ],
+        ],
+      },
+      { type: 'heading', text: 'Step 1: Start from earnings, not tools' },
+      {
+        type: 'paragraph',
+        content: [
+          'The work starts with the diligence a buyer would run. Commercial diligence tests the market, customers, pricing and pipeline for revenue left behind. Performance diligence follows the work itself: where hours go, what each order costs to serve, and where it waits. Every finding is tied to earnings, so opportunities compare on what they are worth. The same diligence can run on a company before close, so the AI case enters the value creation plan on day one.',
+        ],
+      },
+      { type: 'heading', text: 'Step 2: Rank by worth, cost and payback' },
+      {
+        type: 'paragraph',
+        content: [
+          'Each opportunity gets a business case: the earnings it adds, from a baseline in the company’s own records; the cost to build and run it; and the month the gain covers the cost. Ideas that fail the numbers are retired in writing. The top one leaves with a design and a priced build plan. ',
+          { text: 'How the business case is built', href: '/value' },
+          '.',
+        ],
+      },
+      { type: 'heading', text: 'Step 3: Build inside the company' },
+      {
+        type: 'paragraph',
+        content: [
+          'The system is built with the people who will use it, in the email and software they already work in, over 10 to 14 weeks. A person approves anything that reaches a customer. ',
+          { text: 'The engineering standard', href: '/engineering' },
+          ' covers how each system is kept running, safe and checked.',
+        ],
+      },
+      { type: 'heading', text: 'Step 4: Get people using it' },
+      {
+        type: 'paragraph',
+        content: [
+          'A system nobody uses adds nothing to EBITDA. One named person meets the team every week for the first 90 days, against a goal of 7 in 10 intended users active every week by day 90.',
+        ],
+      },
+      { type: 'heading', text: 'Step 5: Report it the way the sponsor reads results' },
+      {
+        type: 'paragraph',
+        content: [
+          'Each company reports on one scoreboard: how much the system is used, how good its output is, the business result against the baseline, and what it costs to run. The format is the same in every company, so the operating team can compare the portfolio on one page.',
+        ],
+      },
+      { type: 'heading', text: 'Why portfolio AI stalls' },
       {
         type: 'list',
         items: [
-          'Revenue operations automation.',
-          'High-volume operational workflow modernization.',
-          'Governance and KPI reporting tied to value creation goals.',
+          'It starts from a tool, so nobody can say which earnings line it serves.',
+          'The pilot never reaches the work the team does every day.',
+          'Nobody owns adoption after launch, so use fades.',
+          'There is no baseline, so the gain cannot be proven.',
+          'Each company reinvents the approach, so nothing compares across the portfolio.',
         ],
       },
-      { type: 'heading', text: 'Why it matters' },
+      {
+        type: 'pullquote',
+        text: 'The mandate is in place.',
+        emphasis: 'The method is the gap.',
+      },
+      { type: 'heading', text: 'A checklist for operating partners' },
+      {
+        type: 'list',
+        items: [
+          'Every AI opportunity has a business case stated in earnings.',
+          'Every case has a baseline taken from the company’s own records.',
+          'Every build has a named owner for adoption and a usage goal with a date.',
+          'Every system reports use, quality, results and running cost each month.',
+          'Every company reports in the same format.',
+          'Ideas that fail the numbers are retired, with the reason written down.',
+        ],
+      },
       {
         type: 'paragraph',
         content: [
-          'Repeatability is the operating advantage. Portfolio companies should not reinvent execution from scratch every time. The ',
-          { text: 'PE Portfolio Pack', href: '/services' },
-          ' packages this: a portfolio AI scan, a Diagnostic multipack, and a sponsor-level adoption scoreboard.',
+          'This is how ClearForge runs portfolio work: one diagnostic model across the companies you choose, systems built where they pay, and results reported to the operating team. ',
+          { text: 'How portfolio work runs', href: '/private-equity' },
+          '.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'choosing-an-ai-partner-for-portfolio-companies',
+    topic: 'Private equity',
+    title: 'How to choose an AI partner',
+    titleEmphasis: 'for your portfolio companies.',
+    standfirst:
+      'Ten questions an operating partner can ask any AI firm, what a good answer sounds like, and the warning signs.',
+    summary:
+      'A buyer’s guide for private equity operating partners choosing an AI consulting or implementation partner for portfolio companies: ten questions, good answers and warning signs, covering earnings, building, adoption, control, proof, ownership and portfolio reporting.',
+    blocks: [
+      {
+        type: 'lead',
+        content: [
+          'The right AI partner for a portfolio company finds where AI adds earnings, builds it inside the company, gets people using it, and proves the gain each month. These ten questions separate the firms that do that from the ones that sell a tool or a roadmap.',
+        ],
+      },
+      {
+        type: 'table',
+        caption: 'Ten questions to ask an AI partner',
+        headers: ['Question', 'A good answer', 'A warning sign'],
+        rows: [
+          [
+            '1. Where does the work start?',
+            'A short, fixed-price review built on the company’s own numbers',
+            'A platform license or a long strategy phase before anything is priced',
+          ],
+          [
+            '2. How is each opportunity tied to earnings?',
+            'A business case per opportunity, in EBITDA terms, from a baseline in the company’s records',
+            'Benefits quoted as industry averages',
+          ],
+          [
+            '3. Do you build, or only advise?',
+            'The same team scopes, builds and runs the system',
+            'A roadmap handed to the company to carry out',
+          ],
+          [
+            '4. Who works inside the company?',
+            'Engineers who sit with the people doing the work',
+            'Everything run remotely from a template',
+          ],
+          [
+            '5. How do you get people to use it?',
+            'A named owner, weekly meetings and a usage goal with a date',
+            'One training session at launch',
+          ],
+          [
+            '6. Does a person stay in control?',
+            'People approve anything that reaches a customer, and overrides are logged',
+            'Agents that send or change records on their own from day one',
+          ],
+          [
+            '7. How do you prove it worked?',
+            'A monthly scoreboard of use, quality, results and running cost, against the business case',
+            'Activity counts with no baseline',
+          ],
+          [
+            '8. What if nothing is worth building?',
+            'They say so, and the company keeps the findings',
+            'Every review ends in a build proposal',
+          ],
+          [
+            '9. Who owns what you build?',
+            'The company owns its data and every output, and the terms say what happens if it stops',
+            'Outputs locked inside the vendor’s platform',
+          ],
+          [
+            '10. Can it run across the portfolio?',
+            'One model across companies, reported in one format the operating team can compare',
+            'A different approach and report in every company',
+          ],
+        ],
+      },
+      { type: 'heading', text: 'The three questions that matter most' },
+      {
+        type: 'paragraph',
+        content: [
+          'If there is only time for three, ask questions 2, 5 and 7. A partner who ties every opportunity to earnings, owns adoption, and reports the result each month is a partner whose work will show up in the value creation plan.',
+        ],
+      },
+      { type: 'heading', text: 'How ClearForge answers them' },
+      {
+        type: 'paragraph',
+        content: [
+          'Our answers are on the page, not behind a sales call: ',
+          { text: 'how we find and measure the value', href: '/value' },
+          ', ',
+          { text: 'how we build', href: '/engineering' },
+          ', and ',
+          { text: 'how portfolio work runs', href: '/private-equity' },
+          '.',
         ],
       },
     ],

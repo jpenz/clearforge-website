@@ -6,8 +6,10 @@ import { ArticleBody } from '@/components/ui/ArticleBody';
 import { Container } from '@/components/ui/Container';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { SectionBand } from '@/components/ui/SectionBand';
+import { INSIGHT_PUBLISHED, INSIGHT_UPDATED } from '@/data/insight-dates';
 import { ARTICLES, getArticle, getReadNext } from '@/data/insights';
 import { SHOW_FOUNDER_IDENTITY } from '@/data/site';
+import { articleJsonLd, breadcrumbJsonLd, JsonLdScriptProps } from '@/lib/seo';
 
 export function generateStaticParams() {
   return ARTICLES.map(({ slug }) => ({ slug }));
@@ -22,6 +24,12 @@ export async function generateMetadata({
   return {
     title: `${article.title} ${article.titleEmphasis ?? ''}`.trim(),
     description: article.standfirst,
+    alternates: { canonical: `/insights/${article.slug}` },
+    openGraph: {
+      type: 'article',
+      publishedTime: INSIGHT_PUBLISHED[article.slug],
+      modifiedTime: INSIGHT_UPDATED[article.slug] ?? INSIGHT_PUBLISHED[article.slug],
+    },
   };
 }
 
@@ -31,9 +39,31 @@ export default async function ArticlePage({ params }: PageProps<'/insights/[slug
   if (!article) notFound();
 
   const readNext = getReadNext(article.slug);
+  const headline = `${article.title} ${article.titleEmphasis ?? ''}`.trim();
 
   return (
     <>
+      <script
+        {...JsonLdScriptProps(
+          articleJsonLd({
+            slug: article.slug,
+            headline,
+            description: article.summary,
+            section: article.topic,
+            published: INSIGHT_PUBLISHED[article.slug],
+            updated: INSIGHT_UPDATED[article.slug],
+          }),
+        )}
+      />
+      <script
+        {...JsonLdScriptProps(
+          breadcrumbJsonLd([
+            { name: 'Home', path: '/' },
+            { name: 'Insights', path: '/insights' },
+            { name: headline, path: `/insights/${article.slug}` },
+          ]),
+        )}
+      />
       {/* Label band */}
       <PageFrame aria-label="Article context">
         <div className="flex items-center justify-between gap-4 px-5 py-5 md:px-10">

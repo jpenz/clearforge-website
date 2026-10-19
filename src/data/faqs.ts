@@ -104,6 +104,16 @@ export const PE_FAQS: Faq[] = [
       'With them. The system is built into the workflow the operating team already runs, and adoption is the metric we are graded on, so a build that management will not use is a failed build. The sponsor gets visibility; the company gets the working system.',
   },
   {
+    question: 'How does AI show up in EBITDA?',
+    answer:
+      'Through three levers: more revenue from the same sales team, lower cost to serve each order, and less cash tied up in the work. Each opportunity gets a business case stated in earnings, from a baseline in the company’s own records, so it can go straight into the value creation plan.',
+  },
+  {
+    question: 'Can you assess AI value in a company we are buying?',
+    answer:
+      'Yes. The same commercial and performance diligence that ranks AI opportunities in a portfolio company can run on a target before close, so the AI case is priced into the value creation plan from day one.',
+  },
+  {
     question: 'How is portfolio work priced?',
     answer:
       'Scoped with the sponsor. Single-company work starts with a fixed-fee diagnostic that prices the build before you commit. Portfolio work is scoped against the number of companies and the depth of the scan.',

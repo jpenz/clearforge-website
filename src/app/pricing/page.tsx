@@ -14,7 +14,7 @@ import {
 import { faqJsonLd, JsonLdScriptProps, pricingJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Engagements',
+  title: 'How We Charge for AI Consulting and Build',
   description:
     'How ClearForge engagements work: a fixed-fee two-week diagnostic first, then a build sprint scoped before you commit, then adoption and managed operations retainers.',
 };

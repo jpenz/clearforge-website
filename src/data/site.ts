@@ -1,5 +1,5 @@
 export const SITE_NAME = 'ClearForge';
-export const SITE_TAGLINE = 'AI systems your team actually uses';
+export const SITE_TAGLINE = 'AI consulting and build for mid-market and PE-backed companies';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://clearforge.ai';
 
 /** The one canonical booking CTA label. Never vary it. */

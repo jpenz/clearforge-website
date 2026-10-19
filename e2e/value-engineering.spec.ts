@@ -70,3 +70,24 @@ test('each services stage links to the page that explains it', async ({ page }) 
     await expect(page.getByRole('link', { name })).toHaveAttribute('href', href);
   }
 });
+
+test('insight pages carry article and breadcrumb data, and the firm is named plainly', async ({
+  page,
+}) => {
+  await page.goto('/insights/pe-value-creation-with-ai');
+  const data = await page
+    .locator('script[type="application/ld+json"]')
+    .evaluateAll((nodes) => nodes.map((node) => JSON.parse(node.textContent ?? '{}')));
+  const article = data.find((d) => d['@type'] === 'Article');
+  expect(article?.headline).toMatch(/AI value creation in private equity/);
+  expect(article?.datePublished).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+  expect(data.find((d) => d['@type'] === 'BreadcrumbList')?.itemListElement).toHaveLength(3);
+
+  await page.goto('/');
+  const home = await page
+    .locator('script[type="application/ld+json"]')
+    .evaluateAll((nodes) => nodes.map((node) => JSON.parse(node.textContent ?? '{}')));
+  const org = home.find((d) => d['@type'] === 'ProfessionalService');
+  expect(org?.legalName).toBe('Clearforge AI LLC');
+  expect(org?.knowsAbout).toContain('AI value creation in private equity');
+});

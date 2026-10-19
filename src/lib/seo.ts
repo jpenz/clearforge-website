@@ -1,6 +1,12 @@
 import type { Faq } from '@/data/faqs';
 import { PRICING_TIERS } from '@/data/pricing';
-import { SHOW_FOUNDER_IDENTITY, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/data/site';
+import {
+  FOUNDER_EMAIL,
+  SHOW_FOUNDER_IDENTITY,
+  SITE_NAME,
+  SITE_TAGLINE,
+  SITE_URL,
+} from '@/data/site';
 
 export function organizationJsonLd() {
   return {
@@ -8,8 +14,32 @@ export function organizationJsonLd() {
     '@type': 'ProfessionalService',
     '@id': `${SITE_URL}/#organization`,
     name: SITE_NAME,
+    legalName: 'Clearforge AI LLC',
+    alternateName: ['ClearForge AI', 'Clearforge AI'],
     url: SITE_URL,
+    email: FOUNDER_EMAIL,
     slogan: SITE_TAGLINE,
+    areaServed: { '@type': 'Country', name: 'United States' },
+    audience: [
+      {
+        '@type': 'BusinessAudience',
+        name: 'Private equity firms and their portfolio companies',
+      },
+      {
+        '@type': 'BusinessAudience',
+        name: 'Mid-market companies with $20 million to $500 million in revenue',
+      },
+    ],
+    knowsAbout: [
+      'AI value creation in private equity',
+      'AI opportunity assessment',
+      'Commercial and performance due diligence',
+      'AI business case and ROI measurement',
+      'AI agent development',
+      'Forward-deployed engineering',
+      'AI adoption and change management',
+      'Managed AI operations',
+    ],
     description:
       'We find the jobs in your company that AI can do, build the AI to do them, and stay until your people use it. For companies with $20 million to $500 million in yearly sales, and the private equity firms that own them.',
     // The founder entity is omitted while the identity is hidden: structured
@@ -134,6 +164,48 @@ export function servicesJsonLd() {
           name: 'Mid-market companies and private equity operating teams',
         },
       },
+    })),
+  };
+}
+
+/** Article structured data for an insights page. The firm is the author while the founder identity is hidden. */
+export function articleJsonLd(args: {
+  slug: string;
+  headline: string;
+  description: string;
+  section: string;
+  published?: string;
+  updated?: string;
+}) {
+  const url = `${SITE_URL}/insights/${args.slug}`;
+  const org = { '@id': `${SITE_URL}/#organization` };
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: args.headline,
+    description: args.description,
+    articleSection: args.section,
+    url,
+    mainEntityOfPage: url,
+    ...(args.published ? { datePublished: args.published } : {}),
+    ...(args.updated || args.published ? { dateModified: args.updated ?? args.published } : {}),
+    author: SHOW_FOUNDER_IDENTITY
+      ? { '@type': 'Person', name: 'James Penz', url: `${SITE_URL}/about` }
+      : { '@type': 'Organization', name: SITE_NAME, ...org },
+    publisher: { '@type': 'Organization', name: SITE_NAME, ...org },
+  };
+}
+
+/** Breadcrumb trail, from the home page down. */
+export function breadcrumbJsonLd(items: Array<{ name: string; path: string }>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: `${SITE_URL}${item.path}`,
     })),
   };
 }
