@@ -13,9 +13,9 @@ import { PE_FAQS } from '@/data/faqs';
 import { faqJsonLd, JsonLdScriptProps } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'AI for PE Portfolio Companies',
+  title: 'AI Value Creation for Private Equity Portfolio Companies',
   description:
-    'One diagnostic model across the portfolio, systems built into the companies that need them, and adoption per company reported to the sponsor. Built for PE operating teams.',
+    'For PE operating partners: find where AI adds EBITDA in each portfolio company, build it, and report results in one format. AI value diligence before close.',
   alternates: { canonical: '/private-equity' },
 };
 
@@ -72,12 +72,12 @@ export default function PrivateEquityPage() {
           <div className="grid lg:grid-cols-[2fr_1fr]">
             <div className="border-hairline-ghost px-5 pt-10 pb-10 md:px-10 md:pt-14 md:pb-14 lg:border-r">
               <h1 className="font-display max-w-[20ch] text-balance text-[clamp(38px,4.2vw,76px)] leading-[1.05] font-medium tracking-[-0.01em]">
-                AI across the portfolio, not a{' '}
-                <em className="text-cobalt-bright italic">pilot graveyard.</em>
+                Find where AI adds earnings across the portfolio, build it, and{' '}
+                <em className="text-cobalt-bright italic">prove it.</em>
               </h1>
               <p className="mt-6 max-w-[56ch] text-[16px] leading-relaxed text-ghost/80">
-                One diagnostic model across the companies you choose, systems built where they pay,
-                and adoption per company reported back to the operating team.
+                One diagnostic model across the companies you choose, systems built where they add
+                EBITDA, and results reported back to the operating team in one format.
               </p>
             </div>
             <div className="flex flex-col justify-center border-t border-hairline-ghost px-5 py-8 md:px-10 md:py-14 lg:border-t-0">

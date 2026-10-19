@@ -10,7 +10,7 @@ import { offeringId, PE_PACK, SERVICE_STAGES } from '@/data/services';
 import { JsonLdScriptProps, servicesJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Services',
+  title: 'AI Consulting Services: Find, Build, Adopt and Run',
   description:
     'One catalog, four stages: Diagnose, Build, Adopt, Run. Engagements start with a fixed-fee two-week diagnostic and are scoped before any build.',
 };

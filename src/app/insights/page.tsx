@@ -6,7 +6,7 @@ import { SectionBand } from '@/components/ui/SectionBand';
 import { ARTICLES } from '@/data/insights';
 
 export const metadata: Metadata = {
-  title: 'Insights',
+  title: 'AI Insights for Mid-Market and PE Leaders',
   description:
     'Long reads on AI systems, adoption, and what they cost. Written by the founder. No filler.',
 };

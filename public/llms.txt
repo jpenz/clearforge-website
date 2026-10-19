@@ -1,37 +1,53 @@
 # ClearForge
 
-> ClearForge builds AI systems your team actually uses. Founder-led AI consulting and build firm for mid-market companies ($20M to $500M revenue) and PE operating teams. The practice background is Bain's AI and Automation practice, with earlier work at EY and Capgemini. Pricing is scoped in a fixed-fee two-week diagnostic before any build. The deliverable is the working system, not a report.
+> ClearForge (Clearforge AI LLC) is an AI consulting and build firm for mid-market companies with $20 million to $500 million in revenue, and for the private equity firms that own them. We find the jobs in a company that AI can do, build the AI to do them, and stay until the people use it. Work starts with a two-week review at one fixed price. The practice background is Bain's AI and Automation practice, with earlier work at EY and Capgemini.
 
-## Engagement model
+## What ClearForge does, in four steps
 
-- Forge Diagnostic: fixed fee, 2 weeks. Where every engagement starts; ends with a scoped, priced build plan.
-- Eval and Reliability Audit: fixed fee, 2 weeks, for AI systems a company already built (eval harness, reliability gates, a fix plan).
-- Forge Sprint: 10 to 14 weeks from kickoff to a live production system, scoped in the Diagnostic. Ships with daily output checks and step-by-step run tracing.
-- Forge Scale: monthly adoption retainer (the Adoption Mile: named operator, weekly working cadence, live adoption scoreboard). Top tier is a Fractional Chief AI Officer engagement.
-- Forge Run: monthly managed agent operations per system (monitoring, daily output checks, SLAs, model upgrades).
-- PE Portfolio Pack: portfolio AI scan, Diagnostic multipack, sponsor-level adoption scoreboard. Scoped with the sponsor.
+1. Find it (2 weeks, one fixed price): commercial and performance diligence that finds where AI adds the most earnings, a business case per opportunity ranked by worth, cost and payback, and a priced plan for the one workflow worth building first. If nothing is worth building, we say so, and the client keeps the findings. A full business valuation is available on request.
+2. Build it (10 to 14 weeks): forward-deployed engineers build the system with the people who will use it, in the email and software they already work in. A person approves anything that reaches a customer.
+3. Get the team using it (first 90 days): one person from ClearForge meets the team every week. The goal is 7 in 10 intended users active every week by day 90.
+4. Keep it running (monthly): daily checks on what each system produced, step-by-step run tracing, model updates, and a monthly report of use, quality, results and running cost against the business case.
 
-## The standard
+Catalog names: Forge Diagnostic (step 1), Forge Sprint (step 2), Forge Scale (step 3, with a Fractional Chief AI Officer tier), Forge Run (step 4), and the Eval and Reliability Audit for AI systems a company already built. Fees: each step is priced before it starts; no prices are published.
 
-- 70 percent weekly-active adoption bar by day 90.
-- 10 to 14 weeks from kickoff to a live production system.
+## For private equity
+
+- AI value creation across a portfolio: one diagnostic model run across the companies the sponsor chooses, so results compare.
+- AI reaches EBITDA through three levers: more revenue from the same team, lower cost to serve, and less cash tied up in the work. Each business case is stated in earnings from the company's own records, so it can go into the value creation plan.
+- AI value diligence on a target before close, so the AI case is in the value creation plan from day one.
+- Results reported to the operating team in one format per company: use, quality, results and running cost.
+- Offer name: PE Portfolio Pack (portfolio AI scan, diagnostic multipack, sponsor scoreboard), scoped with the sponsor.
+
+## Results (anonymized client records)
+
+- A $4B industrial conglomerate: an AI system that reads news of new plants, expansions and building projects, picks the ones that need the company's products, and writes each salesperson a one-page brief. Leads that fit what the company sells rose from 19 a month to 613 a month by month six; 1,181 across three divisions in six months.
+- A home and commercial services firm: 42 businesses found, 31 contacted, 18 quoted, 7 recurring accounts won.
+
+## Ownership and data
+
+- The client owns its data and everything the system produces for it (leads, reports, briefs). ClearForge owns the software that produces them, and runs and updates it. If the client stops, it keeps everything the system made.
+- Data stays in the client's systems wherever possible. Model providers run under API terms that exclude client data from training.
 
 ## Pages
 
-- [Services](https://clearforge.ai/services): The catalog as a journey: Diagnose, Build, Adopt, Run.
-- [Value and return](https://clearforge.ai/value): How AI opportunities are found and ranked: commercial and performance diligence (with a full business valuation on request), a business case per opportunity ranked by worth, cost and payback, and the scoreboard that measures adoption, quality and the business result after launch.
-- [Engineering standard](https://clearforge.ai/engineering): Forward-deployed engineers and the production practices in client systems, answered as five questions: will it keep running, can it touch our systems safely, does a person stay in control, how do you know it is right, and who watches it after launch.
-- [Engagements](https://clearforge.ai/pricing): How engagements work and what each includes.
-- [Proof](https://clearforge.ai/proof): Case studies with real numbers, anonymized clients.
-- [Insights](https://clearforge.ai/insights): Long reads on AI systems, adoption, and what they cost.
-- [About](https://clearforge.ai/about): Founder-led. One standard.
-- [Book a 30-min intro](https://clearforge.ai/contact): Inline scheduling.
-- [Forge Intelligence](https://clearforge.ai/discover): Free AI workflow-mapping tool.
-- [Scorecard](https://clearforge.ai/scorecard): Free AI readiness scorecard, 10 questions across 5 pillars.
-- [Private equity](https://clearforge.ai/private-equity): AI across a PE portfolio. One diagnostic model across companies, systems built where they pay, adoption per company reported to the sponsor. Includes the PE Portfolio Pack and a sponsor FAQ.
-- [Security](https://clearforge.ai/security): Data handling, named subprocessors, no training on your data, DPA on request.
-- [Industries](https://clearforge.ai/industries): 20 industry workflow patterns, each with the system we would build first and labeled benchmark ranges.
-- [Privacy](https://clearforge.ai/privacy) and [Terms](https://clearforge.ai/terms): Plain-language policies.
+- [Home](https://clearforge.ai/): What we do, a real example, the four steps, why to trust it, straight answers on cost and risk, and how to start.
+- [How it works](https://clearforge.ai/services): The four steps with each offering, term and how it is billed.
+- [Private equity](https://clearforge.ai/private-equity): AI value creation for PE portfolio companies, with a sponsor FAQ.
+- [Value and return](https://clearforge.ai/value): How AI opportunities are found, ranked and measured: diligence, the business case, and the return scoreboard.
+- [Engineering standard](https://clearforge.ai/engineering): Forward-deployed engineers and the production practices in client systems, answered as five questions a technical reviewer asks.
+- [Results](https://clearforge.ai/proof): Case studies with figures from client records, anonymized.
+- [How we charge](https://clearforge.ai/pricing): How each step is billed.
+- [AI value creation in private equity](https://clearforge.ai/insights/pe-value-creation-with-ai): Find it, build it, prove it, step by step.
+- [How to choose an AI partner for portfolio companies](https://clearforge.ai/insights/choosing-an-ai-partner-for-portfolio-companies): Ten questions for operating partners.
+- [How PE firms turn AI experiments into EBITDA](https://clearforge.ai/insights/pe-ai-ebitda-playbook): Value pools, readiness, plays and governance.
+- [Insights](https://clearforge.ai/insights): Long reads on AI systems, adoption and cost.
+- [About](https://clearforge.ai/about): The firm and its background.
+- [Book a 30-min intro](https://clearforge.ai/contact): Scheduling.
+- [Map the Workflow](https://clearforge.ai/discover): Free tool that finds one job in a business AI could take on.
+- [Take the scorecard](https://clearforge.ai/scorecard): Free AI readiness scorecard, 10 questions.
+- [Security](https://clearforge.ai/security): Data handling, named subprocessors, no training on client data, DPA on request.
+- [Industries](https://clearforge.ai/industries): Workflow patterns by industry, with the system we would build first.
 
 <!-- Founder identity is hidden (SHOW_FOUNDER_IDENTITY in src/data/site.ts,
      2026-09-12). If that flag is turned back on, restore the founder

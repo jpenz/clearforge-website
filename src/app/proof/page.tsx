@@ -10,7 +10,7 @@ import { BLUEPRINTS } from '@/data/blueprints';
 import { CASE_STUDIES } from '@/data/case-studies';
 
 export const metadata: Metadata = {
-  title: 'Proof',
+  title: 'AI Case Studies and Results',
   description:
     'Case studies with real numbers and anonymized clients: 1,181 qualified opportunities across 3 divisions in 6 months, a commercial pipeline rebuilt from zero, a portfolio-wide AI diagnostic.',
 };
