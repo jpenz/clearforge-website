@@ -52,7 +52,7 @@ export const PRICING_FAQS: Faq[] = [
   {
     question: 'What does Forge Run cover?',
     answer:
-      'Managed agent operations after a build: monitoring, production evals, SLAs, and model upgrades. It runs as a monthly operations retainer, scoped per system.',
+      'Managed agent operations after a build: monitoring, daily output checks, SLAs, and model upgrades. It runs as a monthly operations retainer, scoped per system.',
   },
   {
     question: 'How is pricing set?',
@@ -81,7 +81,7 @@ export const PE_FAQS: Faq[] = [
   {
     question: 'How do you measure whether portfolio companies actually adopt what gets built?',
     answer:
-      'Weekly-active usage, reported to the sponsor. The bar is 70 percent of the intended users active weekly by day 90. It is tracked on a live adoption scoreboard so the operating team sees which companies are using their systems and which are not, without asking management for a status update.',
+      "Each company's use of its systems, reported to the sponsor on a live adoption scoreboard. The target is 70 percent of the intended users active weekly by day 90. The operating team sees which companies are using their systems and which are not, without asking management for a status update.",
   },
   {
     question: 'How fast can one portfolio company get to a live system?',

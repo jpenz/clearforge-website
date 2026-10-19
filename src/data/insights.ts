@@ -58,7 +58,7 @@ export const ARTICLES: Article[] = [
         content: [
           'Build work is scoped, not listed. A Forge Sprint is ',
           { text: 'scoped in the Diagnostic and agreed before any build.', bold: true },
-          ' Every Sprint ships with an eval harness and reliability gates as a named deliverable, not an add-on.',
+          ' Every Sprint ships with daily output checks and step-by-step run tracing as named deliverables.',
         ],
       },
       { type: 'heading', text: 'The tiers' },
@@ -101,8 +101,8 @@ export const ARTICLES: Article[] = [
       {
         type: 'list',
         items: [
-          'An eval harness that checks outputs against a test set.',
-          'Reliability gates the system must pass before release.',
+          'A daily check on what the system produced, beyond whether it ran.',
+          'Step-by-step tracing of every run, with each model call recorded.',
           'A live production system, not a report.',
         ],
       },
@@ -161,7 +161,7 @@ export const ARTICLES: Article[] = [
         items: [
           'A named operator who owns adoption.',
           'A weekly working cadence with the team.',
-          'A live adoption scoreboard tracking weekly-active use.',
+          "A live adoption scoreboard tracking each person's use of the system.",
         ],
       },
       {
@@ -173,7 +173,7 @@ export const ARTICLES: Article[] = [
       {
         type: 'paragraph',
         content: [
-          'The scoreboard tracks weekly-active use against the 70 percent bar. Everyone reads the same number every week. When the number stalls, the weekly cadence exists to find out why and fix it.',
+          "The scoreboard tracks each person's use of the system, and the 70 percent bar is the target it is read against. Everyone reads the same numbers every week. When use stalls, the weekly cadence exists to find out why and fix it.",
         ],
       },
       {
@@ -189,16 +189,17 @@ export const ARTICLES: Article[] = [
   {
     slug: 'every-sprint-ships-with-an-eval-harness',
     topic: 'Reliability',
-    title: 'Every Sprint ships with',
-    titleEmphasis: 'an eval harness.',
+    title: 'What an eval harness does,',
+    titleEmphasis: 'and when you need one.',
     standfirst:
-      'What eval harnesses and reliability gates are, and why they are a named deliverable.',
-    summary: 'What eval harnesses and reliability gates are, and why they are a named deliverable.',
+      'What eval harnesses and reliability gates are, and when a production AI system needs them.',
+    summary:
+      'What eval harnesses and reliability gates are, and when a production AI system needs them.',
     blocks: [
       {
         type: 'lead',
         content: [
-          'Every Forge Sprint ships with an eval harness and reliability gates as a named deliverable. Not an option, not an add-on. This article explains what those two things are and why they are in the contract.',
+          'An eval harness and reliability gates are how a team proves an AI system still works after every change. This article explains what those two things are and how to add them to a system you already run.',
         ],
       },
       { type: 'heading', text: 'The eval harness' },
@@ -320,8 +321,8 @@ export const ARTICLES: Article[] = [
         type: 'list',
         items: [
           'The system is built inside the workflow the team already runs.',
-          'An eval harness checks outputs against a test set from the first build week.',
-          'Reliability gates are set and must pass before production release.',
+          'Every run is traced step by step from the first build week.',
+          'Daily output checks start on the first day in production.',
           'Cutover lands the system in production, live for the team.',
         ],
       },
@@ -1916,7 +1917,7 @@ export const ARTICLES: Article[] = [
         content: [
           'A managed operations cadence retrains and tunes workflows based on live outcomes. This creates compounding intelligence and stronger performance each cycle. That is what ',
           { text: 'Forge Run', href: '/services' },
-          ' does after a build: monitoring, production evals, SLAs, and model upgrades, on a monthly retainer scoped to the system.',
+          ' does after a build: monitoring, daily output checks, SLAs, and model upgrades, on a monthly retainer scoped to the system.',
         ],
       },
       {

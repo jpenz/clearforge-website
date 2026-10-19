@@ -105,7 +105,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         paragraphs: [
           'ClearForge built an AI system for opportunity identification and qualification. It went from kickoff to a live production system in 10 to 14 weeks.',
           "The system watched capital projects and industrial demand signals across 20+ states, matched each opportunity to the company's actual product lines and territories, and generated a rep-ready playbook for each account. Sales feedback on every playbook fed back into the scoring.",
-          'It shipped with an eval harness and reliability gates. Outputs were checked against a test set before release. All three divisions worked from the same system.',
+          'Every playbook is checked daily for missing fields and sources, and research claims are checked against the pages they cite. All three divisions worked from the same system.',
         ],
       },
       {
@@ -122,7 +122,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         figure: '70%',
         figureLabel: 'Weekly-active adoption bar by day 90',
         paragraphs: [
-          'Adoption ran on the Adoption Mile. A named operator owned it. The teams met on a weekly working cadence. A live adoption scoreboard tracked weekly-active use.',
+          "Adoption ran on the Adoption Mile. A named operator owned it. The teams met on a weekly working cadence. A live scoreboard tracked each rep's activity and progress through the pipeline.",
           'The engagement was built to the 70 percent weekly-active adoption bar by day 90. That is the standard the firm builds to.',
         ],
       },
@@ -188,7 +188,6 @@ export const CASE_STUDIES: CaseStudy[] = [
         paragraphs: [
           'ClearForge built an AI system to identify commercial targets and support outreach through a four-stage funnel. It went from kickoff to a live production system in 10 to 14 weeks.',
           'The system qualified inbound and outbound opportunities, ran coordinated outreach and follow-up, and prepped every call. The owner worked the pipeline from one weekly view: leads, quotes, follow-ups, and account expansion.',
-          'It shipped with an eval harness and reliability gates. Outputs were checked against a test set before release.',
         ],
       },
       {
@@ -205,7 +204,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         figure: '70%',
         figureLabel: 'Weekly-active adoption bar by day 90',
         paragraphs: [
-          'Adoption ran on the Adoption Mile. A named operator owned it. The team met on a weekly working cadence. A live adoption scoreboard tracked weekly-active use.',
+          'Adoption ran on the Adoption Mile. A named operator owned it. The team met on a weekly working cadence. A live adoption scoreboard tracked use of the system.',
           'The engagement was built to the 70 percent weekly-active adoption bar by day 90. That is the standard the firm builds to.',
         ],
       },

@@ -144,7 +144,7 @@ test.describe('the header tier below md', () => {
 test.describe('no horizontal overflow at 390', () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
-  for (const route of ['/private-equity', '/proof', '/services']) {
+  for (const route of ['/', '/private-equity', '/proof', '/services', '/value', '/engineering']) {
     test(`${route} fits the viewport`, async ({ page }) => {
       await page.goto(route);
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));

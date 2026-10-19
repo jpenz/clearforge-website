@@ -954,12 +954,12 @@ export function getIndustry(slug: string) {
 /** Shared across all industries: every build ships the same named parts. */
 export const INDUSTRY_DELIVERABLES = [
   {
-    name: 'Eval harness',
-    detail: 'Checks agent outputs against a test set before release.',
+    name: 'Daily output check',
+    detail: 'Checks what the system produced every day, beyond whether it ran.',
   },
   {
-    name: 'Reliability gates',
-    detail: 'Hard checks the system must pass before it ships.',
+    name: 'Run tracing',
+    detail: 'Every run traced step by step, with each model call recorded.',
   },
   {
     name: 'Live production system',

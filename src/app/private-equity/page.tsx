@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import type { ReactNode } from 'react';
 import { BookCallButton } from '@/components/functional/BookCallButton';
 import { ArrowLink } from '@/components/ui/ArrowLink';
 import { Container } from '@/components/ui/Container';
 import { GapPair } from '@/components/ui/GapPair';
+import { LedgerRow } from '@/components/ui/LedgerRow';
 import { PageFrame } from '@/components/ui/PageFrame';
 import { Plate } from '@/components/ui/Plate';
 import { SectionBand } from '@/components/ui/SectionBand';
@@ -15,7 +15,7 @@ import { faqJsonLd, JsonLdScriptProps } from '@/lib/seo';
 export const metadata: Metadata = {
   title: 'AI for PE Portfolio Companies',
   description:
-    'One diagnostic model across the portfolio, systems built into the companies that need them, and weekly-active adoption reported to the sponsor. Built for PE operating teams.',
+    'One diagnostic model across the portfolio, systems built into the companies that need them, and adoption per company reported to the sponsor. Built for PE operating teams.',
   alternates: { canonical: '/private-equity' },
 };
 
@@ -46,47 +46,9 @@ const SEQUENCE = [
     name: 'Sponsor scoreboard',
     eyebrow: 'Reported to the operating team',
     detail:
-      'Weekly-active adoption per company, reported to the operating team. The target is 70 percent by day 90.',
+      'Adoption per company, reported to the operating team. The target is 70 percent weekly-active use by day 90.',
   },
 ];
-
-interface LedgerRowProps {
-  /** The ledger mark. Decorative: the eyebrow beside it already names the step. */
-  marker: string;
-  eyebrow: string;
-  title: ReactNode;
-  children: ReactNode;
-  /** Omit the bottom rule on the last row of a run. */
-  rule?: boolean;
-}
-
-/**
- * One row of the register: the ledger mark set large and quiet on the
- * left, the step and its conclusion in the middle, the detail across a
- * vertical hairline on the right. The mark is aria-hidden because the
- * eyebrow beside it carries the same step number as real text.
- */
-function LedgerRow({ marker, eyebrow, title, children, rule = true }: LedgerRowProps) {
-  return (
-    <div
-      className={`grid items-start gap-x-8 gap-y-5 px-5 py-8 md:px-10 md:py-12 lg:grid-cols-[minmax(120px,0.55fr)_1.45fr_2fr] lg:gap-x-12 ${
-        rule ? 'border-b border-hairline' : ''
-      }`}
-    >
-      <p
-        aria-hidden="true"
-        className="font-display tnum text-[clamp(64px,7vw,110px)] leading-[0.85] font-medium text-ink/15 select-none"
-      >
-        {marker}
-      </p>
-      <div>
-        <p className="tnum text-[12px] tracking-[0.16em] text-ink/70 uppercase">{eyebrow}</p>
-        <div className="mt-3">{title}</div>
-      </div>
-      <div className="lg:border-l lg:border-hairline lg:pl-12">{children}</div>
-    </div>
-  );
-}
 
 export default function PrivateEquityPage() {
   const caseC = CASE_STUDIES[2];
@@ -115,7 +77,7 @@ export default function PrivateEquityPage() {
               </h1>
               <p className="mt-6 max-w-[56ch] text-[16px] leading-relaxed text-ghost/80">
                 One diagnostic model across the companies you choose, systems built where they pay,
-                and weekly-active adoption reported back to the operating team.
+                and adoption per company reported back to the operating team.
               </p>
             </div>
             <div className="flex flex-col justify-center border-t border-hairline-ghost px-5 py-8 md:px-10 md:py-14 lg:border-t-0">
@@ -180,7 +142,7 @@ export default function PrivateEquityPage() {
                     70<span className="align-top text-[0.5em]">%</span>
                   </>
                 }
-                label="Weekly-active adoption target by day 90, reported per company"
+                label="Weekly-active adoption target by day 90, per company"
               />
             </div>
             <div className="px-5 py-8 md:px-10 md:py-10">

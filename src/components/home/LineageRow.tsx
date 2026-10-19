@@ -4,8 +4,10 @@ import { PageFrame } from '@/components/ui/PageFrame';
  * Lineage band: where the founder comes from, and how we build. Research
  * verdict 2026-08-20: elite firms signal named verifiable practices, not
  * tool inventories (a raw tools list fails the "can nobody else say it"
- * test). Every practice here is factual: evals are a named Sprint
- * deliverable and adoption is the metric every build is graded on. The 70
+ * test). Every practice here is factual: the daily output check runs on
+ * every live system and adoption is the metric every build is graded on.
+ * ("Evals ship with every sprint" came off 2026-10-18: no client system
+ * had prompt evals yet. Restore it once they do.) The 70
  * percent target is stated once, on the adoption plate, so this band does
  * not restate it two screens early. The stack stays as a quiet supporting line. Named tools
  * are the ones a mid-market buyer recognizes; specialized research tooling
@@ -15,7 +17,7 @@ import { PageFrame } from '@/components/ui/PageFrame';
  */
 const TEAM_FROM = ['Bain & Company', 'EY', 'Capgemini'];
 const PRACTICES = [
-  'Evals ship with every sprint',
+  'Every live system is checked daily on its output',
   'Adoption is the metric we are graded on',
   'The deliverable is a running system, not a report',
 ];
