@@ -79,7 +79,8 @@ export const STANDARD_QUESTIONS: StandardQuestion[] = [
     id: 'correct',
     step: '04',
     question: 'How do you know it is right?',
-    answer: 'Research claims are checked against their sources, and every playbook is checked daily.',
+    answer:
+      'Research claims are checked against their sources, and every playbook is checked daily.',
     points: [
       'Claims a cited source does not support are removed before anyone reads them.',
       'Users rate what the system produced, and the ratings feed the scoreboard.',
