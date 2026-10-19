@@ -34,7 +34,7 @@ export const PRICING_TIERS: PricingTier[] = [
     index: '03',
     name: 'Forge Sprint',
     subtitle:
-      'A live production system. Ships with an eval harness and reliability gates as a named deliverable.',
+      'A live production system. Ships with daily output checks and step-by-step run tracing as named deliverables.',
     term: '10 to 14 weeks',
     price: 'Scoped in the Diagnostic',
     minPrice: 75000,
@@ -52,7 +52,7 @@ export const PRICING_TIERS: PricingTier[] = [
     index: '05',
     name: 'Forge Run',
     subtitle:
-      'Managed agent operations after a build. Monitoring, production evals, SLAs, model upgrades.',
+      'Managed agent operations after a build. Monitoring, daily output checks, SLAs, model upgrades.',
     term: 'Per system · Monthly',
     price: 'Monthly, per system',
     priceDetail: 'per system per month',

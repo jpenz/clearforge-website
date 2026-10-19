@@ -18,12 +18,12 @@ export interface ValueStep {
 export const VALUE_STEPS: ValueStep[] = [
   {
     step: '01',
-    name: 'Value the business',
-    title: 'Our diligence values your business first, then shows where AI adds the most earnings.',
+    name: 'Find the value',
+    title: 'Our diligence ties every finding to earnings, then shows where AI adds the most.',
     points: [
-      'A valuation sets earnings and enterprise value as the baseline.',
       'Commercial diligence tests market, customers, pricing and pipeline for revenue left behind.',
       'Performance diligence measures the hours, cost to serve and wait time in the work.',
+      'A full valuation of the business is added when you ask for one.',
     ],
   },
   {
@@ -85,7 +85,7 @@ export const VALUE_FAQS: Faq[] = [
   {
     question: 'What does the diligence cover?',
     answer:
-      'A valuation of the business, then two diligence passes. The commercial pass covers market, customers, pricing and pipeline. The performance pass covers the hours, cost and hand-offs in the work. Each finding is tied to earnings, so opportunities compare on what they are worth.',
+      'Two diligence passes. The commercial pass covers market, customers, pricing and pipeline. The performance pass covers the hours, cost and hand-offs in the work. Each finding is tied to earnings, so opportunities compare on what they are worth. A full business valuation is added on request.',
   },
   {
     question: 'How long does it take to find the opportunities?',

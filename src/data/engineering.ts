@@ -50,10 +50,8 @@ export const STANDARD_QUESTIONS: StandardQuestion[] = [
     answer:
       'Each step saves its result, so a rerun after a failure redoes only the unfinished work.',
     points: [
-      'Model and database calls retry on their own, up to five times, before a run fails.',
-      'Runs execute in a queued pool of workers, and each business line generates in parallel.',
-      'Reruns never duplicate a record, and every failure is logged for review.',
-      'The automation database is backed up nightly, and a full restore drill passed in September 2026.',
+      'Calls to models and databases retry on their own before a run fails.',
+      'Every failure is logged, and reruns never duplicate a record.',
     ],
   },
   {
@@ -62,9 +60,8 @@ export const STANDARD_QUESTIONS: StandardQuestion[] = [
     question: 'Can it touch our systems safely?',
     answer: 'Each agent gets only the access its job needs.',
     points: [
-      "Clients on our standard template get their own database schema and a login role that cannot read other clients' tables.",
-      'The research agent has one tool: read-only web search.',
-      'Text an agent writes is cleaned against a strict allowlist before it appears on screen.',
+      'Clients on our standard setup get their own schema and a scoped database login.',
+      'Research agents can search the web and nothing else.',
     ],
     link: { label: 'Security and data handling', href: '/security' },
   },
@@ -74,21 +71,18 @@ export const STANDARD_QUESTIONS: StandardQuestion[] = [
     question: 'Does a person stay in control?',
     answer: 'Agents propose and people decide; no agent emails your customers or moves a deal.',
     points: [
-      'An agent can only add an opportunity as Identified; only a person can mark it Validated.',
-      'Outreach is drafted in the playbook for a rep to review and send.',
-      'Every out-of-sequence stage change is logged with a reason and counted in an override rate.',
+      'Only a person can approve an opportunity an agent finds.',
+      'Outreach is drafted for a rep to review and send.',
     ],
   },
   {
     id: 'correct',
     step: '04',
     question: 'How do you know it is right?',
-    answer:
-      'Research claims are checked against their sources, and every playbook is checked daily.',
+    answer: 'Research claims are checked against their sources, and every playbook is checked daily.',
     points: [
-      'Market scans download every cited page and remove claims the page does not support.',
-      'The daily check flags any playbook with unfilled fields, missing sources or broken structure.',
-      'Reps rate each playbook for accuracy and contact quality, and the ratings feed the scoreboard.',
+      'Claims a cited source does not support are removed before anyone reads them.',
+      'Users rate what the system produced, and the ratings feed the scoreboard.',
     ],
   },
   {
@@ -97,10 +91,8 @@ export const STANDARD_QUESTIONS: StandardQuestion[] = [
     question: 'Who watches it after launch?',
     answer: 'Every live system gets a daily check on what it produced, beyond whether it ran.',
     points: [
-      'The check confirms each business line still produces new opportunities at its normal weekly rate.',
-      'Every run is traced step by step, with each model call recorded.',
-      'Each research run is priced in model tokens and search calls, per business line.',
-      'Models are sized to the job: the largest for synthesis, mid-size ones for research and writing.',
+      'Every run is traced step by step, and research runs are priced by what they use.',
+      'Each step runs on a model sized to the job.',
     ],
   },
 ];

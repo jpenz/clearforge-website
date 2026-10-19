@@ -14,13 +14,13 @@ import { faqJsonLd, JsonLdScriptProps } from '@/lib/seo';
 export const metadata: Metadata = {
   title: 'AI Value Diligence and ROI Measurement',
   description:
-    'Business valuation and commercial and performance diligence that find where AI adds the most earnings, a business case ranked by return, and a scoreboard that measures the return on AI after launch.',
+    'Commercial and performance diligence that finds where AI adds the most earnings, a business case ranked by return, and a scoreboard that measures the return on AI after launch. Business valuation on request.',
   alternates: { canonical: '/value' },
 };
 
 /** The page's own spine, indexed in the hero. */
 const REGISTER = [
-  { step: '01', name: 'Value the business' },
+  { step: '01', name: 'Find the value' },
   { step: '02', name: 'Rank the business case' },
   { step: '03', name: 'Measure the return' },
 ];

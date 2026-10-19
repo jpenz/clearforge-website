@@ -66,7 +66,7 @@ export const SERVICE_STAGES: ServiceStage[] = [
       {
         name: 'Forge Sprint',
         description:
-          '10 to 14 weeks from kickoff to a live production system. Every Sprint ships with an eval harness and reliability gates.',
+          '10 to 14 weeks from kickoff to a live production system. Every Sprint ships with daily output checks and step-by-step run tracing.',
         term: '10 to 14 weeks',
         feeBasis: 'Scoped in the Diagnostic',
         feeNote: 'Agreed before any build.',
@@ -109,7 +109,7 @@ export const SERVICE_STAGES: ServiceStage[] = [
       {
         name: 'Forge Run',
         description:
-          'Monitoring, production evals, SLAs, and model upgrades for every system we built.',
+          'Monitoring, daily output checks, SLAs, and model upgrades for every system we built.',
         term: 'Ongoing',
         feeBasis: 'Monthly retainer',
         feeNote: 'Per system, after the build.',

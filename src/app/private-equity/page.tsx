@@ -15,7 +15,7 @@ import { faqJsonLd, JsonLdScriptProps } from '@/lib/seo';
 export const metadata: Metadata = {
   title: 'AI for PE Portfolio Companies',
   description:
-    'One diagnostic model across the portfolio, systems built into the companies that need them, and weekly-active adoption reported to the sponsor. Built for PE operating teams.',
+    'One diagnostic model across the portfolio, systems built into the companies that need them, and adoption per company reported to the sponsor. Built for PE operating teams.',
   alternates: { canonical: '/private-equity' },
 };
 
@@ -46,7 +46,7 @@ const SEQUENCE = [
     name: 'Sponsor scoreboard',
     eyebrow: 'Reported to the operating team',
     detail:
-      'Weekly-active adoption per company, reported to the operating team. The target is 70 percent by day 90.',
+      'Adoption per company, reported to the operating team. The target is 70 percent weekly-active use by day 90.',
   },
 ];
 
@@ -77,7 +77,7 @@ export default function PrivateEquityPage() {
               </h1>
               <p className="mt-6 max-w-[56ch] text-[16px] leading-relaxed text-ghost/80">
                 One diagnostic model across the companies you choose, systems built where they pay,
-                and weekly-active adoption reported back to the operating team.
+                and adoption per company reported back to the operating team.
               </p>
             </div>
             <div className="flex flex-col justify-center border-t border-hairline-ghost px-5 py-8 md:px-10 md:py-14 lg:border-t-0">
@@ -142,7 +142,7 @@ export default function PrivateEquityPage() {
                     70<span className="align-top text-[0.5em]">%</span>
                   </>
                 }
-                label="Weekly-active adoption target by day 90, reported per company"
+                label="Weekly-active adoption target by day 90, per company"
               />
             </div>
             <div className="px-5 py-8 md:px-10 md:py-10">
