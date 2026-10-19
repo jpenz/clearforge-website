@@ -32,10 +32,10 @@ export interface NavItem {
 
 /** Top navigation: exactly five items plus one button, at every width. */
 export const NAV_ITEMS: NavItem[] = [
-  { label: 'Services', href: '/services' },
-  { label: 'Proof', href: '/proof' },
+  { label: 'How it works', href: '/services' },
+  { label: 'Results', href: '/proof' },
   { label: 'Private equity', href: '/private-equity' },
-  { label: 'Engagements', href: '/pricing' },
+  { label: 'How we charge', href: '/pricing' },
   { label: 'Insights', href: '/insights' },
   { label: 'About', href: '/about' },
 ];
@@ -59,7 +59,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     ],
   },
   {
-    title: 'Proof',
+    title: 'Results',
     items: [
       { label: 'Case studies', href: '/proof#case-studies' },
       { label: 'Build patterns', href: '/proof#build-patterns' },
@@ -72,7 +72,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     title: 'Firm',
     items: [
       { label: 'About', href: '/about' },
-      { label: 'Engagements', href: '/pricing' },
+      { label: 'How we charge', href: '/pricing' },
       { label: 'Private equity', href: '/private-equity' },
       { label: 'Start a project', href: '/start' },
       { label: 'Security', href: '/security' },

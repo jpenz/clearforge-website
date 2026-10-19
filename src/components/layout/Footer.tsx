@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { BookCallButton } from '@/components/functional/BookCallButton';
 import { Container } from '@/components/ui/Container';
-import { FOOTER_COLUMNS, FOUNDER_EMAIL, SITE_NAME, SITE_TAGLINE } from '@/data/site';
+import { FOOTER_COLUMNS, FOUNDER_EMAIL, SITE_NAME } from '@/data/site';
 
 const legalLink =
   'underline decoration-ghost/40 underline-offset-4 transition-colors hover:text-ghost';
@@ -31,7 +31,8 @@ export function Footer() {
               <span className="text-[15px] font-semibold">{SITE_NAME}</span>
             </div>
             <p className="mt-4 text-[14px] leading-relaxed text-ghost/70">
-              {SITE_TAGLINE}. Founder-led, for mid-market companies and PE operating teams.
+              We find the jobs AI can do in your company, build it, and stay until your people use
+              it.
             </p>
             <BookCallButton size="md" className="mt-6" />
           </div>

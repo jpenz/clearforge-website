@@ -10,22 +10,22 @@ const FIELD_ROWS: Array<{
   illustrative: boolean;
   numeric: boolean;
 }> = [
-  { key: 'workflow', label: 'Workflow', illustrative: true, numeric: false },
+  { key: 'workflow', label: 'The job', illustrative: true, numeric: false },
   {
     key: 'manualSteps',
-    label: 'Manual steps found',
+    label: 'Steps done by hand',
     illustrative: true,
     numeric: true,
   },
   {
     key: 'candidate',
-    label: 'Candidate AI system',
+    label: 'AI that could do it',
     illustrative: true,
     numeric: false,
   },
   {
     key: 'window',
-    label: 'Estimated build window',
+    label: 'Time to build',
     illustrative: false,
     numeric: true,
   },
@@ -35,7 +35,7 @@ const FIELD_ROWS: Array<{
 const SAMPLES: Array<{ chip: string; example: string }> = [
   { chip: 'industrial distributor', example: 'an industrial distributor' },
   { chip: 'services firm', example: 'a services firm' },
-  { chip: 'PE portfolio co', example: 'a PE portfolio company' },
+  { chip: 'PE-owned company', example: 'a company owned by a PE firm' },
 ];
 
 /** The idle-state sample readout: one worked example, labelled as such. */
@@ -44,10 +44,10 @@ const SAMPLE_READOUT: Array<{
   value: string;
   numeric?: boolean;
 }> = [
-  { label: 'Workflow', value: 'Inbound quote to order' },
-  { label: 'Manual steps found', value: '14', numeric: true },
-  { label: 'Candidate AI system', value: 'Quote desk agent' },
-  { label: 'Estimated build window', value: '10 to 14 weeks', numeric: true },
+  { label: 'The job', value: 'Answering price requests by email' },
+  { label: 'Steps done by hand', value: '14', numeric: true },
+  { label: 'AI that could do it', value: 'Drafts each reply for a person to send' },
+  { label: 'Time to build', value: '10 to 14 weeks', numeric: true },
 ];
 
 const HOST_PATTERN = /^(https?:\/\/)?(www\.)?([a-z0-9-]+\.)+[a-z]{2,}(\/\S*)?$/i;
@@ -89,7 +89,7 @@ export function HeroAgent() {
     if (sample) return `Example: ${sample} · illustrative`;
     if (!illustrative) return status === 'done' ? 'Analysis complete' : 'Analysis streaming';
     if (status === 'done') return `Could not read ${target}. Here is an illustrative readout.`;
-    return 'Illustrative readout';
+    return 'Example';
   };
 
   const submit = () => {
@@ -115,7 +115,7 @@ export function HeroAgent() {
     <div className="border border-ink bg-white text-ink">
       <div className="flex items-center justify-between border-b border-hairline px-5 py-3">
         <span className="text-[12px] font-semibold tracking-[0.14em] uppercase">
-          Free tool · Map the Workflow
+          Try it free · Map the Workflow
         </span>
         <span
           className={`tnum text-[12px] tracking-[0.14em] uppercase ${
@@ -138,14 +138,14 @@ export function HeroAgent() {
             }}
           >
             <p className="mb-5 max-w-[46ch] text-[14px] leading-relaxed text-ink/70">
-              Maps one revenue workflow, finds the manual steps, and names a candidate AI system.
-              Free. Runs in under a minute.
+              Enter your website. See one job in your business that AI could take on. Free, in under
+              a minute.
             </p>
             <label
               className="mb-2 block text-[12px] tracking-[0.14em] text-ink/70 uppercase"
               htmlFor="hero-agent-url"
             >
-              Company URL
+              Your website
             </label>
             <div className="flex border border-ink focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-cobalt">
               <input
@@ -197,8 +197,8 @@ export function HeroAgent() {
             </div>
             <div className="mt-7">
               <div className="mb-2 flex items-baseline justify-between gap-4 text-[12px] text-ink/70">
-                <span>Example: an industrial distributor</span>
-                <span className="tracking-[0.14em] uppercase">Illustrative</span>
+                <span>What a result looks like, for a parts distributor</span>
+                <span className="tracking-[0.14em] uppercase">Example</span>
               </div>
               <dl className="border-t border-hairline text-[14px]">
                 {SAMPLE_READOUT.map((row) => (

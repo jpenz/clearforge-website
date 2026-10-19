@@ -47,12 +47,12 @@ test('the scoreboard section is addressable at /value#return', async ({ page }) 
   }
 });
 
-test('home links to both pages from the band under the catalog', async ({ page }) => {
+test('home trust band links each promise to the page with the detail', async ({ page }) => {
   await page.goto('/');
-  const band = page.getByRole('region', { name: 'Under every engagement' });
+  const band = page.getByRole('region', { name: 'Why you can trust it' });
   for (const [name, href] of [
-    ['How we find the value', '/value'],
-    ['The engineering standard', '/engineering'],
+    ['How people stay in charge', '/engineering#control'],
+    ['How it is checked', '/engineering#operate'],
     ['How the return is measured', '/value#return'],
   ]) {
     await expect(band.getByRole('link', { name })).toHaveAttribute('href', href);
