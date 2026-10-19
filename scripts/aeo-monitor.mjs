@@ -1,84 +1,118 @@
 /**
- * AEO Citation Monitor — weekly check: do the AI answer engines cite
- * clearforge.ai for the queries buyers actually ask? Logs history to
- * ~/agentforge/aeo-monitor/history.jsonl and prints a gap report.
+ * AEO citation monitor: do AI assistants with live web search name or cite
+ * clearforge.ai for the questions buyers actually ask? Asks Claude and
+ * ChatGPT (each with its own web search) every query, records whether
+ * clearforge.ai is cited or ClearForge is named, and appends one run to
+ * ~/agentforge/aeo-monitor/history.jsonl. Prints a scorecard.
  *
- *   PERPLEXITY_API_KEY=... node scripts/aeo-monitor.mjs
+ *   ANTHROPIC_API_KEY=... OPENAI_API_KEY=... node scripts/aeo-monitor.mjs
+ *
+ * Either key alone runs that engine only. Replaced the Perplexity-only
+ * version on 2026-10-19 after its key stopped working.
  */
-import { appendFileSync, existsSync, readFileSync } from 'node:fs';
+import { appendFileSync, mkdirSync } from 'node:fs';
 
-const KEY = process.env.PERPLEXITY_API_KEY;
-if (!KEY) { console.error('PERPLEXITY_API_KEY required'); process.exit(1); }
-
-const LOG = `${process.env.HOME}/agentforge/aeo-monitor/history.jsonl`;
+const LOG_DIR = `${process.env.HOME}/agentforge/aeo-monitor`;
 const QUERIES = [
-  'best AI consulting firm for mid-market companies',
-  'AI readiness assessment for my company',
-  'how much does AI consulting cost',
-  'custom AI agents for business operations',
-  'AI for private equity portfolio companies',
-  'AI adoption consulting after failed pilot',
-  'fractional chief AI officer vs full time',
-  'AI implementation partner for manufacturing',
-  'why do AI pilots fail to reach production',
-  'AI consulting firm with transparent pricing',
-  'AI agent vs automation what is the difference',
-  'AI operating model for mid-market company',
+  // Private equity: the buyer this work is for.
+  'AI consulting firm for private equity portfolio companies',
+  'how can private equity firms use AI to create value across a portfolio',
+  'who helps PE-backed companies implement AI and get their teams to use it',
+  'AI due diligence for a private equity acquisition',
+  'how to measure the ROI of AI in portfolio companies',
+  'how to choose an AI partner for portfolio companies',
+  // Mid-market operators.
+  'AI consulting for a mid-market industrial distributor',
+  'fixed price AI assessment for a mid-market company',
+  'company that builds AI agents for B2B sales teams at manufacturers',
+  'why do AI pilots fail to reach production and how to fix it',
+  // Brand: is the firm known at all.
+  'What does ClearForge (clearforge.ai) do?',
 ];
 
-const run = { at: new Date().toISOString(), engine: 'perplexity-sonar', results: [] };
-for (const q of QUERIES) {
-  try {
-    const res = await fetch('https://api.perplexity.ai/chat/completions', {
+const ask = {
+  async claude(query) {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { authorization: `Bearer ${KEY}`, 'content-type': 'application/json' },
+      headers: {
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+      },
       body: JSON.stringify({
-        model: 'sonar',
-        messages: [{ role: 'user', content: q }],
-        max_tokens: 600,
+        model: 'claude-haiku-5-5',
+        max_tokens: 1200,
+        tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: 3 }],
+        messages: [{ role: 'user', content: query }],
       }),
     });
+    if (!res.ok) throw new Error(`claude ${res.status}`);
     const data = await res.json();
-    const citations = data.citations ?? data.search_results?.map((r) => r.url) ?? [];
-    const answer = data.choices?.[0]?.message?.content ?? '';
-    const citedIdx = citations.findIndex((c) => String(c).includes('clearforge.ai'));
-    const mentioned = /clearforge/i.test(answer);
-    const domains = [...new Set(citations.map((c) => { try { return new URL(String(c)).hostname.replace(/^www\./, ''); } catch { return String(c).slice(0, 40); } }))];
-    run.results.push({ q, cited: citedIdx >= 0, position: citedIdx >= 0 ? citedIdx + 1 : null, mentioned, domains: domains.slice(0, 8) });
-    console.log(citedIdx >= 0 ? `  ✓ CITED #${citedIdx + 1}` : (mentioned ? '  ◐ mentioned, not cited' : '  ✗ absent '), '·', q);
-  } catch (e) {
-    run.results.push({ q, error: String(e).slice(0, 120) });
-    console.log('  ! error ·', q);
+    const text = data.content
+      .filter((b) => b.type === 'text')
+      .map((b) => b.text)
+      .join(' ');
+    const urls = data.content
+      .flatMap((b) => (b.type === 'web_search_tool_result' ? b.content ?? [] : []))
+      .map((r) => r.url)
+      .filter(Boolean);
+    return { text, urls };
+  },
+  async chatgpt(query) {
+    const res = await fetch('https://api.openai.com/v1/responses', {
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ model: 'gpt-4.1-mini', tools: [{ type: 'web_search' }], input: query }),
+    });
+    if (!res.ok) throw new Error(`chatgpt ${res.status}`);
+    const data = await res.json();
+    const parts = (data.output ?? []).flatMap((o) => o.content ?? []);
+    const text = parts.map((p) => p.text ?? '').join(' ');
+    const urls = parts.flatMap((p) => (p.annotations ?? []).map((a) => a.url)).filter(Boolean);
+    return { text, urls };
+  },
+};
+
+const engines = Object.keys(ask).filter((e) =>
+  e === 'claude' ? process.env.ANTHROPIC_API_KEY : process.env.OPENAI_API_KEY,
+);
+if (!engines.length) {
+  console.error('Set ANTHROPIC_API_KEY and/or OPENAI_API_KEY');
+  process.exit(1);
+}
+
+const run = { at: new Date().toISOString(), engines, results: [] };
+for (const query of QUERIES) {
+  for (const engine of engines) {
+    try {
+      const { text, urls } = await ask[engine](query);
+      const domains = [...new Set(urls.map((u) => new URL(u).hostname.replace(/^www\./, '')))];
+      run.results.push({
+        engine,
+        query,
+        cited: domains.some((d) => d.endsWith('clearforge.ai')),
+        named: /clearforge/i.test(text),
+        domains: domains.slice(0, 8),
+      });
+    } catch (error) {
+      run.results.push({ engine, query, error: String(error.message ?? error) });
+    }
   }
-  await new Promise((r) => setTimeout(r, 1100));
 }
 
-const citedNow = run.results.filter((r) => r.cited).length;
-console.log(`\nSCORE: cited on ${citedNow}/${QUERIES.length} queries`);
+mkdirSync(LOG_DIR, { recursive: true });
+appendFileSync(`${LOG_DIR}/history.jsonl`, `${JSON.stringify(run)}\n`);
 
-// deltas vs previous run
-if (existsSync(LOG)) {
-  const lines = readFileSync(LOG, 'utf8').trim().split('\n');
-  const prev = lines.length ? JSON.parse(lines[lines.length - 1]) : null;
-  if (prev) {
-    const prevCited = new Set(prev.results.filter((r) => r.cited).map((r) => r.q));
-    const gained = run.results.filter((r) => r.cited && !prevCited.has(r.q)).map((r) => r.q);
-    const lost = [...prevCited].filter((q) => !run.results.find((r) => r.q === q)?.cited);
-    if (gained.length) console.log('GAINED:', gained.join(' | '));
-    if (lost.length) console.log('LOST:', lost.join(' | '));
+for (const engine of engines) {
+  const rows = run.results.filter((r) => r.engine === engine);
+  const ok = rows.filter((r) => !r.error);
+  const cited = ok.filter((r) => r.cited || r.named);
+  console.log(`\n${engine}: ClearForge cited or named in ${cited.length} of ${ok.length} answers`);
+  for (const r of rows) {
+    const mark = r.error ? `error ${r.error}` : r.cited ? 'CITED' : r.named ? 'named' : '-';
+    console.log(`  ${mark.padEnd(10)} ${r.query}${r.error || r.cited || r.named ? '' : `  [${r.domains.slice(0, 3).join(', ')}]`}`);
   }
 }
-
-// top competitor domains across uncited queries → the gap list
-const gapDomains = {};
-for (const r of run.results.filter((r) => !r.cited && r.domains)) {
-  for (const d of r.domains) gapDomains[d] = (gapDomains[d] ?? 0) + 1;
-}
-const topRivals = Object.entries(gapDomains).sort((a, b) => b[1] - a[1]).slice(0, 8);
-console.log('\nMOST-CITED DOMAINS WHERE WE ARE ABSENT:');
-for (const [d, n] of topRivals) console.log(`  ${String(n).padStart(2)}x ${d}`);
-console.log('\nBIGGEST GAPS (uncited queries):');
-for (const r of run.results.filter((r) => !r.cited)) console.log('  -', r.q);
-
-appendFileSync(LOG, JSON.stringify(run) + '\n');
-console.log(`\nlogged → ${LOG}`);
