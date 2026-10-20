@@ -30,7 +30,12 @@ export default function ProofPage() {
     <>
       {/* Intro: full-bleed dark title block (proof-threads.jpg plate, braid to the right) */}
       <section aria-label="Proof introduction" className="cf-dark-band overflow-clip">
-        <Plate src="/renders/proof-threads.jpg" position="88% 45%" overlay="strong-right" />
+        <Plate
+          src="/renders/proof-threads.jpg"
+          priority
+          position="88% 45%"
+          overlay="strong-right"
+        />
         <div aria-hidden="true" className="cf-aurora-b" />
         <Container gutter="cells" className="relative">
           <SectionBand tone="dark" left="Proof" right="Client-approved · Anonymized" />
