@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
-test.describe('Samuel Revenue OS demo', () => {
+test.describe('Revenue OS demo', () => {
   test('renders without a hydration or runtime error', async ({ page }) => {
     const errors: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));

@@ -12,7 +12,7 @@ import { CASE_STUDIES } from '@/data/case-studies';
 export const metadata: Metadata = {
   title: 'AI Case Studies and Results',
   description:
-    'Case studies with real numbers and anonymized clients: 1,181 qualified opportunities across 3 divisions in 6 months, a commercial pipeline rebuilt from zero, a portfolio-wide AI diagnostic.',
+    'Anonymized client results: AI agents running revenue operations that found a $4B+ supplier its biggest new customer in eight months, a pipeline rebuilt from zero, and a portfolio diagnostic.',
 };
 
 const FUNNEL = [
@@ -59,16 +59,18 @@ export default function ProofPage() {
       <PageFrame id="case-studies" aria-label="Case A">
         <div className="flex items-center justify-between gap-4 border-b border-hairline px-5 py-4 md:px-10">
           <p className="tnum text-[12px] font-medium tracking-[0.14em] text-ink/70 uppercase">
-            Case A · $4B industrial conglomerate
+            Case A · $4B+ industrial supplier
           </p>
-          <span className="tnum text-[12px] tracking-[0.14em] text-ink/70 uppercase">6 months</span>
+          <span className="tnum text-[12px] tracking-[0.14em] text-ink/70 uppercase">
+            AI revenue operations
+          </span>
         </div>
         <div className="grid lg:grid-cols-[2fr_1fr]">
           <div className="relative flex flex-col border-b border-hairline px-5 py-8 transition-colors hover:bg-white md:px-10 md:py-12 lg:border-r lg:border-b-0">
             <div className="grid gap-8 xl:grid-cols-[auto_1fr] xl:items-end xl:gap-14">
               <Stat size="lg" value={primary.value} label={primary.label} />
               {/* The setup only: the numeral beside it already carries the
-                  result, so the emphasis clause would restate 1,181. */}
+                  result, so the emphasis clause would restate the 8. */}
               <p className="font-display max-w-[26ch] text-balance text-[26px] leading-[1.3] font-medium xl:pb-2">
                 {caseA.headline}
               </p>
