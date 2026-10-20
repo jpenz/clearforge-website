@@ -21,7 +21,7 @@ Catalog names: Forge Diagnostic (step 1), Forge Sprint (step 2), Forge Scale (st
 
 ## Results (anonymized client records)
 
-- A $4B industrial conglomerate: an AI system that reads news of new plants, expansions and building projects, picks the ones that need the company's products, and writes each salesperson a one-page brief. Leads that fit what the company sells rose from 19 a month to 613 a month by month six; 1,181 across three divisions in six months.
+- A $4B+ industrial supplier, more than 100 years old: AI agents run revenue operations for three divisions. Every week they find companies that just showed a reason to buy, identify the best contact and verify their direct phone and email, brief each salesperson, and feed marketing's email, ad and LinkedIn campaigns. Eight months in, they found the client's biggest new customer. Opportunities found per month grew from 19 in month one to 613 in month six and 1,482 in September 2026.
 - A home and commercial services firm: 42 businesses found, 31 contacted, 18 quoted, 7 recurring accounts won.
 
 ## Ownership and data
