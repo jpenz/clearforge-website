@@ -49,6 +49,11 @@ Tokens are frozen: cobalt `#2454ff`, cobalt-bright `#7a97ff` on dark, ink
 `#010b13`, ghost `#f8f8ff`. No new hues, no second accent, no gradients as
 decoration.
 
+Font weights are bounded by the self-hosted font files: Newsreader roman
+400 to 500, italic 300 to 500, Hanken Grotesk 300 to 700. A weight outside
+those renders at the nearest end. To use one, widen the range in
+`scripts/subset-fonts.py` and rerun it.
+
 Reuse these primitives instead of writing new ones:
 
 | Component | Use it for |

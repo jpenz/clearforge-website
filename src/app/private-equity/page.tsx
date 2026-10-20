@@ -60,7 +60,7 @@ export default function PrivateEquityPage() {
       {/* Hero: full-bleed dark title block (pe-monoliths.jpg plate), with the
           register indexed on the right so the page announces its own spine. */}
       <section aria-label="AI for private equity" className="cf-dark-band overflow-clip">
-        <Plate src="/renders/pe-monoliths.jpg" position="55% 50%" overlay="strong-right" />
+        <Plate src="/renders/pe-monoliths.jpg" priority position="55% 50%" overlay="strong-right" />
         <div aria-hidden="true" className="cf-aurora-b" />
         <div aria-hidden="true" className="cf-scrim-right pointer-events-none absolute inset-0" />
         <Container gutter="cells" className="relative">

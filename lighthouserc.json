@@ -2,17 +2,17 @@
   "ci": {
     "collect": {
       "startServerCommand": "npm run start",
-      "startServerReadyPattern": "Ready on",
+      "startServerReadyPattern": "Ready in",
       "startServerReadyTimeout": 30000,
       "url": [
         "http://localhost:3000",
         "http://localhost:3000/about",
         "http://localhost:3000/contact",
-        "http://localhost:3000/services/custom-ai-agents",
-        "http://localhost:3000/use-cases/ai-sales-pipeline-acceleration",
+        "http://localhost:3000/services",
+        "http://localhost:3000/proof",
         "http://localhost:3000/industries/manufacturing",
         "http://localhost:3000/insights/clearforge-ai-transformation-maturity-model",
-        "http://localhost:3000/blueprints/industrial-sales-intelligence-command"
+        "http://localhost:3000/private-equity"
       ],
       "numberOfRuns": 2
     },

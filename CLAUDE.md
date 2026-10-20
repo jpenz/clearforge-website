@@ -73,6 +73,11 @@ serif display, plus a cinematic dark "atmosphere" layer.
   `text-cobalt-bright` on dark.
 - **Body:** Hanken Grotesk. **Data/labels/eyebrows:** `.tnum` tabular figures,
   uppercase, tracked.
+- **Font files** are self-hosted subsets in `src/app/fonts/`, built by
+  `scripts/subset-fonts.py` with each weight axis clipped to what the site
+  renders: Newsreader roman 400–500, italic 300–500, Hanken 300–700. A
+  weight outside those ranges silently renders at the nearest end, so widen
+  the range in the script and rerun it before using one.
 
 ### Atmosphere layer (V12.1)
 

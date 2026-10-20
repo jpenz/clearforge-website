@@ -1,6 +1,6 @@
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
-import { Hanken_Grotesk, Newsreader } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
@@ -9,15 +9,43 @@ import { SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/data/site';
 // Display face: Newsreader (the brand's proven serif; Bodoni's hairline
 // strokes were hard to read at display sizes, owner call 2026-08-18).
 // Variable name kept so the token layer is untouched.
-const bodoni = Newsreader({
-  subsets: ['latin'],
-  style: ['normal', 'italic'],
+//
+// Both faces are the Google Fonts files, self-hosted after
+// scripts/subset-fonts.py clips each weight axis to the weights the site
+// renders and keeps ASCII plus the punctuation in use. These preloaded files
+// are about half the size of Google's; the rest of Latin sits in -ext files
+// declared in globals.css, fetched only when a page renders such a character.
+// A new weight outside these ranges renders at the nearest end: widen the
+// range in the script and rerun it.
+const bodoni = localFont({
+  src: [
+    { path: './fonts/newsreader-roman.woff2', weight: '400 500', style: 'normal' },
+    { path: './fonts/newsreader-italic.woff2', weight: '300 500', style: 'italic' },
+  ],
   variable: '--font-bodoni',
+  adjustFontFallback: 'Times New Roman',
+  declarations: [
+    { prop: 'font-family', value: 'Newsreader' },
+    {
+      prop: 'unicode-range',
+      value:
+        'U+0020-007E, U+00A0, U+00A9, U+00AE, U+00B0, U+00B7, U+00D7, U+2010-2011, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026, U+2032-2033, U+20AC, U+2122, U+2190-2193, U+2212, U+2248, U+2264-2265',
+    },
+  ],
 });
 
-const hanken = Hanken_Grotesk({
-  subsets: ['latin'],
+const hanken = localFont({
+  src: './fonts/hanken-grotesk.woff2',
+  weight: '300 700',
   variable: '--font-hanken',
+  declarations: [
+    { prop: 'font-family', value: 'Hanken Grotesk' },
+    {
+      prop: 'unicode-range',
+      value:
+        'U+0020-007E, U+00A0, U+00A9, U+00AE, U+00B0, U+00B7, U+00D7, U+2010-2011, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026, U+2032-2033, U+20AC, U+2122, U+2190-2193, U+2212, U+2248, U+2264-2265',
+    },
+  ],
 });
 
 export const metadata: Metadata = {
