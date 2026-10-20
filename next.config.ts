@@ -47,6 +47,14 @@ const nextConfig: NextConfig = {
     // plus form overhead) — this is also the hard DoS ceiling on any action.
     serverActions: { bodySizeLimit: "12mb" },
   },
+  turbopack: {
+    resolveAlias: {
+      // Next's client entry imports this relative path to send every browser
+      // a polyfill file for features our targets (Chrome/Edge/Firefox 111+,
+      // Safari 16.4+) already have. Swap it for the one polyfill they need.
+      "../build/polyfills/polyfill-module": "./src/lib/polyfill-module.ts",
+    },
+  },
   async headers() {
     return [{ source: "/(.*)", headers: SECURITY_HEADERS }];
   },
